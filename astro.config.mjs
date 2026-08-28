@@ -42,6 +42,7 @@ export default defineConfig({
 				light: './src/assets/images/light-logo.svg',
 				dark: './src/assets/images/dark-logo.svg',
 			},
+			favicon: '/images/favicon.svg',
 			customCss: [
 				'./src/styles/global.css',
 			],
@@ -54,6 +55,12 @@ export default defineConfig({
 					borderWidth: '1px',
 					frames: {
 						shadowColor: 'transparent',
+					},
+				},
+				themes: ['vitesse-black', 'vitesse-light'],
+				shiki: {
+					langAlias: {
+						markdoc: 'mdx',
 					},
 				},
 			},
