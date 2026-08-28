@@ -1,0 +1,180 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border-color: var(--sl-color-hairline);
+}
+
+* {
+  margin: 0;
+}
+
+* {
+  scrollbar-color: var(--sl-color-gray-4) transparent;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: var(--sl-color-gray-4);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sl-color-gray-2);
+}
+
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-button:horizontal,
+::-webkit-scrollbar-button:vertical,
+::-webkit-scrollbar-button:start,
+::-webkit-scrollbar-button:end {
+  display: none !important;
+  opacity: 0 !important;
+  background: transparent !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+::selection {
+  background: var(--sl-color-accent);
+  color: var(--sl-color-text-invert);
+}
+
+:focus-visible {
+  outline: 2px solid var(--sl-color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+[disabled],
+[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+html {
+  color-scheme: dark;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: inherit;
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+body {
+  hanging-punctuation: first last;
+  line-height: var(--sl-line-height);
+  font-family: var(--__sl-font);
+  font-feature-settings: "ss01" on, "ss02" on, "kern" on;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--sl-color-bg);
+  color: var(--sl-color-text);
+  scroll-behavior: smooth;
+}
+
+img,
+picture,
+video,
+canvas,
+iframe,
+svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--sl-color-gray-3);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+code {
+  overflow-wrap: break-word;
+}
+
+code,
+kbd,
+samp,
+pre {
+  text-autospace: no-autospace;
+}
+
+code {
+  font-family: var(--__sl-font-mono);
+}
+
+hr {
+  margin-block: 1.5rem;
+  border: none;
+  background-color: var(--sl-color-hairline);
+  height: 1px;
+}
+
+.sr-only {
+  position: absolute;
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border-width: 0 !important;
+  white-space: nowrap;
+}
