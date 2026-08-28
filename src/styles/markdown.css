@@ -76,9 +76,6 @@
 		color: var(--sl-color-white);
 		font-weight: 600;
 	}
-	.sl-markdown-content th:not([align]):not(:where(.not-content *)) {
-		text-align: start;
-	}
 	
 	.sl-markdown-content .starlight-aside :is(th, td, hr, blockquote):not(:where(.not-content *)) {
 		border-color: var(--sl-color-gray-4);
@@ -100,7 +97,6 @@
 	}
 
 	.sl-markdown-content hr:not(:where(.not-content *)) {
-		border: 0;
 		border-bottom: 1px solid var(--sl-color-hairline);
 	}
 
@@ -109,7 +105,6 @@
 		--sl-details-border-color--hover: var(--sl-color-text-accent);
 
 		border-inline-start: 2px solid var(--sl-details-border-color);
-		padding-inline-start: 1rem;
 	}
 	.sl-markdown-content details:not([open]):hover:not(:where(.not-content *)),
 	.sl-markdown-content details:has(> summary:hover):not(:where(.not-content *)) {
@@ -117,49 +112,15 @@
 	}
 	.sl-markdown-content summary:not(:where(.not-content *)) {
 		color: var(--sl-color-white);
-		cursor: pointer;
-		display: block;
 		font-weight: 500;
-		margin-inline-start: -0.5rem;
-		padding-inline-start: 0.5rem;
-	}
-	.sl-markdown-content details[open] > summary:not(:where(.not-content *)) {
-		margin-bottom: 1rem;
 	}
 
-	.sl-markdown-content summary:not(:where(.not-content *))::marker,
-	.sl-markdown-content summary:not(:where(.not-content *))::-webkit-details-marker {
-		display: none;
-	}
 	.sl-markdown-content summary:not(:where(.not-content *))::before {
 		--sl-details-marker-size: 1.25rem;
-
-		background-color: currentColor;
-		content: '';
-		display: inline-block;
-		height: var(--sl-details-marker-size);
-		width: var(--sl-details-marker-size);
-		margin-inline: calc((var(--sl-details-marker-size) / 4) * -1) 0.25rem;
-		vertical-align: middle;
 		-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14.8 11.3 10.6 7a1 1 0 1 0-1.4 1.5l3.5 3.5-3.5 3.5a1 1 0 0 0 0 1.4 1 1 0 0 0 .7.3 1 1 0 0 0 .7-.3l4.2-4.2a1 1 0 0 0 0-1.4Z'/%3E%3C/svg%3E%0A");
 		mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14.8 11.3 10.6 7a1 1 0 1 0-1.4 1.5l3.5 3.5-3.5 3.5a1 1 0 0 0 0 1.4 1 1 0 0 0 .7.3 1 1 0 0 0 .7-.3l4.2-4.2a1 1 0 0 0 0-1.4Z'/%3E%3C/svg%3E%0A");
 		-webkit-mask-repeat: no-repeat;
 		mask-repeat: no-repeat;
-	}
-	@media (prefers-reduced-motion: no-preference) {
-		.sl-markdown-content summary:not(:where(.not-content *))::before {
-			transition: transform 0.2s ease-in-out;
-		}
-	}
-	.sl-markdown-content details[open] > summary:not(:where(.not-content *))::before {
-		transform: rotateZ(90deg);
-	}
-	[dir='rtl'] .sl-markdown-content summary:not(:where(.not-content *))::before,
-	.sl-markdown-content [dir='rtl'] summary:not(:where(.not-content *))::before {
-		transform: rotateZ(180deg);
-	}
-	.sl-markdown-content summary:not(:where(.not-content *)) p:only-child {
-		display: inline;
 	}
 
 	.sl-markdown-content .starlight-aside details:not(:where(.not-content *)) {
