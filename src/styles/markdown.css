@@ -14,27 +14,21 @@
 	}
 
 	.sl-markdown-content h1:not(:where(.not-content *)) {
-		font-size: var(--sl-text-h1);
 		font-weight: 700;
 	}
 	.sl-markdown-content h2:not(:where(.not-content *)) {
-		font-size: var(--sl-text-h2);
 		font-weight: 600;
 	}
 	.sl-markdown-content h3:not(:where(.not-content *)) {
-		font-size: var(--sl-text-h3);
 		font-weight: 500;
 	}
 	.sl-markdown-content h4:not(:where(.not-content *)) {
-		font-size: var(--sl-text-h4);
 		font-weight: 500;
 	}
 	.sl-markdown-content h5:not(:where(.not-content *)) {
-		font-size: var(--sl-text-h5);
 		font-weight: 500;
 	}
 	.sl-markdown-content h6:not(:where(.not-content *)) {
-		font-size: var(--sl-text-h6);
 		font-weight: 500;
 	}
 
@@ -48,18 +42,12 @@
 	.sl-markdown-content code:not(:where(.not-content *)) {
 		background-color: var(--sl-color-bg-inline-code);
 		border: 1px solid var(--sl-color-gray-5);
-		border-radius: 0.75rem;
-		margin-block: -0.125rem;
-		padding: 0.125rem 0.375rem;
+		border-radius: 0.5rem;
 		font-size: var(--sl-text-code-sm);
-	}
-	.sl-markdown-content :is(h1, h2, h3, h4, h5, h6) code {
-		font-size: inherit;
 	}
 
 	.sl-markdown-content pre:not(:where(.not-content *)) {
 		border: 1px solid var(--sl-color-gray-5);
-		padding: 0.75rem 1rem;
 		font-size: var(--sl-text-code);
 	}
 
