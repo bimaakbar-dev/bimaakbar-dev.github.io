@@ -1,0 +1,209 @@
+/* ==================================================
+   STARLIGHT GLOBAL TOKENS (HARDCODED OVERRIDES)
+   ================================================== */
+
+:root,
+::backdrop {
+    /* 1. DARK MODE: BASE COLORS */
+    --sl-color-white: rgb(240, 240, 240);
+    --sl-color-gray-1: rgb(240, 240, 240);
+    --sl-color-gray-2: rgb(168, 168, 168);
+    --sl-color-gray-3: rgb(113, 113, 122);
+    --sl-color-gray-4: rgb(15, 15, 15);
+    --sl-color-gray-5: rgb(30, 30, 30);
+    --sl-color-gray-6: rgb(10, 10, 10);
+    --sl-color-black: rgb(5, 5, 5);
+
+    /* 2. DARK MODE: SEMANTIC COLORS (Untuk Asides, Badges, Error) */
+    /* Info (Blue) */
+    --sl-color-blue-low: rgb(6 182 212 / 0.14);
+    --sl-color-blue: rgb(6, 182, 212);
+    --sl-color-blue-high: rgb(165, 243, 252);
+
+    /* Success (Green) */
+    --sl-color-green-low: rgb(34 197 94 / 0.12);
+    --sl-color-green: rgb(34, 197, 94);
+    --sl-color-green-high: rgb(134, 239, 172);
+
+    /* Caution (Orange) */
+    --sl-color-orange-low: rgb(249 115 22 / 0.12);
+    --sl-color-orange: rgb(249, 115, 22);
+    --sl-color-orange-high: rgb(253, 186, 116);
+
+    /* Danger (Red) */
+    --sl-color-red-low: rgb(239 68 68 / 0.12);
+    --sl-color-red: rgb(239, 68, 68);
+    --sl-color-red-high: rgb(252, 165, 165);
+
+    /* Tip (Purple) */
+    --sl-color-purple-low: rgb(168 85 247 / 0.12);
+    --sl-color-purple: rgb(168, 85, 247);
+    --sl-color-purple-high: rgb(216, 180, 254);
+
+    /* 3. DARK MODE: ACCENTS */
+    --sl-color-accent-low: rgb(229 229 229 / 0.15);
+    --sl-color-accent: rgb(229, 229, 229);
+    --sl-color-accent-high: rgb(229, 229, 229);
+
+    /* 4. DARK MODE: LAYOUT & TEXT */
+    --sl-color-text: rgb(168, 168, 168);
+    --sl-color-text-accent: rgb(229, 229, 229);
+    --sl-color-text-invert: rgb(5, 5, 5);
+    
+    --sl-color-bg: rgb(5, 5, 5);
+    --sl-color-bg-nav: rgb(5, 5, 5);
+    --sl-color-bg-sidebar: rgb(5, 5, 5);
+    --sl-color-bg-inline-code: rgb(10, 10, 10);
+    --sl-color-bg-accent: rgb(229, 229, 229);
+    
+    --sl-color-hairline-light: rgb(15, 15, 15);
+    --sl-color-hairline: rgb(30, 30, 30);
+    --sl-color-hairline-shade: rgb(15, 15, 15);
+
+    --sl-color-backdrop-overlay: hsla(223, 13%, 10%, 0.66);
+    
+    /* 5. DARK MODE: SHADOWS */
+    --sl-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.8);
+    --sl-shadow-md: 0 4px 12px rgb(0 0 0 / 0.7);
+    --sl-shadow-lg: 0 12px 24px rgb(0 0 0 / 0.8);
+
+    /* 6. FONTS */
+    --sl-font-system: var(--font-geist), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --sl-font-system-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --__sl-font: var(--sl-font-system);
+    --__sl-font-mono: var(--sl-font-system-mono);
+}
+
+:root[data-theme='light'],
+[data-theme='light'] ::backdrop {
+    /* 1. LIGHT MODE: BASE COLORS */
+    --sl-color-white: rgb(9, 9, 11);
+    --sl-color-gray-1: rgb(9, 9, 11);
+    --sl-color-gray-2: rgb(82, 82, 91);
+    --sl-color-gray-3: rgb(113, 113, 122);
+    --sl-color-gray-4: rgb(244, 244, 245);
+    --sl-color-gray-5: rgb(228, 228, 231);
+    --sl-color-gray-6: rgb(244, 244, 245);
+    --sl-color-gray-7: rgb(244, 244, 245);
+    --sl-color-black: rgb(250, 250, 250);
+
+    /* 2. LIGHT MODE: SEMANTIC COLORS (Untuk Asides, Badges, Error) */
+    /* Info (Blue) */
+    --sl-color-blue-low: rgb(8 145 178 / 0.1);
+    --sl-color-blue: rgb(8, 145, 178);
+    --sl-color-blue-high: rgb(22, 78, 99);
+
+    /* Success (Green) */
+    --sl-color-green-low: rgb(16 150 88 / 0.1);
+    --sl-color-green: rgb(16, 150, 88);
+    --sl-color-green-high: rgb(6, 78, 59);
+
+    /* Caution (Orange) */
+    --sl-color-orange-low: rgb(217 119 6 / 0.1);
+    --sl-color-orange: rgb(217, 119, 6);
+    --sl-color-orange-high: rgb(120, 53, 15);
+
+    /* Danger (Red) */
+    --sl-color-red-low: rgb(225 29 72 / 0.1);
+    --sl-color-red: rgb(225, 29, 72);
+    --sl-color-red-high: rgb(136, 19, 55);
+
+    /* Tip (Purple) */
+    --sl-color-purple-low: rgb(147 51 234 / 0.1);
+    --sl-color-purple: rgb(147, 51, 234);
+    --sl-color-purple-high: rgb(88, 28, 135);
+
+    /* 3. LIGHT MODE: ACCENTS */
+    --sl-color-accent-low: rgb(24 24 27 / 0.15);
+    --sl-color-accent: rgb(24, 24, 27);
+    --sl-color-accent-high: rgb(24, 24, 27);
+
+    /* 4. LIGHT MODE: LAYOUT & TEXT */
+    --sl-color-text: rgb(82, 82, 91);
+    --sl-color-text-accent: rgb(24, 24, 27);
+    --sl-color-text-invert: rgb(250, 250, 250);
+
+    --sl-color-bg: rgb(250, 250, 250);
+    --sl-color-bg-nav: rgb(250, 250, 250);
+    --sl-color-bg-sidebar: rgb(250, 250, 250);
+    --sl-color-bg-inline-code: rgb(244, 244, 245);
+    --sl-color-bg-accent: rgb(24, 24, 27);
+
+    --sl-color-hairline: rgb(228, 228, 231);
+    --sl-color-hairline-light: rgb(244, 244, 245);
+    --sl-color-hairline-shade: rgb(244, 244, 245);
+
+    --sl-color-backdrop-overlay: hsla(225, 9%, 36%, 0.66);
+
+    /* 5. LIGHT MODE: SHADOWS */
+    --sl-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
+    --sl-shadow-md: 0 4px 10px rgb(0 0 0 / 0.06);
+    --sl-shadow-lg: 0 10px 20px rgb(0 0 0 / 0.07);
+}
+
+/* ==================================================
+   STRUCTURAL SIZES & Z-INDEX (Tetap bawaan Starlight)
+   ================================================== */
+:root {
+    --sl-text-2xs: 0.75rem;
+    --sl-text-xs: 0.8125rem;
+    --sl-text-sm: 0.875rem;
+    --sl-text-base: 1rem;
+    --sl-text-lg: 1.125rem;
+    --sl-text-xl: 1.25rem;
+    --sl-text-2xl: 1.5rem;
+    --sl-text-3xl: 1.8125rem;
+    --sl-text-4xl: 2.1875rem;
+    --sl-text-5xl: 2.625rem;
+    --sl-text-6xl: 4rem;
+
+    --sl-text-body: var(--sl-text-base);
+    --sl-text-body-sm: var(--sl-text-xs);
+    --sl-text-code: var(--sl-text-sm);
+    --sl-text-code-sm: var(--sl-text-xs);
+    --sl-text-h1: var(--sl-text-4xl);
+    --sl-text-h2: var(--sl-text-3xl);
+    --sl-text-h3: var(--sl-text-2xl);
+    --sl-text-h4: var(--sl-text-xl);
+    --sl-text-h5: var(--sl-text-lg);
+
+    --sl-line-height: 1.75;
+    --sl-line-height-headings: 1.2;
+
+    --sl-nav-height: 3.5rem;
+    --sl-nav-pad-x: 1rem;
+    --sl-nav-pad-y: 0.75rem;
+    --sl-mobile-toc-height: 3rem;
+    --sl-sidebar-width: 18.75rem;
+    --sl-sidebar-pad-x: 1rem;
+    --sl-content-width: 45rem;
+    --sl-content-pad-x: 1rem;
+    --sl-content-gap-y: 1rem;
+    --sl-main-pad: 0 0 3vh 0;
+    --sl-menu-button-size: 2rem;
+    --sl-nav-gap: var(--sl-content-pad-x);
+    --sl-outline-offset-inside: -0.1875rem;
+
+    --sl-z-index-toc: 4;
+    --sl-z-index-menu: 5;
+    --sl-z-index-navbar: 10;
+    --sl-z-index-skiplink: 20;
+}
+
+@media (min-width: 50em) {
+    :root {
+        --sl-nav-height: 4rem;
+        --sl-nav-pad-x: 1.5rem;
+        --sl-text-h1: var(--sl-text-5xl);
+        --sl-text-h2: var(--sl-text-4xl);
+        --sl-text-h3: var(--sl-text-3xl);
+        --sl-text-h4: var(--sl-text-2xl);
+    }
+}
+
+@media (min-width: 72rem) {
+    :root {
+        --sl-content-pad-x: 1.5rem;
+        --sl-mobile-toc-height: 0rem;
+    }
+}

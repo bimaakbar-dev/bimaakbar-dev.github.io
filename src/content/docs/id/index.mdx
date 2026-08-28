@@ -1,0 +1,39 @@
+---
+title: Selamat datang di Stradocs
+description: Mulailah membangun situs dokumentasi Anda dengan Stradocs.
+template: splash # Remove or comment out this line to display the site sidebar on this page.
+hero:
+  tagline: Selamat atas pembuatan proyek Stradocs baru!
+  image:
+    file: ../../../assets/houston.webp
+  actions:
+    - text: Panduan Contoh
+      link: /guides/example/
+      icon: right-arrow
+    - text: Baca dokumentasi Starlight
+      link: https://starlight.astro.build
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Langkah selanjutnya
+
+<CardGrid stagger>
+	<Card title="Perbarui konten" icon="pencil">
+		Sunting `src/content/docs/index.mdx` untuk melihat perubahan pada halaman ini.
+	</Card>
+	<Card title="Ubah tata letak halaman" icon="document">
+		Hapus `template: splash` di `src/content/docs/index.mdx` untuk menampilkan bilah sisi di halaman ini.
+	</Card>
+	<Card title="Tambahkan konten baru" icon="add-document">
+		Tambahkan file Markdown atau MDX ke `src/content/docs` untuk membuat halaman baru.
+	</Card>
+	<Card title="Konfigurasikan situs Anda" icon="setting">
+		Edit `sidebar` dan konfigurasi lainnya di `astro.config.mjs`.
+	</Card>
+	<Card title="Baca dokumentasinya" icon="open-book">
+		Pelajari lebih lanjut di [Dokumentasi Starlight](https://starlight.astro.build/).
+	</Card>
+</CardGrid>
