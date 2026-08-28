@@ -44,6 +44,7 @@ export default defineConfig({
 			},
 			favicon: '/images/favicon.svg',
 			customCss: [
+     './src/styles/reset.css',
 				'./src/styles/global.css',
 			],
 			components: {
