@@ -66,16 +66,3 @@ input::placeholder,
 textarea::placeholder {
   color: var(--sl-color-gray-3);
 }
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  text-wrap: balance;
-}
-
-p {
-  text-wrap: pretty;
-}
