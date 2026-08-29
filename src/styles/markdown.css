@@ -1,4 +1,4 @@
-@layer starlight.content {
+
 	.sl-markdown-content strong:not(:where(.not-content *)) {
 		font-weight: 500;
 		color: var(--sl-color-white);
@@ -127,4 +127,3 @@
 		--sl-details-border-color: var(--sl-color-asides-border);
 		--sl-details-border-color--hover: var(--sl-color-asides-text-accent);
 	}
-}
