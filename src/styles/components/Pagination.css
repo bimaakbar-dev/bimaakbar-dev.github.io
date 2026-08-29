@@ -1,0 +1,17 @@
+.pagination-links a {
+	gap: 0.5rem;
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.5rem;
+	color: var(--sl-color-gray-2);
+	box-shadow: none;
+}
+
+.pagination-links a:hover {
+	border-color: var(--sl-color-gray-2);
+}
+
+.pagination-links .link-title {
+	color: var(--sl-color-white);
+	font-size: var(--sl-text-base);
+	line-height: var(--sl-line-height-headings);
+}
