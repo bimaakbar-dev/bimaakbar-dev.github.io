@@ -172,3 +172,23 @@
 	--sl-details-border-color: var(--sl-color-asides-border);
 	--sl-details-border-color--hover: var(--sl-color-asides-text-accent);
 }
+
+.expressive-code .copy-code-button {
+  background-color: var(--sl-color-gray-6) !important;
+  color: var(--sl-color-gray-2) !important;
+  border: 1px solid var(--sl-color-gray-5) !important;
+  border-radius: 0.375rem !important;
+  transition: all 0.15s ease;
+}
+
+.expressive-code .copy-code-button:hover {
+  background-color: var(--sl-color-gray-5) !important;
+  color: var(--sl-color-white) !important;
+  border-color: var(--sl-color-gray-4) !important;
+}
+
+.expressive-code .copy-code-button.success {
+  background-color: var(--sl-color-gray-5) !important;
+  color: var(--sl-color-white) !important;
+  border-color: var(--sl-color-gray-4) !important;
+}
