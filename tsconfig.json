@@ -2,14 +2,10 @@
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"],
-    "compilerOptions": {
-    "plugins": [
-      {
-        "name": "@astrojs/ts-plugin"
-      }
-    ],
+  "compilerOptions": {
     "verbatimModuleSyntax": true,
     "paths": {
       "~/*": ["./src/*"]
     }
+  }
 }
