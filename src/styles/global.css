@@ -1,7 +1,13 @@
+@import './components/Banner.css';
+@import './components/ContentNotice.css';
+
 @import './user-components/Badge.css';
 @import './user-components/Card.css';
 @import './user-components/FileTree.css';
+@import './user-components/LinkButton.css';
 @import './user-components/LinkCard.css';
+@import './user-components/Steps.css';
+@import './user-components/Tabs.css';
 
 :root,
 ::backdrop {

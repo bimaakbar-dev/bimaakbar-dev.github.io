@@ -51,6 +51,9 @@ export default defineConfig({
 			],
 			components: {
 				Head: './src/components/Head.astro',
+				DraftContentNotice: './src/components/FallbackContentNotice.astro',
+				FallbackContentNotice: './src/components/FallbackContentNotice.astro',
+				
 			},
 			expressiveCode: {
 				styleOverrides: { 
@@ -88,6 +91,7 @@ export default defineConfig({
 						inlineButtonBorder: 'var(--sl-color-hairline)',
 						inlineButtonForeground: 'var(--sl-color-white)',
 
+						// terminalIcon: 'var(--terminal-icon)',
 						terminalBackground: 'var(--sl-color-gray-6)',
 						terminalTitlebarBackground: 'var(--sl-color-gray-6)',
 						terminalTitlebarBorderBottomColor: 'var(--sl-color-hairline)',
