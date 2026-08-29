@@ -1,0 +1,66 @@
+.starlight-aside {
+	display: block;
+	box-sizing: border-box;
+	position: relative;
+	padding: 0.5rem 1rem 0.5rem 1.65rem;
+	border: 1px solid var(--sl-color-hairline);
+	border-radius: 0.5rem;
+	background-color: var(--sl-color-gray-5);
+	border-inline-start: none;
+	color: var(--sl-color-white);
+}
+.starlight-aside::before {
+	content: "";
+	position: absolute;
+	inset-block: 0.65rem;
+	inset-inline-start: 0.5rem;
+	width: 3px;
+	background-color: var(--sl-color-asides-border);
+	border-radius: 999px;
+	vertical-align: middle;
+}
+.starlight-aside--note {
+	--sl-color-asides-text-accent: var(--sl-color-blue-high);
+	--sl-color-asides-border: var(--sl-color-blue);
+	background-color: none;
+}
+.starlight-aside--tip {
+	--sl-color-asides-text-accent: var(--sl-color-purple-high);
+	--sl-color-asides-border: var(--sl-color-purple);
+	background-color: none;
+}
+.starlight-aside--caution {
+	--sl-color-asides-text-accent: var(--sl-color-orange-high);
+	--sl-color-asides-border: var(--sl-color-orange);
+	background-color: none;
+}
+.starlight-aside--danger {
+	--sl-color-asides-text-accent: var(--sl-color-red-high);
+	--sl-color-asides-border: var(--sl-color-red);
+	background-color: none;
+}
+
+.starlight-aside__title {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+	font-size: var(--sl-text-sm);
+	font-weight: 500;
+	line-height: var(--sl-line-height-headings);
+	color: var(--sl-color-asides-text-accent);
+}
+
+.starlight-aside__icon {
+	font-size: 1.125em;
+	width: 1em;
+	height: 1em;
+	flex-shrink: 0;
+}
+
+.starlight-aside__title + .starlight-aside__content {
+	margin-top: 0;
+}
+
+.starlight-aside__content a {
+	color: var(--sl-color-asides-text-accent);
+}
