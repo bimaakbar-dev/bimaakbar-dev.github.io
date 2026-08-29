@@ -188,7 +188,7 @@
     --sl-z-index-skiplink: 20;
 }
 
-.expressive-code .frame .copy-button {
+.expressive-code .copy button {
   background-color: var(--sl-color-gray-6);
   border: 1px solid var(--sl-color-gray-5);
   color: var(--sl-color-gray-2);
@@ -198,31 +198,13 @@
   opacity: 0.8;
 }
 
-/* Hover Effect */
-.expressive-code .frame .copy-button:hover {
+.expressive-code .copy button:hover {
   background-color: var(--sl-color-gray-5);
   border-color: var(--sl-color-gray-4);
   color: var(--sl-color-white);
   opacity: 1;
   transform: scale(1.05);
 }
-
-/* Success/Copied State */
-.expressive-code .frame .copy-button.copied {
-  background-color: var(--sl-color-green);
-  border-color: var(--sl-color-green-high);
-  color: var(--sl-color-text-invert);
-}
-
-/* Custom Tooltip Styling */
-.expressive-code .frame .copy-button::after {
-  font-family: var(--sl-font-system-mono);
-  font-size: 0.75rem;
-  font-weight: 500;
-  border-radius: 0.25rem;
-}
-
-
 
 @media (min-width: 50em) {
     :root {
