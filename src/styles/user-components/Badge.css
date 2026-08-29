@@ -1,26 +1,26 @@
 :root {
 	--sl-badge-default-border: var(--sl-color-accent);
-	--sl-badge-default-bg: var(--sl-color-accent-low);
+	--sl-badge-default-bg: var(--sl-color-accent-high);
 	--sl-badge-default-text: #fff;
 
 	--sl-badge-note-border: var(--sl-color-blue);
-	--sl-badge-note-bg: var(--sl-color-blue-low);
+	--sl-badge-note-bg: var(--sl-color-blue-high);
 	--sl-badge-note-text: #fff;
 
 	--sl-badge-danger-border: var(--sl-color-red);
-	--sl-badge-danger-bg: var(--sl-color-red-low);
+	--sl-badge-danger-bg: var(--sl-color-red-high);
 	--sl-badge-danger-text: #fff;
 
 	--sl-badge-success-border: var(--sl-color-green);
-	--sl-badge-success-bg: var(--sl-color-green-low);
+	--sl-badge-success-bg: var(--sl-color-green-high);
 	--sl-badge-success-text: #fff;
 
 	--sl-badge-caution-border: var(--sl-color-orange);
-	--sl-badge-caution-bg: var(--sl-color-orange-low);
+	--sl-badge-caution-bg: var(--sl-color-orange-high);
 	--sl-badge-caution-text: #fff;
 
 	--sl-badge-tip-border: var(--sl-color-purple);
-	--sl-badge-tip-bg: var(--sl-color-purple-low);
+	--sl-badge-tip-bg: var(--sl-color-purple-high);
 	--sl-badge-tip-text: #fff;
 }
 
@@ -36,7 +36,7 @@
 .sl-badge {
 	display: inline-block;
 	border: 1px solid var(--sl-color-border-badge);
-	border-radius: 0.25rem;
+	border-radius: 999px;
 	font-family: var(--sl-font-system-mono);
 	line-height: normal;
 	color: var(--sl-color-text-badge);
@@ -111,7 +111,6 @@
 	padding: 0.225rem 0.45rem;
 }
 
-/* Badge in headings */
 .sl-markdown-content :is(h1, h2, h3, h4, h5, h6) .sl-badge {
 	vertical-align: middle;
 }
