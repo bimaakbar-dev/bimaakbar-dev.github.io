@@ -1,5 +1,6 @@
 @import './components/Banner.css';
 @import './components/MobileMenuToggle.css';
+@import './components/Pagination.css';
 
 @import './user-components/Badge.css';
 @import './user-components/Card.css';
