@@ -23,8 +23,9 @@
 }
 .card .title {
 	font-weight: 500;
-	font-size: var(--sl-text-h4);
+	font-size: var(--sl-text-lg);
 	color: var(--sl-color-white);
+ gap: 0.5rem;
 }
 .card .icon {
 	border: 1px solid var(--sl-card-border);
