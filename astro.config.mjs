@@ -47,7 +47,7 @@ export default defineConfig({
      './src/styles/reset.css',
 				'./src/styles/global.css',
      './src/styles/markdown.css',
-     './src/style/asides.css',
+     './src/styles/asides.css',
 			],
 			components: {
 				Head: './src/components/Head.astro',
