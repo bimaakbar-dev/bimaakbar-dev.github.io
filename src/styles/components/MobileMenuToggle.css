@@ -5,22 +5,22 @@ starlight-menu-button button {
 	height: var(--sl-menu-button-size);
 	padding: 0.5rem;
 	background-color: transparent;
-	color: var(--sl-color-black);
+	color: var(--sl-color-white);
 	box-shadow: none;
 }
 
 starlight-menu-button [aria-expanded='true'] button {
 	background-color: transparent;
-	color: var(--sl-color-black);
+	color: var(--sl-color-white);
 	box-shadow: none;
 }
 
 [data-theme='light'] starlight-menu-button button {
     background-color: transparent;
-    color: var(--sl-color-white);
+    color: var(--sl-color-black);
 }
 
 [data-theme='light'] starlight-menu-button [aria-expanded='true'] button {
 	background-color: transparent;
-	color: var(--sl-color-white);
+	color: var(--sl-color-black);
 }
