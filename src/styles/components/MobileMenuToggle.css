@@ -1,0 +1,26 @@
+starlight-menu-button button {
+	border: 0;
+	border-radius: 50%;
+	width: var(--sl-menu-button-size);
+	height: var(--sl-menu-button-size);
+	padding: 0.5rem;
+	background-color: none;
+	color: var(--sl-color-black);
+	box-shadow: none;
+}
+
+starlight-menu-button[aria-expanded='true'] button {
+	background-color: none;
+	color: var(--sl-color-black);
+	box-shadow: none;
+}
+
+starlight-menu-button([data-theme='light']) button {
+	background-color: none;
+	color: var(--sl-color-white);
+}
+
+starlight-menu-button([data-theme='light']) [aria-expanded='true'] button {
+	background-color: none;
+	color: var(--sl-color-white);
+}
