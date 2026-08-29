@@ -1,8 +1,8 @@
 :root {
 	--sl-badge-default-border: var(--sl-color-accent);
 	--sl-badge-default-bg: var(--sl-color-accent);
-	--sl-badge-default-text: #fff;
-
+	--sl-badge-default-text: #000
+	
 	--sl-badge-note-border: var(--sl-color-blue);
 	--sl-badge-note-bg: var(--sl-color-blue);
 	--sl-badge-note-text: #fff;
