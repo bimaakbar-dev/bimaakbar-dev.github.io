@@ -4,23 +4,23 @@ starlight-menu-button button {
 	width: var(--sl-menu-button-size);
 	height: var(--sl-menu-button-size);
 	padding: 0.5rem;
-	background-color: none;
+	background-color: transparent;
 	color: var(--sl-color-black);
 	box-shadow: none;
 }
 
-starlight-menu-button[aria-expanded='true'] button {
-	background-color: none;
+starlight-menu-button [aria-expanded='true'] button {
+	background-color: transparent;
 	color: var(--sl-color-black);
 	box-shadow: none;
 }
 
-starlight-menu-button([data-theme='light']) button {
-	background-color: none;
-	color: var(--sl-color-white);
+[data-theme='light'] starlight-menu-button button {
+    background-color: transparent;
+    color: var(--sl-color-white);
 }
 
-starlight-menu-button([data-theme='light']) [aria-expanded='true'] button {
-	background-color: none;
+[data-theme='light'] starlight-menu-button [aria-expanded='true'] button {
+	background-color: transparent;
 	color: var(--sl-color-white);
 }
