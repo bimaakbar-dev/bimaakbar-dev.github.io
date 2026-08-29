@@ -1,6 +1,4 @@
-/* ==================================================
-   STARLIGHT GLOBAL TOKENS (HARDCODED OVERRIDES)
-   ================================================== */
+@import './user-components/LinkCard.css';
 
 :root,
 ::backdrop {
