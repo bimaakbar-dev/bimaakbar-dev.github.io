@@ -68,6 +68,7 @@ export default defineConfig({
 
 					frames: {
 						copyIcon: 'var(--copy-icon)',
+
 						frameBoxShadowCssValue: 'none',
 						shadowColor: 'transparent',
 
@@ -89,8 +90,9 @@ export default defineConfig({
 
 						terminalBackground: 'var(--sl-color-gray-6)',
 						terminalTitlebarBackground: 'var(--sl-color-gray-6)',
-						terminalTitlebarBorderBottomColor: 'var(--sl-color-text-accent)',
-						terminalTitlebarDotsForeground: 'var(--sl-color-gray-5)',
+						terminalTitlebarBorderBottomColor: 'var(--sl-color-hairline)',
+						terminalTitlebarDotsForeground: 'var(--sl-color-gray-2)',
+						terminalTitlebarDotsOpacity: '0.2',
 
 						tooltipSuccessBackground: 'var(--sl-color-green)',
 						tooltipSuccessForeground: 'var(--sl-color-text-invert)'
@@ -142,6 +144,9 @@ export default defineConfig({
             			{ label: 'Code', slug: 'components/code' },
             			{ label: 'File Tree', slug: 'components/file-tree' },
             			{ label: 'Icons', slug: 'components/icons' },
+						{ label: 'Link Buttons', slug: 'components/link-buttons' },
+						{ label: 'Steps', slug: 'components/steps' },
+						{ label: 'Tabs', slug: 'components/tabs' },
 					],
 				},
 			],
