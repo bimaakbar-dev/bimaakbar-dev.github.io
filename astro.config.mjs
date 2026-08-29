@@ -58,16 +58,6 @@ export default defineConfig({
 					borderWidth: '1px',
 					frames: {
 						shadowColor: 'transparent',
-						copyButtonBackground: 'var(--sl-color-gray-6)',
-						copyButtonBackgroundHover: 'var(--sl-color-gray-5)',
-						copyButtonForeground: 'var(--sl-color-gray-2)',
-						copyButtonForegroundHover: 'var(--sl-color-white)',
-						copyButtonBorder: '1px solid var(--sl-color-gray-5)',
-						copyButtonRadius: '0.375rem',
-						
-						copiedButtonBackground: 'var(--sl-color-gray-5)',
-						copiedButtonForeground: 'var(--sl-color-white)',
-						copiedButtonBorder: '1px solid var(--sl-color-gray-4)',
 					},
 				},
 				themes: ['vitesse-black', 'vitesse-light'],
