@@ -54,13 +54,49 @@ export default defineConfig({
 			},
 			expressiveCode: {
 				styleOverrides: { 
+					borderColor: 'var(--sl-color-hairline)',
 					borderRadius: '0.5rem',
 					borderWidth: '1px',
+
+					codeBackground: 'var(--sl-color-gray-6)',
+					codeFontFamily: 'var(--font-geist-mono)',
+					codeFontSize: 'var(--sl-text-code-sm)',
+
+					focusBorder: 'var(--sl-color-accent)',
+
+					uiFontFamily: 'var(--font-geist)',
+
 					frames: {
+						copyIcon: 'var(--copy-icon)',
+						frameBoxShadowCssValue: 'none',
 						shadowColor: 'transparent',
+
+						editorActiveTabBackground: 'var(--sl-color-gray-6)',
+						editorActiveTabBorderColor: 'var(--sl-color-hairline)',
+						editorActiveTabIndicatorTopColor: 'none',
+						editorActiveTabForeground: 'var(--sl-color-text-accent)',
+						editorActiveTabIndicatorBottomColor: 'var(--sl-color-accent)',
+
+						editorBackground: 'var(--sl-color-gray-6)',
+						editorTabBarBackground: 'var(--sl-color-gray-6)',
+						editorTabBarBorderBottomColor: 'var(--sl-color-hairline)',
+						editorTabBarBorderColor: 'var(--sl-color-hairline)',
+						editorTabBorderRadius: '0.5rem',
+						
+						inlineButtonBackground: 'var(--sl-color-gray-5)',
+						inlineButtonBorder: 'var(--sl-color-hairline)',
+						inlineButtonForeground: 'var(--sl-color-white)',
+
+						terminalBackground: 'var(--sl-color-gray-6)',
+						terminalTitlebarBackground: 'var(--sl-color-gray-6)',
+						terminalTitlebarBorderBottomColor: 'var(--sl-color-text-accent)',
+						terminalTitlebarDotsForeground: 'var(--sl-color-gray-5)',
+
+						tooltipSuccessBackground: 'var(--sl-color-green)',
+						tooltipSuccessForeground: 'var(--sl-color-text-invert)'
 					},
 				},
-				themes: ['vitesse-black', 'vitesse-light'],
+				themes: [ 'vitesse-black', 'vitesse-light' ],
 				shiki: {
 					langAlias: {
 						markdoc: 'mdx',
@@ -101,7 +137,7 @@ export default defineConfig({
 						{ label: 'Cards', slug: 'components/cards' },
 						{ label: 'Link Cards', slug: 'components/link-cards' },
 						{ label: 'Card Grids', slug: 'components/card-grids' },
-       				 { label: 'Asides', slug: 'components/asides' },
+       				 	{ label: 'Asides', slug: 'components/asides' },
             			{ label: 'Badges', slug: 'components/badges' },
             			{ label: 'Code', slug: 'components/code' },
             			{ label: 'File Tree', slug: 'components/file-tree' },
