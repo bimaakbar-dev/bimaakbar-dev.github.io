@@ -189,9 +189,10 @@
 }
 
 .expressive-code .frame .copy-button {
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 6px;
+  background-color: var(--sl-color-gray-6);
+  border: 1px solid var(--sl-color-gray-5);
+  color: var(--sl-color-gray-2);
+  border-radius: 0.5rem;
   padding: 6px;
   transition: all 0.2s ease-in-out;
   opacity: 0.8;
@@ -199,26 +200,29 @@
 
 /* Hover Effect */
 .expressive-code .frame .copy-button:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.4);
+  background-color: var(--sl-color-gray-5);
+  border-color: var(--sl-color-gray-4);
+  color: var(--sl-color-white);
   opacity: 1;
   transform: scale(1.05);
 }
 
-/* Success/Copied State animation styling */
+/* Success/Copied State */
 .expressive-code .frame .copy-button.copied {
-  background-color: #22c55e; /* Green feedback */
-  border-color: #16a34a;
-  color: white;
+  background-color: var(--sl-color-green);
+  border-color: var(--sl-color-green-high);
+  color: var(--sl-color-text-invert);
 }
 
-/* Custom Tooltip Styling ("Copied!" popup indicator) */
+/* Custom Tooltip Styling */
 .expressive-code .frame .copy-button::after {
-  font-family: system-ui, sans-serif;
+  font-family: var(--sl-font-system-mono);
   font-size: 0.75rem;
   font-weight: 500;
-  border-radius: 4px;
+  border-radius: 0.25rem;
 }
+
+
 
 @media (min-width: 50em) {
     :root {
