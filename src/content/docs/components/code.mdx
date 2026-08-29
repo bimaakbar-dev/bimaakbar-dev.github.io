@@ -1,0 +1,31 @@
+---
+title: Code
+description: Learn how to display syntax highlighted code in Starlight without Markdown code blocks.
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+The `<Code>` component renders syntax highlighted code.
+It is useful when using a [Markdown code block](/guides/authoring-content/#code-blocks) is not possible, for example, to render data coming from external sources like files, databases, or APIs.
+
+import Preview from '~/components/components-preview.astro';
+
+<Preview>
+
+<Code
+	slot="preview"
+	code={`## Welcome
+
+Hello from **space**!`}
+lang="md"
+title="example.md"
+ins={3}
+/>
+
+</Preview>
+
+## Import
+
+```tsx
+import { Code } from '@astrojs/starlight/components';
+```
