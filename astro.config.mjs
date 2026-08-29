@@ -91,7 +91,6 @@ export default defineConfig({
 						inlineButtonBorder: 'var(--sl-color-hairline)',
 						inlineButtonForeground: 'var(--sl-color-white)',
 
-						// terminalIcon: 'var(--terminal-icon)',
 						terminalBackground: 'var(--sl-color-gray-6)',
 						terminalTitlebarBackground: 'var(--sl-color-gray-6)',
 						terminalTitlebarBorderBottomColor: 'var(--sl-color-hairline)',
@@ -143,7 +142,7 @@ export default defineConfig({
 						{ label: 'Cards', slug: 'components/cards' },
 						{ label: 'Link Cards', slug: 'components/link-cards' },
 						{ label: 'Card Grids', slug: 'components/card-grids' },
-       				 	{ label: 'Asides', slug: 'components/asides' },
+       				 { label: 'Asides', slug: 'components/asides' },
             			{ label: 'Badges', slug: 'components/badges' },
             			{ label: 'Code', slug: 'components/code' },
             			{ label: 'File Tree', slug: 'components/file-tree' },
