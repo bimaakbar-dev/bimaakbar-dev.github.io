@@ -88,7 +88,7 @@
     --sl-color-gray-7: rgb(244, 244, 245);
     --sl-color-black: rgb(250, 250, 250);
 
-    /* 2. LIGHT MODE: SEMANTIC COLORS (Untuk Asides, Badges, Error) */
+    /* 2. LIGHT MODE: SEMANTIC COLORS (for Asides, Badges, Error) */
     /* Info (Blue) */
     --sl-color-blue-low: rgb(8 145 178 / 0.1);
     --sl-color-blue: rgb(8, 145, 178);
@@ -142,9 +142,6 @@
     --sl-shadow-lg: 0 10px 20px rgb(0 0 0 / 0.07);
 }
 
-/* ==================================================
-   STRUCTURAL SIZES & Z-INDEX (Tetap bawaan Starlight)
-   ================================================== */
 :root {
     --sl-text-2xs: 0.75rem;
     --sl-text-xs: 0.8125rem;
@@ -189,6 +186,38 @@
     --sl-z-index-menu: 5;
     --sl-z-index-navbar: 10;
     --sl-z-index-skiplink: 20;
+}
+
+.expressive-code .frame .copy-button {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 6px;
+  transition: all 0.2s ease-in-out;
+  opacity: 0.8;
+}
+
+/* Hover Effect */
+.expressive-code .frame .copy-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Success/Copied State animation styling */
+.expressive-code .frame .copy-button.copied {
+  background-color: #22c55e; /* Green feedback */
+  border-color: #16a34a;
+  color: white;
+}
+
+/* Custom Tooltip Styling ("Copied!" popup indicator) */
+.expressive-code .frame .copy-button::after {
+  font-family: system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 4px;
 }
 
 @media (min-width: 50em) {
