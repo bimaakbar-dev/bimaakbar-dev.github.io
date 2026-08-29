@@ -97,6 +97,7 @@ export default defineConfig({
 					items: [
 						{ label: 'Using Components', slug: 'components/using-components' },
 						{ label: 'Cards', slug: 'components/cards' },
+       { label: 'Asides', slug: 'components/asides' },
 					],
 				},
 			],
