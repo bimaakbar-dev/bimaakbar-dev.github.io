@@ -44,7 +44,7 @@
 	display: flex;
 	gap: 0.5rem;
 	align-items: center;
-	font-size: var(--sl-text-sm);
+	font-size: var(--sl-text-base);
 	font-weight: 500;
 	line-height: var(--sl-line-height-headings);
 	color: var(--sl-color-asides-text-accent);
