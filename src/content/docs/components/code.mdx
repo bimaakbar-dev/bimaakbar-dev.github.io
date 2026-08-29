@@ -79,23 +79,6 @@ export const highlights = ['file', 'CMS'];
 In MDX files and Astro components, use [Vite’s `?raw` import suffix](https://vite.dev/guide/assets#importing-asset-as-string) to import any code file as a string.
 You can then pass this imported string to the `<Code>` component to include it on your page.
 
-<Preview>
-
-```mdx "?raw"
-# src/content/docs/example.mdx
-
-import { Code } from '@astrojs/starlight/components';
-import importedCode from '/tsconfig.json?raw';
-
-<Code code={importedCode} lang="json" title="tsconfig.json" />
-```
-
-import importedCode from '../../../../../examples/basics/tsconfig.json?raw';
-
-<Code slot="preview" code={importedCode} lang="json" title="tsconfig.json" />
-
-</Preview>
-
 ## `<Code>` Props
 
 **Implementation:** [`Code.astro`](https://github.com/expressive-code/expressive-code/blob/main/packages/astro-expressive-code/components/Code.astro)
