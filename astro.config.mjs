@@ -44,10 +44,10 @@ export default defineConfig({
 			},
 			favicon: '/images/favicon.svg',
 			customCss: [
-     './src/styles/reset.css',
+     		   './src/styles/reset.css',
 				'./src/styles/global.css',
-     './src/styles/markdown.css',
-     './src/styles/asides.css',
+				'./src/styles/markdown.css',
+				'./src/styles/asides.css',
 			],
 			components: {
 				Head: './src/components/Head.astro',
@@ -59,6 +59,19 @@ export default defineConfig({
 					frames: {
 						shadowColor: 'transparent',
 					},
+					codeCopyButton: {
+                		background: 'var(--sl-color-gray-6)',
+                		backgroundHover: 'var(--sl-color-gray-5)',
+                		color: 'var(--sl-color-gray-2)',
+                		colorHover: 'var(--sl-color-white)',
+                		border: '1px solid var(--sl-color-gray-5)',
+                		borderRadius: '0.375rem',
+            		},
+            		codeCopiedButton: {
+                		background: 'var(--sl-color-gray-5)',
+                		color: 'var(--sl-color-white)',
+                		border: '1px solid var(--sl-color-gray-4)',
+            		},
 				},
 				themes: ['vitesse-black', 'vitesse-light'],
 				shiki: {
@@ -90,14 +103,16 @@ export default defineConfig({
 				},
 				{
 					label: 'Reference',
-					items: [{ autogenerate: { directory: 'reference' } }],
+					items: [
+						{ autogenerate: { directory: 'reference' } }
+					],
 				},
 				{
 					label: 'Components',
 					items: [
 						{ label: 'Using Components', slug: 'components/using-components' },
 						{ label: 'Cards', slug: 'components/cards' },
-       { label: 'Asides', slug: 'components/asides' },
+       				 { label: 'Asides', slug: 'components/asides' },
 					],
 				},
 			],
