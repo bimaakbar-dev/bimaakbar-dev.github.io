@@ -103,6 +103,7 @@ export default defineConfig({
 						{ label: 'Card Grids', slug: 'components/card-grids' },
        				 { label: 'Asides', slug: 'components/asides' },
             { label: 'Badges', slug: 'components/badges' },
+            { label: 'File Tree', slug: 'components/file-tree' },
 					],
 				},
 			],
