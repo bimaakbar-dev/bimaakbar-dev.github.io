@@ -12,6 +12,10 @@
 	line-height: var(--sl-line-height-headings);
 }
 
+.sl-markdown-content :is(h1 code, h2 code, h3 code, h4 code, h5 code, h6 code):not(:where(.not-content *)) {
+	font-size: inherit;
+}
+
 .sl-markdown-content h1:not(:where(.not-content *)) {
 	font-weight: 700;
 }
@@ -71,23 +75,54 @@
 
 .sl-markdown-content table:not(:where(.not-content *)) {
 	display: block;
+	width: 100%;
+    min-width: max-content;
 	overflow: auto;
 	border-spacing: 0;
+	table-layout: auto;
+    border-collapse: separate;
+}
+.sl-markdown-content :is(thead):not(:where(.not-content *)) {
+    background: transparent;
+}
+.sl-markdown-content :is(thead th):not(:where(.not-content *)) {
+    background-color: var(--sl-color-gray-6);
+    border-block: 1px solid var(--sl-color-hairline);
+    white-space: nowrap;
+}
+.sl-markdown-content :is(thead tr:first-child th:first-child):not(:where(.not-content *)) {
+    border-left: 1px solid var(--sl-color-hairline);
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+}
+.sl-markdown-content :is(thead tr:first-child th:last-child):not(:where(.not-content *)) {
+    border-right: 1px solid var(--sl-color-hairline);
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
 }
 .sl-markdown-content :is(th, td):not(:where(.not-content *)) {
-	border-bottom: 1px solid var(--sl-color-gray-5);
-	padding: 0.5rem 1rem;
-	vertical-align: baseline;
-}
-.sl-markdown-content :is(th:first-child, td:first-child):not(:where(.not-content *)) {
-	padding-inline-start: 0;
-}
-.sl-markdown-content :is(th:last-child, td:last-child):not(:where(.not-content *)) {
-	padding-inline-end: 0;
+	border-bottom: none;
+	padding: 0;
 }
 .sl-markdown-content th:not(:where(.not-content *)) {
-	color: var(--sl-color-white);
-	font-weight: 500;
+    color: var(--sl-color-white);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+}
+.sl-markdown-content :is(tbody tr:not(:first-child) td):not(:where(.not-content *)) {
+    border-top: 1px solid var(--sl-color-hairline);
+}
+.sl-markdown-content :is(td):not(:where(.not-content *)) {
+    word-break: normal;
+    overflow-wrap: anywhere;
+}
+.sl-markdown-content :is(td a, td code):not(:where(.not-content *)) {
+    white-space: nowrap;
+}
+@media (hover: hover) {
+  .sl-markdown-content :is(tbody tr:hover td):not(:where(.not-content *)) {
+    background: var(--sl-color-gray-5);
+  }
 }
 	
 .sl-markdown-content .starlight-aside :is(th, td, hr, blockquote):not(:where(.not-content *)) {
