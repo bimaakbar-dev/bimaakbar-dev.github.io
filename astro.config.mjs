@@ -100,6 +100,7 @@ export default defineConfig({
 						{ label: 'Using Components', slug: 'components/using-components' },
 						{ label: 'Cards', slug: 'components/cards' },
 						{ label: 'Link Cards', slug: 'components/link-cards' },
+						{ label: 'Card Grids', slug: 'components/card-grids' },
        				 { label: 'Asides', slug: 'components/asides' },
 					],
 				},
