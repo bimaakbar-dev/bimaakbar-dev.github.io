@@ -204,14 +204,14 @@
 }
 
 .expressive-code .copy button {
+	width: 0.8em;
+	height: 0.8em;
     border-radius: 0.5rem;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
 .expressive-code .copy button svg {
 	font-size: var(--sl-text-code);
-    width: 0.8em;
-	height: 0.8em;
     flex-shrink: 0;
 }
 
