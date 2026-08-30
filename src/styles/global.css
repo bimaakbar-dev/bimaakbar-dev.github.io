@@ -204,11 +204,8 @@
 }
 
 .expressive-code .copy button {
-    border-radius: 0.5rem !important;
-}
-.expressive-code .copy button svg {
-    width: var(--sl-text-code-sm);
-    height: var(--sl-text-code-sm);
+    border-radius: 0.5rem;
+    font-size: var(--sl-text-code-sm);
 }
 
 @media (min-width: 50em) {
