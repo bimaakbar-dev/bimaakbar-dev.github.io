@@ -7,19 +7,19 @@
 }
 .card:nth-child(4n + 1) {
 	--sl-card-border: var(--sl-color-orange);
-	--sl-card-bg: var(--sl-color-orange-low);
+	--sl-card-bg: var(--sl-color-gray-5);
 }
 .card:nth-child(4n + 3) {
 	--sl-card-border: var(--sl-color-green);
-	--sl-card-bg: var(--sl-color-green-low);
+	--sl-card-bg: var(--sl-color-gray-5);;
 }
 .card:nth-child(4n + 4) {
 	--sl-card-border: var(--sl-color-red);
-	--sl-card-bg: var(--sl-color-red-low);
+	--sl-card-bg: var(--sl-color-gray-5);
 }
 .card:nth-child(4n + 5) {
 	--sl-card-border: var(--sl-color-blue);
-	--sl-card-bg: var(--sl-color-blue-low);
+	--sl-card-bg: var(--sl-color-gray-5);
 }
 .card .title {
 	flex-direction: column;
