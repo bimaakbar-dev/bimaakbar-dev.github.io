@@ -243,6 +243,10 @@
 }
 
 /* Footnotes */
+.sl-markdown-content .footnotes :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
+    display: none;
+}
+
 .sl-markdown-content .footnotes:not(:where(.not-content *)) {
     margin-top: 2.5rem;
     padding-top: 1rem;
@@ -264,7 +268,7 @@
 }
 
 .sl-markdown-content .footnote-backref:not(:where(.not-content *)) {
-    text-decoration: none;
+    text-decoration: none !important;
     margin-inline-start: 0.25rem;
     color: var(--sl-color-text-accent);
 }
