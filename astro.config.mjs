@@ -136,6 +136,12 @@ export default defineConfig({
 					],
 				},
 				{
+					label: 'Writing',
+					items: [
+						{ label: 'Markdown', slug: 'writing/markdown' },
+					],
+				},
+				{
 					label: 'Components',
 					items: [
 						{ label: 'Using Components', slug: 'components/using-components' },
