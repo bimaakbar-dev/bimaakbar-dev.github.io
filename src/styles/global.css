@@ -63,7 +63,7 @@
     
     --sl-color-hairline-light: rgb(15, 15, 15);
     --sl-color-hairline: rgb(30, 30, 30);
-    --sl-color-hairline-shade: rgb(15, 15, 15);
+    --sl-color-hairline-shade: rgb(30, 30, 30);
 
     --sl-color-backdrop-overlay: hsla(223, 13%, 10%, 0.66);
 
@@ -120,7 +120,7 @@
 
     --sl-color-hairline: rgb(228, 228, 231);
     --sl-color-hairline-light: rgb(244, 244, 245);
-    --sl-color-hairline-shade: rgb(244, 244, 245);
+    --sl-color-hairline-shade: rgb(228, 228, 231);
 
     --sl-color-backdrop-overlay: hsla(225, 9%, 36%, 0.66);
 
@@ -147,15 +147,15 @@
     --sl-text-5xl: 2.625rem;
     --sl-text-6xl: 4rem;
 
-    --sl-text-body: var(--sl-text-base);
-    --sl-text-body-sm: var(--sl-text-xs);
-    --sl-text-code: var(--sl-text-sm);
-    --sl-text-code-sm: var(--sl-text-xs);
-    --sl-text-h1: var(--sl-text-4xl);
-    --sl-text-h2: var(--sl-text-3xl);
-    --sl-text-h3: var(--sl-text-2xl);
-    --sl-text-h4: var(--sl-text-xl);
-    --sl-text-h5: var(--sl-text-lg);
+    /* --sl-text-body: var(--sl-text-base); */
+    /* --sl-text-body-sm: var(--sl-text-xs); */
+    /* --sl-text-code: var(--sl-text-sm); */
+    /* --sl-text-code-sm: var(--sl-text-xs); */
+    /* --sl-text-h1: var(--sl-text-4xl); */
+    /* --sl-text-h2: var(--sl-text-3xl); */
+    /* --sl-text-h3: var(--sl-text-2xl); */
+    /* --sl-text-h4: var(--sl-text-xl); */
+    /* --sl-text-h5: var(--sl-text-lg); */
 
     --sl-line-height: 1.75;
     --sl-line-height-headings: 1.2;
@@ -166,12 +166,13 @@
     --sl-mobile-toc-height: 3rem;
     --sl-sidebar-width: 18.75rem;
     --sl-sidebar-pad-x: 1rem;
-    --sl-content-width: 45rem;
-    --sl-content-pad-x: 1rem;
-    --sl-content-gap-y: 1rem;
-    --sl-main-pad: 0 0 3vh 0;
+    /* --sl-content-width: 45rem; */
+    /* --sl-content-pad-x: 1rem; */
+    /* --sl-content-gap-y: 1rem; */
+    /* --sl-main-pad: 0 0 3vh 0; */
     --sl-menu-button-size: 2rem;
-    --sl-nav-gap: var(--sl-content-pad-x);
+    /* --sl-nav-gap: var(--sl-content-pad-x); */
+    
     --sl-outline-offset-inside: -0.1875rem;
 
     --sl-z-index-toc: 4;
