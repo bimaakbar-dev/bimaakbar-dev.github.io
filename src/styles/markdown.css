@@ -1,12 +1,3 @@
-.sl-markdown-content strong:not(:where(.not-content *)) {
-	font-weight: 500;
-	color: var(--sl-color-white);
-}
-
-.sl-markdown-content dt:not(:where(.not-content *)) {
-	font-weight: 500;
-}
-
 .sl-markdown-content :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
 	color: var(--sl-color-white);
 	line-height: var(--sl-line-height-headings);
@@ -16,6 +7,7 @@
 	font-size: inherit;
 }
 
+/* Heading */
 .sl-markdown-content h1:not(:where(.not-content *)) {
 	font-weight: 700;
 }
@@ -35,6 +27,7 @@
 	font-weight: 500;
 }
 
+/* Link */
 .sl-markdown-content a:not(:where(.not-content *)) {
 	font-weight: 500;
 	color: var(--sl-color-white);
@@ -44,6 +37,22 @@
 	color: var(--sl-color-text-accent);
 }
 
+/* Bold */
+.sl-markdown-content :is(strong, b):not(:where(.not-content *)) {
+	font-weight: 500;
+	color: var(--sl-color-white);
+}
+/* italic */
+.sl-markdown-content :is(em, i):not(:where(.not-content *)) {
+	color: var(--sl-color-gray-3);
+}
+
+/* Definisi list */
+.sl-markdown-content dt:not(:where(.not-content *)) {
+	font-weight: 500;
+}
+
+/* Code block */
 .sl-markdown-content code:not(:where(.not-content *)) {
 	background-color: var(--sl-color-bg-inline-code);
 	border: 1px solid var(--sl-color-gray-5);
@@ -56,6 +65,7 @@
 	font-size: var(--sl-text-code);
 }
 
+/* Blockquote */
 .sl-markdown-content blockquote:not(:where(.not-content *)) {
     position: relative;
     border-inline-start: none;
@@ -74,6 +84,8 @@
     border-radius: 999px;
 }
 
+/* Table */
+
 .sl-markdown-content table:not(:where(.not-content *)) {
 	display: block;
 	width: 100%;
@@ -83,49 +95,61 @@
 	table-layout: auto;
     border-collapse: separate;
 }
+
 .sl-markdown-content :is(thead):not(:where(.not-content *)) {
     background: transparent;
 }
+
 .sl-markdown-content :is(thead th):not(:where(.not-content *)) {
     background-color: var(--sl-color-gray-6);
     border-block: 1px solid var(--sl-color-hairline);
     white-space: nowrap;
 }
+
 .sl-markdown-content :is(thead tr:first-child th:first-child):not(:where(.not-content *)) {
-    border-left: 1px solid var(--sl-color-hairline);
-    border-top-left-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
+    border-inline-start: 1px solid var(--sl-color-hairline);
+    border-start-start-radius: 0.5rem;
+    border-end-start-radius: 0.5rem;
 }
+
 .sl-markdown-content :is(thead tr:first-child th:last-child):not(:where(.not-content *)) {
-    border-right: 1px solid var(--sl-color-hairline);
-    border-top-right-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
+    border-inline-end: 1px solid var(--sl-color-hairline);
+    border-start-end-radius: 0.5rem;
+    border-end-end-radius: 0.5rem;
 }
+
 .sl-markdown-content :is(th, td):not(:where(.not-content *)) {
 	border-bottom: none;
 	padding: 0;
 }
+
 .sl-markdown-content :is(th):not(:where(.not-content *)) {
     color: var(--sl-color-white);
     font-weight: 500;
     padding: 0.5rem 1rem;
 }
+
 .sl-markdown-content :is(tbody tr:not(:first-child) td):not(:where(.not-content *)) {
     border-top: 1px solid var(--sl-color-hairline);
 }
+
 .sl-markdown-content :is(td):not(:where(.not-content *)) {
     word-break: normal;
     overflow-wrap: anywhere;
+    padding: 0.5rem 1rem;
 }
+
 .sl-markdown-content :is(td a, td code):not(:where(.not-content *)) {
     white-space: nowrap;
 }
+
 @media (hover: hover) {
   .sl-markdown-content :is(tbody tr:hover td):not(:where(.not-content *)) {
     background: var(--sl-color-gray-5);
   }
 }
-	
+
+/* Components */
 .sl-markdown-content .starlight-aside :is(th, td, hr, blockquote):not(:where(.not-content *)) {
 	border-color: var(--sl-color-gray-4);
 }
@@ -142,10 +166,12 @@
 	}
 }
 
+/* Hr */
 .sl-markdown-content hr:not(:where(.not-content *)) {
 	border-bottom: 1px solid var(--sl-color-hairline);
 }
 
+/* Details */
 .sl-markdown-content details:not(:where(.not-content *)) {
 	--sl-details-border-color: var(--sl-color-gray-5);
 	--sl-details-border-color--hover: var(--sl-color-text-accent);
