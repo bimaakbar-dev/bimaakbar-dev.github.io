@@ -314,6 +314,10 @@
     color: var(--sl-color-gray-3);
 }
 
+.sl-markdown-content .footnotes #footnote-label:not(:where(.not-content *)) {
+    display: flex;
+}
+
 .sl-markdown-content .footnotes ol:not(:where(.not-content *)) {
     padding-inline-start: 1.25rem;
 }
@@ -323,13 +327,17 @@
 }
 
 .sl-markdown-content .footnotes li::marker:not(:where(.not-content *)) {
-    color: var(--sl-color-gray-4);
+    color: var(--sl-color-gray-5);
 }
 
-.sl-markdown-content .footnote-backref:not(:where(.not-content *)) {
-    text-decoration: none !important;
+.sl-markdown-content .footnotes a.data-footnote-backref:not(:where(.not-content *)) {
+    text-decoration: none;
     margin-inline-start: 0.25rem;
     color: var(--sl-color-text-accent);
+}
+
+.sl-markdown-content a [data-footnote-ref]:not(:where(.not-content *)) {
+    text-decoration: none;
 }
 
 /* Components */
