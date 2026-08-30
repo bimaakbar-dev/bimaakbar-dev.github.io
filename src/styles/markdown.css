@@ -229,6 +229,46 @@
 	mask-repeat: no-repeat;
 }
 
+/* Kbd */
+.sl-markdown-content kbd:not(:where(.not-content *)) {
+    background-color: var(--sl-color-bg-inline-code);
+    border: 1px solid var(--sl-color-gray-5);
+    border-bottom-width: 2px;
+    border-radius: 0.25rem;
+    padding: 0.15rem 0.35rem;
+    font-size: var(--sl-text-code-sm);
+    font-family: var(--sl-font-mono, monospace);
+    color: var(--sl-color-white);
+    box-shadow: 0 1px 0 var(--sl-color-gray-5);
+}
+
+/* Footnotes */
+.sl-markdown-content .footnotes:not(:where(.not-content *)) {
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--sl-color-hairline);
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+}
+
+.sl-markdown-content .footnotes ol:not(:where(.not-content *)) {
+    padding-inline-start: 1.25rem;
+}
+
+.sl-markdown-content .footnotes li:not(:where(.not-content *)) {
+    margin-bottom: 0.5rem;
+}
+
+.sl-markdown-content .footnotes li::marker:not(:where(.not-content *)) {
+    color: var(--sl-color-gray-4);
+}
+
+.sl-markdown-content .footnote-backref:not(:where(.not-content *)) {
+    text-decoration: none;
+    margin-inline-start: 0.25rem;
+    color: var(--sl-color-text-accent);
+}
+
 /* Components */
 .sl-markdown-content .starlight-aside :is(th, td, hr, blockquote):not(:where(.not-content *)) {
 	border-color: var(--sl-color-gray-4);
