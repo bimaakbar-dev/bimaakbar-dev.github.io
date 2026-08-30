@@ -1,49 +1,18 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
 import starlight from '@astrojs/starlight';
+
+import { fontsConfig } from './src/config/fonts';
 import { sidebarConfig } from './src/config/sidebar';
 import { expressiveCodeConfig } from './src/config/expressive-code';
 
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://bimaakbar.pages.dev',
-	fonts: [
-		{
-			provider: fontProviders.local(),
-			name: 'Geist',
-			cssVariable: '--font-geist',
-			options: {
-				variants: [
-					{
-						weight: "100 900",
-						style: 'normal',
-						src: ['./src/assets/fonts/Geist.woff2'],
-					},
-				],
-			},
-		},
-		{
-			provider: fontProviders.local(),
-			name: 'GeistMono',
-			cssVariable: '--font-geist-mono',
-			options: {
-				variants: [
-					{
-						weight: 'normal',
-						style: 'normal',
-						src: ['./src/assets/fonts/GeistMono.woff2'],
-					},
-				],
-			},
-		},
-	],
+	fonts: fontsConfig,
 	integrations: [
 		starlight({
 			title: 'stargazers',
-			logo: {
-				light: './src/assets/images/light-logo.svg',
-				dark: './src/assets/images/dark-logo.svg',
-			},
 			defaultLocale: 'root',
 			locales: {
 				root: {
@@ -54,6 +23,10 @@ export default defineConfig({
 					label: 'Indonesia',
 					lang: 'id',
 				},
+			},
+			logo: {
+				light: './src/assets/images/light-logo.svg',
+				dark: './src/assets/images/dark-logo.svg',
 			},
 			favicon: '/images/favicon.svg',
 			customCss: [
