@@ -1,0 +1,96 @@
+site-search button[data-open-modal] {
+	font-size: var(--sl-text-sm);
+	border-radius: 0.5rem;
+}
+
+@media (min-width: 50rem) {
+	site-search button[data-open-modal] {
+		border: 1px solid var(--sl-color-hairline);
+		border-radius: 0.5rem;
+		background-color: var(--sl-color-bg);
+		color: var(--sl-color-gray-2);
+	}
+	site-search button[data-open-modal]:hover {
+		border-color: var(--sl-color-hairline);
+		color: var(--sl-color-text-accent);
+        background-color: var(--sl-color-gray-6);
+	}
+    site-search dialog {
+        border: none;
+    }
+}
+
+site-search button > kbd {
+	border-radius: 0.35rem;
+	font-size: var(--sl-text-2xs);
+	background-color: var(--sl-color-gray-6);
+	border: 1px solid var(--sl-color-hairline);
+}
+
+site-search dialog {
+	background-color: var(--sl-color-bg);
+	border: 1px solid var(--sl-color-hairline);
+	border-radius: 0.75rem;
+	box-shadow: var(--sl-shadow-lg);
+}
+
+site-search button[data-close-modal] {
+	color: var(--sl-color-text);
+	font-size: var(--sl-text-sm);
+}
+
+site-search #starlight__search {
+	--pagefind-ui-primary: var(--sl-color-accent);
+	--pagefind-ui-text: var(--sl-color-text);
+	--pagefind-ui-background: var(--sl-color-bg);
+	--pagefind-ui-border: var(--sl-color-hairline);
+	--pagefind-ui-border-width: 1px;
+	--pagefind-ui-border-radius: 0.5rem;
+	--pagefind-ui-tag: var(--sl-color-gray-5);
+	--pagefind-ui-font: var(--font-geist);
+}
+
+site-search #starlight__search .pagefind-ui__search-input {
+	color: var(--sl-color-text-accent);
+	font-size: var(--sl-text-base);
+	border-radius: 0.5rem;
+	border: 1px solid var(--sl-color-hairline);
+	background-color: var(--sl-color-bg-inline-code);
+}
+
+site-search input:focus {
+	--pagefind-ui-border: var(--sl-color-accent);
+}
+
+site-search .pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)),
+site-search .pagefind-ui__result-nested {
+	background-color: var(--sl-color-bg-inline-code);
+	border-radius: 0.5rem;
+}
+
+site-search .pagefind-ui__result-inner > :first-child {
+	border-radius: 0.5rem 0.5rem 0 0;
+}
+site-search .pagefind-ui__result-inner > :last-child {
+	border-radius: 0 0 0.5rem 0.5rem;
+}
+
+site-search .pagefind-ui__result-link {
+	color: var(--sl-color-white);
+	font-size: var(--sl-text-sm);
+	font-weight: 500;
+}
+
+site-search .pagefind-ui__result-excerpt {
+	color: var(--sl-color-gray-2);
+	font-size: var(--sl-text-xs);
+}
+
+site-search mark {
+	color: var(--sl-color-accent-high);
+}
+
+site-search .pagefind-ui__result-tags {
+	background-color: var(--sl-color-bg-inline-code);
+	font-size: var(--sl-text-2xs);
+}
