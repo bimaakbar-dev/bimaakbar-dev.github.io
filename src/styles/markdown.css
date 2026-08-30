@@ -73,9 +73,8 @@
     display: inline-grid;
     place-content: center;
     margin-inline-end: 0.5rem;
-    vertical-align: -0.125em;
+    vertical-align: middle;
     cursor: pointer;
-    transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
 .sl-markdown-content input[type="checkbox"]:not(:where(.not-content *)):hover {
@@ -98,7 +97,6 @@
 
 .sl-markdown-content li:has(> input[type="checkbox"]):not(:where(.not-content *)) {
     list-style-type: none;
-    margin-inline-start: -1.25rem;
 }
 
 /* Definisi list */
@@ -236,6 +234,11 @@
 	border-color: var(--sl-color-gray-4);
 }
 
+.sl-markdown-content .starlight-aside :is(a):not(:where(.not-content *)) {
+	color: inherit;
+	text-decoration-color: var(--sl-color-asides-text-accent);
+}
+
 @supports (border-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 30%, transparent)) {
 	.sl-markdown-content .starlight-aside :is(th, td, hr, blockquote):not(:where(.not-content *)) {
 		border-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 30%, transparent);
@@ -244,7 +247,7 @@
 
 @supports (border-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 12%, transparent)) {
 	.sl-markdown-content .starlight-aside code:not(:where(.not-content *)) {
-		background-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 12%, transparent);
+		border-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 12%, transparent);
 	}
 }
 
