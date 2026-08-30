@@ -185,13 +185,13 @@
     border-radius: 0.5rem;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+
+    width: 2rem !important;
+	height: 2rem !important;
 }
-.expressive-code .copy button svg {
-	font-size: var(--sl-text-code);
-	width: 1.333em !important;
-	height: 1.333em !important;
-    padding: 0.2em;
-    flex-shrink: 0;
+
+.expressive-code .copy button::after {
+	margin: 0.5rem !important;
 }
 
 @media (min-width: 50em) {
@@ -202,6 +202,9 @@
         --sl-text-h2: var(--sl-text-4xl);
         --sl-text-h3: var(--sl-text-3xl);
         --sl-text-h4: var(--sl-text-2xl);
+    }
+    .expressive-code .copy button::after {
+        margin: 0.45rem !important;
     }
 }
 
