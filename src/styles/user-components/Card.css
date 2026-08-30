@@ -22,6 +22,7 @@
 	--sl-card-bg: var(--sl-color-blue-low);
 }
 .card .title {
+  flex-direction: column;
 	font-weight: 500;
 	font-size: var(--sl-text-lg);
 	color: var(--sl-color-white);
