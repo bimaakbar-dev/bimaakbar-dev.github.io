@@ -2,7 +2,7 @@
 import { defineConfig, fontProviders } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import { sidebarConfig } from './src/config/sidebar';
-import { expressiveCodeConfig } from './src/config/sidebar';
+import { expressiveCodeConfig } from './src/config/expressive-code';
 
 // https://astro.build/config
 export default defineConfig({
