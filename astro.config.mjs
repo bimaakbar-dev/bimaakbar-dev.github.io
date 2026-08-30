@@ -7,6 +7,7 @@ import { sidebarConfig } from './src/config/sidebar';
 import { expressiveCodeConfig } from './src/config/expressive-code';
 
 import { satteri } from '@astrojs/markdown-satteri';
+import { satteriExternalLink } from './src/lib/plugins/satteri/external-link';
 import { satteriTable } from './src/lib/plugins/satteri/table';
 
 // https://astro.build/config
@@ -15,7 +16,10 @@ export default defineConfig({
 	fonts: fontsConfig,
 	markdown: {
     	processor: satteri({
-			hastPlugins: [satteriTable],
+			hastPlugins: [
+				satteriExternalLink,
+				satteriTable
+			],
     	}),
 	},
 	integrations: [
