@@ -205,7 +205,6 @@
 
 .expressive-code .copy button {
     border-radius: 0.5rem;
-    padding: 0.2em;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
@@ -213,6 +212,7 @@
 	font-size: var(--sl-text-code);
 	width: 1.333em !important;
 	height: 1.333em !important;
+    padding: 0.2em;
     flex-shrink: 0;
 }
 
