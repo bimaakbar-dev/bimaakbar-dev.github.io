@@ -41,4 +41,4 @@ export const expressiveCodeConfig = {
       markdoc: 'mdx',
     },
   },
-} as const;
+};
