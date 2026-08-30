@@ -1,0 +1,10 @@
+.large {
+	font-size: var(--sl-text-lg);
+	font-weight: 500;
+}
+
+[aria-current='page'],
+[aria-current='page']:hover,
+[aria-current='page']:focus {
+	font-weight: 500;
+}
