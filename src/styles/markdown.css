@@ -257,9 +257,12 @@
 /* Details */
 .sl-markdown-content details:not(:where(.not-content *)) {
 	--sl-details-border-color: var(--sl-color-gray-5);
-	--sl-details-border-color--hover: var(--sl-color-text-accent);
+	--sl-details-border-color--hover: var(--sl-color-gray-6);
 
 	border: 1px solid var(--sl-details-border-color);
+  padding-block: 0.5rem;
+  padding-inline-end: 1rem;
+  border-radius: 0.5rem;
 }
 .sl-markdown-content details:not([open]):hover:not(:where(.not-content *)),
 .sl-markdown-content details:has(> summary:hover):not(:where(.not-content *)) {
