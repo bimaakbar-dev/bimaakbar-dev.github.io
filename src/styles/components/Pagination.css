@@ -7,7 +7,8 @@
 }
 
 .pagination-links a:hover {
-	border-color: var(--sl-color-gray-2);
+	border-color: var(--sl-color-gray-5);
+	background-color: var(--sl-color-gray-6);
 }
 
 .pagination-links .link-title {
