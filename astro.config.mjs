@@ -13,11 +13,11 @@ import { satteriTable } from './src/lib/plugins/satteri/table';
 export default defineConfig({
 	site: 'https://bimaakbar.pages.dev',
 	fonts: fontsConfig,
- markdown: {
-    processor: satteri({
-      hastPlugins: [satteriTable],
-    }),
-  },
+	markdown: {
+    	processor: satteri({
+			hastPlugins: [satteriTable],
+    	}),
+	},
 	integrations: [
 		starlight({
 			title: 'stargazers',
