@@ -147,8 +147,17 @@
 }
 
 /* Table */
-.sl-markdown-content table:not(:where(.not-content *)) {
+.sl-markdown-content .table-wrapper:not(:where(.not-content *)) {
 	display: block;
+	position: relative;
+	margin: 2.5rem 0;
+	width: 100%;
+	max-width: 100%;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+.sl-markdown-content .table-wrapper > table:not(:where(.not-content *)) {
+	display: table;
 	width: 100%;
     min-width: max-content;
 	overflow: auto;
