@@ -302,7 +302,7 @@
 }
 
 /* Footnotes */
-.sl-markdown-content .footnotes :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
+.sl-markdown-content .footnotes :is(h1, h2, h3, h4, h5, h6, div.sl-heading-wrapper):not(:where(.not-content *)) {
     display: none;
 }
 
@@ -312,10 +312,6 @@
     border-top: 1px solid var(--sl-color-hairline);
     font-size: var(--sl-text-sm);
     color: var(--sl-color-gray-3);
-}
-
-.sl-markdown-content .footnotes #footnote-label:not(:where(.not-content *)) {
-    display: flex;
 }
 
 .sl-markdown-content .footnotes ol:not(:where(.not-content *)) {
@@ -336,7 +332,7 @@
     color: var(--sl-color-text-accent);
 }
 
-.sl-markdown-content a [data-footnote-ref]:not(:where(.not-content *)) {
+.sl-markdown-content a[data-footnote-ref]:not(:where(.not-content *)) {
     text-decoration: none;
 }
 
