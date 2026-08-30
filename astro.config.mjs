@@ -6,10 +6,18 @@ import { fontsConfig } from './src/config/fonts';
 import { sidebarConfig } from './src/config/sidebar';
 import { expressiveCodeConfig } from './src/config/expressive-code';
 
+import { satteri } from '@astrojs/markdown-satteri';
+import { satteriTable } from './src/lib/plugins/satteri/table';
+
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://bimaakbar.pages.dev',
 	fonts: fontsConfig,
+ markdown: {
+    processor: satteri({
+      hastPlugins: [satteriTable],
+    }),
+  },
 	integrations: [
 		starlight({
 			title: 'stargazers',
