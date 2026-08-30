@@ -56,6 +56,32 @@
 	color: var(--sl-color-text-accent);
 }
 
+.sl-markdown-content a.inline-link.is-external:not(:where(.not-content *)) {
+	font-weight: 500;
+	color: var(--sl-color-white);
+	text-decoration-color: var(--sl-color-text-accent);
+	text-decoration-thickness: 2px;
+	text-underline-offset: 2px;
+}
+.sl-markdown-content a.inline-link.is-external:hover:not(:where(.not-content *)) {
+	color: var(--sl-color-text-accent);
+}
+.sl-markdown-content a.inline-link.is-external:not(:where(.not-content *))::after {
+	--ic-external: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M18 6L6 18M8 6h10v10'/%3E%3C/svg%3E");
+	--icon-size: 1em;
+	
+	display: inline-block;
+	vertical-align: middle;
+	mask: var(--ic-external) center / contain no-repeat;
+	-webkit-mask: var(--ic-external) center / contain no-repeat;
+	margin-inline-start: 0.125rem;
+	background-color: var(--sl-color-text-accent);
+	width: var(--icon-size);
+	height: var(--icon-size);
+	content: "";
+	font-size: inherit;
+}
+
 /* Bold */
 .sl-markdown-content :is(strong, b):not(:where(.not-content *)) {
 	font-weight: 500;
