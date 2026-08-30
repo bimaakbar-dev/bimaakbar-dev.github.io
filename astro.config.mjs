@@ -87,7 +87,7 @@ export default defineConfig({
 						editorTabBarBorderColor: 'var(--sl-color-hairline)',
 						editorTabBorderRadius: '0.5rem',
 						
-						inlineButtonBackground: 'var(--sl-color-gray-5)',
+						inlineButtonBackground: 'color-mix(in srgb, var(--sl-color-bg) 60%, transparent)',
 						inlineButtonBorder: 'var(--sl-color-hairline)',
 						inlineButtonForeground: 'var(--sl-color-white)',
 
