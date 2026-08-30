@@ -52,6 +52,10 @@
 	text-decoration-thickness: 2px;
 	text-underline-offset: 2px;
 }
+.sl-markdown-content :is(code a, code a.inline-link.is-external):not(:where(.not-content *)) {
+	text-decoration-thickness: 1px;
+	text-underline-offset: 1px;
+}
 .sl-markdown-content a:hover:not(:where(.not-content *)) {
 	color: var(--sl-color-text-accent);
 }
