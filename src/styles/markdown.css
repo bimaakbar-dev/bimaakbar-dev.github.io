@@ -139,6 +139,12 @@
     list-style-type: none;
 }
 
+/* Image */
+.sl-markdown-content :is(img, picture, iframe):not(:where(.not-content *)) {
+	border-radius: 0.5rem;
+	border: 1px solid var(--sl-color-gray-6);
+}
+
 /* Definisi list */
 .sl-markdown-content dt:not(:where(.not-content *)) {
 	font-weight: 500;
