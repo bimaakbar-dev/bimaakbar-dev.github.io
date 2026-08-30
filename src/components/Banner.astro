@@ -1,43 +1,87 @@
 ---
-import Default from '@astrojs/starlight/components/Banner.astro';
+const { banner } = Astro.locals.starlightRoute.entry.data;
+
+const stars = [
+	{ left: 1, top: 30, opacity: 70 },
+	{ left: 3, top: 70, opacity: 50 },
+	{ left: 5, top: 22, opacity: 60 },
+	{ left: 7, top: 58, opacity: 45 },
+	{ left: 9, top: 84, opacity: 55 },
+	{ left: 12, top: 36, opacity: 50 },
+	{ left: 15, top: 18, opacity: 60 },
+	{ left: 18, top: 64, opacity: 40 },
+	{ left: 21, top: 80, opacity: 50 },
+	{ left: 24, top: 28, opacity: 55 },
+	{ left: 76, top: 24, opacity: 55 },
+	{ left: 79, top: 76, opacity: 50 },
+	{ left: 82, top: 40, opacity: 60 },
+	{ left: 85, top: 60, opacity: 45 },
+	{ left: 88, top: 18, opacity: 50 },
+	{ left: 91, top: 82, opacity: 60 },
+	{ left: 94, top: 32, opacity: 55 },
+	{ left: 96, top: 66, opacity: 45 },
+	{ left: 98, top: 24, opacity: 50 },
+	{ left: 99, top: 78, opacity: 60 },
+];
 ---
-<Default>
-	<span aria-hidden="true" class="star-container">
-  	<span class="star" style="left:1%;top:30%; background-color: color-mix(in srgb, var(--sl-color-white) 70%, transparent);"></span>
-  	<span class="star" style="left:3%;top:70%; background-color: color-mix(in srgb, var(--sl-color-white) 50%, transparent);"></span>
-  	<span class="star" style="left:5%;top:22%; background-color: color-mix(in srgb, var(--sl-color-white) 60%, transparent);"></span>
-  	<span class="star" style="left:7%;top:58%; background-color: color-mix(in srgb, var(--sl-color-white) 45%, transparent);"></span>
-  	<span class="star" style="left:9%;top:84%; background-color: color-mix(in srgb, var(--sl-color-white) 55%, transparent);"></span>
-  	<span class="star" style="left:12%;top:36%; background-color: color-mix(in srgb, var(--sl-color-white) 50%, transparent);"></span>
-  	<span class="star" style="left:15%;top:18%; background-color: color-mix(in srgb, var(--sl-color-white) 60%, transparent);"></span>
-  	<span class="star" style="left:18%;top:64%; background-color: color-mix(in srgb, var(--sl-color-white) 40%, transparent);"></span>
-  	<span class="star" style="left:21%;top:80%; background-color: color-mix(in srgb, var(--sl-color-white) 50%, transparent);"></span>
-  	<span class="star" style="left:24%;top:28%; background-color: color-mix(in srgb, var(--sl-color-white) 55%, transparent);"></span>
-  	<span class="star" style="left:76%;top:24%; background-color: color-mix(in srgb, var(--sl-color-white) 55%, transparent);"></span>
-  	<span class="star" style="left:79%;top:76%; background-color: color-mix(in srgb, var(--sl-color-white) 50%, transparent);"></span>
-  	<span class="star" style="left:82%;top:40%; background-color: color-mix(in srgb, var(--sl-color-white) 60%, transparent);"></span>
-  	<span class="star" style="left:85%;top:60%; background-color: color-mix(in srgb, var(--sl-color-white) 45%, transparent);"></span>
-  	<span class="star" style="left:88%;top:18%; background-color: color-mix(in srgb, var(--sl-color-white) 50%, transparent);"></span>
-  	<span class="star" style="left:91%;top:82%; background-color: color-mix(in srgb, var(--sl-color-white) 60%, transparent);"></span>
-  	<span class="star" style="left:94%;top:32%; background-color: color-mix(in srgb, var(--sl-color-white) 55%, transparent);"></span>
-  	<span class="star" style="left:96%;top:66%; background-color: color-mix(in srgb, var(--sl-color-white) 45%, transparent);"></span>
-  	<span class="star" style="left:98%;top:24%; background-color: color-mix(in srgb, var(--sl-color-white) 50%, transparent);"></span>
-  	<span class="star" style="left:99%;top:78%; background-color: color-mix(in srgb, var(--sl-color-white) 60%, transparent);"></span>
-	</span>
-	<slot />
-</Default>
+
+{ banner &&
+	<div class="stargazer-banner">
+		<span aria-hidden="true" class="stargazer-wrapper">
+			{stars.map((s) => (
+				<span
+					class="stargazer"
+					style={`left:${s.left}%; top:${s.top}%; opacity:${s.opacity / 100};`}
+				/>
+			))}
+		</span>
+		<div class="sl-banner" data-pagefind-ignore set:html={banner.content} />
+	</div>
+}
 
 <style>
-	.star-container {
-    	pointer-events: none;
-    	position: absolute;
-    	inset: 0;
+	.stargazer-banner {
+		--__sl-banner-text: var(--sl-color-banner-text, var(--sl-color-text-invert));
+		position: relative;
+		padding: var(--sl-nav-pad-y) var(--sl-nav-pad-x);
+		background-color: var(--sl-color-banner-bg, var(--sl-color-bg-accent));
+		overflow: hidden;
+		isolation: isolate;
+		z-index: 0;
+		text-align: center;
+		text-wrap: balance;
+		box-shadow: var(--sl-shadow-sm);
 	}
 
-	.star {
-    	position: absolute;
-    	width: 1px;
-    	height: 1px;
-    	border-radius: 9999px;
+	.stargazer-wrapper {
+		pointer-events: none;
+		position: absolute;
+		inset: 0;
+	}
+
+	.stargazer {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		background-color: var(--__sl-banner-text);
+		mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Ccircle cx='4' cy='4' r='4'/%3E%3C/svg%3E");
+		mask-size: contain;
+		mask-repeat: no-repeat;
+	}
+
+	.sl-banner {
+		position: relative;
+		z-index: 1;
+		color: var(--__sl-banner-text);
+		line-height: var(--sl-line-height-headings);
+		padding: 0;
+		background-color: transparent;
+	}
+
+	.sl-banner :global(a) {
+		color: var(--__sl-banner-text);
+		text-decoration-color: var(--__sl-banner-text);
+		text-decoration-thickness: 2px;
+		text-underline-offset: 2px;
 	}
 </style>
