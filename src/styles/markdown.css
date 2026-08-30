@@ -267,8 +267,9 @@
 
 	border: 1px solid var(--sl-details-border-color);
   padding-block: 0.5rem;
-  padding-inline-end: 1rem;
+  padding-inline-end: 0.5rem;
   border-radius: 0.5rem;
+  background-color: var(--sl-color-gray-6);
 }
 .sl-markdown-content details:not([open]):hover:not(:where(.not-content *)),
 .sl-markdown-content details:has(> summary:hover):not(:where(.not-content *)) {
