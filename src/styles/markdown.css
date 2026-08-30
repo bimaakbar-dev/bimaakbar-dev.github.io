@@ -34,6 +34,12 @@
 	font-size: inherit;
 }
 
+@media (hover: none) {
+	.sl-markdown-content .sl-anchor-link {
+		opacity: 1;
+	}
+}
+
 /* Link */
 .sl-markdown-content a:not(:where(.not-content *)) {
 	font-weight: 500;
