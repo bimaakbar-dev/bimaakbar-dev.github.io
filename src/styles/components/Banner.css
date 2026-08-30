@@ -7,6 +7,7 @@
     text-align: center;
     text-wrap: balance;
     box-shadow: var(--sl-shadow-sm);
+    position: relative;
 }
 
 .sl-banner a {
