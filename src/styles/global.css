@@ -205,7 +205,7 @@
 
 .expressive-code .copy button {
     border-radius: 0.5rem;
-    font-size: var(--sl-text-code);
+    font-size: var(--sl-text-base);
     width: 1.5rem !important;
     height: 1.5rem !important;
     flex-shrink: 0;
