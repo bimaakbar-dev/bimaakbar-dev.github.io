@@ -259,7 +259,7 @@
 	--sl-details-border-color: var(--sl-color-gray-5);
 	--sl-details-border-color--hover: var(--sl-color-text-accent);
 
-	border-inline-start: 2px solid var(--sl-details-border-color);
+	border: 1px solid var(--sl-details-border-color);
 }
 .sl-markdown-content details:not([open]):hover:not(:where(.not-content *)),
 .sl-markdown-content details:has(> summary:hover):not(:where(.not-content *)) {
