@@ -206,6 +206,14 @@
 .expressive-code .copy button {
     border-radius: 0.5rem;
     font-size: var(--sl-text-code-sm);
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+}
+.expressive-code .copy button svg {
+    width: 1em !important;
+    height: 1em !important;
+    font-size: inherit;
 }
 
 @media (min-width: 50em) {
