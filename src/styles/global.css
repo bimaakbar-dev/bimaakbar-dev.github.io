@@ -204,6 +204,8 @@
 }
 
 .expressive-code .copy button {
+	width: 1.333em;
+	height: 1.333em;
     border-radius: 0.5rem;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
