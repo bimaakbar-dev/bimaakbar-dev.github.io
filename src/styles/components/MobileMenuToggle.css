@@ -15,12 +15,12 @@ starlight-menu-button [aria-expanded='true'] button {
 	box-shadow: none;
 }
 
-[data-theme='light'] starlight-menu-button button {
+starlight-menu-button [data-theme='light'] button {
     background-color: transparent;
     color: var(--sl-color-black);
 }
 
-[data-theme='light'] starlight-menu-button [aria-expanded='true'] button {
+starlight-menu-button [data-theme='light'] [aria-expanded='true'] button {
 	background-color: transparent;
 	color: var(--sl-color-black);
 }
