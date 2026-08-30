@@ -50,6 +50,7 @@ export default defineConfig({
 				'./src/styles/asides.css',
 			],
 			components: {
+     Banner: './src/components/Banner.astro',
 				Head: './src/components/Head.astro',
 				DraftContentNotice: './src/components/FallbackContentNotice.astro',
 				FallbackContentNotice: './src/components/FallbackContentNotice.astro',
