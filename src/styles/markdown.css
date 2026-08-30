@@ -36,6 +36,10 @@
 
 @media (hover: none) {
 	.sl-markdown-content .sl-anchor-link {
+		opacity: 0;
+	}
+	.sl-markdown-content .sl-anchor-link:focus,
+	.sl-markdown-content .sl-heading-wrapper:hover .sl-anchor-link {
 		opacity: 1;
 	}
 }
