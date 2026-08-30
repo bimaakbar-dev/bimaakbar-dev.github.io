@@ -1,0 +1,10 @@
+.site-title {
+	gap: 0.5rem;
+	font-size: var(--sl-text-h4);
+	font-weight: 600;
+	color: var(--sl-color-text-white);
+}
+
+.site-title [data-theme='light'] {
+	color: var(--sl-color-text-black);
+}
