@@ -210,8 +210,8 @@
 }
 .expressive-code .copy button svg {
 	font-size: var(--sl-text-code);
-	width: 1rem;
-	height: 1rem;
+	width: 0.8rem !important;
+	height: 0.8rem !important;
     flex-shrink: 0;
 }
 
