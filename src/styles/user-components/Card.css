@@ -1,9 +1,9 @@
 .card {
 	--sl-card-border: var(--sl-color-purple);
-	--sl-card-bg: var(--sl-color-purple-low);
+	--sl-card-bg: var(--sl-color-gray-5);
 	border: 1px solid var(--sl-color-gray-5);
 	border-radius: 0.5rem;
-	background-color: var(--sl-color-black);
+	background-color: var(--sl-color-gray-6);
 }
 .card:nth-child(4n + 1) {
 	--sl-card-border: var(--sl-color-orange);
