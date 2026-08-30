@@ -1,6 +1,7 @@
 @import './components/Banner.css';
 @import './components/MobileMenuToggle.css';
 @import './components/MobileTableOfContents.css';
+@import './components/PageSidebar.css';
 @import './components/Pagination.css';
 
 @import './components-internals/TableOfContents/TableOfContentsList.css';
