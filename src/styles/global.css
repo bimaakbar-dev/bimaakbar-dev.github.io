@@ -205,13 +205,14 @@
 
 .expressive-code .copy button {
     border-radius: 0.5rem;
+    padding: 0.2em;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
 .expressive-code .copy button svg {
 	font-size: var(--sl-text-code);
-	width: 0.8rem !important;
-	height: 0.8rem !important;
+	width: 1.333em !important;
+	height: 1.333em !important;
     flex-shrink: 0;
 }
 
