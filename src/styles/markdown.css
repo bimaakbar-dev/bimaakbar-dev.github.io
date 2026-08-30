@@ -57,7 +57,7 @@
 }
 
 .sl-markdown-content blockquote:not(:where(.not-content *)) {
-	padding: 1.25rem 1.5rem 1.25rem 1rem;
+	padding: 1.25rem 1rem 1.25rem 1.5rem;
     position: relative;
     border-inline-start: none;
 	padding-inline-start: 0;
@@ -69,7 +69,7 @@
     inset-block: 1rem;
     inset-inline-start: 0;
     width: 3px;
-    background: var(--sl-color-gray-5);
+    background: var(--sl-color-accent);
     border-radius: 999px;
 }
 
@@ -104,7 +104,7 @@
 	border-bottom: none;
 	padding: 0;
 }
-.sl-markdown-content th:not(:where(.not-content *)) {
+.sl-markdown-content :is(th):not(:where(.not-content *)) {
     color: var(--sl-color-white);
     font-weight: 500;
     padding: 0.5rem 1rem;
