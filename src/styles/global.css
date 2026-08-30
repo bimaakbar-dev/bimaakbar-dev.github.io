@@ -209,8 +209,8 @@
     -webkit-backdrop-filter: blur(8px);
 }
 .expressive-code .copy button svg {
-    width: 1.333em !important;
-    height: 1.333em !important;
+    width: 1em !important;
+    height: 1em !important;
     flex-shrink: 0;
 }
 
