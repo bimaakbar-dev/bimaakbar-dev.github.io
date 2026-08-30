@@ -1,20 +1,4 @@
-@import './components/MobileMenuToggle.css';
-@import './components/MobileTableOfContents.css';
-@import './components/PageSidebar.css';
-@import './components/Pagination.css';
-@import './components/Search.css';
-@import './components/SidebarSublist.css';
-@import './components/SiteTitle.css';
-
-@import './components-internals/TableOfContents/TableOfContentsList.css';
-
-@import './user-components/Badge.css';
-@import './user-components/Card.css';
-@import './user-components/FileTree.css';
-@import './user-components/LinkButton.css';
-@import './user-components/LinkCard.css';
-@import './user-components/Steps.css';
-@import './user-components/Tabs.css';
+@import './stargazer.css';
 
 :root,
 ::backdrop {
@@ -146,6 +130,17 @@
     --sl-text-4xl: 2.1875rem;
     --sl-text-5xl: 2.625rem;
     --sl-text-6xl: 4rem; */
+    
+    --sl-text-body: var(--sl-text-base);
+	--sl-text-body-sm: var(--sl-text-xs);
+	--sl-text-code: var(--sl-text-sm);
+	--sl-text-code-sm: var(--sl-text-xs);
+    
+    --sl-text-h1: var(--sl-text-4xl);
+	--sl-text-h2:  var(--sl-text-2xl);
+	--sl-text-h3: var(--sl-text-xl);
+	--sl-text-h4: var(--sl-text-lg);
+	--sl-text-h5: var(--sl-text-base);
 
     --sl-line-height: 1.75;
     --sl-line-height-headings: 1.2;
@@ -171,7 +166,8 @@
 
 .expressive-code .copy button {
     border-radius: 0.5rem;
-    backdrop-filter: blur(8px);
+    
+	backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 
     width: 2rem !important;
@@ -186,6 +182,12 @@
     :root {
         --sl-nav-height: 4rem;
         --sl-nav-pad-x: 1.5rem;
+        
+        --sl-text-h1: var(--sl-text-3xl);
+		--sl-text-h2: var(--sl-text-2xl);
+		--sl-text-h3: var(--sl-text-xl);
+		--sl-text-h4: var(--sl-text-lg);
+		--sl-text-h5: var(--sl-text-base);
     }
     .expressive-code .copy button::after {
         margin: 0.45rem !important;
@@ -197,4 +199,4 @@
         --sl-content-pad-x: 1.5rem;
         --sl-mobile-toc-height: 0rem;
     }
-}
+}
