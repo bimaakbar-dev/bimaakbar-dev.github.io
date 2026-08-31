@@ -1,8 +1,6 @@
 starlight-menu-button button {
 	border: 0;
 	border-radius: 50%;
-	width: var(--sl-menu-button-size);
-	height: var(--sl-menu-button-size);
 	padding: 0.5rem;
 	background-color: transparent;
 	color: var(--sl-color-white);
