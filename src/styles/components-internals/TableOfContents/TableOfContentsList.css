@@ -1,18 +1,22 @@
 starlight-toc ul ul,
 mobile-starlight-toc ul ul {
-	border-inline-start: 1px solid var(--sl-color-hairline);
-	margin-inline-start: -1rem;
-	padding-inline-start: 1rem;
+	position: relative;
 }
 
-starlight-toc ul ul a,
-mobile-starlight-toc ul ul a {
-	border-inline-start: none !important;
+starlight-toc ul ul::before,
+mobile-starlight-toc ul ul::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0.5rem;
+	width: 1px;
+	background-color: var(--sl-color-hairline);
 }
 
-starlight-toc ul ul:has(a[aria-current='true']),
-mobile-starlight-toc ul ul:has(a[aria-current='true']) {
-	border-inline-start-color: var(--sl-color-text-accent);
+starlight-toc ul ul:has(a[aria-current='true'])::before,
+mobile-starlight-toc ul ul:has(a[aria-current='true'])::before {
+	background-color: var(--sl-color-text-accent);
 }
 
 mobile-starlight-toc .isMobile a {
