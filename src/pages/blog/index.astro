@@ -10,7 +10,7 @@ const posts = (await getCollection('blog')).sort(
 );
 ---
 
-<StarlightPage frontmatter={{ title: 'Stargazer Blog', description: 'Catatan rilis dan artikel terbaru.' }}>
+<StarlightPage frontmatter={{ title: 'Stargazer Blog', description: 'Catatan rilis dan artikel terbaru.', template: 'splash' }}>
 	<div class="blog-list">
 		{
 			posts.map((post) => (
