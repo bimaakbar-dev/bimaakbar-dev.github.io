@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
@@ -16,6 +17,15 @@ const { Content } = await render(post);
 
 <StarlightPage frontmatter={{ title: post.data.title, description: post.data.description }}>
 	<div class="blog-post">
+		{
+			post.data.heroImage && (
+				<Image
+					src={post.data.heroImage}
+					alt={post.data.title}
+					class="hero-image"
+				/>
+			)
+		}
 		<time datetime={post.data.pubDate.toISOString()}>
 			Dipublikasikan pada: {post.data.pubDate.toLocaleDateString('id-ID', {
 				year: 'numeric',
@@ -37,9 +47,12 @@ const { Content } = await render(post);
 		font-size: var(--sl-text-sm);
 		color: var(--sl-color-gray-3);
 	}
-	.blog-post hr {
-		border: 0;
-		border-top: 1px solid var(--sl-color-hairline);
-		margin: 1.5rem 0;
+	.hero-image {
+		width: 100%;
+		height: auto;
+		max-height: 400px;
+		object-fit: cover;
+		border-radius: 0.5rem;
+		margin-bottom: 1.5rem;
 	}
 </style>
