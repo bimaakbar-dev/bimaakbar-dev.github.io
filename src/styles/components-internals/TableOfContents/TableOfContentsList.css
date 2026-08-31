@@ -3,19 +3,24 @@ mobile-starlight-toc ul ul {
 	position: relative;
 }
 
-starlight-toc ul ul::before,
-mobile-starlight-toc ul ul::before {
+starlight-toc ul ul li,
+mobile-starlight-toc ul ul li {
+	position: relative;
+}
+
+starlight-toc ul ul li::before,
+mobile-starlight-toc ul ul li::before {
 	content: '';
 	position: absolute;
 	top: 0;
 	bottom: 0;
-	left: 0.5rem;
+	left: 1rem;
 	width: 1px;
 	background-color: var(--sl-color-hairline);
 }
 
-starlight-toc ul ul:has(a[aria-current='true'])::before,
-mobile-starlight-toc ul ul:has(a[aria-current='true'])::before {
+starlight-toc ul ul li:has(> a[aria-current='true'])::before,
+mobile-starlight-toc ul ul li:has(> a[aria-current='true'])::before {
 	background-color: var(--sl-color-text-accent);
 }
 
