@@ -12,7 +12,7 @@ import { satteriTable } from './src/lib/plugins/satteri/table';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://c0desk1.github.io',
+	site: 'https://bimaakbar.github.io',
 	fonts: fontsConfig,
 	markdown: {
     	processor: satteri({
