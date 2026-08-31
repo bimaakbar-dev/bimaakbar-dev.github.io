@@ -3,73 +3,86 @@ import Default from '@astrojs/starlight/components/PageTitle.astro';
 import { Image } from 'astro:assets';
 import FormattedDate from '~/components/FormattedDate.astro';
 
-const route = Astro.locals.starlightRoute;
-const data = route?.entry?.data;
-const isBlogDetail = Astro.url.pathname.startsWith('/blog/') && Astro.url.pathname !== '/blog/';
+const isBlogDetail =
+  Astro.url.pathname.startsWith('/blog/') &&
+  Astro.url.pathname !== '/blog/';
 
-const heroImage = data?.heroImage;
-const pubDate = data?.pubDate;
-const author = data?.author || { name: 'c0desk1', avatar: 'https://avatars.githubusercontent.com/u/81931118?v=4' };
+const meta = Astro.locals.blogMeta;
 ---
 
-{isBlogDetail ? (
-	<div class="blog-header-meta">
-		{heroImage && (
-			<Image src={heroImage} alt={data?.title || 'Blog Hero Image'} class="hero-image" />
-		)}
-		
-		{pubDate && (
-			<div class="meta-info">
-				<FormattedDate date={new Date(pubDate)} />
-			</div>
-		)}
+{isBlogDetail && meta ? (
+  <div class="blog-header-meta">
+    {meta.heroImage && (
+      <Image
+        src={meta.heroImage}
+        alt="Blog Hero Image"
+        class="hero-image"
+      />
+    )}
 
-		<Default />
+    {meta.pubDate && (
+      <div class="meta-info">
+        <FormattedDate date={meta.pubDate} />
+      </div>
+    )}
 
-		<div class="author-info">
-			<span>By</span>
-			<img src={author.avatar} alt={author.name} class="author-avatar" />
-			<span class="author-name">{author.name}</span>
-		</div>
-	</div>
+    <Default />
+
+    {meta.author && (
+      <div class="author-info">
+        <span>By</span>
+        <img
+          src={meta.author.avatar}
+          alt={meta.author.name}
+          class="author-avatar"
+        />
+        <span class="author-name">{meta.author.name}</span>
+      </div>
+    )}
+  </div>
 ) : (
-	<Default />
+  <Default />
 )}
 
 <style>
-	@layer starlight.core {
-		.blog-header-meta {
-			margin-bottom: 2rem;
-		}
-		.hero-image {
-			width: 100%;
-			height: auto;
-			max-height: 400px;
-			object-fit: cover;
-			border-radius: 0.5rem;
-			margin-bottom: 1.25rem;
-		}
-		.meta-info {
-			font-size: var(--sl-text-sm);
-			color: var(--sl-color-gray-3);
-			margin-bottom: 0.75rem;
-		}
-		.author-info {
-			display: flex;
-			align-items: center;
-			gap: 0.5rem;
-			margin-top: 0.75rem;
-			font-size: var(--sl-text-sm);
-		}
-		.author-avatar {
-			width: 24px;
-			height: 24px;
-			border-radius: 50%;
-			object-fit: cover;
-		}
-		.author-name {
-			color: var(--sl-color-gray-2);
-			font-weight: 500;
-		}
-	}
+  @layer starlight.core {
+    .blog-header-meta {
+      margin-bottom: 2rem;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: auto;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .meta-info {
+      font-size: var(--sl-text-sm);
+      color: var(--sl-color-gray-3);
+      margin-bottom: 0.75rem;
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      font-size: var(--sl-text-sm);
+    }
+
+    .author-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .author-name {
+      color: var(--sl-color-gray-2);
+      font-weight: 500;
+    }
+  }
 </style>
