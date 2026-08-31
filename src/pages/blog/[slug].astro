@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from 'astro:content';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const DEFAULT_AUTHOR = {
+  name: 'c0desk1',
+  avatar: 'https://avatars.githubusercontent.com/u/81931118?v=4',
+};
+
+Astro.locals.blogMeta = {
+  heroImage: post.data.heroImage,
+  pubDate: post.data.pubDate,
+  author: post.data.author ?? DEFAULT_AUTHOR,
+};
+---
+
+<StarlightPage
+  frontmatter={{
+    title: post.data.title,
+    description: post.data.description,
+    template: 'splash',
+  }}
+>
+  <div class="blog-content">
+    <div class="sl-markdown-content">
+      <Content />
+    </div>
+  </div>
+</StarlightPage>
