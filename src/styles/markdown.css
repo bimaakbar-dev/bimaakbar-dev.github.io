@@ -97,7 +97,7 @@
 }
 
 /* List */
-.sl-markdown-content :is(ul, ol):not(:where(.not-content *))::marker {
+.sl-markdown-content :is(ul, ol):not(:where(.not-content *)) li::marker {
 	color: var(--sl-color-gray-4);
 }
 
