@@ -5,13 +5,11 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
 
-# Beri izin untuk deploy ke Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Hanya jalankan satu deploy dalam satu waktu
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -33,10 +31,10 @@ jobs:
         run: npm ci
 
       - name: Build Astro
-        run: npm run build  # default output ke folder dist/
+        run: npm run build
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./dist
 
@@ -49,4 +47,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
