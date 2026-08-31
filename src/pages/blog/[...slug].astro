@@ -1,0 +1,45 @@
+---
+import { getCollection, render } from 'astro:content';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<StarlightPage frontmatter={{ title: post.data.title, description: post.data.description }}>
+	<div class="blog-post">
+		<time datetime={post.data.pubDate.toISOString()}>
+			Dipublikasikan pada: {post.data.pubDate.toLocaleDateString('id-ID', {
+				year: 'numeric',
+				month: 'long',
+				day: 'numeric',
+			})}
+		</time>
+		
+		<hr class="my-6" />
+
+		<div class="sl-markdown-content">
+			<Content />
+		</div>
+	</div>
+</StarlightPage>
+
+<style>
+	.blog-post time {
+		font-size: var(--sl-text-sm);
+		color: var(--sl-color-gray-3);
+	}
+	.blog-post hr {
+		border: 0;
+		border-top: 1px solid var(--sl-color-hairline);
+		margin: 1.5rem 0;
+	}
+</style>
