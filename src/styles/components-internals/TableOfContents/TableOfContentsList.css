@@ -1,3 +1,14 @@
+.right-sidebar-panel starlight-toc ul ul a {
+	border-inline-start: 1px solid var(--sl-color-hairline);
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.right-sidebar-panel starlight-toc ul ul a[aria-current='true'] {
+	border-inline-start-color: var(--sl-color-text-accent);
+}
+
+
 .isMobile a {
 	border-top: 0;
 }
