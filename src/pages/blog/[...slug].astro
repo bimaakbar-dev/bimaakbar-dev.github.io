@@ -1,4 +1,5 @@
 ---
+// ./src/pages/blog/[...slug].astro
 import { getCollection, render } from 'astro:content';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import { Image } from 'astro:assets';
@@ -8,7 +9,7 @@ import FormattedDate from '~/components/FormattedDate.astro';
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
 	return posts.map((post) => ({
-		Params: { slug: post.id },
+		params: { slug: post.id },
 		props: { post },
 	}));
 }
@@ -28,7 +29,7 @@ const { Content } = await render(post);
 				class="hero-image"
 			/>
 		)}
-		<p class="date"><FormattedDate date={post.data.pubDate} /></p>
+		<FormattedDate date={post.data.pubDate} />
 		<h1 set:html={post.data.title} />
 		<hr class="my-6" />
 		<div class="sl-markdown-content">
