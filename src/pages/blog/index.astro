@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<StarlightPage frontmatter={{ title: 'Blog & Updates', description: 'Catatan rilis dan artikel terbaru.' }}>
+	<div class="blog-list">
+		{
+			posts.map((post) => (
+				<article class="blog-card">
+					<h2>
+						<a href={`/blog/${post.id}`}>{post.data.title}</a>
+					</h2>
+					<time datetime={post.data.pubDate.toISOString()}>
+						{post.data.pubDate.toLocaleDateString('id-ID', {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric',
+						})}
+					</time>
+					<p>{post.data.description}</p>
+				</article>
+			))
+		}
+	</div>
+</StarlightPage>
+
+<style>
+	.blog-list {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		margin-top: 1rem;
+	}
+	.blog-card h2 {
+		font-size: var(--sl-text-h4);
+		margin-bottom: 0.25rem;
+	}
+	.blog-card a {
+		color: var(--sl-color-white);
+		text-decoration: none;
+	}
+	.blog-card a:hover {
+		color: var(--sl-color-text-accent);
+	}
+	time {
+		font-size: var(--sl-text-xs);
+		color: var(--sl-color-gray-3);
+	}
+	.blog-card p {
+		margin-top: 0.5rem;
+		color: var(--sl-color-gray-2);
+	}
+</style>
