@@ -20,7 +20,7 @@ const author = data?.author || { name: 'c0desk1', avatar: 'https://avatars.githu
 			)}
 		
 			<div class="meta-info">
-				{pubDate && <FormattedDate date={new Date(pubDate)} />}
+				{pubDate && <FormattedDate date={post.data.pubDate} />}
 			</div>
 		
 			<Default />
@@ -31,9 +31,7 @@ const author = data?.author || { name: 'c0desk1', avatar: 'https://avatars.githu
 			</div>
 	</div>
 ) : (
-	<Default>
-		<slot />
-	</Default>
+	<Default />
 )}
 
 <style>
