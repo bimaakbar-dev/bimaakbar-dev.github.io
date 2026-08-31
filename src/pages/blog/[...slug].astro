@@ -1,10 +1,6 @@
 ---
-// ./src/pages/blog/[...slug].astro
 import { getCollection, render } from 'astro:content';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
-import { Image } from 'astro:assets';
-
-import FormattedDate from '~/components/FormattedDate.astro';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
@@ -18,20 +14,15 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<StarlightPage frontmatter={
-	{ title: post.data.title, description: post.data.description, template: 'splash' }
-}>
-	<div class="blog-post">
-		{ post.data.heroImage && (
-			<Image
-				src={post.data.heroImage}
-				alt={post.data.title}
-				class="hero-image"
-			/>
-		)}
-		<FormattedDate date={post.data.pubDate} />
-		<h1 set:html={post.data.title} />
-		<hr class="my-6" />
+<StarlightPage frontmatter={{ 
+	title: post.data.title, 
+	description: post.data.description, 
+	template: 'splash',
+	pubDate: post.data.pubDate,
+	heroImage: post.data.heroImage,
+	author: { name: 'c0desk1', avatar: 'https://avatars.githubusercontent.com/u/81931118?v=4' }
+}}>
+	<div class="blog-content">
 		<div class="sl-markdown-content">
 			<Content />
 		</div>
@@ -39,16 +30,9 @@ const { Content } = await render(post);
 </StarlightPage>
 
 <style>
-	.blog-post time {
-		font-size: var(--sl-text-sm);
-		color: var(--sl-color-gray-3);
-	}
-	.hero-image {
-		width: 100%;
-		height: auto;
-		max-height: 400px;
-		object-fit: cover;
-		border-radius: 0.5rem;
-		margin-bottom: 1.5rem;
+	.blog-content hr {
+		border: 0;
+		border-top: 1px solid var(--sl-color-hairline);
+		margin: 2rem 0;
 	}
 </style>
