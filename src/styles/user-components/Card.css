@@ -30,6 +30,7 @@
 	align-items: start;
 }
 .card .icon {
+	font-size: var(--sl-text-lg);
 	border: none;
 	color: var(--sl-card-border);
 	background-color: transparent;
