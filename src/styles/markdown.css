@@ -98,7 +98,7 @@
 
 /* List */
 .sl-markdown-content :is(ul, ol):not(:where(.not-content *)) li::marker {
-	color: var(--sl-color-gray-4);
+	color: var(--sl-color-gray-5);
 }
 
 /* Task List */
@@ -232,7 +232,7 @@
 .sl-markdown-content :is(th):not(:where(.not-content *)) {
     color: var(--sl-color-white);
     font-weight: 500;
-    padding: 0.5rem 1rem;
+    padding-inline: 1rem;
 }
 
 .sl-markdown-content :is(tbody tr:not(:first-child) td):not(:where(.not-content *)) {
