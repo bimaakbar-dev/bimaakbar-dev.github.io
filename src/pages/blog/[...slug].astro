@@ -17,22 +17,20 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<StarlightPage frontmatter={{ title: post.data.title, description: post.data.description }}>
+<StarlightPage frontmatter={
+	{ title: post.data.title, description: post.data.description, template: splash }
+}>
 	<div class="blog-post">
-		{
-			post.data.heroImage && (
-				<Image
-					src={post.data.heroImage}
-					alt={post.data.title}
-					class="hero-image"
-				/>
-			)
-		}
-		<FormattedDate date={post.data.pubDate} />
+		{ post.data.heroImage && (
+			<Image
+				src={post.data.heroImage}
+				alt={post.data.title}
+				class="hero-image"
+			/>
+		)}
+		<p class="date"><FormattedDate date={post.data.pubDate} /></p>
 		<h1 set:html={post.data.title} />
-		
 		<hr class="my-6" />
-
 		<div class="sl-markdown-content">
 			<Content />
 		</div>
