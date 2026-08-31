@@ -20,9 +20,10 @@ const { Content } = await render(post);
 	template: 'splash',
 	pubDate: post.data.pubDate,
 	heroImage: post.data.heroImage,
-	author: { name: 'c0desk1', avatar: 'https://avatars.githubusercontent.com/u/81931118?v=4' }
+	author: { name: 'Bima Akbar', avatar: 'https://avatars.githubusercontent.com/u/81931118?v=4' }
 }}>
 	<div class="blog-content">
+		<hr class="divider" />
 		<div class="sl-markdown-content">
 			<Content />
 		</div>
@@ -30,7 +31,7 @@ const { Content } = await render(post);
 </StarlightPage>
 
 <style>
-	.blog-content hr {
+	.blog-content .divider {
 		border: 0;
 		border-top: 1px solid var(--sl-color-hairline);
 		margin: 2rem 0;
