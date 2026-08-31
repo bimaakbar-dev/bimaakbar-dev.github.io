@@ -15,7 +15,6 @@ const author = data?.author || { name: 'c0desk1', avatar: 'https://avatars.githu
 
 {isBlogDetail ? (
 	<div class="blog-header-meta">
-		<Default>
 			{heroImage && (
 				<Image src={heroImage} alt={title} class="hero-image" />
 			)}
@@ -24,13 +23,12 @@ const author = data?.author || { name: 'c0desk1', avatar: 'https://avatars.githu
 				{pubDate && <FormattedDate date={new Date(pubDate)} />}
 			</div>
 		
-			<slot />
+			<Default />
 			<div class="author-info">
 				<span class="dot">By</span>
 				<img src={author.avatar} alt={author.name} class="author-avatar" />
 				<span class="author-name">{author.name}</span>
 			</div>
-		</Default>
 	</div>
 ) : (
 	<Default>
