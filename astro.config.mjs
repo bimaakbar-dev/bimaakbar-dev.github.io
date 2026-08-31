@@ -51,6 +51,7 @@ export default defineConfig({
 			components: {
 				Banner: './src/components/Banner.astro',
 				Head: './src/components/Head.astro',
+				Header: './src/components/Header.astro';
 				DraftContentNotice: './src/components/FallbackContentNotice.astro',
 				FallbackContentNotice: './src/components/FallbackContentNotice.astro',
 				
