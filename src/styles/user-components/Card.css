@@ -24,7 +24,7 @@
 .card .title {
 	flex-direction: column;
 	font-weight: 500;
-	font-size: var(--sl-text-lg);
+	font-size: var(--sl-text-base);
 	color: var(--sl-color-white);
 	gap: 0.75rem;
 	align-items: start;
