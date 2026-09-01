@@ -1,8 +1,6 @@
 ---
-import { PAGE_TITLE_ID } from '@astrojs/starlight/constants';
 import Default from '@astrojs/starlight/components/PageTitle.astro';
 import { Image } from 'astro:assets';
-
 import FormattedDate from '~/components/FormattedDate.astro';
 
 const isBlogPost =
@@ -29,8 +27,6 @@ const meta = Astro.locals.blogMeta;
     )}
 
     <Default />
-    
-    <h1 id={PAGE_TITLE_ID}>{Astro.locals.starlightRoute.entry.data.title}</h1>
 
     {meta.author && (
       <div class="author">
@@ -62,14 +58,6 @@ const meta = Astro.locals.blogMeta;
 			color: var(--sl-color-gray-2);
 			margin-bottom: 0.25rem;
 		}
-    
-    	h1 {
-			margin-top: 1rem;
-			font-size: var(--sl-text-h2);
-			line-height: var(--sl-line-height-headings);
-			font-weight: 500;
-			color: var(--sl-color-white);
-		}
 
     	.author {
 			display: flex;
@@ -91,4 +79,4 @@ const meta = Astro.locals.blogMeta;
 			color: var(--sl-color-gray-2);
 		}
 	}
-</style>
+</style> 
