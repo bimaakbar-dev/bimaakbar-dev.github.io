@@ -1,18 +1,136 @@
 ---
 import Default from '@astrojs/starlight/components/SiteTitle.astro';
-import HeaderLink from '~/components/HeaderLink.astro';
+import { navSections } from '~/config/navigation';
+
+const pathname = Astro.url.pathname;
+
+const active = navSections.find((s) =>
+  s.href === '/' ? pathname === '/' : pathname.startsWith(s.href)
+) ?? navSections[0];
 ---
+
 <div class="sl-flex print:hidden sg-header">
-	<Default />
-	<div class="sl-flex print:hidden internal-links">
-		<HeaderLink href="/">Docs</HeaderLink>
-		<HeaderLink href="/blog">Blog</HeaderLink>
-	</div>
+  <Default />
+
+  <div class="nav-dropdown">
+    <button class="nav-trigger" aria-haspopup="listbox" aria-expanded="false">
+      <span class="nav-trigger-label">{active.label}</span>
+      <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+        <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <ul class="nav-menu" role="listbox">
+      {navSections.map((s) => (
+        <li role="option" aria-selected={s.href === active.href}>
+          <a href={s.href} class:list={['nav-item', { 'is-active': s.href === active.href }]}>
+            {s.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
 </div>
 
 <style>
-	.sg-header {
-		align-items: center;
-		gap: 1rem;
-	}
+  @layer starlight.core {
+    .sg-header {
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .nav-trigger {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.25rem 0.625rem;
+      font-size: var(--sl-text-sm);
+      font-weight: 500;
+      color: var(--sl-color-gray-2);
+      background: transparent;
+      border: 0.5px solid var(--sl-color-hairline);
+      border-radius: 0.375rem;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .nav-trigger:hover {
+      color: var(--sl-color-white);
+      border-color: var(--sl-color-gray-4);
+    }
+
+    .nav-chevron {
+      transition: transform 0.2s;
+      opacity: 0.6;
+    }
+
+    .nav-dropdown.is-open .nav-chevron {
+      transform: rotate(180deg);
+    }
+
+    .nav-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 0.375rem);
+      left: 0;
+      min-width: 120px;
+      background: var(--sl-color-bg-nav);
+      border: 0.5px solid var(--sl-color-hairline);
+      border-radius: 0.5rem;
+      padding: 0.25rem;
+      list-style: none;
+      margin: 0;
+      z-index: 50;
+    }
+
+    .nav-dropdown.is-open .nav-menu {
+      display: block;
+    }
+
+    .nav-item {
+      display: block;
+      padding: 0.375rem 0.625rem;
+      font-size: var(--sl-text-sm);
+      color: var(--sl-color-gray-2);
+      text-decoration: none;
+      border-radius: 0.25rem;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .nav-item:hover {
+      background: var(--sl-color-bg-sidebar);
+      color: var(--sl-color-white);
+    }
+
+    .nav-item.is-active {
+      color: var(--sl-color-accent-high);
+      font-weight: 500;
+    }
+  }
 </style>
+
+<script>
+  const dropdowns = document.querySelectorAll('.nav-dropdown');
+
+  dropdowns.forEach((dropdown) => {
+    const trigger = dropdown.querySelector('.nav-trigger');
+
+    trigger?.addEventListener('click', () => {
+      const isOpen = dropdown.classList.toggle('is-open');
+      trigger.setAttribute('aria-expanded', String(isOpen));
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    dropdowns.forEach((dropdown) => {
+      if (!dropdown.contains(e.target as Node)) {
+        dropdown.classList.remove('is-open');
+        dropdown.querySelector('.nav-trigger')?.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+</script>
