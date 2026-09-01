@@ -1,74 +1,52 @@
 ---
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 const showContentTypeTabs = Astro.slots.has('markdoc');
 ---
 
-<figure class="preview-figure">
-  <div class="preview-box">
-    <div class="preview-header">
-      <span class="preview-label">{Astro.locals.t('component.preview')}</span>
-    </div>
-    <div class="preview-content">
-      <slot name="preview" />
-    </div>
-  </div>
-
-  <div class="preview-code">
-    {showContentTypeTabs ? (
-      <Tabs syncKey="content-type">
-        <TabItem label="MDX">
-          <slot />
-        </TabItem>
-        <TabItem label="Markdoc">
-          <slot name="markdoc" />
-        </TabItem>
-      </Tabs>
-    ) : (
-      <slot />
-    )}
-  </div>
+<figure>
+	{
+		showContentTypeTabs ? (
+			<Tabs syncKey="content-type">
+				<TabItem label="MDX">
+					<slot />
+				</TabItem>
+				<TabItem label="Markdoc">
+					<slot name="markdoc" />
+				</TabItem>
+			</Tabs>
+		) : (
+			<slot />
+		)
+	}
+	<div class="preview">
+		<figcaption>{Astro.locals.t('component.preview')}</figcaption>
+		<div class="preview-content"><slot name="preview" /></div>
+	</div>
 </figure>
 
 <style>
-  .preview-figure {
-    margin: 0;
-  }
+	:global(.sl-markdown-content) .preview {
+		border: 1px solid var(--sl-color-gray-5);
+		border-top: none;
+		margin-top: 0;
+        border-bottom-left-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+	}
 
-  .preview-box {
-    border: 0.5px solid var(--sl-color-hairline);
-    border-radius: 0.5rem;
-    overflow: hidden;
-    margin-bottom: 0;
-  }
+	.preview:only-child {
+		border-top: 1px solid var(--sl-color-gray-5);
+        border-radius: 1rem;
+	}
 
-  .preview-header {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 0.75rem;
-    border-bottom: 0.5px solid var(--sl-color-hairline);
-    background: var(--sl-color-bg-sidebar);
-  }
+	figcaption {
+		font-size: var(--sl-text-sm);
+		font-weight: 600;
+		padding: 0.5rem 1rem 0;
+	}
 
-  .preview-label {
-    font-size: var(--sl-text-xs);
-    font-weight: 500;
-    color: var(--sl-color-gray-3);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  :global(.sl-markdown-content) .preview-content {
-    padding: 1.5rem;
-    margin-top: 0;
-    background: var(--sl-color-bg);
-  }
-
-  .preview-code {
-    margin-top: 0.5rem;
-  }
-
-  .preview-code :global(.expressive-code) {
-    border-radius: 0.5rem;
-  }
+	:global(.sl-markdown-content) .preview-content {
+		margin-top: 0;
+		padding: 1rem;
+	}
 </style>
