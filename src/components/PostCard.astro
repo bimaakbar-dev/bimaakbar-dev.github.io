@@ -93,16 +93,19 @@ const getUrl = (id: string) => {
   .post-card-content {
   	margin-top: 1.5rem;
   	display: grid;
-  	column-gap: 4rem;
+  	column-gap: 1.5rem;
   	row-gap: 1rem;
   }
 
   .post-card-title {
     font-size: var(--sl-text-h4);
-    font-weight: 500;
+    font-weight: 600;
     line-height: var(--sl-line-height-headings);
     color: var(--sl-color-text);
-	text-decoration: none;
+  }
+  
+  .post-card-title a {
+  	text-decoration: none;
   }
 
   .post-card-description {
