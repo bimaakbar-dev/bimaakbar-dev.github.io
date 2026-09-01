@@ -12,24 +12,22 @@ const active = navSections.find((s) =>
 <div class="sl-flex print:hidden sg-header">
   <Default />
 
-  <div class="nav-dropdown">
-    <button class="nav-trigger" aria-haspopup="listbox" aria-expanded="false">
-      <span class="nav-trigger-label">{active.label}</span>
-      <svg class="nav-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-        <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-
-    <ul class="nav-menu" role="listbox">
+  <label class="nav-select-wrapper">
+    <span class="sr-only">Pilih seksi</span>
+    <svg class="nav-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path d="M2 4h10M2 7h7M2 10h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <select class="nav-select" autocomplete="off">
       {navSections.map((s) => (
-        <li role="option" aria-selected={s.href === active.href}>
-          <a href={s.href} class:list={['nav-item', { 'is-active': s.href === active.href }]}>
-            {s.label}
-          </a>
-        </li>
+        <option value={s.href} selected={s.href === active.href}>
+          {s.label}
+        </option>
       ))}
-    </ul>
-  </div>
+    </select>
+    <svg class="nav-caret" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </label>
 </div>
 
 <style>
@@ -39,105 +37,64 @@ const active = navSections.find((s) =>
       gap: 0.25rem;
     }
 
-    .nav-dropdown {
+    .nav-select-wrapper {
+      --icon-size: 0.875rem;
+      --caret-size: 1.25rem;
+      --pad: 0.5rem;
       position: relative;
-    }
-
-    .nav-trigger {
       display: flex;
       align-items: center;
-      gap: 0.375rem;
-      padding: 0.25rem 0.625rem;
-      font-size: var(--sl-text-sm);
-      font-weight: 500;
       color: var(--sl-color-gray-2);
-      background: transparent;
-      border: 0.5px solid var(--sl-color-hairline);
-      border-radius: 0.375rem;
       cursor: pointer;
-      transition: color 0.2s, border-color 0.2s;
     }
 
-    .nav-trigger:hover {
+    .nav-select-wrapper:hover {
       color: var(--sl-color-white);
-      border-color: var(--sl-color-gray-4);
     }
 
-    .nav-chevron {
-      transition: transform 0.2s;
-      opacity: 0.6;
-    }
-
-    .nav-dropdown[data-open] .nav-chevron {
-      transform: rotate(180deg);
-    }
-
-    .nav-menu {
-      display: none;
+    .nav-icon,
+    .nav-caret {
       position: absolute;
-      top: calc(100% + 0.375rem);
-      left: 0;
-      min-width: 120px;
-      background: var(--sl-color-bg-nav);
-      border: 0.5px solid var(--sl-color-hairline);
-      border-radius: 0.5rem;
-      padding: 0.25rem;
-      list-style: none;
-      margin: 0;
-      z-index: 50;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
     }
 
-    .nav-dropdown[data-open] .nav-menu {
-      display: block;
+    .nav-icon {
+      inset-inline-start: 0;
+      font-size: var(--icon-size);
     }
 
-    .nav-item {
-      display: block;
-      padding: 0.375rem 0.625rem;
+    .nav-caret {
+      inset-inline-end: 0;
+      font-size: var(--caret-size);
+    }
+
+    .nav-select {
+      border: 0;
+      padding-block: 0.625rem;
+      padding-inline: calc(var(--icon-size) + var(--pad) + 0.25rem)
+        calc(var(--caret-size) + var(--pad) + 0.25rem);
+      margin-inline: calc(var(--pad) * -1);
+      background-color: transparent;
+      color: inherit;
+      cursor: pointer;
+      appearance: none;
       font-size: var(--sl-text-sm);
-      color: var(--sl-color-gray-2);
-      text-decoration: none;
-      border-radius: 0.25rem;
-      transition: background 0.15s, color 0.15s;
     }
 
-    .nav-item:hover {
-      background: var(--sl-color-bg-sidebar);
-      color: var(--sl-color-white);
-    }
-
-    .nav-item.is-active {
-      color: var(--sl-color-accent-high);
-      font-weight: 500;
+    option {
+      background-color: var(--sl-color-bg-nav);
+      color: var(--sl-color-gray-1);
     }
   }
 </style>
 
 <script>
-  const dropdowns = document.querySelectorAll('.nav-dropdown');
-
-  dropdowns.forEach((dropdown) => {
-    const trigger = dropdown.querySelector('.nav-trigger');
-
-    trigger?.addEventListener('click', () => {
-      const isOpen = dropdown.hasAttribute('data-open');
-      if (isOpen) {
-        dropdown.removeAttribute('data-open');
-        trigger.setAttribute('aria-expanded', 'false');
-      } else {
-        dropdown.setAttribute('data-open', '');
-        trigger.setAttribute('aria-expanded', 'true');
-      }
-    });
-  });
-
-  document.addEventListener('click', (e) => {
-    dropdowns.forEach((dropdown) => {
-      if (!dropdown.contains(e.target as Node)) {
-        dropdown.removeAttribute('data-open');
-        dropdown.querySelector('.nav-trigger')
-          ?.setAttribute('aria-expanded', 'false');
-      }
-    });
+  const select = document.querySelector<HTMLSelectElement>('.nav-select');
+  select?.addEventListener('change', (e) => {
+    if (e.currentTarget instanceof HTMLSelectElement) {
+      window.location.pathname = e.currentTarget.value;
+    }
   });
 </script>
