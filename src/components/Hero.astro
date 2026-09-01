@@ -1,16 +1,13 @@
 ---
-// 1. Import the default Hero, not PageTitle
 import Default from '@astrojs/starlight/components/Hero.astro';
 import { Image } from 'astro:assets';
 import FormattedDate from './FormattedDate.astro';
 
 const { entry } = Astro.locals.starlightRoute;
-// Added 'hero' to extract title and tagline for the index page
 const { title, pubDate, heroImage, author, hero } = entry.data;
 
 const pathname = Astro.url.pathname;
 
-// Check if this is the main /blog/ index page or an individual post
 const isBlogIndex = pathname === '/blog' || pathname === '/blog/';
 const isBlogPost = pathname.startsWith('/blog/') && !isBlogIndex;
 
@@ -20,7 +17,6 @@ const PAGE_TITLE_ID = '_top';
 {isBlogIndex ? (
   <div class="blog-index-wrapper">
     <div class="blog-index-hero">
-      {/* Uses frontmatter hero title/tagline, falls back to regular title */}
       <h1 id={PAGE_TITLE_ID}>{hero?.title || title}</h1>
       {hero?.tagline && <p class="tagline">{hero.tagline}</p>}
     </div>
@@ -64,10 +60,9 @@ const PAGE_TITLE_ID = '_top';
 <style>
   /* --- Blog Index Styles --- */
   .blog-index-wrapper {
-    /* Simulates the dark geometric pattern from your reference */
     margin-inline: -var(--sl-content-pad-x);
     padding: 5rem var(--sl-content-pad-x);
-    background-color: #0b1120;
+    background-color: var(--sl-color-bg);
     background-image: 
       radial-gradient(circle at 50% 50%, rgba(120, 119, 198, 0.15) 0%, transparent 60%),
       linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
@@ -79,23 +74,22 @@ const PAGE_TITLE_ID = '_top';
 
   .blog-index-hero {
     text-align: center;
-    max-width: 800px;
+    max-width: 64rem;
     margin: 0 auto;
   }
 
   .blog-index-hero h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 800;
+    font-size: var(--sl-color-h1);
+    font-weight: 600;
+    line-height: var(--sl-line-height-headings);
     color: var(--sl-color-white);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
     margin-bottom: 1rem;
   }
 
   .blog-index-hero .tagline {
     font-size: var(--sl-text-h4);
     color: var(--sl-color-gray-3);
-    line-height: 1.6;
+    line-height: var(--sl-line-height);
   }
 
   /* --- Blog Post Styles --- */
@@ -135,9 +129,9 @@ const PAGE_TITLE_ID = '_top';
     max-width: 52rem !important;
     margin-inline: auto;
   }
-  @media (min-width: 50rem) {
+ /* @media (min-width: 50rem) {
     .main-frame {
       padding-top: calc(var(--sl-nav-height) - 10%);
     }
-  }
+  } */
 </style>
