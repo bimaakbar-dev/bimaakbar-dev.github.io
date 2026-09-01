@@ -1,5 +1,6 @@
 ---
 import Default from '@astrojs/starlight/components/SiteTitle.astro';
+import { Icon } from '@astrojs/starlight/components';
 import { navSections } from '~/config/navigation';
 
 const pathname = Astro.url.pathname;
@@ -14,9 +15,6 @@ const active = navSections.find((s) =>
 
   <label class="nav-select-wrapper">
     <span class="sr-only">Pilih seksi</span>
-    <svg class="nav-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-      <path d="M2 4h10M2 7h7M2 10h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-    </svg>
     <select class="nav-select" autocomplete="off">
       {navSections.map((s) => (
         <option value={s.href} selected={s.href === active.href}>
@@ -24,9 +22,7 @@ const active = navSections.find((s) =>
         </option>
       ))}
     </select>
-    <svg class="nav-caret" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-      <path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
+    <Icon name="down-caret" class="nav-caret" aria-hidden="true" />
   </label>
 </div>
 
@@ -38,54 +34,44 @@ const active = navSections.find((s) =>
     }
 
     .nav-select-wrapper {
-      --icon-size: 0.875rem;
-      --caret-size: 1.25rem;
-      --pad: 0.5rem;
       position: relative;
       display: flex;
       align-items: center;
       color: var(--sl-color-gray-2);
-      cursor: pointer;
     }
 
     .nav-select-wrapper:hover {
       color: var(--sl-color-white);
     }
 
-    .nav-icon,
-    .nav-caret {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      pointer-events: none;
-    }
-
-    .nav-icon {
-      inset-inline-start: 0;
-      font-size: var(--icon-size);
-    }
-
-    .nav-caret {
-      inset-inline-end: 0;
-      font-size: var(--caret-size);
-    }
-
     .nav-select {
-      border: 0;
-      padding-block: 0.625rem;
-      padding-inline: calc(var(--icon-size) + var(--pad) + 0.25rem)
-        calc(var(--caret-size) + var(--pad) + 0.25rem);
-      margin-inline: calc(var(--pad) * -1);
-      background-color: transparent;
+      appearance: none;
+      background: transparent;
+      border: 0.5px solid var(--sl-color-hairline);
+      border-radius: 0.5rem;
       color: inherit;
       cursor: pointer;
-      appearance: none;
       font-size: var(--sl-text-sm);
+      font-weight: 500;
+      padding: 0.25rem 2rem 0.25rem 0.75rem;
+    }
+
+    .nav-select:hover,
+    .nav-select:focus-visible {
+      border-color: var(--sl-color-gray-4);
+      outline: none;
     }
 
     option {
       background-color: var(--sl-color-bg-nav);
       color: var(--sl-color-gray-1);
+    }
+
+    .nav-caret {
+      position: absolute;
+      inset-inline-end: 0.5rem;
+      pointer-events: none;
+      font-size: 1rem;
     }
   }
 </style>
