@@ -1,8 +1,9 @@
 .site-title {
-	gap: 0.5rem;
-	font-size: var(--sl-text-h4);
-	font-weight: 600;
-	color: var(--sl-color-text-white);
+  gap: 0.5rem;
+  font-size: var(--sl-text-h4);
+  font-weight: 600;
+  line-height: var(--sl-line-height-headings);
+  color: var(--sl-color-text-white);
 }
 
 .site-title [data-theme='light'] {
