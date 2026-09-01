@@ -7,7 +7,6 @@ const { entry } = Astro.locals.starlightRoute;
 const { title, pubDate, heroImage, author } = entry.data;
 
 const pathname = Astro.url.pathname;
-// Memastikan ini adalah post spesifik, bukan halaman index /blog/
 const isBlogPost = pathname.startsWith('/blog/') && pathname !== '/blog' && pathname !== '/blog/';
 
 const PAGE_TITLE_ID = '_top';
@@ -86,9 +85,9 @@ const PAGE_TITLE_ID = '_top';
     max-width: 52rem !important;
     margin-inline: auto;
   }
-  @media (min-width: 50rem) {
+  /* @media (min-width: 50rem) {
     .main-frame {
       padding-top: calc(var(--sl-nav-height) - 10%);
     }
-  }
+  } */
 </style>
