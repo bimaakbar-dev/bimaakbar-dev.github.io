@@ -42,9 +42,11 @@ const isBlogIndex = pathname === '/blog/' || pathname === '/blog';
     }
 
     .blog-hero {
-      max-width: 48rem;
-      margin-inline: auto;
       position: relative;
+      max-width: var(--sl-content-width);
+      padding-inline: var(--sl-content-pad-x);
+      margin-inline: auto;
+      
       overflow: hidden;
       margin-bottom: 2rem;
       border-bottom: 0.5px solid var(--sl-color-hairline);
