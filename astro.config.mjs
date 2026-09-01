@@ -54,6 +54,7 @@ export default defineConfig({
 				FallbackContentNotice: './src/components/FallbackContentNotice.astro',
 				Head: './src/components/Head.astro',
      Hero: './src/components/Hero.astro',
+     MobileMenuToggle: './src/components/MobileMenuToggle.astro',
      PageSidebar: './src/components/PageSidebar.astro',
 				PageTitle: './src/components/PageTitle.astro',
      Sidebar: './src/components/Sidebar.astro',
