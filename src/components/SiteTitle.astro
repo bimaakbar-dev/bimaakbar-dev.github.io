@@ -1,0 +1,18 @@
+---
+import Default from '@astrojs/starlight/components/SiteTitle.astro';
+import HeaderLink from '~/components/HeaderLink.astro';
+---
+<div class="sl-flex print:hidden sg-header">
+	<Default />
+	<div class="sl-flex print:hidden internal-links">
+		<HeaderLink href="/">Docs</HeaderLink>
+		<HeaderLink href="/blog">Blog</HeaderLink>
+	</div>
+</div>
+
+<style>
+	.sg-header {
+		align-items: center;
+		gap: 1rem;
+	}
+</style>
