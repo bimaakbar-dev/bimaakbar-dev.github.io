@@ -28,6 +28,7 @@ export const collections = {
 		schema: i18nSchema({
 			extend: z.object({
 				'component.preview': z.string().optional(),
+				'component.blogPostAuthor': z.string().optional(),
 			}),
 		}) 
 	}),
