@@ -86,7 +86,7 @@ export default defineConfig({
               FallbackContentNotice: './src/components/FallbackContentNotice.astro',
               Head: './src/components/Head.astro',
               Hero: './src/components/Hero.astro',
-              PageTitle: './src/components/Hero.astro',
+              PageTitle: './src/components/PageTitle.astro',
               
           },
           social: [
