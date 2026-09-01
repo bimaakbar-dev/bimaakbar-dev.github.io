@@ -2,84 +2,154 @@
 import { getCollection } from 'astro:content';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import { Image } from 'astro:assets';
-
 import FormattedDate from '~/components/FormattedDate.astro';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+const posts = await getCollection('blog');
+
+const sorted = posts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
 
-<StarlightPage frontmatter={{ title: 'Stargazer Blog', description: 'Catatan rilis dan artikel terbaru.', template: 'splash' }}>
-	<div class="blog-list">
-		{
-			posts.map((post) => (
-				<article class="blog-card">
-					{post.data.heroImage && (
-						<a href={`/blog/${post.id}`}>
-							<Image
-								src={post.data.heroImage}
-								alt={post.data.title}
-								class="card-image"
-							/>
-						</a>
-					)}
-					<div class="card-content">
-						<h2>
-							<a href={`/blog/${post.id}`}>{post.data.title}</a>
-						</h2>
-						<FormattedDate date={post.data.pubDate} />
-						<p>{post.data.description}</p>
-					</div>
-				</article>
-			))
-		}
-	</div>
+<StarlightPage
+  frontmatter={{
+    title: 'Stargazer Blog',
+    description: 'Get all the latest news from the Stargazers.',
+    template: 'splash',
+  }}
+>
+  <div class="blog-hero">
+    <p class="blog-hero-eyebrow">✦ Stargazer</p>
+    <h1 class="blog-hero-title">Stargazer Blog</h1>
+    <p class="blog-hero-desc">Get all the latest news from the Stargazers.</p>
+  </div>
+
+  <div class="blog-list">
+    {sorted.map((post) => (
+      <a href={`/blog/${post.id}`} class="post-card">
+        {post.data.heroImage && (
+          <Image
+            src={post.data.heroImage}
+            alt={post.data.title}
+            class="post-thumbnail"
+          />
+        )}
+        <div class="post-body">
+          <p class="post-meta">
+            <FormattedDate date={post.data.pubDate} />
+          </p>
+          <h2 class="post-title">{post.data.title}</h2>
+          <p class="post-desc">{post.data.description}</p>
+        </div>
+      </a>
+    ))}
+  </div>
 </StarlightPage>
 
 <style>
-	.blog-list {
-		display: flex;
-		flex-direction: column;
-		gap: 2rem;
-		margin-top: 1rem;
-	}
-	.blog-card {
-		border: 1px solid var(--sl-color-hairline);
-		border-radius: 0.5rem;
-		overflow: hidden;
-		background-color: var(--sl-color-bg-nav);
-		transition: border-color 0.2s ease;
-	}
-	.blog-card:hover {
-		border-color: var(--sl-color-gray-2);
-	}
-	.card-image {
-		width: 100%;
-		height: 200px;
-		object-fit: cover;
-	}
-	.card-content {
-		padding: 1.25rem;
-	}
-	.blog-card h2 {
-		font-size: var(--sl-text-h4);
-		margin-bottom: 0.25rem;
-	}
-	.blog-card h2 a {
-		color: var(--sl-color-white);
-		text-decoration: none;
-	}
-	.blog-card h2 a:hover {
-		color: var(--sl-color-text-accent);
-	}
-	time {
-		font-size: var(--sl-text-xs);
-		color: var(--sl-color-gray-3);
-	}
-	.blog-card p {
-		margin-top: 0.5rem;
-		color: var(--sl-color-gray-2);
-		font-size: var(--sl-text-sm);
-	}
+  @layer starlight.core {
+    .blog-hero {
+      text-align: center;
+      padding: 3rem 1rem 2.5rem;
+      margin-bottom: 2rem;
+      border-bottom: 0.5px solid var(--sl-color-gray-5);
+      position: relative;
+    }
+
+    .blog-hero-eyebrow {
+      font-size: var(--sl-text-xs);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--sl-color-accent);
+      margin: 0 0 0.75rem;
+    }
+
+    .blog-hero-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--sl-color-white);
+      margin: 0 0 0.75rem;
+    }
+
+    .blog-hero-desc {
+      font-size: var(--sl-text-base);
+      color: var(--sl-color-gray-2);
+      max-width: 40ch;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .blog-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .post-card {
+      display: flex;
+      flex-direction: column;
+      border: 0.5px solid var(--sl-color-gray-5);
+      border-radius: 0.75rem;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .post-card:hover {
+      border-color: var(--sl-color-accent);
+      transform: translateY(-2px);
+    }
+
+    .post-thumbnail {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .post-body {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .post-meta {
+      font-size: var(--sl-text-xs);
+      color: var(--sl-color-gray-3);
+      margin: 0;
+    }
+
+    .post-title {
+      font-size: var(--sl-text-lg);
+      font-weight: 600;
+      margin: 0;
+      color: var(--sl-color-white);
+      line-height: 1.3;
+    }
+
+    .post-desc {
+      font-size: var(--sl-text-sm);
+      color: var(--sl-color-gray-2);
+      margin: 0;
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    @media (min-width: 640px) {
+      .post-card {
+        flex-direction: row;
+      }
+
+      .post-thumbnail {
+        width: 240px;
+        height: auto;
+        flex-shrink: 0;
+      }
+    }
+  }
 </style>
