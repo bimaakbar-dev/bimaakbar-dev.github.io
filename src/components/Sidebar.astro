@@ -1,5 +1,7 @@
 ---
 import Default from '@astrojs/starlight/components/Sidebar.astro';
+import HeaderLink from './HeaderLink.astro';
+
 import MobileMenuFooter from 'virtual:starlight/components/MobileMenuFooter';
 
 const pathname = Astro.url.pathname;
@@ -22,7 +24,15 @@ const isBlogPost = pathname.startsWith('/blog/')
         <div class="sg-placeholder-cta" />
       </div>
     </div>
-    <div class="md:sl-hidden">
+    <div class="md:sl-hidden sg-mobile-footer">
+      <!-- Placeholder navigasi halaman, akan diganti nanti -->
+      <div class="sg-placeholder-block">
+        <div class="sg-placeholder-label">Navigation</div>
+        <HeaderLink href="/">Home</HeaderLink>
+        <HeaderLink href="/blog">Blog</HeaderLink>
+        <div class="sg-placeholder-item" />
+        <div class="sg-placeholder-item" />
+      </div>
       <MobileMenuFooter />
     </div>
   </div>
@@ -37,16 +47,26 @@ const isBlogPost = pathname.startsWith('/blog/')
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      padding-block: 1rem;
     }
 
     .sg-sidebar-inner {
       padding-inline: var(--sl-sidebar-pad-x);
-      padding-block: 1.5rem;
+      padding-block: 0.5rem;
       display: flex;
       flex-direction: column;
       gap: 2rem;
       flex: 1;
       overflow-y: auto;
+    }
+
+    .sg-mobile-footer {
+      padding-inline: var(--sl-sidebar-pad-x);
+      padding-block: 1rem;
+      border-top: 0.5px solid var(--sl-color-hairline);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
 
     .sg-placeholder-block {
