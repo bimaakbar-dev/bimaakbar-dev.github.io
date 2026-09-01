@@ -1,0 +1,10 @@
+---
+import Default from '@astrojs/starlight/components/MobileMenuToggle.astro';
+
+const pathname = Astro.url.pathname;
+const isBlogPost = pathname.startsWith('/blog/') 
+  && pathname !== '/blog/' 
+  && pathname !== '/blog';
+---
+
+{!isBlogPost && <Default />}
