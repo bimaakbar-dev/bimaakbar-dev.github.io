@@ -18,6 +18,8 @@ const meta = Astro.locals.blogMeta;
       <Image
         src={meta.heroImage}
         alt="Blog Hero Image"
+        width={1020}
+        height={510}
         class="hero-image"
       />
     )}
@@ -48,17 +50,13 @@ const meta = Astro.locals.blogMeta;
 
 <style>
   @layer starlight.core {
-    @media (min-width: 50em) {
-    	h1 {
-			font-size: var(--sl-text-3xl);
-		}
-	}
 	h1 {
 		margin-top: 1rem;
-		font-size: var(--sl-text-4xl);
+		font-size: var(--sl-text-h1);
 		line-height: var(--sl-line-height-headings);
 		font-weight: 500;
 		color: var(--sl-color-white);
+		letter-spacing: -0.02em;
 	}
     .blog-header-meta {
       text-align: center;
@@ -77,6 +75,7 @@ const meta = Astro.locals.blogMeta;
 
     .date {
       font-size: var(--sl-text-base);
+      line-height: var(--sl-line-height);
       color: var(--sl-color-gray-2);
       margin-bottom: 0.75rem;
     }
@@ -86,6 +85,7 @@ const meta = Astro.locals.blogMeta;
       gap: 0.5rem;
       margin-top: 0.75rem;
       font-size: var(--sl-text-base);
+      line-height: var(--sl-line-height);
       color: var(--sl-color-gray-1);
     }
 
@@ -94,7 +94,7 @@ const meta = Astro.locals.blogMeta;
       height: 1.5rem;
       border-radius: 50%;
       object-fit: cover;
-      border: 1px solid var(--sl-color-hairline);
+      border: 1px solid var(--sl-color-accent);
     }
   }
 </style>
