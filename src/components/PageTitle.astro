@@ -29,7 +29,7 @@ const meta = Astro.locals.blogMeta;
     <Default />
 
     {meta.author && (
-      <div class="author-info">
+      <p class="author-info">
         <span>{Astro.locals.t('component.blogPostAuthor')}</span>
         <img
           src={meta.author.avatar}
@@ -37,7 +37,7 @@ const meta = Astro.locals.blogMeta;
           class="author-avatar"
         />
         <span class="author-name">{meta.author.name}</span>
-      </div>
+      </p>
     )}
   </div>
 ) : (
