@@ -13,16 +13,15 @@ banner:
 import PostCard from '~/components/PostCard.astro';
 import { getCollection } from 'astro:content';
 
-const allPosts = await getCollection('docs');
-
-const blogPosts = allPosts
-  .filter((post) => post.data.pubDate)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
   {
-    blogPosts.map((post) => (
-      <PostCard entry={post} />
-    ))
+    (async () => {
+      const allPosts = await getCollection('docs');
+      const blogPosts = allPosts
+        .filter((post) => post.data.pubDate)
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+      
+      return blogPosts.map((post) => <PostCard entry={post} />);
+    })()
   }
 </div>
