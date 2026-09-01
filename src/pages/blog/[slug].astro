@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import ContentPanel from '@astrojs/starlight/components/ContentPanel.astro';
+import MarkdownContent from '@astrojs/starlight/components/MarkdownContent.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -32,11 +34,11 @@ Astro.locals.blogMeta = {
     template: 'splash',
   }}
 >
-  <div class="blog-content">
-    <div class="sl-markdown-content">
+  <ContentPanel>
+    <MarkdownContent>
       <Content />
-    </div>
-  </div>
+    </MarkdownContent>
+  </ContentPanel>
 </StarlightPage>
 <style>
   .blog-content {
