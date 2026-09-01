@@ -16,6 +16,8 @@ const sorted = posts.sort(
     title: 'Stargazer Blog',
     description: 'Get all the latest news from the Stargazers.',
     template: 'splash',
+    hero:
+		tagline: 'Get all the latest news from the Stargazers.',
   }}
 >
   <div class="blog-hero">
@@ -87,7 +89,6 @@ const sorted = posts.sort(
       text-decoration: none;
       color: inherit;
       transition: transform 0.2s ease;
-      gap: 1rem;
     }
 
     .post-card:hover {
@@ -98,18 +99,20 @@ const sorted = posts.sort(
       width: 100%;
       height: 200px;
       object-fit: cover;
-      margin: 1rem 0;
+      margin: 0.5rem 0;
     }
 
     .post-body {
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+      padding: 0.5rem 1rem;
     }
 
     .post-meta {
       font-size: var(--sl-text-xs);
       color: var(--sl-color-gray-3);
+      padding: 0.5rem 1rem;
     }
 
     .post-title {
@@ -130,12 +133,6 @@ const sorted = posts.sort(
     @media (min-width: 50rem) {
       .post-card {
         flex-direction: row;
-      }
-
-      .post-thumbnail {
-        width: 240px;
-        height: auto;
-        flex-shrink: 0;
       }
     }
   }
