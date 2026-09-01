@@ -21,18 +21,22 @@ const getUrl = (id: string) => {
       const { data, id } = post;
       const { title, description, pubDate, heroImage } = data;
       return (
-        <a href={getUrl(id)} class="post-card">
-          <div class="post-card-content">
-            <div class="post-card-date">
-              <FormattedDate date={pubDate} />
+        <article class="post-card">
+			<header>
+            	<p class="post-card-date">
+					<FormattedDate date={pubDate} />
+            	</p>
+			</header>
+			<div class="post-card-cover">
+              {heroImage && (
+			    <Image width={766} height={328} src={heroImage} class="post-card-image" alt={title} loading="lazy" />
+              )}
             </div>
-            {heroImage && (
-            <Image width={720} height={360} src={heroImage} class="post-card-image" alt={title} loading="lazy" />
-          )}
-            <h3 class="post-card-title">{title}</h3>
+            <h3 class="post-card-title">
+				<a href={getUrl(id)}>{title}</a>
+			</h3>
             {description && <p class="post-card-description">{description}</p>}
-          </div>
-        </a>
+        </article>
       );
     })
   }
@@ -47,20 +51,21 @@ const getUrl = (id: string) => {
   }
 
   .post-card {
-    display: block;
+    position: relative;
+    padding: 1rem;
     border: 1px solid var(--sl-color-gray-5);
     /* border-radius: 0.75rem; */
-    overflow: hidden;
-    text-decoration: none;
-    color: var(--sl-color-text);
     background-color: var(--sl-color-bg);
     transition: box-shadow 0.25s ease, transform 0.15s ease;
-    gap: 0.75rem;
   }
 
   .post-card:hover {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     transform: translateY(-2px);
+  }
+  
+  .post-card-cover {
+    margin-inline: -1rem;
   }
 
   .post-card-image {
@@ -71,30 +76,24 @@ const getUrl = (id: string) => {
     transition: transform 0.3s ease;
     aspect-ratio: 16 / 9;
     background-color: var(--sl-color-gray-6);
-    margin-bottom: 1rem;
     border: none;
-  }
-
-  .post-card-content {
-    padding-block: 1.25rem;
+    margin-block: 1rem;
   }
 
   .post-card-date {
     font-size: var(--sl-text-body);
     line-height: var(--sl-line-height);
     color: var(--sl-color-gray-2);
-    padding-inline: 1.25rem;
-    margin: 0;
+    font-family: var(--__sl-font-mono);
   }
 
   .post-card-title {
-    margin: 0 0 0.4rem 0;
     font-size: var(--sl-text-h4);
     font-weight: 500;
     line-height: var(--sl-line-height-headings);
     color: var(--sl-color-text);
-   padding-inline: 1.25rem;
-   margin-bottom: 1rem;
+	margin-bottom: 1rem;
+	text-decoration: none;
   }
 
   .post-card-description {
@@ -105,7 +104,5 @@ const getUrl = (id: string) => {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
-    overflow: hidden;
-    padding-inline: 1.25rem;
   }
 </style>
