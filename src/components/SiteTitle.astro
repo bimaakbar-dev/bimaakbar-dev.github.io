@@ -36,12 +36,11 @@ const active = navSections.find((s) =>
   @layer starlight.core {
     .sg-header {
       align-items: center;
-      gap: 1rem;
+      gap: 0.25rem;
     }
 
     .nav-dropdown {
       position: relative;
-      overflow: visible
     }
 
     .nav-trigger {
@@ -69,7 +68,7 @@ const active = navSections.find((s) =>
       opacity: 0.6;
     }
 
-    .nav-dropdown.is-open .nav-chevron {
+    .nav-dropdown[data-open] .nav-chevron {
       transform: rotate(180deg);
     }
 
@@ -88,7 +87,7 @@ const active = navSections.find((s) =>
       z-index: 50;
     }
 
-    .nav-dropdown.is-open .nav-menu {
+    .nav-dropdown[data-open] .nav-menu {
       display: block;
     }
 
@@ -121,16 +120,23 @@ const active = navSections.find((s) =>
     const trigger = dropdown.querySelector('.nav-trigger');
 
     trigger?.addEventListener('click', () => {
-      const isOpen = dropdown.classList.toggle('is-open');
-      trigger.setAttribute('aria-expanded', String(isOpen));
+      const isOpen = dropdown.hasAttribute('data-open');
+      if (isOpen) {
+        dropdown.removeAttribute('data-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      } else {
+        dropdown.setAttribute('data-open', '');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
     });
   });
 
   document.addEventListener('click', (e) => {
     dropdowns.forEach((dropdown) => {
       if (!dropdown.contains(e.target as Node)) {
-        dropdown.classList.remove('is-open');
-        dropdown.querySelector('.nav-trigger')?.setAttribute('aria-expanded', 'false');
+        dropdown.removeAttribute('data-open');
+        dropdown.querySelector('.nav-trigger')
+          ?.setAttribute('aria-expanded', 'false');
       }
     });
   });
