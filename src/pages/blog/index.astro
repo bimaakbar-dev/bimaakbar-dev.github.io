@@ -37,8 +37,8 @@ const sorted = posts.sort(
           />
         )}
         <div class="post-body">
-          <h2 class="post-title">{post.data.title}</h2>
-          <p class="post-desc">{post.data.description}</p>
+          <h2 class="post-title" set:html={post.data.title} />
+          <p class="post-desc" set:html={post.data.description} />
         </div>
       </a>
     ))}
@@ -57,7 +57,7 @@ const sorted = posts.sort(
 
     .blog-hero-title {
       font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700;
+      font-weight: 600;
       line-height: 1.15;
       color: var(--sl-color-white);
       margin: 0 0 0.75rem;
@@ -87,10 +87,10 @@ const sorted = posts.sort(
       text-decoration: none;
       color: inherit;
       transition: transform 0.2s ease;
+      gap: 1rem;
     }
 
     .post-card:hover {
-      border-color: var(--sl-color-accent);
       transform: translateY(-2px);
     }
 
@@ -102,7 +102,6 @@ const sorted = posts.sort(
     }
 
     .post-body {
-      padding: 1.25rem;
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
@@ -111,22 +110,17 @@ const sorted = posts.sort(
     .post-meta {
       font-size: var(--sl-text-xs);
       color: var(--sl-color-gray-3);
-      margin: 0;
     }
 
     .post-title {
-      font-size: var(--sl-text-lg);
+      font-size: var(--sl-text-h4);
       font-weight: 500;
-      margin: 0;
       color: var(--sl-color-white);
-      line-height: 1.2;
     }
 
     .post-desc {
       font-size: var(--sl-text-sm);
       color: var(--sl-color-gray-2);
-      margin: 0;
-      line-height: 1.75;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
