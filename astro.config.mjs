@@ -9,8 +9,6 @@ import { satteri } from '@astrojs/markdown-satteri';
 import { satteriExternalLink } from './src/lib/plugins/satteri/external-link';
 import { satteriTable } from './src/lib/plugins/satteri/table';
 
-import tailwindcss from '@tailwindcss/vite';
-
 // https://astro.build/config
 export default defineConfig({
     site: 'https://bimaakbar-dev.github.io',
@@ -96,8 +94,4 @@ export default defineConfig({
             credits: true,
         }),
     ],
-
-    vite: {
-        plugins: [tailwindcss()],
-    },
 });
