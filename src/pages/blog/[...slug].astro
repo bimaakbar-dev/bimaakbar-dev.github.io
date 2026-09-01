@@ -1,0 +1,47 @@
+---
+// src/pages/blog/[...slug].astro
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const entries = await getCollection(
+    "docs",
+    ({ data, id }) => !data.draft && id.startsWith('blog/')
+  );
+
+  return entries.map((entry) => ({
+    params: { slug: entry.id.replace(/^blog\//, '') },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<StarlightPage frontmatter={{
+  title: entry.data.title,
+  description: entry.data.description,
+  template: 'splash',
+  heroImage: entry.data.heroImage,
+  author: {
+    name: entry.data.author?.name,
+    avatar: entry.data.author?.avatar
+  },
+  pubDate: entry.data.pubDate
+}}>
+  <Content />
+</StarlightPage>
+
+<style is:global>
+  .content-panel .sl-container {
+    max-width: 64rem !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .sl-markdown-content {
+    margin: 0 auto;
+    max-width: 50rem !important;
+  }
+</style>

@@ -1,0 +1,16 @@
+---
+// src/pages/blog/index.astro
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import BlogPage from '~/components/BlogPage.astro';
+---
+
+<StarlightPage frontmatter={{
+  title:'Stargazers Blog',
+  description: 'Get all the latest news from the Stargazers.',
+  hero: {
+    tagline: 'Get all the latest news from the Stargazers.',
+  },
+  template: 'splash',
+}}>
+    <BlogPage />
+</StarlightPage>

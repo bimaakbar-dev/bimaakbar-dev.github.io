@@ -1,3 +1,12 @@
+@layer base, starlight, theme, components, utilities;
+
+@import '@astrojs/starlight-tailwind';
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+@import './reset.css';
+@import './asides.css';
+@import './markdown.css';
 @import './stargazer.css';
 
 :root,
@@ -150,6 +159,7 @@
     --sl-nav-pad-y: 0.75rem;
     --sl-mobile-toc-height: 3rem;
     --sl-sidebar-width: 18.75rem;
+    --sl-content-width: 45rem;
     --sl-sidebar-pad-x: 1rem;
     --sl-menu-button-size: 2rem;
     /* --sl-nav-gap: var(--sl-content-pad-x); */

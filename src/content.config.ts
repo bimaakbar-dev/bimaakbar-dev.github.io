@@ -12,8 +12,8 @@ export const collections = {
 				pubDate: z.coerce.date().optional(),
 				heroImage: z.optional(image()),
 				author: z.object({
-					name: z.string(),
-					avatar: z.url(),
+					name: z.string().optional(),
+					avatar: z.url().optional(),
 				}).optional(),
 				tags: z.array(z.string()).optional(),
 			}),

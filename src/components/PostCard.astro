@@ -6,95 +6,37 @@ import { getCollection } from 'astro:content';
 const allPosts = await getCollection('docs');
 
 const blogPosts = allPosts
-  .filter((post) => post.data.pubDate)
+  .filter((post): post is typeof post & { data: { pubDate: Date } } =>
+    post.data.pubDate !== undefined
+  )
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-const getUrl = (id: string) => {
-  const base = id.replace(/\.(md|mdx)$/, '').replace(/\/index$/, '');
-  return `/${base}`;
-};
 ---
 
-<div class="post-grid">
-  {
-    blogPosts.map((post) => {
-      const { data, id } = post;
-      const { title, description, pubDate, heroImage } = data;
-      return (
-        <article class="post-card">
-			<header>
-            	<p class="post-card-date">
-					<FormattedDate date={pubDate} />
-            	</p>
-			</header>
-			<div class="post-card-cover">
-              {heroImage && (
-			    <Image width={766} height={328} src={heroImage} class="post-card-image" alt={title} loading="lazy" />
-              )}
-            </div>
-            <div class="post-card-content">
-            	<h3 class="post-card-title">
-					<a href={getUrl(id)}>{title}</a>
-				</h3>
-            	{description && <p class="post-card-description">{description}</p>}
-            </div>
-        </article>
-      );
-    })
-  }
-</div>
+{ blogPosts.map((post) => {
+    const { data } = post;
+    const { title, description, pubDate, heroImage } = data;
+    return (
+      <article class="relative border border-(--sl-color-gray-5) bg-(--sl-color-gray-6) p-4 outline-(--sl-color-purple) transition-transform duration-300 ease-out focus-within:outline hover:scale-[1.03]">
+        <header>
+          <FormattedDate date={pubDate} />
+        </header>
+        <div class="-mx-4">
+          {heroImage && (
+            <Image width={766} height={328} src={heroImage} class="my-4 w-full h-auto" alt={title} loading="lazy" decoding="async" />
+          )}
+        </div>
+        <div class="mt-6 grid gap-x-16 gap-y-4 md:grid-cols-2">
+          <h3 class="post-card-title">
+            <a href={`/${post.id}/`} class="outline-none after:absolute after:inset-0">{title}</a>
+          </h3>
+          {description && <p class="post-card-description">{description}</p>}
+        </div>
+      </article>
+    );
+  })
+}
 
 <style>
-  .post-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .post-card {
-    position: relative;
-    padding: 1rem;
-    border: 1px solid var(--sl-color-gray-5);
-    /* border-radius: 0.75rem; */
-    background-color: var(--sl-color-gray-6);
-    transition: box-shadow 0.25s ease, transform 0.15s ease;
-  }
-
-  .post-card:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-    transform: translateY(-2px);
-    border-color: var(--sl-color-accent);
-  }
-  
-  .post-card-cover {
-    margin-inline: -1rem;
-  }
-
-  .post-card-image {
-    display: block;
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    background-color: var(--sl-color-gray-6);
-    border: none;
-    margin-block: 1rem;
-  }
-
-  .post-card-date {
-    font-size: var(--sl-text-body);
-    line-height: var(--sl-line-height);
-    color: var(--sl-color-gray-2);
-    font-family: var(--__sl-font-mono);
-  }
-  
-  .post-card-content {
-  	margin-top: 1.5rem;
-  	display: grid;
-  	column-gap: 0.5rem;
-  	row-gap: 1rem;
-  text-align: start;
-  }
-
   .post-card-title {
     font-size: var(--sl-text-h4);
     font-weight: 600;
@@ -112,11 +54,12 @@ const getUrl = (id: string) => {
     color: var(--sl-color-gray-2);
     line-height: var(--sl-line-height);
     text-align: start;
+    margin: 0;
   }
 
   @media (min-width: 50rem) {
-  	.post-card-content {
-  		grid-template-columns: repeat(2, minmax(0, 1fr));
-		}
+  	.post-card-title {
+      font-size: var(--sl-text-h3);
+    }
 	}
 </style>
