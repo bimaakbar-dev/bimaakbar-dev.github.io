@@ -62,7 +62,7 @@ const getUrl = (id: string) => {
     transform: translateY(-2px);
   }
 
-  .post-card-image :not(--sl-content-markdown img) {
+  .post-card-image :not(--sl-markdown-content img) {
     display: block;
     width: 100%;
     height: auto;
@@ -72,6 +72,7 @@ const getUrl = (id: string) => {
     aspect-ratio: 16 / 9;
     background-color: var(--sl-color-gray-6);
     overflow: hidden;
+    margin-block: 1rem;
   }
 
   .post-card-content {
@@ -83,7 +84,6 @@ const getUrl = (id: string) => {
     font-size: var(--sl-text-body);
     line-height: var(--sl-line-height);
     color: var(--sl-color-gray-2);
-    margin-bottom: 0.5rem;
     padding-inline: 1.25rem;
   }
 
