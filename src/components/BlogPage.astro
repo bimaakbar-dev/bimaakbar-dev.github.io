@@ -41,7 +41,7 @@ import PostCard from './PostCard.astro';
 <style>
   .blog-wrapper {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: stretch;
     gap: 1.5rem;
     width: 100%;
@@ -116,7 +116,7 @@ import PostCard from './PostCard.astro';
 
   @media (max-width: 40rem) {
     .blog-wrapper {
-      flex-direction: column-reverse;
+      flex-direction: row-reverse;
       gap: 1.2rem;
     }
     .blog-sidebar {
