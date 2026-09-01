@@ -47,51 +47,45 @@ const meta = Astro.locals.blogMeta;
 
 <style>
 	@layer starlight.core {
-  	.page-title {
-  		align-items: center;
-  	}
-	.hero-image {
-      width: 100%;
-      height: auto;
-      max-height: 400px;
-      object-fit: cover;
-      border-radius: 0.5rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .date {
-      font-size: var(--sl-text-sm);
-      color: var(--sl-color-gray-5);
-      margin-bottom: 0.75rem;
-    }
+		.hero-image {
+			width: 100%;
+			height: auto;
+			object-fit: cover;
+			border-radius: 0.5rem;
+			margin-bottom: 1.25rem;
+		}
+		.date {
+			font-size: var(--sl-text-base);
+			color: var(--sl-color-gray-2);
+			margin-bottom: 0.25rem;
+		}
     
-    h1 {
-		margin-top: 1rem;
-		font-size: var(--sl-text-h2);
-		line-height: var(--sl-line-height-headings);
-		font-weight: 600;
-		color: var(--sl-color-white);
+    	h1 {
+			margin-top: 1rem;
+			font-size: var(--sl-text-h2);
+			line-height: var(--sl-line-height-headings);
+			font-weight: 600;
+			color: var(--sl-color-white);
+		}
+
+    	.author {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+			margin-top: 0.75rem;
+			font-size: var(--sl-text-base);
+		}
+		
+		.author-avatar {
+			width: 24px;
+			height: 24px;
+			border-radius: 50%;
+			object-fit: cover;
+			border: 1px solid var(--sl-color-gray-6);
+		}
+
+		.author-name {
+			color: var(--sl-color-gray-2);
+		}
 	}
-
-    .author {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 0.75rem;
-      font-size: var(--sl-text-sm);
-    }
-
-    .author-avatar {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 1px solid var(--sl-color-gray-6);
-    }
-
-    .author-name {
-      color: var(--sl-color-gray-2);
-      font-weight: 500;
-    }
-  }
 </style>
