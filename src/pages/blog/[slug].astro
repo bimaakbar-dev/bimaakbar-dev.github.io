@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import ContentPanel from '@astrojs/starlight/components/ContentPanel.astro';
 import MarkdownContent from '@astrojs/starlight/components/MarkdownContent.astro';
 
 export async function getStaticPaths() {
@@ -32,131 +33,9 @@ Astro.locals.blogMeta = {
     description: post.data.description,
     template: 'splash',
   }}
->
-  <div class="sg-blog-post">
-    <aside class="sg-sidebar">
-      <div class="sg-sidebar-inner">
-        <div class="sg-placeholder-block">
-          <div class="sg-placeholder-label">Related Posts</div>
-          <div class="sg-placeholder-item" />
-          <div class="sg-placeholder-item" />
-          <div class="sg-placeholder-item" />
-        </div>
-        <div class="sg-placeholder-block">
-          <div class="sg-placeholder-label">CTA</div>
-          <div class="sg-placeholder-cta" />
-        </div>
-      </div>
-    </aside>
-
-    <MarkdownContent>
+><Fragment>
+    <div>
       <Content />
-    </MarkdownContent>
-
-    <aside class="sg-pagebar">
-      <div class="sg-sidebar-inner">
-        <div class="sg-placeholder-block">
-          <div class="sg-placeholder-label">On this page</div>
-          <div class="sg-placeholder-item" />
-          <div class="sg-placeholder-item sg-placeholder-item--short" />
-          <div class="sg-placeholder-item" />
-          <div class="sg-placeholder-item sg-placeholder-item--short" />
-        </div>
-      </div>
-    </aside>
-  </div>
+    </div>
+  </Fragment>
 </StarlightPage>
-
-<style>
-  .sg-blog-post {
-    display: grid;
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-    width: 100%;
-    min-height: 100vh;
-    margin-inline: auto;
-  }
-
-  .sg-sidebar {
-    position: fixed;
-    inset-inline-start: 0;
-    inset-inline-end: 0;
-    top: var(--sl-nav-height);
-    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
-    display: none;
-    height: calc(100vh - var(--sl-nav-height));
-    width: 100%;
-    border-inline-end: 1px solid var(--sl-color-hairline-shade);
-    background: var(--sl-color-bg-sidebar);
-    overflow-y: auto;
-  }
-
-  .sg-pagebar {
-    position: sticky;
-    top: var(--sl-nav-height);
-    display: none;
-    height: calc(100vh - var(--sl-nav-height));
-    width: 100%;
-    scrollbar-gutter: stable;
-    overflow-y: auto;
-    border-inline-start: 1px solid var(--sl-color-hairline-shade);
-  }
-
-  .sg-sidebar-inner {
-    padding-inline: var(--sl-sidebar-pad-x);
-    padding-block: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .sg-placeholder-block {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .sg-placeholder-label {
-    font-size: var(--sl-text-xs);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--sl-color-gray-3);
-  }
-
-  .sg-placeholder-item {
-    height: 0.75rem;
-    border-radius: 0.25rem;
-    background: var(--sl-color-gray-5);
-    width: 100%;
-    opacity: 0.5;
-  }
-
-  .sg-placeholder-item--short {
-    width: 60%;
-  }
-
-  .sg-placeholder-cta {
-    height: 2.5rem;
-    border-radius: 0.5rem;
-    background: var(--sl-color-gray-5);
-    opacity: 0.5;
-  }
-
-  @media (min-width: 50rem) {
-    .sg-blog-post {
-      grid-template-columns: var(--sl-sidebar-width) minmax(0, 1fr) var(--sl-sidebar-width);
-    }
-
-    .sg-sidebar {
-      position: sticky;
-      top: var(--sl-nav-height);
-      height: calc(100vh - var(--sl-nav-height));
-      z-index: 0;
-      display: block;
-    }
-
-    .sg-pagebar {
-      display: block;
-    }
-  }
-</style>
