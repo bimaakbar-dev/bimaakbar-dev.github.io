@@ -27,3 +27,9 @@ mobile-starlight-toc ul ul li:has(> a[aria-current='true'])::before {
 mobile-starlight-toc .isMobile a {
 	border-top: 0;
 }
+
+@media (min-width: 50rem) {
+	starlight-toc ul ul li::before {
+		left: 0.75rem;
+	}
+}
