@@ -1,47 +1,66 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
 
-export interface Props {
-  entry: CollectionEntry<'docs'>;
-}
+// Ambil semua dokumen dari koleksi 'docs'
+const allPosts = await getCollection('docs');
 
-const { entry } = Astro.props;
-const { data, id } = entry; // <-- Ambil id (bukan slug)
-const { title, description, pubDate, heroImage } = data;
+// Filter: hanya yang punya pubDate (anggap itu blog post)
+// Urutkan dari terbaru ke terlama
+const blogPosts = allPosts
+  .filter((post) => post.data.pubDate)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-// Ubah id menjadi URL yang valid:
-// - Buang ekstensi .md / .mdx
-// - Jika ada /index di akhir, buang juga (biar jadi /blog)
-const url = `/${id.replace(/\.(md|mdx)$/, '').replace(/\/index$/, '')}`;
-
-const formattedDate = pubDate
-  ? pubDate.toLocaleDateString('id-ID', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    })
-  : null;
+// Helper: ubah id file menjadi URL
+const getUrl = (id: string) => {
+  const base = id.replace(/\.(md|mdx)$/, '').replace(/\/index$/, '');
+  return `/${base}`;
+};
 ---
 
-<a href={url} class="post-card">
-  {heroImage && (
-    <div class="post-card-image">
-      <Image src={heroImage} alt={title} loading="lazy" />
-    </div>
-  )}
-  <div class="post-card-content">
-    {formattedDate && (
-      <time datetime={pubDate.toISOString()} class="post-card-date">
-        {formattedDate}
-      </time>
-    )}
-    <h3 class="post-card-title">{title}</h3>
-    {description && <p class="post-card-description">{description}</p>}
-  </div>
-</a>
+<div class="post-grid">
+  {
+    blogPosts.map((post) => {
+      const { data, id } = post;
+      const { title, description, pubDate, heroImage } = data;
+      const formattedDate = pubDate
+        ? pubDate.toLocaleDateString('id-ID', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })
+        : null;
+
+      return (
+        <a href={getUrl(id)} class="post-card">
+          {heroImage && (
+            <div class="post-card-image">
+              <Image src={heroImage} alt={title} loading="lazy" />
+            </div>
+          )}
+          <div class="post-card-content">
+            {formattedDate && (
+              <time datetime={pubDate.toISOString()} class="post-card-date">
+                {formattedDate}
+              </time>
+            )}
+            <h3 class="post-card-title">{title}</h3>
+            {description && <p class="post-card-description">{description}</p>}
+          </div>
+        </a>
+      );
+    })
+  }
+</div>
 
 <style>
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
   .post-card {
     display: block;
     border: 1px solid var(--sl-color-gray-5);
@@ -100,7 +119,6 @@ const formattedDate = pubDate
     font-size: 0.95rem;
     color: var(--sl-color-gray-2);
     line-height: 1.5;
-    /* Batasi deskripsi jadi 3 baris */
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
