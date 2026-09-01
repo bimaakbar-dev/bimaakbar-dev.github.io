@@ -1,0 +1,23 @@
+---
+import Default from '@astrojs/starlight/components/PageTitle.astro';
+
+const { entry } = Astro.locals.starlightRoute;
+const isBlogPost = Astro.url.pathname.startsWith('/blog/');
+const PAGE_TITLE_ID = '_top';
+---
+
+{isBlogPost ? (
+    <div class="blog-header pb-6">
+        <h1 id={PAGE_TITLE_ID} class="text-4xl font-bold tracking-tight text-white mb-4">
+            {entry.data.title}
+        </h1>
+        
+        <div class="flex items-center gap-2 text-sm text-gray-400">
+            <span>By {entry.data.author?.name || 'Admin'}</span>
+            <span>•</span>
+            <span>{entry.data.pubDate ? new Date(entry.data.pubDate).toLocaleDateString() : ''}</span>
+        </div>
+    </div>
+) : (
+    <Default />
+)}

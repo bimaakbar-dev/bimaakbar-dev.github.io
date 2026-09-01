@@ -42,11 +42,11 @@ const PAGE_TITLE_ID = '_top';
     )}
   </header>
 ) : (
-    <Default {...Astro.props} />
+    <Default />
 )}
 
 <style>
-  .post-title {
+  h1.post-title {
     font-size: var(--sl-text-h3);
     font-weight: 600;
     line-height: var(--sl-line-height-headings);
@@ -69,21 +69,21 @@ const PAGE_TITLE_ID = '_top';
 	}
 </style>
 
-<style is:global>
-  .content-panel .sl-container header {
+<style>
+  :global(.content-panel .sl-container header) {
     max-width: 52rem !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
     position: relative;
     z-index: 10;
   }
-  .content-panel + .content-panel {
+  :global(.content-panel + .content-panel) {
 		border-top: 1px solid var(--sl-color-gray-5);
     max-width: 52rem !important;
     margin-inline: auto;
 	}
   @media (min-width: 50rem) {
-    .main-frame {
+    :global(.main-frame) {
       padding-top: calc(var(--sl-nav-height) - 10%);
     }
   }

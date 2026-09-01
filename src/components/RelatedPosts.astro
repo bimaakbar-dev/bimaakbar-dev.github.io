@@ -1,0 +1,102 @@
+---
+// src/components/RelatedPosts.astro
+import { getCollection } from 'astro:content';
+
+export interface Props {
+  currentSlug: string;
+  tags?: string[];
+  limit?: number;
+}
+
+const { currentSlug, tags = [], limit = 3 } = Astro.props;
+
+const allPosts = await getCollection('docs', ({ data }) => {
+  return data.pubDate !== undefined && data.draft !== true;
+});
+
+// Urutkan berdasarkan tanggal terbaru
+const sortedPosts = allPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+
+const relatedPosts = sortedPosts
+  .filter((post) => {
+    if (post.id === currentSlug) return false;
+    if (tags.length === 0) return false;
+    const postTags = post.data.tags || [];
+    return tags.some((tag) => postTags.includes(tag));
+  })
+  .slice(0, limit);
+---
+
+{
+  relatedPosts.length > 0 && (
+    <section class="related-posts">
+      <h2 class="related-posts-title">Related Posts</h2>
+      <ul class="related-posts-list">
+        {relatedPosts.map((post) => (
+          <li class="related-post-item">
+            <a href={`/${post.id}/`} class="related-post-link">
+              <span class="related-post-title">{post.data.title}</span>
+              {post.data.pubDate && (
+                <time class="related-post-date" datetime={post.data.pubDate.toISOString()}>
+                  {new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(post.data.pubDate)}
+                </time>
+              )}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<style>
+  .related-posts {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--sl-color-hairline);
+  }
+  .related-posts-title {
+    font-size: var(--sl-text-h4);
+    font-weight: 600;
+    color: var(--sl-color-white);
+    margin-bottom: 1rem;
+  }
+  .related-posts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .related-post-item {
+    display: flex;
+    align-items: center;
+  }
+  .related-post-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    background: var(--sl-color-gray-6);
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: var(--sl-color-text);
+    transition: background 0.2s;
+  }
+  .related-post-link:hover {
+    background: var(--sl-color-gray-5);
+  }
+  .related-post-title {
+    font-weight: 500;
+    font-size: var(--sl-text-body);
+  }
+  .related-post-date {
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+</style>
