@@ -38,6 +38,8 @@ const meta = Astro.locals.blogMeta;
         <img
           src={meta.author.avatar}
           alt={meta.author.name}
+          width={24}
+          height={24}
           class="avatar"
         />
         <span set:html={meta.author.name} />
