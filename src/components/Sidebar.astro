@@ -1,0 +1,81 @@
+---
+import Default from '@astrojs/starlight/components/Sidebar.astro';
+import MobileMenuFooter from 'virtual:starlight/components/MobileMenuFooter';
+
+const pathname = Astro.url.pathname;
+const isBlogPost = pathname.startsWith('/blog/') 
+  && pathname !== '/blog/' 
+  && pathname !== '/blog';
+---
+
+{isBlogPost ? (
+  <div class="sg-blog-sidebar">
+    <div class="sg-sidebar-inner">
+      <div class="sg-placeholder-block">
+        <div class="sg-placeholder-label">Related Posts</div>
+        <div class="sg-placeholder-item" />
+        <div class="sg-placeholder-item" />
+        <div class="sg-placeholder-item" />
+      </div>
+      <div class="sg-placeholder-block">
+        <div class="sg-placeholder-label">CTA</div>
+        <div class="sg-placeholder-cta" />
+      </div>
+    </div>
+    <div class="md:sl-hidden">
+      <MobileMenuFooter />
+    </div>
+  </div>
+) : (
+  <Default />
+)}
+
+<style>
+  @layer starlight.core {
+    .sg-blog-sidebar {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .sg-sidebar-inner {
+      padding-inline: var(--sl-sidebar-pad-x);
+      padding-block: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .sg-placeholder-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .sg-placeholder-label {
+      font-size: var(--sl-text-xs);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--sl-color-gray-3);
+    }
+
+    .sg-placeholder-item {
+      height: 0.75rem;
+      border-radius: 0.25rem;
+      background: var(--sl-color-gray-5);
+      width: 100%;
+      opacity: 0.5;
+    }
+
+    .sg-placeholder-cta {
+      height: 2.5rem;
+      border-radius: 0.5rem;
+      background: var(--sl-color-gray-5);
+      opacity: 0.5;
+    }
+  }
+</style>
