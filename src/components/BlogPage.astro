@@ -8,7 +8,6 @@ import PostCard from './PostCard.astro';
     <PostCard />
   </main>
 
-  <!-- SIDEBAR (KIRI) - menggunakan <aside> -->
   <aside class="blog-sidebar">
     <div class="widget">
       <h4>🔥 Popular Posts</h4>
@@ -61,7 +60,7 @@ import PostCard from './PostCard.astro';
 
   .widget {
     background: var(--sl-color-gray-6);
-    padding: 1.2rem;
+    padding: 1rem;
     border-radius: 0.75rem;
   }
   .widget h4 {
@@ -119,12 +118,13 @@ import PostCard from './PostCard.astro';
       gap: 1.2rem;
     }
     .blog-sidebar {
-      width: var(--sl-sidebar-width);
-      padding-inline: var(--sl-sidebar-pad-x);
+      width: var(--sl-sidebar-width, 18rem);
       flex-shrink: 0;
-     .blog-main {
-       flex: 1;
-      }
+      align-self: stretch;
+    }
+    .blog-main {
+      flex: 1;
+      align-self: stretch;
     }
   }
 </style>
