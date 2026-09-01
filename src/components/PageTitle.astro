@@ -28,6 +28,8 @@ const meta = Astro.locals.blogMeta;
     )}
 
     <Default />
+    
+    <h1 id={PAGE_TITLE_ID}>{Astro.locals.starlightRoute.entry.data.title}</h1>
 
     {meta.author && (
       <div class="author">
@@ -64,7 +66,7 @@ const meta = Astro.locals.blogMeta;
 			margin-top: 1rem;
 			font-size: var(--sl-text-h2);
 			line-height: var(--sl-line-height-headings);
-			font-weight: 600;
+			font-weight: 500;
 			color: var(--sl-color-white);
 		}
 
