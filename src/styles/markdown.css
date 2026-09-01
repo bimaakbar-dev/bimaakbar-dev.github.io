@@ -142,7 +142,7 @@
 /* Image */
 .sl-markdown-content :is(img, picture, iframe):not(:where(.not-content *)) {
 	display: block;
-	border-radius: 0.5rem;
+	/* border-radius: 0.5rem; */
 	border: 1px solid var(--sl-color-gray-6);
 	margin-inline: auto;
 	width: 100%;
