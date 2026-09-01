@@ -24,115 +24,16 @@ const isBlogPost = pathname.startsWith('/blog/')
       </div>
     </aside>
 
-    <div class="main-pane" id="starlight__content">
+    <Default>
       <slot />
-    </div>
+      <slot name="right-sidebar" slot="right-sidebar" />
+    </Default>
 
     <aside class="sg-pagebar print:hidden" aria-hidden="true" />
   </div>
 ) : (
   <Default>
-    <slot name="main" slot="main" />
+    <slot />
     <slot name="right-sidebar" slot="right-sidebar" />
   </Default>
 )}
-
-<style>
-  @layer starlight.core {
-    .sg-blog-post {
-      display: grid;
-      grid-template-columns: 1fr;
-      width: 100%;
-      min-height: 100vh;
-    }
-
-    /* Mobile: konten dulu, sidebar di bawah */
-    .main-pane {
-      order: 1;
-      isolation: isolate;
-    }
-
-    .sg-sidebar {
-      order: 2;
-      display: block;
-      border-top: 0.5px solid var(--sl-color-hairline);
-      background: var(--sl-color-bg-sidebar);
-      overflow-y: auto;
-    }
-
-    .sg-pagebar {
-      display: none;
-    }
-
-    .sg-sidebar-inner {
-      padding-inline: var(--sl-sidebar-pad-x);
-      padding-block: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    .sg-placeholder-block {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .sg-placeholder-label {
-      font-size: var(--sl-text-xs);
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--sl-color-gray-3);
-    }
-
-    .sg-placeholder-item {
-      height: 0.75rem;
-      border-radius: 0.25rem;
-      background: var(--sl-color-gray-5);
-      width: 100%;
-      opacity: 0.5;
-    }
-
-    .sg-placeholder-item--short {
-      width: 60%;
-    }
-
-    .sg-placeholder-cta {
-      height: 2.5rem;
-      border-radius: 0.5rem;
-      background: var(--sl-color-gray-5);
-      opacity: 0.5;
-    }
-
-    @media (min-width: 50rem) {
-      .sg-blog-post {
-        grid-template-columns: var(--sl-sidebar-width) minmax(0, 1fr) var(--sl-sidebar-width);
-      }
-
-      .main-pane {
-        order: 2;
-      }
-
-      .sg-sidebar {
-        order: 1;
-        position: sticky;
-        top: var(--sl-nav-height);
-        height: calc(100vh - var(--sl-nav-height));
-        border-top: none;
-        border-inline-end: 0.5px solid var(--sl-color-hairline);
-        overflow-y: auto;
-        scrollbar-gutter: stable;
-      }
-
-      .sg-pagebar {
-        display: block;
-        order: 3;
-        position: sticky;
-        top: var(--sl-nav-height);
-        height: calc(100vh - var(--sl-nav-height));
-        border-inline-start: 0.5px solid var(--sl-color-hairline);
-      }
-    }
-  }
-</style>
