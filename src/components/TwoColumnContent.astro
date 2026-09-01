@@ -7,8 +7,8 @@ const isBlogPost = pathname.startsWith('/blog/')
   && pathname !== '/blog';
 ---
 
-{isBlogPost ? (
-  <div class="sg-blog-post">
+<div class:list={[{ 'sg-blog-layout': isBlogPost }]}>
+  {isBlogPost && (
     <aside class="sg-sidebar print:hidden">
       <div class="sg-sidebar-inner">
         <div class="sg-placeholder-block">
@@ -23,17 +23,111 @@ const isBlogPost = pathname.startsWith('/blog/')
         </div>
       </div>
     </aside>
+  )}
 
-    <Default>
-      <slot />
-      <slot name="right-sidebar" slot="right-sidebar" />
-    </Default>
-
-    <aside class="sg-pagebar print:hidden" aria-hidden="true" />
-  </div>
-) : (
   <Default>
     <slot />
     <slot name="right-sidebar" slot="right-sidebar" />
   </Default>
-)}
+
+  {isBlogPost && (
+    <aside class="sg-pagebar print:hidden" aria-hidden="true" />
+  )}
+</div>
+
+<style>
+  @layer starlight.core {
+    .sg-blog-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      width: 100%;
+    }
+
+    .sg-sidebar {
+      order: 2;
+      display: block;
+      border-top: 0.5px solid var(--sl-color-hairline);
+      background: var(--sl-color-bg-sidebar);
+      overflow-y: auto;
+    }
+
+    .sg-blog-layout > :global(div) {
+      order: 1;
+    }
+
+    .sg-pagebar {
+      display: none;
+    }
+
+    .sg-sidebar-inner {
+      padding-inline: var(--sl-sidebar-pad-x);
+      padding-block: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .sg-placeholder-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .sg-placeholder-label {
+      font-size: var(--sl-text-xs);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--sl-color-gray-3);
+    }
+
+    .sg-placeholder-item {
+      height: 0.75rem;
+      border-radius: 0.25rem;
+      background: var(--sl-color-gray-5);
+      width: 100%;
+      opacity: 0.5;
+    }
+
+    .sg-placeholder-item--short {
+      width: 60%;
+    }
+
+    .sg-placeholder-cta {
+      height: 2.5rem;
+      border-radius: 0.5rem;
+      background: var(--sl-color-gray-5);
+      opacity: 0.5;
+    }
+
+    @media (min-width: 50rem) {
+      .sg-blog-layout {
+        grid-template-columns: var(--sl-sidebar-width) minmax(0, 1fr) var(--sl-sidebar-width);
+      }
+
+      .sg-blog-layout > :global(div) {
+        order: 2;
+      }
+
+      .sg-sidebar {
+        order: 1;
+        position: sticky;
+        top: var(--sl-nav-height);
+        height: calc(100vh - var(--sl-nav-height));
+        border-top: none;
+        border-inline-end: 0.5px solid var(--sl-color-hairline);
+        overflow-y: auto;
+        scrollbar-gutter: stable;
+      }
+
+      .sg-pagebar {
+        display: block;
+        order: 3;
+        position: sticky;
+        top: var(--sl-nav-height);
+        height: calc(100vh - var(--sl-nav-height));
+        border-inline-start: 0.5px solid var(--sl-color-hairline);
+      }
+    }
+  }
+</style>
