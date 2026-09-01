@@ -43,5 +43,7 @@
   "pagefind.search_suggestion": "No results for [SEARCH_TERM]. Try one of the following searches:",
   "pagefind.searching": "Searching for [SEARCH_TERM]...",
 
-  "component.preview": "Preview"
+  "component.preview": "Preview",
+
+"component.blogPostAuthor": "By"
 }
