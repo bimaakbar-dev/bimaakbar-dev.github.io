@@ -1,5 +1,6 @@
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
+
 import { docsLoader, i18nLoader } from '@astrojs/starlight/loaders';
 import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
@@ -14,6 +15,7 @@ export const collections = {
 					name: z.string(),
 					avatar: z.url(),
 				}).optional(),
+				tags: z.array(z.string()).optional(),
 			}),
 		})
 	}),
@@ -25,5 +27,5 @@ export const collections = {
 				'component.blogPostAuthor': z.string().optional(),
 			}),
 		}) 
-	}),
+	})
 };
