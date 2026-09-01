@@ -21,7 +21,7 @@ const meta = Astro.locals.blogMeta;
     )}
 
     {meta.pubDate && (
-      <div class="meta-info">
+      <div class="date">
         <FormattedDate date={meta.pubDate} />
       </div>
     )}
@@ -30,7 +30,7 @@ const meta = Astro.locals.blogMeta;
 
     {meta.author && (
       <div class="author-info">
-        <span>By</span>
+        <span>{Astro.locals.t('component.blogPostAuthor')}</span>
         <img
           src={meta.author.avatar}
           alt={meta.author.name}
@@ -47,7 +47,8 @@ const meta = Astro.locals.blogMeta;
 <style>
   @layer starlight.core {
     .blog-header-meta {
-      margin-bottom: 2rem;
+      margin-bottom: 0;
+      text-align: center;
     }
 
     .hero-image {
@@ -55,11 +56,11 @@ const meta = Astro.locals.blogMeta;
       height: auto;
       max-height: 400px;
       object-fit: cover;
-      border-radius: 0.5rem;
+      /* border-radius: 0.5rem; */
       margin-bottom: 1.25rem;
     }
 
-    .meta-info {
+    .date {
       font-size: var(--sl-text-sm);
       color: var(--sl-color-gray-3);
       margin-bottom: 0.75rem;
