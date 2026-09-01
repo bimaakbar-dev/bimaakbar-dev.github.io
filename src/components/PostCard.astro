@@ -2,16 +2,12 @@
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 
-// Ambil semua dokumen dari koleksi 'docs'
 const allPosts = await getCollection('docs');
 
-// Filter: hanya yang punya pubDate (anggap itu blog post)
-// Urutkan dari terbaru ke terlama
 const blogPosts = allPosts
   .filter((post) => post.data.pubDate)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-// Helper: ubah id file menjadi URL
 const getUrl = (id: string) => {
   const base = id.replace(/\.(md|mdx)$/, '').replace(/\/index$/, '');
   return `/${base}`;
@@ -33,17 +29,17 @@ const getUrl = (id: string) => {
 
       return (
         <a href={getUrl(id)} class="post-card">
-          {heroImage && (
-            <div class="post-card-image">
-              <Image src={heroImage} alt={title} loading="lazy" />
-            </div>
-          )}
           <div class="post-card-content">
             {formattedDate && (
               <time datetime={pubDate.toISOString()} class="post-card-date">
                 {formattedDate}
               </time>
             )}
+            {heroImage && (
+            <div class="post-card-image">
+              <Image src={heroImage} alt={title} loading="lazy" />
+            </div>
+          )}
             <h3 class="post-card-title">{title}</h3>
             {description && <p class="post-card-description">{description}</p>}
           </div>
@@ -64,7 +60,7 @@ const getUrl = (id: string) => {
   .post-card {
     display: block;
     border: 1px solid var(--sl-color-gray-5);
-    border-radius: 0.75rem;
+    /* border-radius: 0.75rem; */
     overflow: hidden;
     text-decoration: none;
     color: var(--sl-color-text);
@@ -88,6 +84,7 @@ const getUrl = (id: string) => {
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
+    border-radius; none;
   }
 
   .post-card:hover .post-card-image :global(img) {
