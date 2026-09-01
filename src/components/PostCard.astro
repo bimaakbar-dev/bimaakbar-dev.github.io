@@ -75,8 +75,6 @@ const getUrl = (id: string) => {
     width: 100%;
     height: auto;
     object-fit: cover;
-    transition: transform 0.3s ease;
-    aspect-ratio: 16 / 9;
     background-color: var(--sl-color-gray-6);
     border: none;
     margin-block: 1rem;
@@ -94,7 +92,7 @@ const getUrl = (id: string) => {
   	display: grid;
   	column-gap: 0.5rem;
   	row-gap: 1rem;
-  text-aligns: start;
+  text-align: start;
   }
 
   .post-card-title {
@@ -102,6 +100,7 @@ const getUrl = (id: string) => {
     font-weight: 600;
     line-height: var(--sl-line-height-headings);
     color: var(--sl-color-text);
+    text-align: start;
   }
   
   .post-card-title a {
@@ -112,7 +111,9 @@ const getUrl = (id: string) => {
     font-size: var(--sl-text-body);
     color: var(--sl-color-gray-2);
     line-height: var(--sl-line-height);
+    text-align: start;
   }
+
   @media (min-width: 50rem) {
   	.post-card-content {
   		grid-template-columns: repeat(2, minmax(0, 1fr));
