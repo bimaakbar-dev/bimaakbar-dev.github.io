@@ -29,15 +29,15 @@ const meta = Astro.locals.blogMeta;
     <Default />
 
     {meta.author && (
-      <p class="author-info">
+      <div class="sl-flex author">
         <span>{Astro.locals.t('component.blogPostAuthor')}</span>
         <img
           src={meta.author.avatar}
           alt={meta.author.name}
-          class="author-avatar"
+          class="avatar"
         />
-        <span class="author-name">{meta.author.name}</span>
-      </p>
+        <span set:html={meta.author.name} />
+      </div>
     )}
   </div>
 ) : (
@@ -47,8 +47,8 @@ const meta = Astro.locals.blogMeta;
 <style>
   @layer starlight.core {
     .blog-header-meta {
-      margin-bottom: 0;
       text-align: center;
+      justify-items: center;
     }
 
     .hero-image {
@@ -56,35 +56,30 @@ const meta = Astro.locals.blogMeta;
       height: auto;
       max-height: 400px;
       object-fit: cover;
-      /* border-radius: 0.5rem; */
+      /* border-radius: 0.5rem; disabled rounded*/
       margin-bottom: 1.25rem;
     }
 
     .date {
       font-size: var(--sl-text-sm);
-      color: var(--sl-color-gray-3);
+      color: var(--sl-color-gray-2);
       margin-bottom: 0.75rem;
     }
 
-    .author-info {
-      display: flex;
+    .author {
       align-items: center;
-      text-align: center;
       gap: 0.5rem;
       margin-top: 0.75rem;
       font-size: var(--sl-text-sm);
+      color: var(--sl-color-gray-1);
     }
 
-    .author-avatar {
-      width: 24px;
-      height: 24px;
+    .avatar {
+      width: 1rem;
+      height: 1rem;
       border-radius: 50%;
       object-fit: cover;
-    }
-
-    .author-name {
-      color: var(--sl-color-gray-2);
-      font-weight: 500;
+      border: 1px solid var(--sl-color-hairline);
     }
   }
 </style>
