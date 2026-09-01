@@ -1,0 +1,29 @@
+---
+import Default from '@astrojs/starlight/components/PageSidebar.astro';
+
+const pathname = Astro.url.pathname;
+const isBlogPost = pathname.startsWith('/blog/') 
+  && pathname !== '/blog/' 
+  && pathname !== '/blog';
+---
+
+{isBlogPost ? (
+  <!-- Kosong untuk balance layout -->
+  <div class="sg-pagebar-empty" aria-hidden="true" />
+) : (
+  <Default />
+)}
+
+<style>
+  @layer starlight.core {
+    .sg-pagebar-empty {
+      display: none;
+    }
+
+    @media (min-width: 72rem) {
+      .sg-pagebar-empty {
+        display: block;
+      }
+    }
+  }
+</style>
