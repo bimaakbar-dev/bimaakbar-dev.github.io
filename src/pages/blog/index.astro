@@ -4,11 +4,15 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import { Image } from 'astro:assets';
 import FormattedDate from '~/components/FormattedDate.astro';
 
-const posts = await getCollection('blog');
+const allDocs = await getCollection('docs');
 
-const sorted = posts.sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+const posts = allDocs
+  .filter((doc) => doc.id.startsWith('blog/') && doc.id !== 'blog/index')
+  .sort((a, b) => {
+    const aDate = a.data.pubDate?.valueOf() ?? 0;
+    const bDate = b.data.pubDate?.valueOf() ?? 0;
+    return bDate - aDate;
+  });
 ---
 
 <StarlightPage
@@ -17,18 +21,17 @@ const sorted = posts.sort(
     description: 'Get all the latest news from the Stargazers.',
     template: 'splash',
     hero: {
-    	tagline: 'Get all the latest news from the Stargazers.'
+      tagline: 'Get all the latest news from the Stargazers.',
     },
   }}
 >
-
   <div class="blog-list">
-    {sorted.map((post) => (
-      <a href={`/blog/${post.id}`} class="post-card">
+    {posts.map((post) => (
+      <a href={`/${post.id}/`} class="post-card">
         <p class="post-meta">
-			<FormattedDate date={post.data.pubDate} />
+          {post.data.pubDate && <FormattedDate date={post.data.pubDate} />}
         </p>
-		{post.data.heroImage && (
+        {post.data.heroImage && (
           <Image
             src={post.data.heroImage}
             alt={post.data.title}
@@ -98,7 +101,7 @@ const sorted = posts.sort(
 
     .post-desc {
 		font-size: var(--sl-text-base);
-		color: var(--sl-color-gray-2);
+		color: var(--sl-Color-gray-2);
 		line-height: var(--sl-line-height);
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
