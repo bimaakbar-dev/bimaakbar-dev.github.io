@@ -40,7 +40,9 @@ Astro.locals.blogMeta = {
 </StarlightPage>
 <style>
   .blog-content {
-    max-width: 48rem;
-    margin-inline: auto;
+    max-width: var(--sl-content-width);
+    margin-inline: var(--sl-content-margin-inline, auto);
+    padding-inline: var(--sl-content-pad-x);
+   gap-inline: var(--sl-content-gap-y);
   }
 </style>
