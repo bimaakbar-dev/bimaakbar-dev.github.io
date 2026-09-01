@@ -1,6 +1,7 @@
 ---
+import { StarlightPage } from '@astrojs/starlight/StarlightPage.astro';
+
 import { getCollection, render } from 'astro:content';
-import BlogPostLayout from '~/layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -21,13 +22,16 @@ const DEFAULT_AUTHOR = {
 const author = post.data.author ?? DEFAULT_AUTHOR;
 ---
 
-<BlogPostLayout
-  title={post.data.title}
-  description={post.data.description}
-  pubDate={post.data.pubDate}
-  updatedDate={post.data.updatedDate}
-  heroImage={post.data.heroImage}
-  author={author}
+<StarlightPage
+  frontmatter={{
+    title: post.data.title,
+    description: post.data.description,
+    template: 'doc',
+    tableOfContents: false,
+  }}
+  hasSidebar={true}
 >
-  <Content />
-</BlogPostLayout>
+  <div class="sl-markdown-content">
+    <Content />
+  </div>
+</StarlightPage>
