@@ -48,12 +48,10 @@ import PostCard from './PostCard.astro';
   }
 
   .blog-sidebar {
-    width: var(--sl-sidebar-width);
-    flex-shrink: 0;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    padding-inline: var(--sl-sidebar-pad-x);
   }
 
   .blog-main {
@@ -117,10 +115,16 @@ import PostCard from './PostCard.astro';
   @media (max-width: 40rem) {
     .blog-wrapper {
       flex-direction: row-reverse;
+      align-items: stretch;
       gap: 1.2rem;
     }
     .blog-sidebar {
-      width: 100%;
+      width: var(--sl-sidebar-width);
+      padding-inline: var(--sl-sidebar-pad-x);
+      flex-shrink: 0;
+     .blog-main {
+       flex: 1;
+      }
     }
   }
 </style>
