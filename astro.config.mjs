@@ -54,7 +54,7 @@ export default defineConfig({
 				FallbackContentNotice: './src/components/FallbackContentNotice.astro',
 				Head: './src/components/Head.astro',
 				Header: './src/components/Header.astro',
-				PageTitle: './src/components/PageTitle.astro',
+				SiteTitle: './src/components/SiteTitle.astro',
 				
 			},
 			social: [
