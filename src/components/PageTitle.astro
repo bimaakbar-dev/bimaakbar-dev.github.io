@@ -1,8 +1,9 @@
 ---
-import { PAGE_TITLE_ID } from '@astrojs/starlight/constants';
 import Default from '@astrojs/starlight/components/PageTitle.astro';
 import { Image } from 'astro:assets';
 import FormattedDate from '~/components/FormattedDate.astro';
+
+const PAGE_TITLE_ID = '_top';
 
 const isBlogPost =
   Astro.url.pathname.startsWith('/blog/') &&
