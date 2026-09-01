@@ -5,16 +5,17 @@ import { docsSchema, i18nSchema } from '@astrojs/starlight/schema';
 
 export const collections = {
 	docs: defineCollection({ 
-	loader: docsLoader(), 
-	schema: docsSchema({
-    	extend: ({ image }) => z.object({
-			pubDate: z.coerce.date().optional(),
-			heroImage: z.optional(image()),
-			author: z.object({
-				name: z.string(),
-				avatar: z.string().url(),
-			}).optional(),
-		}),
+		loader: docsLoader(), 
+		schema: docsSchema({
+    		extend: ({ image }) => z.object({
+				pubDate: z.coerce.date().optional(),
+				heroImage: z.optional(image()),
+				author: z.object({
+					name: z.string(),
+					avatar: z.url(),
+				}).optional(),
+			}),
+		})
 	}),
 	i18n: defineCollection({ 
 		loader: i18nLoader(), 
