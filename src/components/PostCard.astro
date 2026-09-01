@@ -20,14 +20,6 @@ const getUrl = (id: string) => {
     blogPosts.map((post) => {
       const { data, id } = post;
       const { title, description, pubDate, heroImage } = data;
-      const formattedDate = pubDate
-        ? pubDate.toLocaleDateString('id-ID', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })
-        : null;
-
       return (
         <a href={getUrl(id)} class="post-card">
           <div class="post-card-content">
