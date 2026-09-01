@@ -1,136 +1,88 @@
 ---
-import { getCollection } from 'astro:content';
-import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import Default from '@astrojs/starlight/components/PageTitle.astro';
 import { Image } from 'astro:assets';
 import FormattedDate from '~/components/FormattedDate.astro';
 
-const posts = await getCollection('blog');
+const isBlogPost =
+  Astro.url.pathname.startsWith('/blog/') &&
+  Astro.url.pathname !== '/blog/';
 
-const sorted = posts.sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+const meta = Astro.locals.blogMeta;
 ---
 
-<StarlightPage
-  frontmatter={{
-    title: 'Stargazer Blog',
-    description: 'Get all the latest news from the Stargazers.',
-    template: 'splash',
-  }}
->
-  <div class="blog-hero">
-    <h1 class="blog-hero-title">Stargazer Blog</h1>
-    <p class="blog-hero-desc">Get all the latest news from the Stargazers.</p>
-  </div>
+{isBlogPost && meta ? (
+  <div class="blog-header-meta">
+    {meta.heroImage && (
+      <Image
+        src={meta.heroImage}
+        alt="Blog Hero Image"
+        class="hero-image"
+      />
+    )}
 
-  <div class="blog-list">
-    {sorted.map((post) => (
-      <a href={`/blog/${post.id}`} class="post-card">
-        <p class="post-meta">
-			<FormattedDate date={post.data.pubDate} />
-        </p>
-		{post.data.heroImage && (
-          <Image
-            src={post.data.heroImage}
-            alt={post.data.title}
-            class="post-thumbnail"
-          />
-        )}
-        <div class="post-body">
-          <h2 class="post-title" set:html={post.data.title} />
-          <p class="post-desc" set:html={post.data.description} />
-        </div>
-      </a>
-    ))}
+    {meta.pubDate && (
+      <div class="meta-info">
+        <FormattedDate date={meta.pubDate} />
+      </div>
+    )}
+
+    <Default />
+
+    {meta.author && (
+      <div class="author-info">
+        <span>By</span>
+        <img
+          src={meta.author.avatar}
+          alt={meta.author.name}
+          class="author-avatar"
+        />
+        <span class="author-name">{meta.author.name}</span>
+      </div>
+    )}
   </div>
-</StarlightPage>
+) : (
+  <Default />
+)}
 
 <style>
   @layer starlight.core {
-    .blog-hero {
-      text-align: center;
-      padding: 3rem 1rem 2.5rem;
+    .blog-header-meta {
       margin-bottom: 2rem;
-      border-bottom: 0.5px solid var(--sl-color-gray-5);
-      position: relative;
     }
 
-    .blog-hero-title {
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 600;
-      line-height: 1.15;
-      color: var(--sl-color-white);
-      margin: 0 0 0.75rem;
-    }
-
-    .blog-hero-desc {
-      font-size: var(--sl-text-base);
-      color: var(--sl-color-gray-2);
-      max-width: 40ch;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-
-    .blog-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .post-card {
-      display: flex;
-      flex-direction: column;
-      border: 0.5px solid var(--sl-color-hairline);
-      background-color: var(--sl-color-gray-6);
-      border-radius: 0.5rem;
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-      transition: transform 0.2s ease;
-    }
-
-    .post-card:hover {
-      transform: translateY(-2px);
-    }
-
-    .post-thumbnail {
+    .hero-image {
       width: 100%;
-      height: 200px;
+      height: auto;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .meta-info {
+      font-size: var(--sl-text-sm);
+      color: var(--sl-color-gray-3);
+      margin-bottom: 0.75rem;
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      font-size: var(--sl-text-sm);
+    }
+
+    .author-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
       object-fit: cover;
     }
 
-    .post-body {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      padding: 1rem;
-    }
-
-    .post-meta {
-      font-size: var(--sl-text-xs);
-      color: var(--sl-color-gray-3);
-      padding: 1rem;
-    }
-
-    .post-title {
-      font-size: var(--sl-text-h4);
-      font-weight: 500;
-      color: var(--sl-color-white);
-    }
-
-    .post-desc {
-      font-size: var(--sl-text-sm);
+    .author-name {
       color: var(--sl-color-gray-2);
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    @media (min-width: 50rem) {
-      .post-card {
-        flex-direction: row;
-      }
+      font-weight: 500;
     }
   }
 </style>
