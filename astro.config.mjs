@@ -53,11 +53,6 @@ export default defineConfig({
 				DraftContentNotice: './src/components/FallbackContentNotice.astro',
 				FallbackContentNotice: './src/components/FallbackContentNotice.astro',
 				Head: './src/components/Head.astro',
-     Hero: './src/components/Hero.astro',
-     MarkdownContent: './src/components/MarkdownContent.astro',
-     PageSidebar: './src/components/PageSidebar.astro',
-				PageTitle: './src/components/PageTitle.astro',
-     Sidebar: './src/components/Sidebar.astro',
 				SiteTitle: './src/components/SiteTitle.astro',
 				
 			},
