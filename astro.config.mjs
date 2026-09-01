@@ -56,6 +56,7 @@ export default defineConfig({
      Hero: './src/components/Hero.astro',
 				PageTitle: './src/components/PageTitle.astro',
 				SiteTitle: './src/components/SiteTitle.astro',
+     TwoColumnContent: './src/components/TwoColumnContent.astro',
 				
 			},
 			social: [
