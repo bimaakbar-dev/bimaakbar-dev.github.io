@@ -43,5 +43,6 @@
   "pagefind.search_suggestion": "Tidak ada hasil untuk [SEARCH_TERM]. Coba salah satu pencarian berikut:",
   "pagefind.searching": "Mencari [SEARCH_TERM]...",
 
-  "component.preview": "Pratinjau"
+  "component.preview": "Pratinjau",
+  "component.blogPostAuthor": "Oleh"
 }
