@@ -1,0 +1,97 @@
+---
+import Default from '@astrojs/starlight/components/Hero.astro';
+
+const { data } = Astro.locals.starlightRoute.entry;
+const { title = data.title, tagline } = data.hero || {};
+
+const pathname = Astro.url.pathname;
+const isBlogIndex = pathname === '/blog/' || pathname === '/blog';
+---
+
+{isBlogIndex ? (
+  <div class="blog-hero">
+    <svg class="noise" xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+      <filter id="noise-filter">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.65"
+          numOctaves="3"
+          stitchTiles="stitch"
+        />
+        <feColorMatrix type="saturate" values="0" />
+        <feBlend in="SourceGraphic" mode="overlay" result="blend" />
+        <feComposite in="blend" in2="SourceGraphic" operator="in" />
+      </filter>
+    </svg>
+
+    <div class="blog-hero-content">
+      <p class="blog-hero-title" id="_top" data-page-title set:html={title} />
+      {tagline && <div class="blog-hero-tagline" set:html={tagline} />}
+    </div>
+  </div>
+) : (
+  <Default />
+)}
+
+<style>
+  @layer starlight.core {
+    .noise {
+      position: absolute;
+      width: 0;
+      height: 0;
+    }
+
+    .blog-hero {
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      border-bottom: 0.5px solid var(--sl-color-hairline);
+
+      background:
+        radial-gradient(
+          ellipse 80% 60% at 50% 120%,
+          color-mix(in srgb, var(--sl-color-accent) 30%, transparent),
+          transparent 70%
+        ),
+        radial-gradient(
+          ellipse 50% 40% at 80% 0%,
+          color-mix(in srgb, var(--sl-color-accent-high) 15%, transparent),
+          transparent 60%
+        ),
+        var(--sl-color-bg);
+    }
+
+    .blog-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      filter: url(#noise-filter);
+      opacity: 0.08;
+      background: var(--sl-color-white);
+      pointer-events: none;
+    }
+
+    .blog-hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding-block: clamp(2.5rem, calc(1rem + 10vmin), 6rem);
+      padding-inline: 1rem;
+    }
+
+    .blog-hero-title {
+      font-size: clamp(var(--sl-text-3xl), calc(0.25rem + 5vw), var(--sl-text-6xl));
+      line-height: var(--sl-line-height-headings);
+      font-weight: 600;
+      color: var(--sl-color-white);
+      margin: 0 0 0.75rem;
+    }
+
+    .blog-hero-tagline {
+      font-size: clamp(var(--sl-text-base), calc(0.0625rem + 2vw), var(--sl-text-xl));
+      color: var(--sl-color-gray-2);
+      max-width: 45ch;
+      margin-inline: auto;
+    }
+  }
+</style>
