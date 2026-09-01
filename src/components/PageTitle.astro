@@ -3,20 +3,26 @@ import Default from '@astrojs/starlight/components/PageTitle.astro';
 import { Image } from 'astro:assets';
 import FormattedDate from '~/components/FormattedDate.astro';
 
-const PAGE_TITLE_ID = '_top';
-
 const isBlogPost =
   Astro.url.pathname.startsWith('/blog/') &&
   Astro.url.pathname !== '/blog/';
 
-const meta = Astro.locals.blogMeta;
+const { entry } = Astro.locals.starlightRoute;
+const { title, heroImage, pubDate, author } = entry.data;
+
+const DEFAULT_AUTHOR = {
+  name: 'c0desk1',
+  avatar: 'https://avatars.githubusercontent.com/u/81931118?v=4',
+};
+
+const resolvedAuthor = author ?? DEFAULT_AUTHOR;
 ---
 
-{isBlogPost && meta ? (
+{isBlogPost ? (
   <div class="blog-header-meta">
-    {meta.heroImage && (
+    {heroImage && (
       <Image
-        src={meta.heroImage}
+        src={heroImage}
         alt="Blog Hero Image"
         width={1020}
         height={510}
@@ -24,27 +30,25 @@ const meta = Astro.locals.blogMeta;
       />
     )}
 
-    {meta.pubDate && (
+    {pubDate && (
       <div class="date">
-        <FormattedDate date={meta.pubDate} />
+        <FormattedDate date={pubDate} />
       </div>
     )}
 
-    <h1 id={PAGE_TITLE_ID}>{Astro.locals.starlightRoute.entry.data.title}</h1>
+    <h1 id="_top">{title}</h1>
 
-    {meta.author && (
-      <div class="sl-flex author">
-        <span>{Astro.locals.t('component.blogPostAuthor')}</span>
-        <img
-          src={meta.author.avatar}
-          alt={meta.author.name}
-          width={24}
-          height={24}
-          class="avatar"
-        />
-        <span set:html={meta.author.name} />
-      </div>
-    )}
+    <div class="sl-flex author">
+      <span>{Astro.locals.t('component.blogPostAuthor')}</span>
+      <img
+        src={resolvedAuthor.avatar}
+        alt={resolvedAuthor.name}
+        width={24}
+        height={24}
+        class="avatar"
+      />
+      <span>{resolvedAuthor.name}</span>
+    </div>
   </div>
 ) : (
   <Default />
