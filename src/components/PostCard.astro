@@ -1,7 +1,7 @@
 ---
-import FormattedDate from './FormattedDate.astro';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
 
 const allPosts = await getCollection('docs');
 
@@ -18,7 +18,7 @@ const blogPosts = allPosts
     return (
       <article class="relative border border-(--sl-color-gray-5) bg-(--sl-color-gray-6) p-4 outline-(--sl-color-purple) transition-transform duration-300 ease-out focus-within:outline hover:scale-[1.03]">
         <header>
-          <FormattedDate class="font-mono text-(--sl-color-gray-2)" date={pubDate} />
+          <FormattedDate class="post-card-date" date={pubDate} />
         </header>
         <div class="-mx-4">
           {heroImage && (
@@ -37,6 +37,11 @@ const blogPosts = allPosts
 }
 
 <style>
+  .post-card-date {
+  	font-family: var(--__sl-font-mono);
+      color: var(--sl-color-gray-2);
+   }
+   
   .post-card-title {
     font-size: var(--sl-text-h4);
     font-weight: 600;
