@@ -29,7 +29,7 @@ const relatedPosts = allPosts
     <h2 class="text-(--sl-text-h3) font-semibold mb-6 text-(--sl-color-white)">Related Posts</h2>    
     <div class="my-6 grid gap-8 grid-cols-[repeat(auto-fit,minmax(min(100%,18rem),1fr))]">
       {relatedPosts.map((post) => (
-        <article class="panel relative flex min-w-0 flex-col text-(--sl-color-gray-2) relative outline-(--sl-color-purple) transition-transform duration-300 ease-out focus-within:outline hover:scale-[1.03]">
+        <article class="relative flex min-w-0 flex-col bg-(--sl-color-gray-6) text-(--sl-color-gray-2) relative outline-(--sl-color-purple) transition-transform duration-300 ease-out focus-within:outline hover:scale-[1.03]">
           {post.data.heroImage && (
 			<Image 
 				src={post.data.heroImage} 
@@ -41,9 +41,7 @@ const relatedPosts = allPosts
             />
           )}
           <div class="px-4 py-6 flex flex-col gap-4">
-            <h3 class="text-pretty text-(--sl-text-h4) md:text-(--sl-text-h3) no-underline outline-none after:absolute after:inset-0">
-              <a href={`/${post.slug}`}>{post.data.title}</a>
-            </h3>
+            <a href={`/blog/${post.slug/}`} class="text-pretty text-(--sl-text-h4) md:text-(--sl-text-h3) no-underline outline-none after:absolute after:inset-0">{post.data.title}</a>
             {post.data.description && (
               <p class="text-(--sl-color-gray-3) line-clamp-3 m-0">
                 {post.data.description}
@@ -55,32 +53,3 @@ const relatedPosts = allPosts
     </div>
   </nav>
 )}
-
-<style>
-  .post-card {
-    text-decoration: none !important;
-    background-color: var(--sl-color-bg-nav);
-  }
-  
-  .post-card:hover {
-    border-color: var(--sl-color-accent);
-  }
-  
-  .post-card:hover h3 {
-    color: var(--sl-color-accent);
-  }
-
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  
-  .line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-</style>
