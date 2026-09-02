@@ -18,7 +18,7 @@ const blogPosts = allPosts
     return (
       <article class="relative border border-(--sl-color-gray-5) bg-(--sl-color-gray-6) p-4 outline-(--sl-color-purple) transition-transform duration-300 ease-out focus-within:outline hover:scale-[1.03]">
         <header>
-          <FormattedDate date={pubDate} />
+          <FormattedDate class="font-mono text-(--sl-color-gray-2)" date={pubDate} />
         </header>
         <div class="-mx-4">
           {heroImage && (
