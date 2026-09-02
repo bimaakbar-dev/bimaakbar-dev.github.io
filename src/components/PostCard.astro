@@ -16,7 +16,7 @@ const blogPosts = allPosts
     const { data } = post;
     const { title, description, pubDate, heroImage } = data;
     return (
-      <article class="relative border border-(--sl-color-gray-5) bg-(--sl-color-gray-6) p-4 outline-(--sl-color-purple) transition-transform duration-300 ease-out focus-within:outline hover:scale-[1.03]">
+      <article class="relative flex flex-col h-full border border-(--sl-color-gray-5) bg-(--sl-color-gray-6) p-4 outline-(--sl-color-purple) transition-transform duration-300 ease-out focus-within:outline hover:scale-[1.03]">
         <header>
           <FormattedDate class="post-card-date" date={pubDate} />
         </header>
@@ -25,7 +25,7 @@ const blogPosts = allPosts
             <Image width={766} height={328} src={heroImage} class="my-4 w-full h-auto" alt={title} loading="lazy" decoding="async" />
           )}
         </div>
-        <div class="mt-6 grid gap-x-16 gap-y-4 md:grid-cols-2">
+        <div class="grid flex-1 mt-6 gap-x-16 gap-y-4 md:grid-cols-2">
           <h3 class="post-card-title">
             <a href={`/${post.id}/`} class="outline-none after:absolute after:inset-0">{title}</a>
           </h3>
