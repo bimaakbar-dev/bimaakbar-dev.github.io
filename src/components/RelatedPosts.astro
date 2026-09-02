@@ -24,38 +24,36 @@ const relatedPosts = allPosts
 ---
 
 {relatedPosts.length > 0 && (
-  <section class="related-posts mt-12 border-t border-(--sl-color-gray-5) pt-8">
-    <h2 class="text-2xl font-bold mb-6 text-(--sl-color-white)">Related Posts</h2>
-    
+  <hr class="-mx-16 basis-[calc(100%+8rem)] border-(--sl-color-gray-5)" />
+  <nav class="related-posts mt-12" aria-labelledby="_related-posts">
+    <h2 class="text-(--sl-text-h3) font-semibold mb-6 text-(--sl-color-white)">Related Posts</h2>    
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {relatedPosts.map((post) => (
-        <a href={`/${post.slug}`} class="post-card block border border-(--sl-color-gray-5) rounded-lg overflow-hidden transition-colors no-underline">
+        <article class="panel relative flex min-w-0 flex-col text-(--sl-color-gray-2) relative outline-(--sl-color-purple) transition-transform duration-300 ease-out focus-within:outline hover:scale-[1.03]">
           {post.data.heroImage && (
-            <div class="aspect-video w-full overflow-hidden bg-(--sl-color-gray-6)">
-              <Image 
-                src={post.data.heroImage} 
+			<Image 
+				src={post.data.heroImage} 
                 alt={post.data.title} 
-                width={400} 
-                height={225} 
-                class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-              />
-            </div>
+                width={1000} 
+                height={429}
+                loading="lazy"
+                decoding="async"
+            />
           )}
-          
-          <div class="p-4">
-            <h3 class="text-lg font-semibold text-(--sl-color-white) mb-2 line-clamp-2">
-              {post.data.title}
+          <div class="px-4 py-6 flex flex-col gap-4">
+            <h3 class="text-pretty text-(--sl-text-h4) md:text-(--sl-text-h3) no-underline outline-none after:absolute after:inset-0">
+              <a href={`/${post.slug}`}>{post.data.title}</a>
             </h3>
             {post.data.description && (
-              <p class="text-sm text-(--sl-color-gray-3) line-clamp-3 m-0">
+              <p class="text-(--sl-color-gray-3) line-clamp-3 m-0">
                 {post.data.description}
               </p>
             )}
           </div>
-        </a>
+        </article>
       ))}
     </div>
-  </section>
+  </nav>
 )}
 
 <style>
