@@ -25,9 +25,9 @@ const relatedPosts = allPosts
 
 {relatedPosts.length > 0 && (
   <hr class="-mx-16 basis-[calc(100%+8rem)] border-(--sl-color-gray-5)" />
-  <nav class="related-posts mt-12" aria-labelledby="_related-posts">
+  <nav aria-labelledby="_related-posts">
     <h2 class="text-(--sl-text-h3) font-semibold mb-6 text-(--sl-color-white)">Related Posts</h2>    
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="my-6 grid gap-8 grid-cols-[repeat(auto-fit,minmax(min(100%,18rem),1fr))]">
       {relatedPosts.map((post) => (
         <article class="panel relative flex min-w-0 flex-col text-(--sl-color-gray-2) relative outline-(--sl-color-purple) transition-transform duration-300 ease-out focus-within:outline hover:scale-[1.03]">
           {post.data.heroImage && (
