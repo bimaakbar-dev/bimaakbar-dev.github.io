@@ -17,8 +17,8 @@ const PAGE_TITLE_ID = '_top';
 {isBlogIndex ? (
   <div class="blog-index-wrapper">
     <div class="blog-index-hero">
-      <h1 id={PAGE_TITLE_ID}>{hero?.title || title}</h1>
-      {hero?.tagline && <p class="tagline">{hero.tagline}</p>}
+      <h1 id={PAGE_TITLE_ID} class="blog-index-title">{hero?.title || title}</h1>
+      {hero?.tagline && <p class="blog-index-tagline">{hero.tagline}</p>}
     </div>
   </div>
 ) : isBlogPost ? (
@@ -64,12 +64,10 @@ const PAGE_TITLE_ID = '_top';
     padding: 5rem var(--sl-content-pad-x);
     background-color: var(--sl-color-bg);
     background-image: 
-      radial-gradient(circle at 50% 50%, rgba(120, 119, 198, 0.15) 0%, transparent 60%),
-      linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+      radial-gradient(circle at 50% 50%, var(--sl-color-accent) 0%, transparent 60%),
+      linear-gradient(to right, var(--sl-color-hairline) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--sl-color-hairline) 1px, transparent 1px);
     background-size: 100% 100%, 40px 40px, 40px 40px;
-    border-bottom: 1px solid var(--sl-color-gray-5);
-    margin-bottom: 3rem;
   }
 
   .blog-index-hero {
@@ -78,7 +76,7 @@ const PAGE_TITLE_ID = '_top';
     margin: 0 auto;
   }
 
-  .blog-index-hero h1 {
+  .blog-index-hero .blog-index-title{
     font-size: var(--sl-color-h1);
     font-weight: 600;
     line-height: var(--sl-line-height-headings);
@@ -86,7 +84,7 @@ const PAGE_TITLE_ID = '_top';
     margin-bottom: 1rem;
   }
 
-  .blog-index-hero .tagline {
+  .blog-index-hero .blog-index-tagline {
     font-size: var(--sl-text-lg);
     color: var(--sl-color-gray-3);
     line-height: var(--sl-line-height);
@@ -112,6 +110,10 @@ const PAGE_TITLE_ID = '_top';
   @media (min-width: 50rem) {
     .post-title {
       font-size: var(--sl-text-h2);
+    }
+    
+    .blog-index-hero .blog-index-title {
+      font-size: var(--sl-text-h1)
     }
   }
 </style>
