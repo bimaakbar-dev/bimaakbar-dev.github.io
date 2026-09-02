@@ -10,26 +10,56 @@ const blogPosts = allPosts
     post.data.pubDate !== undefined
   )
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  
+const $ = {
+  card: [
+    'relative flex flex-col h-full',
+    'p-4',
+    'border',
+    'bg-(--sl-color-gray-6) border-(--sl-color-gray-5) outline-(--sl-color-purple)',
+    'hover:scale-[1.03]',
+    'focus-within:outline',
+    'transition-transform duration-300 ease-out',
+  ].join(' '),
+  cardHeader: 'post-card-date',
+  cardDate: 'post-card-date text-(--sl-color-gray-2)',
+  cardCover: '-mx-4 my-4',
+  cardImage: [
+    'size-full object-cover',
+  ].join(' '),
+  cardContent: [
+    'grid md:grid-cols-2',
+    'flex-1',
+    'mt-auto gap-x-16 gap-y-8'
+  ].join(' '),
+  cardContentTitle: 'post-card-title text-(--sl-color-text)',
+  cardTitle: [
+    'outline-none',
+    'after:absolute after:inset-0',
+  ].join(' '),
+  cardDesc: 'post-card-description text-(--sl-color-gray-2)',
+};
+  
 ---
 
 { blogPosts.map((post) => {
     const { data } = post;
     const { title, description, pubDate, heroImage } = data;
     return (
-      <article class="relative flex flex-col h-full border border-(--sl-color-gray-5) bg-(--sl-color-gray-6) p-4 outline-(--sl-color-purple) transition-transform duration-300 ease-out focus-within:outline hover:scale-[1.03]">
+      <article class={$.card}>
         <header>
-          <FormattedDate class="post-card-date" date={pubDate} />
+          <FormattedDate class={$.cardDate} date={pubDate} />
         </header>
-        <div class="-mx-4">
+        <div class={$.cardCover}>
           {heroImage && (
-            <Image width={766} height={328} src={heroImage} class="my-4 w-full h-auto" alt={title} loading="lazy" decoding="async" />
+            <Image width={766} height={328} src={heroImage} class={$.cardImage} alt={title} loading="lazy" decoding="async" />
           )}
         </div>
-        <div class="grid flex-1 mt-6 gap-x-16 gap-y-4 md:grid-cols-2">
-          <h3 class="post-card-title">
-            <a href={`/${post.id}/`} class="outline-none after:absolute after:inset-0">{title}</a>
+        <div class={$.cardContent}>
+          <h3 class={$.cardContentTitle}>
+            <a href={`/${post.id}/`} class={$.cardTitle}>{title}</a>
           </h3>
-          {description && <p class="post-card-description">{description}</p>}
+          {description && <p class={$.cardDesc}>{description}</p>}
         </div>
       </article>
     );
@@ -39,14 +69,12 @@ const blogPosts = allPosts
 <style>
   .post-card-date {
   	font-family: var(--__sl-font-mono);
-      color: var(--sl-color-gray-2);
    }
    
   .post-card-title {
     font-size: var(--sl-text-h4);
     font-weight: 600;
     line-height: var(--sl-line-height-headings);
-    color: var(--sl-color-text);
     text-align: start;
   }
   
@@ -57,7 +85,6 @@ const blogPosts = allPosts
 
   .post-card-description {
     font-size: var(--sl-text-body);
-    color: var(--sl-color-gray-2);
     line-height: var(--sl-line-height);
     text-align: start;
     margin: 0;
