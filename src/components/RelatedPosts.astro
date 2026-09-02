@@ -24,32 +24,36 @@ const relatedPosts = allPosts
 ---
 
 {relatedPosts.length > 0 && (
-  <hr class="-mx-16 basis-[calc(100%+8rem)] border-(--sl-color-gray-5)" />
-  <nav aria-labelledby="_related-posts">
-    <h2 class="text-(--sl-text-h3) font-semibold mb-6 text-(--sl-color-white)">Related Posts</h2>    
-    <div class="my-6 grid gap-8 grid-cols-[repeat(auto-fit,minmax(min(100%,18rem),1fr))]">
-      {relatedPosts.map((post) => (
-        <article class="relative flex min-w-0 flex-col bg-(--sl-color-gray-6) text-(--sl-color-gray-2) relative outline-(--sl-color-purple) transition-transform duration-300 ease-out focus-within:outline hover:scale-[1.03]">
-          {post.data.heroImage && (
-			<Image 
-				src={post.data.heroImage} 
+  <>
+    <hr class="w-full border-t border-(--sl-color-gray-5) my-10" />
+    
+    <nav aria-labelledby="_related-posts">
+      <h2 class="text-(--sl-text-h3) font-semibold mb-6 text-(--sl-color-white)">Related Posts</h2>    
+      <div class="my-6 grid gap-8 grid-cols-[repeat(auto-fit,minmax(min(100%,18rem),1fr))]">
+        {relatedPosts.map((post) => (
+          <article class="relative flex min-w-0 flex-col bg-(--sl-color-gray-6) text-(--sl-color-gray-2) outline-(--sl-color-purple) transition-transform duration-300 ease-out focus-within:outline hover:scale-[1.03] overflow-hidden shadow-sm">
+            {post.data.heroImage && (
+              <Image 
+                src={post.data.heroImage} 
                 alt={post.data.title} 
                 width={1000} 
                 height={429}
                 loading="lazy"
                 decoding="async"
-            />
-          )}
-          <div class="px-4 py-6 flex flex-col gap-4">
-            <a href={`/blog/${post.slug/}`} class="text-pretty text-(--sl-text-h4) md:text-(--sl-text-h3) no-underline outline-none after:absolute after:inset-0">{post.data.title}</a>
-            {post.data.description && (
-              <p class="text-(--sl-color-gray-3) line-clamp-3 m-0">
-                {post.data.description}
-              </p>
+                class="w-full h-48 object-cover" 
+              />
             )}
-          </div>
-        </article>
-      ))}
-    </div>
-  </nav>
+            <div class="px-4 py-6 flex flex-col gap-4">
+              <a href={`/blog/${post.slug}/`} class="text-pretty text-(--sl-text-h4) md:text-(--sl-text-h3) no-underline outline-none after:absolute after:inset-0">{post.data.title}</a>
+              {post.data.description && (
+                <p class="text-(--sl-color-gray-3) line-clamp-3 m-0">
+                  {post.data.description}
+                </p>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </nav>
+  </>
 )}
