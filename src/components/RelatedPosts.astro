@@ -25,7 +25,7 @@ const relatedPosts = allPosts
 
 {relatedPosts.length > 0 && (
   <>
-    <hr class="w-full border-t border-(--sl-color-gray-5) my-10" />
+    <hr class="w-full -mx-16 basis-[calc(100%+8rem)] border-(--sl-color-gray-5)" />
     
     <nav aria-labelledby="_related-posts">
       <h2 class="text-(--sl-text-h3) font-semibold mb-6 text-(--sl-color-white)">Related Posts</h2>    
@@ -43,8 +43,8 @@ const relatedPosts = allPosts
                 class="w-full h-48 object-cover" 
               />
             )}
-            <div class="px-4 py-6 flex flex-col gap-4">
-              <a href={`/blog/${post.slug}/`} class="text-pretty text-(--sl-text-h4) md:text-(--sl-text-h3) no-underline outline-none after:absolute after:inset-0">{post.data.title}</a>
+            <div class="related-card-content px-4 py-6 flex flex-col gap-4">
+              <a href={`/blog/${post.slug}/`} class="text-pretty text-(--sl-text-h4) md:text-(--sl-text-h3) outline-none after:absolute after:inset-0">{post.data.title}</a>
               {post.data.description && (
                 <p class="text-(--sl-color-gray-3) line-clamp-3 m-0">
                   {post.data.description}
@@ -57,3 +57,17 @@ const relatedPosts = allPosts
     </nav>
   </>
 )}
+
+<style>
+  .related-card-content a {
+	line-height: var(--sl-line-height-headings);
+	color: var(--sl-color-text);
+	text-decoration: none;
+	-webkit-tap-highlight-color: transparent;
+  }
+  
+  .related-card-content p {
+  	line-height: var(--sl-line-height);
+  	margin: 0;
+  }
+</style>
