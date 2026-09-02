@@ -21,6 +21,31 @@ const relatedPosts = allPosts
     return dateB - dateA;
   })
   .slice(0, limit);
+const $ = {
+  card: [
+    'relative flex flex-col h-full',
+    'border',
+    'bg-(--sl-color-gray-6) border-(--sl-color-hairline) text-(--sl-color-gray-2) outline-(--sl-color-purple)',
+    'hover:scale-[1.03]',
+	'focus-within:outline'
+    'transition-transform duration-300 ease-out',
+  ].join(' '),
+  cardImage: 'w-full h-48 object-cover',
+  cardContent: [
+    'related-card-content',
+    'flex flex-col',
+    'flex-1 gap-4 px-4 py-6',
+  ].join(' '),
+  cardTitle: [
+    'text-(--sl-text-h4) md:text-(--sl-text-h3)',
+    'text-pretty outline-none',
+    'after:absolute after:inset-0'
+  ].join(' '),
+  cardDesc: [
+    'mt-auto',
+    'text-(--sl-color-gray-3)',
+  ].join(' '),
+}; 
 ---
 
 {relatedPosts.length > 0 && (
@@ -29,7 +54,7 @@ const relatedPosts = allPosts
       <h2 class="text-(--sl-text-h3) font-semibold mb-6 text-(--sl-color-white)">Related Posts</h2>    
       <div class="my-6 grid gap-8 grid-cols-[repeat(auto-fit,minmax(min(100%,18rem),1fr))]">
         {relatedPosts.map((post) => (
-          <article class="relative flex min-w-0 h-full flex-col bg-(--sl-color-gray-6) border border-(--sl-color-hairline) text-(--sl-color-gray-2) outline-(--sl-color-purple) transition-transform duration-300 ease-out focus-within:outline hover:scale-[1.03] overflow-hidden shadow-sm">
+          <article class={$.card}>
             {post.data.heroImage && (
               <Image 
                 src={post.data.heroImage} 
@@ -38,13 +63,13 @@ const relatedPosts = allPosts
                 height={429}
                 loading="lazy"
                 decoding="async"
-                class="w-full h-48 object-cover" 
+                class={$.cardImage}
               />
             )}
-            <div class="related-card-content px-4 py-6 flex flex-col flex-1 gap-4">
-              <a href={`/${post.id}/`} class="text-pretty text-(--sl-text-h4) md:text-(--sl-text-h3) outline-none after:absolute after:inset-0">{post.data.title}</a>
+            <div class={$.cardContent}>
+              <a href={`/${post.id}/`} class={$.cardTitle}>{post.data.title}</a>
               {post.data.description && (
-                <p class="text-(--sl-color-gray-3)">
+                <p class={$.cardDesc}>
                   {post.data.description}
                 </p>
               )}
