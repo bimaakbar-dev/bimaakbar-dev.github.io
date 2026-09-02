@@ -34,9 +34,9 @@ const { Content } = await render(entry);
 
 	<Content />
 
-  <hr class="w-full -mx-16 basis-[calc(100%+8rem)] border-(--sl-color-gray-5) mx-auto" />
+  <hr class="w-screen -mx-16 basis-[calc(100%+8rem)] border-(--sl-color-gray-5) mx-auto my-6" />
 
-	<div class="max-w-[50rem] mx-auto mt-12">
+	<div class="max-w-[50rem] mx-auto my-6">
     	<RelatedPosts currentSlug={entry.slug || entry.id} />
 	</div>
 </StarlightPage>
