@@ -14,7 +14,7 @@ const allPosts = await getCollection('docs', ({ id, data }) => {
 });
 
 const relatedPosts = allPosts
-  .filter((post) => post.slug !== currentSlug)
+  .filter((post) => post.slug !== currentSlug && post.id !== currentSlug)
   .sort((a, b) => {
     const dateA = a.data.pubDate ? new Date(a.data.pubDate).valueOf() : 0;
     const dateB = b.data.pubDate ? new Date(b.data.pubDate).valueOf() : 0;
@@ -42,9 +42,9 @@ const relatedPosts = allPosts
               />
             )}
             <div class="related-card-content px-4 py-6 flex flex-col gap-4">
-              <a href={`/blog/${post.slug}/`} class="text-pretty text-(--sl-text-h4) md:text-(--sl-text-h3) outline-none after:absolute after:inset-0">{post.data.title}</a>
+              <a href={`/${post.id}/`} class="text-pretty text-(--sl-text-h4) md:text-(--sl-text-h3) outline-none after:absolute after:inset-0">{post.data.title}</a>
               {post.data.description && (
-                <p class="text-(--sl-color-gray-3) line-clamp-3 m-0">
+                <p class="text-(--sl-color-gray-3)">
                   {post.data.description}
                 </p>
               )}
