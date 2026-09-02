@@ -32,13 +32,14 @@ const { Content } = await render(entry);
   }
 }}>
 
-	<Content />
+  <Content />
+  
+  <hr class="w-full max-w-[64rem] border-(--sl-color-gray-5) my-8" />
 
-  <hr class="w-screen -mx-16 basis-[calc(100%+8rem)] border-(--sl-color-gray-5) mx-auto my-6" />
+  <div class="max-w-[50rem] mx-auto my-8">    
+    <RelatedPosts currentSlug={entry.id} />
+  </div>
 
-	<div class="max-w-[50rem] mx-auto my-6">
-    	<RelatedPosts currentSlug={entry.slug || entry.id} />
-	</div>
 </StarlightPage>
 
 <style is:global>
