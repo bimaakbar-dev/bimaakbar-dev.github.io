@@ -50,10 +50,9 @@ const $ = {
 ---
 
 {relatedPosts.length > 0 && (
-  <>  
-    <nav aria-labelledby="_related-posts">
-      <h2 class="text-(--sl-text-h3) font-semibold mb-6 text-(--sl-color-white)">Related Posts</h2>    
-      <div class="my-6 grid gap-8 grid-cols-[repeat(auto-fit,minmax(min(100%,18rem),1fr))]">
+  <nav aria-labelledby="_related-posts">
+    <h2 class="related-label font-semibold mb-6 text-(--sl-color-white)">Related Posts</h2>    
+    <div class="my-6 grid gap-8 grid-cols-[repeat(auto-fit,minmax(min(100%,18rem),1fr))]">
         {relatedPosts.map((post) => (
           <article class={$.card}>
             {post.data.heroImage && (
@@ -77,12 +76,15 @@ const $ = {
             </div>
           </article>
         ))}
-      </div>
-    </nav>
-  </>
+    </div>
+  </nav>
 )}
 
 <style>
+  .related-label {
+    font-size: var(--sl-text-h3);
+    line-height: var(--sl-line-height-headings);
+  }
   .related-card-content a {
 	line-height: var(--sl-line-height-headings);
 	color: var(--sl-color-text);
