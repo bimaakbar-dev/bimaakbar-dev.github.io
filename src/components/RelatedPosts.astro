@@ -31,7 +31,7 @@ const relatedPosts = allPosts
       <h2 class="text-(--sl-text-h3) font-semibold mb-6 text-(--sl-color-white)">Related Posts</h2>    
       <div class="my-6 grid gap-8 grid-cols-[repeat(auto-fit,minmax(min(100%,18rem),1fr))]">
         {relatedPosts.map((post) => (
-          <article class="relative flex min-w-0 flex-col bg-(--sl-color-gray-6) text-(--sl-color-gray-2) outline-(--sl-color-purple) transition-transform duration-300 ease-out focus-within:outline hover:scale-[1.03] overflow-hidden shadow-sm">
+          <article class="relative flex min-w-0 flex-col bg-(--sl-color-gray-6) border border-(--sl-color-hairline) text-(--sl-color-gray-2) outline-(--sl-color-purple) transition-transform duration-300 ease-out focus-within:outline hover:scale-[1.03] overflow-hidden shadow-sm">
             {post.data.heroImage && (
               <Image 
                 src={post.data.heroImage} 
