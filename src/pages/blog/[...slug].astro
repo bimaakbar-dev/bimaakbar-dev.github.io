@@ -54,8 +54,8 @@ const { Content } = await render(entry);
   }
 
   .content-panel + .content-panel {
-    border-top: none;
-    max-width: 48rem !important;
+    border-top: 1px solid var(--sl-color-hairline);
+    max-width: 48rem;
     margin-inline: auto;
   }
 
@@ -75,6 +75,8 @@ const { Content } = await render(entry);
 
   .content-panel .sl-container div.meta {
     padding-inline: var(--sl-content-pad-x);
+    max-width: 48rem;
+    width: 100%;
   }
 
   .content-panel .sl-container hr {
