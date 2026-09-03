@@ -45,6 +45,7 @@
 
 .sl-link-card:hover {
 	background: var(--sl-color-gray-6);
+  border-color: var(--sl-color-accent-high);
 }
 
 .sl-link-card:hover .icon {
