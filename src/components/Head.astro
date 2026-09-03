@@ -29,6 +29,10 @@ const isBlogEntry = entry?.id?.startsWith('blog/') || entry?.id?.startsWith(`${l
 const isBlogPath = pathname.startsWith('/blog') || pathname.startsWith(`/${locale}/blog`);
 const isBlogPage = isBlogEntry || isBlogPath;
 ---
+<Font cssVariable="--font-monsterrat" preload />
+<Font cssVariable="--font-inter" preload />
+<Font cssVariable="--font-firaCode" preload />
+
 <Font cssVariable="--font-geist" preload />
 <Font cssVariable="--font-geist-mono" preload />
 
@@ -55,4 +59,3 @@ const isBlogPage = isBlogEntry || isBlogPath;
         <meta name="twitter:image:alt" content={ogImageAlt} />
     </>
 )}
-
