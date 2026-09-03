@@ -20,7 +20,7 @@
     color: var(--sl-color-black);
 }
 .sl-link-button.secondary {
-    border-color: var(--sl-color-hairline);
+    border-color: var(--sl-color-gray-5);
     color: var(--sl-color-white);
 }
 .sl-link-button.minimal {
@@ -35,7 +35,7 @@
 @media (min-width: 50rem) {
     .sl-link-button {
         font-size: var(--sl-text-base);
-        /* padding: 0.9375rem 1.25rem; */
+        padding: 0.5rem 1.125rem;
     }
 }
 
