@@ -21,14 +21,14 @@ export default defineConfig({
     fonts: [
     	{
             provider: fontProviders.local(),
-            name: 'Monsterrat',
-            cssVariable: '--font-monsterrat',
+            name: 'Montserrat',
+            cssVariable: '--font-montserrat',
             options: {
                 variants: [
                     {
                         weight: '100 900',
                         style: 'normal',
-                        src: ['./src/assets/fonts/Monsterrat.woff2'],
+                        src: ['./src/assets/fonts/Montserrat.woff2'],
                     },
                 ],
             },
@@ -40,7 +40,7 @@ export default defineConfig({
             options: {
                 variants: [
                     {
-                        weight: 'normal',
+                        weight: '100 900',
                         style: 'normal',
                         src: ['./src/assets/fonts/Inter.woff2'],
                     },
@@ -95,6 +95,7 @@ export default defineConfig({
         processor: satteri({
             hastPlugins: [
                 satteriExternalLink,
+                // @ts-ignore
                 satteriTable
             ],
         }),
