@@ -1,4 +1,5 @@
 ---
+// src/components/RelatedPosts.astro
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 
@@ -9,25 +10,44 @@ interface Props {
 
 const { currentSlug, limit = 2 } = Astro.props;
 
-const allPosts = await getCollection('docs', ({ id }) => {
-  return (id.startsWith('blog/') || id.startsWith('id/blog'));
-});
+const { locale } = Astro.locals.starlightRoute || {};
+const currentLocale = locale || 'root';
 
-const relatedPosts = allPosts
-  .filter((post) => post.id !== currentSlug)
+const localePrefix = currentLocale === 'root' ? 'blog/' : `${currentLocale}/blog/`;
+
+const allPosts = await getCollection('docs', ({ data }) => !data.draft);
+
+const postsInSameLocale = allPosts.filter(p => p.id.startsWith(localePrefix));
+const currentPost = postsInSameLocale.find((p) => p.id === currentSlug);
+if (!currentPost) return;
+
+const currentTags = currentPost.data.tags || [];
+
+const relatedPosts = postsInSameLocale
+  .filter((p) => p.id !== currentSlug)
+  .filter((p) => {
+    if (currentTags.length === 0) return false;
+    return p.data.tags?.some((tag) => currentTags.includes(tag));
+  })
   .sort((a, b) => {
     const dateA = a.data.pubDate ? new Date(a.data.pubDate).valueOf() : 0;
     const dateB = b.data.pubDate ? new Date(b.data.pubDate).valueOf() : 0;
     return dateB - dateA;
   })
   .slice(0, limit);
+
+const getHref = (post: { id: string }) => {
+  const slug = post.id.replace(/^(id\/)?blog\//, '');
+  return currentLocale === 'root' ? `/blog/${slug}` : `/${currentLocale}/blog/${slug}`;
+};
+
 const $ = {
   card: [
     'relative flex flex-col h-full',
     'border',
     'bg-(--sl-color-gray-6) border-(--sl-color-gray-5) text-(--sl-color-gray-2) outline-(--sl-color-accent-high)',
     'hover:scale-[1.03]',
-	  'focus-within:outline',
+    'focus-within:outline',
     'transition-transform duration-300 ease-out',
   ].join(' '),
   cardImage: 'w-full max-h-48 h-auto object-cover',
@@ -39,45 +59,46 @@ const $ = {
   cardTitle: [
     'text-(--sl-text-h4) md:text-(--sl-text-h3)',
     'text-pretty outline-none',
-    'after:absolute after:inset-0'
+    'after:absolute after:inset-0',
   ].join(' '),
-  cardDesc: [
-    'mt-auto',
-    'text-(--sl-color-gray-3)',
-  ].join(' '),
-}; 
+  cardDesc: ['mt-auto', 'text-(--sl-color-gray-3)'].join(' '),
+};
 ---
 
-{relatedPosts.length > 0 && (
-  <nav aria-labelledby="_related-posts" class="not-content">
-    <h2 class="related-label text-(--sl-color-white)">{Astro.locals.t('blog.relatedPostLabel')}</h2>    
-    <div class="my-6 grid gap-8 grid-cols-[repeat(auto-fill,minmax(min(100%,18rem),1fr))]">
-      {relatedPosts.map((post) => (
-        <article class={$.card}>
-          {post.data.heroImage && (
-            <Image 
-              src={post.data.heroImage} 
-              alt={post.data.title} 
-              width={1000} 
-              height={429}
-              loading="lazy"
-              decoding="async"
-              class={$.cardImage}
-            />
-          )}
-          <div class={$.cardContent}>
-            <a href={`/${post.id}/`} class={$.cardTitle}>{post.data.title}</a>
-            {post.data.description && (
-              <p class={$.cardDesc}>
-                {post.data.description}
-              </p>
+{
+  relatedPosts.length > 0 && (
+    <nav aria-labelledby="_related-posts" class="not-content">
+      <h2 class="related-label text-(--sl-color-white)">
+        {Astro.locals.t('blog.relatedPostLabel')}
+      </h2>
+      <div class="my-6 grid gap-8 grid-cols-[repeat(auto-fill,minmax(min(100%,18rem),1fr))]">
+        {relatedPosts.map((post) => (
+          <article class={$.card}>
+            {post.data.heroImage && (
+              <Image
+                src={post.data.heroImage}
+                alt={post.data.title}
+                width={1000}
+                height={429}
+                loading="lazy"
+                decoding="async"
+                class={$.cardImage}
+              />
             )}
-          </div>
-        </article>
-      ))}
-    </div>
-  </nav>
-)}
+            <div class={$.cardContent}>
+              <a href={getHref(post)} class={$.cardTitle}>
+                {post.data.title}
+              </a>
+              {post.data.description && (
+                <p class={$.cardDesc}>{post.data.description}</p>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </nav>
+  )
+}
 
 <style>
   .related-label {
@@ -91,9 +112,8 @@ const $ = {
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
   }
-  
   .related-card-content p {
-  	line-height: var(--sl-line-height);
-  	margin: 0;
+    line-height: var(--sl-line-height);
+    margin: 0;
   }
 </style>

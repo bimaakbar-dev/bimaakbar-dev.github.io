@@ -1,53 +1,57 @@
 ---
 // src/components/overwrite/MarkdownContent.astro
 import '@astrojs/starlight/style/markdown.css';
-import Default from '@astrojs/starlight/components/MarkdownContent.astro'
+import Default from '@astrojs/starlight/components/MarkdownContent.astro';
 import EditLink from '@astrojs/starlight/components/EditLink.astro';
 import LastUpdated from '@astrojs/starlight/components/LastUpdated.astro';
+import RelatedPosts from '~/components/RelatedPosts.astro';
 
-import RelatedPosts from './RelatedPosts.astro';
+const { locale, entry } = Astro.locals.starlightRoute;
 
-const { entry } = Astro.locals.starlightRoute;
+const currentLocale = locale || 'root';
+const basePath = currentLocale === 'root' ? '/blog' : `/${currentLocale}/blog`;
+const prefix = currentLocale === 'root' ? 'blog/' : `${currentLocale}/blog/`;
 const pathname = Astro.url.pathname;
-
-const isBlogIndex = pathname === '/blog/' || pathname === '/blog' || 
-                    pathname === '/id/blog/' || pathname === '/id/blog';
-const isBlogPost = entry.id?.startsWith('blog/') || entry.id?.startsWith('id/blog/');
+const isBlogIndex = pathname === basePath || pathname === `${basePath}/`;
+const isBlogPost = entry.id?.startsWith(prefix);
 ---
-{ isBlogPost ? (
+
+{
+  isBlogPost ? (
     <>
-        <article class="sl-markdown-content">
-            <slot />
-        </article>
-        <div class="meta sl-flex">
-            <EditLink />
-            <LastUpdated />
-        </div>
-        <hr />
-        <RelatedPosts currentSlug={entry.id} />
+      <article class="sl-markdown-content">
+        <slot />
+      </article>
+      <div class="meta sl-flex">
+        <EditLink />
+        <LastUpdated />
+      </div>
+      <hr />
+      <RelatedPosts currentSlug={entry.id} />
     </>
-) : isBlogIndex ? (
+  ) : isBlogIndex ? (
     <div>
-        <slot />
+      <slot />
     </div>
-) : (
+  ) : (
     <Default>
-        <slot />
+      <slot />
     </Default>
-)}
+  )
+}
 
 <style>
-    .meta {
-        width: 100%;
-		gap: 0.75rem 3rem;
-		justify-content: space-between;
-		flex-wrap: wrap;
-		margin-top: 3rem;
-		font-size: var(--sl-text-sm);
-		color: var(--sl-color-gray-3);
-        padding-inline: var(--sl-content-pad-x);
-	}
-	.meta > :global(p:only-child) {
-		margin-inline-start: auto;
-	}
+  .meta {
+    width: 100%;
+    gap: 0.75rem 3rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+    padding-inline: var(--sl-content-pad-x);
+  }
+  .meta > :global(p:only-child) {
+    margin-inline-start: auto;
+  }
 </style>

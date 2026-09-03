@@ -1,10 +1,16 @@
 ---
+// src/components/PostCard.astro
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import FormattedDate from './FormattedDate.astro';
 
-const allPosts = await getCollection('docs', ({ id }) => {
-  return (id.startsWith('blog/') || id.startsWith('id/blog'));
+const { locale } = Astro.locals.starlightRoute || {};
+
+const currentLocale = locale || 'root';
+const prefix = currentLocale === 'root' ? 'blog/' : `${currentLocale}/blog/`;
+const allPosts = await getCollection('docs', ({ id, data }) => {
+  if (data.draft) return false;
+  return id.startsWith(prefix);
 });
 
 const blogPosts = allPosts
@@ -12,7 +18,7 @@ const blogPosts = allPosts
     post.data.pubDate !== undefined
   )
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-  
+
 const $ = {
   card: [
     'not-content',
@@ -27,27 +33,25 @@ const $ = {
   cardHeader: 'post-card-date',
   cardDate: 'post-card-date text-(--sl-color-gray-2)',
   cardCover: '-mx-4 my-4',
-  cardImage: [
-    'size-full object-cover',
-  ].join(' '),
+  cardImage: ['size-full object-cover'].join(' '),
   cardContent: [
     'grid md:grid-cols-2',
     'flex-1',
-    'mt-auto gap-x-16 gap-y-8'
+    'mt-auto gap-x-16 gap-y-8',
   ].join(' '),
   cardContentTitle: 'post-card-title text-(--sl-color-white)',
-  cardTitle: [
-    'outline-none',
-    'after:absolute after:inset-0',
-  ].join(' '),
+  cardTitle: ['outline-none', 'after:absolute after:inset-0'].join(' '),
   cardDesc: 'post-card-description text-(--sl-color-gray-2)',
 };
-  
 ---
 
-{ blogPosts.map((post) => {
+{
+  blogPosts.map((post) => {
     const { data } = post;
     const { title, description, pubDate, heroImage } = data;
+    const slug = post.id.replace(/^(id\/)?blog\//, '');
+    const href = currentLocale === 'root' ? `/blog/${slug}` : `/${currentLocale}/blog/${slug}`;
+
     return (
       <li class="w-full">
         <article class={$.card}>
@@ -56,12 +60,20 @@ const $ = {
           </header>
           <div class={$.cardCover}>
             {heroImage && (
-              <Image width={766} height={328} src={heroImage} class={$.cardImage} alt={title} loading="eager" decoding="async" />
+              <Image
+                width={766}
+                height={328}
+                src={heroImage}
+                class={$.cardImage}
+                alt={title}
+                loading="eager"
+                decoding="async"
+              />
             )}
           </div>
           <div class={$.cardContent}>
             <h3 class={$.cardContentTitle}>
-              <a href={`/${post.id}/`} class={$.cardTitle}>{title}</a>
+              <a href={href} class={$.cardTitle}>{title}</a>
             </h3>
             {description && <p class={$.cardDesc}>{description}</p>}
           </div>
@@ -73,22 +85,22 @@ const $ = {
 
 <style>
   .post-card-date {
-  	font-family: var(--__sl-font-mono);
-   }
-   
+    font-family: var(--__sl-font-mono);
+  }
+
   .post-card-title {
     font-size: var(--sl-text-h4);
     font-weight: 600;
     line-height: var(--sl-line-height-headings);
     text-align: start;
   }
-  
+
   .post-card-title a {
     font-size: inherit;
     line-height: inherit;
     font-weight: inherit;
     color: var(--sl-color-white);
-  	text-decoration: none;
+    text-decoration: none;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -100,8 +112,8 @@ const $ = {
   }
 
   @media (min-width: 50rem) {
-  	.post-card-title {
+    .post-card-title {
       font-size: var(--sl-text-h3);
     }
-	}
+  }
 </style>

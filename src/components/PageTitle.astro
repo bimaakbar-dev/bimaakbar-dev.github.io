@@ -12,7 +12,11 @@ const {
   author 
 } = entry.data;
 
-const isBlogPost = entry.id.startsWith('blog/') || entry.id.startsWith('id/blog/');
+const { locale } = Astro.locals.starlightRoute || {};
+const currentLocale = locale || 'root';
+
+const prefix = currentLocale === 'root' ? 'blog/' : `${currentLocale}/blog/`;
+const isBlogPost = entry.id.startsWith(prefix);
 ---
 
 {isBlogPost ? (

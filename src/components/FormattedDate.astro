@@ -5,14 +5,14 @@ interface Props {
 }
 
 const { date, class: className } = Astro.props;
+const { lang } = Astro.locals.starlightRoute || {};
 
-const currentLocale = Astro.currentLocale ?? 'en';
-const formatLocale = currentLocale === 'id' ? 'id-ID' : 'en-US';
+const locale = lang || 'en';
 ---
 
 <time class={className} datetime={date.toISOString()}>
     {
-        date.toLocaleDateString(formatLocale, {
+        date.toLocaleDateString(locale, {
             year: 'numeric',
             month: 'short', 
             day: 'numeric',

@@ -1,13 +1,12 @@
 ---
-title: 'First post'
+title: 'Postingan kedua'
 description: 'Lorem ipsum dolor sit amet'
-pubDate: '2022-07-08'
-heroImage: '~/assets/images/blog-placeholder-3.jpg'
+pubDate: 'Jul 15 2022'
+heroImage: '~/assets/images/blog-placeholder-4.jpg'
 author:
   name: Bima Akbar
-  avatar: ~/assets/houston.webp
+  avatar: '~/assets/houston.webp'
 draft: false
-lastUpdated: 2026-09-03
 tags:
   - astro
   - starlight
