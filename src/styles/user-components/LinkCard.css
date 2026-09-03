@@ -8,12 +8,13 @@
 	padding: 1rem;
 	box-shadow: var(--sl-shadow-sm);
 	position: relative;
-	background-color: transparent;
+	background-color: var(--sl-color-gray-6);
 }
 
 .sl-link-card a {
 	text-decoration: none;
 	line-height: var(--sl-line-height-headings);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .sl-link-card a::before {
@@ -40,12 +41,10 @@
 
 .sl-link-card .icon {
 	color: var(--sl-color-gray-3);
-	transition: color 0.15s ease;
 }
 
 .sl-link-card:hover {
 	background: var(--sl-color-gray-6);
-	border-color: var(--sl-color-gray-3);
 }
 
 .sl-link-card:hover .icon {
