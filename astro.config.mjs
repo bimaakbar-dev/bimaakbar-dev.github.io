@@ -21,7 +21,7 @@ export default defineConfig({
     fonts: [
     	{
             provider: fontProviders.local(),
-            name: 'Geist',
+            name: 'Monsterrat',
             cssVariable: '--font-monsterrat',
             options: {
                 variants: [
@@ -35,7 +35,7 @@ export default defineConfig({
         },
         {
             provider: fontProviders.local(),
-            name: 'Geist',
+            name: 'Inter',
             cssVariable: '--font-inter',
             options: {
                 variants: [
@@ -49,7 +49,7 @@ export default defineConfig({
         },
         {
             provider: fontProviders.local(),
-            name: 'Geist',
+            name: 'FiraCode',
             cssVariable: '--font-firaCode',
             options: {
                 variants: [
