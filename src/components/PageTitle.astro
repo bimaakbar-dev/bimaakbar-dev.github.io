@@ -23,7 +23,7 @@ const PAGE_TITLE_ID = '_top';
         <Image width={1500} height={643} src={heroImage} class="min-h-60 h-auto w-full object-cover" alt={title} loading="eager" decoding="async" />
       )}
     </div>
-    <header class="post-header mx-auto w-full text-center bg-(--sl-color-bg) md:z-10 relative p-6">
+    <header class="mx-auto w-full text-center bg-(--sl-color-bg) md:z-10 relative p-6">
       {pubDate && <FormattedDate date={pubDate} class="post-date" />}
       <h1 id={PAGE_TITLE_ID} class="post-title mb-4 mt-2 sm:mb-5 sm:mt-3" set:html={title} />
       {author && (
@@ -52,12 +52,7 @@ const PAGE_TITLE_ID = '_top';
     <Default />
 )}
 
-<style>
-  .post-header {
-    position: relative;
-    z-index: 10;
-  }
-  
+<style>  
   .post-title {
     font-size: var(--sl-text-h3);
     font-weight: 600;
