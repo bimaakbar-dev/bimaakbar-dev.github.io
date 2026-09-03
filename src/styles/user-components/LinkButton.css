@@ -35,7 +35,7 @@
 @media (min-width: 50rem) {
     .sl-link-button {
         font-size: var(--sl-text-base);
-        padding: 0.9375rem 1.25rem;
+        /* padding: 0.9375rem 1.25rem; */
     }
 }
 
