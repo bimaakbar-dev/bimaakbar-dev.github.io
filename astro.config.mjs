@@ -19,6 +19,48 @@ const site = PREVIEW_SITE || 'https://bimaakbar-dev.github.io/';
 export default defineConfig({
     site,
     fonts: [
+    	{
+            provider: fontProviders.local(),
+            name: 'Geist',
+            cssVariable: '--font-monsterrat',
+            options: {
+                variants: [
+                    {
+                        weight: '100 900',
+                        style: 'normal',
+                        src: ['./src/assets/fonts/Monsterrat.woff2'],
+                    },
+                ],
+            },
+        },
+        {
+            provider: fontProviders.local(),
+            name: 'Geist',
+            cssVariable: '--font-inter',
+            options: {
+                variants: [
+                    {
+                        weight: 'normal',
+                        style: 'normal',
+                        src: ['./src/assets/fonts/Inter.woff2'],
+                    },
+                ],
+            },
+        },
+        {
+            provider: fontProviders.local(),
+            name: 'Geist',
+            cssVariable: '--font-firaCode',
+            options: {
+                variants: [
+                    {
+                        weight: 'normal',
+                        style: 'normal',
+                        src: ['./src/assets/fonts/FiraCode.woff2'],
+                    },
+                ],
+            },
+        },
         {
             provider: fontProviders.local(),
             name: 'Geist',
@@ -53,7 +95,6 @@ export default defineConfig({
         processor: satteri({
             hastPlugins: [
                 satteriExternalLink,
-                // @ts-ignore
                 satteriTable
             ],
         }),
