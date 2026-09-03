@@ -94,6 +94,7 @@ export default defineConfig({
                 MarkdownContent: './src/components/MarkdownContent.astro',
                 MobileMenuToggle: './src/components/MobileMenuToggle.astro',
                 PageTitle: './src/components/PageTitle.astro',
+                SkipLink: './src/components/SkipLink.astro'
                 
             },
             social: [
