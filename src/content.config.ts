@@ -24,8 +24,12 @@ export const collections = {
 		schema: i18nSchema({
 			extend: z.object({
 				'component.preview': z.string().optional(),
-				'component.blogPostAuthor': z.string().optional(),
+				'blog.PostAuthor': z.string().optional(),
 				'blog.relatedPostLabel': z.string().optional(),
+				'blog.PopularPostLabel': z.string().optional(),
+				'rss.RssFeedLabel': z.string().optional(),
+				'rss.RssFeedTitle': z.string().optional(),
+				'rss.RssFeedDesc': z.string().optional(),
 			}),
 		}) 
 	})
