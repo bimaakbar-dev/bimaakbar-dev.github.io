@@ -1,4 +1,4 @@
-.top-level > li a.large,
+.top-level > li a,
 .top-level > li .group-label .large {
 	font-size: var(--sl-text-lg);
 	font-weight: 500;
@@ -10,11 +10,10 @@
 	font-weight: 500;
 	background-color: transparent;
 	color: var(--sl-color-white);
-	
 }
 
 .top-level :is(ul ul li) {
-	border-inline-start: 1px solid var(--sl-color-hairline);
+	border-inline-start: 1px solid var(--sl-color-gray-5);
 }
 
 @media (min-width: 50rem) {
