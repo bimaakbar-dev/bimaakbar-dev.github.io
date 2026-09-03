@@ -1,0 +1,356 @@
+---
+title: Writing Elements Showcase
+description: A complete reference page to preview all typography and writing elements in your Starlight theme.
+sidebar:
+  badge:
+    text: New
+    variant: tip
+---
+
+## Headings
+
+# Heading 1
+## Heading 2
+### Heading 3
+#### Heading 4
+##### Heading 5
+###### Heading 6
+
+---
+
+## Paragraphs & Basic Text
+
+This is a regular paragraph. Text flows naturally to fill the container width. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+A second paragraph separated by a blank line. A single line break within the same block does not create a new paragraph — only a blank line does.
+
+**Bold text** uses two asterisks.  
+*Italic text* uses one asterisk.  
+***Bold and italic*** uses three asterisks.  
+~~Strikethrough~~ uses two tildes.  
+`Inline code` uses a backtick.
+
+Combinations: **bold with `code` inside** and *italic with ~~strikethrough~~ inside*.
+
+---
+
+## Links
+
+[Internal link to another page](/docs/getting-started)
+
+[External link to Astro](https://astro.build)
+
+[Link with a title attribute](https://starlight.astro.build "Starlight Documentation")
+
+Bare URL: [https://astro.build](https://astro.build)
+
+Email: [hello@example.com](mailto:hello@example.com)
+
+---
+
+## Blockquotes
+
+> This is a single-line blockquote.
+
+> A blockquote can also be long and span multiple sentences. Lorem ipsum dolor sit amet, consectetur adipiscing elit. This still belongs to the same quote block.
+>
+> A second paragraph inside the same blockquote, separated by a blank line.
+
+> Nested blockquotes:
+>
+> > This is a blockquote inside a blockquote.
+> >
+> > > And this is one level deeper.
+
+> **Blockquote with formatting inside:**
+>
+> - A list item inside a blockquote
+> - A second item
+>
+> `inline code` works here too.
+
+---
+
+## Lists
+
+### Unordered List
+
+- First item
+- Second item
+- Third item
+
+List with sub-items:
+
+- Main item
+  - Sub-item one
+  - Sub-item two
+    - Sub-sub-item
+    - Another sub-sub-item
+  - Sub-item three
+- Another main item
+
+### Ordered List
+
+1. First step
+2. Second step
+3. Third step
+
+Ordered list with sub-items:
+
+1. Item one
+   1. Sub-item 1.1
+   2. Sub-item 1.2
+2. Item two
+   1. Sub-item 2.1
+3. Item three
+
+### Task List
+
+- [x] Completed task
+- [x] This one is done too
+- [ ] Not yet started
+- [ ] Another pending task
+
+### List with Paragraphs
+
+-   An item with a longer paragraph inside it.
+
+    A second paragraph for the same item. It needs 4-space indentation to remain part of this list item.
+
+-   The next item.
+
+    > A blockquote inside a list item.
+
+-   Last item with `inline code` inside it.
+
+---
+
+## Code
+
+### Inline Code
+
+Run `npm run dev` to start the local server. The `NODE_ENV` variable must be set to `production` during build.
+
+### Code Block — No Language
+
+```
+This is a plain code block
+with no syntax highlighting
+third line
+```
+
+### Code Block — With Language
+
+```bash
+npm create astro@latest
+cd my-project
+npm install
+npm run dev
+```
+
+```javascript
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+console.log(greet("World"));
+```
+
+```typescript
+interface Config {
+  title: string;
+  description?: string;
+  lang: string;
+}
+
+const config: Config = {
+  title: "My Site",
+  lang: "en",
+};
+```
+
+```css
+:root {
+  --color-primary: #7c3aed;
+  --color-text: #1e1e2e;
+  --font-body: "Inter", sans-serif;
+}
+
+.container {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+```
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>My Page</title>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+  </body>
+</html>
+```
+
+```json
+{
+  "name": "my-docs",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build"
+  }
+}
+```
+
+### Code Block with Title
+
+```js title="src/utils/format.js"
+export function formatDate(date) {
+  return new Intl.DateTimeFormat("en-US", {
+    dateStyle: "long",
+  }).format(date);
+}
+```
+
+```astro title="src/pages/index.astro"
+---
+const title = "Home";
+---
+
+<h1>{title}</h1>
+```
+
+---
+
+## Tables
+
+Simple table:
+
+| Column One | Column Two | Column Three |
+| ---------- | ---------- | ------------ |
+| Data A     | Data B     | Data C       |
+| Data D     | Data E     | Data F       |
+
+Table with alignment:
+
+| Name          | Type      | Default  |
+| :------------ | :-------: | -------: |
+| `title`       | `string`  | —        |
+| `description` | `string`  | `""`     |
+| `draft`       | `boolean` | `false`  |
+| `pubDate`     | `Date`    | today    |
+
+---
+
+## Images
+
+![Showcase placeholder image](https://placehold.co/800x400/1e1e2e/cdd6f4?text=Showcase+Image)
+
+Image with a title (shown on hover):
+
+![Architecture diagram](https://placehold.co/800x300/1e1e2e/cdd6f4?text=Architecture+Diagram "Astro Starlight system architecture")
+
+---
+
+## Horizontal Rules
+
+Three ways to write a divider — the result is identical:
+
+---
+
+***
+
+___
+
+---
+
+## Footnotes
+
+This sentence has a footnote.[^1]
+
+Footnotes can also be long and multi-paragraph.[^2]
+
+[^1]: Content of the first footnote. Can include **formatting** and `code`.
+
+[^2]: Content of the second, longer footnote.
+
+    A second paragraph within the same footnote, indented with 4 spaces.
+
+---
+
+## Escape Characters
+
+Characters that need a backslash escape to avoid being processed by Markdown:
+
+\* asterisk \* | \_ underscore \_ | \` backtick \` | \\ backslash \\
+
+\# hash | \[ bracket \] | \( paren \) | \{ curly \} | \. period \|
+
+---
+
+## Native HTML
+
+HTML elements that are valid inside Markdown:
+
+Superscript: E = mc<sup>2</sup>, x<sup>n</sup> + y<sup>n</sup> = z<sup>n</sup>
+
+Subscript: H<sub>2</sub>O, CO<sub>2</sub>
+
+Keyboard: press <kbd>Ctrl</kbd> + <kbd>K</kbd> to search, <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> for DevTools.
+
+Highlight: text with a <mark>highlighted section</mark> using the mark tag.
+
+<details>
+<summary>Click to expand</summary>
+
+Content hidden by default. Can contain regular Markdown inside:
+
+- Item one
+- Item two
+
+```js
+console.log("code inside details");
+```
+
+</details>
+
+<details open>
+<summary>Expanded by default</summary>
+
+The `open` attribute makes the content visible without clicking.
+
+</details>
+
+---
+
+## Combined Elements
+
+Blockquote containing various content types:
+
+> **Important note:**
+>
+> Blockquotes can contain almost any other element:
+>
+> 1. An ordered list inside
+> 2. With **formatting** on each item
+>
+> ```bash
+> echo "code inside a blockquote"
+> ```
+>
+> | A | B |
+> |---|---|
+> | 1 | 2 |
+
+List with mixed content:
+
+- **Item with bold text** — followed by a plain explanation.
+- Item with `inline code` and *italic text* on the same line.
+- Item with a link: see the [official documentation](https://starlight.astro.build).
+  - Sub-item with a blockquote:
+    > A short quote inside a sub-item list.

@@ -1,0 +1,22 @@
+---
+// src/components/BlogPage.astro
+
+import PopularPosts from './PopularPosts.astro';
+import RSSFeed from './RSSFeed.astro';
+import PostCard from './PostCard.astro';
+
+const { entry } = Astro.props;
+const excludeCurrentId = entry?.id;
+---
+
+<div class="flex lg:flex-row flex-col-reverse flex-1">
+  <aside class="min-w-[16rem] border-(--sl-color-hairline-shade) lg:max-w-xs lg:border-r xl:max-w-sm border-t lg:border-t-0 py-6">
+    <PopularPosts limit={5} excludeCurrent={excludeCurrentId} />
+    <RSSFeed />
+  </aside>
+  <section class="mx-auto max-w-4xl p-6 lg:p-12">
+    <ul class="flex flex-col flex-1 items-center gap-y-4 md:gap-y-6 lg:gap-y-8 list-none p-0 m-0">
+      <PostCard />
+    </ul>
+  </section>
+</div>
