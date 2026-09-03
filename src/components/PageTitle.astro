@@ -28,7 +28,7 @@ const PAGE_TITLE_ID = '_top';
       <h1 id={PAGE_TITLE_ID} class="post-title mb-4 mt-2 sm:mb-5 sm:mt-3" set:html={title} />
       {author && (
         <div class="post-author flex flex-wrap items-center justify-center gap-x-4 text-(--sl-color-gray-2) md:gap-y-4">
-          <span>{Astro.locals.t('component.blogPostAuthor')}</span>
+          <span>{Astro.locals.t('blog.PostAuthor')}</span>
           <div class="flex items-center gap-2">
             { author.avatar && (
               <Image 
@@ -56,7 +56,6 @@ const PAGE_TITLE_ID = '_top';
   .post-header {
     position: relative;
     z-index: 10;
-    border-bottom: 1px solid var(--sl-color-hairline)
   }
   
   .post-title {
