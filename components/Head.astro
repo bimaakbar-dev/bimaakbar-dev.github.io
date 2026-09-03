@@ -1,0 +1,39 @@
+---
+import Default from '@astrojs/starlight/components/Head.astro';
+import { Font } from 'astro:assets';
+
+const { entry } = Astro.locals.starlightRoute;
+const data = (entry?.data as any) || {};
+
+let ogImage = '/og.jpg?v=1';
+
+if (data.heroImage) {
+    if (typeof data.heroImage === 'string') ogImage = data.heroImage;
+    else if (data.heroImage.src) ogImage = data.heroImage.src;
+    else if (data.heroImage.file?.src) ogImage = data.heroImage.file.src;
+}
+
+const hasManualOg = data.head?.some((h: any) => h.attrs?.property === 'og-image');
+const absolutOg = (() => {
+    try {
+        return new URL(ogImage, Astro.site || Astro.url).href;
+    } catch { return ogImage; }
+})();
+ 
+const ogImageAlt = data.title || 'Make your docs shine with Starlight';
+---
+
+<Font cssVariable="--font-geist" preload />
+<Font cssVariable="--font-geist-mono" preload />
+
+<Default><slot /></Default>
+
+{!hasManualOg && entry && (
+    <>
+        <meta property="og:image" content={absolutOg} />
+        <meta name="twitter:image" content={absolutOg} />
+        <meta property="og:image:alt" content={ogImageAlt} />
+        <meta name="twitter:image:alt" content={ogImageAlt} />
+    </>
+)}
+

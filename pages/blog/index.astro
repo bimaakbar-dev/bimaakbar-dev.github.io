@@ -1,0 +1,40 @@
+---
+// src/pages/blog/[...slug].astro
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import BlogPage from '~/components/BlogPage.astro';
+---
+
+<StarlightPage hasSidebar={false} frontmatter={{
+  title: "Blog",
+  description: "Get all the latest news from the Stargazers.",
+  template: 'splash',
+  hero: {
+    title: "Stargazers Blog",
+    tagline: "Get all the latest news from the Stargazers."
+  },
+  banner: {
+    content: `We just launched something cool! <a href="/blog/">Check it out</a>`
+  }
+}}>
+
+  <BlogPage />
+</StarlightPage>
+
+
+<style is:global>
+    .main-frame {
+        padding-top: calc(var(--sl-nav-height));
+    }
+    .content-panel .sl-container {
+        max-width: 100dvw !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .content-panel {
+        padding: 0 !important;
+        margin: 0
+    }
+    .sl-container > * + * {
+		margin-top: 0 !important;
+    }
+</style>
