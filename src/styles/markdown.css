@@ -53,7 +53,7 @@
 .sl-markdown-content a:not(:where(.not-content *)) {
 	font-weight: 500;
 	color: var(--sl-color-white);
-	text-decoration-color: var(--sl-color-text-accent);
+	text-decoration-color: var(--sl-color-accent-high);
 	text-decoration-thickness: 2px;
 	text-underline-offset: 2px;
 }
@@ -68,7 +68,7 @@
 .sl-markdown-content a.inline-link.is-external:not(:where(.not-content *)) {
 	font-weight: 500;
 	color: var(--sl-color-white);
-	text-decoration-color: var(--sl-color-text-accent);
+	text-decoration-color: var(--sl-color-accent-high);
 	text-decoration-thickness: 2px;
 	text-underline-offset: 2px;
 }
@@ -235,6 +235,7 @@
 .sl-markdown-content :is(th, td):not(:where(.not-content *)) {
 	border-bottom: none;
 	padding: 0.5rem 1rem;
+	margin: 0
 }
 
 .sl-markdown-content :is(th):not(:where(.not-content *)) {
@@ -270,7 +271,7 @@
 /* Details */
 .sl-markdown-content details:not(:where(.not-content *)) {
 	--sl-details-border-color: var(--sl-color-gray-5);
-	--sl-details-border-color--hover: var(--sl-color-accent);
+	--sl-details-border-color--hover: var(--sl-color-accent-high);
 
 	border: 1px solid var(--sl-details-border-color);
 	padding-block: 0.5rem;
