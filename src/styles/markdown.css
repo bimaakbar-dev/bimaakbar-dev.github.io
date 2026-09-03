@@ -6,6 +6,7 @@
 /* Heading */
 .sl-markdown-content :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
 	line-height: var(--sl-line-height-headings);
+  font-family: var(--font-montserrat);
 }
 
 .sl-markdown-content :is(h1, h2):not(:where(.not-content *)) {
