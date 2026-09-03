@@ -186,7 +186,7 @@
     inset-block: 1rem;
     inset-inline-start: 0;
     width: 3px;
-    background: var(--sl-color-accent);
+    background: var(--sl-color-accent-high);
     border-radius: 999px;
 }
 
@@ -226,7 +226,7 @@
     border-end-start-radius: 0.5rem;
 }
 
-.sl-markdown-content :is(thead tr:first-child th:last-child):not(:where(.not-content *)) {
+.sl-markdown-content :is(thead tr:last-child th:last-child):not(:where(.not-content *)) {
     border-inline-end: 1px solid var(--sl-color-hairline);
     border-start-end-radius: 0.5rem;
     border-end-end-radius: 0.5rem;
@@ -234,13 +234,12 @@
 
 .sl-markdown-content :is(th, td):not(:where(.not-content *)) {
 	border-bottom: none;
-	padding: 0;
+	padding: 0.5rem 1rem;
 }
 
 .sl-markdown-content :is(th):not(:where(.not-content *)) {
     color: var(--sl-color-white);
     font-weight: 500;
-    padding: 0.5rem 1rem;
 }
 
 .sl-markdown-content :is(tbody tr:not(:first-child) td):not(:where(.not-content *)) {
@@ -250,7 +249,7 @@
 .sl-markdown-content :is(td):not(:where(.not-content *)) {
     word-break: normal;
     overflow-wrap: anywhere;
-    padding: 0.5rem 1rem;
+    
 }
 
 .sl-markdown-content :is(td a, td code):not(:where(.not-content *)) {

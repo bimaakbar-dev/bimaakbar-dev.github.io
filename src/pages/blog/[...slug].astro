@@ -42,7 +42,7 @@ const { Content } = await render(entry);
 
 <style is:global>
   .main-frame {
-    padding-top: calc(var(--sl-nav-height));
+    padding-top: 0;
   }
 
   .content-panel {
@@ -54,7 +54,7 @@ const { Content } = await render(entry);
   }
 
   .content-panel + .content-panel {
-    border-top: 1px solid var(--sl-color-hairline);
+    border-top: 1px solid var(--sl-color-gray-5);
     max-width: 48rem;
     margin-inline: auto;
   }
@@ -77,6 +77,7 @@ const { Content } = await render(entry);
     padding-inline: var(--sl-content-pad-x);
     max-width: 48rem;
     width: 100%;
+    margin-inline: auto;
   }
 
   .content-panel .sl-container hr {

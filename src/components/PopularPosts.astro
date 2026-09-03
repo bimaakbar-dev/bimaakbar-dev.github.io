@@ -31,7 +31,7 @@ const getLocale = (id: string) => (id.startsWith('id/blog/') ? 'id' : 'root');
 {
   popularPosts.length > 0 && (
     <div class="border-0 border-(--sl-color-gray-5) p-5 lg:border-b lg:p-8 xl:p-10">
-      <h3 class="text-(--sl-color-white)" style="font-family: var(--__sl-font-mono); font-size: var(--sl-text-h5);">{Astro.locals.t('blog.PopularPostLabel')}</h3>
+      <h3 class="text-(--sl-color-white) font-normal" style="font-family: var(--__sl-font-mono); font-size: var(--sl-text-body);">{Astro.locals.t('blog.PopularPostLabel')}</h3>
       <ul class="popular-posts-list">
         {popularPosts.map((post) => {
           if (!post?.id) return null;
@@ -69,7 +69,7 @@ const getLocale = (id: string) => (id.startsWith('id/blog/') ? 'id' : 'root');
     padding: 0.3rem 0;
     text-decoration: none;
     color: var(--sl-color-accent-high);
-    font-size: var(--sl-text-body);
+    font-size: var(--sl-text-lg);
   }
 
   .popular-posts-link:hover {

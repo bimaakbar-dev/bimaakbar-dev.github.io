@@ -120,6 +120,8 @@
     --sl-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
     --sl-shadow-md: 0 4px 10px rgb(0 0 0 / 0.06);
     --sl-shadow-lg: 0 10px 20px rgb(0 0 0 / 0.07);
+
+    --purple-hsl: 255, 85%, 65%;
 }
 
 :root {
@@ -171,14 +173,19 @@
     --sl-z-index-navbar: 10;
     --sl-z-index-skiplink: 20;
 
+    --purple-hsl: 255, 60%, 60%;
+	--overlay-blurple: hsla(var(--purple-hsl), 0.2);
+
     --copy-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2'/%3E%3Cpath d='M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 .expressive-code .copy button {
+    border: 0;
     border-radius: 0.5rem;
-    
+    background-color: color-mix(in srgb, var(--sl-color-bg) 80%, transparent);
 	backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+    outline: 1px solid var(--sl-color-gray-5);
 
     width: 2rem !important;
 	height: 2rem !important;

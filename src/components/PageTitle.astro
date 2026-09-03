@@ -17,10 +17,10 @@ const PAGE_TITLE_ID = '_top';
 ---
 
 {isBlogPost ? (
-  <div>
-    <div class="mx-auto w-full md:-mb-20 lg:-mb-24 xl:-mb-32 aspect-video">
+  <>
+    <div class="mx-auto w-full max-w-5xl md:-mb-10 lg:-mb-12 xl:-mb-16">
       {heroImage && (
-        <Image width={1500} height={643} src={heroImage} class="min-h-60 h-auto w-full object-cover" alt={title} loading="eager" decoding="async" />
+        <Image width={1500} height={643} src={heroImage} class="min-h-60 h-full w-full object-cover" alt={title} loading="eager" decoding="async" />
       )}
     </div>
     <header class="mx-auto w-full text-center bg-(--sl-color-bg) md:z-10 relative p-6">
@@ -47,7 +47,7 @@ const PAGE_TITLE_ID = '_top';
         </div>
       )}
     </header>
-  </div>
+  </>
 ) : (
     <Default />
 )}
