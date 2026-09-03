@@ -1,6 +1,7 @@
 ---
 // Hero.astro
 import Default from '@astrojs/starlight/components/Hero.astro';
+import { PAGE_TITLE_ID } from '~/constants';
 
 const { entry } = Astro.locals.starlightRoute;
 const { title, hero } = entry.data;
@@ -9,9 +10,6 @@ const pathname = Astro.url.pathname;
 
 const isBlogIndex = pathname === '/blog/' || pathname === '/blog' || 
                     pathname === '/id/blog/' || pathname === '/id/blog';
-
-
-const PAGE_TITLE_ID = '_top';
 ---
 
 {isBlogIndex ? (

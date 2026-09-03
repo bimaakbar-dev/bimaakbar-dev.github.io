@@ -1,5 +1,6 @@
 ---
 import Default from '@astrojs/starlight/components/PageTitle.astro';
+import { PAGE_TITLE_ID } from '~/constants';
 import { Image } from 'astro:assets';
 import FormattedDate from './FormattedDate.astro';
 
@@ -12,8 +13,6 @@ const {
 } = entry.data;
 
 const isBlogPost = entry.id.startsWith('blog/') || entry.id.startsWith('id/blog/');
-
-const PAGE_TITLE_ID = '_top';
 ---
 
 {isBlogPost ? (
