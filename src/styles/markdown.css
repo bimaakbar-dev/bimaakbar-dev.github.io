@@ -283,6 +283,7 @@
 .sl-markdown-content details:not([open]):hover:not(:where(.not-content *)),
 .sl-markdown-content details:has(> summary:hover):not(:where(.not-content *)) {
 	border-color: var(--sl-details-border-color--hover);
+  -webkit-tap-highlight-color: transparent;
 }
 .sl-markdown-content summary:not(:where(.not-content *)) {
 	color: var(--sl-color-white);
