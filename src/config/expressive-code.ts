@@ -5,10 +5,10 @@ export const expressiveCodeConfig = {
     borderRadius: '0.5rem',
     borderWidth: '1px',
     codeBackground: 'var(--sl-color-gray-6)',
-    codeFontFamily: 'var(--font-geist-mono)',
+    codeFontFamily: 'var(--font-firaCode)',
     codeFontSize: 'var(--sl-text-code-sm)',
     focusBorder: 'var(--sl-color-accent)',
-    uiFontFamily: 'var(--font-geist)',
+    uiFontFamily: 'var(--font-inter)',
     frames: {
       copyIcon: 'var(--copy-icon)',
       frameBoxShadowCssValue: 'none',
