@@ -1,0 +1,47 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+import Default from '@astrojs/starlight/components/Footer.astro'
+
+const { entry } = Astro.locals.starlightRoute;
+const pathname = Astro.url.pathname;
+
+const isBlogIndex = pathname === '/blog/' || pathname === '/blog' || 
+                    pathname === '/id/blog/' || pathname === '/id/blog';
+const isBlogPost = entry.id?.startsWith('blog/') || entry.id?.startsWith('id/blog/');
+---
+{ isBlogPost ? (
+    <footer class="sl-flex">
+        <a class="kudos sl-flex" href="https://starlight.astro.build">
+            <Icon name={'starlight'} /> {Astro.locals.t('builtWithStarlight.label')}
+        </a>
+    </footer>
+) : isBlogIndex ? (
+    <footer class="sl-flex">
+        <a class="kudos sl-flex" href="https://starlight.astro.build">
+            <Icon name={'starlight'} /> {Astro.locals.t('builtWithStarlight.label')}
+        </a>
+    </footer>
+) : (
+    <Default />
+)}
+
+<style>
+    footer {
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+    .kudos {
+		align-items: center;
+		gap: 0.5em;
+		margin: 1.5rem auto;
+		font-size: var(--sl-text-xs);
+		text-decoration: none;
+		color: var(--sl-color-gray-3);
+	}
+	.kudos:hover {
+		color: var(--sl-color-white);
+	}
+    .kudos :global(svg) {
+		color: var(--sl-color-orange);
+	}
+</style>

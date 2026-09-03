@@ -1,0 +1,79 @@
+---
+// src/components/PopularPosts.astro
+import { getCollection } from 'astro:content';
+
+export interface Props {
+  limit?: number;
+  excludeCurrent?: string;
+}
+
+const { limit = 5, excludeCurrent } = Astro.props;
+
+const allEntries = await getCollection('docs');
+
+const blogEntries = allEntries.filter(
+  (entry) =>
+    entry?.id &&
+    (entry.id.startsWith('blog/') || entry.id.startsWith('id/blog/'))
+);
+
+const popularPosts = blogEntries
+  .filter((entry): entry is typeof entry & { data: { pubDate: Date } } =>
+    entry.data?.pubDate !== undefined
+  )
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .filter((entry) => entry.id !== excludeCurrent)
+  .slice(0, limit);
+
+const getLocale = (id: string) => (id.startsWith('id/blog/') ? 'id' : 'root');
+---
+
+{
+  popularPosts.length > 0 && (
+    <div class="border-0 border-(--sl-color-gray-5) p-5 lg:border-b lg:p-8 xl:p-10">
+      <h3 class="text-(--sl-color-white)" style="font-family: var(--__sl-font-mono); font-size: var(--sl-text-h5);">{Astro.locals.t('blog.PopularPostLabel')}</h3>
+      <ul class="popular-posts-list">
+        {popularPosts.map((post) => {
+          if (!post?.id) return null;
+
+          const slug = post.id.replace(/^(id\/)?blog\//, '');
+          const locale = getLocale(post.id);
+          const href = locale === 'id' ? `/id/blog/${slug}` : `/blog/${slug}`;
+
+          return (
+            <li class="popular-posts-item">
+              <a href={href} class="popular-posts-link">
+                {post.data.title}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  )
+}
+
+<style>
+  .popular-posts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .popular-posts-item {
+    margin-top: 0.25rem;
+  }
+
+  .popular-posts-link {
+    display: block;
+    padding: 0.3rem 0;
+    text-decoration: none;
+    color: var(--sl-color-accent-high);
+    font-size: var(--sl-text-body);
+  }
+
+  .popular-posts-link:hover {
+    color: var(--sl-color-accent-high);
+    text-decoration: underline;
+  }
+</style>

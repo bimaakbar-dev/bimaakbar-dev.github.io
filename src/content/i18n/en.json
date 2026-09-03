@@ -1,0 +1,11 @@
+{
+  "component.preview": "Preview",
+
+  "blog.PostAuthor": "By",
+  "blog.relatedPostLabel": "Related posts",
+  "blog.PopularPostLabel": "Popular posts",
+
+  "rss.RssFeedLabel": "Subscribe",
+  "rss.RssFeedTitle": "RSS",
+  "rss.RssFeedDesc": "Stay up-to-date with news from the Stargazers"
+}

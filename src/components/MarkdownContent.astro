@@ -1,0 +1,50 @@
+---
+// src/components/overwrite/MarkdownContent.astro
+import '@astrojs/starlight/style/markdown.css';
+import Default from '@astrojs/starlight/components/MarkdownContent.astro'
+import EditLink from '@astrojs/starlight/components/EditLink.astro';
+import LastUpdated from '@astrojs/starlight/components/LastUpdated.astro';
+import RelatedPosts from '~/components/RelatedPosts.astro';
+
+const { entry } = Astro.locals.starlightRoute;
+const pathname = Astro.url.pathname;
+
+const isBlogIndex = pathname === '/blog/' || pathname === '/blog' || 
+                    pathname === '/id/blog/' || pathname === '/id/blog';
+const isBlogPost = entry.id?.startsWith('blog/') || entry.id?.startsWith('id/blog/');
+---
+{ isBlogPost ? (
+    <>
+        <article class="sl-markdown-content">
+            <slot />
+        </article>
+        <div class="meta sl-flex">
+            <EditLink />
+            <LastUpdated />
+        </div>
+        <hr />
+        <RelatedPosts currentSlug={entry.id} />
+    </>
+) : isBlogIndex ? (
+    <div>
+        <slot />
+    </div>
+) : (
+    <Default>
+        <slot />
+    </Default>
+)}
+
+<style>
+    .meta {
+		gap: 0.75rem 3rem;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		margin-top: 3rem;
+		font-size: var(--sl-text-sm);
+		color: var(--sl-color-gray-3);
+	}
+	.meta > :global(p:only-child) {
+		margin-inline-start: auto;
+	}
+</style>
