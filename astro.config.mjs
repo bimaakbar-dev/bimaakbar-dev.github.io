@@ -90,6 +90,7 @@ export default defineConfig({
                 FallbackContentNotice: './src/components/FallbackContentNotice.astro',
                 Footer: './src/components/Footer.astro',
                 Head: './src/components/Head.astro',
+                Header: './src/components/Header.astro',
                 Hero: './src/components/Hero.astro',
                 MarkdownContent: './src/components/MarkdownContent.astro',
                 MobileMenuToggle: './src/components/MobileMenuToggle.astro',
