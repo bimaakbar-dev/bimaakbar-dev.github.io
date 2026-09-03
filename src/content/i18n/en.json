@@ -44,6 +44,7 @@
   "pagefind.searching": "Searching for [SEARCH_TERM]...",
 
   "component.preview": "Preview",
+  "component.blogPostAuthor": "By",
 
-"component.blogPostAuthor": "By"
+  "blog.relatedPostLabel": "Related posts"
 }

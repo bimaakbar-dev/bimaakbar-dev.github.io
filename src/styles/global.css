@@ -42,7 +42,7 @@
 
     --sl-color-accent-low: rgb(229 229 229 / 0.15);
     --sl-color-accent: rgb(229, 229, 229);
-    --sl-color-accent-high: rgb(229, 229, 229);
+    --sl-color-accent-high: hsl(224, 100%, 85%);
 
     --sl-color-text: rgb(168, 168, 168);
     --sl-color-text-accent: rgb(229, 229, 229);
@@ -99,7 +99,7 @@
 
     --sl-color-accent-low: rgb(24 24 27 / 0.15);
     --sl-color-accent: rgb(24, 24, 27);
-    --sl-color-accent-high: rgb(24, 24, 27);
+    --sl-color-accent-high: hsl(224, 100%, 85%);
 
     --sl-color-text: rgb(82, 82, 91);
     --sl-color-text-accent: rgb(24, 24, 27);
@@ -123,8 +123,8 @@
 }
 
 :root {
-    --sl-font-system: var(--font-geist), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    --sl-font-system-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --sl-font-system: -apple-system, var(--font-geist), BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --sl-font-system-mono: ui-monospace, var(--font-geist-mono), SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     --__sl-font: var(--sl-font-system);
     --__sl-font-mono: var(--sl-font-system-mono);
     

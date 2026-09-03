@@ -2,55 +2,84 @@
 // src/pages/blog/[...slug].astro
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import { getCollection, render } from 'astro:content';
-import RelatedPosts from '~/components/RelatedPosts.astro';
 
 export async function getStaticPaths() {
-  const entries = await getCollection(
-    "docs",
-    ({ data, id }) => !data.draft && id.startsWith('blog/')
-  );
+  const allEntries = await getCollection("docs");
+  const blogEntries = allEntries.filter(entry => entry.id.startsWith('blog/'));
 
-  return entries.map((entry) => ({
-    params: { slug: entry.id.replace(/^blog\//, '') },
-    props: { entry },
-  }));
+  return blogEntries.map((entry) => {
+    const slug = entry.id.replace(/^blog\//, '');
+    return {
+      params: { slug },
+      props: { entry },
+   };
+  });
 }
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
 
-<StarlightPage frontmatter={{
+<StarlightPage hasSidebar={false} frontmatter={{
   title: entry.data.title,
   description: entry.data.description,
-  template: 'splash',
+  editUrl: 'https://github.com/bimaakbar-dev/starlight/edit/main/docs/blog/',
+  template: 'doc',
   heroImage: entry.data.heroImage,
   pubDate: entry.data.pubDate,
   author: {
     name: entry.data.author?.name,
     avatar: entry.data.author?.avatar
-  }
+  },
+  lastUpdated: entry.data.lastUpdated,
+  draft: entry.data.draft,
+  tableOfContents: false
 }}>
 
   <Content />
-  
-  <hr class="w-full max-w-[64rem]! border-(--sl-color-gray-5) my-8" />
-
-  <div class="max-w-[50rem] mx-auto my-8">    
-    <RelatedPosts currentSlug={entry.id} />
-  </div>
-
 </StarlightPage>
 
+
 <style is:global>
-  .content-panel .sl-container {
-    max-width: 64rem !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+  .main-frame {
+    padding-top: calc(var(--sl-nav-height));
   }
 
-  .sl-markdown-content {
-    margin: 0 auto;
-    max-width: 50rem !important;
+  .content-panel {
+    max-width: 100dvw;
+    width: 100%;
+    margin-inline: auto;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .content-panel + .content-panel {
+    border-top: none;
+    max-width: 48rem !important;
+    margin-inline: auto;
+  }
+
+  .content-panel .sl-container .sl-markdown-content {
+    max-width: 48rem;
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: var(--sl-content-pad-x);
+  }
+
+  .content-panel .sl-container nav {
+    max-width: 48rem;
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: var(--sl-content-pad-x);
+  }
+
+  .content-panel .sl-container div.meta {
+    padding-inline: var(--sl-content-pad-x);
+  }
+
+  .content-panel .sl-container hr {
+    min-width: 100%;
+    border-top: 1px solid var(--sl-color-gray-5);
+    margin-inline: auto;
   }
 </style>

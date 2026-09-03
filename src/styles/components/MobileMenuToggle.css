@@ -1,24 +1,23 @@
-starlight-menu-button button {
-	border: 0;
-	border-radius: 50%;
-	padding: 0.5rem;
+.sl-menu-button button[popovertarget] {
+	padding: 0;
 	background-color: transparent;
 	color: var(--sl-color-white);
 	box-shadow: none;
 }
 
-starlight-menu-button [aria-expanded='true'] button {
-	background-color: transparent;
-	color: var(--sl-color-white);
-	box-shadow: none;
-}
-
-starlight-menu-button [data-theme='light'] button {
+.sl-menu-button [data-theme='light'] button[popovertarget]:has(~ :popover-close) {
     background-color: transparent;
     color: var(--sl-color-black);
 }
 
-starlight-menu-button [data-theme='light'] [aria-expanded='true'] button {
+.sl-menu-button button[popovertarget] {
+	background-color: transparent;
+	color: var(--sl-color-white);
+	box-shadow: none;
+}
+
+.sl-menu-button [data-theme='light'] button[popovertarget]:has(~ :popover-open) {
 	background-color: transparent;
 	color: var(--sl-color-black);
+	box-shadow: none;
 }

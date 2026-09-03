@@ -4,100 +4,14 @@ import PostCard from './PostCard.astro';
 ---
 
 <div class="flex lg:flex-row flex-col-reverse flex-1">
-  <aside class="min-w-[16rem] border-(--sl-color-hairline-shade) lg:max-w-xs lg:border-r xl:max-w-sm border-t lg:border-t-0 px-4 lg:px-8 py-4">
-    <div class="widget">
-      <h4>🔥 Popular Posts</h4>
-      <ul>
-        <li><a href="#">Memahami Astro Islands</a></li>
-        <li><a href="#">Starlight untuk Dokumentasi</a></li>
-        <li><a href="#">Optimasi Gambar dengan Astro</a></li>
-      </ul>
-    </div>
-
-    <div class="widget">
-      <h4>📬 Newsletter</h4>
-      <p>Dapatkan update artikel terbaru setiap minggu.</p>
-      <button class="cta-button">Subscribe</button>
-    </div>
-
-    <div class="widget">
-      <h4>🏷️ Tags Populer</h4>
-      <div class="tags-wrapper">
-        <span class="tag">Astro</span>
-        <span class="tag">Starlight</span>
-        <span class="tag">JavaScript</span>
-        <span class="tag">CSS</span>
-        <span class="tag">React</span>
-      </div>
-    </div>
-  </aside>
-  <section class="mx-auto max-w-4xl p-4 lg:p-12">
-    <div class="flex flex-col items-center gap-y-4 md:gap-y-6 lg:gap-y-8">
+  <aside class="min-w-[16rem] border-(--sl-color-hairline-shade) lg:max-w-xs lg:border-r xl:max-w-sm border-t lg:border-t-0 px-4 lg:px-8 py-6">
+    <ul class="flex flex-col flex-1 items-center gap-y-4 md:gap-y-6 lg:gap-y-8 list-none p-0 m-0">
       <PostCard />
-    </div>
+    </ul>
+  </aside>
+  <section class="mx-auto max-w-4xl p-6 lg:p-12">
+    <ul class="flex flex-col flex-1 items-center gap-y-4 md:gap-y-6 lg:gap-y-8 list-none p-0 m-0">
+      <PostCard />
+    </ul>
   </section>
 </div>
-
-<style is:global>
-  .content-panel .sl-container {
-    max-width: 100dvw !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-  .content-panel {
-    padding: 0 !important;
-  }
-</style>
-
-<style>
-  .widget {
-    padding: 1rem;
-  }
-  .widget h4 {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-  }
-  .widget ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .widget ul li {
-    margin-bottom: 0.3rem;
-  }
-  .widget ul li a {
-    text-decoration: none;
-    color: var(--sl-color-text);
-    font-size: 0.9rem;
-  }
-  .widget ul li a:hover {
-    text-decoration: underline;
-  }
-  .cta-button {
-    width: 100%;
-    padding: 0.6rem;
-    background: var(--sl-color-accent);
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: opacity 0.2s;
-  }
-  .cta-button:hover {
-    opacity: 0.85;
-  }
-  .tags-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-  }
-  .tag {
-    background: var(--sl-color-gray-5);
-    padding: 0.2rem 0.7rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    color: var(--sl-color-text);
-  }
-</style>

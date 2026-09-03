@@ -7,31 +7,30 @@ interface Props {
   limit?: number;
 }
 
-const { currentSlug, limit = 3 } = Astro.props;
+const { currentSlug, limit = 2 } = Astro.props;
 
-const allPosts = await getCollection('docs', ({ id, data }) => {
-  return id.startsWith('blog/') && !data.draft;
+const allPosts = await getCollection('docs', ({ id }) => {
+  return (id.startsWith('blog/') || id.startsWith('id/blog'));
 });
 
 const relatedPosts = allPosts
-  .filter((post) => post.slug !== currentSlug && post.id !== currentSlug)
+  .filter((post) => post.id !== currentSlug)
   .sort((a, b) => {
     const dateA = a.data.pubDate ? new Date(a.data.pubDate).valueOf() : 0;
     const dateB = b.data.pubDate ? new Date(b.data.pubDate).valueOf() : 0;
     return dateB - dateA;
   })
   .slice(0, limit);
-  
 const $ = {
   card: [
     'relative flex flex-col h-full',
     'border',
-    'bg-(--sl-color-gray-6) border-(--sl-color-hairline) text-(--sl-color-gray-2) outline-(--sl-color-purple)',
+    'bg-(--sl-color-gray-6) border-(--sl-color-hairline) text-(--sl-color-gray-2) outline-(--sl-color-accent-high)',
     'hover:scale-[1.03]',
-	'focus-within:outline',
+	  'focus-within:outline',
     'transition-transform duration-300 ease-out',
   ].join(' '),
-  cardImage: 'w-full h-48 object-cover',
+  cardImage: 'w-full max-h-48 h-auto object-cover',
   cardContent: [
     'related-card-content',
     'flex flex-col',
@@ -40,7 +39,7 @@ const $ = {
   cardTitle: [
     'text-(--sl-text-h4) md:text-(--sl-text-h3)',
     'text-pretty outline-none',
-    'after:absolute after:inset-0',
+    'after:absolute after:inset-0'
   ].join(' '),
   cardDesc: [
     'mt-auto',
@@ -50,32 +49,32 @@ const $ = {
 ---
 
 {relatedPosts.length > 0 && (
-  <nav aria-labelledby="_related-posts">
-    <h2 class="related-label font-semibold mb-6 text-(--sl-color-white)">Related Posts</h2>    
-    <div class="my-6 grid gap-8 grid-cols-[repeat(auto-fit,minmax(min(100%,18rem),1fr))]">
-        {relatedPosts.map((post) => (
-          <article class={$.card}>
-            {post.data.heroImage && (
-              <Image 
-                src={post.data.heroImage} 
-                alt={post.data.title} 
-                width={1000} 
-                height={429}
-                loading="lazy"
-                decoding="async"
-                class={$.cardImage}
-              />
+  <nav aria-labelledby="_related-posts" class="not-content">
+    <h2 class="related-label text-(--sl-color-white)">{Astro.locals.t('blog.relatedPostLabel')}</h2>    
+    <div class="my-6 grid gap-8 grid-cols-[repeat(auto-fill,minmax(min(100%,18rem),1fr))]">
+      {relatedPosts.map((post) => (
+        <article class={$.card}>
+          {post.data.heroImage && (
+            <Image 
+              src={post.data.heroImage} 
+              alt={post.data.title} 
+              width={1000} 
+              height={429}
+              loading="lazy"
+              decoding="async"
+              class={$.cardImage}
+            />
+          )}
+          <div class={$.cardContent}>
+            <a href={`/${post.id}/`} class={$.cardTitle}>{post.data.title}</a>
+            {post.data.description && (
+              <p class={$.cardDesc}>
+                {post.data.description}
+              </p>
             )}
-            <div class={$.cardContent}>
-              <a href={`/${post.id}/`} class={$.cardTitle}>{post.data.title}</a>
-              {post.data.description && (
-                <p class={$.cardDesc}>
-                  {post.data.description}
-                </p>
-              )}
-            </div>
-          </article>
-        ))}
+          </div>
+        </article>
+      ))}
     </div>
   </nav>
 )}
@@ -83,13 +82,14 @@ const $ = {
 <style>
   .related-label {
     font-size: var(--sl-text-h3);
+    font-weight: 500;
     line-height: var(--sl-line-height-headings);
   }
   .related-card-content a {
-	line-height: var(--sl-line-height-headings);
-	color: var(--sl-color-text);
-	text-decoration: none;
-	-webkit-tap-highlight-color: transparent;
+    line-height: var(--sl-line-height-headings);
+    color: var(--sl-color-white);
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
   }
   
   .related-card-content p {

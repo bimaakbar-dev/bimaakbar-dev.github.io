@@ -44,5 +44,7 @@
   "pagefind.searching": "Mencari [SEARCH_TERM]...",
 
   "component.preview": "Pratinjau",
-  "component.blogPostAuthor": "Oleh"
+  "component.blogPostAuthor": "Oleh",
+
+  "blog.relatedPostLabel": "Postingan terkait"
 }

@@ -4,23 +4,24 @@
 	font-weight: 500;
 }
 
-.top-level a[aria-current='page'],
-.top-level a[aria-current='page']:hover,
-.top-level a[aria-current='page']:focus {
+.top-level li a[aria-current='page'],
+.top-level li a[aria-current='page']:hover,
+.top-level li a[aria-current='page']:focus {
 	font-weight: 500;
 	background-color: transparent;
 	color: var(--sl-color-white);
+	
 }
 
-.top-level ul ul li {
+.top-level :is(ul ul li) {
 	border-inline-start: 1px solid var(--sl-color-hairline);
 }
 
 @media (min-width: 50rem) {
-	.top-level .large {
+	.top-level > li .group-label .large {
 		font-size: var(--sl-text-base);
 	}
-	.top-level a {
+	.top-level li a {
 		font-size: var(--sl-text-sm);
 	}
 }

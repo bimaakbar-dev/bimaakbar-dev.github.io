@@ -1,11 +1,13 @@
 ---
 title: 'Markdown Style Guide'
 description: 'Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.'
-pubDate: 'Jun 19 2024'
-heroImage: '../../../assets/images/blog-placeholder-1.jpg'
+pubDate: 2024-06-19
+heroImage: '~/assets/images/blog-placeholder-1.jpg'
 author:
   name: Bima Akbar
-  avatar: https://avatars.githubusercontent.com/u/81931118?v=4
+  avatar: '~/assets/houston.webp'
+editUrl: https://github.com/withastro/starlight/edit/main/docs/
+lastUpdated: 2026-09-03
 ---
 
 Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.

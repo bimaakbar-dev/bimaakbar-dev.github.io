@@ -3,7 +3,9 @@ import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import FormattedDate from './FormattedDate.astro';
 
-const allPosts = await getCollection('docs');
+const allPosts = await getCollection('docs', ({ id }) => {
+  return (id.startsWith('blog/') || id.startsWith('id/blog'));
+});
 
 const blogPosts = allPosts
   .filter((post): post is typeof post & { data: { pubDate: Date } } =>
@@ -13,10 +15,11 @@ const blogPosts = allPosts
   
 const $ = {
   card: [
+    'not-content',
     'relative flex flex-col h-full',
     'p-4',
     'border',
-    'bg-(--sl-color-gray-6) border-(--sl-color-gray-5) outline-(--sl-color-purple)',
+    'bg-(--sl-color-gray-6) border-(--sl-color-gray-5) outline-(--sl-color-accent-high)',
     'hover:scale-[1.03]',
     'focus-within:outline',
     'transition-transform duration-300 ease-out',
@@ -32,7 +35,7 @@ const $ = {
     'flex-1',
     'mt-auto gap-x-16 gap-y-8'
   ].join(' '),
-  cardContentTitle: 'post-card-title text-(--sl-color-text)',
+  cardContentTitle: 'post-card-title text-(--sl-color-white)',
   cardTitle: [
     'outline-none',
     'after:absolute after:inset-0',
@@ -46,22 +49,24 @@ const $ = {
     const { data } = post;
     const { title, description, pubDate, heroImage } = data;
     return (
-      <article class={$.card}>
-        <header>
-          <FormattedDate class={$.cardDate} date={pubDate} />
-        </header>
-        <div class={$.cardCover}>
-          {heroImage && (
-            <Image width={766} height={328} src={heroImage} class={$.cardImage} alt={title} loading="lazy" decoding="async" />
-          )}
-        </div>
-        <div class={$.cardContent}>
-          <h3 class={$.cardContentTitle}>
-            <a href={`/${post.id}/`} class={$.cardTitle}>{title}</a>
-          </h3>
-          {description && <p class={$.cardDesc}>{description}</p>}
-        </div>
-      </article>
+      <li class="w-full">
+        <article class={$.card}>
+          <header>
+            <FormattedDate class={$.cardDate} date={pubDate} />
+          </header>
+          <div class={$.cardCover}>
+            {heroImage && (
+              <Image width={766} height={328} src={heroImage} class={$.cardImage} alt={title} loading="eager" decoding="async" />
+            )}
+          </div>
+          <div class={$.cardContent}>
+            <h3 class={$.cardContentTitle}>
+              <a href={`/${post.id}/`} class={$.cardTitle}>{title}</a>
+            </h3>
+            {description && <p class={$.cardDesc}>{description}</p>}
+          </div>
+        </article>
+      </li>
     );
   })
 }
@@ -79,8 +84,12 @@ const $ = {
   }
   
   .post-card-title a {
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+    color: var(--sl-color-white);
   	text-decoration: none;
-  -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .post-card-description {

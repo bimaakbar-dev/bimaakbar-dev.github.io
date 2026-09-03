@@ -2,17 +2,19 @@
 title: Welcome to Starlight
 description: Get started building your docs site with Starlight.
 template: splash
+editUrl: false
 hero:
   tagline: Congrats on setting up a new Starlight project!
   image:
-    file: ../../assets/houston.webp
+    file: ~/assets/hero-star.webp
   actions:
-    - text: Example Guide
-      link: /guides/example/
-      icon: right-arrow
-    - text: Read the Blog
+    - text: Start Here
+      link: /getting-started/introduction
+      icon: rocket
+    - text: Read Blog
       link: /blog/
-      variant: minimal
+      icon: right-arrow
+      variant: secondary
 banner:
   content: |
     We just launched something cool!
@@ -20,6 +22,7 @@ banner:
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
+import AboutAstro from '~/components/about-astro.astro';
 
 ## Next steps
 
@@ -41,3 +44,11 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 		Learn more in [the Starlight Docs](https://starlight.astro.build/).
 	</Card>
 </CardGrid>
+
+<AboutAstro title="Brought to you by">
+Astro is the all-in-one web framework designed for speed.
+Pull your content from anywhere and deploy everywhere, all powered by your favorite UI components and libraries.
+
+[Learn about Astro](https://astro.build/)
+
+</AboutAstro>

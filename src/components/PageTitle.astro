@@ -4,24 +4,28 @@ import { Image } from 'astro:assets';
 import FormattedDate from './FormattedDate.astro';
 
 const { entry } = Astro.locals.starlightRoute;
-const { title, pubDate, heroImage, author } = entry.data;
+const { 
+  title, 
+  pubDate, 
+  heroImage, 
+  author 
+} = entry.data;
 
-const pathname = Astro.url.pathname;
-const isBlogPost = pathname.startsWith('/blog/') && pathname !== '/blog' && pathname !== '/blog/';
+const isBlogPost = entry.id.startsWith('blog/') || entry.id.startsWith('id/blog/');
 
 const PAGE_TITLE_ID = '_top';
 ---
 
 {isBlogPost ? (
-  <>
-    <div class="mx-auto w-full max-w-5xl md:-mb-20 lg:-mb-24 xl:-mb-32 aspect-video">
+  <div>
+    <div class="mx-auto w-full md:-mb-20 lg:-mb-24 xl:-mb-32 aspect-video">
       {heroImage && (
         <Image width={1500} height={643} src={heroImage} class="min-h-60 h-auto w-full object-cover" alt={title} loading="eager" decoding="async" />
       )}
     </div>
-    <header class="mx-auto w-full max-w-prose text-center bg-(--sl-color-bg) md:z-10 relative p-6">
+    <header class="post-header mx-auto w-full text-center bg-(--sl-color-bg) md:z-10 relative p-6">
       {pubDate && <FormattedDate date={pubDate} class="post-date" />}
-      <h1 id={PAGE_TITLE_ID} class="post-title mb-4 mt-2 sm:mb-5 sm:mt-3">{title}</h1>
+      <h1 id={PAGE_TITLE_ID} class="post-title mb-4 mt-2 sm:mb-5 sm:mt-3" set:html={title} />
       {author && (
         <div class="post-author flex flex-wrap items-center justify-center gap-x-4 text-(--sl-color-gray-2) md:gap-y-4">
           <span>{Astro.locals.t('component.blogPostAuthor')}</span>
@@ -31,9 +35,9 @@ const PAGE_TITLE_ID = '_top';
                 src={author.avatar} 
                 width={48} 
                 height={48}
-                class="my-0 inline-block rounded-full border border-(--sl-color-accent) size-6 md:size-10" 
+                class="my-0 inline-block rounded-full ring ring-(--sl-color-accent-high) size-6 md:size-10" 
                 alt={author.name || title } 
-                loading="lazy" 
+                loading="eager" 
                 decoding="async" 
                 aria-hidden="true"
               />
@@ -43,12 +47,18 @@ const PAGE_TITLE_ID = '_top';
         </div>
       )}
     </header>
-  </>
+  </div>
 ) : (
-    <Default {...Astro.props} />
+    <Default />
 )}
 
 <style>
+  .post-header {
+    position: relative;
+    z-index: 10;
+    border-bottom: 1px solid var(--sl-color-hairline)
+  }
+  
   .post-title {
     font-size: var(--sl-text-h3);
     font-weight: 600;
@@ -70,25 +80,4 @@ const PAGE_TITLE_ID = '_top';
       font-size: var(--sl-text-h2);
     }
   }
-</style>
-
-<style is:global>
-  .content-panel .sl-container header {
-    max-width: 52rem !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    position: relative;
-    z-index: 10;
-  }
-  .content-panel + .content-panel {
-    border-top: 1px solid var(--sl-color-gray-5);
-    max-width: 52rem !important;
-    margin-inline: auto;
-  }
-/*  @media (min-width: 50rem) {
-    .main-frame {
-      padding-top: calc(var(--sl-nav-height) - 10%);
-    }
-  }
-*/
 </style>

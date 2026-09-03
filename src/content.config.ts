@@ -13,7 +13,7 @@ export const collections = {
 				heroImage: z.optional(image()),
 				author: z.object({
 					name: z.string().optional(),
-					avatar: z.url().optional(),
+					avatar: z.optional(image()),
 				}).optional(),
 				tags: z.array(z.string()).optional(),
 			}),
@@ -25,6 +25,7 @@ export const collections = {
 			extend: z.object({
 				'component.preview': z.string().optional(),
 				'component.blogPostAuthor': z.string().optional(),
+				'blog.relatedPostLabel': z.string().optional(),
 			}),
 		}) 
 	})
