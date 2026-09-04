@@ -1,9 +1,7 @@
 ---
 import { LinkButton } from '@astrojs/starlight/components';
 
-const { locale } = Astro.locals.starlightRoute || {};
-const currentLocale = locale || 'root';
-const rssHref = currentLocale === 'root' ? '/rss.xml' : `/${currentLocale}/rss.xml`;
+const { rssUrl } = Astro.locals.starlightRoute;
 ---
 
 <div class="border-0 border-(--sl-color-gray-5) p-5 lg:border-b lg:p-8 xl:p-10">
@@ -13,7 +11,7 @@ const rssHref = currentLocale === 'root' ? '/rss.xml' : `/${currentLocale}/rss.x
     <p class="text-(--sl-color-gray-2) mb-6 mt-4" style="font-size: var(--sl-text-body)">
         {Astro.locals.t('rss.RssFeedDesc')}
     </p>
-    <LinkButton href={rssHref} variant="secondary" icon="rss" iconPlacement="start">
+    <LinkButton href={rssUrl as string} variant="secondary" icon="rss" iconPlacement="start">
         {Astro.locals.t('rss.RssFeedTitle')}
     </LinkButton>
 </div>

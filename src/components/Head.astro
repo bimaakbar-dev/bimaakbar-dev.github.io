@@ -2,7 +2,8 @@
 import Default from '@astrojs/starlight/components/Head.astro';
 import { Font } from 'astro:assets';
 
-const { entry, locale } = Astro.locals.starlightRoute;
+const { entry, isBlog, rssUrl } = Astro.locals.starlightRoute;
+
 const data = (entry?.data as any) || {};
 
 let ogImage = '/og.jpg?v=1';
@@ -19,35 +20,29 @@ const absolutOg = (() => {
         return new URL(ogImage, Astro.site || Astro.url).href;
     } catch { return ogImage; }
 })();
- 
+
 const ogImageAlt = data.title || 'Make your docs shine with Starlight';
-
-const rssUrl = locale === 'root' ? '/rss.xml' : `/${locale}/rss.xml`;
-
-const pathname = Astro.url.pathname;
-const isBlogEntry = entry?.id?.startsWith('blog/') || entry?.id?.startsWith(`${locale}/blog/`);
-const isBlogPath = pathname.startsWith('/blog') || pathname.startsWith(`/${locale}/blog`);
-const isBlogPage = isBlogEntry || isBlogPath;
 ---
+
 <Font cssVariable="--font-montserrat" preload />
 <Font cssVariable="--font-inter" preload />
-<Font cssVariable="--font-firaCode" preload />
+<Font cssVariable="--font-firaCode" preload />
 
 <Default>
     <slot />
 </Default>
+
 {
-    isBlogPage && (
-        <>
-            <link
-                rel="alternate"
-                type="application/rss+xml"
-                title={locale === 'root' ? 'RSS Feed' : 'Feed RSS'}
-                href={rssUrl}
-            />
-        </>
+    isBlog && (
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="RSS Feed"
+            href={rssUrl as string}
+        />
     )
 }
+
 {!hasManualOg && entry && (
     <>
         <meta property="og:image" content={absolutOg} />

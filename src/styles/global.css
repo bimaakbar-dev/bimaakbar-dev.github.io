@@ -40,9 +40,9 @@
     --sl-color-purple: rgb(168, 85, 247);
     --sl-color-purple-high: rgb(216, 180, 254);
 
-    --sl-color-accent-low: rgb(229 229 229 / 0.15);
-    --sl-color-accent: hsl(224, 100%, 85%);
-    --sl-color-accent-high: hsl(224, 100%, 85%);
+    --sl-color-accent-low: hsl(234, 80%, 30%);
+	--sl-color-accent: hsl(234, 90%, 60%);
+	--sl-color-accent-high: hsl(234, 88%, 90%);
 
     --sl-color-text: rgb(168, 168, 168);
     --sl-color-text-accent: rgb(229, 229, 229);
@@ -97,9 +97,9 @@
     --sl-color-purple: rgb(147, 51, 234);
     --sl-color-purple-high: rgb(88, 28, 135);
 
-    --sl-color-accent-low: rgb(24 24 27 / 0.15);
-    --sl-color-accent: rgb(24, 24, 27);
-    --sl-color-accent-high: hsl(224, 100%, 85%);
+    --sl-color-accent-high: hsl(234, 80%, 30%);
+	--sl-color-accent: hsl(234, 90%, 60%);
+	--sl-color-accent-low: hsl(234, 88%, 90%);
 
     --sl-color-text: rgb(82, 82, 91);
     --sl-color-text-accent: rgb(24, 24, 27);

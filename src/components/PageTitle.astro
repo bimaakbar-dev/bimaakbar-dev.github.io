@@ -1,61 +1,70 @@
 ---
+// PageTitle.astro
 import Default from '@astrojs/starlight/components/PageTitle.astro';
 import { PAGE_TITLE_ID } from '~/constants';
 import { Image } from 'astro:assets';
 import FormattedDate from './FormattedDate.astro';
 
-const { entry } = Astro.locals.starlightRoute;
+const { 
+  entry, 
+  isBlogPost 
+} = Astro.locals.starlightRoute;
+
 const { 
   title, 
   pubDate, 
   heroImage, 
   author 
 } = entry.data;
-
-const { locale } = Astro.locals.starlightRoute || {};
-const currentLocale = locale || 'root';
-
-const prefix = currentLocale === 'root' ? 'blog/' : `${currentLocale}/blog/`;
-const isBlogPost = entry.id.startsWith(prefix);
 ---
 
-{isBlogPost ? (
-  <>
-    <div class="mx-auto w-full max-w-5xl md:-mb-10 lg:-mb-12 xl:-mb-16">
-      {heroImage && (
-        <Image width={1500} height={643} src={heroImage} class="min-h-60 h-full w-full object-cover" alt={title} loading="eager" decoding="async" />
-      )}
-    </div>
-    <header class="mx-auto w-full text-center bg-(--sl-color-bg) md:z-10 relative p-6">
-      {pubDate && <FormattedDate date={pubDate} class="post-date" />}
-      <h1 id={PAGE_TITLE_ID} class="post-title mb-4 mt-2 sm:mb-5 sm:mt-3" set:html={title} />
-      {author && (
-        <div class="post-author flex flex-wrap items-center justify-center gap-x-4 text-(--sl-color-gray-2) md:gap-y-4">
-          <span>{Astro.locals.t('blog.PostAuthor')}</span>
-          <div class="flex items-center gap-2">
-            { author.avatar && (
-              <Image 
-                src={author.avatar} 
-                width={48} 
-                height={48}
-                class="my-0 inline-block rounded-full ring ring-(--sl-color-accent-high) size-6 md:size-10" 
-                alt={author.name || title } 
-                loading="eager" 
-                decoding="async" 
-                aria-hidden="true"
-              />
-            )} 
-            <span>{author.name}</span>
+{
+  isBlogPost ? (
+    <>
+      <div class="mx-auto w-full max-w-5xl md:-mb-10 lg:-mb-12 xl:-mb-16">
+        {heroImage && (
+          <Image
+            width={1500}
+            height={643}
+            src={heroImage}
+            class="min-h-60 h-full w-full object-cover"
+            alt={title}
+            loading="eager"
+            decoding="async"
+          />
+        )}
+      </div>
+      <header class="mx-auto w-full text-center bg-(--sl-color-bg) md:z-10 relative p-6">
+        {pubDate && <FormattedDate date={pubDate} class="post-date" />}
+        <h1 id={PAGE_TITLE_ID} class="post-title mb-4 mt-2 sm:mb-5 sm:mt-3" set:html={title} />
+        {author && (
+          <div class="post-author flex flex-wrap items-center justify-center gap-x-4 text-(--sl-color-gray-2) md:gap-y-4">
+            <span>{Astro.locals.t('blog.PostAuthor')}</span>
+            <div class="flex items-center gap-2">
+              {author.avatar && (
+                <Image
+                  src={author.avatar}
+                  width={48}
+                  height={48}
+                  class="my-0 inline-block rounded-full ring ring-(--sl-color-accent-high) size-6 md:size-10"
+                  alt={author.name || title}
+                  loading="eager"
+                  decoding="async"
+                  aria-hidden="true"
+                />
+              )}
+              <span>{author.name}</span>
+            </div>
           </div>
-        </div>
-      )}
-    </header>
-  </>
-) : (
+        )}
+      </header>
+    </>
+  ) : (
     <Default />
-)}
+  )
+}
 
-<style>  
+<style>
   .post-title {
     font-size: var(--sl-text-h3);
     font-weight: 600;

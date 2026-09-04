@@ -3,27 +3,31 @@
 import Default from '@astrojs/starlight/components/Hero.astro';
 import { PAGE_TITLE_ID } from '~/constants';
 
-const { entry, locale } = Astro.locals.starlightRoute;
-const { title, hero } = entry.data;
+const { 
+  entry, 
+  isBlogIndex 
+} = Astro.locals.starlightRoute;
 
-const currentLocale = locale || 'root';
-const basePath = currentLocale === 'root' ? '/blog' : `/${currentLocale}/blog`;
-const pathname = Astro.url.pathname;
-const isBlogIndex = pathname === basePath || pathname === `${basePath}/`;
+const { 
+  title, 
+  hero 
+} = entry.data;
 ---
 
-{isBlogIndex ? (
-  <div class="lg:py-18 blog-index-wrapper relative z-10 py-12 sm:py-14 md:py-16 xl:py-20 border-b border-(--sl-color-gray-5)">
-    <div class="absolute inset-x-0 top-0 h-px w-full bg-linear-to-r from-transparent via-(--sl-color-accent-high) to-transparent opacity-50" />
-    <div class="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(rgba(128,128,128,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(128,128,128,0.1)_1px,transparent_1px)] mask-[radial-gradient(ellipse_80%_80%_at_50%_0%,#000_40%,transparent_100%)] bg-size-[24px_24px]" />
-    <div class="relative flex flex-col flex-1 items-center gap-6 text-center z-20">
-      <h1 id={PAGE_TITLE_ID} class="blog-index-title mx-auto max-w-5xl text-(--sl-text-h3) sm:text-(--sl-text-h2) lg:text-(--sl-text-h1)" set:html={hero?.title || title} />
-      {hero?.tagline && <p class="blog-index-tagline text-(--sl-color-gray-2)" set:html={hero.tagline} />}
+{
+  isBlogIndex ? (
+    <div class="lg:py-18 blog-index-wrapper relative z-10 py-12 sm:py-14 md:py-16 xl:py-20 border-b border-(--sl-color-gray-5)">
+      <div class="absolute inset-x-0 top-0 h-px w-full bg-linear-to-r from-transparent via-(--sl-color-accent-high) to-transparent opacity-50" />
+      <div class="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(rgba(128,128,128,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(128,128,128,0.1)_1px,transparent_1px)] mask-[radial-gradient(ellipse_80%_80%_at_50%_0%,#000_40%,transparent_100%)] bg-size-[24px_24px]" />
+      <div class="relative flex flex-col flex-1 items-center gap-6 text-center z-20">
+        <h1 id={PAGE_TITLE_ID} class="blog-index-title mx-auto max-w-5xl text-(--sl-text-h3) sm:text-(--sl-text-h2) lg:text-(--sl-text-h1)" set:html={hero?.title || title} />
+        {hero?.tagline && <p class="blog-index-tagline text-(--sl-color-gray-2)" set:html={hero.tagline} />}
+      </div>
     </div>
-  </div>
-) : (
-    <Default {...Astro.props} />
-)}
+  ) : (
+    <Default />
+  )
+}
 
 <style>
   /* --- Blog Index Styles --- */
@@ -41,7 +45,7 @@ const isBlogIndex = pathname === basePath || pathname === `${basePath}/`;
     z-index: 20;
   }
 
-  .blog-index-title{
+  .blog-index-title {
     font-weight: 600;
     line-height: var(--sl-line-height-headings);
     color: var(--sl-color-white);
@@ -51,7 +55,6 @@ const isBlogIndex = pathname === basePath || pathname === `${basePath}/`;
   .blog-index-tagline {
     --sans-wght: 300;
     -webkit-font-smoothing: subpixel-antialiased;
-
     font-size: var(--sl-text-body);
     font-weight: 300;
     line-height: var(--sl-line-height);
@@ -78,9 +81,8 @@ const isBlogIndex = pathname === basePath || pathname === `${basePath}/`;
     .post-title {
       font-size: var(--sl-text-h2);
     }
-    
     .blog-index-hero .blog-index-title {
-      font-size: var(--sl-text-h1)
+      font-size: var(--sl-text-h1);
     }
   }
 </style>

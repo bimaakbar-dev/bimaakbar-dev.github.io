@@ -1,5 +1,5 @@
 .starlight-aside {
-	display: inline-block;
+	display: block;
 	box-sizing: border-box;
 	position: relative;
 	padding: 1rem 1rem 1rem 1.65rem;

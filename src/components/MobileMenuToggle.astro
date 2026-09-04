@@ -1,10 +1,11 @@
 ---
 import { Icon } from '@astrojs/starlight/components';
 ---
-
 <button popovertarget="starlight__sidebar" class="sl-menu-button sl-flex md:sl-hidden print:hidden">
-	<Icon name="bars" class="open-menu" />
-	<Icon name="close" class="close-menu" />
+	<div class="inline-flex items-center shrink-0 justify-center icon-wrapper">
+		<Icon name="bars" class="open-menu" />
+		<Icon name="close" class="close-menu" />
+	</div>
 	<span class="sr-only">{Astro.locals.t('menuButton.accessibleLabel')}</span>
 </button>
 
@@ -15,24 +16,30 @@ import { Icon } from '@astrojs/starlight/components';
 			top: calc((var(--sl-nav-height) - var(--sl-menu-button-size)) / 2);
 			inset-inline-end: var(--sl-nav-pad-x);
 			z-index: var(--sl-z-index-navbar);
-			border: 0;
-			border-radius: 50%;
 			width: var(--sl-menu-button-size);
 			height: var(--sl-menu-button-size);
-			padding: 0;
+			padding: 0.25rem;
+			border-radius: 0.5rem;
 			background-color: transparent;
 			color: var(--sl-color-white);
 			box-shadow: none;
 			cursor: pointer;
-            align-items: center;
-            justify-content: center;
-            display: block;
-            flex-shrink: 0;
+			align-items: center;
+			justify-content: center;
+			display: flex;
+			flex-shrink: 0;
+		}
+
+		/* 🔥 Paksa ukuran ikon */
+		button .icon-wrapper svg {
+			width: 1.5rem !important;
+			height: 1.5rem !important;
+			flex-shrink: 0;
 		}
 
 		button:has(~ :popover-open) {
 			background-color: transparent;
-            color: var(--sl-color-white);
+			color: var(--sl-color-white);
 			box-shadow: none;
 		}
 

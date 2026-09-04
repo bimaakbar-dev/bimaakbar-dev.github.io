@@ -1,0 +1,92 @@
+---
+// src/components/GlobalMobileMenu.astro
+import { Icon } from '@astrojs/starlight/components';
+import MobileMenuFooter from '@astrojs/starlight/components/MobileMenuFooter.astro'
+import NavLinks from '~/components/NavLinks.astro';
+---
+
+<details class="global-mobile-menu md:sl-hidden print:hidden">
+  <summary class="menu-button">
+    <Icon name="bars" class="open-icon" />
+    <Icon name="close" class="close-icon" />
+    <span class="sr-only">{Astro.locals.t('menuButton.accessibleLabel')}</span>
+  </summary>
+  <div class="dropdown-panel">
+    <NavLinks />
+    <MobileMenuFooter/>
+  </div>
+</details>
+
+<style>
+  :global(.mobile-preferences) {
+		justify-content: space-between;
+		flex-wrap: wrap;
+		border-top: 1px solid var(--sl-color-gray-6);
+		column-gap: 1rem;
+		padding: 0 !important;
+    margin-top: 1rem;
+	}
+  .global-mobile-menu {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .global-mobile-menu summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 0;
+    background: transparent;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+    color: var(--sl-color-white);
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+  .global-mobile-menu summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .global-mobile-menu:not([open]) .close-icon {
+    display: none;
+  }
+  .global-mobile-menu[open] .open-icon {
+    display: none;
+  }
+
+  .dropdown-panel {
+    position: fixed;
+    top: calc(var(--sl-nav-height));
+    inset-inline: 0;
+    width: 100%;
+    max-width: calc(100dvw);
+    padding-inline: 1rem;
+    padding-block-start: 1rem;
+    padding-block-end: 0.5rem;
+    background-color: var(--sl-color-bg-nav);
+    box-shadow: var(--sl-shadow-lg);
+    z-index: var(--sl-z-index-dropdown);
+    border-bottom: 1px solid var(--sl-color-gray-5);
+    border-end-end-radius: 0.5rem;
+    border-end-start-radius: 0.5rem;
+  }
+
+  .dropdown-panel :global(.nav-links) {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .dropdown-panel :global(.nav-link) {
+    font-size: var(--sl-text-body);
+    padding: 0.5rem 0;
+    width: 100%;
+  }
+
+  @media (min-width: 50rem) {
+    .global-mobile-menu {
+      display: none !important;
+    }
+  }
+</style>

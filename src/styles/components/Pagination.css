@@ -4,6 +4,7 @@
 	border-radius: 0.5rem;
 	color: var(--sl-color-gray-2);
 	box-shadow: none;
+	font-size: var(--sl-text-sm);
 }
 
 .pagination-links a:hover {

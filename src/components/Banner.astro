@@ -44,6 +44,11 @@ const stars = [
 		--__sl-banner-text: var(--sl-color-banner-text, var(--sl-color-text-invert));
 		position: relative;
 		padding: var(--sl-nav-pad-y) var(--sl-nav-pad-x);
+		background:
+		linear-gradient(215deg, var(--overlay-blurple), transparent 40%),
+		radial-gradient(var(--overlay-blurple), transparent 40%) no-repeat -60vw -40vh / 105vw 200vh,
+		radial-gradient(var(--overlay-blurple), transparent 65%) no-repeat 50% calc(100% + 20rem) /
+			60rem 30rem;
 		background-color: var(--sl-color-banner-bg, var(--sl-color-bg-accent));
 		overflow: hidden;
 		isolation: isolate;

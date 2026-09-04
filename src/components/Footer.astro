@@ -2,20 +2,11 @@
 import { Icon } from '@astrojs/starlight/components';
 import Default from '@astrojs/starlight/components/Footer.astro';
 
-const { locale, entry } = Astro.locals.starlightRoute;
-
-const currentLocale = locale || 'root';
-const basePath = currentLocale === 'root' ? '/blog' : `/${currentLocale}/blog`;
-const prefix = currentLocale === 'root' ? 'blog/' : `${currentLocale}/blog/`;
-
-const pathname = Astro.url.pathname;
-const isBlogIndex = pathname === basePath || pathname === `${basePath}/`;
-const isBlogPost = entry.id?.startsWith(prefix);
-const isBlogPage = isBlogIndex || isBlogPost;
+const { isBlog } = Astro.locals.starlightRoute;
 ---
 
 {
-  isBlogPage ? (
+  isBlog ? (
     <footer class="sl-flex">
       <a class="kudos sl-flex" href="https://starlight.astro.build">
         <Icon name="starlight" /> {Astro.locals.t('builtWithStarlight.label')}

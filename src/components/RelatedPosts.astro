@@ -10,14 +10,14 @@ interface Props {
 
 const { currentSlug, limit = 2 } = Astro.props;
 
-const { locale } = Astro.locals.starlightRoute || {};
-const currentLocale = locale || 'root';
+const route = Astro.locals.starlightRoute as any;
 
-const localePrefix = currentLocale === 'root' ? 'blog/' : `${currentLocale}/blog/`;
+const { blogPrefix, blogBasePath } = route;
 
 const allPosts = await getCollection('docs', ({ data }) => !data.draft);
 
-const postsInSameLocale = allPosts.filter(p => p.id.startsWith(localePrefix));
+const postsInSameLocale = allPosts.filter(p => p.id.startsWith(blogPrefix as any));
+
 const currentPost = postsInSameLocale.find((p) => p.id === currentSlug);
 if (!currentPost) return;
 
@@ -37,10 +37,11 @@ const relatedPosts = postsInSameLocale
   .slice(0, limit);
 
 const getHref = (post: { id: string }) => {
-  const slug = post.id.replace(/^(id\/)?blog\//, '');
-  return currentLocale === 'root' ? `/blog/${slug}` : `/${currentLocale}/blog/${slug}`;
+  const slug = post.id.slice(blogPrefix.length);
+  return `${blogBasePath}/${slug}`;
 };
 
+// Styling
 const $ = {
   card: [
     'relative flex flex-col h-full',

@@ -11,9 +11,11 @@ site-search button[data-open-modal] {
     site-search button[data-open-modal] {
         border: 1px solid var(--sl-color-gray-5);
         border-radius: 0.5rem;
-        background-color: var(--sl-color-black);
+        background-color: var(--sl-color-bg);
         color: var(--sl-color-gray-2);
         font-size: var(--sl-text-sm);
+        min-width: 16rem;
+        width: 100%
     }
     site-search button[data-open-modal]:hover {
         border-color: none;
@@ -31,7 +33,7 @@ site-search button > kbd {
     font-size: var(--sl-text-2xs);
     gap: 0.25em;
     padding-inline: 0.375rem;
-    background-color: var(--sl-color-gray-6);
+    background-color: var(--sl-color-gray-5);
     font-family: var(--__sl-font);
 }
 

@@ -1,5 +1,5 @@
 ---
-// src/pages/blog/[...slug].astro
+// src/pages/blog/index.astro
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import BlogPage from '~/components/BlogPage.astro';
 ---
@@ -35,6 +35,6 @@ import BlogPage from '~/components/BlogPage.astro';
         margin: 0
     }
     .sl-container > * + * {
-		margin-top: 0 !important;
-    }
+      margin-top: 0 !important;
+      }
 </style>

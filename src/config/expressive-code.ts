@@ -1,5 +1,7 @@
 // src/config/expressive-code.ts
-export const expressiveCodeConfig = {
+import type { StarlightExpressiveCodeOptions } from '@astrojs/starlight/expressive-code';
+
+export const expressiveCode: StarlightExpressiveCodeOptions = {
   styleOverrides: {
     borderColor: 'var(--sl-color-hairline)',
     borderRadius: '0.5rem',
@@ -41,4 +43,4 @@ export const expressiveCodeConfig = {
       markdoc: 'mdx',
     },
   },
-} as const;
+};

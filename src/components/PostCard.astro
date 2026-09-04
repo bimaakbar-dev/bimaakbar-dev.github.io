@@ -4,13 +4,12 @@ import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import FormattedDate from './FormattedDate.astro';
 
-const { locale } = Astro.locals.starlightRoute || {};
+const route = Astro.locals.starlightRoute as any;
+const { blogPrefix, blogBasePath } = route;
 
-const currentLocale = locale || 'root';
-const prefix = currentLocale === 'root' ? 'blog/' : `${currentLocale}/blog/`;
 const allPosts = await getCollection('docs', ({ id, data }) => {
   if (data.draft) return false;
-  return id.startsWith(prefix);
+  return id.startsWith(blogPrefix);
 });
 
 const blogPosts = allPosts
@@ -49,8 +48,8 @@ const $ = {
   blogPosts.map((post) => {
     const { data } = post;
     const { title, description, pubDate, heroImage } = data;
-    const slug = post.id.replace(/^(id\/)?blog\//, '');
-    const href = currentLocale === 'root' ? `/blog/${slug}` : `/${currentLocale}/blog/${slug}`;
+    const slug = post.id.slice(blogPrefix.length);
+    const href = `${blogBasePath}/${slug}`;
 
     return (
       <li class="w-full">

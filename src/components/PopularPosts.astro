@@ -9,14 +9,14 @@ export interface Props {
 
 const { limit = 5, excludeCurrent } = Astro.props;
 
-const { locale } = Astro.locals.starlightRoute || {};
+const route = Astro.locals.starlightRoute as any;
 
-const currentLocale = locale || 'root';
-const prefix = currentLocale === 'root' ? 'blog/' : `${currentLocale}/blog/`;
+const blogPrefix = route.blogPrefix || 'blog/';
+const blogBasePath = route.blogBasePath || '/blog';
 
 const allEntries = await getCollection('docs', ({ id, data }) => {
   if (data.draft) return false;
-  return id.startsWith(prefix);
+  return id.startsWith(blogPrefix);
 });
 
 const popularPosts = allEntries
@@ -41,9 +41,8 @@ const popularPosts = allEntries
         {popularPosts.map((post) => {
           if (!post?.id) return null;
 
-          const slug = post.id.replace(/^(id\/)?blog\//, '');
-          // 🔥 Build href berdasarkan currentLocale
-          const href = currentLocale === 'root' ? `/blog/${slug}` : `/${currentLocale}/blog/${slug}`;
+          const slug = post.id.slice(blogPrefix.length);
+          const href = `${blogBasePath}/${slug}`;
 
           return (
             <li class="popular-posts-item">
