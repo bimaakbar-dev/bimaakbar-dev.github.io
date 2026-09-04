@@ -41,6 +41,7 @@
 
 .starlight-aside__title + .starlight-aside__content {
 	margin-top: 0.5rem;
+  font-size: var(--sl-text-sm);
 }
 
 .starlight-aside__content a {
