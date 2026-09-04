@@ -20,8 +20,6 @@ import { Aside, Badge, Card, CardGrid, LinkCard, Tabs, TabItem } from '@astrojs/
 
 [Astro Starlight](https://starlight.astro.build) is a solid documentation foundation — lightweight, MDX-based, and well-structured. But its default interface feels generic. For projects that want their own visual identity, that's a hindrance from day one.
 
-**Stradocs** was born out of a simple frustration: *why start from scratch every time you want to be different?*
-
 Inspired by **Fumadocs**'s clean and opinionated design approach, and **Vercel**'s precise and minimal aesthetic, Stradocs is built on one philosophy:
 
 > **Clean. Premium. Modern.**
@@ -39,12 +37,9 @@ Inspired by **Fumadocs**'s clean and opinionated design approach, and **Vercel**
 
 <Tabs>
   <TabItem label="Core" icon="rocket">
-    | Technology |  Version |
-     |---|---|
-     |  Astro |  `7.3` |
-     |  Starlight |  `0.42` |
-     |  Tailwind CSS |  via Vite plugin |
-     |  Markdown Processor |  `@astrojs/markdown-satteri` |
+    - [Astro](https://astro.build/) <Badge text="7.3" variant="note" />
+    - [Starlight](https://starlight.astro.build/) <Badge text="0.42" variant="note" />
+    - [TailwindCss](https://tailwindcss.com/) <Badge text="4" variant="new" />
    </TabItem>
    <TabItem label="Font" icon="seti:font">
      |  Role |  Typeface |  Format |
@@ -52,12 +47,6 @@ Inspired by **Fumadocs**'s clean and opinionated design approach, and **Vercel**
      |  Headings |  Montserrat |  `.woff2` (local) |
      |  Body |  Inter |  `.woff2` (local) |
      |  Mono / Code |  FiraCode |  `.woff2` (local) |
-  </TabItem>
-  <TabItem label="Deploy" icon="github">
-    | | |
-    |---|---|
-    | Platform | GitHub Pages |
-    | Repo | [bimaakbar-dev/bimaakbar-dev.github.io](https://github.com/bimaakbar-dev/bimaakbar-dev.github.io) |
   </TabItem>
 </Tabs>
 
@@ -213,7 +202,9 @@ Stradocs was built by **Bima Akbar** and is released completely free and open so
 git clone https://github.com/bimaakbar-dev/bimaakbar-dev.github.io.git my-docs
 
 cd my-docs
+
 npm install
+
 npm run dev
 ```
 
