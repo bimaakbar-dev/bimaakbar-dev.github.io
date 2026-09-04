@@ -7,33 +7,15 @@ export const sidebarConfig = [
     ],
   },
   {
-    label: 'Guides',
-    items: [
-      { label: 'Example Guide', slug: 'guides/example' }
-    ],
-  },
-  {
-    label: 'Reference',
-    items: [
-      { autogenerate: 
-        { directory: 'reference' } 
-      }
-    ],
-  },
-  {
     label: 'Writing',
     items: [
-     { autogenerate:
-       { directory: 'docs/writing' }
-     }
+     { autogenerate: { directory: 'docs/writing' } },
+     { label: 'Markdown', slug: 'docs/writing/markdown' },
+     { label: 'Using Mdx, slug: 'docs/writing/using-mdx' }
     ],
   },
   {
     label: 'Components',
-    items: [
-      { autogenerate: 
-        { directory: 'components' } 
-      }
-    ],
+    items: [{ autogenerate: { directory: 'components' } }],
   },
 ];
