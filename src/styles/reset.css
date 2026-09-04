@@ -69,7 +69,3 @@ h6 {
 p {
   text-wrap: pretty;
 }
-
-code, pre, kbd {
-  font-family: var(--font-firaCode);
-}
