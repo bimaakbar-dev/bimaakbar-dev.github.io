@@ -41,7 +41,7 @@
     --sl-color-purple-high: rgb(216, 180, 254);
 
     --sl-color-accent-low: rgb(229 229 229 / 0.15);
-    --sl-color-accent: rgb(229, 229, 229);
+    --sl-color-accent: hsl(224, 100%, 85%);
     --sl-color-accent-high: hsl(224, 100%, 85%);
 
     --sl-color-text: rgb(168, 168, 168);
