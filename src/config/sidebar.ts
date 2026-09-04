@@ -9,9 +9,9 @@ export const sidebarConfig = [
   {
     label: 'Writing',
       items: [
-        { autogenerate: { directory: 'docs/writing' } },
-        { label: 'Markdown', slug: 'docs/writing/markdown' },
-        { label: 'Using MDX', slug: 'docs/writing/using-mdx' }
+        { autogenerate: { directory: 'docs/writting' } },
+        { label: 'Markdown', slug: 'docs/writting/markdown' },
+        { label: 'Using MDX', slug: 'docs/writting/using-mdx' }
       ],
   },
   {
