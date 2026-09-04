@@ -17,14 +17,14 @@
 1. `Clone` or `Fork` this repository into your local project.
 2. Run the dependency installation command in the terminal:
   
-  ```bash
-  npm install
-  ```
+   ```bash
+   npm install
+   ```
 3. Start a local development server:
   
-  ```bash
-  npm run dev
-  ```
+   ```bash
+   npm run dev
+   ```
 The server will run automatically on `localhost:4321`.
 
 [Learn more about stradocs](https://bimaakbar-dev.github.io/docs/getting-started/introduction)
