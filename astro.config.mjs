@@ -3,7 +3,10 @@ import { defineConfig, fontProviders } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 import { sidebarConfig } from './src/config/sidebar';
-import { expressiveCodeConfig } from './src/config/expressive-code';
+import { expressiveCode } from './src/config/expressive-code';
+import { 
+    Overrides 
+} from './src/components/overwrite';
 
 import { satteri } from '@astrojs/markdown-satteri';
 import { satteriExternalLink } from './src/lib/plugins/satteri/external-link';
@@ -91,25 +94,9 @@ export default defineConfig({
                 replacesTitle: false,
             },
             favicon: '/images/favicon.svg',
-            customCss: [
-                './src/styles/global.css',
-            ],
-            // @ts-ignore
-            expressiveCode: expressiveCodeConfig,
-            components: {
-                Banner: './src/components/Banner.astro',
-                DraftContentNotice: './src/components/FallbackContentNotice.astro',
-                FallbackContentNotice: './src/components/FallbackContentNotice.astro',
-                Footer: './src/components/Footer.astro',
-                Head: './src/components/Head.astro',
-                Header: './src/components/Header.astro',
-                Hero: './src/components/Hero.astro',
-                MarkdownContent: './src/components/MarkdownContent.astro',
-                MobileMenuToggle: './src/components/MobileMenuToggle.astro',
-                PageTitle: './src/components/PageTitle.astro',
-                SkipLink: './src/components/SkipLink.astro'
-                
-            },
+            customCss: [ './src/styles/global.css' ],
+            expressiveCode: expressiveCode,
+            components: Overrides,
             social: [
                 { icon: 'github', label: 'GitHub', href: 'https://github.com/bimaakbar-dev' }
             ],
@@ -118,6 +105,7 @@ export default defineConfig({
 			},
             credits: true,
             sidebar: sidebarConfig,
+            routeMiddleware: './src/routeData.ts',
         }),
     ],
 
