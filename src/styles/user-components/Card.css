@@ -33,7 +33,7 @@
 .card .icon {
 	font-size: var(--sl-text-lg);
 	border: none;
-	color: var(--sl-card-border);
+	color: var(--sl-color-gray-2);
 	background-color: transparent;
 	padding: 0;
 	border-radius: 0;
