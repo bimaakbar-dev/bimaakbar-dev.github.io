@@ -23,6 +23,14 @@ export const sidebarConfig = [
   {
     label: 'Writing',
     items: [
+     { autogenerate:
+       { directory: 'docs/writing' }
+     }
+    ],
+  },
+  {
+    label: 'Writing',
+    items: [
       { label: 'Markdown', slug: 'writing/markdown' }
     ],
   },
