@@ -1,0 +1,11 @@
+{
+  "component.preview": "Pratinjau",
+
+  "blog.PostAuthor": "Oleh",
+  "blog.relatedPostLabel": "Postingan terkait",
+  "blog.PopularPostLabel": "Postingan populer",
+
+  "rss.RssFeedLabel": "Berlangganan",
+  "rss.RssFeedTitle": "RSS",
+  "rss.RssFeedDesc": "Dapatkan informasi terkini dari Stargazers"
+}

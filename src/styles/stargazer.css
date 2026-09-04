@@ -35,3 +35,15 @@
 [data-has-hero] .hero > img {
 	filter: drop-shadow(0 0 3rem var(--overlay-blurple));
 }
+
+.site-title {
+	align-items: center;
+	gap: 0.5rem;
+	font-size: var(--sl-text-h4);
+	font-weight: 600;
+	color: var(--sl-color-white);
+	text-decoration: none;
+	white-space: nowrap;
+	min-width: 0;
+	font-family: var(--font-montserrat);
+}

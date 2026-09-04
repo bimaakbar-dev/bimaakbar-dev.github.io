@@ -1,5 +1,5 @@
 :root {
-	--sl-badge-default-border: var(--sl-color-accent);
+	--sl-badge-default-border: var(--sl-color-accent-high);
 	--sl-badge-default-bg: var(--sl-color-accent);
 	--sl-badge-default-text:  #000;
 	
@@ -20,7 +20,7 @@
 	--sl-badge-caution-text: #fff;
 
 	--sl-badge-tip-border: var(--sl-color-purple);
-	--sl-badge-tip-bg: var(--sl-color-purple);
+	--sl-badge-tip-bg: var(--sl-color-purple-high);
 	--sl-badge-tip-text: #fff;
 }
 

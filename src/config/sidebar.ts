@@ -2,14 +2,57 @@
 export const sidebarConfig = [
   {
     label: 'Getting Started',
-    items: [{ autogenerate: { directory: 'docs/getting-started' } }],
+    translations: {
+      'id': 'Memulai',
+    },
+    items: [
+      { autogenerate: 
+        { directory: 'docs/getting-started' } 
+      }
+    ],
+  },
+  {
+    label: 'Guides',
+    translations: {
+      'id': 'Panduan',
+    },
+    items: [
+      { autogenerate: 
+        { directory: 'docs/guides' } 
+      }
+    ],
   },
   {
     label: 'Writing',
-    items: [{ autogenerate: { directory: 'docs/writting' } }],
+    translations: {
+      'id': 'Menulis',
+    },
+    items: [
+      { autogenerate: 
+        { directory: 'docs/writing' } 
+      }
+    ],
   },
   {
     label: 'Components',
-    items: [{ autogenerate: { directory: 'components' } }],
+    translations: {
+      'id': 'Komponen',
+    },
+    items: [
+      { autogenerate: 
+        { directory: 'docs/components' } 
+      }
+    ],
+  },
+  {
+    label: 'Reference',
+    translations: {
+      'id': 'Referensi',
+    },
+    items: [
+      { autogenerate: 
+        { directory: 'docs/reference' } 
+      }
+    ],
   },
 ];
