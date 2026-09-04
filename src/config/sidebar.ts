@@ -29,12 +29,6 @@ export const sidebarConfig = [
     ],
   },
   {
-    label: 'Writing',
-    items: [
-      { label: 'Markdown', slug: 'writing/markdown' }
-    ],
-  },
-  {
     label: 'Components',
     items: [
       { autogenerate: 
