@@ -1,33 +1,239 @@
 ---
-title: "Stradocs V1.0"
-description: "Rilis perdana Stradocs v1.0, tema kustom Starlight dengan arsitektur layout mandiri dan performa optimal."
-pubDate: 2026-09-04
-draft: false
+title: 'Stradocs 1.0'
+description: 'Memperkenalkan Stradocs 1.0 — Tema Astro Starlight'
+editUrl: https://github.com/bimaakbar-dev/bimaakbar-dev.github.io
 author:
-  name: Bima Akbar
-  avatar: ~/assets/images/author/bimaakbar.svg
+  name: 'Bima Akbar'
+  avatar: ~/assets/images/author/bimaakbar-dev.svg
 heroImage: ~/assets/images/blog/stradocs-v1.jpg
 tags:
   - astro
   - starlight
+  - announcement
   - stradocs
   - v1.0
+draft: false
 ---
 
-Selamat datang di **Stradocs V1.0**—rilis perdana dari tema kustom Starlight yang dibangun khusus untuk menghadirkan pengalaman dokumentasi dan publikasi yang bersih, cepat, serta sepenuhnya independen dari layout bawaan.
+Memperkenalkan **Stradocs 1.0** — Tema Astro Starlight yang Didesain Ulang dari Nol
 
-## Filosofi
+:::note
+Versi pertama Stradocs: tema open-source berbasis Astro Starlight dengan redesign komponen menyeluruh, sistem blog terintegrasi, dukungan dua bahasa, font lokal, OG Image, dan RSS — terinspirasi dari Fumadocs dan Vercel, bebas di-fork oleh siapa saja.
+:::
 
-Dalam pengembangan tema ini, fokus utama kami adalah kebebasan tata letak (*layout freedom*). Dengan menanggalkan sidebar bawaan Starlight dan mengoptimalkan struktur halaman kustom via `Page.astro`, tema ini memberikan ruang baca yang luas tanpa distraksi elemen UI yang tidak diperlukan.
+## Ini Bukan Sekadar Ganti Warna
 
-## Fitur Utama Tema Stradocs V1.0
+[Astro Starlight](https://starlight.astro.build) adalah fondasi dokumentasi yang solid. Ringan, berbasis MDX, dan terstruktur dengan baik. Tapi tampilannya yang default terasa generik — dan untuk proyek yang ingin punya identitas visual sendiri, itu jadi hambatan sejak hari pertama.
 
-- **Custom Page Architecture:** Pengendalian penuh terhadap elemen kerangka HTML dan struktur dokumen secara langsung.
-- **Optimized Styling:** Memanfaatkan penyematan CSS modular untuk menjaga performa render tetap ringan.
-- **Automated Syndication:** Dukungan *RSS Feed* bawaan untuk memudahkan pembaca melacak artikel terbaru.
+Stradocs lahir dari frustrasi yang sederhana: *mengapa harus memulai dari nol setiap kali ingin tampil berbeda?*
 
-## Fokus Konten dan Pengembangan
+Terinspirasi oleh pendekatan desain **Fumadocs** yang bersih dan teropini, serta estetika sistem **Vercel** yang presisi dan minimal, Stradocs dibangun di atas satu filosofi: **clean, premium, dan modern**. Bukan starter kit asal jadi — melainkan tema yang sudah memikirkan tipografi, komponen, skema konten, dan pengalaman menulis sejak awal. Setiap detail dirancang agar hasilnya terasa selesai, bukan setengah jadi.
 
-Sebagai tema yang dirancang untuk kreator, platform ini difokuskan untuk menampung berbagai arsip digital, catatan pemrograman, eksperimen *modding*, hingga dokumentasi project pribadi secara terstruktur[span_0](start_span)[span_0](end_span).
+## Untuk Siapa Stradocs Dibuat?
 
-Nantikan pembaruan fitur, dokumentasi komponen, serta artikel teknis seputar pengembangan web berikutnya melalui platform ini.
+Stradocs dirancang untuk siapa saja yang ingin membangun situs dokumentasi atau blog teknikal yang tampak profesional tanpa harus membangun segalanya dari nol:
+
+- **Developer** yang ingin dokumentasi proyek dengan tampilan yang layak sejak hari pertama
+- **Content creator** yang membutuhkan platform penulisan yang fleksibel dan dapat dikustomisasi
+- **Penulis teknikal** yang ingin fokus pada konten, bukan konfigurasi
+- **Siapa saja yang sedang belajar** Astro, Starlight, atau ekosistem static site generation — Stradocs bisa dijadikan referensi arsitektur nyata yang bisa dibaca langsung dari kodenya
+
+## Stack & Versi
+
+| Teknologi | Detail |
+|---|---|
+| Astro | `7.3` |
+| Starlight | `0.42` |
+| CSS Framework | Tailwind CSS (via Vite plugin) |
+| Markdown Processor | `@astrojs/markdown-satteri` |
+| Font Heading | Montserrat (lokal, `.woff2`) |
+| Font Body | Inter (lokal, `.woff2`) |
+| Font Mono/Kode | FiraCode (lokal, `.woff2`) |
+| Deploy Target | GitHub Pages |
+
+Semua font dihosting secara lokal menggunakan Astro `fontProviders.local()` — tidak ada request ke Google Fonts atau CDN eksternal. Performa dan privasi pengguna tetap terjaga sejak load pertama.
+
+## Fitur yang Disertakan
+
+### Redesign Komponen Starlight
+
+Stradocs mengganti sebagian besar komponen bawaan Starlight dengan versi yang didesain ulang secara visual. Komponen-komponen berikut memiliki implementasi custom:
+
+| Komponen | Keterangan |
+|---|---|
+| `Header` | Navigasi utama dengan tampilan yang didesain ulang |
+| `Hero` | Seksi hero halaman utama |
+| `Footer` | Footer dengan informasi dan tautan custom |
+| `Head` | Pengelolaan meta tag, OG Image, dan font |
+| `Banner` | Banner pengumuman atas halaman |
+| `MarkdownContent` | Wrapper konten artikel dengan tipografi custom |
+| `PageTitle` | Judul halaman dengan styling tersendiri |
+| `MobileMenuToggle` | Toggle menu mobile |
+| `SkipLink` | Aksesibilitas navigasi keyboard |
+| `FallbackContentNotice` | Notifikasi konten fallback untuk i18n |
+
+Custom CSS distrukturkan dalam `src/styles/global.css` agar mudah dipelihara dan di-override lebih lanjut.
+
+### Markdown Plugins via `Satteri`
+
+Alih-alih directive component MDX konvensional, Stradocs menggunakan `@astrojs/markdown-satteri` sebagai markdown processor dengan dua plugin custom berbasis hast:
+
+**`satteriExternalLink`** — Memproses semua tautan eksternal secara otomatis di level AST. Setiap tautan yang mengarah keluar dari situs mendapat atribut dan indikator visual yang sesuai tanpa penulis konten harus menulis markup tambahan.
+
+**`satteriTable`** — Membungkus setiap tabel dalam container responsif yang scrollable secara horizontal. Masalah klasik tabel lebar di layar kecil terselesaikan secara otomatis untuk semua konten, termasuk konten yang sudah ada.
+
+Pendekatan berbasis hast plugin ini berarti kedua fitur bekerja di semua file Markdown dan MDX tanpa memerlukan import komponen tambahan di setiap file konten.
+
+### Halaman Blog Custom
+
+Starlight dirancang untuk dokumentasi, bukan blog. Stradocs menambahkan sistem blog yang terintegrasi penuh — bukan plugin terpisah, melainkan bagian dari struktur proyek yang sama.
+
+Halaman blog mencakup:
+- Listing artikel dengan pagination
+- Halaman detail artikel individual
+- Filter berdasarkan tag
+- Tampilan author dengan avatar
+
+Penggunaan komponen di dalam konten blog sama seperti bawaan Starlight. Kamu bisa membuat versi `.mdx` jika ingin menggunakan komponen langsung di dalam artikel.
+
+### Extended Docs Schema untuk Blog
+
+Skema konten Starlight diperluas menggunakan opsi `extend` dari `docsSchema()`. Semua field bersifat opsional sehingga halaman dokumentasi biasa tidak perlu menyertakannya.
+
+```ts
+// src/content.config.ts
+schema: docsSchema({
+  extend: ({ image }) => z.object({
+    pubDate: z.coerce.date().optional(),
+    heroImage: z.optional(image()),
+    author: z.array(z.object({
+      name: z.string().optional(),
+      avatar: z.optional(image()),
+    })).optional(),
+    tags: z.array(z.string()).optional(),
+  }),
+})
+```
+
+Contoh frontmatter artikel blog:
+
+```yaml
+---
+title: 'Judul Artikel'
+description: 'Deskripsi singkat artikel'
+pubDate: 2025-09-01
+author:
+  - name: 'Bima Akbar'
+    avatar: ~/assets/images/author/bimaakbar-dev.svg
+heroImage: ~/assets/images/blog/cover.jpg
+tags:
+  - astro
+  - tutorial
+draft: false
+---
+```
+
+| Field | Tipe | Keterangan |
+|---|---|---|
+| `pubDate` | `Date` (opsional) | Tanggal publikasi; di-coerce otomatis dari string |
+| `heroImage` | `ImageMetadata` (opsional) | Gambar utama, diproses Astro Image |
+| `author` | `{ name?, avatar? }[]` (opsional) | Array penulis — mendukung multi-author dengan avatar |
+| `tags` | `string[]` (opsional) | Kategori / tag artikel |
+
+`author` didesain sebagai array sehingga satu artikel dapat memiliki lebih dari satu penulis, masing-masing dengan nama dan avatar sendiri. Type-safety penuh — typo di frontmatter akan langsung tertangkap saat build.
+
+### Bilingual: English & Indonesia
+
+Stradocs dikonfigurasi dengan dukungan dua bahasa sejak awal:
+
+```ts
+locales: {
+  root: { label: 'English', lang: 'en' },
+  id:   { label: 'Indonesia', lang: 'id' },
+},
+```
+
+Selain routing i18n bawaan Starlight, skema i18n juga diperluas dengan string UI khusus untuk komponen blog:
+
+```ts
+// src/content.config.ts
+schema: i18nSchema({
+  extend: z.object({
+    'component.preview': z.string().optional(),
+    'blog.PostAuthor': z.string().optional(),
+    'blog.relatedPostLabel': z.string().optional(),
+    'blog.PopularPostLabel': z.string().optional(),
+    'rss.RssFeedLabel': z.string().optional(),
+    'rss.RssFeedTitle': z.string().optional(),
+    'rss.RssFeedDesc': z.string().optional(),
+  }),
+})
+```
+
+Semua label UI — judul RSS, label "Related Post", "Popular Post", nama author — dapat diterjemahkan. Tidak ada string yang di-hardcode di dalam komponen.
+
+### Komponen Blog Baru
+
+**`RelatedPost`**
+Menampilkan daftar artikel terkait di bawah konten blog berdasarkan kesamaan tag. Membantu pembaca menemukan konten relevan tanpa harus kembali ke halaman listing.
+
+**`PopularPost`**
+Widget sidebar atau inline untuk menampilkan artikel-artikel yang diprioritaskan. Dapat dikonfigurasi secara manual melalui frontmatter atau data statis.
+
+### Font Lokal
+
+Ketiga font didaftarkan melalui Astro `fontProviders.local()` dan dihosting sepenuhnya dalam repositori:
+
+- **Montserrat** — Heading. Geometris, tegas, berkarakter kuat di ukuran besar. Variable font weight `100–900`.
+- **Inter** — Body text. Sangat terbaca di berbagai ukuran layar dan resolusi. Variable font weight `100–900`.
+- **FiraCode** — Blok kode dan elemen monospace. Mendukung ligatures untuk pengalaman membaca kode yang lebih nyaman.
+
+Semua font dalam format `.woff2` untuk ukuran file optimal.
+
+### OG Image
+
+Setiap halaman — dokumentasi maupun artikel blog — secara otomatis menghasilkan Open Graph image. Tampilan konsisten dan profesional saat tautan dibagikan di media sosial, platform pesan, atau aplikasi apapun.
+
+### RSS Feed `rss.xml`
+
+Feed RSS tersedia di `/rss.xml` dan mencakup seluruh entri blog secara otomatis. Pembaca dapat berlangganan menggunakan RSS reader favorit mereka tanpa harus mengunjungi situs secara manual.
+
+## Open Source
+
+Stradocs dibangun oleh **Bima Akbar** dan dirilis sepenuhnya **gratis dan open source**. Tidak ada lisensi berbayar, tidak ada fitur yang dikunci.
+
+```bash
+# Clone repositori
+git clone https://github.com/bimaakbar-dev/bimaakbar-dev.github.io.git my-docs
+
+# Masuk ke direktori
+cd my-docs
+
+# Install dependensi
+npm install
+
+# Jalankan development server
+npm run dev
+```
+
+Sesuaikan konten, warna, dan konfigurasi sesuai kebutuhan proyek Anda. Arsitektur Stradocs dirancang agar mudah dibaca dan dimodifikasi — bukan magic, hanya kode Astro yang terstruktur.
+
+Kontribusi dalam bentuk apapun sangat terbuka: bug report, pull request, saran fitur, atau sekadar diskusi. Tidak ada prasyarat khusus untuk berkontribusi.
+
+> **Repositori:** [github.com/bimaakbar-dev/bimaakbar-dev.github.io](https://github.com/bimaakbar-dev/bimaakbar-dev.github.io)
+
+## Apa yang Tidak Disertakan — dan Kenapa
+
+Stradocs tidak membawa CMS, tidak bergantung pada database, dan tidak memerlukan backend. Ia tetap sepenuhnya static, sesuai filosofi Astro.
+
+Kompleksitas hanya ditambahkan di tempat yang memberikan nilai nyata. Bagi yang sedang belajar, ini juga berarti tidak ada lapisan abstraksi tersembunyi — kodenya transparan dan bisa ditelusuri dari awal hingga akhir.
+
+## Penutup
+
+Ini adalah versi pertama. Masih ada banyak yang ingin dikerjakan, tapi 1.0 sudah cukup matang untuk digunakan sebagai titik awal proyek nyata.
+
+Jika Anda membangun dokumentasi, blog teknikal, atau sekadar ingin referensi arsitektur Astro + Starlight yang lengkap — fork Stradocs, eksplorasi kodenya, dan jadikan milik Anda.
+
+→ [github.com/bimaakbar-dev/bimaakbar-dev.github.io](https://github.com/bimaakbar-dev/bimaakbar-dev.github.io)
+
+*Stradocs 1.0 — Dibuat oleh [Bima Akbar](https://github.com/bimaakbar-dev). Dibangun dengan Astro 7.3 & Starlight 0.42. Terinspirasi dari Fumadocs dan Vercel.*
