@@ -98,7 +98,8 @@ export default defineConfig({
             expressiveCode: expressiveCode,
             components: Overrides,
             social: [
-                { icon: 'github', label: 'GitHub', href: 'https://github.com/bimaakbar-dev' }
+                { icon: 'github', label: 'GitHub', href: 'https://github.com/bimaakbar-dev' },
+{ icon: 'discord', label: 'Discord', href: 'https://discord.com/users/bimaakbardev' },
             ],
             editLink: {
 				baseUrl: 'https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/edit/main/docs/',
