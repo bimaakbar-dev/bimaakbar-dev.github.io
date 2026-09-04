@@ -234,9 +234,10 @@
 }
 
 .sl-markdown-content :is(th, td):not(:where(.not-content *)) {
+	font-size: var(--sl-text-sm);
 	border-bottom: none;
 	padding: 0.5rem 1rem;
-	margin: 0
+	margin: 0;
 }
 
 .sl-markdown-content :is(th):not(:where(.not-content *)) {

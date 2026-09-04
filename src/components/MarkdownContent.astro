@@ -26,7 +26,6 @@ const isBlogPost = entry.id?.startsWith(prefix);
         <EditLink />
         <LastUpdated />
       </div>
-      <hr />
       <RelatedPosts currentSlug={entry.id} />
     </>
   ) : isBlogIndex ? (
@@ -34,9 +33,9 @@ const isBlogPost = entry.id?.startsWith(prefix);
       <slot />
     </div>
   ) : (
-    <Default>
+    <article class="sl-markdown-content">
       <slot />
-    </Default>
+    </article>
   )
 }
 

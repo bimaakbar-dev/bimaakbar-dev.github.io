@@ -42,6 +42,11 @@ const { Content } = await render(entry);
 
 
 <style is:global>
+  :root {
+    --sg-blog-content-width: 48rem;
+    --sg-blog-content-pad-x: var(--sl-content-pad-x);
+  }
+
   .main-frame {
     padding-top: 0;
   }
@@ -56,34 +61,34 @@ const { Content } = await render(entry);
 
   .content-panel + .content-panel {
     border-top: 1px solid var(--sl-color-gray-5);
-    max-width: 48rem;
+    max-width: 100dvw;
     margin-inline: auto;
     margin-block: 0
   }
 
   .content-panel .sl-container .sl-markdown-content {
-    max-width: 48rem;
     width: 100%;
+    max-width: var(--sg-blog-content-width);
     margin-inline: auto;
-    padding-inline: var(--sl-content-pad-x);
+    padding-inline: var(--sg-blog-content-pad-x);
   }
 
-  .content-panel .sl-container nav {
-    max-width: 48rem;
+  .content-panel .sl-container nav.related-post {
     width: 100%;
+    max-width: var(--sg-blog-content-width);
     margin-inline: auto;
-    padding-inline: var(--sl-content-pad-x);
+    padding-inline: var(--sg-blog-content-pad-x);
   }
 
   .content-panel .sl-container div.meta {
-    padding-inline: var(--sl-content-pad-x);
-    max-width: 48rem;
     width: 100%;
+    max-width: var(--sg-blog-content-width);
     margin-inline: auto;
+    padding-inline: var(--sg-blog-content-pad-x);
   }
 
   .content-panel .sl-container hr {
-    min-width: 100%;
+    width: 100%;
     border-top: 1px solid var(--sl-color-gray-5);
     margin-inline: auto;
   }
