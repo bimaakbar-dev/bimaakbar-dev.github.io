@@ -116,7 +116,7 @@ export default defineConfig({
                 { icon: 'github', label: 'GitHub', href: 'https://github.com/bimaakbar-dev' }
             ],
             editLink: {
-				baseUrl: 'https://github.com/bimaakbar-dev/starlight/edit/main/docs/',
+				baseUrl: 'https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/edit/main/docs/',
 			},
             credits: true,
             sidebar: sidebarConfig,
