@@ -11,9 +11,7 @@ import { satteriTable } from './src/lib/plugins/satteri/table';
 
 import tailwindcss from '@tailwindcss/vite';
 
-const PREVIEW_SITE = process.env.CONTEXT !== 'production' && process.env.DEPLOY_PRIME_URL;
-
-const site = PREVIEW_SITE || 'https://bimaakbar-dev.github.io/';
+const site = 'https://bimaakbar-dev.github.io/';
 
 // https://astro.build/config
 export default defineConfig({
@@ -75,7 +73,7 @@ export default defineConfig({
 
     integrations: [
         starlight({
-            title: 'stargazers',
+            title: 'stradocs',
             defaultLocale: 'root',
             locales: {
                 root: {
@@ -88,9 +86,9 @@ export default defineConfig({
                 },
             },
             logo: {
-                light: './src/assets/logo-light.svg',
-                dark: './src/assets/logo-dark.svg',
-                replacesTitle: true,
+                light: './src/assets/images/author/bimaakbar.svg',
+                dark: './src/assets/images/author/bimaakbar.svg',
+                replacesTitle: false,
             },
             favicon: '/images/favicon.svg',
             customCss: [
