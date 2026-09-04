@@ -1,0 +1,54 @@
+---
+title: Welcome to Stradocs
+description: Get started building your site with Stardocs.
+template: splash
+editUrl: false
+hero:
+  tagline: Congrats on setting up a new Stardocs project!
+  image:
+    file: ~/assets/images/author/bimaakbar.svg
+  actions:
+    - text: Start Here
+      link: /docs/getting-started/introduction
+      icon: rocket
+    - text: Read Blog
+      link: /blog/
+      icon: right-arrow
+      variant: secondary
+banner:
+  content: |
+    Stradocs 1.0 Out now!!
+    <a href="/blog/stradocs-v1">Check it out</a>
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import AboutAstro from '~/components/about-astro.astro';
+
+## Next steps
+
+<CardGrid stagger>
+	<Card title="Update content" icon="pencil">
+		Edit `src/content/docs/index.mdx` to see this page change.
+	</Card>
+	<Card title="Change page layout" icon="document">
+		Delete `template: splash` in `src/content/docs/index.mdx` to display a
+		sidebar on this page.
+	</Card>
+	<Card title="Add new content" icon="add-document">
+		Add Markdown or MDX files to `src/content/docs` to create new pages.
+	</Card>
+	<Card title="Configure your site" icon="setting">
+		Edit your `sidebar` and other config in `astro.config.mjs`.
+	</Card>
+	<Card title="Read the docs" icon="open-book">
+		Learn more in [the Starlight Docs](https://starlight.astro.build/).
+	</Card>
+</CardGrid>
+
+<AboutAstro title="Brought to you by">
+Astro is the all-in-one web framework designed for speed.
+Pull your content from anywhere and deploy everywhere, all powered by your favorite UI components and libraries.
+
+[Learn about Astro](https://astro.build/)
+
+</AboutAstro>

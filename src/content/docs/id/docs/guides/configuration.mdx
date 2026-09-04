@@ -1,0 +1,186 @@
+---
+title: 'Konfigurasi'
+description: 'Panduan konfigurasi Stradocs — file mana yang diubah untuk kebutuhan apa.'
+---
+
+import { Aside, Card, CardGrid, FileTree, LinkCard } from '@astrojs/starlight/components';
+
+Stradocs tidak memiliki file konfigurasi tersendiri. Semua konfigurasi tersebar di empat file utama, masing-masing dengan tanggung jawab yang jelas dan terpisah.
+
+<FileTree>
+- src/
+  - config/
+    - sidebar.ts
+    - expressive-code.ts
+  - constants.ts
+- astro.config.mjs
+</FileTree>
+
+## `astro.config.mjs`
+
+File konfigurasi utama Astro. Ini adalah tempat pertama yang perlu disentuh saat menyesuaikan Stradocs dengan proyek kamu.
+
+<Card title="site" icon="external">
+    URL produksi situs. Wajib diisi dengan benar agar OG Image, RSS feed, dan sitemap menghasilkan URL yang valid.
+
+    ```js
+    // astro.config.mjs
+    const site = 'https://domain-kamu.com';
+    ```
+</Card>
+<Card title="title" icon="document">
+    Nama situs yang muncul di tab browser, header, dan metadata. Ubah sesuai nama proyek kamu.
+
+    ```js
+    starlight({
+      title: 'Nama Proyekmu',
+    })
+    ```
+</Card>
+<Card title="logo" icon="star">
+    Logo situs dalam dua varian — `light` dan `dark` untuk mendukung mode terang dan gelap.
+
+    ```js
+    logo: {
+      light: './src/assets/logo-light.svg',
+      dark: './src/assets/logo-dark.svg',
+      replacesTitle: true,
+    }
+    ```
+</Card>
+<Card title="social" icon="github">
+    Tautan media sosial yang muncul di header. Tambah, hapus, atau ganti sesuai kebutuhan.
+
+    ```js
+    social: [
+      { icon: 'github', label: 'GitHub', href: 'https://github.com/username' }
+    ]
+    ```
+</Card>
+<Card title="locales" icon="translate">
+    Konfigurasi bahasa. Stradocs sudah dikonfigurasi untuk English (root) dan Indonesia (`/id`). Hapus bahasa yang tidak dibutuhkan atau tambahkan bahasa baru.
+
+    ```js
+    locales: {
+      root: { label: 'English', lang: 'en' },
+      id:   { label: 'Indonesia', lang: 'id' },
+    }
+    ```
+</Card>
+<Card title="fonts" icon="seti:font">
+    Font lokal Montserrat, Inter, dan FiraCode didaftarkan di sini. Ganti file `.woff2` di `src/assets/fonts/` jika ingin menggunakan typeface lain.
+
+    ```js
+    fonts: [
+      {
+        provider: fontProviders.local(),
+        name: 'Montserrat',
+        cssVariable: '--font-montserrat',
+        // ...
+      }
+    ]
+    ```
+</Card>
+
+<Aside type="caution">
+  Setelah mengubah `site`, jalankan ulang `npm run build` untuk memastikan semua URL yang di-generate sudah menggunakan domain yang benar.
+</Aside>
+
+---
+
+## `src/config/sidebar.ts`
+
+Konfigurasi struktur sidebar navigasi. Semua grup, label, urutan halaman, dan tautan eksternal di sidebar dikelola dari file ini.
+
+```ts
+// src/config/sidebar.ts
+export const sidebarConfig = [
+  {
+    label: 'Getting Started',
+    items: [
+      { slug: 'getting-started/introduction' },
+      { slug: 'getting-started/project-structure' },
+    ],
+  },
+  {
+    label: 'Guide',
+    items: [
+      { slug: 'guide/installation' },
+      { slug: 'guide/configuration' },
+    ],
+  },
+];
+```
+
+<Aside type="tip">
+  Starlight mendukung berbagai opsi sidebar — autogenerate, badge, collapsed group, dan tautan eksternal. Lihat [dokumentasi Starlight](https://starlight.astro.build/reference/configuration/#sidebar) untuk referensi lengkap.
+</Aside>
+
+---
+
+## `src/config/expressive-code.ts`
+
+Konfigurasi tampilan blok kode menggunakan [Expressive Code](https://expressive-code.com) — library syntax highlighting bawaan Starlight.
+
+```ts
+// src/config/expressive-code.ts
+export const expressiveCodeConfig = {
+  themes: ['nama-tema'],
+  // opsi lainnya...
+};
+```
+
+Ubah file ini untuk mengganti tema blok kode, mengaktifkan plugin tambahan, atau menyesuaikan tampilan frame dan line numbers.
+
+---
+
+## `src/constants.ts`
+
+Konstanta yang digunakan bersama di seluruh proyek — satu tempat untuk nilai-nilai yang dipakai oleh banyak komponen sekaligus.
+
+```ts
+// src/constants.ts
+export const SITE_TITLE = 'Stradocs';
+export const SITE_DESCRIPTION = 'Deskripsi singkat situsmu.';
+// konstanta lainnya...
+```
+
+<Aside>
+  Jika ada nilai yang dipakai di lebih dari satu komponen — nama situs, URL sosial, nama author default — letakkan di sini agar perubahan cukup dilakukan di satu tempat.
+</Aside>
+
+---
+
+## `src/styles/global.css`
+
+Entry point CSS Stradocs. Semua kustomisasi visual — warna, tipografi, spacing — berpusat di sini melalui CSS custom properties.
+
+```css
+/* src/styles/global.css */
+:root {
+  --sl-color-accent: /* warna aksen utama */;
+  --sl-color-accent-high: /* warna aksen hover */;
+  --font-montserrat: /* didapat otomatis dari Astro font system */;
+}
+```
+
+<Aside type="tip">
+  Starlight mengekspos semua design token-nya sebagai CSS custom properties. Lihat [dokumentasi Starlight CSS custom properties](https://starlight.astro.build/reference/overrides/) untuk daftar lengkap variabel yang bisa di-override.
+</Aside>
+
+---
+
+## Langkah Selanjutnya
+
+<CardGrid>
+  <LinkCard
+    title="Menambahkan Konten"
+    description="Cara menambahkan halaman dokumentasi dan artikel blog baru."
+    href="/id/docs/guide/adding-content"
+  />
+  <LinkCard
+    title="Struktur Proyek"
+    description="Lihat kembali struktur folder Stradocs secara keseluruhan."
+    href="/id/docs/getting-started/project-structure"
+  />
+</CardGrid>

@@ -1,0 +1,139 @@
+---
+title: 'Installation'
+description: 'How to clone and run Stradocs in a local environment.'
+sidebar:
+  order: 1
+---
+
+import { Aside, Steps, Tabs, TabItem, LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Stradocs is distributed as a GitHub repository that can be directly forked or cloned. There are no packages to install globally—simply clone, install dependencies, and you're ready to go.
+
+<Aside type="tip">
+  Stradocs is built on Astro and Starlight. Make sure you are familiar with both before proceeding.
+</Aside>
+
+
+## Requirements
+
+| Requirement | Minimum Version |
+|---|---|
+| Node.js | `18.20.8` or later |
+| Git | Latest version |
+
+
+## Clone Repository
+
+<Steps>
+
+1. **Fork or clone the Stradocs repository.**
+
+   Fork via GitHub if you want to save changes to your own repository, or clone directly if you just want to explore locally.
+
+   ```bash
+   git clone https://github.com/bimaakbar-dev/bimaakbar-dev.github.io.git my-docs
+   ```
+
+2. **Enter the project directory**
+
+   ```bash
+   cd my-docs
+   ```
+
+3. **Install dependencies**
+
+   <Tabs>
+     <TabItem label="npm" icon="seti:npm">
+       ```bash
+       npm install
+       ```
+     </TabItem>
+     <TabItem label="pnpm" icon="pnpm">
+       ```bash
+       pnpm install
+       ```
+     </TabItem>
+     <TabItem label="yarn" icon="seti:yarn">
+       ```bash
+       yarn install
+       ```
+     </TabItem>
+   </Tabs>
+
+4. **Run the development server**
+
+   <Tabs>
+     <TabItem label="npm" icon="seti:npm">
+       ```bash
+       npm run dev
+       ```
+     </TabItem>
+     <TabItem label="pnpm" icon="pnpm">
+       ```bash
+       pnpm dev
+       ```
+     </TabItem>
+     <TabItem label="yarn" icon="seti:yarn">
+       ```bash
+       yarn dev
+       ```
+     </TabItem>
+   </Tabs>
+
+   Open [http://localhost:4321](http://localhost:4321) in your browser. Stradocs is ready to use.
+
+</Steps>
+
+
+## Available Scripts
+
+| Script | Description |
+|---|---|
+| `npm run dev` | Runs the development server at `localhost:4321` with hot reload |
+| `npm run build` | Builds for production into the `dist/` folder |
+| `npm run preview` | Previews the build locally before deployment |
+
+
+## Build for Production
+
+When ready to deploy, run the build command:
+
+<Tabs>
+  <TabItem label="npm" icon="seti:npm">
+    ```bash
+    npm run build
+    ```
+  </TabItem>
+  <TabItem label="pnpm" icon="pnpm">
+    ```bash
+    pnpm build
+    ```
+  </TabItem>
+  <TabItem label="yarn" icon="seti:yarn">
+    ```bash
+    yarn build
+    ```
+  </TabItem>
+</Tabs>
+
+The build output will be located in the `dist/` folder. Stradocs is configured to deploy to **GitHub Pages**—the `site` configuration in `astro.config.mjs` is already set to the repository URL.
+
+<Aside>
+  If you want to deploy to another platform, adjust the `site` and `base` values ​​in `astro.config.mjs` according to the Astro documentation for the target platform.
+</Aside>
+
+
+## The next step
+
+<CardGrid>
+  <LinkCard
+    title="Configuration"
+    description="Adjust the Stradocs configuration—sidebar, site title, and more."
+    href="/docs/guides/configuration"
+  />
+  <LinkCard
+    title="Project Structure"
+    description="Understand the Stradocs folder structure before starting customization."
+    href="/docs/getting-started/project-structure"
+  />
+</CardGrid>
