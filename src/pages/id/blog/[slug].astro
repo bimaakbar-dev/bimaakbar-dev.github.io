@@ -2,6 +2,7 @@
 // src/pages/id/blog/[slug].astro
 import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
 import { getCollection, render } from "astro:content";
+import { getReadingTimeMinutes } from "~/utils/readingTime";
 
 export async function getStaticPaths() {
   const allEntries = await getCollection("docs");
@@ -20,6 +21,8 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+
+const minutes = getReadingTimeMinutes(entry.body);
 ---
 
 <StarlightPage
@@ -27,19 +30,16 @@ const { Content } = await render(entry);
   frontmatter={{
     title: entry.data.title,
     description: entry.data.description,
-    editUrl:
-      "https://github.com/bimaakbar-dev/starlight/edit/main/docs/id/blog/",
+    editUrl: "https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/edit/main/docs/id/blog/",
     template: "doc",
     heroImage: entry.data.heroImage,
     pubDate: entry.data.pubDate,
-    author: {
-      name: entry.data.author?.name,
-      avatar: entry.data.author?.avatar,
-    },
+    author: entry.data.author,
     lastUpdated: entry.data.lastUpdated,
     draft: entry.data.draft,
     tableOfContents: false,
     tags: entry.data.tags,
+    minutesRead: minutes,
   }}
 >
   <Content />

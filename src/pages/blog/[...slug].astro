@@ -2,6 +2,7 @@
 // src/pages/blog/[...slug].astro
 import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
 import { getCollection, render } from "astro:content";
+import { getReadingTimeMinutes } from "~/utils/readingTime";
 
 export async function getStaticPaths() {
   const allEntries = await getCollection("docs");
@@ -19,8 +20,9 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content, remarkPluginFrontmatter } = await render(entry);
-const minutesRead = remarkPluginFrontmatter?.minutesRead;
+const { Content } = await render(entry);
+
+const minutes = getReadingTimeMinutes(entry.body);
 ---
 
 <StarlightPage
@@ -32,14 +34,12 @@ const minutesRead = remarkPluginFrontmatter?.minutesRead;
     template: "doc",
     heroImage: entry.data.heroImage,
     pubDate: entry.data.pubDate,
-    author: {
-      name: entry.data.author?.name,
-      avatar: entry.data.author?.avatar,
-    },
+    author: entry.data.author,
     lastUpdated: entry.data.lastUpdated,
     draft: entry.data.draft,
     tableOfContents: false,
     tags: entry.data.tags,
+    minutesRead: minutes,
   }}
 >
   <Content />

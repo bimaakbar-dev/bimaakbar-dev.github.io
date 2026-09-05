@@ -12,13 +12,14 @@ export const collections = {
         z.object({
           pubDate: z.coerce.date().optional(),
           heroImage: z.optional(image()),
-          author: z
-            .object({
+          author: z.array(
+            z.object({
               name: z.string().optional(),
               avatar: z.optional(image()),
             })
-            .optional(),
+          ).optional(),
           tags: z.array(z.string()).optional(),
+          minutesRead: z.number().optional(),
         }),
     }),
   }),
@@ -27,9 +28,17 @@ export const collections = {
     schema: i18nSchema({
       extend: z.object({
         "component.preview": z.string().optional(),
+
+        "action.CopyPage": z.string().optional(),
+        "action.CopyMarkdown": z.string().optional(),
+        "action.ViewMarkdown": z.string().optional(),
+        "action.AgentSetup": z.string().optional(),
+
         "blog.PostAuthor": z.string().optional(),
+        "blog.readingTime": z.string().optional(),
         "blog.relatedPostLabel": z.string().optional(),
         "blog.PopularPostLabel": z.string().optional(),
+
         "rss.RssFeedLabel": z.string().optional(),
         "rss.RssFeedTitle": z.string().optional(),
         "rss.RssFeedDesc": z.string().optional(),
