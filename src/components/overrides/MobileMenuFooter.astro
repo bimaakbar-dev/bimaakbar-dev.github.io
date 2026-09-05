@@ -1,20 +1,20 @@
 ---
-import SocialIcons from '~/components/overrides/SocialIcon.astro';
+import SocialIcons from './SocialIcons.astro';
 import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro';
 import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
 ---
 
 <div class="mobile-preferences sl-flex">
+	<ThemeSelect />
+	<LanguageSelect />
 	<div class="sl-flex social-icons">
         <SocialIcons />
     </div>
-	<ThemeSelect />
-	<LanguageSelect />
 </div>
 
 <style>
   .social-icons {
-    margin-inline-end: auto;
+    margin-inline-start: auto;
     gap: 1rem;
     align-items: center;
     padding-block: 1rem;
