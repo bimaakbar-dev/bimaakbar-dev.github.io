@@ -1,13 +1,15 @@
 ---
 // src/components/overrides/Header.astro
-import LanguageSelect from "@astrojs/starlight/components/LanguageSelect.astro";
-import Search from "@astrojs/starlight/components/Search.astro";
 import SiteTitle from "@astrojs/starlight/components/SiteTitle.astro";
-import SocialIcons from "@astrojs/starlight/components/SocialIcons.astro";
+import Search from "@astrojs/starlight/components/Search.astro";
+
 import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
+import LanguageSelect from "@astrojs/starlight/components/LanguageSelect.astro";
+import SocialIcons from "@astrojs/starlight/components/SocialIcons.astro";
+
 import NavLinks from "~/components/NavLinks.astro";
 import MobileMenu from "~/components/MobileMenu.astro";
-import GithubStar from '../../components/GithubStar.astro';
+import GithubStar from '~/components/GithubStar.astro';
 
 const { isCustomMenu } = Astro.locals.starlightRoute;
 ---
@@ -61,7 +63,7 @@ const { isCustomMenu } = Astro.locals.starlightRoute;
     .social-icons::before {
       content: "";
       height: 2rem;
-      border-inline-start: 1px solid var(--sl-color-gray-5);
+      border-inline-end: 1px solid var(--sl-color-gray-5);
     }
 
     @media (min-width: 50rem) {
