@@ -1,0 +1,33 @@
+---
+import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro';
+import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
+import GithubStar from '~/components/GithubStar.astro';
+---
+
+<div class="mobile-preferences sl-flex">
+	<div aria-hidden="true" />
+	<ThemeSelect />
+	<LanguageSelect />
+</div>
+
+<style>
+	@layer starlight.core {
+		.social-icons {
+			display: flex;
+			margin-inline-end: auto;
+			gap: 1rem;
+			align-items: center;
+			padding-block: 1rem;
+		}
+		.social-icons:empty {
+			display: none;
+		}
+		.mobile-preferences {
+			justify-content: space-between;
+			flex-wrap: wrap;
+			border-top: 1px solid var(--sl-color-gray-6);
+			column-gap: 1rem;
+			padding: 0.5rem 0;
+		}
+	}
+</style>

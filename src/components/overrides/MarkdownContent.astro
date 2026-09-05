@@ -4,6 +4,8 @@ import "@astrojs/starlight/style/markdown.css";
 
 import EditLink from "@astrojs/starlight/components/EditLink.astro";
 import LastUpdated from "@astrojs/starlight/components/LastUpdated.astro";
+import Pagination from "@astrojs/starlight/components/Pagination.astro";
+
 import RelatedPosts from "~/components/RelatedPosts.astro";
 
 const { entry, isBlogPost, isBlogIndex } = Astro.locals.starlightRoute;
@@ -19,16 +21,23 @@ const { entry, isBlogPost, isBlogIndex } = Astro.locals.starlightRoute;
         <EditLink />
         <LastUpdated />
       </div>
+      <Pagination />
       <RelatedPosts currentSlug={entry.id} />
     </>
   ) : isBlogIndex ? (
     <div>
       <slot />
+      <Pagination />
     </div>
   ) : (
     <article class="sl-markdown-content">
       <slot />
     </article>
+    <div class="meta sl-flex">
+      <EditLink />
+      <LastUpdated />
+    </div>
+    <Pagination />
   )
 }
 

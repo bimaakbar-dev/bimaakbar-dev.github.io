@@ -1,12 +1,10 @@
 ---
 // src/components/overrides/Header.astro
-import SiteTitle from "@astrojs/starlight/components/SiteTitle.astro";
-import Search from "@astrojs/starlight/components/Search.astro";
-
-import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
 import LanguageSelect from "@astrojs/starlight/components/LanguageSelect.astro";
+import Search from "@astrojs/starlight/components/Search.astro";
+import SiteTitle from "@astrojs/starlight/components/SiteTitle.astro";
 import SocialIcons from "@astrojs/starlight/components/SocialIcons.astro";
-
+import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
 import NavLinks from "~/components/NavLinks.astro";
 import MobileMenu from "~/components/MobileMenu.astro";
 import GithubStar from '~/components/GithubStar.astro';
@@ -25,16 +23,13 @@ const { isCustomMenu } = Astro.locals.starlightRoute;
     <div class="print:hidden">
       <Search />
     </div>
-    {isCustomMenu && <MobileMenu />}    
+    {isCustomMenu && <MobileMenu />}
     <div class="sl-hidden md:sl-flex print:hidden right-group">
-      <div class="sl-flex right-group">
-        <ThemeSelect />
-        <LanguageSelect />
-      </div>
-      <div class="sl-flex social-icons">
-        <SocialIcons />
+      <div class="sl-flex github-star right-group">
         <GithubStar repo="bimaakbar-dev/bimaakbar-dev.github.io" />
       </div>
+      <ThemeSelect />
+      <LanguageSelect />
     </div>
   </div>
 </div>
@@ -54,13 +49,13 @@ const { isCustomMenu } = Astro.locals.starlightRoute;
       margin: -0.25rem;
       min-width: 0;
     }
+    
     .nav-group,
-    .right-group,
-    .social-icons {
+    .right-group {
       gap: 1rem;
       align-items: center;
     }
-    .social-icons::before {
+    .github-star::after {
       content: "";
       height: 2rem;
       border-inline-end: 1px solid var(--sl-color-gray-5);

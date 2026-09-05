@@ -8,6 +8,7 @@ export const Overrides = {
   Header: "./src/components/overrides/Header.astro",
   Hero: "./src/components/overrides/Hero.astro",
   MarkdownContent: "./src/components/overrides/MarkdownContent.astro",
+  MobileMenuFooter: "./src/components/overrides/MobileMenuFooter.astro",
   MobileMenuToggle: "./src/components/overrides/MobileMenuToggle.astro",
   MobileTableOfContents: "./src/components/overrides/MobileTableOfContents.astro",
   PageTitle: "./src/components/overrides/PageTitle.astro",

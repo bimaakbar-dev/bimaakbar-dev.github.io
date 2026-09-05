@@ -1,42 +1,67 @@
 ---
 import { Icon } from "@astrojs/starlight/components";
-import Default from "@astrojs/starlight/components/Footer.astro";
+import SocialIcons from "@astrojs/starlight/components/SocialIcons.astro";
 
-const { isBlog } = Astro.locals.starlightRoute;
+// @ts-ignore
+import config from 'virtual:starlight/user-config';
+
+const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
+const currentYear = new Date().getFullYear();
 ---
 
-{
-  isBlog ? (
-    <footer class="sl-flex">
+<footer class="sl-flex">
+  <div class="sl-flex social-icons">
+    <SocialIcons />
+  </div>
+  <span class="copyright sl-flex leading-none">
+    <a class="kudos sl-flex" href={siteTitleHref}>
+      {siteTitle}
+    </a>
+    {currentYear}
+    { config.credits && (
       <a class="kudos sl-flex" href="https://starlight.astro.build">
-        <Icon name="starlight" /> {Astro.locals.t("builtWithStarlight.label")}
+        <Icon name={'starlight'} /> {Astro.locals.t('builtWithStarlight.label')}
       </a>
-    </footer>
-  ) : (
-    <Default />
-  )
-}
+    )}
+  </span>
+</footer>
 
 <style>
   footer {
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 0.25rem;
+    align-items: center;
+    margin-inline: auto;
+    border-top: 1px solid var(--sl-color-gray-5);
+    padding-top: 2rem;
+  }
+  .social-icons {
+    gap: 1rem;
+    align-items: center;
+    color: var(--sl-color-accent);
+  }
+  .copyright {
+    align-items: center;
+    font-size: var(--sl-text-xs);
+    line-height: var(--sl-line-height);
+    color: var(--sl-color-gray-3);
+    margin-block: 1rem;
+    margin-inline: auto;
+    gap: 0.25rem
   }
   .kudos {
     align-items: center;
     gap: 0.5em;
-    margin: 1.5rem auto;
     font-size: var(--sl-text-xs);
     text-decoration: none;
     color: var(--sl-color-gray-3);
+    line-height: var(--sl-line-height);
   }
   .kudos:hover {
     color: var(--sl-color-white);
   }
+  .copyright :global(svg),
   .kudos :global(svg) {
     color: var(--sl-color-orange);
-  }
-  :global(.sl-container footer) {
-    border-top: 1px solid var(--sl-color-gray-5);
   }
 </style>

@@ -21,9 +21,9 @@ const safeMarkdown = encodeURIComponent(rawMarkdown);
 
 <page-actions
   data-markdown={safeMarkdown}
-  class:list={["page-actions not-content -ml-2 mt-3 sl-flex flex-wrap items-center gap-y-1 text-xs md:text-sm", className]}
+  class:list={["sl-flex page-actions not-content -ml-2 mt-3 gap-y-1", className]}
 >
-  <button type="button" data-action="copy-url" class="action-link" aria-label="Copy Page Link">
+  <button type="button" data-action="copy-url" class="action-link" aria-label={Astro.locals.t("action.CopyPage")}>
     <svg width="1em" height="1em" viewBox="0 0 256 256" class="icon-default size-3.5">
       <path fill="currentColor" d="M137.54 186.36a8 8 0 0 1 0 11.31l-9.94 10a56 56 0 0 1-79.2-79.21l24-24a56 56 0 0 1 76.77-2.43a8 8 0 1 1-10.56 12a40 40 0 0 0-54.85 1.75l-24 24a40 40 0 0 0 56.58 56.58l9.94-9.95a8 8 0 0 1 11.26-.05Zm70.08-138a56.08 56.08 0 0 0-79.22 0l-9.94 10a8 8 0 0 0 11.31 11.31l9.94-9.95a40 40 0 0 1 56.58 56.58l-24 24a40 40 0 0 1-54.85 1.72a8 8 0 1 0-10.58 12a56 56 0 0 0 76.77-2.43l24-24a56.08 56.08 0 0 0 0-79.23Z" />
     </svg>
@@ -35,7 +35,7 @@ const safeMarkdown = encodeURIComponent(rawMarkdown);
 
   <span aria-hidden="true" class="divider">|</span>
 
-  <button type="button" data-action="markdown" class="action-link" aria-label="Copy Page as Markdown">
+  <button type="button" data-action="markdown" class="action-link" aria-label={Astro.locals.t("action.CopyMarkdown")}>
     <svg width="1em" height="1em" viewBox="0 0 256 256" class="icon-default size-3.5">
       <path fill="currentColor" d="M216 32H88a8 8 0 0 0-8 8v40H40a8 8 0 0 0-8 8v128a8 8 0 0 0 8 8h128a8 8 0 0 0 8-8v-40h40a8 8 0 0 0 8-8V40a8 8 0 0 0-8-8m-56 176H48V96h112Zm48-48h-32V88a8 8 0 0 0-8-8H96V48h112Z" />
     </svg>
@@ -49,14 +49,14 @@ const safeMarkdown = encodeURIComponent(rawMarkdown);
 
   {
     markdownUrl ? (
-      <a href={markdownUrl} target="_blank" rel="noopener noreferrer" class="action-link" aria-label="View Page as Markdown">
+      <a href={markdownUrl} target="_blank" rel="noopener noreferrer" class="action-link" aria-label={Astro.locals.t("action.ViewMarkdown")}>
         <svg width="1em" height="1em" viewBox="0 0 256 256" class="size-3.5">
           <path fill="currentColor" d="M232 48H24A16 16 0 0 0 8 64v128a16 16 0 0 0 16 16h208a16 16 0 0 0 16-16V64a16 16 0 0 0-16-16m0 144H24V64h208zm-104-88v48a8 8 0 0 1-16 0v-28.69l-18.34 18.35a8 8 0 0 1-11.32 0L64 123.31V152a8 8 0 0 1-16 0v-48a8 8 0 0 1 13.66-5.66L88 124.69l26.34-26.35A8 8 0 0 1 128 104m77.66 18.34a8 8 0 0 1 0 11.32l-24 24a8 8 0 0 1-11.32 0l-24-24a8 8 0 0 1 11.32-11.32L168 132.69V104a8 8 0 0 1 16 0v28.69l10.34-10.35a8 8 0 0 1 11.32 0" />
         </svg>
         {Astro.locals.t("action.ViewMarkdown")}
       </a>
     ) : (
-      <button type="button" data-action="view" class="action-link" aria-label="View Page as Markdown">
+      <button type="button" data-action="view" class="action-link" aria-label={Astro.locals.t("action.ViewMarkdown")}>
         <svg width="1em" height="1em" viewBox="0 0 256 256" class="size-3.5">
           <path fill="currentColor" d="M232 48H24A16 16 0 0 0 8 64v128a16 16 0 0 0 16 16h208a16 16 0 0 0 16-16V64a16 16 0 0 0-16-16m0 144H24V64h208zm-104-88v48a8 8 0 0 1-16 0v-28.69l-18.34 18.35a8 8 0 0 1-11.32 0L64 123.31V152a8 8 0 0 1-16 0v-48a8 8 0 0 1 13.66-5.66L88 124.69l26.34-26.35A8 8 0 0 1 128 104m77.66 18.34a8 8 0 0 1 0 11.32l-24 24a8 8 0 0 1-11.32 0l-24-24a8 8 0 0 1 11.32-11.32L168 132.69V104a8 8 0 0 1 16 0v28.69l10.34-10.35a8 8 0 0 1 11.32 0" />
         </svg>
@@ -69,6 +69,7 @@ const safeMarkdown = encodeURIComponent(rawMarkdown);
     agentHref && (
       <>
         <span aria-hidden="true" class="divider max-[700px]:hidden">|</span>
+
         <a href={agentHref} target="_blank" rel="noopener noreferrer" class="action-link max-[700px]:hidden" aria-label={agentLabel}>
           <svg width="1em" height="1em" viewBox="0 0 256 256" class="size-3.5">
             <path fill="currentColor" d="M200 48h-64V16a8 8 0 0 0-16 0v32H56a32 32 0 0 0-32 32v112a32 32 0 0 0 32 32h144a32 32 0 0 0 32-32V80a32 32 0 0 0-32-32m16 144a16 16 0 0 1-16 16H56a16 16 0 0 1-16-16V80a16 16 0 0 1 16-16h144a16 16 0 0 1 16 16Zm-52-56H92a28 28 0 0 0 0 56h72a28 28 0 0 0 0-56m-24 16v24h-24v-24Zm-60 12a12 12 0 0 1 12-12h8v24h-8a12 12 0 0 1-12-12m84 12h-8v-24h8a12 12 0 0 1 0 24m-92-68a12 12 0 1 1 12 12a12 12 0 0 1-12-12m88 0a12 12 0 1 1 12 12a12 12 0 0 1-12-12" />
@@ -124,9 +125,11 @@ const safeMarkdown = encodeURIComponent(rawMarkdown);
 
 <style>
   .page-actions {
-    font-size: var(--sl-text-xs);
+    font-size: var(--sl-text-2xs);
+    align-items: center;
+    flex-wrap: wrap;
   }
- 
+
   .meta-item {
     color: var(--sl-color-gray-3);
   }
@@ -187,7 +190,7 @@ const safeMarkdown = encodeURIComponent(rawMarkdown);
   }
   @media (min-width: 50rem) {
     .page-actions {
-      font-size: var(--sl-text-sm);
+      font-size: var(--sl-text-xs);
     }
   }
 </style>
