@@ -7,8 +7,8 @@ import { Icon } from "@astrojs/starlight/components";
   class="sl-menu-button sl-flex md:sl-hidden print:hidden"
 >
   <div class="inline-flex items-center shrink-0 justify-center icon-wrapper">
-    <Icon name="bars" class="open-menu" />
-    <Icon name="close" class="close-menu" />
+    <Icon name="bars" class="open-menu" size="1.333em" />
+    <Icon name="close" class="close-menu" size="1.333em" />
   </div>
   <span class="sr-only">{Astro.locals.t("menuButton.accessibleLabel")}</span>
 </button>
@@ -35,8 +35,6 @@ import { Icon } from "@astrojs/starlight/components";
     }
 
     button .icon-wrapper svg {
-      width: 1.45em !important;
-      height: 1.45em !important;
       flex-shrink: 0;
     }
 
