@@ -87,11 +87,11 @@ export default defineConfig({
       defaultLocale: "root",
       locales: {
         root: {
-          label: "EN",
+          label: "English",
           lang: "en",
         },
         id: {
-          label: "ID",
+          label: "Bahasa Indonesia",
           lang: "id",
         },
       },
@@ -113,7 +113,7 @@ export default defineConfig({
         {
           icon: "discord",
           label: "Discord",
-          href: "https://discord.com/user/bimaakbardev",
+          href: "https://discord.com/users/bimaakbardev",
         },
       ],
       editLink: {
