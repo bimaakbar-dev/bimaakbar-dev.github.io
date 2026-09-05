@@ -22,16 +22,18 @@ const { isCustomMenu } = Astro.locals.starlightRoute;
   <div class="sl-flex right-group">
     <div class="print:hidden">
       <Search />
-    </div>
-    {isCustomMenu && <MobileMenu />}
+    </div>    
     <div class="sl-hidden md:sl-flex print:hidden right-group">
-      <ThemeSelect />
-      <LanguageSelect />
+      <div class="sl-flex gap-2">
+        <ThemeSelect />
+        <LanguageSelect />
+      <div>
       <div class="sl-flex social-icons">
         <GithubStar repo="bimaakbar-dev/bimaakbar-dev.github.io" />
         <SocialIcons />
       </div>
     </div>
+    {isCustomMenu && <MobileMenu />}
   </div>
 </div>
 <style>
@@ -53,7 +55,7 @@ const { isCustomMenu } = Astro.locals.starlightRoute;
     .nav-group,
     .right-group,
     .social-icons {
-      gap: 1.5rem;
+      gap: 1rem;
       align-items: center;
     }
     .social-icons::before {
