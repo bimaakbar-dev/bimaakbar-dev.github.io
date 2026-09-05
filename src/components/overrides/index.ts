@@ -13,5 +13,5 @@ export const Overrides = {
   MobileTableOfContents: "./src/components/overrides/MobileTableOfContents.astro",
   PageTitle: "./src/components/overrides/PageTitle.astro",
   SkipLink: "./src/components/overrides/SkipLink.astro",
-  SocialIcon: "./src/components/overrides/SocialIcon.astro",
+  SocialIcon: "./src/components/overrides/SocialIcons.astro",
 } as const;
