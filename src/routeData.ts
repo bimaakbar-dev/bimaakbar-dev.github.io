@@ -3,13 +3,15 @@ import { defineRouteMiddleware } from "@astrojs/starlight/route-data";
 
 export const onRequest = defineRouteMiddleware((context) => {
   const { entry, locale } = context.locals.starlightRoute;
-
   const pathname = context.url.pathname;
 
   const safeLocale = locale || "root";
   const base = safeLocale === "root" ? "" : `/${safeLocale}`;
 
-  // Docs
+  // 🔥 Deteksi template splash → custom menu
+  const isCustomMenu = entry?.data?.template === "splash";
+
+  // Docs (tetap untuk keperluan lain)
   const docsBasePath = `${base}/docs`;
   const isDocsIndex = pathname === docsBasePath || pathname === `${docsBasePath}/`;
   const isDocs = pathname.startsWith(`${docsBasePath}/`) || isDocsIndex;
@@ -21,6 +23,9 @@ export const onRequest = defineRouteMiddleware((context) => {
   const isBlogIndex = pathname === blogBasePath || pathname === `${blogBasePath}/`;
 
   const route = context.locals.starlightRoute as any;
+
+  // 🔥 Properti baru untuk test
+  route.isCustomMenu = isCustomMenu;
 
   route.isDocs = isDocs;
   route.isDocsIndex = isDocsIndex;
