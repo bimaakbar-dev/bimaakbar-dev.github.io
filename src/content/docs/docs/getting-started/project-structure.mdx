@@ -1,94 +1,105 @@
 ---
-title: 'Project Structure'
-description: 'A breakdown of the Stradocs folder structure after cloning — where to put content, components, assets, and configuration.'
+title: "Project Structure"
+description: "A breakdown of the Stradocs folder structure after cloning - where to put content, components, assets, and configuration."
 ---
 
-import { Aside, Card, CardGrid, FileTree, LinkCard } from '@astrojs/starlight/components';
+import {
+  Aside,
+  Card,
+  CardGrid,
+  FileTree,
+  LinkCard,
+} from "@astrojs/starlight/components";
 
 Stradocs follows the standard Astro + Starlight project structure with several additional directories for the blog system, plugins, and custom styling. This page explains the role of each folder and key file.
 
 <Aside type="tip">
-  If you're already familiar with Astro or Starlight project structure, most folders here will feel familiar. Focus on the directories that **don't exist** in default Starlight: `lib/`, `styles/components/`, and the extended `content/` structure.
+  If you're already familiar with Astro or Starlight project structure, most
+  folders here will feel familiar. Focus on the directories that **don't exist**
+  in default Starlight: `lib/`, `styles/components/`, and the extended
+  `content/` structure.
 </Aside>
 
-## Overview
+## Structure
 
 <FileTree>
-- public/
-  - images/
-    - favicon.svg
-  - robots.txt
-- src/
-  - assets/
-    - fonts/
-    - images/
-      - author/
-      - blog/
-      - hero/
-  - components/
-  - config/
-    - expressive-code.ts
-    - sidebar.ts
-  - content/
-    - docs/
-    - blog/
-    - id/
-      - docs/
-      - blog/
-    - index.astro
-    - i18n/
-      - en.json
-      - id.json
-    - 404.md
-  - lib/
-    - plugins/
-      - satteri/
-  - pages/
-    - blog/
-      - [...slug].astro
-      - index.astro
-    - id/
-      - blog/
-        - [...slug].astro
+  - public/ 
+    - images/ 
+      - favicon.svg 
+    - robots.txt 
+  - src/ 
+    - assets/ 
+      - fonts/ 
+      - images/ 
+        - author/ 
+        - blog/ 
+        - hero/ 
+    - components/ 
+    - config/ 
+      - expressive-code.ts
+      - sidebar.ts 
+    - content/ 
+      - docs/ 
+        - blog/ 
+        - docs/
+        - id/ 
+          - docs/ 
+          - blog/ 
+          - index.astro 
         - index.astro
-        - rss.xml.js
-    - rss.xml.js
-  - styles/
-    - components/
-    - components-internal/
-    - user-components/
-    - asides.css
-    - global.css
-    - markdown.css
-    - reset.css
-    - stradocs.css
-  - constants.ts
-  - content.config.ts
-- astro.config.mjs
-- CLAUDE.md
-- AGENTS.md
-- package.json
-- tsconfig.json
+      - i18n/ 
+        - en.json 
+        - id.json 
+      - 404.md 
+    - lib/ 
+      - plugins/ 
+        - satteri/ 
+      - pages/ 
+        - blog/ 
+          - [...slug].astro 
+          - index.astro 
+        - id/ 
+          - blog/ 
+            - [...slug].astro 
+            - index.astro 
+          - rss.xml.js 
+        - rss.xml.js 
+      - styles/ 
+        - components/ 
+        - components-internal/ 
+        - user-components/ 
+        - asides.css 
+        - global.css 
+        - markdown.css 
+        - reset.css
+        - stradocs.css 
+      - constants.ts 
+      - content.config.ts 
+  - astro.config.mjs 
+  - CLAUDE.md 
+  - AGENTS.md 
+  - package.json 
+  - tsconfig.json
 </FileTree>
 
 ### Root
 
-| File | Description |
-|---|---|
-| `astro.config.mjs` | Main Astro configuration — fonts, Starlight integration, Tailwind, Satteri plugins, and site settings |
-| `content.config.ts` | Collection definitions for docs and i18n, including blog schema extensions |
-| `tsconfig.json` | TypeScript configuration |
-| `CLAUDE.md` | Project context for Claude — architecture notes and guidelines |
-| `AGENTS.md` | Project context for other AI agents |
+| File                | Description                                                                                           |
+| ------------------- | ----------------------------------------------------------------------------------------------------- |
+| `astro.config.mjs`  | Main Astro configuration — fonts, Starlight integration, Tailwind, Satteri plugins, and site settings |
+| `content.config.ts` | Collection definitions for docs and i18n, including blog schema extensions                            |
+| `tsconfig.json`     | TypeScript configuration                                                                              |
+| `CLAUDE.md`         | Project context for Claude — architecture notes and guidelines                                        |
+| `AGENTS.md`         | Project context for other AI agents                                                                   |
 
 ### `public/`
 
 Static assets served directly without Astro processing.
 
-| Path | Description |
-|---|---|
-| `public/images/favicon.svg` | Site favicon |
-| `public/robots.txt` | Instructions for web crawlers |
+| Path                        | Description                   |
+| --------------------------- | ----------------------------- |
+| `public/images/favicon.svg` | Site favicon                  |
+| `public/robots.txt`         | Instructions for web crawlers |
 
 ### `src/assets/`
 
@@ -96,16 +107,19 @@ Assets processed by Astro — optimized, hashed, and bundled at build time.
 
 <CardGrid>
   <Card title="fonts/" icon="seti:font">
-    Local font files in `.woff2` format. Montserrat, Inter, and FiraCode are registered from here via `astro.config.mjs`.
+    Local font files in `.woff2` format. Montserrat, Inter, and FiraCode are
+    registered from here via `astro.config.mjs`.
   </Card>
   <Card title="images/blog/" icon="document">
-    Hero images for blog posts. Referenced from the `heroImage` frontmatter field.
+    Hero images for blog posts. Referenced from the `heroImage` frontmatter
+    field.
   </Card>
   <Card title="images/author/" icon="pencil">
     Author avatars. Referenced from the `author[].avatar` frontmatter field.
   </Card>
   <Card title="images/hero/" icon="star">
-    Images for other purposes — landing page hero or specific documentation pages.
+    Images for other purposes — landing page hero or specific documentation
+    pages.
   </Card>
 </CardGrid>
 
@@ -124,35 +138,38 @@ Contains two types of components:
 
 Configuration split out from `astro.config.mjs` for easier maintenance.
 
-| File | Description |
-|---|---|
+| File                 | Description                                                                         |
+| -------------------- | ----------------------------------------------------------------------------------- |
 | `expressive-code.ts` | Expressive Code configuration override — code block appearance, themes, and plugins |
-| `sidebar.ts` | Sidebar navigation configuration — group structure, labels, and page ordering |
+| `sidebar.ts`         | Sidebar navigation configuration — group structure, labels, and page ordering       |
 
 ### `src/content/`
 
 All site content. Stradocs extends Starlight's content structure with a `blog/` folder and a separate i18n structure.
 
 <FileTree>
-- content/
-  - docs/
-    - **English documentation content (route `/docs/`)**
-  - blog/
-    - **English blog posts (route `/blog/`)**
-  - id/
+  - content/ 
     - docs/
-      - **Indonesian documentation content (route `/id/docs/`)**
-    - blog/
-      - **Indonesian blog posts (route `/id/blog/`)**
-  - index.astro
-  - i18n
-    - en.json
-    - id.json
-  - 404.md
+      - docs/
+        - **English documentation content (route `/docs/`)** 
+      - blog/
+        - **English blog posts (route `/blog/`)** 
+      - id/ 
+        - docs/
+          - **Indonesian documentation content (route `/id/docs/`)** 
+        - blog/ 
+          - **Indonesian blog posts (route `/id/blog/`)** 
+        - index.astro 
+      - index.astro 
+      - i18n 
+        - en.json 
+        - id.json 
+      - 404.md
 </FileTree>
 
 <Aside type="tip">
-  Markdown and MDX files in `docs/` are managed automatically by Starlight. Files in `blog/` are handled by the custom pages in `src/pages/blog/`.
+  Markdown and MDX files in `docs/` are managed automatically by Starlight.
+  Files in `blog/` are handled by the custom pages in `src/pages/blog/`.
 </Aside>
 
 ### `src/lib/`
@@ -160,53 +177,55 @@ All site content. Stradocs extends Starlight's content structure with a `blog/` 
 Internal utilities and plugins for Stradocs.
 
 <FileTree>
-- lib/
-  - plugins/
-    - satteri/
-      - **`satteriExternalLink`** — hast plugin for external links
-      - **`satteriTable`** — hast plugin for responsive tables
+  - lib/ 
+    - plugins/ 
+      - satteri/ 
+        - **`satteriExternalLink`** # hast plugin for external links 
+        - **`satteriTable`** # hast plugin for responsive tables
 </FileTree>
 
 These plugins are registered in `astro.config.mjs` under `markdown.processor` and are active automatically across all content.
 
 ### `src/pages/`
 
-Custom pages not managed by Starlight — specifically for the blog system.
+Custom pages not managed by Starlight - specifically for the blog system.
 
 <FileTree>
-- pages/
-  - blog/
-    - index.astro        # English blog listing page
-    - [...slug].astro    # English blog post detail page
-  - id/
-    - blog/
-      - index.astro      # Indonesian blog listing page
-      - [...slug].astro  # Indonesian blog post detail page
-      - rss.xml.js       # Indonesian RSS feed
-  - rss.xml.js           # English RSS feed
+  - pages/ 
+    - blog/ 
+      - index.astro # English blog listing page 
+      - [...slug].astro # English blog post detail page 
+    - id/ 
+      - blog/ 
+        - index.astro # Indonesian bloglisting page 
+        - [...slug].astro # Indonesian blog post detail page 
+      - rss.xml.js # Indonesian RSS feed 
+    - rss.xml.js # English RSS feed
 </FileTree>
 
 <Aside>
-  All pages outside `blog/` are managed automatically by Starlight based on files in `src/content/docs/`.
+  All pages outside `blog/` are managed automatically by Starlight based on
+  files in `src/content/docs/`.
 </Aside>
 
 ### `src/styles/`
 
 Stradocs' styling system is organized to follow Starlight's CSS layer structure.
 
-| File / Folder | Description |
-|---|---|
-| `components/` | CSS overrides for Starlight components in the `@layer components` layer |
-| `components-internal/` | CSS overrides for Starlight's internal components |
-| `user-components/` | CSS overrides for Starlight's user-facing components |
-| `asides.css` | Override styles for Starlight's built-in `<Aside>` component |
-| `global.css` | Main entry point — imports all CSS files and defines custom CSS properties |
-| `markdown.css` | Override for Markdown content typography and styling |
-| `reset.css` | Override for Starlight's CSS reset |
-| `stradocs.css` | Additional custom CSS outside of Starlight override categories |
+| File / Folder          | Description                                                                |
+| ---------------------- | -------------------------------------------------------------------------- |
+| `components/`          | CSS overrides for Starlight components in the `@layer components` layer    |
+| `components-internal/` | CSS overrides for Starlight's internal components                          |
+| `user-components/`     | CSS overrides for Starlight's user-facing components                       |
+| `asides.css`           | Override styles for Starlight's built-in `<Aside>` component               |
+| `global.css`           | Main entry point — imports all CSS files and defines custom CSS properties |
+| `markdown.css`         | Override for Markdown content typography and styling                       |
+| `reset.css`            | Override for Starlight's CSS reset                                         |
+| `stradocs.css`         | Additional custom CSS outside of Starlight override categories             |
 
 <Aside type="tip">
-  `global.css` is the only file registered in `astro.config.mjs` under `customCss`. All other files are imported from here.
+  `global.css` is the only file registered in `astro.config.mjs` under
+  `customCss`. All other files are imported from here.
 </Aside>
 
 ### `src/constants.ts`

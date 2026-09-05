@@ -1,7 +1,13 @@
 {
+  "action.CopyPage": "Salin halaman",
+  "action.CopyMarkdown": "Salin sebagai Markdown",
+  "action.ViewMarkdown": "Lihat sebagai Markdown",
+  "action.AgentSetup": "Pengaturan agen",
+
   "component.preview": "Pratinjau",
 
   "blog.PostAuthor": "Oleh",
+  "blog.readingTime": "{{minutes}} menit baca",
   "blog.relatedPostLabel": "Postingan terkait",
   "blog.PopularPostLabel": "Postingan populer",
 

@@ -1,48 +1,80 @@
 ---
-title: Welcome to Stradocs
-description: Get started building your site with Stardocs.
+title: Stradocs
+description: Custom Starlight theme featuring a modern design aesthetic and full layout flexibility.
 template: splash
 editUrl: false
 hero:
-  tagline: Congrats on setting up a new Stardocs project!
+  title: Stradocs
+  tagline: A custom Starlight theme that brings a clean, premium, and modern aesthetic to your documentation. Inspired by Vercel and Fumadocs.
   image:
     file: ~/assets/images/author/bimaakbar.svg
   actions:
-    - text: Start Here
+    - text: Start Documentation
       link: /docs/getting-started/introduction
       icon: rocket
-    - text: Read Blog
-      link: /blog/
-      icon: right-arrow
-      variant: secondary
 banner:
   content: |
-    Stradocs 1.0 Out now!!
-    <a href="/blog/stradocs-v1">Check it out</a>
+    Stradocs V1.0 Officially Released!
+    <a href="/blog/stradocs-v1">Read more →</a>
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
-import AboutAstro from '~/components/about-astro.astro';
+import { Card, CardGrid } from "@astrojs/starlight/components";
+import AboutAstro from "~/components/about-astro.astro";
+
+## Key Features
+
+<CardGrid stagger>
+  <Card title="Redesigned Components" icon="pencil">
+    The Header, Hero, Footer, and many other Starlight components have been
+    replaced with visually redesigned versions—going beyond simple color
+    changes.
+  </Card>
+  <Card title="Integrated Blog System" icon="document">
+    A full-featured blog system including schema extensions, multi-author
+    support, Related Posts, Popular Posts, and RSS feeds—ready to use out of the
+    box.
+  </Card>
+  <Card title="Automatic Markdown Plugins" icon="setting">
+    The `satteriExternalLink` and `satteriTable` plugins are automatically
+    enabled across all content—no manual imports required in individual files.
+  </Card>
+  <Card title="Local Fonts" icon="seti:font">
+    Montserrat, Inter, and FiraCode are hosted locally—eliminating external CDN
+    requests to ensure optimal performance and privacy.
+  </Card>
+  <Card title="Automatic OG Images" icon="external">
+    Every page automatically generates an Open Graph image, ensuring a
+    consistent appearance when shared on social media.
+  </Card>
+  <Card title="Bilingual Support" icon="translate">
+    Pre-configured for English and Indonesian, including i18n strings for all
+    blog components.
+  </Card>
+</CardGrid>
+
+## How It Works
+
+Stradocs is Starlight—not a fork, not a wrapper. Everything you know about Starlight still applies. Stradocs simply adds and replaces the visual layer on top.
 
 ## Next steps
 
 <CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
+  <Card title="Update content" icon="pencil">
+    Edit `src/content/docs/index.mdx` to see this page change.
+  </Card>
+  <Card title="Change page layout" icon="document">
+    Delete `template: splash` in `src/content/docs/index.mdx` to display a
+    sidebar on this page.
+  </Card>
+  <Card title="Add new content" icon="add-document">
+    Add Markdown or MDX files to `src/content/docs` to create new pages.
+  </Card>
+  <Card title="Configure your site" icon="setting">
+    Edit your `sidebar` and other config in `astro.config.mjs`.
+  </Card>
+  <Card title="Read the docs" icon="open-book">
+    Learn more in [the Starlight Docs](https://starlight.astro.build/).
+  </Card>
 </CardGrid>
 
 <AboutAstro title="Presented by">

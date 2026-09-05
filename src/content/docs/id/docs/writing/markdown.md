@@ -1,6 +1,6 @@
 ---
-title: 'Markdown'
-description: 'Pelajari cara menulis konten Markdown di Stradocs.'
+title: "Markdown"
+description: "Pelajari cara menulis konten Markdown di Stradocs."
 ---
 
 Berikut adalah contoh beberapa sintaks dasar Markdown yang dapat digunakan saat menulis konten Markdown di Astro.

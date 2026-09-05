@@ -1,11 +1,13 @@
 ---
-title: 'Stradocs 1.0'
-description: 'Introducing Stradocs 1.0 — a ground-up redesign of the Astro Starlight theme, with an integrated blog system, local fonts, OG Image, and RSS.'
+title: "Stradocs 1.0"
+description: "Introducing Stradocs 1.0 a ground-up redesign of the Astro Starlight theme, with an integrated blog system, local fonts, OG Image, and RSS."
 editUrl: https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/edit/main/src/content/docs/blog/id/stradocs-v1.mdx
 pubDate: 2026-09-04T09:40Z
 author:
-  name: 'Bima Akbar'
-  avatar: ~/assets/images/author/bimaakbar-dev.svg
+  - name: "Bima Akbar"
+    avatar: ~/assets/images/author/bimaakbar-dev.svg
+  - name: "stradocs"
+    avatar: ~/assets/images/author/bimaakbar.svg
 heroImage: ~/assets/images/blog/stradocs-v1.jpg
 tags:
   - Astro
@@ -16,7 +18,15 @@ tags:
 draft: false
 ---
 
-import { Aside, Badge, Card, CardGrid, LinkCard, Tabs, TabItem } from '@astrojs/starlight/components';
+import {
+  Aside,
+  Badge,
+  Card,
+  CardGrid,
+  LinkCard,
+  Tabs,
+  TabItem,
+} from "@astrojs/starlight/components";
 
 [Astro Starlight](https://starlight.astro.build) is a solid documentation foundation — lightweight, MDX-based, and well-structured. But its default interface feels generic. For projects that want their own visual identity, that's a hindrance from day one.
 
@@ -27,10 +37,21 @@ Inspired by **Fumadocs**'s clean and opinionated design approach, and **Vercel**
 ## For who?
 
 <CardGrid>
-  <Card title="Developer" icon="laptop">Project documentation that looks good from day one — without having to redesign from scratch.</Card>
-  <Card title="Content Creator" icon="pencil">A flexible, customizable writing platform that doesn't limit creativity.</Card>
-  <Card title="Technical Writer" icon="document">Focus on content. Stradocs takes care of typography, layout, and the reading experience.</Card>
-  <Card title="Student" icon="open-book">A true Astro + Starlight architectural reference — the code is transparent and traceable from the beginning.</Card>
+  <Card title="Developer" icon="laptop">
+    Project documentation that looks good from day one — without having to
+    redesign from scratch.
+  </Card>
+  <Card title="Content Creator" icon="pencil">
+    A flexible, customizable writing platform that doesn't limit creativity.
+  </Card>
+  <Card title="Technical Writer" icon="document">
+    Focus on content. Stradocs takes care of typography, layout, and the reading
+    experience.
+  </Card>
+  <Card title="Student" icon="open-book">
+    A true Astro + Starlight architectural reference — the code is transparent
+    and traceable from the beginning.
+  </Card>
 </CardGrid>
 
 ## Stack
@@ -39,19 +60,21 @@ Inspired by **Fumadocs**'s clean and opinionated design approach, and **Vercel**
   <TabItem label="Core" icon="rocket">
     - [Astro](https://astro.build/) <Badge text="7.3" variant="note" />
     - [Starlight](https://starlight.astro.build/) <Badge text="0.42" variant="note" />
-    - [TailwindCss](https://tailwindcss.com/) <Badge text="4.3" variant="note" />
-   </TabItem>
-   <TabItem label="Font" icon="seti:font">
-     |  Role |  Typeface |  Format |
-     |---|---|---|
-     |  Headings |  Montserrat |  `.woff2` (local) |
-     |  Body |  Inter |  `.woff2` (local) |
-     |  Mono / Code |  FiraCode |  `.woff2` (local) |
+    - [TailwindCss](https://tailwindcss.com/)<Badge text="4.3" variant="note" />
+  </TabItem>
+  <TabItem label="Font" icon="seti:font">
+    | Role | Typeface | Format | 
+    |---|---|---| 
+    | Headings | Montserrat | `.woff2` (local) | 
+    | Body | Inter | `.woff2` (local) | 
+    | Mono / Code | FiraCode | `.woff2` (local) |
   </TabItem>
 </Tabs>
-
+<br />
 <Aside type="tip">
-  All fonts use Astro's built-in `fontProviders.local()` — no requests to Google Fonts or external CDNs. Performance and user privacy are maintained from the very first load.
+  All fonts use Astro's built-in `fontProviders.local()`. No requests to Google
+  Fonts or external CDNs. Performance and user privacy are maintained from the
+  very first load.
 </Aside>
 
 ## Stradocs 1.0 Features
@@ -62,19 +85,23 @@ Stradocs replaces most of Starlight's built-in components with redesigned versio
 
 <CardGrid>
   <Card title="Header & Navigation" icon="bars">
-    Main navigation with a cleaner design and full control over the visual structure.
+    Main navigation with a cleaner design and full control over the visual
+    structure.
   </Card>
   <Card title="Hero" icon="star">
-    The main page hero section has a custom layout that is not tied to the default Starlight template.
+    The main page hero section has a custom layout that is not tied to the
+    default Starlight template.
   </Card>
   <Card title="Footer" icon="information">
     Footer with information, social links and fully controlled structure.
   </Card>
   <Card title="Head & OG Image" icon="external">
-    Complete meta tag management — including automatic Open Graph images for every page.
+    Complete meta tag management including automatic Open Graph images for
+    every page.
   </Card>
   <Card title="MarkdownContent" icon="document">
-    Wrapper article content with a custom typography system that is consistent across pages.
+    Wrapper article content with a custom typography system that is consistent
+    across pages.
   </Card>
   <Card title="PageTitle & Banner" icon="pen">
     Page titles and announcement banners with their own styling.
@@ -84,22 +111,29 @@ Stradocs replaces most of Starlight's built-in components with redesigned versio
 ### Markdown Plugins
 
 <Aside type="note">
-  Astro 7 uses `@astrojs/markdown-satteri` as the default markdown processor — a Rust-based pipeline that is much faster than remark/rehype.
+  Astro 7 uses `@astrojs/markdown-satteri` as the default markdown processor — a
+  Rust-based pipeline that is much faster than remark/rehype.
 </Aside>
 
 Stradocs adds two hast-based custom plugins that work at the AST level:
 
 <CardGrid>
   <Card title="satteriExternalLink" icon="external">
-    Process all external links automatically. Every outbound link from the site gets the proper attributes and visual indicators — without the author needing to write additional markup.
+    Process all external links automatically. Every outbound link from the site
+    gets the proper attributes and visual indicators without the author
+    needing to write additional markup.
   </Card>
   <Card title="satteriTable" icon="list-format">
-    Wraps each table in a responsive, horizontally scrollable container. Automatically applies to all Markdown and MDX content, including existing content.
+    Wraps each table in a responsive, horizontally scrollable container.
+    Automatically applies to all Markdown and MDX content, including existing
+    content.
   </Card>
 </CardGrid>
 
 <Aside type="tip">
-  Since both plugins work at the hash AST level, their features are active across **all Markdown and MDX files** without the need to import additional components in each content file.
+  Since both plugins work at the hash AST level, their features are active
+  across **all Markdown and MDX files** without the need to import additional
+  components in each content file.
 </Aside>
 
 ### Integrated Blog System
@@ -107,14 +141,23 @@ Stradocs adds two hast-based custom plugins that work at the AST level:
 Starlight was designed for documentation, not blogging. Stradocs adds a fully integrated blog system—not a separate plugin, but rather part of the same project structure.
 
 <CardGrid>
-  <Card title="Blog Listing" icon="list-format">Article listing page with pagination and filtering by tags.</Card>
-  <Card title="Article Page" icon="document">Detailed view of individual articles with a clean, content-focused layout.</Card>
-  <Card title="RelatedPost" icon="forward-slash">Displays related articles based on similar tags below each article.</Card>
-  <Card title="PopularPost" icon="star">Widget to display prioritized articles — in the sidebar or inline.</Card>
+  <Card title="Blog Listing" icon="list-format">
+    Article listing page with pagination and filtering by tags.
+  </Card>
+  <Card title="Article Page" icon="document">
+    Detailed view of individual articles with a clean, content-focused layout.
+  </Card>
+  <Card title="RelatedPost" icon="forward-slash">
+    Displays related articles based on similar tags below each article.
+  </Card>
+  <Card title="PopularPost" icon="star">
+    Widget to display prioritized articles in the sidebar or inline.
+  </Card>
 </CardGrid>
 
 <Aside>
-  Using components within blog content is the same as with Starlight. Create a `.mdx` file to use components directly within articles.
+  Using components within blog content is the same as with Starlight. Create a
+  `.mdx` file to use components directly within articles.
 </Aside>
 
 ### Extended Schema for Blogs
@@ -124,27 +167,32 @@ Starlight's content schema is extended using the `extend` option of `docsSchema(
 ```ts
 // src/content/config.ts
 schema: docsSchema({
-  extend: ({ image }) => z.object({
-    pubDate: z.coerce.date().optional(),
-    heroImage: z.optional(image()),
-    author: z.array(z.object({
-      name: z.string().optional(),
-      avatar: z.optional(image()),
-    })).optional(),
-    tags: z.array(z.string()).optional(),
-  }),
-})
+  extend: ({ image }) =>
+    z.object({
+      pubDate: z.coerce.date().optional(),
+      heroImage: z.optional(image()),
+      author: z
+        .array(
+          z.object({
+            name: z.string().optional(),
+            avatar: z.optional(image()),
+          }),
+        )
+        .optional(),
+      tags: z.array(z.string()).optional(),
+    }),
+});
 ```
 
 Example of blog article frontmatter:
 
 ```yaml
 ---
-title: 'Article title'
-description: 'Short description.'
+title: "Article title"
+description: "Short description."
 pubDate: 2025-09-01
 author:
-  - name: 'yourname'
+  - name: "yourname"
     avatar: ~/assets/images/author/your-image.jpg
 heroImage: ~/assets/images/blog/cover.jpg
 tags:
@@ -154,15 +202,16 @@ draft: false
 ---
 ```
 
-| Field | Type | Description |
-|---|---|---|
-| `pubDate` | `Date` (optional) | Publication date; automatically coerced from string |
-| `heroImage` | `ImageMetadata` (optional) | Feature image, processed by Astro Image |
-| `author` | `{ name?, avatar? }[]` (optional) | Author array — supports multiple authors with avatars |
-| `tags` | `string[]` (optional) | Article categories/tags |
+| Field       | Type                              | Description                                           |
+| ----------- | --------------------------------- | ----------------------------------------------------- |
+| `pubDate`   | `Date` (optional)                 | Publication date; automatically coerced from string   |
+| `heroImage` | `ImageMetadata` (optional)        | Feature image, processed by Astro Image               |
+| `author`    | `{ name?, avatar? }[]` (optional) | Author array — supports multiple authors with avatars |
+| `tags`      | `string[]` (optional)             | Article categories/tags                               |
 
 <Aside type="tip">
-  `author` is designed as an **array** — a single article can have more than one author, each with their own name and avatar.
+  `author` is designed as an **array** — a single article can have more than one
+  author, each with their own name and avatar.
 </Aside>
 
 ### Dual Language Support
@@ -174,14 +223,14 @@ In addition to Starlight's built-in i18n routing, the blog component's UI string
 ```ts
 schema: i18nSchema({
   extend: z.object({
-    'blog.PostAuthor': z.string().optional(),
-    'blog.relatedPostLabel': z.string().optional(),
-    'blog.PopularPostLabel': z.string().optional(),
-    'rss.RssFeedLabel': z.string().optional(),
-    'rss.RssFeedTitle': z.string().optional(),
-    'rss.RssFeedDesc': z.string().optional(),
+    "blog.PostAuthor": z.string().optional(),
+    "blog.relatedPostLabel": z.string().optional(),
+    "blog.PopularPostLabel": z.string().optional(),
+    "rss.RssFeedLabel": z.string().optional(),
+    "rss.RssFeedTitle": z.string().optional(),
+    "rss.RssFeedDesc": z.string().optional(),
   }),
-})
+});
 ```
 
 There are no hardcoded strings inside the components — everything is translatable.
@@ -189,8 +238,15 @@ There are no hardcoded strings inside the components — everything is translata
 ### OG Image & RSS
 
 <CardGrid>
-  <Card title="OG Image" icon="external">Every page—documentation and blog posts—automatically generates an Open Graph image. This creates a consistent and professional appearance when links are shared on social media or messaging platforms.</Card>
-  <Card title="RSS Feed" icon="rss">The RSS feed is available in `/rss.xml` and automatically includes all blog entries. Readers can subscribe without having to manually visit the site.</Card>
+  <Card title="OG Image" icon="external">
+    Every page—documentation and blog posts—automatically generates an Open
+    Graph image. This creates a consistent and professional appearance when
+    links are shared on social media or messaging platforms.
+  </Card>
+  <Card title="RSS Feed" icon="rss">
+    The RSS feed is available in `/rss.xml` and automatically includes all blog
+    entries. Readers can subscribe without having to manually visit the site.
+  </Card>
 </CardGrid>
 
 ## Open Source
@@ -209,7 +265,9 @@ npm run dev
 ```
 
 <Aside type="note">
-  The Stradocs architecture is designed to be easy to read and modify. There are no hidden abstractions—just structured, traceable Astro code from start to finish.
+  The Stradocs architecture is designed to be easy to read and modify. There are
+  no hidden abstractions—just structured, traceable Astro code from start to
+  finish.
 </Aside>
 
 <CardGrid>

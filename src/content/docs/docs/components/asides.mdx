@@ -3,11 +3,11 @@ title: Asides
 description: Learn how to use asides in Starlight to display secondary information alongside a page’s main content.
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside } from "@astrojs/starlight/components";
 
 To display secondary information alongside a page’s main content, use the `<Aside>` component.
 
-import Preview from '~/components/component-preview.astro';
+import Preview from "~/components/component-preview.astro";
 
 <Preview>
 
@@ -20,7 +20,7 @@ import Preview from '~/components/component-preview.astro';
 ## Import
 
 ```tsx
-import { Aside } from '@astrojs/starlight/components';
+import { Aside } from "@astrojs/starlight/components";
 ```
 
 ## Usage
@@ -32,7 +32,7 @@ An `<Aside>` can have an optional [`type`](#type) attribute, which controls the 
 <Preview>
 
 ````mdx
-import { Aside } from '@astrojs/starlight/components';
+import { Aside } from "@astrojs/starlight/components";
 
 <Aside>Some content in an aside.</Aside>
 
@@ -109,10 +109,10 @@ Override the default aside titles by using the [`title`](#title) attribute.
 <Preview>
 
 ```mdx 'title="Watch out!"'
-import { Aside } from '@astrojs/starlight/components';
+import { Aside } from "@astrojs/starlight/components";
 
 <Aside type="caution" title="Watch out!">
-	A warning aside *with* a custom title.
+  A warning aside *with* a custom title.
 </Aside>
 ```
 
@@ -127,7 +127,7 @@ A warning aside *with* a custom title.
 </Fragment>
 
 <Aside slot="preview" type="caution" title="Watch out!">
-	A warning aside *with* a custom title.
+  A warning aside *with* a custom title.
 </Aside>
 
 </Preview>
@@ -139,10 +139,10 @@ Override the default aside icons by using the [`icon`](#icon) attribute set to t
 <Preview>
 
 ```mdx 'icon="starlight"'
-import { Aside } from '@astrojs/starlight/components';
+import { Aside } from "@astrojs/starlight/components";
 
 <Aside type="tip" icon="starlight">
-	A tip aside *with* a custom icon.
+  A tip aside *with* a custom icon.
 </Aside>
 ```
 
@@ -157,7 +157,7 @@ A tip aside *with* a custom icon.
 </Fragment>
 
 <Aside slot="preview" type="tip" icon="starlight">
-	A tip aside *with* a custom icon.
+  A tip aside *with* a custom icon.
 </Aside>
 
 </Preview>

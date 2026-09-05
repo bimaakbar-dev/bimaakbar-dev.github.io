@@ -1,6 +1,6 @@
 ---
-title: 'Markdown'
-description: 'Learn how to writing Markdown content in Stradocs.'
+title: "Markdown"
+description: "Learn how to writing Markdown content in Stradocs."
 ---
 
 Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.

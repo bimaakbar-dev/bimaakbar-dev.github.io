@@ -3,12 +3,12 @@ title: Code
 description: Learn how to display syntax highlighted code in Starlight without Markdown code blocks.
 ---
 
-import { Code } from '@astrojs/starlight/components';
+import { Code } from "@astrojs/starlight/components";
 
 The `<Code>` component renders syntax highlighted code.
 It is useful when using a [Markdown code block](/guides/authoring-content/#code-blocks) is not possible, for example, to render data coming from external sources like files, databases, or APIs.
 
-import Preview from '~/components/component-preview.astro';
+import Preview from "~/components/component-preview.astro";
 
 <Preview>
 
@@ -27,7 +27,7 @@ ins={3}
 ## Import
 
 ```tsx
-import { Code } from '@astrojs/starlight/components';
+import { Code } from "@astrojs/starlight/components";
 ```
 
 ## Usage
@@ -39,11 +39,11 @@ See the [Expressive Code “Code Component” docs](https://expressive-code.com/
 <Preview>
 
 ```mdx
-import { Code } from '@astrojs/starlight/components';
+import { Code } from "@astrojs/starlight/components";
 
 export const exampleCode = `console.log('This could come from a file or CMS!');`;
-export const fileName = 'example.js';
-export const highlights = ['file', 'CMS'];
+export const fileName = "example.js";
+export const highlights = ["file", "CMS"];
 
 <Code code={exampleCode} lang="js" title={fileName} mark={highlights} />
 ```
@@ -61,15 +61,15 @@ export const highlights = ['file', 'CMS'];
 </Fragment>
 
 export const exampleCode = `console.log('This could come from a file or CMS!');`;
-export const fileName = 'example.js';
-export const highlights = ['file', 'CMS'];
+export const fileName = "example.js";
+export const highlights = ["file", "CMS"];
 
 <Code
-	slot="preview"
-	code={exampleCode}
-	lang="js"
-	title={fileName}
-	mark={highlights}
+  slot="preview"
+  code={exampleCode}
+  lang="js"
+  title={fileName}
+  mark={highlights}
 />
 
 </Preview>

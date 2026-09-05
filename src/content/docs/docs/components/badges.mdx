@@ -3,11 +3,11 @@ title: Badges
 description: Learn how to use badges in Starlight to display additional pieces of information.
 ---
 
-import { Badge } from '@astrojs/starlight/components';
+import { Badge } from "@astrojs/starlight/components";
 
 To display small pieces of information, such as a status or category, use the `<Badge>` component.
 
-import Preview from '~/components/component-preview.astro';
+import Preview from "~/components/component-preview.astro";
 
 <Preview>
 
@@ -18,7 +18,7 @@ import Preview from '~/components/component-preview.astro';
 ## Import
 
 ```tsx
-import { Badge } from '@astrojs/starlight/components';
+import { Badge } from "@astrojs/starlight/components";
 ```
 
 ## Usage
@@ -31,7 +31,7 @@ To use a built-in badge color, set the [`variant`](#variant) attribute to one of
 <Preview>
 
 ```mdx
-import { Badge } from '@astrojs/starlight/components';
+import { Badge } from "@astrojs/starlight/components";
 
 - <Badge text="Note" variant="note" />
 - <Badge text="Success" variant="success" />
@@ -53,11 +53,11 @@ import { Badge } from '@astrojs/starlight/components';
 </Fragment>
 
 <Fragment slot="preview">
-	- <Badge text="Note" variant="note" />
-	- <Badge text="Success" variant="success" />
-	- <Badge text="Tip" variant="tip" />
-	- <Badge text="Caution" variant="caution" />
-	- <Badge text="Danger" variant="danger" />
+  - <Badge text="Note" variant="note" />
+  - <Badge text="Success" variant="success" />
+  - <Badge text="Tip" variant="tip" />
+  - <Badge text="Caution" variant="caution" />
+  - <Badge text="Danger" variant="danger" />
 </Fragment>
 
 </Preview>
@@ -69,7 +69,7 @@ Use the [`size`](#size) attribute to control the size of the badge text.
 <Preview>
 
 ```mdx /size="\w+"/
-import { Badge } from '@astrojs/starlight/components';
+import { Badge } from "@astrojs/starlight/components";
 
 - <Badge text="New" size="small" />
 - <Badge text="New and improved" size="medium" />
@@ -87,9 +87,9 @@ import { Badge } from '@astrojs/starlight/components';
 </Fragment>
 
 <Fragment slot="preview">
-	- <Badge text="New" size="small" />
-	- <Badge text="New and improved" size="medium" />
-	- <Badge text="New, improved, and bigger" size="large" />
+  - <Badge text="New" size="small" />
+  - <Badge text="New and improved" size="medium" />
+  - <Badge text="New, improved, and bigger" size="large" />
 </Fragment>
 
 </Preview>
@@ -101,9 +101,9 @@ Customize badges by using any other `<span>` attributes such as `class` or `styl
 <Preview>
 
 ```mdx "style={{ fontStyle: 'italic' }}"
-import { Badge } from '@astrojs/starlight/components';
+import { Badge } from "@astrojs/starlight/components";
 
-<Badge text="Custom" variant="success" style={{ fontStyle: 'italic' }} />
+<Badge text="Custom" variant="success" style={{ fontStyle: "italic" }} />
 ```
 
 <Fragment slot="markdoc">
@@ -115,10 +115,10 @@ import { Badge } from '@astrojs/starlight/components';
 </Fragment>
 
 <Badge
-	slot="preview"
-	text="Custom"
-	variant="success"
-	style={{ fontStyle: 'italic' }}
+  slot="preview"
+  text="Custom"
+  variant="success"
+  style={{ fontStyle: "italic" }}
 />
 
 </Preview>

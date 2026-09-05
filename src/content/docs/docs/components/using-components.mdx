@@ -22,8 +22,8 @@ These look like HTML tags but start with an uppercase letter matching the name i
 title: Welcome to my docs
 ---
 
-import { Icon } from '@astrojs/starlight/components';
-import CustomCard from '../../components/CustomCard.astro';
+import { Icon } from "@astrojs/starlight/components";
+import CustomCard from "../../components/CustomCard.astro";
 
 <Icon name="open-book" />
 
@@ -72,7 +72,7 @@ If these styles conflict with your component’s appearance, set the `not-conten
 ---
 
 <div class="not-content">
-	<p>Not impacted by Starlight’s default content styling.</p>
+  <p>Not impacted by Starlight’s default content styling.</p>
 </div>
 ```
 
@@ -86,8 +86,8 @@ The following example uses `ComponentProps` to get the type of the props accepte
 ```astro
 ---
 // src/components/Example.astro
-import type { ComponentProps } from 'astro/types';
-import { Badge } from '@astrojs/starlight/components';
+import type { ComponentProps } from "astro/types";
+import { Badge } from "@astrojs/starlight/components";
 
 type BadgeProps = ComponentProps<typeof Badge>;
 ---

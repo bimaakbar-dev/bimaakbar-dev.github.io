@@ -1,26 +1,32 @@
 ---
-title: 'Installation'
-description: 'How to clone and run Stradocs in a local environment.'
+title: "Installation"
+description: "How to clone and run Stradocs in a local environment."
 sidebar:
   order: 1
 ---
 
-import { Aside, Steps, Tabs, TabItem, LinkCard, CardGrid } from '@astrojs/starlight/components';
+import {
+  Aside,
+  Steps,
+  Tabs,
+  TabItem,
+  LinkCard,
+  CardGrid,
+} from "@astrojs/starlight/components";
 
 Stradocs is distributed as a GitHub repository that can be directly forked or cloned. There are no packages to install globally—simply clone, install dependencies, and you're ready to go.
 
 <Aside type="tip">
-  Stradocs is built on Astro and Starlight. Make sure you are familiar with both before proceeding.
+  Stradocs is built on Astro and Starlight. Make sure you are familiar with both
+  before proceeding.
 </Aside>
-
 
 ## Requirements
 
-| Requirement | Minimum Version |
-|---|---|
-| Node.js | `18.20.8` or later |
-| Git | Latest version |
-
+| Requirement | Minimum Version    |
+| ----------- | ------------------ |
+| Node.js     | `18.20.8` or later |
+| Git         | Latest version     |
 
 ## Clone Repository
 
@@ -44,19 +50,13 @@ Stradocs is distributed as a GitHub repository that can be directly forked or cl
 
    <Tabs>
      <TabItem label="npm" icon="seti:npm">
-       ```bash
-       npm install
-       ```
+       ```bash npm install ```
      </TabItem>
      <TabItem label="pnpm" icon="pnpm">
-       ```bash
-       pnpm install
-       ```
+       ```bash pnpm install ```
      </TabItem>
      <TabItem label="yarn" icon="seti:yarn">
-       ```bash
-       yarn install
-       ```
+       ```bash yarn install ```
      </TabItem>
    </Tabs>
 
@@ -64,19 +64,13 @@ Stradocs is distributed as a GitHub repository that can be directly forked or cl
 
    <Tabs>
      <TabItem label="npm" icon="seti:npm">
-       ```bash
-       npm run dev
-       ```
+       ```bash npm run dev ```
      </TabItem>
      <TabItem label="pnpm" icon="pnpm">
-       ```bash
-       pnpm dev
-       ```
+       ```bash pnpm dev ```
      </TabItem>
      <TabItem label="yarn" icon="seti:yarn">
-       ```bash
-       yarn dev
-       ```
+       ```bash yarn dev ```
      </TabItem>
    </Tabs>
 
@@ -84,15 +78,13 @@ Stradocs is distributed as a GitHub repository that can be directly forked or cl
 
 </Steps>
 
-
 ## Available Scripts
 
-| Script | Description |
-|---|---|
-| `npm run dev` | Runs the development server at `localhost:4321` with hot reload |
-| `npm run build` | Builds for production into the `dist/` folder |
-| `npm run preview` | Previews the build locally before deployment |
-
+| Script            | Description                                                     |
+| ----------------- | --------------------------------------------------------------- |
+| `npm run dev`     | Runs the development server at `localhost:4321` with hot reload |
+| `npm run build`   | Builds for production into the `dist/` folder                   |
+| `npm run preview` | Previews the build locally before deployment                    |
 
 ## Build for Production
 
@@ -100,28 +92,23 @@ When ready to deploy, run the build command:
 
 <Tabs>
   <TabItem label="npm" icon="seti:npm">
-    ```bash
-    npm run build
-    ```
+    ```bash npm run build ```
   </TabItem>
   <TabItem label="pnpm" icon="pnpm">
-    ```bash
-    pnpm build
-    ```
+    ```bash pnpm build ```
   </TabItem>
   <TabItem label="yarn" icon="seti:yarn">
-    ```bash
-    yarn build
-    ```
+    ```bash yarn build ```
   </TabItem>
 </Tabs>
 
 The build output will be located in the `dist/` folder. Stradocs is configured to deploy to **GitHub Pages**—the `site` configuration in `astro.config.mjs` is already set to the repository URL.
 
 <Aside>
-  If you want to deploy to another platform, adjust the `site` and `base` values ​​in `astro.config.mjs` according to the Astro documentation for the target platform.
+  If you want to deploy to another platform, adjust the `site` and `base` values
+  ​​in `astro.config.mjs` according to the Astro documentation for the target
+  platform.
 </Aside>
-
 
 ## The next step
 

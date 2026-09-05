@@ -3,19 +3,19 @@ title: Icons
 description: Learn how to display icons in Stradocs.
 ---
 
-import { Icon } from '@astrojs/starlight/components';
+import { Icon } from "@astrojs/starlight/components";
 
 To display icons from Starlight’s [built-in icon set](/reference/icons/#all-icons), use the `<Icon>` component.
 
-import Preview from '~/components/component-preview.astro';
+import Preview from "~/components/component-preview.astro";
 
 <Preview>
 
 <Icon
-	slot="preview"
-	name="open-book"
-	color="var(--sl-color-text-accent)"
-	size="4rem"
+  slot="preview"
+  name="open-book"
+  color="var(--sl-color-text-accent)"
+  size="4rem"
 />
 
 </Preview>
@@ -23,7 +23,7 @@ import Preview from '~/components/component-preview.astro';
 ## Import
 
 ```tsx
-import { Icon } from '@astrojs/starlight/components';
+import { Icon } from "@astrojs/starlight/components";
 ```
 
 ## Usage
@@ -34,7 +34,7 @@ An icon requires a [`name`](#name) set to [one of Starlight’s built-in icons](
 <Preview>
 
 ```mdx
-import { Icon } from '@astrojs/starlight/components';
+import { Icon } from "@astrojs/starlight/components";
 
 <Icon name="star" />
 <Icon name="starlight" label="The Starlight logo" />
@@ -50,8 +50,8 @@ import { Icon } from '@astrojs/starlight/components';
 </Fragment>
 
 <Fragment slot="preview">
-	<Icon name="star" />
-	<Icon name="starlight" label="The Starlight logo" />
+  <Icon name="star" />
+  <Icon name="starlight" label="The Starlight logo" />
 </Fragment>
 
 </Preview>
@@ -64,7 +64,7 @@ The [`class`](#class) attribute can be used to add custom CSS classes to the ico
 <Preview>
 
 ```mdx
-import { Icon } from '@astrojs/starlight/components';
+import { Icon } from "@astrojs/starlight/components";
 
 <Icon name="star" color="goldenrod" size="2rem" />
 <Icon name="rocket" color="var(--sl-color-text-accent)" />
@@ -80,8 +80,8 @@ import { Icon } from '@astrojs/starlight/components';
 </Fragment>
 
 <Fragment slot="preview">
-	<Icon name="star" color="goldenrod" size="2rem" />
-	<Icon name="rocket" color="var(--sl-color-text-accent)" />
+  <Icon name="star" color="goldenrod" size="2rem" />
+  <Icon name="rocket" color="var(--sl-color-text-accent)" />
 </Fragment>
 
 </Preview>

@@ -3,16 +3,16 @@ title: Link Buttons
 description: Learn how to create link buttons in Starlight for visually distinct call-to-action links.
 ---
 
-import { LinkButton } from '@astrojs/starlight/components';
+import { LinkButton } from "@astrojs/starlight/components";
 
 To display visually distinct call-to-action links, use the `<LinkButton>` component.
 
-import Preview from '~/components/component-preview.astro';
+import Preview from "~/components/component-preview.astro";
 
 <Preview>
 
 <LinkButton slot="preview" href="/getting-started/">
-	Read the docs
+  Read the docs
 </LinkButton>
 
 </Preview>
@@ -20,7 +20,7 @@ import Preview from '~/components/component-preview.astro';
 ## Import
 
 ```tsx
-import { LinkButton } from '@astrojs/starlight/components';
+import { LinkButton } from "@astrojs/starlight/components";
 ```
 
 ## Usage
@@ -34,11 +34,11 @@ Optionally, customize the appearance of the link button using the [`variant`](#v
 <Preview>
 
 ```mdx
-import { LinkButton } from '@astrojs/starlight/components';
+import { LinkButton } from "@astrojs/starlight/components";
 
 <LinkButton href="/getting-started/">Get started</LinkButton>
 <LinkButton href="/reference/configuration/" variant="secondary">
-	Configuration Reference
+  Configuration Reference
 </LinkButton>
 ```
 
@@ -55,10 +55,10 @@ Configuration Reference
 </Fragment>
 
 <Fragment slot="preview">
-	<LinkButton href="/getting-started/">Get started</LinkButton>
-	<LinkButton href="/reference/configuration/" variant="secondary">
-		Configuration Reference
-	</LinkButton>
+  <LinkButton href="/getting-started/">Get started</LinkButton>
+  <LinkButton href="/reference/configuration/" variant="secondary">
+    Configuration Reference
+  </LinkButton>
 </Fragment>
 
 </Preview>
@@ -72,15 +72,15 @@ The [`iconPlacement`](#iconplacement) attribute can be used to place the icon be
 <Preview>
 
 ```mdx {6-7}
-import { LinkButton } from '@astrojs/starlight/components';
+import { LinkButton } from "@astrojs/starlight/components";
 
 <LinkButton
-	href="https://docs.astro.build"
-	variant="secondary"
-	icon="external"
-	iconPlacement="start"
+  href="https://docs.astro.build"
+  variant="secondary"
+  icon="external"
+  iconPlacement="start"
 >
-	Related: Astro
+  Related: Astro
 </LinkButton>
 ```
 
@@ -99,13 +99,13 @@ Related: Astro
 </Fragment>
 
 <LinkButton
-	slot="preview"
-	href="https://docs.astro.build"
-	variant="secondary"
-	icon="external"
-	iconPlacement="start"
+  slot="preview"
+  href="https://docs.astro.build"
+  variant="secondary"
+  icon="external"
+  iconPlacement="start"
 >
-	Related: Astro
+  Related: Astro
 </LinkButton>
 
 </Preview>

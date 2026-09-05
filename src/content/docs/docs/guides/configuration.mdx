@@ -1,19 +1,21 @@
 ---
-title: 'Configuration'
-description: 'Stradocs configuration guide — which files to modify and for what purpose.'
+title: "Configuration"
+description: "Stradocs configuration guide — which files to modify and for what purpose."
 ---
 
-import { Aside, Card, CardGrid, FileTree, LinkCard } from '@astrojs/starlight/components';
+import {
+  Aside,
+  Card,
+  CardGrid,
+  FileTree,
+  LinkCard,
+} from "@astrojs/starlight/components";
 
 Stradocs does not have a dedicated configuration file. All configurations are distributed across four main files, each with distinct and separate responsibilities.
 
 <FileTree>
-- src/
-  - config/
-    - sidebar.ts
-    - expressive-code.ts
-  - constants.ts
-- astro.config.mjs
+  - src/ - config/ - sidebar.ts - expressive-code.ts - constants.ts -
+  astro.config.mjs
 </FileTree>
 
 ## `astro.config.mjs`
@@ -27,6 +29,7 @@ The main Astro configuration file. This is the first place to look when customiz
     // astro.config.mjs
     const site = 'https://your-domain.com';
     ```
+
   </Card>
   <Card title="title" icon="document">
     The site name that appears in the browser tab, header, and metadata. Change this to match your project name.
@@ -36,6 +39,7 @@ The main Astro configuration file. This is the first place to look when customiz
       title: 'site name',
     })
     ```
+
   </Card>
   <Card title="logo" icon="star">
     The site logo in two variants—`light` and `dark`—to support light and dark modes.
@@ -47,6 +51,7 @@ The main Astro configuration file. This is the first place to look when customiz
       replacesTitle: true,
     }
     ```
+
   </Card>
   <Card title="social" icon="github">
     Social media links that appear in the header. Add, remove, or replace them as needed.
@@ -56,6 +61,7 @@ The main Astro configuration file. This is the first place to look when customiz
       { icon: 'github', label: 'GitHub', href: 'https://github.com/username' }
     ]
     ```
+
   </Card>
   <Card title="locales" icon="translate">
     Language configuration. Stradocs is already configured for English `root` and Indonesian `/id`. Remove languages ​​you do not need or add new ones.
@@ -66,6 +72,7 @@ The main Astro configuration file. This is the first place to look when customiz
       id:   { label: 'Indonesia', lang: 'id' },
     }
     ```
+
   </Card>
   <Card title="fonts" icon="seti:font">
     The local fonts Montserrat, Inter, and FiraCode are registered here. Replace the `.woff2` files in `src/assets/fonts/` if you wish to use a different typeface.
@@ -80,10 +87,12 @@ The main Astro configuration file. This is the first place to look when customiz
       }
     ]
     ```
+
   </Card>
 
 <Aside type="caution">
-  After changing `site`, rerun `npm run build` to ensure all generated URLs use the correct domain.
+  After changing `site`, rerun `npm run build` to ensure all generated URLs use
+  the correct domain.
 </Aside>
 
 ---
@@ -96,67 +105,49 @@ Navigation sidebar structure configuration. All groups, labels, page order, and 
 // src/config/sidebar.ts
 export const sidebarConfig = [
   {
-    label: 'Getting Started',
+    label: "Getting Started",
     translations: {
-      'id': 'Memulai',
+      id: "Memulai",
     },
-    items: [
-      { autogenerate: 
-        { directory: 'docs/getting-started' } 
-      }
-    ],
+    items: [{ autogenerate: { directory: "docs/getting-started" } }],
   },
   {
-    label: 'Guides',
+    label: "Guides",
     translations: {
-      'id': 'Panduan',
+      id: "Panduan",
     },
-    items: [
-      { autogenerate: 
-        { directory: 'docs/guides' } 
-      }
-    ],
+    items: [{ autogenerate: { directory: "docs/guides" } }],
   },
   {
-    label: 'Writing',
+    label: "Writing",
     translations: {
-      'id': 'Menulis',
+      id: "Menulis",
     },
-    items: [
-      { autogenerate: 
-        { directory: 'docs/writing' } 
-      }
-    ],
+    items: [{ autogenerate: { directory: "docs/writing" } }],
   },
   {
-    label: 'Components',
+    label: "Components",
     translations: {
-      'id': 'Komponen',
+      id: "Komponen",
     },
-    items: [
-      { autogenerate: 
-        { directory: 'docs/components' } 
-      }
-    ],
+    items: [{ autogenerate: { directory: "docs/components" } }],
   },
   {
-    label: 'Reference',
+    label: "Reference",
     translations: {
-      'id': 'Referensi',
+      id: "Referensi",
     },
-    items: [
-      { autogenerate: 
-        { directory: 'docs/reference' } 
-      }
-    ],
+    items: [{ autogenerate: { directory: "docs/reference" } }],
   },
 ];
 ```
 
 <Aside type="tip">
-  Starlight supports various sidebar options — auto-generation, badges, collapsed groups, and external links. See the [Starlight documentation](https://starlight.astro.build/reference/configuration/#sidebar) for a complete reference.
+  Starlight supports various sidebar options — auto-generation, badges,
+  collapsed groups, and external links. See the [Starlight
+  documentation](https://starlight.astro.build/reference/configuration/#sidebar)
+  for a complete reference.
 </Aside>
-
 
 ## `src/config/expressive-code.ts`
 
@@ -165,13 +156,12 @@ Configure the appearance of code blocks using Expressive Code—Starlight's buil
 ```ts
 // src/config/expressive-code.ts
 export const expressiveCodeConfig = {
-  themes: ['nama-tema'],
+  themes: ["nama-tema"],
   // opsi lainnya...
 };
 ```
 
 Modify this file to change the code block theme, enable additional plugins, or customize the appearance of frames and line numbers.
-
 
 ## `src/constants.ts`
 
@@ -186,9 +176,10 @@ export { PAGE_TITLE_ID };
 ```
 
 <Aside>
-  If there are values ​​used in more than one component—such as the site name, social URLs, or default author name—place them here so that changes only need to be made in one place.
+  If there are values ​​used in more than one component—such as the site name,
+  social URLs, or default author name—place them here so that changes only need
+  to be made in one place.
 </Aside>
-
 
 ## `src/styles/global.css`
 
@@ -204,9 +195,11 @@ The Stradocs CSS entry point. All visual customizations—colors, typography, sp
 ```
 
 <Aside type="tip">
-  Starlight exposes all its design tokens as CSS custom properties. See the [Starlight CSS custom properties documentation](https://starlight.astro.build/reference/overrides/) for a complete list of variables that can be overridden.
+  Starlight exposes all its design tokens as CSS custom properties. See the
+  [Starlight CSS custom properties
+  documentation](https://starlight.astro.build/reference/overrides/) for a
+  complete list of variables that can be overridden.
 </Aside>
-
 
 ## The next step
 

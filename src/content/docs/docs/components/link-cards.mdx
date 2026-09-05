@@ -5,19 +5,19 @@ sidebar:
   order: 3
 ---
 
-import { LinkCard } from '@astrojs/starlight/components';
+import { LinkCard } from "@astrojs/starlight/components";
 
 To display links to different pages prominently, use the `<LinkCard>` component.
 
-import Preview from '~/components/component-preview.astro';
+import Preview from "~/components/component-preview.astro";
 
 <Preview>
 
 <LinkCard
-	slot="preview"
-	title="Customizing Starlight"
-	description="Learn how to make your Starlight site your own with custom styles, fonts, and more."
-	href="/guides/customization/"
+  slot="preview"
+  title="Customizing Starlight"
+  description="Learn how to make your Starlight site your own with custom styles, fonts, and more."
+  href="/guides/customization/"
 />
 
 </Preview>
@@ -25,7 +25,7 @@ import Preview from '~/components/component-preview.astro';
 ## Import
 
 ```tsx
-import { LinkCard } from '@astrojs/starlight/components';
+import { LinkCard } from "@astrojs/starlight/components";
 ```
 
 ## Usage
@@ -36,7 +36,7 @@ Each `<LinkCard>` requires a [`title`](#title) and an [`href`](#href) attribute.
 <Preview>
 
 ```mdx
-import { LinkCard } from '@astrojs/starlight/components';
+import { LinkCard } from "@astrojs/starlight/components";
 
 <LinkCard title="Authoring Markdown" href="/guides/authoring-content/" />
 ```
@@ -50,9 +50,9 @@ import { LinkCard } from '@astrojs/starlight/components';
 </Fragment>
 
 <LinkCard
-	slot="preview"
-	title="Authoring Markdown"
-	href="/guides/authoring-content/"
+  slot="preview"
+  title="Authoring Markdown"
+  href="/guides/authoring-content/"
 />
 
 </Preview>
@@ -64,12 +64,12 @@ Add a short description to a link card using the [`description`](#description) a
 <Preview>
 
 ```mdx {6}
-import { LinkCard } from '@astrojs/starlight/components';
+import { LinkCard } from "@astrojs/starlight/components";
 
 <LinkCard
-	title="Internationalization"
-	href="/guides/i18n/"
-	description="Configure Starlight to support multiple languages."
+  title="Internationalization"
+  href="/guides/i18n/"
+  description="Configure Starlight to support multiple languages."
 />
 ```
 
@@ -85,10 +85,10 @@ import { LinkCard } from '@astrojs/starlight/components';
 </Fragment>
 
 <LinkCard
-	slot="preview"
-	title="Internationalization"
-	href="/guides/i18n/"
-	description="Configure Starlight to support multiple languages."
+  slot="preview"
+  title="Internationalization"
+  href="/guides/i18n/"
+  description="Configure Starlight to support multiple languages."
 />
 
 </Preview>

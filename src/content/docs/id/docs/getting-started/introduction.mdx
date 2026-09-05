@@ -1,12 +1,20 @@
 ---
-title: 'Perkenalan'
-description: 'Gambaran umum Stradocs — tema Astro Starlight yang didesain ulang dengan filosofi clean, premium, dan modern.'
+title: "Perkenalan"
+description: "Gambaran umum Stradocs — tema Astro Starlight yang didesain ulang dengan filosofi clean, premium, dan modern."
 sidebar:
   order: 1
 ---
 
-import { Aside, Badge, Card, CardGrid, LinkCard, Tabs, TabItem } from '@astrojs/starlight/components';
-import Testimonial from '~/components/Testimonial.astro';
+import {
+  Aside,
+  Badge,
+  Card,
+  CardGrid,
+  LinkCard,
+  Tabs,
+  TabItem,
+} from "@astrojs/starlight/components";
+import Testimonial from "~/components/Testimonial.astro";
 
 Stradocs adalah tema [Astro Starlight](https://starlight.astro.build) yang didesain ulang secara menyeluruh. Bukan sekadar override variabel CSS — komponen, skema konten, sistem blog, dan tipografi semuanya dirancang dari awal dengan satu filosofi:
 
@@ -26,22 +34,28 @@ Jika kamu sudah familiar dengan Starlight, kamu langsung bisa produktif. Stradoc
 
 <CardGrid>
   <Card title="Redesign Komponen" icon="pencil">
-    Header, Hero, Footer, MarkdownContent, dan banyak komponen lain diganti dengan versi custom yang didesain ulang secara visual.
+    Header, Hero, Footer, MarkdownContent, dan banyak komponen lain diganti
+    dengan versi custom yang didesain ulang secara visual.
   </Card>
   <Card title="Sistem Blog" icon="document">
-    Halaman blog terintegrasi penuh dengan schema extension, komponen RelatedPost dan PopularPost, serta dukungan multi-author.
+    Halaman blog terintegrasi penuh dengan schema extension, komponen
+    RelatedPost dan PopularPost, serta dukungan multi-author.
   </Card>
   <Card title="Markdown Plugins" icon="setting">
-    Plugin `satteriExternalLink` dan `satteriTable` aktif otomatis di seluruh konten — tanpa import tambahan.
+    Plugin `satteriExternalLink` dan `satteriTable` aktif otomatis di seluruh
+    konten — tanpa import tambahan.
   </Card>
   <Card title="Font Lokal" icon="seti:font">
-    Montserrat, Inter, dan FiraCode dihosting lokal via `fontProviders.local()` — tanpa request ke CDN eksternal.
+    Montserrat, Inter, dan FiraCode dihosting lokal via `fontProviders.local()`
+    — tanpa request ke CDN eksternal.
   </Card>
   <Card title="OG Image & RSS" icon="external">
-    Setiap halaman menghasilkan Open Graph image otomatis. Feed RSS tersedia di `/rss.xml`.
+    Setiap halaman menghasilkan Open Graph image otomatis. Feed RSS tersedia di
+    `/rss.xml`.
   </Card>
   <Card title="Bilingual" icon="translate">
-    Dikonfigurasi untuk English dan Indonesia sejak awal, termasuk i18n string untuk komponen blog.
+    Dikonfigurasi untuk English dan Indonesia sejak awal, termasuk i18n string
+    untuk komponen blog.
   </Card>
 </CardGrid>
 
@@ -49,19 +63,13 @@ Jika kamu sudah familiar dengan Starlight, kamu langsung bisa produktif. Stradoc
 
 <Tabs>
   <TabItem label="Core" icon="rocket">
-    | Teknologi | Versi |
-    |---|---|
-    | Astro | `7.3` |
-    | Starlight | `0.42` |
-    | Tailwind CSS | via Vite plugin |
-    | Markdown Processor | `@astrojs/markdown-satteri` |
+    | Teknologi | Versi | |---|---| | Astro | `7.3` | | Starlight | `0.42` | |
+    Tailwind CSS | via Vite plugin | | Markdown Processor |
+    `@astrojs/markdown-satteri` |
   </TabItem>
   <TabItem label="Font" icon="seti:font">
-    | Peran | Typeface |
-    |---|---|
-    | Heading | Montserrat |
-    | Body | Inter |
-    | Mono / Kode | FiraCode |
+    | Peran | Typeface | |---|---| | Heading | Montserrat | | Body | Inter | |
+    Mono / Kode | FiraCode |
   </TabItem>
 </Tabs>
 
@@ -70,7 +78,8 @@ Jika kamu sudah familiar dengan Starlight, kamu langsung bisa produktif. Stradoc
 Stradocs adalah Starlight — bukan fork, bukan wrapper. Semua yang kamu tahu tentang Starlight tetap berlaku di sini: struktur konten, routing, sidebar, i18n, dan konfigurasi bekerja persis sama.
 
 <Aside type="tip">
-  Dokumentasi resmi Starlight tetap menjadi referensi utama. Stradocs hanya menambahkan dan mengganti lapisan visual di atasnya.
+  Dokumentasi resmi Starlight tetap menjadi referensi utama. Stradocs hanya
+  menambahkan dan mengganti lapisan visual di atasnya.
 </Aside>
 
 Yang membedakan hanyalah komponen yang sudah diganti, plugin yang sudah aktif, dan sistem blog yang sudah siap pakai — sehingga kamu tidak perlu menyentuh hal-hal itu dari nol.

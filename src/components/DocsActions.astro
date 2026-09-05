@@ -1,0 +1,184 @@
+---
+// src/components/CopyDropdown.astro
+interface Props {
+  class?: string;
+  rawMarkdown?: string;
+  markdownUrl?: string;
+  agentHref?: string;
+  agentLabel?: string;
+}
+
+const {
+  class: className = "",
+  rawMarkdown = "",
+  markdownUrl,
+  agentHref,
+  agentLabel = Astro.locals.t("action.AgentSetup"),
+} = Astro.props;
+
+const safeMarkdown = encodeURIComponent(rawMarkdown);
+---
+
+<page-actions
+  data-markdown={safeMarkdown}
+  class:list={["page-actions not-content -ml-2 mt-3 flex flex-wrap items-center gap-y-1 text-sm", className]}
+>
+  <button type="button" data-action="copy-url" class="action-link" aria-label="Copy Page Link">
+    <svg width="1em" height="1em" viewBox="0 0 256 256" class="icon-default size-3.5">
+      <path fill="currentColor" d="M137.54 186.36a8 8 0 0 1 0 11.31l-9.94 10a56 56 0 0 1-79.2-79.21l24-24a56 56 0 0 1 76.77-2.43a8 8 0 1 1-10.56 12a40 40 0 0 0-54.85 1.75l-24 24a40 40 0 0 0 56.58 56.58l9.94-9.95a8 8 0 0 1 11.26-.05Zm70.08-138a56.08 56.08 0 0 0-79.22 0l-9.94 10a8 8 0 0 0 11.31 11.31l9.94-9.95a40 40 0 0 1 56.58 56.58l-24 24a40 40 0 0 1-54.85 1.72a8 8 0 1 0-10.58 12a56 56 0 0 0 76.77-2.43l24-24a56.08 56.08 0 0 0 0-79.23Z" />
+    </svg>
+    <svg width="1em" height="1em" viewBox="0 0 256 256" class="icon-done size-3.5">
+      <path fill="currentColor" d="M173.66 98.34a8 8 0 0 1 0 11.32l-56 56a8 8 0 0 1-11.32 0l-24-24a8 8 0 0 1 11.32-11.32L112 148.69l50.34-50.35a8 8 0 0 1 11.32 0M232 128A104 104 0 1 1 128 24a104.11 104.11 0 0 1 104 104m-16 0a88 88 0 1 0-88 88a88.1 88.1 0 0 0 88-88" />
+    </svg>
+    <span aria-live="polite">{Astro.locals.t("action.CopyPage")}</span>
+  </button>
+
+  <span aria-hidden="true" class="divider">|</span>
+
+  <button type="button" data-action="markdown" class="action-link" aria-label="Copy Page as Markdown">
+    <svg width="1em" height="1em" viewBox="0 0 256 256" class="icon-default size-3.5">
+      <path fill="currentColor" d="M216 32H88a8 8 0 0 0-8 8v40H40a8 8 0 0 0-8 8v128a8 8 0 0 0 8 8h128a8 8 0 0 0 8-8v-40h40a8 8 0 0 0 8-8V40a8 8 0 0 0-8-8m-56 176H48V96h112Zm48-48h-32V88a8 8 0 0 0-8-8H96V48h112Z" />
+    </svg>
+    <svg width="1em" height="1em" viewBox="0 0 256 256" class="icon-done size-3.5">
+      <path fill="currentColor" d="M173.66 98.34a8 8 0 0 1 0 11.32l-56 56a8 8 0 0 1-11.32 0l-24-24a8 8 0 0 1 11.32-11.32L112 148.69l50.34-50.35a8 8 0 0 1 11.32 0M232 128A104 104 0 1 1 128 24a104.11 104.11 0 0 1 104 104m-16 0a88 88 0 1 0-88 88a88.1 88.1 0 0 0 88-88" />
+    </svg>
+    <span aria-live="polite">{Astro.locals.t("action.CopyMarkdown")}</span>
+  </button>
+
+  <span aria-hidden="true" class="divider">|</span>
+
+  {
+    markdownUrl ? (
+      <a href={markdownUrl} target="_blank" rel="noopener noreferrer" class="action-link" aria-label="View Page as Markdown">
+        <svg width="1em" height="1em" viewBox="0 0 256 256" class="size-3.5">
+          <path fill="currentColor" d="M232 48H24A16 16 0 0 0 8 64v128a16 16 0 0 0 16 16h208a16 16 0 0 0 16-16V64a16 16 0 0 0-16-16m0 144H24V64h208zm-104-88v48a8 8 0 0 1-16 0v-28.69l-18.34 18.35a8 8 0 0 1-11.32 0L64 123.31V152a8 8 0 0 1-16 0v-48a8 8 0 0 1 13.66-5.66L88 124.69l26.34-26.35A8 8 0 0 1 128 104m77.66 18.34a8 8 0 0 1 0 11.32l-24 24a8 8 0 0 1-11.32 0l-24-24a8 8 0 0 1 11.32-11.32L168 132.69V104a8 8 0 0 1 16 0v28.69l10.34-10.35a8 8 0 0 1 11.32 0" />
+        </svg>
+        {Astro.locals.t("action.ViewMarkdown")}
+      </a>
+    ) : (
+      <button type="button" data-action="view" class="action-link" aria-label="View Page as Markdown">
+        <svg width="1em" height="1em" viewBox="0 0 256 256" class="size-3.5">
+          <path fill="currentColor" d="M232 48H24A16 16 0 0 0 8 64v128a16 16 0 0 0 16 16h208a16 16 0 0 0 16-16V64a16 16 0 0 0-16-16m0 144H24V64h208zm-104-88v48a8 8 0 0 1-16 0v-28.69l-18.34 18.35a8 8 0 0 1-11.32 0L64 123.31V152a8 8 0 0 1-16 0v-48a8 8 0 0 1 13.66-5.66L88 124.69l26.34-26.35A8 8 0 0 1 128 104m77.66 18.34a8 8 0 0 1 0 11.32l-24 24a8 8 0 0 1-11.32 0l-24-24a8 8 0 0 1 11.32-11.32L168 132.69V104a8 8 0 0 1 16 0v28.69l10.34-10.35a8 8 0 0 1 11.32 0" />
+        </svg>
+        {Astro.locals.t("action.ViewMarkdown")}
+      </button>
+    )
+  }
+
+  {
+    agentHref && (
+      <>
+        <span aria-hidden="true" class="divider max-[700px]:hidden">|</span>
+        <a href={agentHref} target="_blank" rel="noopener noreferrer" class="action-link max-[700px]:hidden" aria-label={agentLabel}>
+          <svg width="1em" height="1em" viewBox="0 0 256 256" class="size-3.5">
+            <path fill="currentColor" d="M200 48h-64V16a8 8 0 0 0-16 0v32H56a32 32 0 0 0-32 32v112a32 32 0 0 0 32 32h144a32 32 0 0 0 32-32V80a32 32 0 0 0-32-32m16 144a16 16 0 0 1-16 16H56a16 16 0 0 1-16-16V80a16 16 0 0 1 16-16h144a16 16 0 0 1 16 16Zm-52-56H92a28 28 0 0 0 0 56h72a28 28 0 0 0 0-56m-24 16v24h-24v-24Zm-60 12a12 12 0 0 1 12-12h8v24h-8a12 12 0 0 1-12-12m84 12h-8v-24h8a12 12 0 0 1 0 24m-92-68a12 12 0 1 1 12 12a12 12 0 0 1-12-12m88 0a12 12 0 1 1 12 12a12 12 0 0 1-12-12" />
+          </svg>
+          {agentLabel}
+        </a>
+      </>
+    )
+  }
+</page-actions>
+
+<script>
+  class PageActions extends HTMLElement {
+    connectedCallback() {
+      const rawMarkdown = decodeURIComponent(this.dataset.markdown || "");
+
+      this.querySelectorAll<HTMLButtonElement>("button[data-action]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const action = btn.dataset.action;
+
+          if (action === "copy-url") {
+            this.handleCopy(window.location.href, btn, "Copy page");
+          } else if (action === "markdown") {
+            if (rawMarkdown) this.handleCopy(rawMarkdown, btn, "Copy as Markdown");
+          } else if (action === "view") {
+            if (rawMarkdown) {
+              const blob = new Blob([rawMarkdown], { type: "text/plain;charset=utf-8" });
+              window.open(URL.createObjectURL(blob), "_blank");
+            }
+          }
+        });
+      });
+    }
+
+    private async handleCopy(text: string, btn: HTMLButtonElement, restoreLabel: string) {
+      try {
+        await navigator.clipboard.writeText(text);
+        const label = btn.querySelector("[aria-live]");
+        btn.classList.add("is-done");
+        if (label) label.textContent = "Copied!";
+        setTimeout(() => {
+          btn.classList.remove("is-done");
+          if (label) label.textContent = restoreLabel;
+        }, 1600);
+      } catch (err) {
+        console.error("Failed to copy: ", err);
+      }
+    }
+  }
+
+  customElements.define("page-actions", PageActions);
+</script>
+
+<style>
+  .meta-item {
+    color: var(--sl-color-gray-3);
+  }
+
+  .divider {
+    user-select: none;
+    color: var(--sl-color-gray-5);
+  }
+
+  .action-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: 0.35rem;
+    padding: 0.25rem 0.5rem;
+    background-color: transparent;
+    color: var(--sl-color-text);
+    text-decoration: none;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .action-link:hover {
+    color: var(--sl-color-text-accent);
+    background-color: var(--sl-color-gray-5);
+  }
+
+  .action-link:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+  }
+
+  .icon-default,
+  .icon-done {
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  .icon-done {
+    display: none;
+    color: var(--sl-color-green);
+  }
+
+  .action-link.is-done .icon-default {
+    display: none;
+  }
+
+  .action-link.is-done .icon-done {
+    display: inline-flex;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .action-link,
+    .icon-default,
+    .icon-done {
+      transition: none;
+    }
+  }
+</style>

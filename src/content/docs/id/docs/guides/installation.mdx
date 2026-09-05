@@ -1,26 +1,32 @@
 ---
-title: 'Instalasi'
-description: 'Cara clone dan menjalankan Stradocs di local environment.'
+title: "Instalasi"
+description: "Cara clone dan menjalankan Stradocs di local environment."
 sidebar:
   order: 1
 ---
 
-import { Aside, Steps, Tabs, TabItem, LinkCard, CardGrid } from '@astrojs/starlight/components';
+import {
+  Aside,
+  Steps,
+  Tabs,
+  TabItem,
+  LinkCard,
+  CardGrid,
+} from "@astrojs/starlight/components";
 
 Stradocs didistribusikan sebagai repositori GitHub yang bisa langsung di-fork atau di-clone. Tidak ada package yang perlu diinstall secara global — cukup clone, install dependencies, dan langsung jalan.
 
 <Aside type="tip">
-  Stradocs dibangun di atas Astro dan Starlight. Pastikan kamu sudah familiar dengan keduanya sebelum melanjutkan.
+  Stradocs dibangun di atas Astro dan Starlight. Pastikan kamu sudah familiar
+  dengan keduanya sebelum melanjutkan.
 </Aside>
-
 
 ## Requirements
 
-| Requirement | Versi Minimum |
-|---|---|
-| Node.js | `18.20.8` atau lebih baru |
-| Git | Versi terbaru |
-
+| Requirement | Versi Minimum             |
+| ----------- | ------------------------- |
+| Node.js     | `18.20.8` atau lebih baru |
+| Git         | Versi terbaru             |
 
 ## Clone Repositori
 
@@ -44,19 +50,13 @@ Stradocs didistribusikan sebagai repositori GitHub yang bisa langsung di-fork at
 
    <Tabs>
      <TabItem label="npm" icon="seti:npm">
-       ```bash
-       npm install
-       ```
+       ```bash npm install ```
      </TabItem>
      <TabItem label="pnpm" icon="pnpm">
-       ```bash
-       pnpm install
-       ```
+       ```bash pnpm install ```
      </TabItem>
      <TabItem label="yarn" icon="seti:yarn">
-       ```bash
-       yarn install
-       ```
+       ```bash yarn install ```
      </TabItem>
    </Tabs>
 
@@ -64,19 +64,13 @@ Stradocs didistribusikan sebagai repositori GitHub yang bisa langsung di-fork at
 
    <Tabs>
      <TabItem label="npm" icon="seti:npm">
-       ```bash
-       npm run dev
-       ```
+       ```bash npm run dev ```
      </TabItem>
      <TabItem label="pnpm" icon="pnpm">
-       ```bash
-       pnpm dev
-       ```
+       ```bash pnpm dev ```
      </TabItem>
      <TabItem label="yarn" icon="seti:yarn">
-       ```bash
-       yarn dev
-       ```
+       ```bash yarn dev ```
      </TabItem>
    </Tabs>
 
@@ -84,15 +78,13 @@ Stradocs didistribusikan sebagai repositori GitHub yang bisa langsung di-fork at
 
 </Steps>
 
-
 ## Scripts yang Tersedia
 
-| Script | Keterangan |
-|---|---|
-| `npm run dev` | Menjalankan development server di `localhost:4321` dengan hot reload |
-| `npm run build` | Build untuk production ke folder `dist/` |
-| `npm run preview` | Preview hasil build secara lokal sebelum deploy |
-
+| Script            | Keterangan                                                           |
+| ----------------- | -------------------------------------------------------------------- |
+| `npm run dev`     | Menjalankan development server di `localhost:4321` dengan hot reload |
+| `npm run build`   | Build untuk production ke folder `dist/`                             |
+| `npm run preview` | Preview hasil build secara lokal sebelum deploy                      |
 
 ## Build untuk Production
 
@@ -100,28 +92,22 @@ Saat siap deploy, jalankan build command:
 
 <Tabs>
   <TabItem label="npm" icon="seti:npm">
-    ```bash
-    npm run build
-    ```
+    ```bash npm run build ```
   </TabItem>
   <TabItem label="pnpm" icon="pnpm">
-    ```bash
-    pnpm build
-    ```
+    ```bash pnpm build ```
   </TabItem>
   <TabItem label="yarn" icon="seti:yarn">
-    ```bash
-    yarn build
-    ```
+    ```bash yarn build ```
   </TabItem>
 </Tabs>
 
 Output build akan berada di folder `dist/`. Stradocs dikonfigurasi untuk deploy ke **GitHub Pages** — konfigurasi `site` di `astro.config.mjs` sudah diset ke URL repositori.
 
 <Aside>
-  Jika ingin deploy ke platform lain, sesuaikan nilai `site` dan `base` di `astro.config.mjs` mengikuti dokumentasi Astro untuk platform yang dituju.
+  Jika ingin deploy ke platform lain, sesuaikan nilai `site` dan `base` di
+  `astro.config.mjs` mengikuti dokumentasi Astro untuk platform yang dituju.
 </Aside>
-
 
 ## Langkah Selanjutnya
 

@@ -1,7 +1,13 @@
 {
+  "action.CopyPage": "Copy Page",
+  "action.CopyMarkdown": "Copy as Markdown",
+  "action.ViewMarkdown": "View as Markdown",
+  "action.AgentSetup": "Agent setup",
+
   "component.preview": "Preview",
 
   "blog.PostAuthor": "By",
+  "blog.readingTime": "{{minutes}} min read",
   "blog.relatedPostLabel": "Related posts",
   "blog.PopularPostLabel": "Popular posts",
 
