@@ -1,21 +1,30 @@
 // src/routeData.ts
-import { defineRouteMiddleware } from '@astrojs/starlight/route-data';
+import { defineRouteMiddleware } from "@astrojs/starlight/route-data";
 
 export const onRequest = defineRouteMiddleware((context) => {
   const { entry, locale } = context.locals.starlightRoute;
 
   const pathname = context.url.pathname;
 
-  const safeLocale = locale || 'root';
-  const base = safeLocale === 'root' ? '' : `/${safeLocale}`;
-  const blogPrefix = safeLocale === 'root' ? 'blog/' : `${safeLocale}/blog/`;
-  const blogBasePath = `${base}/blog`;
+  const safeLocale = locale || "root";
+  const base = safeLocale === "root" ? "" : `/${safeLocale}`;
 
+  // Docs
+  const docsBasePath = `${base}/docs`;
+  const isDocsIndex = pathname === docsBasePath || pathname === `${docsBasePath}/`;
+  const isDocs = pathname.startsWith(`${docsBasePath}/`) || isDocsIndex;
+
+  // Blog
+  const blogPrefix = safeLocale === "root" ? "blog/" : `${safeLocale}/blog/`;
+  const blogBasePath = `${base}/blog`;
   const isBlogPost = entry?.id?.startsWith(blogPrefix) ?? false;
   const isBlogIndex = pathname === blogBasePath || pathname === `${blogBasePath}/`;
 
   const route = context.locals.starlightRoute as any;
-  
+
+  route.isDocs = isDocs;
+  route.isDocsIndex = isDocsIndex;
+
   route.isBlog = isBlogPost || isBlogIndex;
   route.isBlogPost = isBlogPost;
   route.isBlogIndex = isBlogIndex;

@@ -1,0 +1,26 @@
+---
+// src/components/NavLinks.astro
+import NavLink from "~/components/HeaderLink.astro";
+
+const { locale, blogBasePath } = Astro.locals.starlightRoute;
+
+const currentLocale = locale || "root";
+const base = currentLocale === "root" ? "" : `/${currentLocale}`;
+
+const blogLink = blogBasePath || `${base}/blog`;
+---
+
+<nav class="nav-links">
+  <NavLink href={`${base}/docs`} matchPrefix>
+    Docs
+  </NavLink>
+  <NavLink href={blogLink as string} matchPrefix> Blog </NavLink>
+</nav>
+
+<style>
+  .nav-links {
+    display: flex;
+    gap: var(--sl-nav-gap);
+    align-items: center;
+  }
+</style>

@@ -1,0 +1,103 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  handle: string;
+  name: string;
+  cite: string;
+}
+
+const { name, handle, cite } = Astro.props;
+
+const avatars = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/images/testimonials/*.jpg",
+);
+const avatar = avatars[`../assets/images/testimonials/${handle}.jpg`];
+if (!avatar) {
+  throw new Error(`Could not resolve testimonial avatar for @${handle}`);
+}
+const src = (await avatar()).default;
+---
+
+<li class="testimonial not-content">
+  <blockquote class="quote" cite={cite}>
+    <slot />
+  </blockquote>
+  <div class="footer-cite">
+    <Image class="avatar" height="48" width="48" {src} alt="" />
+    <div class="flex items-center gap-1">
+      <p class="name">{name}</p>
+      <p class="text-(--sl-color-gray-3) leading-none">/</p>
+      <a href={cite} class="handle">@{handle}</a>
+    </div>
+  </div>
+</li>
+
+<style>
+  .testimonial {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 0.5em;
+  }
+  .quote {
+    display: flex;
+    position: relative;
+    text-align: left;
+    color: var(--sl-color-white);
+    font-size: var(--sl-text-h3);
+    line-height: var(--sl-line-height-headings);
+    font-weight: 400;
+  }
+  .quote::before {
+    content: "“";
+    pointer-events: none;
+    left: 0;
+    font-family: var(--font-serif);
+    color: var(--sl-color-accent-high);
+  }
+  .quote::after {
+    content: "”";
+    pointer-events: none;
+    right: 0;
+    font-family: var(--font-serif);
+    color: var(--sl-color-accent-high);
+  }
+  .quote > :global(* + *) {
+    margin-top: 0.75em;
+  }
+
+  .footer-cite {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .avatar {
+    --outline-color: rgba(255, 255, 255, 0.33);
+    outline: 1px solid var(--outline-color);
+    outline-offset: -1px;
+    border-radius: 99rem;
+    width: 1.5em;
+    height: 1.5em;
+  }
+  :global([data-theme="light"]) .avatar {
+    --outline-color: rgba(23, 25, 30, 0.33);
+  }
+
+  .name {
+    font-weight: 500;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-2);
+    line-height: var(--sl-line-height-headings);
+  }
+  .handle {
+    font-size: var(--sl-text-2xs);
+    text-decoration: none;
+    color: var(--sl-color-accent-high);
+  }
+  .handle:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+</style>

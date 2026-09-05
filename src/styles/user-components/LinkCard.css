@@ -1,53 +1,53 @@
 /* Custom Link Card */
 .sl-link-card {
-	display: grid;
-	grid-template-columns: 1fr auto;
-	gap: 0.5rem;
-	border: 1px solid var(--sl-color-gray-5);
-	border-radius: 0.5rem;
-	padding: 1rem;
-	box-shadow: var(--sl-shadow-sm);
-	position: relative;
-	background-color: var(--sl-color-gray-6);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: var(--sl-shadow-sm);
+  position: relative;
+  background-color: var(--sl-color-gray-6);
 }
 
 .sl-link-card a {
-	text-decoration: none;
-	line-height: var(--sl-line-height-headings);
+  text-decoration: none;
+  line-height: var(--sl-line-height-headings);
   -webkit-tap-highlight-color: transparent;
 }
 
 .sl-link-card a::before {
-	content: '';
-	position: absolute;
-	inset: 0;
+  content: "";
+  position: absolute;
+  inset: 0;
 }
 
 .sl-link-card .stack {
-	flex-direction: column;
-	gap: 0.5rem;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .sl-link-card .title {
-	color: var(--sl-color-white);
-	font-weight: 500;
-	font-size: var(--sl-text-base);
+  color: var(--sl-color-white);
+  font-weight: 500;
+  font-size: var(--sl-text-base);
 }
 
 .sl-link-card .description {
-	color: var(--sl-color-gray-3);
-	line-height: 1.5;
+  color: var(--sl-color-gray-3);
+  line-height: 1.5;
 }
 
 .sl-link-card .icon {
-	color: var(--sl-color-gray-3);
+  color: var(--sl-color-gray-3);
 }
 
 .sl-link-card:hover {
-	background: var(--sl-color-gray-6);
+  background: var(--sl-color-gray-6);
   border-color: var(--sl-color-accent-high);
 }
 
 .sl-link-card:hover .icon {
-	color: var(--sl-color-white);
+  color: var(--sl-color-white);
 }

@@ -1,0 +1,69 @@
+---
+// src/components/HeaderLink.astro
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"a"> & {
+  href: string;
+  matchPrefix?: boolean;
+};
+
+const { href, class: className, matchPrefix = false, ...props } = Astro.props;
+
+const pathname = Astro.url.pathname;
+
+const isActive = (): boolean => {
+  if (!href) return false;
+
+  const normalize = (str: string) => str.replace(/\/$/, "");
+  const normalizedHref = normalize(href);
+  const normalizedPathname = normalize(pathname);
+
+  if (normalizedHref === "" && normalizedPathname === "") return true;
+  if (normalizedHref === "/" && normalizedPathname === "") return true;
+
+  if (matchPrefix) {
+    const pattern = new RegExp(`^${normalizedHref}(/|$)`);
+    return pattern.test(normalizedPathname);
+  }
+
+  return (
+    normalizedPathname === normalizedHref ||
+    (normalizedPathname === "" && normalizedHref === "/")
+  );
+};
+
+const active = isActive();
+const linkClass = [className, "nav-link", active && "nav-link--active"]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<a
+  href={href}
+  class:list={[linkClass]}
+  aria-current={active ? "page" : undefined}
+  {...props}
+>
+  <slot />
+</a>
+
+<style>
+  .nav-link {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--sl-color-gray-2);
+    font-size: var(--sl-text-base);
+    font-weight: 500;
+    font-family: var(--font-montserrat);
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+
+  .nav-link:hover {
+    color: var(--sl-color-white);
+  }
+
+  .nav-link--active {
+    color: var(--sl-color-accent-high);
+  }
+</style>

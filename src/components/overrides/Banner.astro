@@ -1,0 +1,138 @@
+---
+const { banner } = Astro.locals.starlightRoute.entry.data;
+
+const stars = [
+  { left: 1, top: 30, opacity: 70 },
+  { left: 3, top: 70, opacity: 50 },
+  { left: 5, top: 22, opacity: 60 },
+  { left: 7, top: 58, opacity: 45 },
+  { left: 9, top: 84, opacity: 55 },
+  { left: 12, top: 36, opacity: 50 },
+  { left: 15, top: 18, opacity: 60 },
+  { left: 18, top: 64, opacity: 40 },
+  { left: 21, top: 80, opacity: 50 },
+  { left: 24, top: 28, opacity: 55 },
+  { left: 76, top: 24, opacity: 55 },
+  { left: 79, top: 76, opacity: 50 },
+  { left: 82, top: 40, opacity: 60 },
+  { left: 85, top: 60, opacity: 45 },
+  { left: 88, top: 18, opacity: 50 },
+  { left: 91, top: 82, opacity: 60 },
+  { left: 94, top: 32, opacity: 55 },
+  { left: 96, top: 66, opacity: 45 },
+  { left: 98, top: 24, opacity: 50 },
+  { left: 99, top: 78, opacity: 60 },
+];
+---
+
+{
+  banner && (
+    <div class="stargazer-banner">
+      <span aria-hidden="true" class="stargazer-wrapper">
+        {stars.map((s) => (
+          <span
+            class="stargazer"
+            style={`left:${s.left}%; top:${s.top}%; opacity:${s.opacity / 100};`}
+          />
+        ))}
+      </span>
+      <div class="sl-banner" data-pagefind-ignore set:html={banner.content} />
+    </div>
+  )
+}
+
+<style>
+  .stargazer-banner {
+    --__sl-banner-text: var(
+      --sl-color-banner-text,
+      var(--sl-color-text-invert)
+    );
+
+    --overlay-glow: hsl(16 80% 65% / 40%);
+    --overlay-glow-soft: hsl(174 55% 65% / 30%);
+    --shine-color: hsl(45 90% 78% / 55%);
+
+    position: relative;
+    padding: var(--sl-nav-pad-y) var(--sl-nav-pad-x);
+    background:
+      linear-gradient(215deg, var(--overlay-glow), transparent 40%),
+      radial-gradient(var(--overlay-glow), transparent 40%)
+        no-repeat -60vw -40vh / 105vw 200vh,
+      radial-gradient(var(--overlay-glow-soft), transparent 65%) no-repeat 50%
+        calc(100% + 20rem) / 60rem 30rem;
+    background-color: var(--sl-color-banner-bg, var(--sl-color-bg-accent));
+    overflow: hidden;
+    isolation: isolate;
+    z-index: 0;
+    text-align: center;
+    text-wrap: balance;
+    box-shadow: var(--sl-shadow-sm);
+  }
+
+  .stargazer-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      100deg,
+      transparent 30%,
+      var(--shine-color) 48%,
+      var(--overlay-glow) 52%,
+      transparent 70%
+    );
+    background-size: 250% 100%;
+    background-position: -100% 0;
+    animation: stargazer-shine 6s ease-in-out infinite;
+    mix-blend-mode: screen;
+  }
+
+  @keyframes stargazer-shine {
+    0% {
+      background-position: -100% 0;
+    }
+    45%,
+    100% {
+      background-position: 150% 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stargazer-banner::before {
+      animation: none;
+      background-position: 50% 0;
+    }
+  }
+
+  .stargazer-wrapper {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+  }
+
+  .stargazer {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background-color: var(--__sl-banner-text);
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Ccircle cx='4' cy='4' r='4'/%3E%3C/svg%3E");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+  }
+
+  .sl-banner {
+    position: relative;
+    z-index: 1;
+    color: var(--__sl-banner-text);
+    line-height: var(--sl-line-height-headings);
+    padding: 0;
+    background-color: transparent;
+  }
+
+  .sl-banner :global(a) {
+    color: var(--__sl-banner-text);
+    text-decoration-color: var(--__sl-banner-text);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+  }
+</style>

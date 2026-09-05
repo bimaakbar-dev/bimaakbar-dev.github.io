@@ -1,11 +1,11 @@
 mobile-starlight-toc details[open] .toggle {
-	color: var(--sl-color-white);
-	border-color: var(--sl-color-gray-5);
-	background-color: var(--sl-color-gray-6);
+  color: var(--sl-color-white);
+  border-color: var(--sl-color-gray-5);
+  background-color: var(--sl-color-gray-6);
 }
 
 mobile-starlight-toc details .toggle:hover {
-	color: var(--sl-color-white);
-	border-color: var(--sl-color-gray-5);
-	background-color: var(--sl-color-gray-6);
+  color: var(--sl-color-white);
+  border-color: var(--sl-color-gray-5);
+  background-color: var(--sl-color-gray-6);
 }

@@ -1,40 +1,41 @@
 ---
 // src/pages/blog/index.astro
-import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
-import BlogPage from '~/components/BlogPage.astro';
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import BlogPage from "~/components/BlogPage.astro";
 ---
 
-<StarlightPage hasSidebar={false} frontmatter={{
-  title: "Blog",
-  description: "Dapatkan semua berita terabaru dari Stargazers",
-  template: 'splash',
-  hero: {
-    title: "Blog Stargazers",
-    tagline: "Dapatkan semua berita terabaru dari Stargazers"
-  },
-  banner: {
-    content: `Kami baru saja meluncurkan sesuatu yang keren! <a href="/blog/">Lihatlah</a>`
-  }
-}}>
-
+<StarlightPage
+  hasSidebar={false}
+  frontmatter={{
+    title: "Blog",
+    description: "Dapatkan semua berita terabaru dari Stargazers",
+    template: "splash",
+    hero: {
+      title: "Blog Stargazers",
+      tagline: "Dapatkan semua berita terabaru dari Stargazers",
+    },
+    banner: {
+      content: `Kami baru saja meluncurkan sesuatu yang keren! <a href="/blog/">Lihatlah</a>`,
+    },
+  }}
+>
   <BlogPage />
 </StarlightPage>
 
-
 <style is:global>
-    .main-frame {
-        padding-top: calc(var(--sl-nav-height));
-    }
-    .content-panel .sl-container {
-        max-width: 100dvw !important;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-    }
-    .content-panel {
-        padding: 0 !important;
-        margin: 0
-    }
-    .sl-container > * + * {
-      margin-top: 0 !important;
-      }
+  .main-frame {
+    padding-top: calc(var(--sl-nav-height));
+  }
+  .content-panel .sl-container {
+    max-width: 100dvw !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .content-panel {
+    padding: 0 !important;
+    margin: 0;
+  }
+  .sl-container > * + * {
+    margin-top: 0 !important;
+  }
 </style>

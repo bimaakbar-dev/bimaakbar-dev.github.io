@@ -1,219 +1,125 @@
 @layer base, starlight, theme, components, utilities;
 
-@import '@astrojs/starlight-tailwind';
-@import 'tailwindcss/theme.css' layer(theme);
-@import 'tailwindcss/utilities.css' layer(utilities);
+@import "@astrojs/starlight-tailwind";
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
 
-@import './reset.css';
-@import './asides.css';
-@import './markdown.css';
-@import './stargazer.css';
+@import "./reset.css";
+@import "./asides.css";
+@import "./markdown.css";
+@import "./stargazer.css";
 
 :root,
 ::backdrop {
-    --sl-color-white: rgb(240, 240, 240);
-    --sl-color-gray-1: rgb(240, 240, 240);
-    --sl-color-gray-2: rgb(168, 168, 168);
-    --sl-color-gray-3: rgb(113, 113, 122);
-    --sl-color-gray-4: rgb(15, 15, 15);
-    --sl-color-gray-5: rgb(30, 30, 30);
-    --sl-color-gray-6: rgb(10, 10, 10);
-    --sl-color-black: rgb(5, 5, 5);
+  --sl-color-white: rgb(240, 240, 240);
+  --sl-color-gray-1: rgb(240, 240, 240);
+  --sl-color-gray-2: rgb(168, 168, 168);
+  --sl-color-gray-3: rgb(113, 113, 122);
+  --sl-color-gray-4: rgb(15, 15, 15);
+  --sl-color-gray-5: rgb(30, 30, 30);
+  --sl-color-gray-6: rgb(10, 10, 10);
+  --sl-color-black: rgb(5, 5, 5);
 
-    --sl-color-blue-low: rgb(6 182 212 / 0.14);
-    --sl-color-blue: rgb(6, 182, 212);
-    --sl-color-blue-high: rgb(165, 243, 252);
+  --sl-color-blue-low: rgb(6 182 212 / 0.14);
+  --sl-color-blue: rgb(6, 182, 212);
+  --sl-color-blue-high: rgb(165, 243, 252);
 
-    --sl-color-green-low: rgb(34 197 94 / 0.12);
-    --sl-color-green: rgb(34, 197, 94);
-    --sl-color-green-high: rgb(134, 239, 172);
+  --sl-color-green-low: rgb(34 197 94 / 0.12);
+  --sl-color-green: rgb(34, 197, 94);
+  --sl-color-green-high: rgb(134, 239, 172);
 
-    --sl-color-orange-low: rgb(249 115 22 / 0.12);
-    --sl-color-orange: rgb(249, 115, 22);
-    --sl-color-orange-high: rgb(253, 186, 116);
+  --sl-color-orange-low: rgb(249 115 22 / 0.12);
+  --sl-color-orange: rgb(249, 115, 22);
+  --sl-color-orange-high: rgb(253, 186, 116);
 
-    --sl-color-red-low: rgb(239 68 68 / 0.12);
-    --sl-color-red: rgb(239, 68, 68);
-    --sl-color-red-high: rgb(252, 165, 165);
+  --sl-color-red-low: rgb(239 68 68 / 0.12);
+  --sl-color-red: rgb(239, 68, 68);
+  --sl-color-red-high: rgb(252, 165, 165);
 
-    --sl-color-purple-low: rgb(168 85 247 / 0.12);
-    --sl-color-purple: rgb(168, 85, 247);
-    --sl-color-purple-high: rgb(216, 180, 254);
+  --sl-color-purple-low: rgb(168 85 247 / 0.12);
+  --sl-color-purple: rgb(168, 85, 247);
+  --sl-color-purple-high: rgb(216, 180, 254);
 
-    --sl-color-accent-low: hsl(234, 80%, 30%);
-	--sl-color-accent: hsl(234, 90%, 60%);
-	--sl-color-accent-high: hsl(234, 88%, 90%);
+  --sl-color-accent-low: hsl(234, 80%, 30%);
+  --sl-color-accent: hsl(234, 90%, 60%);
+  --sl-color-accent-high: hsl(234, 88%, 90%);
 
-    --sl-color-text: rgb(168, 168, 168);
-    --sl-color-text-accent: rgb(229, 229, 229);
-    --sl-color-text-invert: rgb(5, 5, 5);
-    
-    --sl-color-bg: rgb(5, 5, 5);
-    --sl-color-bg-nav: rgb(5, 5, 5);
-    --sl-color-bg-sidebar: rgb(5, 5, 5);
-    --sl-color-bg-inline-code: rgb(10, 10, 10);
-    --sl-color-bg-accent: rgb(229, 229, 229);
-    
-    --sl-color-hairline-light: rgb(15, 15, 15);
-    --sl-color-hairline: rgb(30, 30, 30);
-    --sl-color-hairline-shade: rgb(30, 30, 30);
+  --sl-color-text: rgb(168, 168, 168);
+  --sl-color-text-accent: rgb(229, 229, 229);
+  --sl-color-text-invert: rgb(5, 5, 5);
 
-    --sl-color-backdrop-overlay: hsla(223, 13%, 10%, 0.66);
+  --sl-color-bg: rgb(5, 5, 5);
+  --sl-color-bg-nav: rgb(5, 5, 5);
+  --sl-color-bg-sidebar: rgb(5, 5, 5);
+  --sl-color-bg-inline-code: rgb(10, 10, 10);
+  --sl-color-bg-accent: rgb(229, 229, 229);
 
-    --sl-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.8);
-    --sl-shadow-md: 0 4px 12px rgb(0 0 0 / 0.7);
-    --sl-shadow-lg: 0 12px 24px rgb(0 0 0 / 0.8);
+  --sl-color-hairline-light: rgb(15, 15, 15);
+  --sl-color-hairline: rgb(30, 30, 30);
+  --sl-color-hairline-shade: rgb(30, 30, 30);
+
+  --sl-color-backdrop-overlay: hsla(223, 13%, 10%, 0.66);
+
+  --sl-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.8);
+  --sl-shadow-md: 0 4px 12px rgb(0 0 0 / 0.7);
+  --sl-shadow-lg: 0 12px 24px rgb(0 0 0 / 0.8);
 }
 
-:root[data-theme='light'],
-[data-theme='light'] ::backdrop {
-    --sl-color-white: rgb(9, 9, 11);
-    --sl-color-gray-1: rgb(9, 9, 11);
-    --sl-color-gray-2: rgb(82, 82, 91);
-    --sl-color-gray-3: rgb(113, 113, 122);
-    --sl-color-gray-4: rgb(244, 244, 245);
-    --sl-color-gray-5: rgb(228, 228, 231);
-    --sl-color-gray-6: rgb(244, 244, 245);
-    --sl-color-gray-7: rgb(244, 244, 245);
-    --sl-color-black: rgb(250, 250, 250);
+:root[data-theme="light"],
+[data-theme="light"] ::backdrop {
+  --sl-color-white: rgb(9, 9, 11);
+  --sl-color-gray-1: rgb(9, 9, 11);
+  --sl-color-gray-2: rgb(82, 82, 91);
+  --sl-color-gray-3: rgb(113, 113, 122);
+  --sl-color-gray-4: rgb(244, 244, 245);
+  --sl-color-gray-5: rgb(228, 228, 231);
+  --sl-color-gray-6: rgb(244, 244, 245);
+  --sl-color-gray-7: rgb(244, 244, 245);
+  --sl-color-black: rgb(250, 250, 250);
 
-    --sl-color-blue-low: rgb(8 145 178 / 0.1);
-    --sl-color-blue: rgb(8, 145, 178);
-    --sl-color-blue-high: rgb(22, 78, 99);
+  --sl-color-blue-low: rgb(8 145 178 / 0.1);
+  --sl-color-blue: rgb(8, 145, 178);
+  --sl-color-blue-high: rgb(22, 78, 99);
 
-    --sl-color-green-low: rgb(16 150 88 / 0.1);
-    --sl-color-green: rgb(16, 150, 88);
-    --sl-color-green-high: rgb(6, 78, 59);
+  --sl-color-green-low: rgb(16 150 88 / 0.1);
+  --sl-color-green: rgb(16, 150, 88);
+  --sl-color-green-high: rgb(6, 78, 59);
 
-    --sl-color-orange-low: rgb(217 119 6 / 0.1);
-    --sl-color-orange: rgb(217, 119, 6);
-    --sl-color-orange-high: rgb(120, 53, 15);
+  --sl-color-orange-low: rgb(217 119 6 / 0.1);
+  --sl-color-orange: rgb(217, 119, 6);
+  --sl-color-orange-high: rgb(120, 53, 15);
 
-    --sl-color-red-low: rgb(225 29 72 / 0.1);
-    --sl-color-red: rgb(225, 29, 72);
-    --sl-color-red-high: rgb(136, 19, 55);
+  --sl-color-red-low: rgb(225 29 72 / 0.1);
+  --sl-color-red: rgb(225, 29, 72);
+  --sl-color-red-high: rgb(136, 19, 55);
 
-    --sl-color-purple-low: rgb(147 51 234 / 0.1);
-    --sl-color-purple: rgb(147, 51, 234);
-    --sl-color-purple-high: rgb(88, 28, 135);
+  --sl-color-purple-low: rgb(147 51 234 / 0.1);
+  --sl-color-purple: rgb(147, 51, 234);
+  --sl-color-purple-high: rgb(88, 28, 135);
 
-    --sl-color-accent-high: hsl(234, 80%, 30%);
-	--sl-color-accent: hsl(234, 90%, 60%);
-	--sl-color-accent-low: hsl(234, 88%, 90%);
+  --sl-color-accent-high: hsl(234, 80%, 30%);
+  --sl-color-accent: hsl(234, 90%, 60%);
+  --sl-color-accent-low: hsl(234, 88%, 90%);
 
-    --sl-color-text: rgb(82, 82, 91);
-    --sl-color-text-accent: rgb(24, 24, 27);
-    --sl-color-text-invert: rgb(250, 250, 250);
+  --sl-color-text: rgb(82, 82, 91);
+  --sl-color-text-accent: rgb(24, 24, 27);
+  --sl-color-text-invert: rgb(250, 250, 250);
 
-    --sl-color-bg: rgb(250, 250, 250);
-    --sl-color-bg-nav: rgb(250, 250, 250);
-    --sl-color-bg-sidebar: rgb(250, 250, 250);
-    --sl-color-bg-inline-code: rgb(244, 244, 245);
-    --sl-color-bg-accent: rgb(24, 24, 27);
+  --sl-color-bg: rgb(250, 250, 250);
+  --sl-color-bg-nav: rgb(250, 250, 250);
+  --sl-color-bg-sidebar: rgb(250, 250, 250);
+  --sl-color-bg-inline-code: rgb(244, 244, 245);
+  --sl-color-bg-accent: rgb(24, 24, 27);
 
-    --sl-color-hairline: rgb(228, 228, 231);
-    --sl-color-hairline-light: rgb(244, 244, 245);
-    --sl-color-hairline-shade: rgb(228, 228, 231);
+  --sl-color-hairline: rgb(228, 228, 231);
+  --sl-color-hairline-light: rgb(244, 244, 245);
+  --sl-color-hairline-shade: rgb(228, 228, 231);
 
-    --sl-color-backdrop-overlay: hsla(225, 9%, 36%, 0.66);
+  --sl-color-backdrop-overlay: hsla(225, 9%, 36%, 0.66);
 
-    --sl-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
-    --sl-shadow-md: 0 4px 10px rgb(0 0 0 / 0.06);
-    --sl-shadow-lg: 0 10px 20px rgb(0 0 0 / 0.07);
+  --sl-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
+  --sl-shadow-md: 0 4px 10px rgb(0 0 0 / 0.06);
+  --sl-shadow-lg: 0 10px 20px rgb(0 0 0 / 0.07);
 
-    --purple-hsl: 255, 85%, 65%;
-}
-
-:root {
-    --sl-font-system: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    --sl-font-system-mono: var(--font-firaCode), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    --__sl-font: var(--sl-font-system);
-    --__sl-font-mono: var(--sl-font-system-mono);
-    
-    /* --sl-text-2xs: 0.75rem;
-    --sl-text-xs: 0.8125rem;
-    --sl-text-sm: 0.875rem;
-    --sl-text-base: 1rem;
-    --sl-text-lg: 1.125rem;
-    --sl-text-xl: 1.25rem;
-    --sl-text-2xl: 1.5rem;
-    --sl-text-3xl: 1.8125rem;
-    --sl-text-4xl: 2.1875rem;
-    --sl-text-5xl: 2.625rem;
-    --sl-text-6xl: 4rem; */
-    
-    --sl-text-body: var(--sl-text-base);
-	--sl-text-body-sm: var(--sl-text-xs);
-	--sl-text-code: var(--sl-text-sm);
-	--sl-text-code-sm: var(--sl-text-xs);
-    
-    --sl-text-h1: var(--sl-text-4xl);
-	--sl-text-h2:  var(--sl-text-3xl);
-	--sl-text-h3: var(--sl-text-2xl);
-	--sl-text-h4: var(--sl-text-xl);
-	--sl-text-h5: var(--sl-text-lg);
-
-    --sl-line-height: 1.75;
-    --sl-line-height-headings: 1.2;
-
-    --sl-nav-height: 3.5rem;
-    --sl-nav-pad-x: 1rem;
-    --sl-nav-pad-y: 0.75rem;
-    --sl-mobile-toc-height: 3rem;
-    --sl-sidebar-width: 18.75rem;
-    --sl-content-width: 45rem;
-    --sl-sidebar-pad-x: 1rem;
-    --sl-menu-button-size: 2rem;
-    /* --sl-nav-gap: var(--sl-content-pad-x); */
-    
-    --sl-outline-offset-inside: -0.1875rem;
-
-    --sl-z-index-toc: 4;
-    --sl-z-index-menu: 5;
-    --sl-z-index-navbar: 10;
-    --sl-z-index-skiplink: 20;
-
-    --purple-hsl: 255, 60%, 60%;
-	--overlay-blurple: hsla(var(--purple-hsl), 0.2);
-
-    --copy-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2'/%3E%3Cpath d='M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2'/%3E%3C/g%3E%3C/svg%3E");
-}
-
-.expressive-code .copy button {
-    border: 0;
-    border-radius: 0.5rem;
-    background-color: color-mix(in srgb, var(--sl-color-bg) 80%, transparent);
-	backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    outline: 1px solid var(--sl-color-gray-5);
-
-    width: 2rem !important;
-	height: 2rem !important;
-}
-
-.expressive-code .copy button::after {
-	margin: 0.5rem !important;
-}
-
-@media (min-width: 50em) {
-    :root {
-        --sl-nav-height: 4rem;
-        --sl-nav-pad-x: 1.5rem;
-        
-        --sl-text-h1: var(--sl-text-5xl);
-		--sl-text-h2: var(--sl-text-4xl);
-		--sl-text-h3: var(--sl-text-3xl);
-		--sl-text-h4: var(--sl-text-2xl);
-		--sl-text-h5: var(--sl-text-xl);
-    }
-    .expressive-code .copy button::after {
-        margin: 0.45rem !important;
-    }
-}
-
-@media (min-width: 72rem) {
-    :root {
-        --sl-content-pad-x: 1.5rem;
-        --sl-mobile-toc-height: 0rem;
-    }
+  --purple-hsl: 255, 85%, 65%;
 }

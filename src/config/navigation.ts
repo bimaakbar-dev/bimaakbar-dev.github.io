@@ -4,6 +4,6 @@ export interface NavSection {
 }
 
 export const navSections: NavSection[] = [
-  { label: 'Docs', href: '/' },
-  { label: 'Blog', href: '/blog' },
+  { label: "Docs", href: "/" },
+  { label: "Blog", href: "/blog" },
 ];

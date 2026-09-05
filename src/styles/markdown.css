@@ -1,262 +1,273 @@
 .sl-markdown-content {
-	flex: 1;
-	isolation: isolate;
-	width: 100%;
+  flex: 1;
+  isolation: isolate;
+  width: 100%;
 }
 /* Heading */
 .sl-markdown-content :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
-	line-height: var(--sl-line-height-headings);
+  line-height: var(--sl-line-height-headings);
   font-family: var(--font-montserrat);
 }
 
 .sl-markdown-content :is(h1, h2):not(:where(.not-content *)) {
-    color: var(--sl-color-white);
+  color: var(--sl-color-white);
 }
 
 .sl-markdown-content :is(h3, h4, h5, h6):not(:where(.not-content *)) {
-    color: var(--sl-color-gray-1);
+  color: var(--sl-color-gray-1);
 }
 
 .sl-markdown-content h1:not(:where(.not-content *)) {
-	font-weight: 700;
+  font-weight: 700;
 }
 .sl-markdown-content h2:not(:where(.not-content *)) {
-	font-weight: 600;
+  font-weight: 600;
 }
 .sl-markdown-content h3:not(:where(.not-content *)) {
-	font-weight: 500;
+  font-weight: 500;
 }
 .sl-markdown-content h4:not(:where(.not-content *)) {
-	font-weight: 500;
+  font-weight: 500;
 }
 .sl-markdown-content h5:not(:where(.not-content *)) {
-	font-weight: 500;
+  font-weight: 500;
 }
 .sl-markdown-content h6:not(:where(.not-content *)) {
-	font-weight: 500;
+  font-weight: 500;
 }
 
-.sl-markdown-content :is(h1 code, h2 code, h3 code, h4 code, h5 code, h6 code):not(:where(.not-content *)) {
-	font-size: inherit;
+.sl-markdown-content
+  :is(h1 code, h2 code, h3 code, h4 code, h5 code, h6 code):not(
+    :where(.not-content *)
+  ) {
+  font-size: inherit;
 }
 
 @media (hover: none) {
-	.sl-markdown-content .sl-anchor-link {
-		opacity: 0;
-	}
-	.sl-markdown-content .sl-anchor-link:focus,
-	.sl-markdown-content .sl-heading-wrapper:hover .sl-anchor-link {
-		opacity: 1;
-	}
+  .sl-markdown-content .sl-anchor-link {
+    opacity: 0;
+  }
+  .sl-markdown-content .sl-anchor-link:focus,
+  .sl-markdown-content .sl-heading-wrapper:hover .sl-anchor-link {
+    opacity: 1;
+  }
 }
 
 /* Link */
 .sl-markdown-content a:not(:where(.not-content *)) {
-	font-weight: 500;
-	color: var(--sl-color-white);
-	text-decoration-color: var(--sl-color-accent-high);
-	text-decoration-thickness: 2px;
-	text-underline-offset: 2px;
+  font-weight: 500;
+  color: var(--sl-color-white);
+  text-decoration-color: var(--sl-color-accent-high);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
 }
-.sl-markdown-content :is(code a, code a.inline-link.is-external):not(:where(.not-content *)) {
-	text-decoration-thickness: 1px;
-	text-underline-offset: 1px;
+.sl-markdown-content
+  :is(code a, code a.inline-link.is-external):not(:where(.not-content *)) {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 1px;
 }
 .sl-markdown-content a:hover:not(:where(.not-content *)) {
-	color: var(--sl-color-text-accent);
+  color: var(--sl-color-text-accent);
 }
 
 .sl-markdown-content a.inline-link.is-external:not(:where(.not-content *)) {
-	font-weight: 500;
-	color: var(--sl-color-white);
-	text-decoration-color: var(--sl-color-accent-high);
-	text-decoration-thickness: 2px;
-	text-underline-offset: 2px;
+  font-weight: 500;
+  color: var(--sl-color-white);
+  text-decoration-color: var(--sl-color-accent-high);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
 }
-.sl-markdown-content a.inline-link.is-external:hover:not(:where(.not-content *)) {
-	color: var(--sl-color-text-accent);
+.sl-markdown-content
+  a.inline-link.is-external:hover:not(:where(.not-content *)) {
+  color: var(--sl-color-text-accent);
 }
-.sl-markdown-content a.inline-link.is-external:not(:where(.not-content *))::after {
-	--ic-external: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M18 6L6 18M8 6h10v10'/%3E%3C/svg%3E");
-	--icon-size: 1em;
-	
-	display: inline-block;
-	vertical-align: middle;
-	mask: var(--ic-external) center / contain no-repeat;
-	-webkit-mask: var(--ic-external) center / contain no-repeat;
-	margin-inline-start: 0.125rem;
-	background-color: var(--sl-color-text-accent);
-	width: var(--icon-size);
-	height: var(--icon-size);
-	content: "";
-	font-size: inherit;
+.sl-markdown-content
+  a.inline-link.is-external:not(:where(.not-content *))::after {
+  --ic-external: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M18 6L6 18M8 6h10v10'/%3E%3C/svg%3E");
+  --icon-size: 1em;
+
+  display: inline-block;
+  vertical-align: middle;
+  mask: var(--ic-external) center / contain no-repeat;
+  -webkit-mask: var(--ic-external) center / contain no-repeat;
+  margin-inline-start: 0.125rem;
+  background-color: var(--sl-color-text-accent);
+  width: var(--icon-size);
+  height: var(--icon-size);
+  content: "";
+  font-size: inherit;
 }
 
 /* Bold */
 .sl-markdown-content :is(strong, b):not(:where(.not-content *)) {
-	font-weight: 500;
-	color: var(--sl-color-white);
+  font-weight: 500;
+  color: var(--sl-color-white);
 }
 /* Italic */
 .sl-markdown-content :is(em, i):not(:where(.not-content *)) {
-	color: var(--sl-color-gray-3);
+  color: var(--sl-color-gray-3);
 }
 
 /* List */
 .sl-markdown-content :is(ul, ol):not(:where(.not-content *)) li::marker {
-	color: var(--sl-color-gray-3);
+  color: var(--sl-color-gray-3);
 }
 
 /* Task List */
 .sl-markdown-content input[type="checkbox"]:not(:where(.not-content *)) {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 1rem;
-    height: 1rem;
-    border: 1px solid var(--sl-color-gray-5);
-    border-radius: 0.25rem;
-    background-color: transparent;
-    display: inline-grid;
-    place-content: center;
-    margin-inline-end: 0.5rem;
-    vertical-align: middle;
-    cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.25rem;
+  background-color: transparent;
+  display: inline-grid;
+  place-content: center;
+  margin-inline-end: 0.5rem;
+  vertical-align: middle;
+  cursor: pointer;
 }
 
 .sl-markdown-content input[type="checkbox"]:not(:where(.not-content *)):hover {
-    border-color: var(--sl-color-gray-3);
+  border-color: var(--sl-color-gray-3);
 }
 
-.sl-markdown-content input[type="checkbox"]:not(:where(.not-content *)):checked {
-    background-color: var(--sl-color-text-accent);
-    border-color: var(--sl-color-text-accent);
+.sl-markdown-content
+  input[type="checkbox"]:not(:where(.not-content *)):checked {
+  background-color: var(--sl-color-text-accent);
+  border-color: var(--sl-color-text-accent);
 }
 
-.sl-markdown-content input[type="checkbox"]:not(:where(.not-content *)):checked::before {
-    content: "";
-    width: 0.55rem;
-    height: 0.3rem;
-    border-left: 2px solid var(--sl-color-text-invert);
-    border-bottom: 2px solid var(--sl-color-text-invert);
-    transform: rotate(-45deg) translate(1px, -1px);
+.sl-markdown-content
+  input[type="checkbox"]:not(:where(.not-content *)):checked::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.3rem;
+  border-left: 2px solid var(--sl-color-text-invert);
+  border-bottom: 2px solid var(--sl-color-text-invert);
+  transform: rotate(-45deg) translate(1px, -1px);
 }
 
-.sl-markdown-content li:has(> input[type="checkbox"]):not(:where(.not-content *)) {
-    list-style-type: none;
+.sl-markdown-content
+  li:has(> input[type="checkbox"]):not(:where(.not-content *)) {
+  list-style-type: none;
 }
 
 /* Image */
 .sl-markdown-content :is(img, picture, iframe):not(:where(.not-content *)) {
-	display: block;
-	/* border-radius: 0.5rem; */
-	border: 1px solid var(--sl-color-gray-6);
-	margin-inline: auto;
-	width: 100%;
+  display: block;
+  /* border-radius: 0.5rem; */
+  border: 1px solid var(--sl-color-gray-6);
+  margin-inline: auto;
+  width: 100%;
 }
 
 /* Definisi list */
 .sl-markdown-content dt:not(:where(.not-content *)) {
-	font-weight: 500;
+  font-weight: 500;
 }
 
 /* Code block */
 .sl-markdown-content code:not(:where(.not-content *)) {
-	background-color: var(--sl-color-bg-inline-code);
-	border: 1px solid var(--sl-color-gray-5);
-	border-radius: 0.5rem;
-	font-size: var(--sl-text-code-sm);
+  background-color: var(--sl-color-bg-inline-code);
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  font-size: var(--sl-text-code-sm);
 }
 
 .sl-markdown-content pre:not(:where(.not-content *)) {
-	border: 1px solid var(--sl-color-gray-5);
-	font-size: var(--sl-text-code);
+  border: 1px solid var(--sl-color-gray-5);
+  font-size: var(--sl-text-code);
 }
 
 /* Blockquote */
 .sl-markdown-content blockquote:not(:where(.not-content *)) {
-    position: relative;
-    border-inline-start: none;
-	padding-inline-start: 1.5rem;
-	padding-inline-end: 1rem;
-	padding-block: 1rem;
+  position: relative;
+  border-inline-start: none;
+  padding-inline-start: 1.5rem;
+  padding-inline-end: 1rem;
+  padding-block: 1rem;
 }
 
 .sl-markdown-content blockquote:not(:where(.not-content *))::before {
-    content: "";
-    position: absolute;
-    inset-block: 1rem;
-    inset-inline-start: 0;
-    width: 3px;
-    background: var(--sl-color-accent-high);
-    border-radius: 999px;
+  content: "";
+  position: absolute;
+  inset-block: 1rem;
+  inset-inline-start: 0;
+  width: 3px;
+  background: var(--sl-color-accent-high);
+  border-radius: 999px;
 }
 
 /* Table */
 .sl-markdown-content .table-wrapper:not(:where(.not-content *)) {
-	display: block;
-	position: relative;
-	margin: 2.5rem 0;
-	width: 100%;
-	max-width: 100%;
-	overflow-x: auto;
-	-webkit-overflow-scrolling: touch;
+  display: block;
+  position: relative;
+  margin: 2.5rem 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .sl-markdown-content .table-wrapper > table:not(:where(.not-content *)) {
-	display: table;
-	width: 100%;
-    min-width: max-content;
-	overflow: auto;
-	border-spacing: 0;
-	table-layout: auto;
-    border-collapse: separate;
+  display: table;
+  width: 100%;
+  min-width: max-content;
+  overflow: auto;
+  border-spacing: 0;
+  table-layout: auto;
+  border-collapse: separate;
 }
 
 .sl-markdown-content :is(thead):not(:where(.not-content *)) {
-    background: transparent;
+  background: transparent;
 }
 
 .sl-markdown-content :is(thead th):not(:where(.not-content *)) {
-    background-color: var(--sl-color-gray-6);
-    border-block: 1px solid var(--sl-color-hairline);
-    white-space: nowrap;
+  background-color: var(--sl-color-gray-6);
+  border-block: 1px solid var(--sl-color-hairline);
+  white-space: nowrap;
 }
 
-.sl-markdown-content :is(thead tr:first-child th:first-child):not(:where(.not-content *)) {
-    border-inline-start: 1px solid var(--sl-color-hairline);
-    border-start-start-radius: 0.5rem;
-    border-end-start-radius: 0.5rem;
+.sl-markdown-content
+  :is(thead tr:first-child th:first-child):not(:where(.not-content *)) {
+  border-inline-start: 1px solid var(--sl-color-hairline);
+  border-start-start-radius: 0.5rem;
+  border-end-start-radius: 0.5rem;
 }
 
-.sl-markdown-content :is(thead tr:last-child th:last-child):not(:where(.not-content *)) {
-    border-inline-end: 1px solid var(--sl-color-hairline);
-    border-start-end-radius: 0.5rem;
-    border-end-end-radius: 0.5rem;
+.sl-markdown-content
+  :is(thead tr:last-child th:last-child):not(:where(.not-content *)) {
+  border-inline-end: 1px solid var(--sl-color-hairline);
+  border-start-end-radius: 0.5rem;
+  border-end-end-radius: 0.5rem;
 }
 
 .sl-markdown-content :is(th, td):not(:where(.not-content *)) {
-	font-size: var(--sl-text-sm);
-	border-bottom: none;
-	padding: 0.5rem 1rem;
-	margin: 0;
+  font-size: var(--sl-text-sm);
+  border-bottom: none;
+  padding: 0.5rem 1rem;
+  margin: 0;
 }
 
 .sl-markdown-content :is(th):not(:where(.not-content *)) {
-    color: var(--sl-color-white);
-    font-weight: 500;
+  color: var(--sl-color-white);
+  font-weight: 500;
 }
 
-.sl-markdown-content :is(tbody tr:not(:first-child) td):not(:where(.not-content *)) {
-    border-top: 1px solid var(--sl-color-hairline);
+.sl-markdown-content
+  :is(tbody tr:not(:first-child) td):not(:where(.not-content *)) {
+  border-top: 1px solid var(--sl-color-hairline);
 }
 
 .sl-markdown-content :is(td):not(:where(.not-content *)) {
-    word-break: normal;
-    overflow-wrap: anywhere;
-    
+  word-break: normal;
+  overflow-wrap: anywhere;
 }
 
 .sl-markdown-content :is(td a, td code):not(:where(.not-content *)) {
-    white-space: nowrap;
+  white-space: nowrap;
 }
 
 @media (hover: hover) {
@@ -267,104 +278,132 @@
 
 /* Hr */
 .sl-markdown-content hr:not(:where(.not-content *)) {
-	border-bottom: 1px solid var(--sl-color-hairline);
+  border-bottom: 1px solid var(--sl-color-hairline);
 }
 
 /* Details */
 .sl-markdown-content details:not(:where(.not-content *)) {
-	--sl-details-border-color: var(--sl-color-gray-5);
-	--sl-details-border-color--hover: var(--sl-color-accent-high);
+  --sl-details-border-color: var(--sl-color-gray-5);
+  --sl-details-border-color--hover: var(--sl-color-accent-high);
 
-	border: 1px solid var(--sl-details-border-color);
-	padding-block: 0.5rem;
-	padding-inline-end: 0.5rem;
-	border-radius: 0.5rem;
-	background-color: var(--sl-color-gray-6);
+  border: 1px solid var(--sl-details-border-color);
+  padding-block: 0.5rem;
+  padding-inline-end: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--sl-color-gray-6);
 }
 .sl-markdown-content details:not([open]):hover:not(:where(.not-content *)),
 .sl-markdown-content details:has(> summary:hover):not(:where(.not-content *)) {
-	border-color: var(--sl-details-border-color--hover);
+  border-color: var(--sl-details-border-color--hover);
   -webkit-tap-highlight-color: transparent;
 }
 .sl-markdown-content summary:not(:where(.not-content *)) {
-	color: var(--sl-color-white);
-	font-weight: 500;
+  color: var(--sl-color-white);
+  font-weight: 500;
 }
 .sl-markdown-content summary:not(:where(.not-content *))::before {
-	--sl-details-marker-size: 1.25rem;
-	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14.8 11.3 10.6 7a1 1 0 1 0-1.4 1.5l3.5 3.5-3.5 3.5a1 1 0 0 0 0 1.4 1 1 0 0 0 .7.3 1 1 0 0 0 .7-.3l4.2-4.2a1 1 0 0 0 0-1.4Z'/%3E%3C/svg%3E%0A");
-	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14.8 11.3 10.6 7a1 1 0 1 0-1.4 1.5l3.5 3.5-3.5 3.5a1 1 0 0 0 0 1.4 1 1 0 0 0 .7.3 1 1 0 0 0 .7-.3l4.2-4.2a1 1 0 0 0 0-1.4Z'/%3E%3C/svg%3E%0A");
-	-webkit-mask-repeat: no-repeat;
-	mask-repeat: no-repeat;
+  --sl-details-marker-size: 1.25rem;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14.8 11.3 10.6 7a1 1 0 1 0-1.4 1.5l3.5 3.5-3.5 3.5a1 1 0 0 0 0 1.4 1 1 0 0 0 .7.3 1 1 0 0 0 .7-.3l4.2-4.2a1 1 0 0 0 0-1.4Z'/%3E%3C/svg%3E%0A");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14.8 11.3 10.6 7a1 1 0 1 0-1.4 1.5l3.5 3.5-3.5 3.5a1 1 0 0 0 0 1.4 1 1 0 0 0 .7.3 1 1 0 0 0 .7-.3l4.2-4.2a1 1 0 0 0 0-1.4Z'/%3E%3C/svg%3E%0A");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
 
 /* Kbd */
 .sl-markdown-content kbd:not(:where(.not-content *)) {
-    background-color: var(--sl-color-bg-inline-code);
-    border: 1px solid var(--sl-color-gray-5);
-    border-bottom-width: 2px;
-    border-radius: 0.25rem;
-    padding: 0.15rem 0.35rem;
-    font-size: var(--sl-text-code-sm);
-    font-family: var(--sl-font-mono, monospace);
-    color: var(--sl-color-white);
-    box-shadow: 0 1px 0 var(--sl-color-gray-5);
+  background-color: var(--sl-color-bg-inline-code);
+  border: 1px solid var(--sl-color-gray-5);
+  border-bottom-width: 2px;
+  border-radius: 0.25rem;
+  padding: 0.15rem 0.35rem;
+  font-size: var(--sl-text-code-sm);
+  font-family: var(--sl-font-mono, monospace);
+  color: var(--sl-color-white);
+  box-shadow: 0 1px 0 var(--sl-color-gray-5);
 }
 
 /* Footnotes */
-.sl-markdown-content .footnotes :is(div.sl-heading-wrapper):not(:where(.not-content *)) {
-    display: none;
+.sl-markdown-content
+  .footnotes
+  :is(div.sl-heading-wrapper):not(:where(.not-content *)) {
+  display: none;
 }
 
 .sl-markdown-content .footnotes:not(:where(.not-content *)) {
-    margin-top: 2.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--sl-color-hairline);
-    font-size: var(--sl-text-sm);
-    color: var(--sl-color-gray-3);
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--sl-color-hairline);
+  font-size: var(--sl-text-sm);
+  color: var(--sl-color-gray-3);
 }
 
 .sl-markdown-content .footnotes ol:not(:where(.not-content *)) {
-    padding-inline-start: 1.25rem;
+  padding-inline-start: 1.25rem;
 }
 
 .sl-markdown-content .footnotes li:not(:where(.not-content *)) {
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
-.sl-markdown-content .footnotes a[data-footnote-backref]:not(:where(.not-content *)) {
-    text-decoration: none;
-    margin-inline-start: 0.25rem;
-    color: var(--sl-color-text-accent);
+.sl-markdown-content
+  .footnotes
+  a[data-footnote-backref]:not(:where(.not-content *)) {
+  text-decoration: none;
+  margin-inline-start: 0.25rem;
+  color: var(--sl-color-text-accent);
 }
 
 .sl-markdown-content a[data-footnote-ref]:not(:where(.not-content *)) {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 /* Components */
-.sl-markdown-content .starlight-aside :is(th, td, hr, blockquote):not(:where(.not-content *)) {
-	border-color: var(--sl-color-gray-4);
+.sl-markdown-content
+  .starlight-aside
+  :is(th, td, hr, blockquote):not(:where(.not-content *)) {
+  border-color: var(--sl-color-gray-4);
 }
 
 .sl-markdown-content .starlight-aside :is(a):not(:where(.not-content *)) {
-	color: inherit;
-	text-decoration-color: var(--sl-color-asides-text-accent);
+  color: inherit;
+  text-decoration-color: var(--sl-color-asides-text-accent);
 }
 
-@supports (border-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 30%, transparent)) {
-	.sl-markdown-content .starlight-aside :is(th, td, hr, blockquote):not(:where(.not-content *)) {
-		border-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 30%, transparent);
-	}
+@supports (
+  border-color: color-mix(
+      in srgb,
+      var(--sl-color-asides-text-accent) 30%,
+      transparent
+    )
+) {
+  .sl-markdown-content
+    .starlight-aside
+    :is(th, td, hr, blockquote):not(:where(.not-content *)) {
+    border-color: color-mix(
+      in srgb,
+      var(--sl-color-asides-text-accent) 30%,
+      transparent
+    );
+  }
 }
 
-@supports (border-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 12%, transparent)) {
-	.sl-markdown-content .starlight-aside code:not(:where(.not-content *)) {
-		border-color: color-mix(in srgb, var(--sl-color-asides-text-accent) 12%, transparent);
-	}
+@supports (
+  border-color: color-mix(
+      in srgb,
+      var(--sl-color-asides-text-accent) 12%,
+      transparent
+    )
+) {
+  .sl-markdown-content .starlight-aside code:not(:where(.not-content *)) {
+    border-color: color-mix(
+      in srgb,
+      var(--sl-color-asides-text-accent) 12%,
+      transparent
+    );
+  }
 }
 
 .sl-markdown-content .starlight-aside details:not(:where(.not-content *)) {
-	--sl-details-border-color: var(--sl-color-asides-border);
-	--sl-details-border-color--hover: var(--sl-color-asides-text-accent);
+  --sl-details-border-color: var(--sl-color-asides-border);
+  --sl-details-border-color--hover: var(--sl-color-asides-text-accent);
 }

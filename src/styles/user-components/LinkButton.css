@@ -1,47 +1,47 @@
 .sl-link-button {
-    align-items: center;
-    border: 1px solid transparent;
-    border-radius: 999rem;
-    display: inline-flex;
-    font-size: var(--sl-text-sm);
-    gap: 0.5em;
-    line-height: 1.1875;
-    outline-offset: 0.25rem;
-    padding: 0.4375rem 1.125rem;
-    text-decoration: none;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 999rem;
+  display: inline-flex;
+  font-size: var(--sl-text-sm);
+  gap: 0.5em;
+  line-height: 1.1875;
+  outline-offset: 0.25rem;
+  padding: 0.4375rem 1.125rem;
+  text-decoration: none;
 }
 
 .sl-link-button.primary {
-    background: var(--sl-color-text-accent);
-    border-color: var(--sl-color-text-accent);
-    color: var(--sl-color-black);
+  background: var(--sl-color-text-accent);
+  border-color: var(--sl-color-text-accent);
+  color: var(--sl-color-black);
 }
 .sl-link-button.primary:hover {
-    color: var(--sl-color-black);
+  color: var(--sl-color-black);
 }
 .sl-link-button.secondary {
-    border-color: var(--sl-color-gray-5);
-    color: var(--sl-color-white);
+  border-color: var(--sl-color-gray-5);
+  color: var(--sl-color-white);
 }
 .sl-link-button.minimal {
-    color: var(--sl-color-white);
-    padding-inline: 0;
+  color: var(--sl-color-white);
+  padding-inline: 0;
 }
 
 .sl-link-button svg {
-    flex-shrink: 0;
+  flex-shrink: 0;
 }
 
 @media (min-width: 50rem) {
-    .sl-link-button {
-        font-size: var(--sl-text-base);
-        padding: 0.5rem 1.125rem;
-    }
+  .sl-link-button {
+    font-size: var(--sl-text-base);
+    padding: 0.5rem 1.125rem;
+  }
 }
 
 .sl-markdown-content .sl-link-button {
-    margin-inline-end: 1rem;
+  margin-inline-end: 1rem;
 }
 .sl-markdown-content .sl-link-button:not(:where(p *)) {
-    margin-block: 1rem;
+  margin-block: 1rem;
 }

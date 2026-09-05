@@ -1,14 +1,16 @@
 ---
 // src/pages/id/blog/[slug].astro
-import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
-import { getCollection, render } from 'astro:content';
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-  const allEntries = await getCollection('docs');
-  const blogEntries = allEntries.filter(entry => entry.id.startsWith('id/blog/'));
+  const allEntries = await getCollection("docs");
+  const blogEntries = allEntries.filter((entry) =>
+    entry.id.startsWith("id/blog/"),
+  );
 
   return blogEntries.map((entry) => {
-    const slug = entry.id.replace(/^id\/blog\//, '');
+    const slug = entry.id.replace(/^id\/blog\//, "");
     return {
       params: { slug },
       props: { entry },
@@ -20,26 +22,28 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
 
-<StarlightPage hasSidebar={false} frontmatter={{
-  title: entry.data.title,
-  description: entry.data.description,
-  editUrl: 'https://github.com/bimaakbar-dev/starlight/edit/main/docs/id/blog/',
-  template: 'doc',
-  heroImage: entry.data.heroImage,
-  pubDate: entry.data.pubDate,
-  author: {
-    name: entry.data.author?.name,
-    avatar: entry.data.author?.avatar
-  },
-  lastUpdated: entry.data.lastUpdated,
-  draft: entry.data.draft,
-  tableOfContents: false,
-  tags: entry.data.tags
-}}>
-
+<StarlightPage
+  hasSidebar={false}
+  frontmatter={{
+    title: entry.data.title,
+    description: entry.data.description,
+    editUrl:
+      "https://github.com/bimaakbar-dev/starlight/edit/main/docs/id/blog/",
+    template: "doc",
+    heroImage: entry.data.heroImage,
+    pubDate: entry.data.pubDate,
+    author: {
+      name: entry.data.author?.name,
+      avatar: entry.data.author?.avatar,
+    },
+    lastUpdated: entry.data.lastUpdated,
+    draft: entry.data.draft,
+    tableOfContents: false,
+    tags: entry.data.tags,
+  }}
+>
   <Content />
 </StarlightPage>
-
 
 <style is:global>
   :root {
@@ -63,7 +67,7 @@ const { Content } = await render(entry);
     border-top: 1px solid var(--sl-color-gray-5);
     max-width: 100dvw;
     margin-inline: auto;
-    margin-block: 0
+    margin-block: 0;
   }
 
   .content-panel .sl-container .sl-markdown-content {

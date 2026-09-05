@@ -1,102 +1,96 @@
 :root {
-	--sl-badge-default-border: var(--sl-color-accent-high);
-	--sl-badge-default-bg: var(--sl-color-accent);
-	--sl-badge-default-text:  #000;
-	
-	--sl-badge-note-border: var(--sl-color-blue);
-	--sl-badge-note-bg: var(--sl-color-blue);
-	--sl-badge-note-text:  #fff;
+  --sl-badge-default-border: var(--sl-color-accent-high);
+  --sl-badge-default-bg: var(--sl-color-accent);
+  --sl-badge-default-text: #000;
 
-	--sl-badge-danger-border: var(--sl-color-red);
-	--sl-badge-danger-bg: var(--sl-color-red);
-	--sl-badge-danger-text: #fff;
+  --sl-badge-note-border: var(--sl-color-blue);
+  --sl-badge-note-bg: var(--sl-color-blue);
+  --sl-badge-note-text: #fff;
 
-	--sl-badge-success-border: var(--sl-color-green);
-	--sl-badge-success-bg: var(--sl-color-green);
-	--sl-badge-success-text: #fff;
+  --sl-badge-danger-border: var(--sl-color-red);
+  --sl-badge-danger-bg: var(--sl-color-red);
+  --sl-badge-danger-text: #fff;
 
-	--sl-badge-caution-border: var(--sl-color-orange);
-	--sl-badge-caution-bg: var(--sl-color-orange);
-	--sl-badge-caution-text: #fff;
+  --sl-badge-success-border: var(--sl-color-green);
+  --sl-badge-success-bg: var(--sl-color-green);
+  --sl-badge-success-text: #fff;
 
-	--sl-badge-tip-border: var(--sl-color-purple);
-	--sl-badge-tip-bg: var(--sl-color-purple-high);
-	--sl-badge-tip-text: #fff;
+  --sl-badge-caution-border: var(--sl-color-orange);
+  --sl-badge-caution-bg: var(--sl-color-orange);
+  --sl-badge-caution-text: #fff;
+
+  --sl-badge-tip-border: var(--sl-color-purple);
+  --sl-badge-tip-bg: var(--sl-color-purple-high);
+  --sl-badge-tip-text: #fff;
 }
 
-[data-theme='light'] {
-	--sl-badge-default-bg: var(--sl-color-accent-high);
-	--sl-badge-default-text: #fff;
-	--sl-badge-note-bg: var(--sl-color-blue-high);
-	--sl-badge-danger-bg: var(--sl-color-red-high);
-	--sl-badge-success-bg: var(--sl-color-green-high);
-	--sl-badge-caution-bg: var(--sl-color-orange-high);
-	--sl-badge-tip-bg: var(--sl-color-purple-high);
+[data-theme="light"] {
+  --sl-badge-default-bg: var(--sl-color-accent-high);
+  --sl-badge-default-text: #fff;
+  --sl-badge-note-bg: var(--sl-color-blue-high);
+  --sl-badge-danger-bg: var(--sl-color-red-high);
+  --sl-badge-success-bg: var(--sl-color-green-high);
+  --sl-badge-caution-bg: var(--sl-color-orange-high);
+  --sl-badge-tip-bg: var(--sl-color-purple-high);
 }
 
 .sl-badge {
-	border: 1px solid var(--sl-color-border-badge);
-	border-radius: 0.5rem;
-	font-weight: 500;
+  border: 1px solid var(--sl-color-border-badge);
+  border-radius: 99rem;
+  font-weight: inherit;
+  padding: 0 0.5rem;
+  color: var(--sl-color-text-badge);
+  background-color: var(--sl-color-bg-badge)
 }
 
-/* Sidebar overrides */
 .sidebar-content .sl-badge {
-	font-size: var(--sl-text-xs);
+  font-size: var(--sl-text-xs);
 }
 
-/* outline variant */
-.sidebar-content a[aria-current='page'] > .sl-badge {
-	--sl-color-bg-badge: transparent;
-	--sl-color-border-badge: currentColor;
-	color: inherit;
-}
-
-/* Color variants */
 .default {
-	--sl-color-bg-badge: var(--sl-badge-default-bg);
-	--sl-color-border-badge: var(--sl-badge-default-border);
-	--sl-color-text-badge: var(--sl-badge-default-text);
+  --sl-color-bg-badge: var(--sl-badge-default-bg);
+  --sl-color-border-badge: var(--sl-badge-default-border);
+  --sl-color-text-badge: var(--sl-badge-default-text);
 }
 
 .note {
-	--sl-color-bg-badge: var(--sl-badge-note-bg);
-	--sl-color-border-badge: var(--sl-badge-note-border);
-	--sl-color-text-badge: var(--sl-badge-note-text);
+  --sl-color-bg-badge: var(--sl-badge-note-bg);
+  --sl-color-border-badge: var(--sl-badge-note-border);
+  --sl-color-text-badge: var(--sl-badge-note-text);
 }
 
 .danger {
-	--sl-color-bg-badge: var(--sl-badge-danger-bg);
-	--sl-color-border-badge: var(--sl-badge-danger-border);
-	--sl-color-text-badge: var(--sl-badge-danger-text);
+  --sl-color-bg-badge: var(--sl-badge-danger-bg);
+  --sl-color-border-badge: var(--sl-badge-danger-border);
+  --sl-color-text-badge: var(--sl-badge-danger-text);
 }
 
 .success {
-	--sl-color-bg-badge: var(--sl-badge-success-bg);
-	--sl-color-border-badge: var(--sl-badge-success-border);
-	--sl-color-text-badge: var(--sl-badge-success-text);
+  --sl-color-bg-badge: var(--sl-badge-success-bg);
+  --sl-color-border-badge: var(--sl-badge-success-border);
+  --sl-color-text-badge: var(--sl-badge-success-text);
 }
 
 .tip {
-	--sl-color-bg-badge: var(--sl-badge-tip-bg);
-	--sl-color-border-badge: var(--sl-badge-tip-border);
-	--sl-color-text-badge: var(--sl-badge-tip-text);
+  --sl-color-bg-badge: var(--sl-badge-tip-bg);
+  --sl-color-border-badge: var(--sl-badge-tip-border);
+  --sl-color-text-badge: var(--sl-badge-tip-text);
 }
 
 .caution {
-	--sl-color-bg-badge: var(--sl-badge-caution-bg);
-	--sl-color-border-badge: var(--sl-badge-caution-border);
-	--sl-color-text-badge: var(--sl-badge-caution-text);
+  --sl-color-bg-badge: var(--sl-badge-caution-bg);
+  --sl-color-border-badge: var(--sl-badge-caution-border);
+  --sl-color-text-badge: var(--sl-badge-caution-text);
 }
 
 .small {
-	font-size: var(--sl-text-xs);
+  font-size: var(--sl-text-xs);
 }
 
 .medium {
-	font-size: var(--sl-text-sm);
+  font-size: var(--sl-text-sm);
 }
 
 .large {
-	font-size: var(--sl-text-base);
+  font-size: var(--sl-text-base);
 }

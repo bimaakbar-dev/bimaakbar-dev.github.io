@@ -1,9 +1,9 @@
 // src/env.d.ts
 /// <reference types="astro/client" />
 
-import type { StarlightRouteData } from '@astrojs/starlight';
+import type { StarlightRouteData } from "@astrojs/starlight";
 
-declare module 'astro' {
+declare module "astro" {
   interface Locals {
     starlightRoute: StarlightRouteData & {
       isBlog?: boolean;

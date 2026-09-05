@@ -1,58 +1,38 @@
 // src/config/sidebar.ts
 export const sidebarConfig = [
   {
-    label: 'Getting Started',
+    label: "Getting Started",
     translations: {
-      'id': 'Memulai',
+      id: "Memulai",
     },
-    items: [
-      { autogenerate: 
-        { directory: 'docs/getting-started' } 
-      }
-    ],
+    items: [{ autogenerate: { directory: "docs/getting-started" } }],
   },
   {
-    label: 'Guides',
+    label: "Guides",
     translations: {
-      'id': 'Panduan',
+      id: "Panduan",
     },
-    items: [
-      { autogenerate: 
-        { directory: 'docs/guides' } 
-      }
-    ],
+    items: [{ autogenerate: { directory: "docs/guides" } }],
   },
   {
-    label: 'Writing',
+    label: "Writing",
     translations: {
-      'id': 'Menulis',
+      id: "Menulis",
     },
-    items: [
-      { autogenerate: 
-        { directory: 'docs/writing' } 
-      }
-    ],
+    items: [{ autogenerate: { directory: "docs/writing" } }],
   },
   {
-    label: 'Components',
+    label: "Components",
     translations: {
-      'id': 'Komponen',
+      id: "Komponen",
     },
-    items: [
-      { autogenerate: 
-        { directory: 'docs/components' } 
-      }
-    ],
+    items: [{ autogenerate: { directory: "docs/components" } }],
   },
   {
-    label: 'Reference',
+    label: "Reference",
     translations: {
-      'id': 'Referensi',
+      id: "Referensi",
     },
-    items: [
-      { autogenerate: 
-        { directory: 'docs/reference' } 
-      }
-    ],
+    items: [{ autogenerate: { directory: "docs/reference" } }],
   },
 ];

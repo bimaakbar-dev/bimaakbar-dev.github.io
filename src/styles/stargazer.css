@@ -1,48 +1,49 @@
 /* @import './components/MobileMenuToggle.css'; */
-@import './components/MobileTableOfContents.css';
-@import './components/PageSidebar.css';
-@import './components/Pagination.css';
-@import './components/Search.css';
-@import './components/SidebarSublist.css';
-@import './components/SiteTitle.css';
+@import "./components/MobileTableOfContents.css";
+@import "./components/PageSidebar.css";
+@import "./components/Pagination.css";
+@import "./components/Search.css";
+@import "./components/SidebarSublist.css";
+@import "./components/SiteTitle.css";
 
-@import './components-internals/TableOfContents/TableOfContentsList.css';
+@import "./components-internals/TableOfContents/TableOfContentsList.css";
 
-@import './user-components/Badge.css';
-@import './user-components/Card.css';
-@import './user-components/FileTree.css';
-@import './user-components/LinkButton.css';
-@import './user-components/LinkCard.css';
-@import './user-components/Steps.css';
-@import './user-components/Tabs.css';
+@import "./user-components/Badge.css";
+@import "./user-components/Card.css";
+@import "./user-components/FileTree.css";
+@import "./user-components/LinkButton.css";
+@import "./user-components/LinkCard.css";
+@import "./user-components/Steps.css";
+@import "./user-components/Tabs.css";
 
 [data-has-hero] .page {
-	background:
-		linear-gradient(215deg, var(--overlay-blurple), transparent 40%),
-		radial-gradient(var(--overlay-blurple), transparent 40%) no-repeat -60vw -40vh / 105vw 200vh,
-		radial-gradient(var(--overlay-blurple), transparent 65%) no-repeat 50% calc(100% + 20rem) /
-			60rem 30rem;
+  background:
+    linear-gradient(215deg, var(--overlay-blurple), transparent 40%),
+    radial-gradient(var(--overlay-blurple), transparent 40%)
+      no-repeat -60vw -40vh / 105vw 200vh,
+    radial-gradient(var(--overlay-blurple), transparent 65%) no-repeat 50%
+      calc(100% + 20rem) / 60rem 30rem;
 }
 
 [data-has-hero] header {
-	border-bottom: 1px solid transparent;
-	background-color: transparent;
-	-webkit-backdrop-filter: blur(16px);
-	backdrop-filter: blur(16px);
+  border-bottom: 1px solid transparent;
+  background-color: transparent;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
 }
 
 [data-has-hero] .hero > img {
-	filter: drop-shadow(0 0 3rem var(--overlay-blurple));
+  filter: drop-shadow(0 0 3rem var(--overlay-blurple));
 }
 
 .site-title {
-	align-items: center;
-	gap: 0.5rem;
-	font-size: var(--sl-text-h4);
-	font-weight: 600;
-	color: var(--sl-color-white);
-	text-decoration: none;
-	white-space: nowrap;
-	min-width: 0;
-	font-family: var(--font-montserrat);
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--sl-text-h4);
+  font-weight: 600;
+  color: var(--sl-color-white);
+  text-decoration: none;
+  white-space: nowrap;
+  min-width: 0;
+  font-family: var(--font-montserrat);
 }

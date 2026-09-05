@@ -6,6 +6,6 @@
   color: var(--sl-color-text-white);
 }
 
-.site-title [data-theme='light'] {
-	color: var(--sl-color-text-black);
+.site-title [data-theme="light"] {
+  color: var(--sl-color-text-black);
 }

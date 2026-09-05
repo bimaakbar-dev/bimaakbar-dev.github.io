@@ -1,47 +1,47 @@
 .top-level > li a {
-	font-size: var(--sl-text-sm);
+  font-size: var(--sl-text-sm);
 }
 
 .top-level > li .group-label .large {
-	font-size: var(--sl-text-base);
+  font-size: var(--sl-text-base);
 }
 .top-level > li a,
 .top-level > li .group-label .large {
-	display: block;
-	position: relative;
-	font-weight: 500;
+  display: block;
+  position: relative;
+  font-weight: 500;
 }
 
-.top-level li a[aria-current='page'],
-.top-level li a[aria-current='page']:hover,
-.top-level li a[aria-current='page']:focus {
-	font-weight: 500;
-	background-color: transparent;
-	color: var(--sl-color-white);
+.top-level li a[aria-current="page"],
+.top-level li a[aria-current="page"]:hover,
+.top-level li a[aria-current="page"]:focus {
+  font-weight: 500;
+  background-color: transparent;
+  color: var(--sl-color-white);
 }
 
-.top-level li a[aria-current='page']::before {
-	content: "";
-	position: absolute;
-	left: -0.55rem;
-	height: var(--sl-text-base);
-	width: 2px;
-	background-color: var(--sl-color-accent-high);
-	border-radius: 99rem;
-	vertical-align: middle;
-	flex-shrink: 0;
+.top-level li a[aria-current="page"]::before {
+  content: "";
+  position: absolute;
+  left: -0.55rem;
+  height: var(--sl-text-base);
+  width: 2px;
+  background-color: var(--sl-color-accent-high);
+  border-radius: 99rem;
+  vertical-align: middle;
+  flex-shrink: 0;
 }
 
 .top-level :is(ul ul li) {
-	border-inline-start: 1px solid var(--sl-color-gray-5);
-	box-sizing: border-box;
+  border-inline-start: 1px solid var(--sl-color-gray-5);
+  box-sizing: border-box;
 }
 
 @media (min-width: 50rem) {
-	.top-level > li .group-label .large {
-		font-size: var(--sl-text-base);
-	}
-	.top-level li a {
-		font-size: var(--sl-text-sm);
-	}
+  .top-level > li .group-label .large {
+    font-size: var(--sl-text-base);
+  }
+  .top-level li a {
+    font-size: var(--sl-text-sm);
+  }
 }

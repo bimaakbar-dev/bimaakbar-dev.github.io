@@ -1,40 +1,40 @@
 starlight-toc #starlight__on-this-page {
-	font-size: var(--sl-text-base);
+  font-size: var(--sl-text-base);
 }
 
 starlight-toc ul ul,
 mobile-starlight-toc ul ul {
-	position: relative;
+  position: relative;
 }
 
 starlight-toc ul ul li,
 mobile-starlight-toc ul ul li {
-	position: relative;
+  position: relative;
 }
 
 starlight-toc ul ul li::before,
 mobile-starlight-toc ul ul li::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 1rem;
-	width: 1px;
-	background-color: var(--sl-color-gray-5);
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 1rem;
+  width: 1px;
+  background-color: var(--sl-color-gray-5);
 }
 
-starlight-toc ul ul li:has( > a[aria-current='true'])::before,
-mobile-starlight-toc ul ul li:has( > a[aria-current='true'])::before {
-	background-color: var(--sl-color-accent-high);
-	width: 2px;
+starlight-toc ul ul li:has(> a[aria-current="true"])::before,
+mobile-starlight-toc ul ul li:has(> a[aria-current="true"])::before {
+  background-color: var(--sl-color-accent-high);
+  width: 2px;
 }
 
 mobile-starlight-toc .isMobile a {
-	border-top: 0;
+  border-top: 0;
 }
 
 @media (min-width: 50rem) {
-	starlight-toc ul ul li::before {
-		left: 0.75rem;
-	}
+  starlight-toc ul ul li::before {
+    left: 0.75rem;
+  }
 }
