@@ -23,7 +23,7 @@ const { isCustomMenu } = Astro.locals.starlightRoute;
     <div class="print:hidden">
       <Search />
     </div>
-    {!isCustomMenu && <MobileMenu />}
+    {isCustomMenu && <MobileMenu />}
     <div class="sl-hidden md:sl-flex print:hidden right-group">
       <ThemeSelect />
       <LanguageSelect />
