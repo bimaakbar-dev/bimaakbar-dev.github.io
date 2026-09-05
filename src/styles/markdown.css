@@ -254,6 +254,7 @@
 .sl-markdown-content :is(th):not(:where(.not-content *)) {
   color: var(--sl-color-white);
   font-weight: 500;
+  font-size: var(--sl-text-xs);
 }
 
 .sl-markdown-content
