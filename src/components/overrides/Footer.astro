@@ -1,6 +1,7 @@
 ---
 import { Icon } from "@astrojs/starlight/components";
-import SocialIcons from "@astrojs/starlight/components/SocialIcons.astro";
+
+import SocialIcons from "~/components/overrides/SocialIcons.astro";
 
 // @ts-ignore
 import config from 'virtual:starlight/user-config';
@@ -38,7 +39,6 @@ const currentYear = new Date().getFullYear();
   .social-icons {
     gap: 1rem;
     align-items: center;
-    color: var(--sl-color-accent);
   }
   .copyright {
     align-items: center;
