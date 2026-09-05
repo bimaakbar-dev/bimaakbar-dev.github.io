@@ -7,6 +7,7 @@ import SocialIcons from "@astrojs/starlight/components/SocialIcons.astro";
 import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
 import NavLinks from "~/components/NavLinks.astro";
 import MobileMenu from "~/components/MobileMenu.astro";
+import GithubStar from '../../components/GithubStar.astro';
 
 const { isCustomMenu } = Astro.locals.starlightRoute;
 ---
@@ -27,6 +28,7 @@ const { isCustomMenu } = Astro.locals.starlightRoute;
       <ThemeSelect />
       <LanguageSelect />
       <div class="sl-flex social-icons">
+        <GithubStar repo="bimaakbar-dev/bimaakbar-dev.github.io" />
         <SocialIcons />
       </div>
     </div>

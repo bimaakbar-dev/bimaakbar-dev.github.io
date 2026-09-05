@@ -1,0 +1,108 @@
+---
+// src/components/GithubStar.astro
+// Usage in MDX: <GithubStar repo="withastro/astro" />
+interface Props {
+  /** "owner/repo" */
+  repo: string;
+  class?: string;
+}
+
+const { repo, class: className = "" } = Astro.props;
+const [owner] = repo.split("/");
+
+let stars: number | null = null;
+
+try {
+  const res = await fetch(`https://api.github.com/repos/${repo}`, {
+    headers: {
+      Accept: "application/vnd.github+json",
+      // Set GITHUB_TOKEN at build time to lift the 60 req/hr anonymous rate limit.
+      ...(import.meta.env.GITHUB_TOKEN && {
+        Authorization: `Bearer ${import.meta.env.GITHUB_TOKEN}`,
+      }),
+    },
+  });
+  if (res.ok) {
+    const data = await res.json();
+    stars = data.stargazers_count;
+  } else {
+    console.warn(`[GithubStar] ${repo} → ${res.status} ${res.statusText}`);
+  }
+} catch (err) {
+  console.warn(`[GithubStar] failed to fetch ${repo}`, err);
+}
+
+function formatCompact(n: number) {
+  return n >= 1000 ? `${(n / 1000).toFixed(n % 1000 >= 100 ? 1 : 0)}k` : String(n);
+}
+---
+
+<span class:list={["github-star not-prose inline-flex items-stretch text-[0.8125rem] font-medium", className]}>
+  <a
+    href={`https://github.com/${owner}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={`${owner} on GitHub`}
+    class="segment segment--repo inline-flex items-center rounded-l-md px-2.5 py-1.5 no-underline"
+  >
+    <svg width="1em" height="1em" viewBox="0 0 16 16" class="size-4 shrink-0" aria-hidden="true">
+      <path fill="currentColor" fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"></path>
+    </svg>
+  </a>
+  <a
+    href={`https://github.com/${repo}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={`Star ${repo} on GitHub`}
+    class="segment segment--stars inline-flex items-center gap-1 rounded-r-md px-2.5 py-1.5 no-underline"
+  >
+    <svg width="1em" height="1em" viewBox="0 0 16 16" class="size-3.5 shrink-0" aria-hidden="true">
+      <path fill="currentColor" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.193L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z" />
+    </svg>
+    {stars !== null ? formatCompact(stars) : "–"}
+  </a>
+</span>
+
+<style>
+  .github-star {
+    border-radius: 0.375rem;
+    border: 1px solid var(--sl-color-hairline);
+    box-shadow: var(--sl-shadow-sm);
+    overflow: hidden;
+  }
+
+  .segment {
+    transition: color 0.15s ease;
+  }
+
+  .segment--repo {
+    color: var(--sl-color-gray-2);
+    background-color: var(--sl-color-bg-nav);
+  }
+
+  .segment--repo:hover {
+    color: var(--sl-color-text-accent);
+    background-color: var(--sl-color-gray-6);
+  }
+
+  .segment--stars {
+    color: var(--sl-color-gray-2);
+    background-color: var(--sl-color-gray-6);
+    border-inline-start: 1px solid var(--sl-color-gray-5);
+  }
+
+  .segment--stars:hover {
+    color: var(--sl-color-text-accent);
+  }
+
+  .segment:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: -2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .github-star {
+      transition: none;
+    }
+  }
+</style>

@@ -7,7 +7,7 @@ import DocsActions from '../DocsActions.astro'
 
 const { entry, isBlogPost } = Astro.locals.starlightRoute;
 
-const { title, description, lastUpdated, pubDate, heroImage, author = [], minutesRead } = entry.data;
+const { title, description, pubDate, heroImage, author = [], minutesRead } = entry.data;
 
 const fullMarkdown = `# ${title}\n\n${entry.body || ''}`;
 ---
@@ -57,9 +57,9 @@ const fullMarkdown = `# ${title}\n\n${entry.body || ''}`;
             ))}
           </ul>
           {minutesRead && (
-            <span class="post-reading-time">
+            <p class="post-reading-time">
               {Astro.locals.t('blog.readingTime', { minutes: minutesRead })}
-            </span>
+            </p>
           )}
         </div>
       </header>

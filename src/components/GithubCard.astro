@@ -1,0 +1,181 @@
+---
+// src/components/GithubCard.astro
+interface Props {
+  repo: string;
+  description?: string;
+  class?: string;
+}
+
+const { repo, description: descOverride, class: className = "" } = Astro.props;
+
+const LANG_COLORS: Record<string, string> = {
+  JavaScript: "#f1e05a",
+  TypeScript: "#3178c6",
+  Python: "#3572A5",
+  Rust: "#dea584",
+  Go: "#00ADD8",
+  Java: "#b07219",
+  "C++": "#f34b7d",
+  C: "#555555",
+  "C#": "#178600",
+  Ruby: "#701516",
+  PHP: "#4F5D95",
+  Astro: "#ff5a03",
+  Svelte: "#ff3e00",
+  Vue: "#41b883",
+  HTML: "#e34c26",
+  CSS: "#563d7c",
+  Shell: "#89e051",
+  Swift: "#F05138",
+  Kotlin: "#A97BFF",
+};
+
+let data: {
+  full_name: string;
+  html_url: string;
+  description: string | null;
+  stargazers_count: number;
+  forks_count: number;
+  language: string | null;
+  license: { spdx_id: string } | null;
+  owner: { login: string; avatar_url: string };
+} | null = null;
+
+try {
+  const res = await fetch(`https://api.github.com/repos/${repo}`, {
+    headers: {
+      Accept: "application/vnd.github+json",
+      ...(import.meta.env.GITHUB_TOKEN && {
+        Authorization: `Bearer ${import.meta.env.GITHUB_TOKEN}`,
+      }),
+    },
+  });
+  if (res.ok) {
+    data = await res.json();
+  } else {
+    console.warn(`[GithubCard] ${repo} → ${res.status} ${res.statusText}`);
+  }
+} catch (err) {
+  console.warn(`[GithubCard] failed to fetch ${repo}`, err);
+}
+
+function formatCompact(n: number) {
+  return n >= 1000 ? `${(n / 1000).toFixed(n % 1000 >= 100 ? 1 : 0)}k` : String(n);
+}
+
+const description = descOverride ?? data?.description ?? undefined;
+const langColor = data?.language ? LANG_COLORS[data.language] ?? "var(--sl-color-gray-3)" : undefined;
+---
+
+<a
+  href={data?.html_url ?? `https://github.com/${repo}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  class:list={["github-card not-content block no-underline my-4 w-full items-center mx-auto", className]}
+>
+  <div class="card-header flex items-center gap-2">
+    {
+      data?.owner.avatar_url && (
+        <img src={data.owner.avatar_url} alt="" width="20" height="20" class="avatar shrink-0 rounded-full" />
+      )
+    }
+    <span class="repo-name truncate font-medium">{data?.full_name ?? repo}</span>
+    <svg width="1em" height="1em" viewBox="0 0 16 16" class="ext-icon ml-auto size-3.5 shrink-0" aria-hidden="true">
+      <path fill="currentColor" fill-rule="evenodd" d="M10.604 1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.062-1.062l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1ZM3.75 2A1.75 1.75 0 0 0 2 3.75v8.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0 0 14 12.25v-3.5a.75.75 0 0 0-1.5 0v3.5a.25.25 0 0 1-.25.25h-8.5a.25.25 0 0 1-.25-.25v-8.5a.25.25 0 0 1 .25-.25h3.5a.75.75 0 0 0 0-1.5h-3.5Z"></path>
+    </svg>
+  </div>
+
+  {description && <p class="card-desc">{description}</p>}
+
+  <div class="card-footer flex flex-wrap items-center gap-x-4 gap-y-1">
+    {
+      data?.language && (
+        <span class="footer-item inline-flex items-center gap-1.5">
+          <span class="lang-dot" style={`background-color:${langColor}`} />
+          {data.language}
+        </span>
+      )
+    }
+    <span class="footer-item inline-flex items-center gap-1">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" class="size-3.5 shrink-0" aria-hidden="true">
+        <path fill="currentColor" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.193L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z" />
+      </svg>
+      {data ? formatCompact(data.stargazers_count) : "-"}
+    </span>
+    <span class="footer-item inline-flex items-center gap-1">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" class="size-3.5 shrink-0" aria-hidden="true">
+        <path fill="currentColor" fill-rule="evenodd" d="M5 3.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm0 2.122a2.25 2.25 0 1 0-1.5 0v.878A2.25 2.25 0 0 0 5.75 8.5h1.5v2.128a2.251 2.251 0 1 0 1.5 0V8.5h1.5a2.25 2.25 0 0 0 2.25-2.25v-.878a2.25 2.25 0 1 0-1.5 0v.878a.75.75 0 0 1-.75.75h-4.5A.75.75 0 0 1 5 6.25v-.878Zm3.75 7.378a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.25 4a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"></path>
+      </svg>
+      {data ? formatCompact(data.forks_count) : "-"}
+    </span>
+    {data?.license?.spdx_id && data.license.spdx_id !== "NOASSERTION" && (
+      <span class="footer-item">{data.license.spdx_id}</span>
+    )}
+  </div>
+</a>
+
+<style>
+  .github-card {
+    border-radius: 0.5rem;
+    border: 1px solid var(--sl-color-hairline);
+    background-color: var(--sl-color-bg-nav);
+    box-shadow: var(--sl-shadow-sm);
+    padding: 0.875rem 1rem;
+    max-width: 28rem;
+    transition: box-shadow 0.15s ease;
+  }
+
+  .github-card:hover {
+    border-color: var(--sl-color-gray-3);
+    box-shadow: var(--sl-shadow-md);
+  }
+
+  .github-card:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+  }
+
+  .card-header {
+    color: var(--sl-color-text-accent);
+    font-size: 0.9375rem;
+  }
+
+  .avatar {
+    border: 1px solid var(--sl-color-hairline);
+  }
+
+  .ext-icon {
+    color: var(--sl-color-gray-3);
+  }
+
+  .card-desc {
+    margin: 0.5rem 0 0;
+    color: var(--sl-color-gray-2);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-footer {
+    margin-top: 0.75rem;
+    color: var(--sl-color-gray-3);
+    font-size: 0.8125rem;
+  }
+
+  .lang-dot {
+    display: inline-block;
+    size: 0.625rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 999px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .github-card {
+      transition: none;
+    }
+  }
+</style>
