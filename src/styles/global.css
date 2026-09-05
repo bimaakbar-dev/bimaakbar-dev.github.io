@@ -125,8 +125,8 @@
 }
 
 select {
-  background-color: var(--sl-color-bg-nav);
-  border: 1px solid var(--sl-color-gray-5);
+  background-color: transparent;
+  border: none;
   border-radius: 0.5rem;
   box-shadow: none;
   color: var(--sl-color-gray-1);
@@ -134,24 +134,17 @@ select {
   font-size: var(--sl-text-xs) !important;
 }
 
-option {
-  background-color: var(--sl-color-bg-nav);
-  color: var(--sl-color-gray-1);
-}
-
-select:hover {
-  border-color: var(--sl-color-gray-3);
-  background-color: var(--sl-color-bg-nav);
+select:hover,
+select:focus {
+  background-color: var(--sl-color-color-5);
 }
 
 select:focus {
-  border-color: var(--sl-color-accent);
   outline: none;
   box-shadow: none;
 }
 
-select:focus-visible {
-  outline: none;
-  outline-offset: 2px;
-  box-shadow: none;
+option {
+  background-color: var(--sl-color-bg-nav);
+  color: var(--sl-color-gray-1);
 }
