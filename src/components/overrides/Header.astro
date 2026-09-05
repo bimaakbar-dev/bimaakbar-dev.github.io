@@ -5,13 +5,11 @@ import Search from "@astrojs/starlight/components/Search.astro";
 import SiteTitle from "@astrojs/starlight/components/SiteTitle.astro";
 import SocialIcons from "@astrojs/starlight/components/SocialIcons.astro";
 import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
+
 import NavLinks from "~/components/NavLinks.astro";
 import MobileMenu from "~/components/MobileMenu.astro";
 
-const { locale } = Astro.locals.starlightRoute;
-const pathname = Astro.url.pathname;
-const isDocs =
-  pathname.startsWith("/docs") || pathname.startsWith(`/${locale}/docs`);
+const { isDocs } = Astro.locals.starlightRoute;
 ---
 
 <div class="header">
