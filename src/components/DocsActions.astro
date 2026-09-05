@@ -21,7 +21,7 @@ const safeMarkdown = encodeURIComponent(rawMarkdown);
 
 <page-actions
   data-markdown={safeMarkdown}
-  class:list={["page-actions not-content -ml-2 mt-3 flex flex-wrap items-center gap-y-1 text-sm", className]}
+  class:list={["page-actions not-content -ml-2 mt-3 sl-flex flex-wrap items-center gap-y-1 text-xs md:text-sm", className]}
 >
   <button type="button" data-action="copy-url" class="action-link" aria-label="Copy Page Link">
     <svg width="1em" height="1em" viewBox="0 0 256 256" class="icon-default size-3.5">
@@ -123,6 +123,10 @@ const safeMarkdown = encodeURIComponent(rawMarkdown);
 </script>
 
 <style>
+  .page-actions {
+    font-size: var(--sl-text-sm);
+  }
+ 
   .meta-item {
     color: var(--sl-color-gray-3);
   }
@@ -179,6 +183,11 @@ const safeMarkdown = encodeURIComponent(rawMarkdown);
     .icon-default,
     .icon-done {
       transition: none;
+    }
+  }
+  @media (min-width: 50rem) {
+    .page-actions {
+      font-size: var(--sl-text-sm);
     }
   }
 </style>
