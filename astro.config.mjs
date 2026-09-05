@@ -64,7 +64,9 @@ export default defineConfig({
   ],
   markdown: {
     processor: satteri({
-      mdastPlugins: [mdastReadingTimePlugin],
+      mdastPlugins: [
+        mdastReadingTimePlugin
+      ],
       hastPlugins: [
         hastExternalLink,
         hastTable,
@@ -83,7 +85,10 @@ export default defineConfig({
 
   integrations: [
     starlight({
-      title: "stradocs",
+      title: {
+        en: "c0desk1",
+        id: "c0desk1"
+      },
       defaultLocale: "root",
       locales: {
         root: {
@@ -91,7 +96,7 @@ export default defineConfig({
           lang: "en",
         },
         id: {
-          label: "Bahasa Indonesia",
+          label: "Indonesia",
           lang: "id",
         },
       },
@@ -105,11 +110,6 @@ export default defineConfig({
       expressiveCode: expressiveCode,
       components: Overrides,
       social: [
-        {
-          icon: "github",
-          label: "GitHub",
-          href: "https://github.com/bimaakbar-dev",
-        },
         {
           icon: "discord",
           label: "Discord",
