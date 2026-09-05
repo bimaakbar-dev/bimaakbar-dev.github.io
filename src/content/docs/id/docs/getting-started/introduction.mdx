@@ -1,36 +1,24 @@
 ---
-title: "Perkenalan"
-description: "Gambaran umum Stradocs — tema Astro Starlight yang didesain ulang dengan filosofi clean, premium, dan modern."
+title: "Apa itu Stradocs?"
+description: "Stradocs adalah tema Astro Starlight yang di Kustomisasi."
 sidebar:
   order: 1
+lastUpdated: 2026-09-05
 ---
 
 import {
   Aside,
-  Badge,
   Card,
   CardGrid,
   LinkCard,
-  Tabs,
-  TabItem,
 } from "@astrojs/starlight/components";
-import Testimonial from "~/components/Testimonial.astro";
 
-Stradocs adalah tema [Astro Starlight](https://starlight.astro.build) yang didesain ulang secara menyeluruh. Bukan sekadar override variabel CSS — komponen, skema konten, sistem blog, dan tipografi semuanya dirancang dari awal dengan satu filosofi:
 
-<Testimonial
-  name="Bima Akbar"
-  handle="bimaakbar"
-  cite="https://twitter.com/astrodotbuild/status/1724934718745915558"
->
-  Bersih. Premium. Modern.
-</Testimonial>
+Stradocs adalah tema [Astro Starlight](https://starlight.astro.build) yang kustomisasi dengan tampilan yang bersih, dan minimalis.
 
-Jika kamu sudah familiar dengan Starlight, kamu langsung bisa produktif. Stradocs tidak mengubah cara kerja Starlight — ia hanya membuatnya terlihat dan terasa jauh lebih baik.
+Jika kamu sudah familiar dengan Starlight, kamu langsung bisa menggunakan nya. Stradocs tidak mengubah cara kerja Starlight, ia hanya membuatnya terlihat dan terasa jauh lebih baik.
 
----
-
-## Apa yang Berbeda dari Starlight Default?
+## Apa yang Berbeda dari Starlight?
 
 <CardGrid>
   <Card title="Redesign Komponen" icon="pencil">
@@ -46,8 +34,7 @@ Jika kamu sudah familiar dengan Starlight, kamu langsung bisa produktif. Stradoc
     konten — tanpa import tambahan.
   </Card>
   <Card title="Font Lokal" icon="seti:font">
-    Montserrat, Inter, dan FiraCode dihosting lokal via `fontProviders.local()`
-    — tanpa request ke CDN eksternal.
+    Menggunakan kustom font via `fontProviders.local()`.
   </Card>
   <Card title="OG Image & RSS" icon="external">
     Setiap halaman menghasilkan Open Graph image otomatis. Feed RSS tersedia di
@@ -59,44 +46,31 @@ Jika kamu sudah familiar dengan Starlight, kamu langsung bisa produktif. Stradoc
   </Card>
 </CardGrid>
 
-## Tech Stack
-
-<Tabs>
-  <TabItem label="Core" icon="rocket">
-    | Teknologi | Versi | |---|---| | Astro | `7.3` | | Starlight | `0.42` | |
-    Tailwind CSS | via Vite plugin | | Markdown Processor |
-    `@astrojs/markdown-satteri` |
-  </TabItem>
-  <TabItem label="Font" icon="seti:font">
-    | Peran | Typeface | |---|---| | Heading | Montserrat | | Body | Inter | |
-    Mono / Kode | FiraCode |
-  </TabItem>
-</Tabs>
-
 ## Hubungan dengan Starlight
 
-Stradocs adalah Starlight — bukan fork, bukan wrapper. Semua yang kamu tahu tentang Starlight tetap berlaku di sini: struktur konten, routing, sidebar, i18n, dan konfigurasi bekerja persis sama.
+Stradocs adalah Starlight. Bukan fork, bukan wrapper. Semua yang kamu tahu tentang Starlight tetap berlaku di sini: struktur konten, routing, sidebar, i18n, dan konfigurasi tetap sama.
 
 <Aside type="tip">
   Dokumentasi resmi Starlight tetap menjadi referensi utama. Stradocs hanya
   menambahkan dan mengganti lapisan visual di atasnya.
 </Aside>
 
-Yang membedakan hanyalah komponen yang sudah diganti, plugin yang sudah aktif, dan sistem blog yang sudah siap pakai — sehingga kamu tidak perlu menyentuh hal-hal itu dari nol.
+Yang membedakan hanyalah tampilan ui, komponen tambahan, plugin yang sudah aktif, dan halaman blog yang sudah siap pakai, sehingga kamu tidak perlu menyentuh hal-hal itu dari nol.
 
 ## Open Source
 
-Stradocs gratis dan open source. Fork repositori, modifikasi sesuai kebutuhan, dan jadikan milik Anda.
+Stradocs gratis dan open source. Fork repositori, modifikasi sesuai kebutuhan, dan jadikan milikmu.
+
+import GithubCard from "~/components/GithubCard.astro";
+
+<GithubCard repo="https://github.com/bimaakbar-dev/bimaakbar-dev.github.io" />
+
+## Langkah selanjutnya
 
 <CardGrid>
   <LinkCard
-    title="Repositori"
-    description="Lihat source code lengkap di GitHub."
-    href="https://github.com/bimaakbar-dev/bimaakbar-dev.github.io"
-  />
-  <LinkCard
     title="Struktur Proyek"
-    description="Pelajari struktur folder Stradocs setelah di-clone."
+    description="Pelajari struktur folder Stradocs."
     href="/id/docs/getting-started/project-structure"
   />
 </CardGrid>
