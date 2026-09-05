@@ -7,11 +7,8 @@ export const onRequest = defineRouteMiddleware((context) => {
 
   const safeLocale = locale || "root";
   const base = safeLocale === "root" ? "" : `/${safeLocale}`;
-
-  // 🔥 Deteksi template splash → custom menu
-  const isCustomMenu = entry?.data?.template === "splash";
-
-  // Docs (tetap untuk keperluan lain)
+  
+  // Docs
   const docsBasePath = `${base}/docs`;
   const isDocsIndex = pathname === docsBasePath || pathname === `${docsBasePath}/`;
   const isDocs = pathname.startsWith(`${docsBasePath}/`) || isDocsIndex;
@@ -21,11 +18,11 @@ export const onRequest = defineRouteMiddleware((context) => {
   const blogBasePath = `${base}/blog`;
   const isBlogPost = entry?.id?.startsWith(blogPrefix) ?? false;
   const isBlogIndex = pathname === blogBasePath || pathname === `${blogBasePath}/`;
+  
+  // Custom Menu for template splash
+  const isCustomMenu = entry?.data?.template === "splash" || isBlogPost;
 
   const route = context.locals.starlightRoute as any;
-
-  // 🔥 Properti baru untuk test
-  route.isCustomMenu = isCustomMenu;
 
   route.isDocs = isDocs;
   route.isDocsIndex = isDocsIndex;
@@ -37,4 +34,6 @@ export const onRequest = defineRouteMiddleware((context) => {
   route.blogPrefix = blogPrefix;
   route.blogBasePath = blogBasePath;
   route.rssUrl = `${base}/rss.xml`;
+  
+  route.isCustomMenu = isCustomMenu;
 });
