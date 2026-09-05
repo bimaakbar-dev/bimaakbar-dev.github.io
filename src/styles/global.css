@@ -40,9 +40,9 @@
   --sl-color-purple: rgb(168, 85, 247);
   --sl-color-purple-high: rgb(216, 180, 254);
 
-  --sl-color-accent-low: hsl(234, 80%, 30%);
-  --sl-color-accent: hsl(234, 90%, 60%);
-  --sl-color-accent-high: hsl(234, 88%, 90%);
+  --sl-color-accent-high: hsl(22, 100%, 60%);
+  --sl-color-accent: hsl(32, 100%, 55%);
+  --sl-color-accent-low: hsla(22, 100%, 60%, 0.603);
 
   --sl-color-text: rgb(168, 168, 168);
   --sl-color-text-accent: rgb(229, 229, 229);
@@ -63,6 +63,9 @@
   --sl-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.8);
   --sl-shadow-md: 0 4px 12px rgb(0 0 0 / 0.7);
   --sl-shadow-lg: 0 12px 24px rgb(0 0 0 / 0.8);
+
+  --overlay-bg: hsla(32, 100%, 18%, 0.137);
+  --overlay-bg-shadow: hsla(32, 100%, 55%, 0.4);
 }
 
 :root[data-theme="light"],
@@ -97,9 +100,9 @@
   --sl-color-purple: rgb(147, 51, 234);
   --sl-color-purple-high: rgb(88, 28, 135);
 
-  --sl-color-accent-high: hsl(234, 80%, 30%);
-  --sl-color-accent: hsl(234, 90%, 60%);
-  --sl-color-accent-low: hsl(234, 88%, 90%);
+  --sl-color-accent-high: hsl(22, 100%, 60%);
+  --sl-color-accent: hsl(32, 100%, 55%);
+  --sl-color-accent-low: hsla(22, 100%, 60%, 0.603);
 
   --sl-color-text: rgb(82, 82, 91);
   --sl-color-text-accent: rgb(24, 24, 27);
@@ -120,31 +123,4 @@
   --sl-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
   --sl-shadow-md: 0 4px 10px rgb(0 0 0 / 0.06);
   --sl-shadow-lg: 0 10px 20px rgb(0 0 0 / 0.07);
-
-  --purple-hsl: 255, 85%, 65%;
-}
-
-select {
-  background-color: transparent;
-  border: none;
-  border-radius: 0.5rem;
-  box-shadow: none;
-  color: var(--sl-color-gray-1);
-  padding-block: 0.375rem !important;
-  font-size: var(--sl-text-xs) !important;
-}
-
-select:hover,
-select:focus {
-  background-color: var(--sl-color-color-5);
-}
-
-select:focus {
-  outline: none;
-  box-shadow: none;
-}
-
-option {
-  background-color: var(--sl-color-bg-nav);
-  color: var(--sl-color-gray-1);
 }

@@ -1,9 +1,14 @@
 .site-title {
+  align-items: center;
   gap: 0.5rem;
   font-size: var(--sl-text-h4);
   font-weight: 600;
+  color: var(--sl-color-white);
+  text-decoration: none;
+  white-space: nowrap;
+  min-width: 0;
+  font-family: var(--font-montserrat);
   line-height: var(--sl-line-height-headings);
-  color: var(--sl-color-text-white);
 }
 
 .site-title [data-theme="light"] {

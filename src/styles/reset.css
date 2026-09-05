@@ -111,6 +111,27 @@ textarea::placeholder {
   color: var(--sl-color-gray-3);
 }
 
+select {
+  border: none;
+  background-color: transparent;
+  border-radius: 0.5rem;
+  box-shadow: none;
+  color: var(--sl-color-gray-1);
+  padding-block: 0.375rem !important;
+  font-size: var(--sl-text-xs) !important;
+}
+
+select:hover,
+select:focus {
+  background-color: var(--sl-color-gray-5);
+  outline: none;
+}
+
+option {
+  background-color: var(--sl-color-bg-nav);
+  color: var(--sl-color-gray-1);
+}
+
 h1,
 h2,
 h3,

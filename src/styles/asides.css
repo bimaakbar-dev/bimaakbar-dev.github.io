@@ -7,7 +7,7 @@
   border-radius: 0.5rem;
   background-color: var(--sl-color-gray-6);
   border-inline-start: none;
-  color: var(--sl-color-white);
+  color: var(--sl-color-gray-2);
 }
 
 .starlight-aside::before {
@@ -16,7 +16,7 @@
   inset-block: 0.65rem;
   inset-inline-start: 0.65rem;
   width: 2px;
-  background-color: var(--sl-color-asides-border);
+  background-color: var(--sl-color-asides-indicator);
   border-radius: 999px;
   vertical-align: middle;
 }
@@ -32,11 +32,12 @@
 }
 
 .starlight-aside__icon {
-  font-size: inherit;
+  font-size: 1em;
   flex-shrink: 0;
   vertical-align: middle;
   width: 1.25em;
   height: 1.25em;
+  color: var(--sl-color-asides-text-accent); 
 }
 
 .starlight-aside__title + .starlight-aside__content {
@@ -49,22 +50,21 @@
 }
 
 .starlight-aside--note {
-  --sl-color-asides-text-accent: var(--sl-color-blue-high);
-  --sl-color-asides-border: var(--sl-color-blue);
-  background-color: none;
+  --sl-color-asides-text-accent: var(--sl-color-blue-high, #60a5fa);
+  --sl-color-asides-indicator: var(--sl-color-blue, #3b82f6);
 }
+
 .starlight-aside--tip {
-  --sl-color-asides-text-accent: var(--sl-color-purple-high);
-  --sl-color-asides-border: var(--sl-color-purple);
-  background-color: none;
+  --sl-color-asides-text-accent: var(--sl-color-purple-high, #c084fc);
+  --sl-color-asides-indicator: var(--sl-color-purple, #a855f7);
 }
+
 .starlight-aside--caution {
-  --sl-color-asides-text-accent: var(--sl-color-orange-high);
-  --sl-color-asides-border: var(--sl-color-orange);
-  background-color: none;
+  --sl-color-asides-text-accent: var(--sl-color-orange-high, #fb923c);
+  --sl-color-asides-indicator: var(--sl-color-orange, #f97316);
 }
+
 .starlight-aside--danger {
-  --sl-color-asides-text-accent: var(--sl-color-red-high);
-  --sl-color-asides-border: var(--sl-color-red);
-  background-color: none;
+  --sl-color-asides-text-accent: var(--sl-color-red-high, #f87171);
+  --sl-color-asides-indicator: var(--sl-color-red, #ef4444);
 }

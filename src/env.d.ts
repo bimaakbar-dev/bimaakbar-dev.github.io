@@ -6,7 +6,6 @@ import type { StarlightRouteData } from '@astrojs/starlight';
 declare module 'astro' {
   interface Locals {
     starlightRoute: StarlightRouteData & {
-      // Properti kustom
       isCustomMenu?: boolean;
       isDocs?: boolean;
       isDocsIndex?: boolean;
@@ -26,8 +25,14 @@ declare module '@astrojs/starlight' {
     entry: {
       data: {
         minutesRead?: string;
-        // properti lain yang mungkin ditambahkan
       };
     };
   }
+}
+
+declare module "virtual:starlight/user-config" {
+  const Config: import("@astrojs/starlight/types").StarlightConfig & {
+    credits?: boolean;
+  };
+  export default Config;
 }
