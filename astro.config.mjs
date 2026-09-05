@@ -87,11 +87,11 @@ export default defineConfig({
       defaultLocale: "root",
       locales: {
         root: {
-          label: "English",
+          label: "EN",
           lang: "en",
         },
         id: {
-          label: "Indonesia",
+          label: "ID",
           lang: "id",
         },
       },
