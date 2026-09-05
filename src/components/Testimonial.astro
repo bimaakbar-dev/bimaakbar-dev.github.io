@@ -40,6 +40,7 @@ const src = (await avatar()).default;
     flex-direction: column;
     position: relative;
     gap: 0.5em;
+    border-radius: 0.5rem;
   }
   .quote {
     display: flex;
@@ -52,15 +53,19 @@ const src = (await avatar()).default;
   }
   .quote::before {
     content: "“";
+    position: relative;
     pointer-events: none;
     left: 0;
+    top: -0.25rem;
     font-family: var(--font-serif);
     color: var(--sl-color-accent);
   }
   .quote::after {
     content: "”";
+    position: relative;
     pointer-events: none;
     right: 0;
+    top: -0.25rem;
     font-family: var(--font-serif);
     color: var(--sl-color-accent);
   }
@@ -72,14 +77,15 @@ const src = (await avatar()).default;
     display: flex;
     gap: 0.5rem;
     align-items: center;
+    padding-inline-start: 0.25rem;
   }
   .avatar {
     --outline-color: rgba(255, 255, 255, 0.33);
     outline: 1px solid var(--outline-color);
     outline-offset: -1px;
     border-radius: 99rem;
-    width: 1.5em;
-    height: 1.5em;
+    width: 1.333em;
+    height: 1.333em;
   }
   :global([data-theme="light"]) .avatar {
     --outline-color: rgba(23, 25, 30, 0.33);
@@ -92,7 +98,7 @@ const src = (await avatar()).default;
     line-height: var(--sl-line-height-headings);
   }
   .handle {
-    font-size: var(--sl-text-2xs);
+    font-size: var(--sl-text-xs);
     text-decoration: none;
     color: var(--sl-color-accent);
   }
