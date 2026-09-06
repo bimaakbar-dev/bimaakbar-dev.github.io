@@ -1,5 +1,7 @@
-:root {
-  --sl-sidebar-item-padding-inline: 0.75rem;
+ul.top-level {
+  --sl-sidebar-item-padding-inline: 0.5rem;
+  list-style: none;
+  padding: 0;
 }
 
 .top-level > li a {
@@ -27,7 +29,7 @@
 .top-level li a[aria-current="page"]::before {
   content: "";
   position: absolute;
-  left: -0.725rem;
+  left: -0.525rem;
   height: var(--sl-text-base);
   width: 2px;
   background-color: var(--sl-color-accent-high);
@@ -38,7 +40,7 @@
 
 .top-level :is(ul ul li) {
   position: relative;
-  padding-inline-start: -0.75rem;
+  padding-inline-start: var(--sl-sidebar-item-padding-inline);
   border-inline-start: 1px solid var(--sl-color-hairline-light);
   box-sizing: border-box;
 }
