@@ -13,11 +13,13 @@
 
 .tab > [role="tab"] {
   --sl-tab-color-border: transparent;
+  
   gap: 0.5rem;
   line-height: var(--sl-line-height-headings);
   padding: 0.275rem 1.25rem;
   color: var(--sl-color-gray-3);
   font-weight: 500;
+  font-size: var(--sl-text-sm);
   box-shadow: 0 2px 0 var(--sl-tab-color-border);
 }
 
@@ -32,5 +34,5 @@
 }
 
 .tablist-wrapper ~ [role="tabpanel"] {
-  margin-top: 0.75rem;
+  margin-top: 1rem;
 }
