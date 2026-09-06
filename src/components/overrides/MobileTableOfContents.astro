@@ -11,7 +11,7 @@ const { toc } = Astro.locals.starlightRoute;
 			<nav aria-labelledby="starlight__on-this-page--mobile">
 				<details id="starlight__mobile-toc">
 					<summary id="starlight__on-this-page--mobile" class="sl-flex">
-						<span class="toggle sl-flex">
+						<span class="toggle sl-flex items-center">
 							<span class="progress-circle-wrapper">
 								<svg class="progress-circle" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
 									<circle
@@ -82,7 +82,7 @@ const { toc } = Astro.locals.starlightRoute;
 	gap: 0.5rem;
 	align-items: center;
 	justify-content: space-between;
-	border: 1px solid var(--sl-color-hairline);
+	border: 1px solid var(--sl-color-hairline-light);
 	border-radius: 0.5rem;
 	padding-block: 0.5rem;
 	padding-inline-start: 0.75rem;
@@ -91,6 +91,7 @@ const { toc } = Astro.locals.starlightRoute;
 	background-color: var(--sl-color-gray-6);
 	user-select: none;
 	cursor: pointer;
+  vertical-align: middle;
   }
   .progress-circle-wrapper {
 	display: inline-flex;
