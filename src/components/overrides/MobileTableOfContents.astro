@@ -11,8 +11,8 @@ const { toc } = Astro.locals.starlightRoute;
 			<nav aria-labelledby="starlight__on-this-page--mobile">
 				<details id="starlight__mobile-toc">
 					<summary id="starlight__on-this-page--mobile" class="sl-flex">
-						<span class="toggle sl-flex">
-							<svg class="progress-circle" viewBox="0 0 18 18" focusable="false" aria-hidden="true">
+						<span class="toggle">
+							<svg class="progress-circle" viewBox="0 0 18 18" focusable="false" aria-hidden="true" class="block">
 								<circle
 									cx="9"
 									cy="9"
@@ -70,7 +70,7 @@ const { toc } = Astro.locals.starlightRoute;
 	border-bottom: 1px solid var(--sl-color-hairline-shade);
 	padding: 0.5rem 1rem;
 	font-size: var(--sl-text-xs);
-    line-height: 1;
+    line-height: 1.25;
 	outline-offset: var(--sl-outline-offset-inside);
   }
   summary::marker,
