@@ -19,7 +19,7 @@ export const expressiveCode: StarlightExpressiveCodeOptions = {
       shadowColor: "transparent",
       
       editorActiveTabBackground: "var(--sl-color-bg-inline-code)",
-      editorActiveTabBorderColor: "var(--sl-color-hairline)",
+      editorActiveTabBorderColor: "var(--sl-color-hairline-light)",
       editorActiveTabIndicatorTopColor: "none",
       editorActiveTabForeground: "var(--sl-color-white)",
       editorActiveTabIndicatorBottomColor: "var(--sl-color-accent-high)",
