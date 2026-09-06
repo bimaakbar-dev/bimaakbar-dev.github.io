@@ -41,6 +41,7 @@ const src = (await avatar()).default;
     position: relative;
     gap: 0.5em;
     border-radius: 0.5rem;
+    margin-block: 1rem;
   }
   .quote {
     display: flex;
@@ -51,28 +52,9 @@ const src = (await avatar()).default;
     line-height: var(--sl-line-height-headings);
     font-weight: 400;
   }
-  .quote::before {
-    content: "“";
-    position: relative;
-    pointer-events: none;
-    left: 0;
-    top: -0.25rem;
-    font-family: var(--font-serif);
-    color: var(--sl-color-accent);
-  }
-  .quote::after {
-    content: "”";
-    position: relative;
-    pointer-events: none;
-    right: 0;
-    top: -0.25rem;
-    font-family: var(--font-serif);
-    color: var(--sl-color-accent);
-  }
   .quote > :global(* + *) {
     margin-top: 0.75em;
   }
-
   .footer-cite {
     display: flex;
     gap: 0.5rem;
@@ -88,9 +70,8 @@ const src = (await avatar()).default;
     height: 1.333em;
   }
   :global([data-theme="light"]) .avatar {
-    --outline-color: rgba(23, 25, 30, 0.33);
+    --outline-color: rgba(30, 27, 23, 0.33);
   }
-
   .name {
     font-weight: 500;
     font-size: var(--sl-text-sm);

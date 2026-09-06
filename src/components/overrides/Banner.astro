@@ -48,9 +48,9 @@ const stars = [
       var(--sl-color-black)
     );
 
-    --overlay-glow: hsl(16 80% 65% / 40%);
+    --overlay-glow: var(--sl-color-bg);
     --overlay-glow-soft: hsl(174 55% 65% / 30%);
-    --shine-color: hsl(45 90% 78% / 55%);
+    --shine-color: var(--sl-color-accent-high);
 
     position: relative;
     padding: var(--sl-nav-pad-y) var(--sl-nav-pad-x);
@@ -112,8 +112,8 @@ const stars = [
 
   .stargazer {
     position: absolute;
-    width: 1px;
-    height: 1px;
+    width: 1.25px;
+    height: 1.25px;
     background-color: var(--__sl-banner-text);
     mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Ccircle cx='4' cy='4' r='4'/%3E%3C/svg%3E");
     mask-size: contain;

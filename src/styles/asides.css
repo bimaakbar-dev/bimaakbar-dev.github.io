@@ -1,20 +1,20 @@
 .starlight-aside--note {
-  --sl-color-asides-text-accent: var(--sl-color-blue-high);
+  --sl-color-asides-text-accent: var(--sl-color-blue);
   --sl-color-asides-border: var(--sl-color-blue);
 	background-color: inherit;
 }
 .starlight-aside--tip {
-  --sl-color-asides-text-accent: var(--sl-color-purple-high);
+  --sl-color-asides-text-accent: var(--sl-color-purple);
   --sl-color-asides-border: var(--sl-color-purple);
   background-color: inherit;
 }
 .starlight-aside--caution {
-  --sl-color-asides-text-accent: var(--sl-color-orange-high);
+  --sl-color-asides-text-accent: var(--sl-color-orange);
   --sl-color-asides-border: var(--sl-color-orange);
   background-color: inherit;
 }
 .starlight-aside--danger {
-  --sl-color-asides-text-accent: var(--sl-color-red-high);
+  --sl-color-asides-text-accent: var(--sl-color-red);
   --sl-color-asides-border: var(--sl-color-red);
   background-color: inherit;
 }
@@ -23,10 +23,10 @@
   display: block;
   box-sizing: border-box;
   position: relative;
-  padding: 1rem 1rem 1rem 1.65rem;
+  padding: 1rem 1.25rem 1rem 1.65rem;
   outline: 1px solid var(--sl-color-hairline-light);
   border-radius: 0.5rem;
-  background-color: var(--sl-color-gray-6);
+  background-color: rgb(from var(--sl-color-gray-6) r g b / 50%);
   border-inline-start: none;
   color: var(--sl-color-text);
 }
@@ -34,8 +34,8 @@
   content: "";
   position: absolute;
   inset-block: 0.65rem;
-  inset-inline-start: 0.65rem;
-  width: 2px;
+  inset-inline-start: 0.5rem;
+  width: 0.15rem;
   background-color: var(--sl-color-asides-border);
   border-radius: 99rem;
   vertical-align: middle;

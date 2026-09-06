@@ -5,6 +5,7 @@
   "action.AgentSetup": "Pengaturan agen",
 
   "component.preview": "Pratinjau",
+  "component.scrollToTop": "Geser ke atas",
 
   "blog.PostAuthor": "Oleh",
   "blog.readingTime": "{{minutes}} menit baca",

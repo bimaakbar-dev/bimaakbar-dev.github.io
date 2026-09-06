@@ -1,5 +1,5 @@
 ---
-// src/components/GlobalMobileMenu.astro
+// src/components/MobileMenu.astro
 import { Icon } from "@astrojs/starlight/components";
 import MobileMenuFooter from "~/components/overrides/MobileMenuFooter.astro";
 import NavLinks from "~/components/NavLinks.astro";
@@ -61,14 +61,13 @@ import NavLinks from "~/components/NavLinks.astro";
     top: calc(var(--sl-nav-height));
     inset-inline: 0;
     width: 100%;
-    max-width: calc(100dvw);
+    max-width: 100dvw;
     padding-inline: 1rem;
     padding-block-start: 1rem;
     padding-block-end: 0.5rem;
     z-index: var(--sl-z-index-menu);
     box-shadow: var(--sl-shadow-lg);
-    z-index: var(--sl-z-index-dropdown);
-    border-bottom: 1px solid var(--sl-color-gray-5);
+    border-bottom: 1px solid var(--sl-color-hairline);
     border-end-end-radius: 0.5rem;
     border-end-start-radius: 0.5rem;
   }
@@ -92,11 +91,34 @@ import NavLinks from "~/components/NavLinks.astro";
 </style>
 
 <script>
-  const menu = document.querySelector('.global-mobile-menu') as HTMLDetailsElement;
-  
-  document.addEventListener('click', (e) => {
-    if (!menu.contains(e.target as Node)) {
-      menu.removeAttribute('open');
-    }
+  document.addEventListener('DOMContentLoaded', () => {
+    const details = document.querySelector('.global-mobile-menu');
+    if (!details) return;
+
+    const handleClickOutside = (event) => {
+      if (!details.open) return;
+      if (details.contains(event.target)) return;
+      details.open = false;
+    };
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape' && details.open) {
+        details.open = false;
+        const summary = details.querySelector('summary');
+        if (summary) summary.focus();
+      }
+    };
+
+    const handleLinkClick = () => {
+      details.open = false;
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+
+    const links = details.querySelectorAll('.dropdown-panel a');
+    links.forEach(link => {
+      link.addEventListener('click', handleLinkClick);
+    });
   });
 </script>
