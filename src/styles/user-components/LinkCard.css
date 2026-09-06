@@ -8,7 +8,8 @@
   padding: 1rem;
   box-shadow: var(--sl-shadow-sm);
   position: relative;
-  background-color: var(--sl-color-bg-nav);
+  background-color: var(--sl-color-gray-6);
+  -webkit-tap-highlight-color: auto;
 }
 
 .sl-link-card a {
