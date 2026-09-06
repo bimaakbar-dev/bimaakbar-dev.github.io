@@ -2,9 +2,9 @@
 import type { TocItem } from '~/utils/generateToc';
 
 interface Props {
-	toc: TocItem[];
-	depth?: number;
-	isMobile?: boolean;
+  toc: TocItem[];
+  depth?: number;
+  isMobile?: boolean;
 }
 
 const { 
@@ -15,128 +15,109 @@ const {
 ---
 
 <ul class:list={{ isMobile }}>
-	{
-		toc.map((heading) => (
-			<li>
-				<a href={'#' + heading.slug}>
-					<span>{heading.text}</span>
-				</a>
-				{heading.children.length > 0 && (
-					<Astro.self toc={heading.children} depth={depth + 1} isMobile={isMobile} />
-				)}
-			</li>
-		))
-	}
+  {
+    toc.map((heading) => (
+      <li>
+        <a href={'#' + heading.slug}>
+          <span>{heading.text}</span>
+        </a>
+        {heading.children.length > 0 && (
+          <Astro.self toc={heading.children} depth={depth + 1} isMobile={isMobile} />
+        )}
+      </li>
+    ))
+  }
 </ul>
 
 <style define:vars={{ depth }}>
-	@layer starlight.core {
-		ul {
-			padding: 0;
-			list-style: none;
-		}
-		ul ul {
-			position: relative;
-		}
-		ul ul li {
-			position: relative;
-		}
-		a {
-			--pad-inline: 0.5rem;
-			display: block;
-			border-radius: 0.25rem;
-			padding-block: 0.25rem;
-			padding-inline: calc(1rem * var(--depth) + var(--pad-inline)) var(--pad-inline);
-			line-height: 1.25;
-		}
-		a[aria-current='true'] {
-			color: var(--sl-color-text-accent);
-		}
-		.isMobile a {
-			--pad-inline: 1rem;
-			display: flex;
-			justify-content: space-between;
-			gap: var(--pad-inline);
-			border-top: 0;
-			border-radius: 0;
-			padding-block: 0.5rem;
-			color: var(--sl-color-text);
-			font-size: var(--sl-text-sm);
-			text-decoration: none;
-			outline-offset: var(--sl-outline-offset-inside);
-		}
-		.isMobile:first-child > li:first-child > a {
-			border-top: 0;
-		}
-		.isMobile a[aria-current='true'],
-		.isMobile a[aria-current='true']:hover,
-		.isMobile a[aria-current='true']:focus {
-			color: var(--sl-color-text-accent);
-			background-color: unset;
-		}
-		.isMobile a[aria-current='true']::after {
-			content: '';
-			width: 1rem;
-			background-color: var(--sl-color-text-accent);
-			-webkit-mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxNCAxNCc+PHBhdGggZD0nTTEwLjkxNCA0LjIwNmEuNTgzLjU4MyAwIDAgMC0uODI4IDBMNS43NCA4LjU1NyAzLjkxNCA2LjcyNmEuNTk2LjU5NiAwIDAgMC0uODI4Ljg1N2wyLjI0IDIuMjRhLjU4My41ODMgMCAwIDAgLjgyOCAwbDQuNzYtNC43NmEuNTgzLjU4MyAwIDAgMCAwLS44NTdaJy8+PC9zdmc+Cg==');
-			mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxNCAxNCc+PHBhdGggZD0nTTEwLjkxNCA0LjIwNmEuNTgzLjU4MyAwIDAgMC0uODI4IDBMNS43NCA4LjU1NyAzLjkxNCA2LjcyNmEuNTk2LjU5NiAwIDAgMC0uODI4Ljg1N2wyLjI0IDIuMjRhLjU4My41ODMgMCAwIDAgLjgyOCAwbDQuNzYtNC43NmEuNTgzLjU4MyAwIDAgMCAwLS44NTdaJy8+PC9zdmc+Cg==');
-			-webkit-mask-repeat: no-repeat;
-			mask-repeat: no-repeat;
-			flex-shrink: 0;
-		}
-		 ul ul li::before {
-			content: "";
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 1.25rem;
-			width: 1px;
-			background-color: var(--sl-color-hairline-light);
-		}
-	}
-</style>
-
-<style is:global>
-  starlight-toc ul ul,
-  mobile-starlight-toc ul ul {
-    position: relative;
-  }
-
-  starlight-toc ul ul li,
-  mobile-starlight-toc ul ul li {
-    position: relative;
-  }
-
-  starlight-toc ul ul li::before,
-  mobile-starlight-toc ul ul li::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 1.25rem;
-    width: 1px;
-    background-color: var(--sl-color-hairline-light);
-  }
-
-  starlight-toc ul ul li:has(> a[aria-current="true"])::before,
-  mobile-starlight-toc ul ul li:has(> a[aria-current="true"])::before {
-    background-color: var(--sl-color-text-accent);
-    width: 2px;
-    left: 1.225rem;
-    border-radius: 99rem;
-	height: calc(var(--sl-text-sm) - var(--sl-line-height) - 1);
-  }
-
-  mobile-starlight-toc .isMobile a {
-    border-top: 0;
-  }
-
-  @media (min-width: 50rem) {
-    starlight-toc ul ul li::before {
-      left: 0.75rem;
+  @layer starlight.core {
+    ul {
+      padding: 0;
+      list-style: none;
     }
-	starlight-toc ul ul li:has(> a[aria-current="true"])::before {
-		left: 0.725rem;
-	}
+    
+    ul ul,
+    ul ul li {
+      position: relative;
+    }
+    
+    a {
+      --pad-inline: 0.5rem;
+      display: block;
+      border-radius: 0.25rem;
+      padding-block: 0.25rem;
+      padding-inline: calc(1rem * var(--depth) + var(--pad-inline)) var(--pad-inline);
+      line-height: 1.25;
+    }
+    
+    a[aria-current='true'] {
+      color: var(--sl-color-text-accent);
+    }
+    
+    .isMobile a {
+      --pad-inline: 1rem;
+      display: flex;
+      justify-content: space-between;
+      gap: var(--pad-inline);
+      border-top: 0;
+      border-radius: 0;
+      padding-block: 0.5rem;
+      color: var(--sl-color-text);
+      font-size: var(--sl-text-sm);
+      text-decoration: none;
+      outline-offset: var(--sl-outline-offset-inside);
+    }
+    
+    .isMobile:first-child > li:first-child > a {
+      border-top: 0;
+    }
+    
+    .isMobile a[aria-current='true'],
+    .isMobile a[aria-current='true']:hover,
+    .isMobile a[aria-current='true']:focus {
+      color: var(--sl-color-text-accent);
+      background-color: unset;
+    }
+    
+    .isMobile a[aria-current='true']::after {
+      content: '';
+      width: 1rem;
+      background-color: var(--sl-color-text-accent);
+      -webkit-mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxNCAxNCc+PHBhdGggZD0nTTEwLjkxNCA0LjIwNmEuNTgzLjU4MyAwIDAgMC0uODI4IDBMNS43NCA4LjU1NyAzLjkxNCA2LjcyNmEuNTk2LjU5NiAwIDAgMC0uODI4Ljg1N2wyLjI0IDIuMjRhLjU4My41ODMgMCAwIDAgLjgyOCAwbDQuNzYtNC43NmEuNTgzLjU4MyAwIDAgMCAwLS44NTdaJy8+PC9zdmc+Cg==');
+      mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxNCAxNCc+PHBhdGggZD0nTTEwLjkxNCA0LjIwNmEuNTgzLjU4MyAwIDAgMC0uODI4IDBMNS43NCA4LjU1NyAzLjkxNCA2LjcyNmEuNTk2LjU5NiAwIDAgMC0uODI4Ljg1N2wyLjI0IDIuMjRhLjU4My41ODMgMCAwIDAgLjgyOCAwbDQuNzYtNC43NmEuNTgzLjU4MyAwIDAgMCAwLS44NTdaJy8+PC9zdmc+Cg==');
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      flex-shrink: 0;
+    }
+    
+    /* -- GARIS PENGHUBUNG (TREE LINES) -- */
+    ul ul li::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 1.25rem;
+      width: 1px;
+      background-color: var(--sl-color-hairline-light);
+    }
+    
+    ul ul li:has(> a[aria-current="true"])::before {
+      background-color: var(--sl-color-text-accent);
+      width: 2px;
+      left: 1.225rem;
+      border-radius: 99rem;
+      /* Pastikan operasi calc() ini memiliki nilai unit yang valid di browser Anda */
+      height: calc(var(--sl-text-sm) - var(--sl-line-height));
+    }
+
+    /* Penyesuaian khusus Desktop ketika dibungkus oleh <starlight-toc> */
+    @media (min-width: 50rem) {
+      :global(starlight-toc) ul ul li::before {
+        left: 0.75rem;
+      }
+      :global(starlight-toc) ul ul li:has(> a[aria-current="true"])::before {
+        left: 0.725rem;
+      }
+    }
   }
 </style>
