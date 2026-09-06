@@ -34,7 +34,7 @@
 
 .top-level :is(ul ul li) {
   position: relative;
-  padding-inline-start: 0.5rem;
+  padding-inline-start: -0.5rem;
   border-inline-start: 1px solid var(--sl-color-hairline-light);
   box-sizing: border-box;
 }
