@@ -19,6 +19,7 @@
 .top-level li a[aria-current="page"],
 .top-level li a[aria-current="page"]:hover,
 .top-level li a[aria-current="page"]:focus {
+  position: relative;
   font-weight: 500;
   background-color: transparent;
   color: var(--sl-color-white);
@@ -27,15 +28,13 @@
 .top-level li a[aria-current="page"]::before {
   content: "";
   position: absolute;
-  top: 0;
-  bottom: 0;
   left: -0.6rem;
-  height: var(--sl-text-base);
+  top: 50%;
+  transform: translateY(-50%);
+  height: calc(var(--sl-text-base) * 1.4);
   width: 2px;
   background-color: var(--sl-color-accent-high);
   border-radius: 99rem;
-  vertical-align: middle;
-  flex-shrink: 0;
 }
 
 .top-level > ul ul li {
