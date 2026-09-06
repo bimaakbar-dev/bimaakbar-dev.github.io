@@ -13,16 +13,16 @@
 .top-level > li .group-label .large {
   display: block;
   position: relative;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .top-level li a[aria-current="page"],
 .top-level li a[aria-current="page"]:hover,
 .top-level li a[aria-current="page"]:focus {
   position: relative;
-  font-weight: 500;
+  font-weight: 400;
   background-color: transparent;
-  color: var(--sl-color-white);
+  color: var(--sl-color-text-accent);
 }
 
 .top-level li a[aria-current="page"]::before {
