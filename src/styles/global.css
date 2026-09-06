@@ -47,7 +47,7 @@
 
   --sl-color-text: var(--sl-color-gray-2);
 
-  --sl-color-text-accent: var(--sl-color-white);
+  --sl-color-text-accent: var(--sl-color-accent);
   --sl-color-text-invert: var(--sl-color-black);
 
   --sl-color-bg: var(--sl-color-black);
@@ -104,7 +104,7 @@
   --sl-color-accent-low: hsla(22, 100%, 60%, 0.603);
 
   --sl-color-text: var(--sl-color-gray-2);
-  --sl-color-text-accent: var(--sl-color-white);
+  --sl-color-text-accent: var(--sl-color-accent-high);
   --sl-color-text-invert: var(--sl-color-black);
 
   --sl-color-bg: var(--sl-color-black);
