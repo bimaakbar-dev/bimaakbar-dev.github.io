@@ -33,7 +33,9 @@
 }
 
 .top-level :is(ul ul li) {
-  border-inline-start: 1px solid var(--sl-color-gray-5);
+  position: relative;
+  padding-inline-start: 0.75rem;
+  border-inline-start: 1px solid var(--sl-color-hairline-light);
   box-sizing: border-box;
 }
 
