@@ -1,10 +1,7 @@
-@import "./components/PageSidebar.css";
 @import "./components/Pagination.css";
 @import "./components/Search.css";
 @import "./components/SidebarSublist.css";
 @import "./components/SiteTitle.css";
-
-@import "./components-internals/TableOfContents/TableOfContentsList.css";
 
 @import "./user-components/Badge.css";
 @import "./user-components/Card.css";
