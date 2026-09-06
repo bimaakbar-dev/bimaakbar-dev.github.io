@@ -15,12 +15,13 @@ const { toc } = Astro.locals.starlightRoute;
 	)
 }
 
-<script src="./components-internals/TableOfContents/starlight-toc"></script>
+<script>
+    import "./components-internals/TableOfContents/starlight-toc";
+</script>
 
 <style is:global>
     starlight-toc h2#starlight__on-this-page {
         font-size: var(--sl-text-xs);
         font-weight: 500;
     }
-
 </style>
