@@ -3,12 +3,11 @@
 import LanguageSelect from "@astrojs/starlight/components/LanguageSelect.astro";
 import Search from "@astrojs/starlight/components/Search.astro";
 import SiteTitle from "@astrojs/starlight/components/SiteTitle.astro";
-
+import SocialIcons from "./SocialIcons.astro";
 import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
 import NavLinks from "~/components/NavLinks.astro";
 import MobileMenu from "~/components/MobileMenu.astro";
 import GithubStar from '~/components/GithubStar.astro';
-import SocialIcons from "~/components/overrides/SocialIcons.astro";
 
 const { isCustomMenu } = Astro.locals.starlightRoute;
 ---
@@ -21,9 +20,7 @@ const { isCustomMenu } = Astro.locals.starlightRoute;
     <NavLinks />
   </div>
   <div class="sl-flex right-group">
-    <div class="print:hidden">
-      <Search />
-    </div>
+    <Search />
     {isCustomMenu && <MobileMenu />}
     <div class="sl-hidden md:sl-flex print:hidden right-group">
       <div class="sl-flex github-star right-group">
@@ -31,7 +28,7 @@ const { isCustomMenu } = Astro.locals.starlightRoute;
         <ThemeSelect />
         <LanguageSelect />
       </div>
-      <div class="social-icons">
+      <div class="sl-flex social-icons">
         <SocialIcons />
       </div>
     </div>
@@ -54,18 +51,27 @@ const { isCustomMenu } = Astro.locals.starlightRoute;
   }
     
   .nav-group,
-  .right-group {
-    gap: 1rem;
+  .right-group,
+  .social-icons {
+    gap: var(--sl-nav-gap);
     align-items: center;
+  }
+
+  .github-star::after {
+    content: "";
+    height: 2rem;
+    border-inline-end: 1px solid var(--sl-color-gray-5);
   }
 
   @media (min-width: 50rem) {
     :global(:root[data-has-sidebar]) {
       --__sidebar-pad: calc(2 * var(--sl-nav-pad-x));
     }
+
     :global(:root:not([data-has-toc])) {
       --__toc-width: 0rem;
     }
+
     .header {
       --__sidebar-width: max(
         0rem,
@@ -77,7 +83,7 @@ const { isCustomMenu } = Astro.locals.starlightRoute;
           var(--__toc-width, var(--sl-sidebar-width)) -
           (2 * var(--__toc-width, var(--sl-nav-pad-x))) -
           var(--sl-content-inline-start, 0rem) - var(--sl-content-width)
-          ) /
+        ) /
         2
       );
       display: grid;
@@ -85,8 +91,8 @@ const { isCustomMenu } = Astro.locals.starlightRoute;
         minmax(
           calc(
             var(--__sidebar-width) +
-              max(0rem, var(--__main-column-fr) - var(--sl-nav-gap)) -
-              var(--__sidebar-width)
+            max(0rem, var(--__main-column-fr) - var(--sl-nav-gap)) -
+            var(--__sidebar-width)
           ),
           auto
         )

@@ -3,12 +3,12 @@
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 0.5rem;
-  border: 1px solid var(--sl-color-gray-5);
+  border: 1px solid var(--sl-color-hairline-light);
   border-radius: 0.5rem;
   padding: 1rem;
   box-shadow: var(--sl-shadow-sm);
   position: relative;
-  background-color: var(--sl-color-gray-6);
+  background-color: var(--sl-color-bg-nav);
 }
 
 .sl-link-card a {
@@ -44,7 +44,7 @@
 }
 
 .sl-link-card:hover {
-  background: var(--sl-color-gray-6);
+  background: var(--sl-color-bg);
   border-color: var(--sl-color-accent-high);
 }
 

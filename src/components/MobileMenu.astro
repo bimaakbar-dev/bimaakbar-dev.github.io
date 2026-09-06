@@ -11,14 +11,14 @@ import NavLinks from "~/components/NavLinks.astro";
     <Icon name="close" class="close-icon" size="0.9em" />
     <span class="sr-only">{Astro.locals.t("menuButton.accessibleLabel")}</span>
   </summary>
-  <div class="dropdown-panel">
+  <div class="dropdown-panel bg-(--sl-color-bg-nav)">
     <NavLinks />
     <MobileMenuFooter />
   </div>
 </details>
 
 <style>
-  :global(.mobile-preferences) {
+  .mobile-preferences {
     justify-content: space-between;
     flex-wrap: wrap;
     border-top: 1px solid var(--sl-color-gray-6);
@@ -65,7 +65,7 @@ import NavLinks from "~/components/NavLinks.astro";
     padding-inline: 1rem;
     padding-block-start: 1rem;
     padding-block-end: 0.5rem;
-    background-color: var(--sl-color-bg-nav);
+    z-index: var(--sl-z-index-menu);
     box-shadow: var(--sl-shadow-lg);
     z-index: var(--sl-z-index-dropdown);
     border-bottom: 1px solid var(--sl-color-gray-5);

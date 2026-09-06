@@ -5,31 +5,34 @@
   display: inline-flex;
   font-size: var(--sl-text-sm);
   gap: 0.5em;
-  line-height: 1.1875;
+  line-height: var(--sl-line-height-headings, 1.1875);
   outline-offset: 0.25rem;
   padding: 0.4375rem 1.125rem;
   text-decoration: none;
 }
 
 .sl-link-button.primary {
-  background: var(--sl-color-text-accent);
-  border-color: var(--sl-color-text-accent);
+  background: var(--sl-color-bg-accent);
+  border-color: transparent;
   color: var(--sl-color-black);
 }
 .sl-link-button.primary:hover {
-  color: var(--sl-color-black);
+  color: var(--sl-color-text-invert);
 }
 .sl-link-button.secondary {
-  border-color: var(--sl-color-gray-5);
+  border-color: var(--sl-color-hairline);
   color: var(--sl-color-white);
 }
 .sl-link-button.minimal {
   color: var(--sl-color-white);
+  border-color: transparent;
   padding-inline: 0;
 }
 
 .sl-link-button svg {
   flex-shrink: 0;
+  width: 0.75em;
+  height: 0.75em;
 }
 
 @media (min-width: 50rem) {

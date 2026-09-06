@@ -17,46 +17,48 @@
   --sl-color-gray-3: rgb(113, 113, 122);
   --sl-color-gray-4: rgb(15, 15, 15);
   --sl-color-gray-5: rgb(30, 30, 30);
-  --sl-color-gray-6: rgb(10, 10, 10);
-  --sl-color-black: rgb(5, 5, 5);
+  --sl-color-gray-6: hsl(0, 0%, 4%);
+  --sl-color-black: hsl(0, 0%, 0%);
 
-  --sl-color-blue-low: rgb(6 182 212 / 0.14);
-  --sl-color-blue: rgb(6, 182, 212);
-  --sl-color-blue-high: rgb(165, 243, 252);
-
-  --sl-color-green-low: rgb(34 197 94 / 0.12);
-  --sl-color-green: rgb(34, 197, 94);
-  --sl-color-green-high: rgb(134, 239, 172);
-
-  --sl-color-orange-low: rgb(249 115 22 / 0.12);
-  --sl-color-orange: rgb(249, 115, 22);
-  --sl-color-orange-high: rgb(253, 186, 116);
-
-  --sl-color-red-low: rgb(239 68 68 / 0.12);
-  --sl-color-red: rgb(239, 68, 68);
-  --sl-color-red-high: rgb(252, 165, 165);
-
-  --sl-color-purple-low: rgb(168 85 247 / 0.12);
-  --sl-color-purple: rgb(168, 85, 247);
-  --sl-color-purple-high: rgb(216, 180, 254);
+  --sl-hue-orange: 41;
+	--sl-color-orange-low: hsl(var(--sl-hue-orange), 39%, 22%);
+	--sl-color-orange: hsl(var(--sl-hue-orange), 82%, 63%);
+	--sl-color-orange-high: hsl(var(--sl-hue-orange), 82%, 87%);
+	--sl-hue-green: 101;
+	--sl-color-green-low: hsl(var(--sl-hue-green), 39%, 22%);
+	--sl-color-green: hsl(var(--sl-hue-green), 82%, 63%);
+	--sl-color-green-high: hsl(var(--sl-hue-green), 82%, 80%);
+	--sl-hue-blue: 234;
+	--sl-color-blue-low: hsl(var(--sl-hue-blue), 54%, 20%);
+	--sl-color-blue: hsl(var(--sl-hue-blue), 100%, 60%);
+	--sl-color-blue-high: hsl(var(--sl-hue-blue), 100%, 87%);
+	--sl-hue-purple: 281;
+	--sl-color-purple-low: hsl(var(--sl-hue-purple), 39%, 22%);
+	--sl-color-purple: hsl(var(--sl-hue-purple), 82%, 63%);
+	--sl-color-purple-high: hsl(var(--sl-hue-purple), 82%, 89%);
+	--sl-hue-red: 339;
+	--sl-color-red-low: hsl(var(--sl-hue-red), 39%, 22%);
+	--sl-color-red: hsl(var(--sl-hue-red), 82%, 63%);
+	--sl-color-red-high: hsl(var(--sl-hue-red), 82%, 87%);
 
   --sl-color-accent-high: hsl(22, 100%, 60%);
   --sl-color-accent: hsl(32, 100%, 55%);
   --sl-color-accent-low: hsla(22, 100%, 60%, 0.603);
 
-  --sl-color-text: rgb(168, 168, 168);
-  --sl-color-text-accent: rgb(229, 229, 229);
-  --sl-color-text-invert: rgb(5, 5, 5);
+  --sl-color-text: var(--sl-color-gray-2);
 
-  --sl-color-bg: rgb(5, 5, 5);
-  --sl-color-bg-nav: rgb(5, 5, 5);
-  --sl-color-bg-sidebar: rgb(5, 5, 5);
-  --sl-color-bg-inline-code: rgb(10, 10, 10);
-  --sl-color-bg-accent: rgb(229, 229, 229);
+  --sl-color-text-accent: var(--sl-color-white);
+  --sl-color-text-invert: var(--sl-color-black);
 
-  --sl-color-hairline-light: rgb(15, 15, 15);
-  --sl-color-hairline: rgb(30, 30, 30);
-  --sl-color-hairline-shade: rgb(30, 30, 30);
+  --sl-color-bg: var(--sl-color-black);
+  --sl-color-bg-nav: var(--sl-color-gray-6);
+  --sl-color-bg-sidebar: var(--sl-color-bg);
+  --sl-color-bg-inline-code: var(--sl-color-gray-6);
+  --sl-color-bg-accent: var(--sl-color-accent-high);
+
+  --sl-color-hairline-light: var(--sl-color-gray-5);
+	--sl-color-hairline: var(--sl-color-gray-6);
+	--sl-color-hairline-shade: var(--sl-color-gray-6);
 
   --sl-color-backdrop-overlay: hsla(223, 13%, 10%, 0.66);
 
@@ -70,53 +72,49 @@
 
 :root[data-theme="light"],
 [data-theme="light"] ::backdrop {
-  --sl-color-white: rgb(9, 9, 11);
-  --sl-color-gray-1: rgb(9, 9, 11);
-  --sl-color-gray-2: rgb(82, 82, 91);
-  --sl-color-gray-3: rgb(113, 113, 122);
-  --sl-color-gray-4: rgb(244, 244, 245);
-  --sl-color-gray-5: rgb(228, 228, 231);
-  --sl-color-gray-6: rgb(244, 244, 245);
-  --sl-color-gray-7: rgb(244, 244, 245);
-  --sl-color-black: rgb(250, 250, 250);
+  --sl-color-white: hsl(240, 10%, 4%);
+  --sl-color-gray-1: hsl(240, 10%, 4%);
+  --sl-color-gray-2: hsl(240, 5%, 34%);
+  --sl-color-gray-3: hsl(240, 4%, 46%);
+  --sl-color-gray-4: hsl(240, 5%, 96%);
+  --sl-color-gray-5: hsl(240, 6%, 90%);
+  --sl-color-gray-6: hsl(240, 5%, 96%);
+  --sl-color-gray-7: hsl(240, 5%, 96%);
+  --sl-color-black: hsl(0, 0%, 98%);
 
-  --sl-color-blue-low: rgb(8 145 178 / 0.1);
-  --sl-color-blue: rgb(8, 145, 178);
-  --sl-color-blue-high: rgb(22, 78, 99);
-
-  --sl-color-green-low: rgb(16 150 88 / 0.1);
-  --sl-color-green: rgb(16, 150, 88);
-  --sl-color-green-high: rgb(6, 78, 59);
-
-  --sl-color-orange-low: rgb(217 119 6 / 0.1);
-  --sl-color-orange: rgb(217, 119, 6);
-  --sl-color-orange-high: rgb(120, 53, 15);
-
-  --sl-color-red-low: rgb(225 29 72 / 0.1);
-  --sl-color-red: rgb(225, 29, 72);
-  --sl-color-red-high: rgb(136, 19, 55);
-
-  --sl-color-purple-low: rgb(147 51 234 / 0.1);
-  --sl-color-purple: rgb(147, 51, 234);
-  --sl-color-purple-high: rgb(88, 28, 135);
+  --sl-color-orange-high: hsl(var(--sl-hue-orange), 80%, 25%);
+	--sl-color-orange: hsl(var(--sl-hue-orange), 90%, 60%);
+	--sl-color-orange-low: hsl(var(--sl-hue-orange), 90%, 88%);
+	--sl-color-green-high: hsl(var(--sl-hue-green), 80%, 22%);
+	--sl-color-green: hsl(var(--sl-hue-green), 90%, 46%);
+	--sl-color-green-low: hsl(var(--sl-hue-green), 85%, 90%);
+	--sl-color-blue-high: hsl(var(--sl-hue-blue), 80%, 30%);
+	--sl-color-blue: hsl(var(--sl-hue-blue), 90%, 60%);
+	--sl-color-blue-low: hsl(var(--sl-hue-blue), 88%, 90%);
+	--sl-color-purple-high: hsl(var(--sl-hue-purple), 90%, 30%);
+	--sl-color-purple: hsl(var(--sl-hue-purple), 90%, 60%);
+	--sl-color-purple-low: hsl(var(--sl-hue-purple), 80%, 90%);
+	--sl-color-red-high: hsl(var(--sl-hue-red), 80%, 30%);
+	--sl-color-red: hsl(var(--sl-hue-red), 90%, 60%);
+	--sl-color-red-low: hsl(var(--sl-hue-red), 80%, 90%);
 
   --sl-color-accent-high: hsl(22, 100%, 60%);
   --sl-color-accent: hsl(32, 100%, 55%);
   --sl-color-accent-low: hsla(22, 100%, 60%, 0.603);
 
-  --sl-color-text: rgb(82, 82, 91);
-  --sl-color-text-accent: rgb(24, 24, 27);
-  --sl-color-text-invert: rgb(250, 250, 250);
+  --sl-color-text: var(--sl-color-gray-2);
+  --sl-color-text-accent: var(--sl-color-white);
+  --sl-color-text-invert: var(--sl-color-black);
 
-  --sl-color-bg: rgb(250, 250, 250);
-  --sl-color-bg-nav: rgb(250, 250, 250);
-  --sl-color-bg-sidebar: rgb(250, 250, 250);
-  --sl-color-bg-inline-code: rgb(244, 244, 245);
-  --sl-color-bg-accent: rgb(24, 24, 27);
+  --sl-color-bg: var(--sl-color-black);
+  --sl-color-bg-nav: var(--sl-color-gray-6);
+  --sl-color-bg-sidebar: var(--sl-color-bg);
+  --sl-color-bg-inline-code: var(--sl-color-gray-5);
+  --sl-color-bg-accent: var(--sl-color-accent-high);
 
-  --sl-color-hairline: rgb(228, 228, 231);
-  --sl-color-hairline-light: rgb(244, 244, 245);
-  --sl-color-hairline-shade: rgb(228, 228, 231);
+  --sl-color-hairline-light: var(--sl-color-gray-5);
+	--sl-color-hairline: var(--sl-color-gray-6);
+	--sl-color-hairline-shade: var(--sl-color-gray-6);
 
   --sl-color-backdrop-overlay: hsla(225, 9%, 36%, 0.66);
 

@@ -40,10 +40,15 @@
   --sl-mobile-toc-height: 3rem;
   --sl-sidebar-width: 18.75rem;
   --sl-content-width: 45rem;
-  --sl-sidebar-pad-x: 1rem;
-  --sl-menu-button-size: 2rem;
-  /* --sl-nav-gap: var(--sl-content-pad-x); */
+	--sl-content-pad-x: 1rem;
+	--sl-content-gap-y: 1rem;
 
+  --sl-sidebar-pad-x: 1rem;
+  
+  --sl-main-pad: 0 0 3vh 0;
+	--sl-menu-button-size: 2rem;
+
+  --sl-nav-gap: var(--sl-content-pad-x);
   --sl-outline-offset-inside: -0.1875rem;
 
   --sl-z-index-toc: 4;
