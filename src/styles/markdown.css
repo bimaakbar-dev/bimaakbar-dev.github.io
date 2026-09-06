@@ -160,13 +160,13 @@
 /* Code block */
 .sl-markdown-content code:not(:where(.not-content *)) {
   background-color: var(--sl-color-bg-inline-code);
-  border: 1px solid var(--sl-color-hairline);
+  border: 1px solid var(--sl-color-hairline-light);
   border-radius: 0.45rem;
   font-size: var(--sl-text-code-sm);
 }
 
 .sl-markdown-content pre:not(:where(.not-content *)) {
-  border: 1px solid var(--sl-color-hairline);
+  border: 1px solid var(--sl-color-hairline-light);
   font-size: var(--sl-text-code);
 }
 
@@ -199,7 +199,7 @@
   content: "";
   position: absolute;
   inset-block: 1rem;
-  inset-inline-start: 0;
+  inset-inline-start: 0.25rem;
   width: 3px;
   background: var(--sl-color-accent);
   border-radius: 999px;
@@ -231,20 +231,20 @@
 
 .sl-markdown-content :is(thead th):not(:where(.not-content *)) {
   background-color: var(--sl-color-gray-6);
-  border-block: 1px solid var(--sl-color-hairline);
+  border-block: 1px solid var(--sl-color-hairline-light);
   white-space: nowrap;
 }
 
 .sl-markdown-content
   :is(thead tr:first-child th:first-child):not(:where(.not-content *)) {
-  border-inline-start: 1px solid var(--sl-color-hairline);
+  border-inline-start: 1px solid var(--sl-color-hairline-light);
   border-start-start-radius: 0.5rem;
   border-end-start-radius: 0.5rem;
 }
 
 .sl-markdown-content
   :is(thead tr:last-child th:last-child):not(:where(.not-content *)) {
-  border-inline-end: 1px solid var(--sl-color-hairline);
+  border-inline-end: 1px solid var(--sl-color-hairline-light);
   border-start-end-radius: 0.5rem;
   border-end-end-radius: 0.5rem;
 }
@@ -263,7 +263,7 @@
 
 .sl-markdown-content
   :is(tbody tr:not(:first-child) td):not(:where(.not-content *)) {
-  border-top: 1px solid var(--sl-color-hairline-shade);
+  border-top: 1px solid var(--sl-color-hairline);
 }
 
 .sl-markdown-content :is(td):not(:where(.not-content *)) {
@@ -288,7 +288,7 @@
 
 /* Details */
 .sl-markdown-content details:not(:where(.not-content *)) {
-  --sl-details-border-color: var(--sl-color-hairline);
+  --sl-details-border-color: var(--sl-color-hairline-light);
   --sl-details-border-color--hover: var(--sl-color-accent-high);
 
   border: 1px solid var(--sl-details-border-color);
@@ -317,7 +317,7 @@
 /* Kbd */
 .sl-markdown-content kbd:not(:where(.not-content *)) {
   background-color: var(--sl-color-bg-inline-code);
-  border: 1px solid var(--sl-color-hairline);
+  border: 1px solid var(--sl-color-hairline-light);
   border-bottom-width: 2px;
   border-radius: 0.35rem;
   padding: 0.15rem 0.35rem;
@@ -364,7 +364,7 @@
 
 /* Components */
 .sl-markdown-content .starlight-aside:is(th, td, hr, blockquote):not(:where(.not-content *)) {
-  border-color: var(--sl-color-hairline);
+  border-color: var(--sl-color-hairline-light);
 }
 
 .sl-markdown-content .starlight-aside :is(a):not(:where(.not-content *)) {
