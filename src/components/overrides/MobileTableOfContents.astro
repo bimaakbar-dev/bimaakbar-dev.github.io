@@ -82,13 +82,13 @@ const { toc } = Astro.locals.starlightRoute;
 	gap: 0.5rem;
 	align-items: center;
 	justify-content: space-between;
-	/* border: 1px solid var(--sl-color-hairline-light); */
+	border: none;
 	border-radius: 0.5rem;
 	padding-block: 0.5rem;
 	padding-inline-start: 0.75rem;
 	padding-inline-end: 0.5rem;
 	line-height: 1;
-	/* background-color: var(--sl-color-gray-6);*/
+	background-color: none;
 	user-select: none;
 	cursor: pointer;
     vertical-align: middle;
@@ -103,6 +103,7 @@ const { toc } = Astro.locals.starlightRoute;
 	display: block;
 	width: 1.25em;
 	height: 1.25em;
+  margin-block: -0.25em;
 	flex-shrink: 0;
   }
   .progress-fill {
