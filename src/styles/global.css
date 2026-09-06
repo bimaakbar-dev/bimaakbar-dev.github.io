@@ -113,8 +113,8 @@
   --sl-color-bg-inline-code: var(--sl-color-gray-6);
   --sl-color-bg-accent: var(--sl-color-accent-high);
 
-  --sl-color-hairline-light: var(--sl-color-gray-5);
-  --sl-color-hairline-shade: var(--sl-color-gray-5);
+  --sl-color-hairline-light: var(--sl-color-gray-6);
+  --sl-color-hairline-shade: var(--sl-color-gray-6);
 
   --sl-color-backdrop-overlay: hsla(225, 9%, 36%, 0.66);
 
