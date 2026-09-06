@@ -107,3 +107,5 @@ export class StarlightTOC extends HTMLElement {
 		return `-${top}px 0% ${top + 53 - document.documentElement.clientHeight}px`;
 	}
 }
+/**  For custom overrides TableOfContents.astro **/
+customElements.define('starlight-toc', StarlightTOC);
