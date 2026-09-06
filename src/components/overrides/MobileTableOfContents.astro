@@ -12,32 +12,29 @@ const { toc } = Astro.locals.starlightRoute;
 				<details id="starlight__mobile-toc">
 					<summary id="starlight__on-this-page--mobile" class="sl-flex">
 						<span class="toggle sl-flex">
-							<span class="progress-circle-wrapper">
-								<svg class="progress-circle" viewBox="0 0 18 18" focusable="false" aria-hidden="true">
-									<circle
-										cx="9"
-										cy="9"
-										r="7.5"
-										fill="none"
-										stroke="var(--sl-color-gray-5)"
-										stroke-width="1.5"
-										opacity="0.5"
-									/>
-									<circle
-										class="progress-fill"
-										cx="9"
-										cy="9"
-										r="7.5"
-										fill="none"
-										stroke="var(--sl-color-accent)"
-										stroke-width="1.5"
-										stroke-linecap="round"
-										stroke-dasharray="47.12388980384689"
-										stroke-dashoffset="47.12388980384689"
-										transform="rotate(-90 9 9)"
-									/>
-								</svg>
-							</span>
+							<svg class="progress-circle" viewBox="0 0 18 18" focusable="false" aria-hidden="true">
+								<circle
+									cx="9"
+									cy="9"
+									r="7.5"
+									fill="none"
+									stroke="var(--sl-color-gray-5)"
+									stroke-width="1.5"
+								/>
+								<circle
+									class="progress-fill"
+									cx="9"
+									cy="9"
+									r="7.5"
+									fill="none"
+									stroke="var(--sl-color-accent)"
+									stroke-width="1.5"
+									stroke-linecap="round"
+									stroke-dasharray="47.12388980384689"
+									stroke-dashoffset="47.12388980384689"
+									transform="rotate(-90 9 9)"
+								/>
+							</svg>
 							{Astro.locals.t('tableOfContents.onThisPage')}
 							<Icon name={'right-caret'} class="caret" size="1rem" />
 						</span>
@@ -89,17 +86,10 @@ const { toc } = Astro.locals.starlightRoute;
 	vertical-align: middle;
 	height: 100%;
   }
-  .progress-circle-wrapper {
-	display: block;
-	align-items: center;
-	justify-content: center;
-	width: 1.125em;
-    height: 1.125em;
-  }
   .progress-circle {
 	display: block;
-	width: 100%;
-	height: 100%;
+	width: 1.125em;
+    height: 1.125em;
 	flex-shrink: 0;
 	/*font-size: inherit;*/
   }
