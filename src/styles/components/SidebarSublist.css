@@ -1,5 +1,5 @@
 .top-level {
-  --sl-sidebar-item-padding-inline: 0.25rem;
+  --sl-sidebar-item-padding-inline: 0.35rem;
 }
 
 .top-level > li a {
@@ -27,7 +27,7 @@
 .top-level li a[aria-current="page"]::before {
   content: "";
   position: absolute;
-  left: -0.5rem;
+  left: -0.35rem;
   height: var(--sl-text-base);
   width: 2px;
   background-color: var(--sl-color-accent-high);
