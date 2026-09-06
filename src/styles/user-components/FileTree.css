@@ -1,7 +1,7 @@
 starlight-file-tree {
   border: 1px solid var(--sl-color-hairline-light);
   border-radius: 0.5rem;
-  background-color: var(--sl-color-bg-nav);
+  background-color: var(--sl-color-gray-6);
   font-size: var(--sl-text-xs);
 }
 starlight-file-tree .highlight {
