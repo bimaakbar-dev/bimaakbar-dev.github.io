@@ -1,7 +1,5 @@
-ul.top-level {
-  --sl-sidebar-item-padding-inline: 0.5rem;
-  list-style: none;
-  padding: 0;
+.top-level {
+  --sl-sidebar-item-padding-inline: 1rem;
 }
 
 .top-level > li a {
@@ -29,17 +27,13 @@ ul.top-level {
 .top-level li a[aria-current="page"]::before {
   content: "";
   position: absolute;
-  left: -0.575rem;
+  left: -0.5rem;
   height: var(--sl-text-base);
   width: 2px;
   background-color: var(--sl-color-accent-high);
   border-radius: 99rem;
   vertical-align: middle;
   flex-shrink: 0;
-}
-
-.top-level ul ul {
-  padding-inline: 0.5rem;
 }
 
 .top-level > ul ul li {
