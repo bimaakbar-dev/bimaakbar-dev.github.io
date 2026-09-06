@@ -30,20 +30,16 @@ const {
 </ul>
 
 <style define:vars={{ depth }}>
-
+	@layer starlight.core {
 		ul {
 			padding: 0;
 			list-style: none;
-		}
-		ul li {
-			font-weight: 500;
 		}
 		ul ul {
 			position: relative;
 		}
 		ul ul li {
 			position: relative;
-			
 		}
 		a {
 			--pad-inline: 0.5rem;
@@ -69,15 +65,13 @@ const {
 			text-decoration: none;
 			outline-offset: var(--sl-outline-offset-inside);
 		}
-		/* disable */
-		/* .isMobile:first-child > li:first-child > a {
+		.isMobile:first-child > li:first-child > a {
 			border-top: 0;
 		}
-		*/
 		.isMobile a[aria-current='true'],
 		.isMobile a[aria-current='true']:hover,
 		.isMobile a[aria-current='true']:focus {
-			color: var(--sl-color-white);
+			color: var(--sl-color-text-accent);
 			background-color: unset;
 		}
 		.isMobile a[aria-current='true']::after {
@@ -99,21 +93,50 @@ const {
 			width: 1px;
 			background-color: var(--sl-color-hairline-light);
 		}
-		ul ul li:has(> a[aria-current="true"])::before,
-		ul ul li:has(> .isMobile a[aria-current="true"])::before {
-			background-color: var(--sl-color-accent-high);
-			width: 2px;
-			left: 1.225rem;
-			border-radius: 99rem;
-			height: calc(var(--sl-text-sm) - var(--sl-line-height) - 1);
-		}
-		@media (min-width: 50rem) {
-			ul ul li::before {
-				left: 0.75rem;
-			}
-			ul ul li:has(> a[aria-current="true"])::before {
-				left: 0.725rem;
-			}
-		}
+	}
+</style>
 
+<style is:global>
+  starlight-toc ul ul,
+  mobile-starlight-toc ul ul {
+    position: relative;
+  }
+
+  starlight-toc ul ul li,
+  mobile-starlight-toc ul ul li {
+    position: relative;
+  }
+
+  starlight-toc ul ul li::before,
+  mobile-starlight-toc ul ul li::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 1.25rem;
+    width: 1px;
+    background-color: var(--sl-color-hairline-light);
+  }
+
+  starlight-toc ul ul li:has(> a[aria-current="true"])::before,
+  mobile-starlight-toc ul ul li:has(> a[aria-current="true"])::before {
+    background-color: var(--sl-color-text-accent);
+    width: 2px;
+    left: 1.225rem;
+    border-radius: 99rem;
+	height: calc(var(--sl-text-sm) - var(--sl-line-height) - 1);
+  }
+
+  mobile-starlight-toc .isMobile a {
+    border-top: 0;
+  }
+
+  @media (min-width: 50rem) {
+    starlight-toc ul ul li::before {
+      left: 0.75rem;
+    }
+	starlight-toc ul ul li:has(> a[aria-current="true"])::before {
+		left: 0.725rem;
+	}
+  }
 </style>
