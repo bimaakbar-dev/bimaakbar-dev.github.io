@@ -89,7 +89,7 @@ const { toc } = Astro.locals.starlightRoute;
     align-items: center;
     border: none;
     border-radius: 0.5rem;
-    padding-block: 0;
+    padding-block: 0.375rem;
     padding-inline: 0;
     line-height: 1;
     width: 100%;
@@ -107,6 +107,7 @@ const { toc } = Astro.locals.starlightRoute;
   }
   .toggle:hover {
     color: var(--sl-color-white);
+    border-color: transparent;
   }
   .progress-circle-wrapper {
     display: inline-flex;
@@ -126,7 +127,7 @@ const { toc } = Astro.locals.starlightRoute;
   }
   .progress-fill {
     transition: stroke-dasharray 0.15s ease-out;
-    color: var(--sl-color-accent);
+    color: var(--sl-color-accent-high);
   }
   .label-wrap {
     position: relative;
@@ -182,11 +183,12 @@ const { toc } = Astro.locals.starlightRoute;
   }
   .dropdown {
     --border-top: 1px;
+    
     margin-top: calc(-1 * var(--border-top));
-    border-top: var(--border-top) solid var(--sl-color-hairline-shade);
+    border-block: var(--border-top) solid var(--sl-color-hairline-shade);
     max-height: calc(85vh - var(--sl-nav-height) - var(--sl-mobile-toc-height));
     overflow-y: auto;
-    background-color: var(--sl-color-black);
+    background-color: var(--sl-color-bg-nav);
     box-shadow: var(--sl-shadow-md);
     overscroll-behavior: contain;
   }
