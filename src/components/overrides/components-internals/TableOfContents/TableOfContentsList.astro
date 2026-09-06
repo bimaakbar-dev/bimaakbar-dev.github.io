@@ -36,31 +36,60 @@ const {
       list-style: none;
       font-weight: 500;
     }
-    
-    ul ul,
+
+    ul ul {
+      position: relative;
+      padding-inline-start: 0;
+    }
+
     ul ul li {
       position: relative;
     }
-    
+
+    /* Garis vertikal continuous di ul, bukan per-li */
+    ul ul::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 1.25rem;
+      width: 1px;
+      background-color: var(--sl-color-hairline-light);
+    }
+
+    /* Active: pill kecil overlay di atas garis */
+    ul ul li:has(> a[aria-current="true"])::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 1.175rem;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 1rem;
+      background-color: var(--sl-color-text-accent);
+      border-radius: 99rem;
+      z-index: 1;
+    }
+
     a {
       --pad-inline: 0.5rem;
       display: block;
-      border-radius: 0.25rem;
+      border-radius: 0.5rem;
       padding-block: 0.5rem;
       padding-inline: calc(1rem * var(--depth) + var(--pad-inline)) var(--pad-inline);
       line-height: 1.25;
-      border-radius: 0.5rem;
     }
     a:hover {
       background-color: rgb(from var(--sl-color-gray-6) r g b / 50%);
     }
-    
+
     a[aria-current='true'],
     a[aria-current='true']:focus {
       color: var(--sl-color-text-accent);
       background-color: rgb(from var(--sl-color-gray-6) r g b / 50%);
     }
-    
+
+    /* Mobile */
     .isMobile a {
       --pad-inline: 1rem;
       display: flex;
@@ -74,18 +103,14 @@ const {
       text-decoration: none;
       outline-offset: var(--sl-outline-offset-inside);
     }
-    
-    .isMobile:first-child > li:first-child > a {
-      border-top: 0;
-    }
-    
+
     .isMobile a[aria-current='true'],
     .isMobile a[aria-current='true']:hover,
     .isMobile a[aria-current='true']:focus {
       color: var(--sl-color-text-accent);
       background-color: rgb(from var(--sl-color-gray-6) r g b / 50%);
     }
-    
+
     .isMobile a[aria-current='true']::after {
       content: '';
       width: 1rem;
@@ -96,32 +121,26 @@ const {
       mask-repeat: no-repeat;
       flex-shrink: 0;
     }
-    
-    ul ul li::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 1.25rem;
-      width: 1px;
-      background-color: var(--sl-color-hairline-light);
-    }
-    
-    ul ul li:has(> a[aria-current="true"])::before {
-      background-color: var(--sl-color-text-accent);
-      width: 2px;
-      left: 1.225rem;
-      border-radius: 99rem;
-      height: calc(var(--sl-text-xs) - var(--sl-line-height));
-    }
 
     @media (min-width: 50rem) {
-      :global(starlight-toc) ul ul li::before {
+      ul ul::before {
         left: 0.75rem;
       }
-      :global(starlight-toc) ul ul li:has(> a[aria-current="true"])::before {
-        left: 0.725rem;
+      ul ul li:has(> a[aria-current="true"])::before {
+        left: 0.675rem;
       }
     }
+  }
+</style>
+
+<style is:global>
+  starlight-toc ul ul,
+  mobile-starlight-toc ul ul {
+    position: relative;
+  }
+
+  starlight-toc ul ul li,
+  mobile-starlight-toc ul ul li {
+    position: relative;
   }
 </style>
