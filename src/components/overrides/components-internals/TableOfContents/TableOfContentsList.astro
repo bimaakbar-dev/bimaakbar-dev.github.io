@@ -34,8 +34,25 @@ const {
     padding: 0;
 	list-style: none;
   }
+  ul ul {
+    position: relative;
+  }
+  ul ul li::before {
+    content: "";
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0.75rem;
+    width: 1px;
+    background-color: var(--sl-color-hairline);
+  }
+  ul ul li:has(> a[aria-current="true"])::before {
+    background-color: var(--sl-color-accent-high);
+    width: 2px;
+  }
   a {
     --pad-inline: 0.5rem;
+    
 	display: block;
 	border-radius: 0.25rem;
 	padding-block: 0.25rem;
@@ -72,5 +89,10 @@ const {
 	-webkit-mask-repeat: no-repeat;
 	mask-repeat: no-repeat;
 	flex-shrink: 0;
+  }
+  @media (min-width: 50rem) {
+    ul ul li::before {
+      left: 0.75rem;
+    }
   }
 </style>
