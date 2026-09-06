@@ -14,7 +14,7 @@ const {
 } = Astro.props;
 ---
 
-<ul class:list={{ isMobile }}>
+<ul class:list={[{ isMobile }, depth === 0 && 'root']}>
   {
     toc.map((heading) => (
       <li>
@@ -35,32 +35,75 @@ const {
       padding: 0;
       list-style: none;
       font-weight: 500;
-    }
-    
-    ul ul,
-    ul ul li {
       position: relative;
     }
-    
+
+    li {
+      position: relative;
+    }
+
+    /* Garis vertikal continuous di semua level */
+    ul::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 1.25rem;
+      width: 1px;
+      background-color: var(--sl-color-hairline-light);
+      border-radius: 99rem;
+    }
+
+    /* Root ul — garis lebih ke kiri */
+    ul.root::before {
+      left: 0.4rem;
+    }
+
+    /* Dot di setiap li — default transparent */
+    li::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: calc(1.25rem - 0.2rem);
+      transform: translateY(-50%);
+      width: 0.4rem;
+      height: 0.4rem;
+      border-radius: 50%;
+      background-color: transparent;
+      transition: background-color 0.2s ease;
+      z-index: 1;
+    }
+
+    /* Root li dot lebih ke kiri */
+    ul.root > li::before {
+      left: calc(0.4rem - 0.2rem);
+    }
+
+    /* Active dot */
+    li:has(> a[aria-current="true"])::before {
+      background-color: var(--sl-color-text-accent);
+      /* Garis accent dari dot ke atas — arus yang sudah lewat */
+      box-shadow: 0 -999px 0 0.5px var(--sl-color-text-accent);
+    }
+
     a {
       --pad-inline: 0.5rem;
       display: block;
-      border-radius: 0.25rem;
-      padding-block: 0.5rem;
-      padding-inline: calc(1rem * var(--depth) + var(--pad-inline)) var(--pad-inline);
-      line-height: 1.25;
       border-radius: 0.5rem;
+      padding-block: 0.5rem;
+      padding-inline: calc(1rem * var(--depth) + var(--pad-inline) + 0.75rem) var(--pad-inline);
+      line-height: 1.25;
     }
     a:hover {
       background-color: rgb(from var(--sl-color-gray-6) r g b / 50%);
     }
-    
     a[aria-current='true'],
     a[aria-current='true']:focus {
       color: var(--sl-color-text-accent);
       background-color: rgb(from var(--sl-color-gray-6) r g b / 50%);
     }
-    
+
+    /* Mobile */
     .isMobile a {
       --pad-inline: 1rem;
       display: flex;
@@ -74,18 +117,12 @@ const {
       text-decoration: none;
       outline-offset: var(--sl-outline-offset-inside);
     }
-    
-    .isMobile:first-child > li:first-child > a {
-      border-top: 0;
-    }
-    
     .isMobile a[aria-current='true'],
     .isMobile a[aria-current='true']:hover,
     .isMobile a[aria-current='true']:focus {
       color: var(--sl-color-text-accent);
       background-color: rgb(from var(--sl-color-gray-6) r g b / 50%);
     }
-    
     .isMobile a[aria-current='true']::after {
       content: '';
       width: 1rem;
@@ -96,32 +133,31 @@ const {
       mask-repeat: no-repeat;
       flex-shrink: 0;
     }
-    
-    ul ul li::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 1.25rem;
-      width: 1px;
-      background-color: var(--sl-color-hairline-light);
-    }
-    
-    ul ul li:has(> a[aria-current="true"])::before {
-      background-color: var(--sl-color-text-accent);
-      width: 2px;
-      left: 1.225rem;
-      border-radius: 99rem;
-      height: calc(var(--sl-text-xs) - var(--sl-line-height));
-    }
 
     @media (min-width: 50rem) {
-      :global(starlight-toc) ul ul li::before {
+      ul::before {
         left: 0.75rem;
       }
-      :global(starlight-toc) ul ul li:has(> a[aria-current="true"])::before {
-        left: 0.725rem;
+      ul.root::before {
+        left: 0.4rem;
+      }
+      li::before {
+        left: calc(0.75rem - 0.2rem);
+      }
+      ul.root > li::before {
+        left: calc(0.4rem - 0.2rem);
       }
     }
+  }
+</style>
+
+<style is:global>
+  starlight-toc ul,
+  mobile-starlight-toc ul {
+    position: relative;
+  }
+  starlight-toc li,
+  mobile-starlight-toc li {
+    position: relative;
   }
 </style>
