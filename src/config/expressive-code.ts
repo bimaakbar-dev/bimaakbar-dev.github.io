@@ -6,33 +6,40 @@ export const expressiveCode: StarlightExpressiveCodeOptions = {
     borderColor: "var(--sl-color-hairline)",
     borderRadius: "0.5rem",
     borderWidth: "1px",
-    codeBackground: "var(--sl-color-gray-6)",
+    
+    codeBackground: "var(--sl-color-bg-inline-code)",
     codeFontFamily: "var(--font-firaCode)",
     codeFontSize: "var(--sl-text-code-sm)",
+    
     focusBorder: "var(--sl-color-accent)",
     uiFontFamily: "var(--font-inter)",
     frames: {
       copyIcon: "var(--copy-icon)",
       frameBoxShadowCssValue: "none",
       shadowColor: "transparent",
-      editorActiveTabBackground: "var(--sl-color-gray-6)",
+      
+      editorActiveTabBackground: "var(--sl-color-bg-inline-code)",
       editorActiveTabBorderColor: "var(--sl-color-hairline)",
       editorActiveTabIndicatorTopColor: "none",
       editorActiveTabForeground: "var(--sl-color-text-accent)",
       editorActiveTabIndicatorBottomColor: "var(--sl-color-accent-high)",
-      editorBackground: "var(--sl-color-gray-6)",
-      editorTabBarBackground: "var(--sl-color-gray-6)",
+      
+      editorBackground: "var(--sl-color-bg-inline-code)",
+      editorTabBarBackground: "var(--sl-color-bg)",
       editorTabBarBorderBottomColor: "var(--sl-color-hairline)",
       editorTabBarBorderColor: "var(--sl-color-hairline)",
       editorTabBorderRadius: "0.5rem",
+      
       inlineButtonBackground: "transparent",
       inlineButtonBorder: "transparent",
       inlineButtonForeground: "var(--sl-color-white)",
-      terminalBackground: "var(--sl-color-gray-6)",
-      terminalTitlebarBackground: "var(--sl-color-gray-6)",
+      
+      terminalBackground: "var(--sl-color-bg-inline-code)",
+      terminalTitlebarBackground: "var(--sl-color-bg)",
       terminalTitlebarBorderBottomColor: "var(--sl-color-hairline)",
-      terminalTitlebarDotsForeground: "var(--sl-color-gray-2)",
-      terminalTitlebarDotsOpacity: "0.2",
+      terminalTitlebarDotsForeground: "var(--sl-color-gray-3)",
+      terminalTitlebarDotsOpacity: "0.3",
+      
       tooltipSuccessBackground: "var(--sl-color-green)",
       tooltipSuccessForeground: "var(--sl-color-text-invert)",
     },
