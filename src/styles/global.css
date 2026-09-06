@@ -20,26 +20,30 @@
   --sl-color-gray-6: hsl(0, 0%, 5%);
   --sl-color-black: hsl(0, 0%, 0%);
 
-  --sl-hue-orange: 41;
-  --sl-color-orange-low: hsl(var(--sl-hue-orange), 39%, 22%);
-  --sl-color-orange: hsl(var(--sl-hue-orange), 82%, 63%);
-  --sl-color-orange-high: hsl(var(--sl-hue-orange), 82%, 87%);
-  --sl-hue-green: 101;
-  --sl-color-green-low: hsl(var(--sl-hue-green), 39%, 22%);
-  --sl-color-green: hsl(var(--sl-hue-green), 82%, 63%);
-  --sl-color-green-high: hsl(var(--sl-hue-green), 82%, 80%);
-  --sl-hue-blue: 234;
-  --sl-color-blue-low: hsl(var(--sl-hue-blue), 54%, 20%);
-  --sl-color-blue: hsl(var(--sl-hue-blue), 100%, 60%);
-  --sl-color-blue-high: hsl(var(--sl-hue-blue), 100%, 87%);
-  --sl-hue-purple: 281;
-  --sl-color-purple-low: hsl(var(--sl-hue-purple), 39%, 22%);
-  --sl-color-purple: hsl(var(--sl-hue-purple), 82%, 63%);
-  --sl-color-purple-high: hsl(var(--sl-hue-purple), 82%, 89%);
-  --sl-hue-red: 339;
-  --sl-color-red-low: hsl(var(--sl-hue-red), 39%, 22%);
-  --sl-color-red: hsl(var(--sl-hue-red), 82%, 63%);
-  --sl-color-red-high: hsl(var(--sl-hue-red), 82%, 87%);
+  --sl-hue-orange: 35;
+  --sl-color-orange-low: hsl(var(--sl-hue-orange), 30%, 15%);
+  --sl-color-orange: hsl(var(--sl-hue-orange), 90%, 60%);
+  --sl-color-orange-high: hsl(var(--sl-hue-orange), 70%, 85%);
+
+  --sl-hue-green: 150;
+  --sl-color-green-low: hsl(var(--sl-hue-green), 30%, 15%);
+  --sl-color-green: hsl(var(--sl-hue-green), 80%, 55%);
+  --sl-color-green-high: hsl(var(--sl-hue-green), 60%, 85%);
+
+  --sl-hue-blue: 212;
+  --sl-color-blue-low: hsl(var(--sl-hue-blue), 40%, 16%);
+  --sl-color-blue: hsl(var(--sl-hue-blue), 90%, 60%);
+  --sl-color-blue-high: hsl(var(--sl-hue-blue), 70%, 88%);
+
+  --sl-hue-purple: 270;
+  --sl-color-purple-low: hsl(var(--sl-hue-purple), 30%, 15%);
+  --sl-color-purple: hsl(var(--sl-hue-purple), 80%, 65%);
+  --sl-color-purple-high: hsl(var(--sl-hue-purple), 60%, 88%);
+
+  --sl-hue-red: 350;
+  --sl-color-red-low: hsl(var(--sl-hue-red), 30%, 15%);
+  --sl-color-red: hsl(var(--sl-hue-red), 85%, 65%);
+  --sl-color-red-high: hsl(var(--sl-hue-red), 70%, 88%);
 
   --sl-color-accent-high: hsl(22, 100%, 60%);
   --sl-color-accent: hsl(32, 100%, 55%);
@@ -83,21 +87,30 @@
   --sl-color-gray-7: hsl(0, 0%, 96%);
   --sl-color-black: hsl(0, 0%, 100%);
 
-  --sl-color-orange-high: hsl(var(--sl-hue-orange), 80%, 25%);
-  --sl-color-orange: hsl(var(--sl-hue-orange), 90%, 60%);
-  --sl-color-orange-low: hsl(var(--sl-hue-orange), 90%, 88%);
-  --sl-color-green-high: hsl(var(--sl-hue-green), 80%, 22%);
-  --sl-color-green: hsl(var(--sl-hue-green), 90%, 46%);
-  --sl-color-green-low: hsl(var(--sl-hue-green), 85%, 90%);
-  --sl-color-blue-high: hsl(var(--sl-hue-blue), 80%, 30%);
-  --sl-color-blue: hsl(var(--sl-hue-blue), 90%, 60%);
-  --sl-color-blue-low: hsl(var(--sl-hue-blue), 88%, 90%);
-  --sl-color-purple-high: hsl(var(--sl-hue-purple), 90%, 30%);
-  --sl-color-purple: hsl(var(--sl-hue-purple), 90%, 60%);
-  --sl-color-purple-low: hsl(var(--sl-hue-purple), 80%, 90%);
-  --sl-color-red-high: hsl(var(--sl-hue-red), 80%, 30%);
-  --sl-color-red: hsl(var(--sl-hue-red), 90%, 60%);
-  --sl-color-red-low: hsl(var(--sl-hue-red), 80%, 90%);
+  --sl-hue-orange: 35;
+  --sl-color-orange-low: hsl(var(--sl-hue-orange), 40%, 96%);
+  --sl-color-orange: hsl(var(--sl-hue-orange), 80%, 50%);
+  --sl-color-orange-high: hsl(var(--sl-hue-orange), 30%, 25%);
+
+  --sl-hue-green: 150;
+  --sl-color-green-low: hsl(var(--sl-hue-green), 40%, 96%);
+  --sl-color-green: hsl(var(--sl-hue-green), 70%, 40%);
+  --sl-color-green-high: hsl(var(--sl-hue-green), 30%, 20%);
+
+  --sl-hue-blue: 212;
+  --sl-color-blue-low: hsl(var(--sl-hue-blue), 40%, 96%);
+  --sl-color-blue: hsl(var(--sl-hue-blue), 80%, 45%);
+  --sl-color-blue-high: hsl(var(--sl-hue-blue), 30%, 25%);
+
+  --sl-hue-purple: 270;
+  --sl-color-purple-low: hsl(var(--sl-hue-purple), 40%, 96%);
+  --sl-color-purple: hsl(var(--sl-hue-purple), 70%, 55%);
+  --sl-color-purple-high: hsl(var(--sl-hue-purple), 30%, 25%);
+
+  --sl-hue-red: 350;
+  --sl-color-red-low: hsl(var(--sl-hue-red), 40%, 96%);
+  --sl-color-red: hsl(var(--sl-hue-red), 75%, 55%);
+  --sl-color-red-high: hsl(var(--sl-hue-red), 30%, 25%);
 
   --sl-color-accent-high: hsl(22, 100%, 60%);
   --sl-color-accent: hsl(32, 100%, 55%);
@@ -113,8 +126,8 @@
   --sl-color-bg-inline-code: var(--sl-color-gray-6);
   --sl-color-bg-accent: var(--sl-color-accent-high);
 
-  --sl-color-hairline-light: var(--sl-color-gray-6);
-  --sl-color-hairline-shade: var(--sl-color-gray-6);
+  --sl-color-hairline-light: var(--sl-color-gray-5);
+  --sl-color-hairline-shade: var(--sl-color-gray-5);
 
   --sl-color-backdrop-overlay: hsla(225, 9%, 36%, 0.66);
 

@@ -1,0 +1,64 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+---
+
+<desktop-scroll-to-top>
+  <button class="desktop-scroll-btn">
+    <Icon name="up-arrow" size="1.5em" />
+    <span>{Astro.locals.t("component.scrollToTop")}</span>
+  </button>
+</desktop-scroll-to-top>
+
+<style>
+  desktop-scroll-to-top {
+    display: block;
+    margin-top: 1.5rem; 
+  }
+
+  .desktop-scroll-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    width: 100%;
+
+    background: transparent;
+    border: none;
+    border-top: 1px solid var(--sl-color-hairline-light);
+    padding-top: 1rem;
+    
+    color: var(--sl-color-gray-3);
+    font-size: var(--sl-text-sm);
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  .desktop-scroll-btn:hover {
+    color: var(--sl-color-text-white);
+  }
+
+  @media (max-width: 50rem) {
+    desktop-scroll-to-top {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  class DesktopScrollToTop extends HTMLElement {
+    constructor() {
+      super();
+      const button = this.querySelector('button');
+      
+      if (button) {
+        button.addEventListener('click', () => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      }
+    }
+  }
+
+  customElements.define('desktop-scroll-to-top', DesktopScrollToTop);
+</script>

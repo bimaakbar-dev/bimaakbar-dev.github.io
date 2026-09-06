@@ -1,0 +1,83 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+---
+
+<scroll-to-top>
+  <button aria-label={Astro.locals.t("component.scrollToTop")} class="scroll-top-btn">
+    <Icon name="up-arrow" size="2em" />
+  </button>
+</scroll-to-top>
+
+<style>
+  scroll-to-top {
+    display: block;
+  }
+
+  .scroll-top-btn {
+    position: fixed;
+    bottom: calc(env(--safe-area-inset-bottom, 2rem));
+    right: 1.5rem;
+    z-index: var(--sl-z-index-toc, 90);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 99rem;
+    background-color: var(--sl-color-black);
+    color: var(--sl-color-white);
+    border: 1px solid var(--sl-color-gray-5);
+    box-shadow: var(--sl-shadow-md);
+    opacity: 0;
+    transform: translateY(1rem);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+  }
+
+  .scroll-top-btn.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .scroll-top-btn:active {
+    transform: scale(0.92);
+  }
+  @media (min-width: 50rem) {
+    scroll-to-top {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  class ScrollToTop extends HTMLElement {
+    constructor() {
+      super();
+      const button = this.querySelector('.scroll-top-btn');
+      if (!button) return;
+
+      const toggleVisibility = () => {
+        if (window.scrollY > 300) {
+          button.classList.add('visible');
+        } else {
+          button.classList.remove('visible');
+        }
+      };
+
+      toggleVisibility();
+
+      window.addEventListener('scroll', toggleVisibility, { passive: true });
+
+      button.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+  }
+
+  customElements.define('scroll-to-top', ScrollToTop);
+</script>

@@ -14,21 +14,15 @@
   display: block;
   position: relative;
   font-weight: 400;
+  border-radius: 0.35rem;
 }
 
 .top-level li a[aria-current="page"],
 .top-level li a[aria-current="page"]:hover,
 .top-level li a[aria-current="page"]:focus {
   position: relative;
-  font-weight: 400;
-  background-color: transparent;
-  color: var(--sl-color-text-accent);
-}
-
-.top-level ul ul li :has(> a[aria-current="page"]) {
-  content: "";
   background-color: rgb(from var(--sl-color-gray-6) r g b / 80%);
-  border-radius: 0.5rem;
+  color: var(--sl-color-text-accent);
 }
 
 .top-level li a[aria-current="page"]::before {

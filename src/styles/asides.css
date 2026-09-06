@@ -1,20 +1,20 @@
 .starlight-aside--note {
-  --sl-color-asides-text-accent: var(--sl-color-blue-high);
+  --sl-color-asides-text-accent: var(--sl-color-blue);
   --sl-color-asides-border: var(--sl-color-blue);
 	background-color: inherit;
 }
 .starlight-aside--tip {
-  --sl-color-asides-text-accent: var(--sl-color-purple-high);
+  --sl-color-asides-text-accent: var(--sl-color-purple);
   --sl-color-asides-border: var(--sl-color-purple);
   background-color: inherit;
 }
 .starlight-aside--caution {
-  --sl-color-asides-text-accent: var(--sl-color-orange-high);
+  --sl-color-asides-text-accent: var(--sl-color-orange);
   --sl-color-asides-border: var(--sl-color-orange);
   background-color: inherit;
 }
 .starlight-aside--danger {
-  --sl-color-asides-text-accent: var(--sl-color-red-high);
+  --sl-color-asides-text-accent: var(--sl-color-red);
   --sl-color-asides-border: var(--sl-color-red);
   background-color: inherit;
 }

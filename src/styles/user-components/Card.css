@@ -1,28 +1,28 @@
 .card {
   --sl-card-border: var(--sl-color-purple);
-  --sl-card-bg: var(--sl-color-bg);
+  --sl-card-bg: rgb(from var(--sl-color-gray-6) r g b / 40%);
 
   border: 1px solid var(--sl-color-hairline-light);
   border-radius: 0.5rem;
-  background-color: var(--sl-card-bg);
+  background-color: rgb(from var(--sl-color-gray-6) r g b / 40%);
   padding: 1rem;
   gap: 0.5rem;
 }
 .card:nth-child(4n + 1) {
   --sl-card-border: var(--sl-color-orange);
-  --sl-card-bg: var(--sl-color-bg);
+  --sl-card-bg: var(--sl-card-bg);
 }
 .card:nth-child(4n + 3) {
   --sl-card-border: var(--sl-color-green);
-  --sl-card-bg: var(--sl-color-bg);
+  --sl-card-bg: var(--sl-card-bg);
 }
 .card:nth-child(4n + 4) {
   --sl-card-border: var(--sl-color-red);
-  --sl-card-bg: var(--sl-color-bg);
+  --sl-card-bg: var(--sl-card-bg);
 }
 .card:nth-child(4n + 5) {
   --sl-card-border: var(--sl-color-blue);
-  --sl-card-bg: var(--sl-color-bg);
+  --sl-card-bg: var(--sl-card-bg);
 }
 .card .title {
   flex-direction: column;
