@@ -3,7 +3,7 @@ import type { StarlightExpressiveCodeOptions } from "@astrojs/starlight/expressi
 
 export const expressiveCode: StarlightExpressiveCodeOptions = {
   styleOverrides: {
-    borderColor: "var(--sl-color-hairline)",
+    borderColor: "var(--sl-color-hairline-light)",
     borderRadius: "0.5rem",
     borderWidth: "1px",
     
@@ -21,13 +21,13 @@ export const expressiveCode: StarlightExpressiveCodeOptions = {
       editorActiveTabBackground: "var(--sl-color-bg-inline-code)",
       editorActiveTabBorderColor: "var(--sl-color-hairline)",
       editorActiveTabIndicatorTopColor: "none",
-      editorActiveTabForeground: "var(--sl-color-text-accent)",
+      editorActiveTabForeground: "var(--sl-color-white)",
       editorActiveTabIndicatorBottomColor: "var(--sl-color-accent-high)",
       
       editorBackground: "var(--sl-color-bg-inline-code)",
       editorTabBarBackground: "var(--sl-color-bg)",
       editorTabBarBorderBottomColor: "var(--sl-color-hairline)",
-      editorTabBarBorderColor: "var(--sl-color-hairline)",
+      editorTabBarBorderColor: "var(--sl-color-hairline-light)",
       editorTabBorderRadius: "0.5rem",
       
       inlineButtonBackground: "transparent",
