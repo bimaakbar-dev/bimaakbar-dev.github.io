@@ -30,10 +30,12 @@ const {
 </ul>
 
 <style define:vars={{ depth }}>
-	@layer starlight.core {
+
 		ul {
 			padding: 0;
 			list-style: none;
+		}
+		ul li {
 			font-weight: 500;
 		}
 		ul ul {
@@ -41,6 +43,7 @@ const {
 		}
 		ul ul li {
 			position: relative;
+			
 		}
 		a {
 			--pad-inline: 0.5rem;
@@ -112,5 +115,5 @@ const {
 				left: 0.725rem;
 			}
 		}
-	}
+
 </style>
