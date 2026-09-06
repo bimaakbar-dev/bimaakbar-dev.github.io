@@ -11,9 +11,9 @@
   font-weight: 600;
   color: var(--sl-color-white);
   background-color: var(--sl-color-gray-6);
-  box-shadow: inset 0 0 0 1px var(--sl-color-hairline);
+  box-shadow: inset 0 0 0 1px var(--sl-color-hairline-light);
 }
 
 .sl-steps > li::after {
-  background-color: var(--sl-color-hairline);
+  background-color: var(--sl-color-hairline-light);
 }
