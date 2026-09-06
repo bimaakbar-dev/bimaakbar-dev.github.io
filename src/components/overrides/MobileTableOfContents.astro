@@ -11,9 +11,9 @@ const { toc } = Astro.locals.starlightRoute;
 			<nav aria-labelledby="starlight__on-this-page--mobile">
 				<details id="starlight__mobile-toc">
 					<summary id="starlight__on-this-page--mobile" class="sl-flex">
-						<span class="toggle sl-flex">
+						<span class="toggle sl-flex items-center">
 							<span class="progress-circle-wrapper">
-								<svg class="progress-circle" viewBox="0 0 24 24" width="16" height="16">
+								<svg class="progress-circle" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
 									<circle
 										cx="12"
 										cy="12"
@@ -31,7 +31,7 @@ const { toc } = Astro.locals.starlightRoute;
 										stroke="var(--sl-color-accent)"
 										stroke-width="2"
 										stroke-linecap="round"
-										stroke-dasharray="0, 100"
+										stroke-dasharray="0 62.83"
 										transform="rotate(-90 12 12)"
 									/>
 								</svg>
@@ -51,97 +51,93 @@ const { toc } = Astro.locals.starlightRoute;
 }
 
 <style>
-	@layer starlight.core {
-		nav {
-			position: fixed;
-			z-index: var(--sl-z-index-toc);
-			top: calc(var(--sl-nav-height) - 1px);
-			inset-inline: 0;
-			border-top: 1px solid var(--sl-color-gray-5);
-			background-color: var(--sl-color-bg-nav);
-		}
-		@media (min-width: 50rem) {
-			nav {
-				inset-inline-start: var(--sl-content-inline-start, 0);
-			}
-		}
-
-		summary {
-			gap: 0.5rem;
-			align-items: center;
-			height: var(--sl-mobile-toc-height);
-			border-bottom: 1px solid var(--sl-color-hairline-shade);
-			padding: 0.5rem 1rem;
-			font-size: var(--sl-text-xs);
-			outline-offset: var(--sl-outline-offset-inside);
-		}
-		summary::marker,
-		summary::-webkit-details-marker {
-			display: none;
-		}
-
-		.toggle {
-			flex-shrink: 0;
-			gap: 0.5rem;
-			align-items: center;
-			justify-content: space-between;
-			border: none;
-			padding-block: 0;
-			padding-inline-start: p;
-			padding-inline-end: 0;
-			line-height: 1;
-			background-color: transparent;
-			user-select: none;
-			cursor: pointer;
-		}
-
-		.progress-circle-wrapper {
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-			flex-shrink: 0;
-		}
-		.progress-circle {
-			display: block;
-			width: 16px;
-			height: 16px;
-		}
-		.progress-fill {
-			transition: stroke-dasharray 0.1s ease-out;
-		}
-		details[open] .toggle {
-			color: var(--sl-color-accent);
-		}
-		details .toggle:hover {
-			color: var(--sl-color-white);
-		}
-
-		:global([dir='rtl']) .caret {
-			transform: rotateZ(180deg);
-		}
-		details[open] .caret {
-			transform: rotateZ(90deg);
-		}
-
-		.display-current {
-			white-space: nowrap;
-			text-overflow: ellipsis;
-			overflow: hidden;
-			color: var(--sl-color-white);
-		}
-
-		.dropdown {
-			--border-top: 1px;
-			margin-top: calc(-1 * var(--border-top));
-			border-block: var(--border-top) solid var(--sl-color-hairline-shade);
-			max-height: calc(85vh - var(--sl-nav-height) - var(--sl-mobile-toc-height));
-			overflow-y: auto;
-			background-color: var(--sl-color-bg);
-			box-shadow: var(--sl-shadow-md);
-			overscroll-behavior: contain;
-			z-index: 2;
-		}
+  nav {
+    position: fixed;
+	z-index: var(--sl-z-index-toc);
+	top: calc(var(--sl-nav-height) - 1px);
+	inset-inline: 0;
+	border-top: 1px solid var(--sl-color-hairline);
+	background-color: var(--sl-color-bg-nav);
+  }
+  @media (min-width: 50rem) {
+	nav {
+	  inset-inline-start: var(--sl-content-inline-start, 0);
 	}
+  }
+  summary {
+	gap: 0.5rem;
+	align-items: center;
+	height: var(--sl-mobile-toc-height);
+	border-bottom: 1px solid var(--sl-color-hairline-shade);
+	padding: 0.5rem 1rem;
+	font-size: var(--sl-text-xs);
+	outline-offset: var(--sl-outline-offset-inside);
+  }
+  summary::marker,
+  summary::-webkit-details-marker {
+	display: none;
+  }
+  .toggle {
+    flex-shrink: 0;
+	gap: 0.5rem;
+	align-items: center;
+	justify-content: space-between;
+	border: 1px solid var(--sl-color-hairline-light);
+	border-radius: 0.5rem;
+	padding-block: 0.5rem;
+	padding-inline-start: 0.75rem;
+	padding-inline-end: 0.5rem;
+	line-height: 1;
+	background-color: var(--sl-color-gray-6);
+	user-select: none;
+	cursor: pointer;
+  }
+  .progress-circle-wrapper {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+  }
+  .progress-circle {
+	display: block;
+	width: 1.25em;
+	height: 1.25em;
+	flex-shrink: 0;
+  }
+  .progress-fill {
+	transition: stroke-dasharray 0.15s ease-out;
+  }
+  details[open] .toggle {
+	color: var(--sl-color-white);
+	border-color: var(--sl-color-accent);
+  }
+  details .toggle:hover {
+	color: var(--sl-color-white);
+    background-color: var(--sl-color-bg);
+  }
+  [dir='rtl'] .caret {
+	transform: rotateZ(180deg);
+  }
+  details[open] .caret {
+	transform: rotateZ(90deg);
+  }
+  .display-current {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	color: var(--sl-color-white);
+  }
+  .dropdown {
+	--border-top: 1px;
+	margin-top: calc(-1 * var(--border-top));
+	border-top: var(--border-top) solid var(--sl-color-hairline-shade);
+	max-height: calc(85vh - var(--sl-nav-height) - var(--sl-mobile-toc-height));
+	overflow-y: auto;
+	background-color: var(--sl-color-black);
+	box-shadow: var(--sl-shadow-md);
+	overscroll-behavior: contain;
+	z-index: var(--sl-z-index-toc);
+  }
 </style>
 
 <script>
@@ -159,14 +155,17 @@ const { toc } = Astro.locals.starlightRoute;
 			const details = this.querySelector('details');
 			if (!details) return;
 
-			// Update the progress circle as the user scrolls the page.
+			const circumference = 62.83;
+
 			const updateProgress = () => {
 				const scrollTop = window.scrollY;
 				const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-				const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+				const progress = docHeight > 0 ? Math.min(scrollTop / docHeight, 1) : 0;
+				const drawn = progress * circumference;
 				const circle = this.querySelector('.progress-fill') as SVGCircleElement | null;
-				if (circle) circle.style.strokeDasharray = `${progress}, ${100 - progress}`;
+				if (circle) circle.style.strokeDasharray = `${drawn} ${circumference - drawn}`;
 			};
+
 			window.addEventListener('scroll', updateProgress, { passive: true });
 			window.addEventListener('resize', updateProgress);
 			updateProgress();
@@ -174,15 +173,12 @@ const { toc } = Astro.locals.starlightRoute;
 			const closeToC = () => {
 				details.open = false;
 			};
-			// Close the table of contents whenever a link is clicked.
 			details.querySelectorAll('a').forEach((a) => {
 				a.addEventListener('click', closeToC);
 			});
-			// Close the table of contents when a user clicks outside of it.
 			window.addEventListener('click', (e) => {
 				if (!details.contains(e.target as Node)) closeToC();
 			});
-			// Or when they press the escape key.
 			window.addEventListener('keydown', (e) => {
 				if (e.key === 'Escape' && details.open) {
 					const hasFocus = details.contains(document.activeElement);
