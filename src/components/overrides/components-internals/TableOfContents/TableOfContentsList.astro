@@ -39,14 +39,15 @@ const {
   }
   ul ul li::before {
     content: "";
-    position: absolute;
+    position: relative;
     top: 0;
     bottom: 0;
-    left: 0.75rem;
+    left: 1.25rem;
     width: 1px;
     background-color: var(--sl-color-hairline);
   }
-  ul ul li:has(> a[aria-current="true"])::before {
+  ul ul li:has(> a[aria-current="true"])::before,
+  ul ul li:has(> .isMobile a[aria-current="true"])::before {
     background-color: var(--sl-color-accent-high);
     width: 2px;
   }
