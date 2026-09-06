@@ -2,6 +2,8 @@
 
 [![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
 
+[![Deploy site to Pages](https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/actions/workflows/astro.yml/badge.svg?branch=Dev)](https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/actions/workflows/astro.yml)
+
 **Stradocs** is a custom theme from Starlight developed by [Bima Akbar](https://github.com/bimaakbar-dev/) inspired by the design standards of **Vercel** and **Fumadocs**.
 
 ## Key Features
