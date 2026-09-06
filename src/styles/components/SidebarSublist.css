@@ -27,7 +27,7 @@
 .top-level li a[aria-current="page"]::before {
   content: "";
   position: absolute;
-  left: -0.35rem;
+  left: -0.75rem;
   height: var(--sl-text-base);
   width: 2px;
   background-color: var(--sl-color-accent-high);
