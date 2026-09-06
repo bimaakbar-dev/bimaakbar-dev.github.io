@@ -151,22 +151,6 @@ p {
   text-wrap: pretty;
 }
 
-.expressive-code .copy button {
-  border: 0;
-  border-radius: 0.5rem;
-  background-color: color-mix(in srgb, var(--sl-color-bg) 80%, transparent);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  outline: 1px solid var(--sl-color-gray-5);
-
-  width: 2rem !important;
-  height: 2rem !important;
-}
-
-.expressive-code .copy button::after {
-  margin: 0.5rem !important;
-}
-
 @media (min-width: 50em) {
   :root {
     --sl-nav-height: 4rem;

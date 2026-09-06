@@ -1,19 +1,26 @@
 .pagination-links a {
+  position: relative;
   gap: 0.5rem;
-  border: 1px solid var(--sl-color-gray-5);
+  border: 1px solid var(--sl-color-hairline);
   border-radius: 0.5rem;
-  color: var(--sl-color-gray-2);
+  color: var(--sl-color-gray-3);
   box-shadow: none;
-  font-size: var(--sl-text-sm);
+  font-size: var(--sl-text-xs);
 }
 
 .pagination-links a:hover {
-  border-color: var(--sl-color-gray-5);
-  background-color: var(--sl-color-gray-6);
+  background-color: rgb(from var(--sl-color-gray-6) r g b / 50%);
 }
 
 .pagination-links .link-title {
   color: var(--sl-color-white);
   font-size: var(--sl-text-base);
   line-height: var(--sl-line-height-headings);
+}
+
+.pagination-links a svg {
+  position: relative;
+  top: 100%;
+  transform: translateY(-150%);
+  color: var(--sl-color-gray-4);
 }

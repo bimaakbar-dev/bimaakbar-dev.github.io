@@ -34,6 +34,7 @@ const {
     ul {
       padding: 0;
       list-style: none;
+      font-weight: 500;
     }
     
     ul ul,
@@ -90,7 +91,6 @@ const {
       flex-shrink: 0;
     }
     
-    /* -- GARIS PENGHUBUNG (TREE LINES) -- */
     ul ul li::before {
       content: "";
       position: absolute;
@@ -106,11 +106,9 @@ const {
       width: 2px;
       left: 1.225rem;
       border-radius: 99rem;
-      /* Pastikan operasi calc() ini memiliki nilai unit yang valid di browser Anda */
       height: calc(var(--sl-text-sm) - var(--sl-line-height));
     }
 
-    /* Penyesuaian khusus Desktop ketika dibungkus oleh <starlight-toc> */
     @media (min-width: 50rem) {
       :global(starlight-toc) ul ul li::before {
         left: 0.75rem;

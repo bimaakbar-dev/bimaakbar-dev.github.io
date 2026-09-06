@@ -25,6 +25,12 @@
   color: var(--sl-color-text-accent);
 }
 
+.top-level ul ul li :has(> a[aria-current="page"]) {
+  content: "";
+  background-color: rgb(from var(--sl-color-gray-6) r g b / 80%);
+  border-radius: 0.5rem;
+}
+
 .top-level li a[aria-current="page"]::before {
   content: "";
   position: absolute;
@@ -46,7 +52,7 @@
 
 @media (min-width: 50rem) {
   .top-level > li .group-label .large {
-    font-size: var(--sl-text-base);
+    font-size: var(--sl-text-sm);
   }
   .top-level li a {
     font-size: var(--sl-text-sm);

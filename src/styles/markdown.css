@@ -8,12 +8,15 @@
   line-height: var(--sl-line-height-headings);
   font-family: var(--font-montserrat);
 }
+
 .sl-markdown-content :is(h1, h2):not(:where(.not-content *)) {
   color: var(--sl-color-white);
 }
+
 .sl-markdown-content :is(h3, h4, h5, h6):not(:where(.not-content *)) {
   color: var(--sl-color-gray-1);
 }
+
 .sl-markdown-content h1:not(:where(.not-content *)) {
   font-weight: 700;
 }
@@ -32,6 +35,7 @@
 .sl-markdown-content h6:not(:where(.not-content *)) {
   font-weight: 400;
 }
+
 .sl-markdown-content
   :is(h1 code, h2 code, h3 code, h4 code, h5 code, h6 code):not(
     :where(.not-content *)
@@ -91,7 +95,6 @@
   font-weight: 500;
   color: var(--sl-color-white);
 }
-
 /* Italic */
 .sl-markdown-content :is(em, i):not(:where(.not-content *)) {
   color: var(--sl-color-gray-3);
@@ -147,7 +150,7 @@
 .sl-markdown-content :is(img, picture, iframe):not(:where(.not-content *)) {
   display: block;
   border-radius: 0.5rem;
-  border: 1px solid var(--sl-color-hairline);
+  border: 1px solid var(--sl-color-hairline-light);
   margin-inline: auto;
   width: 100%;
 }
@@ -190,16 +193,13 @@
   .sl-markdown-content blockquote:not(:where(.not-content *)) {
     font-size: var(--sl-text-h4);
   }
-  .sl-markdown-content blockquote cite:not(:where(.not-content *)) {
-    font-size: var(--sl-text-xs);
-  }
 }
 
 .sl-markdown-content blockquote:not(:where(.not-content *))::before {
   content: "";
   position: absolute;
   inset-block: 1rem;
-  inset-inline-start: 0.25rem;
+  inset-inline-start: 0;
   width: 3px;
   background: var(--sl-color-accent);
   border-radius: 999px;
@@ -230,7 +230,7 @@
 }
 
 .sl-markdown-content :is(thead th):not(:where(.not-content *)) {
-  background-color: var(--sl-color-gray-6);
+  background-color: var(--sl-color-bg-nav);
   border-block: 1px solid var(--sl-color-hairline-light);
   white-space: nowrap;
 }
@@ -295,7 +295,7 @@
   padding-block: 0.5rem;
   padding-inline-end: 0.5rem;
   border-radius: 0.5rem;
-  background-color: var(--sl-color-gray-6);
+  background-color: var(--sl-color-bg-nav);
 }
 .sl-markdown-content details:not([open]):hover:not(:where(.not-content *)),
 .sl-markdown-content details:has(> summary:hover):not(:where(.not-content *)) {
@@ -324,7 +324,7 @@
   font-size: var(--sl-text-code-sm);
   font-family: var(--sl-font-mono);
   color: var(--sl-color-white);
-  box-shadow: 0 1px 0 var(--sl-color-hairline-shade);
+  box-shadow: 0 1px 0 var(--sl-color-hairline);
 }
 
 /* Footnotes */

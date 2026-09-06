@@ -23,10 +23,10 @@
   display: block;
   box-sizing: border-box;
   position: relative;
-  padding: 1rem 1rem 1rem 1.65rem;
+  padding: 1rem 1.25rem 1rem 1.65rem;
   outline: 1px solid var(--sl-color-hairline-light);
   border-radius: 0.5rem;
-  background-color: var(--sl-color-gray-6);
+  background-color: rgb(from var(--sl-color-gray-6) r g b / 50%);
   border-inline-start: none;
   color: var(--sl-color-text);
 }
@@ -34,8 +34,8 @@
   content: "";
   position: absolute;
   inset-block: 0.65rem;
-  inset-inline-start: 0.65rem;
-  width: 2px;
+  inset-inline-start: 0.5rem;
+  width: 0.15rem;
   background-color: var(--sl-color-asides-border);
   border-radius: 99rem;
   vertical-align: middle;

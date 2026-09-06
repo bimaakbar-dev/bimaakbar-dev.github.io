@@ -4,6 +4,7 @@
   border-radius: 999rem;
   display: inline-flex;
   font-size: var(--sl-text-sm);
+  font-weight: 600;
   gap: 0.5em;
   line-height: var(--sl-line-height-headings, 1.1875);
   outline-offset: 0.25rem;
@@ -14,19 +15,31 @@
 .sl-link-button.primary {
   background: var(--sl-color-bg-accent);
   border-color: transparent;
-  color: var(--sl-color-black);
+  color: var(--sl-color-white);
 }
 .sl-link-button.primary:hover {
-  color: var(--sl-color-text-invert);
+  background: rgb(from var(--sl-color-bg-accent) r g b / 80%);
+  color: var(--sl-color-white);
 }
 .sl-link-button.secondary {
-  border-color: var(--sl-color-hairline);
+  background: transparent;
+  border-color: var(--sl-color-hairline-light);
   color: var(--sl-color-white);
 }
-.sl-link-button.minimal {
+.sl-link-button.secondary:hover {
+  border-color: var(--sl-color-hairline-shade);
   color: var(--sl-color-white);
+  color: var(--sl-color-gray-2);
+}
+.sl-link-button.minimal {
+  background: transparent;
   border-color: transparent;
+  color: var(--sl-color-white);
   padding-inline: 0;
+}
+
+.sl-link-button.minimal:hover {
+  color: var(--sl-color-gray-2);
 }
 
 .sl-link-button svg {
@@ -35,16 +48,16 @@
   height: 0.75em;
 }
 
-@media (min-width: 50rem) {
-  .sl-link-button {
-    font-size: var(--sl-text-base);
-    padding: 0.5rem 1.125rem;
-  }
-}
-
 .sl-markdown-content .sl-link-button {
   margin-inline-end: 1rem;
 }
 .sl-markdown-content .sl-link-button:not(:where(p *)) {
   margin-block: 1rem;
+}
+
+@media (min-width: 50rem) {
+  .sl-link-button {
+    font-size: var(--sl-text-base);
+    padding: 0.5rem 1.15rem;
+  }
 }

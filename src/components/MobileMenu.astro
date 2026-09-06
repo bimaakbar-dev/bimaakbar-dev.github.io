@@ -90,13 +90,3 @@ import NavLinks from "~/components/NavLinks.astro";
     }
   }
 </style>
-
-<script>
-  const menu = document.querySelector('.global-mobile-menu') as HTMLDetailsElement;
-  
-  document.addEventListener('click', (e) => {
-    if (!menu.contains(e.target as Node)) {
-      menu.removeAttribute('open');
-    }
-  });
-</script>
