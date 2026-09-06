@@ -135,3 +135,17 @@
   --sl-shadow-md: 0 4px 10px rgb(0 0 0 / 0.06);
   --sl-shadow-lg: 0 10px 20px rgb(0 0 0 / 0.07);
 }
+
+.expressive-code .copy button {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background-color: rgb(from var(--sl-color-gray-6) r g b / 80%);
+  -webkit-backdrop-filter: blur(16px) !important;
+  backdrop-filter: blur(16px) !important;
+  width: 2rem !important;
+  height: 2rem !important;
+}
+
+.expressive-code .copy button::after {
+  margin: 0.5rem !important;
+}
