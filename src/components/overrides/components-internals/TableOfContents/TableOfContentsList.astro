@@ -46,11 +46,12 @@ const {
     width: 1px;
     background-color: var(--sl-color-hairline);
   }
-  ul ul li:has(> a[aria-current="true"])::before,
-  ul ul li:has(> .isMobile a[aria-current="true"])::before {
+/*  ul ul li:has(> a[aria-current="true"])::before,
+  ul ul li:has(> .isMobile a[aria-current="true"])::before,
     background-color: var(--sl-color-accent-high);
     width: 2px;
   }
+*/
   a {
     --pad-inline: 0.5rem;
     
@@ -95,5 +96,13 @@ const {
     ul ul li::before {
       left: 0.75rem;
     }
+  }
+</style>
+
+<style is:global>
+  starlight-toc ul ul li:has(> a[aria-current="true"])::before,
+  mobile-starlight-toc ul ul li:has(> a[aria-current="true"])::before {
+    background-color: var(--sl-color-accent-high);
+    width: 2px;
   }
 </style>
