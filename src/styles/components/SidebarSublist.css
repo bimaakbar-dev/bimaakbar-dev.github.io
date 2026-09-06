@@ -29,7 +29,7 @@ ul.top-level {
 .top-level li a[aria-current="page"]::before {
   content: "";
   position: absolute;
-  left: -0.525rem;
+  left: -0.575rem;
   height: var(--sl-text-base);
   width: 2px;
   background-color: var(--sl-color-accent-high);
@@ -38,7 +38,7 @@ ul.top-level {
   flex-shrink: 0;
 }
 
-.top-level :is(ul ul li) {
+.top-level > ul ul li {
   position: relative;
   padding-inline-start: var(--sl-sidebar-item-padding-inline);
   border-inline-start: 1px solid var(--sl-color-hairline-light);
