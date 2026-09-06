@@ -10,7 +10,3 @@
   font-family: var(--font-montserrat);
   line-height: var(--sl-line-height-headings);
 }
-
-.site-title [data-theme="light"] {
-  color: var(--sl-color-text-black);
-}
