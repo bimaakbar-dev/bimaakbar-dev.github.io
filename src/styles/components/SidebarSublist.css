@@ -38,6 +38,10 @@ ul.top-level {
   flex-shrink: 0;
 }
 
+.top-level ul ul {
+  padding-inline: 0.5rem;
+}
+
 .top-level > ul ul li {
   position: relative;
   padding-inline-start: var(--sl-sidebar-item-padding-inline);
