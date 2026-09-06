@@ -81,14 +81,7 @@ const { toc } = Astro.locals.starlightRoute;
     flex-shrink: 0;
 	gap: 0.5rem;
 	align-items: center;
-	justify-content: space-between;
-	border: 1px solid var(--sl-color-hairline-light);
-	border-radius: 0.5rem;
-	padding-block: 0.5rem;
-	padding-inline-start: 0.75rem;
-	padding-inline-end: 0.5rem;
 	line-height: 1;
-	background-color: var(--sl-color-gray-6);
 	user-select: none;
 	cursor: pointer;
   }
@@ -108,12 +101,10 @@ const { toc } = Astro.locals.starlightRoute;
 	transition: stroke-dasharray 0.15s ease-out;
   }
   details[open] .toggle {
-	color: var(--sl-color-white);
-	border-color: var(--sl-color-accent);
+	color: var(--sl-color-text-accent);
   }
   details .toggle:hover {
 	color: var(--sl-color-white);
-    background-color: var(--sl-color-bg);
   }
   [dir='rtl'] .caret {
 	transform: rotateZ(180deg);
