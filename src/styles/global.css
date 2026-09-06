@@ -11,13 +11,13 @@
 
 :root,
 ::backdrop {
-  --sl-color-white: rgb(240, 240, 240);
-  --sl-color-gray-1: rgb(240, 240, 240);
-  --sl-color-gray-2: rgb(168, 168, 168);
-  --sl-color-gray-3: rgb(113, 113, 122);
-  --sl-color-gray-4: rgb(15, 15, 15);
-  --sl-color-gray-5: rgb(30, 30, 30);
-  --sl-color-gray-6: hsl(0, 0%, 4%);
+  --sl-color-white: hsl(0, 0%, 96%);
+  --sl-color-gray-1: hsl(0, 0%, 96%);
+  --sl-color-gray-2: hsl(0, 0%, 80%);
+  --sl-color-gray-3: hsl(0, 0%, 60%);
+  --sl-color-gray-4: hsl(0, 0%, 35%);
+  --sl-color-gray-5: hsl(0, 0%, 15%);
+  --sl-color-gray-6: hsl(0, 0%, 5%);
   --sl-color-black: hsl(0, 0%, 0%);
 
   --sl-hue-orange: 41;
@@ -58,7 +58,7 @@
 
   --sl-color-hairline-light: var(--sl-color-gray-5);
 	--sl-color-hairline: var(--sl-color-gray-6);
-	--sl-color-hairline-shade: var(--sl-color-gray-6);
+	--sl-color-hairline-shade: var(--sl-color-black);
 
   --sl-color-backdrop-overlay: hsla(223, 13%, 10%, 0.66);
 
@@ -72,15 +72,15 @@
 
 :root[data-theme="light"],
 [data-theme="light"] ::backdrop {
-  --sl-color-white: hsl(240, 10%, 4%);
-  --sl-color-gray-1: hsl(240, 10%, 4%);
-  --sl-color-gray-2: hsl(240, 5%, 34%);
-  --sl-color-gray-3: hsl(240, 4%, 46%);
-  --sl-color-gray-4: hsl(240, 5%, 96%);
-  --sl-color-gray-5: hsl(240, 6%, 90%);
-  --sl-color-gray-6: hsl(240, 5%, 96%);
-  --sl-color-gray-7: hsl(240, 5%, 96%);
-  --sl-color-black: hsl(0, 0%, 98%);
+  --sl-color-white: hsl(0, 0%, 4%);
+  --sl-color-gray-1: hsl(0, 0%, 4%);
+  --sl-color-gray-2: hsl(0, 0%, 15%);
+  --sl-color-gray-3: hsl(0, 0%, 35%);
+  --sl-color-gray-4: hsl(0, 0%, 60%);
+  --sl-color-gray-5: hsl(0, 0%, 80%);
+  --sl-color-gray-6: hsl(0, 0%, 96%);
+  --sl-color-gray-7: hsl(0, 0%, 96%);
+  --sl-color-black: hsl(0, 0%, 100%);
 
   --sl-color-orange-high: hsl(var(--sl-hue-orange), 80%, 25%);
 	--sl-color-orange: hsl(var(--sl-hue-orange), 90%, 60%);
@@ -112,9 +112,8 @@
   --sl-color-bg-inline-code: var(--sl-color-gray-5);
   --sl-color-bg-accent: var(--sl-color-accent-high);
 
-  --sl-color-hairline-light: var(--sl-color-gray-5);
-	--sl-color-hairline: var(--sl-color-gray-6);
-	--sl-color-hairline-shade: var(--sl-color-gray-6);
+  --sl-color-hairline-light: var(--sl-color-gray-6);
+  --sl-color-hairline-shade: var(--sl-color-gray-6);
 
   --sl-color-backdrop-overlay: hsla(225, 9%, 36%, 0.66);
 
