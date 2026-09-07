@@ -15,7 +15,7 @@ const fullMarkdown = `# ${title}\n\n${entry.body || ''}`;
 {
   isBlogPost ? (
     <>
-      <div class="mx-auto w-full max-w-5xl md:-mb-10 lg:-mb-12 xl:-mb-16">
+      <div class="mx-auto w-full max-w-6xl md:-mb-10 lg:-mb-24 xl:-mb-32 relative z-0 mt-[calc(var(--sl-nav-height) - 1px)]">
         {heroImage && (
           <Image
             width={1500}
