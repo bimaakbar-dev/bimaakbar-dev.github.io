@@ -56,17 +56,15 @@ const { toc } = Astro.locals.starlightRoute;
 	z-index: var(--sl-z-index-toc);
 	top: calc(var(--sl-nav-height) - 1px);
 	inset-inline: 0;
-	border-top: 1px solid var(--sl-color-hairline);
+	border-top: 1px solid var(--sl-color-hairline-light);
 	background-color: rgb(from var(--sl-color-bg-nav) r g b / 80%);
+	-webkit-backdrop-filter: blur(16px);
+  	backdrop-filter: blur(16px);
   }
   @media (min-width: 50rem) {
 	nav {
 	  inset-inline-start: var(--sl-content-inline-start, 0);
 	}
-  }
-  #starlight__mobile-toc {
-	-webkit-backdrop-filter: blur(16px);
-  	backdrop-filter: blur(16px);
   }
   summary {
 	gap: 0.5rem;
@@ -77,6 +75,7 @@ const { toc } = Astro.locals.starlightRoute;
 	font-size: var(--sl-text-xs);
     line-height: 1.25;
 	outline-offset: var(--sl-outline-offset-inside);
+	box-shadow: none;
   }
   summary::marker,
   summary::-webkit-details-marker {
@@ -91,7 +90,7 @@ const { toc } = Astro.locals.starlightRoute;
 	cursor: pointer;
 	vertical-align: middle;
 	height: 100%;
-  flex-shrink: 0;
+	flex-shrink: 0;
   }
   .progress-circle {
 	display: block;
