@@ -17,10 +17,14 @@ import { PAGE_TITLE_ID } from "~/constants";
       left: 50%;
       transform: translateX(-50%) translateY(-200%);
       transition: none;
-      color: var(--sl-color-text-invert);
-      background-color: var(--sl-color-text-accent);
-      top: 1rem;
+      color: var(--sl-color-text-white);
+      background-color: var(--sl-color-bg-accent);
+      border: none;
+      outline: 2px solid var(--sl-color-accent-low);
+      top: calc(env(safe-area-inset-top) + var(--sl-nav-height) + 1rem);
       z-index: var(--sl-z-index-skiplink);
+      text-decoration: none;
+      line-height: var(--sl-line-height-headings)
     }
     a:focus {
       clip: unset;
