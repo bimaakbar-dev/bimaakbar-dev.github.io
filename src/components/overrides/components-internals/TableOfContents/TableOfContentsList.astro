@@ -1,4 +1,6 @@
 ---
+// src/components/overrides/components-internal/TableOfContents/TableOfContentsList.astro
+
 import type { TocItem } from '~/utils/generateToc';
 
 interface Props {
@@ -7,123 +9,202 @@ interface Props {
   isMobile?: boolean;
 }
 
-const { 
-  toc, 
-  isMobile = false, 
-  depth = 0 
-} = Astro.props;
+const { toc, isMobile = false, depth = 0 } = Astro.props;
+
+interface FlatItem {
+  text: string;
+  slug: string;
+  depth: number;
+}
+
+function flatten(items: TocItem[], level = 0): FlatItem[] {
+  return items.flatMap((item) => [
+    { text: item.text, slug: item.slug, depth: level },
+    ...flatten(item.children, level + 1),
+  ]);
+}
+
+function itemOffset(d: number) {
+  if (d <= 0) return 16;
+  if (d === 1) return 32;
+  return 48;
+}
+
+const flat = depth === 0 && !isMobile ? flatten(toc) : null;
 ---
 
-<ul class:list={[{ isMobile }, depth === 0 && 'root']}>
-  {
-    toc.map((heading) => (
-      <li>
-        <a href={'#' + heading.slug}>
-          <span>{heading.text}</span>
-        </a>
-        {heading.children.length > 0 && (
-          <Astro.self toc={heading.children} depth={depth + 1} isMobile={isMobile} />
-        )}
-      </li>
-    ))
-  }
-</ul>
+{
+  flat ? (
+    <div class="toc-rail">
+      <div class="toc-track-bg" aria-hidden="true"></div>
+      <div class="toc-thumb-mask" aria-hidden="true">
+        <div class="toc-thumb-fill" />
+      </div>
+      <ul>
+        {flat.map((item) => (
+          <li style={`padding-inline-start:${itemOffset(item.depth)}px`}>
+            <a href={'#' + item.slug} data-depth={item.depth}>
+              <span>{item.text}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ) : (
+    <div class="toc-rail is-mobile">
+      <div class="toc-track-bg" aria-hidden="true"></div>
+      <div class="toc-thumb-mask" aria-hidden="true">
+        <div class="toc-thumb-fill" />
+      </div>
+      <ul class:list={{ isMobile }}>
+        {toc.map((heading) => (
+          <li>
+            <a href={'#' + heading.slug}>
+              <span>{heading.text}</span>
+            </a>
+            {heading.children.length > 0 && (
+              <Astro.self toc={heading.children} depth={depth + 1} isMobile={isMobile} />
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
 
 <style define:vars={{ depth }}>
-  @layer starlight.core {
-    ul {
+    /* =============================================
+       DESKTOP RAIL (default .toc-rail)
+       ============================================= */
+    :global(starlight-toc) .toc-rail {
+      position: relative;
+      --toc-item-pad-block: 0.4rem;
+    }
+    :global(starlight-toc) .toc-rail ul {
       padding: 0;
+      margin: 0;
       list-style: none;
-      font-weight: 500;
+    }
+    :global(starlight-toc) .toc-rail li {
       position: relative;
     }
-
-    li {
-      position: relative;
-    }
-
-    /* Garis vertikal continuous di semua level */
-    ul::before {
-      content: "";
+    :global(starlight-toc) .toc-track-bg {
       position: absolute;
       top: 0;
-      bottom: 0;
-      left: 1.25rem;
-      width: 1px;
-      background-color: var(--sl-color-hairline-light);
-      border-radius: 99rem;
-    }
-
-    /* Root ul — garis lebih ke kiri */
-    ul.root::before {
-      left: 0.4rem;
-    }
-
-    /* Dot di setiap li — default transparent */
-    li::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: calc(1.25rem - 0.2rem);
-      transform: translateY(-50%);
-      width: 0.4rem;
-      height: 0.4rem;
-      border-radius: 50%;
-      background-color: transparent;
-      transition: background-color 0.2s ease;
+      inset-inline-start: 2px;
+      pointer-events: none;
       z-index: 1;
     }
-
-    /* Root li dot lebih ke kiri */
-    ul.root > li::before {
-      left: calc(0.4rem - 0.2rem);
+    :global(starlight-toc) .toc-thumb-mask {
+      position: absolute;
+      top: 0;
+      inset-inline-start: 2px;
+      pointer-events: none;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      z-index: 2;
     }
-
-    /* Active dot */
-    li:has(> a[aria-current="true"])::before {
+    :global(starlight-toc) .toc-thumb-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
       background-color: var(--sl-color-text-accent);
-      /* Garis accent dari dot ke atas — arus yang sudah lewat */
-      box-shadow: 0 -999px 0 0.5px var(--sl-color-text-accent);
+      opacity: 0;
+      transition: transform 0.25s ease, height 0.25s ease, opacity 0.15s ease;
     }
-
-    a {
-      --pad-inline: 0.5rem;
+    :global(starlight-toc) a {
       display: block;
-      border-radius: 0.5rem;
-      padding-block: 0.5rem;
-      padding-inline: calc(1rem * var(--depth) + var(--pad-inline) + 0.75rem) var(--pad-inline);
-      line-height: 1.25;
+      padding-block: var(--toc-item-pad-block);
+      padding-inline-end: 0.5rem;
+      line-height: 1.3;
+      font-size: var(--sl-text-xs);
+      color: var(--sl-color-gray-3);
+      text-decoration: none;
+      transition: color 0.15s ease;
     }
-    a:hover {
-      background-color: rgb(from var(--sl-color-gray-6) r g b / 50%);
-    }
-    a[aria-current='true'],
-    a[aria-current='true']:focus {
+    :global(starlight-toc) a:hover {
       color: var(--sl-color-text-accent);
-      background-color: rgb(from var(--sl-color-gray-6) r g b / 50%);
+      background-color: transparent;
+    }
+    :global(starlight-toc) a[aria-current='true'],
+    :global(starlight-toc) a[aria-current='true']:focus {
+      color: var(--sl-color-text-accent);
+      background-color: transparent;
+      font-weight: 600;
     }
 
-    /* Mobile */
-    .isMobile a {
+    /* =============================================
+       MOBILE RAIL (gunakan selector bawaan .isMobile)
+       ============================================= */
+    /* Container mobile tetap .toc-rail.is-mobile */
+    :global(mobile-starlight-toc) .toc-rail.is-mobile {
+      position: relative;
+      --toc-item-pad-block: 0.3rem;
+      padding-inline-start: 0.5rem;
+    }
+    /* Ul di dalam mobile – pakai class isMobile (sesuai bawaan) */
+    :global(mobile-starlight-toc) .toc-rail.is-mobile ul.isMobile {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    /* Track & thumb untuk mobile dengan posisi yang pas */
+    :global(mobile-starlight-toc) .toc-rail.is-mobile .toc-track-bg {
+      position: absolute;
+      top: 0;
+      inset-inline-start: 0px;
+      pointer-events: none;
+      z-index: 1;
+    }
+    :global(mobile-starlight-toc) .toc-rail.is-mobile .toc-thumb-mask {
+      position: absolute;
+      top: 0;
+      inset-inline-start: 0px;
+      pointer-events: none;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      z-index: 2;
+    }
+    :global(mobile-starlight-toc) .toc-rail.is-mobile .toc-thumb-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: var(--sl-color-text-accent);
+      opacity: 0;
+      transition: transform 0.25s ease, height 0.25s ease, opacity 0.15s ease;
+    }
+
+    /* 
+      Gaya link mobile – tetap gunakan selector bawaan Starlight
+      :global(mobile-starlight-toc) .isMobile a
+      agar semua aturan (termasuk ::after) tetap berfungsi.
+    */
+    :global(mobile-starlight-toc) .isMobile a {
       --pad-inline: 1rem;
       display: flex;
       justify-content: space-between;
       gap: var(--pad-inline);
       border-top: 0;
-      border-radius: 0.5rem;
+      border-radius: 0;
       padding-block: 0.5rem;
       color: var(--sl-color-text);
       font-size: var(--sl-text-xs);
       text-decoration: none;
       outline-offset: var(--sl-outline-offset-inside);
+      background-color: transparent;
     }
-    .isMobile a[aria-current='true'],
-    .isMobile a[aria-current='true']:hover,
-    .isMobile a[aria-current='true']:focus {
+    :global(mobile-starlight-toc) .isMobile:first-child > li:first-child > a {
+      border-top: 0;
+    }
+    :global(mobile-starlight-toc) .isMobile a[aria-current='true'],
+    :global(mobile-starlight-toc) .isMobile a[aria-current='true']:hover,
+    :global(mobile-starlight-toc) .isMobile a[aria-current='true']:focus {
       color: var(--sl-color-text-accent);
       background-color: rgb(from var(--sl-color-gray-6) r g b / 50%);
     }
-    .isMobile a[aria-current='true']::after {
+    :global(mobile-starlight-toc) .isMobile a[aria-current='true']::after {
       content: '';
       width: 1rem;
       background-color: var(--sl-color-text-accent);
@@ -134,30 +215,16 @@ const {
       flex-shrink: 0;
     }
 
-    @media (min-width: 50rem) {
-      ul::before {
-        left: 0.75rem;
-      }
-      ul.root::before {
-        left: 0.4rem;
-      }
-      li::before {
-        left: calc(0.75rem - 0.2rem);
-      }
-      ul.root > li::before {
-        left: calc(0.4rem - 0.2rem);
+    /* =============================================
+       REDUCE MOTION
+       ============================================= */
+    @media (prefers-reduced-motion: reduce) {
+      :global(starlight-toc) .toc-thumb-fill,
+      :global(starlight-toc) a,
+      :global(mobile-starlight-toc) .toc-rail.is-mobile .toc-thumb-fill,
+      :global(mobile-starlight-toc) .isMobile a {
+        transition: none;
       }
     }
-  }
-</style>
 
-<style is:global>
-  starlight-toc ul,
-  mobile-starlight-toc ul {
-    position: relative;
-  }
-  starlight-toc li,
-  mobile-starlight-toc li {
-    position: relative;
-  }
 </style>
