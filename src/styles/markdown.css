@@ -13,8 +13,12 @@
   color: var(--sl-color-white);
 }
 
-.sl-markdown-content :is(h3, h4, h5, h6):not(:where(.not-content *)) {
-  color: var(--sl-color-gray-1);
+.sl-markdown-content :is(h3, h4):not(:where(.not-content *)) {
+  color: var(--sl-color-gray-2);
+}
+
+.sl-markdown-content :is(h5, h6):not(:where(.not-content *)) {
+  color: var(--sl-color-gray-3);
 }
 
 .sl-markdown-content h1:not(:where(.not-content *)) {
@@ -41,6 +45,8 @@
     :where(.not-content *)
   ) {
   font-size: inherit;
+  color: inherit;
+  line-height: inherit;
 }
 
 @media (hover: none) {
@@ -58,7 +64,7 @@
 .sl-markdown-content a.inline-link.is-external:not(:where(.not-content *)) {
   font-weight: 500;
   color: var(--sl-color-white);
-  text-decoration-color: var(--sl-color-accent);
+  text-decoration-color: var(--sl-color-accent-high);
   text-decoration-thickness: 2px;
   text-underline-offset: 2px;
 }
@@ -70,7 +76,7 @@
 .sl-markdown-content a:hover:not(:where(.not-content *)),
 .sl-markdown-content
   a.inline-link.is-external:hover:not(:where(.not-content *)) {
-  color: var(--sl-color-accent-high);
+  color: var(--sl-color-accent);
 }
 
 .sl-markdown-content
@@ -150,7 +156,7 @@
 .sl-markdown-content :is(img, picture, iframe):not(:where(.not-content *)) {
   display: block;
   border-radius: 0.5rem;
-  border: 1px solid var(--sl-color-hairline-light);
+  border: 1px solid var(--sl-color-hairline);
   margin-inline: auto;
   width: 100%;
 }
@@ -192,6 +198,9 @@
 @media (min-width: 50rem) {
   .sl-markdown-content blockquote:not(:where(.not-content *)) {
     font-size: var(--sl-text-h4);
+  }
+  .sl-markdown-content blockquote cite:not(:where(.not-content *)) {
+    font-size: var(--sl-text-xs);
   }
 }
 
