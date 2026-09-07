@@ -7,7 +7,7 @@
   --sl-color-gray-4: hsla(0, 0%, 35%, 0.8);
   --sl-color-gray-5: hsla(0, 0%, 12.9%, 0.8);
   --sl-color-gray-6: hsla(0, 0%, 8%, 0.8);
-  --sl-color-black: hsla(0, 0%, 2%, 1.0);
+  --sl-color-black: hsla(0, 0%, 2%, 0.8);
 
   --sl-hue-orange: 35;
   --sl-color-orange-low: hsl(var(--sl-hue-orange), 30%, 15%);
@@ -44,7 +44,7 @@
   --sl-color-text-invert: var(--sl-color-black);
 
   --sl-color-bg: var(--sl-color-black);
-  --sl-color-bg-nav: var(--sl-color-black);
+  --sl-color-bg-nav: var(--sl-color-gray-6);
   --sl-color-bg-sidebar: var(--sl-color-black);
   --sl-color-bg-inline-code: var(--sl-color-gray-6);
   
@@ -66,14 +66,14 @@
 
 :root[data-theme="light"],
 [data-theme="light"] ::backdrop {
-  --sl-color-black: hsl(40, 10%, 96%);
-  --sl-color-white: hsl(0, 0%, 12%);
-  --sl-color-gray-1: hsl(0, 0%, 20%);
-  --sl-color-gray-2: hsl(0, 0%, 32%);
-  --sl-color-gray-3: hsl(0, 0%, 48%);
-  --sl-color-gray-4: hsl(0, 0%, 65%);
-  --sl-color-gray-5: hsl(40, 10%, 85%);
-  --sl-color-gray-6: hsl(40, 15%, 92%);
+  --sl-color-white: #FDF6E3;
+  --sl-color-gray-1: #4C3C30;
+  --sl-color-gray-2: #7A6250;
+  --sl-color-gray-3: #967F6D;
+  --sl-color-gray-4: #B5A89B;
+  --sl-color-gray-5: #E6D7B9;
+  --sl-color-gray-6: #FDF6E3;
+  --sl-color-black: #2D231B;
 
   --sl-hue-orange: 22;
   --sl-color-orange-low: hsl(var(--sl-hue-orange), 60%, 88%);
@@ -87,9 +87,9 @@
   --sl-hue-purple: 270;
   --sl-color-purple: hsl(var(--sl-hue-purple), 60%, 55%);
 
-  --sl-color-accent-high: var(--sl-color-orange);
-  --sl-color-accent: hsl(32, 80%, 55%);
-  --sl-color-accent-low: hsla(22, 80%, 55%, 0.12);
+  --sl-color-accent-low: #7A6250;
+  --sl-color-accent: #C19A6B;
+  --sl-color-accent-high: #FDF6E3;
 
   --sl-color-text: var(--sl-color-white);
   --sl-color-text-accent: var(--sl-color-accent-high);
