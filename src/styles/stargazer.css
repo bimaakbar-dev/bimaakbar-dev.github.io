@@ -38,20 +38,20 @@
   --sl-color-accent: hsl(32, 100%, 55%);
   --sl-color-accent-low: hsla(22, 100%, 60%, 0.603);
 
-  --sl-color-text: var(--sl-color-gray-2);
+  --sl-color-text: var(--sl-color-gray-1);
 
   --sl-color-text-accent: var(--sl-color-accent);
   --sl-color-text-invert: var(--sl-color-black);
 
   --sl-color-bg: var(--sl-color-black);
-  --sl-color-bg-nav: var(--sl-color-bg);
-  --sl-color-bg-sidebar: var(--sl-color-bg);
+  --sl-color-bg-nav: var(--sl-color-gray-6);
+  --sl-color-bg-sidebar: var(--sl-color-black);
   --sl-color-bg-inline-code: var(--sl-color-gray-6);
   
   --sl-color-bg-accent: var(--sl-color-accent-high);
 
   --sl-color-hairline-light: var(--sl-color-gray-5);
-  --sl-color-hairline: var(--sl-color-gray-6);
+  --sl-color-hairline: var(--sl-color-gray-5);
   --sl-color-hairline-shade: var(--sl-color-gray-6);
 
   --sl-color-backdrop-overlay: hsla(223, 13%, 10%, 0.66);
@@ -66,62 +66,47 @@
 
 :root[data-theme="light"],
 [data-theme="light"] ::backdrop {
-  --sl-color-white: hsl(0, 0%, 3.9%);
-  --sl-color-gray-1: hsl(0, 0%, 4%);
-  --sl-color-gray-2: hsl(0, 0%, 15%);
-  --sl-color-gray-3: hsl(0, 0%, 45.1%);
-  --sl-color-gray-4: hsl(0, 0%, 60%);
-  --sl-color-gray-5: hsl(0, 0%, 80%);
-  --sl-color-gray-6: hsl(0, 0%, 96.1%);
-  --sl-color-black: hsl(0, 0%, 98%);
+  --sl-color-black: hsl(40, 10%, 96%);
+  --sl-color-white: hsl(0, 0%, 12%);
+  --sl-color-gray-1: hsl(0, 0%, 20%);
+  --sl-color-gray-2: hsl(0, 0%, 32%);
+  --sl-color-gray-3: hsl(0, 0%, 48%);
+  --sl-color-gray-4: hsl(0, 0%, 65%);
+  --sl-color-gray-5: hsl(40, 10%, 85%);
+  --sl-color-gray-6: hsl(40, 15%, 92%);
 
-  --sl-hue-orange: 35;
-  --sl-color-orange-low: hsl(var(--sl-hue-orange), 40%, 96%);
-  --sl-color-orange: hsl(var(--sl-hue-orange), 80%, 50%);
-  --sl-color-orange-high: hsl(var(--sl-hue-orange), 30%, 25%);
+  --sl-hue-orange: 22;
+  --sl-color-orange-low: hsl(var(--sl-hue-orange), 60%, 88%);
+  --sl-color-orange: hsl(var(--sl-hue-orange), 80%, 55%);
+  --sl-color-orange-high: hsl(var(--sl-hue-orange), 70%, 40%);
 
+  --sl-hue-blue: 210;
+  --sl-color-blue: hsl(var(--sl-hue-blue), 70%, 50%);
   --sl-hue-green: 150;
-  --sl-color-green-low: hsl(var(--sl-hue-green), 40%, 96%);
-  --sl-color-green: hsl(var(--sl-hue-green), 70%, 40%);
-  --sl-color-green-high: hsl(var(--sl-hue-green), 30%, 20%);
-
-  --sl-hue-blue: 212;
-  --sl-color-blue-low: hsl(var(--sl-hue-blue), 40%, 96%);
-  --sl-color-blue: hsl(var(--sl-hue-blue), 80%, 45%);
-  --sl-color-blue-high: hsl(var(--sl-hue-blue), 30%, 25%);
-
+  --sl-color-green: hsl(var(--sl-hue-green), 60%, 40%);
   --sl-hue-purple: 270;
-  --sl-color-purple-low: hsl(var(--sl-hue-purple), 40%, 96%);
-  --sl-color-purple: hsl(var(--sl-hue-purple), 70%, 55%);
-  --sl-color-purple-high: hsl(var(--sl-hue-purple), 30%, 25%);
+  --sl-color-purple: hsl(var(--sl-hue-purple), 60%, 55%);
 
-  --sl-hue-red: 350;
-  --sl-color-red-low: hsl(var(--sl-hue-red), 40%, 96%);
-  --sl-color-red: hsl(var(--sl-hue-red), 75%, 55%);
-  --sl-color-red-high: hsl(var(--sl-hue-red), 30%, 25%);
+  --sl-color-accent-high: var(--sl-color-orange);
+  --sl-color-accent: hsl(32, 80%, 55%);
+  --sl-color-accent-low: hsla(22, 80%, 55%, 0.12);
 
-  --sl-color-accent-high: hsl(22, 100%, 60%);
-  --sl-color-accent: hsl(32, 100%, 55%);
-  --sl-color-accent-low: hsla(22, 100%, 60%, 0.603);
-
-  --sl-color-text: var(--sl-color-gray-2);
+  --sl-color-text: var(--sl-color-white);
   --sl-color-text-accent: var(--sl-color-accent-high);
   --sl-color-text-invert: var(--sl-color-black);
 
   --sl-color-bg: var(--sl-color-black);
-  --sl-color-bg-nav: var(--sl-color-bg);
-  --sl-color-bg-sidebar: var(--sl-color-bg);
+  --sl-color-bg-nav: var(--sl-color-gray-6);
+  --sl-color-bg-sidebar: var(--sl-color-black);
   --sl-color-bg-inline-code: var(--sl-color-gray-6);
   --sl-color-bg-accent: var(--sl-color-accent-high);
 
   --sl-color-hairline-light: var(--sl-color-gray-5);
   --sl-color-hairline-shade: var(--sl-color-gray-6);
 
-  --sl-color-backdrop-overlay: hsla(225, 9%, 36%, 0.66);
-
-  --sl-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
-  --sl-shadow-md: 0 4px 10px rgb(0 0 0 / 0.06);
-  --sl-shadow-lg: 0 10px 20px rgb(0 0 0 / 0.07);
+  --sl-shadow-sm: 0 1px 2px hsla(0, 0%, 0%, 0.04);
+  --sl-shadow-md: 0 2px 4px hsla(0, 0%, 0%, 0.06);
+  --sl-shadow-lg: 0 4px 8px hsla(0, 0%, 0%, 0.08);
 }
 
 [data-has-hero] .page {

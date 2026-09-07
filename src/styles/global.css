@@ -4,7 +4,7 @@
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
 
-@import "./stargazer.css";
+@import "./stargazer.css"; /**custom props for coloring **/
 @import "./reset.css";
 @import "./asides.css";
 @import "./markdown.css";

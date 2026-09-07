@@ -10,36 +10,43 @@
   outline-offset: 0.25rem;
   padding: 0.4375rem 1.125rem;
   text-decoration: none;
+  outline: 1px solid transparent;
 }
 
 .sl-link-button.primary {
   background: var(--sl-color-bg-accent);
   border-color: transparent;
   color: var(--sl-color-white);
+  outline-color: transparent;
 }
 .sl-link-button.primary:hover {
   background: rgb(from var(--sl-color-bg-accent) r g b / 80%);
   color: var(--sl-color-white);
+  outline-color: transparent;
 }
 .sl-link-button.secondary {
   background: transparent;
   border-color: var(--sl-color-hairline-light);
   color: var(--sl-color-white);
+  outline-color: transparent;
 }
 .sl-link-button.secondary:hover {
   border-color: var(--sl-color-hairline-shade);
   color: var(--sl-color-white);
   color: var(--sl-color-gray-2);
+  outline-color: transparent;
 }
 .sl-link-button.minimal {
   background: transparent;
   border-color: transparent;
   color: var(--sl-color-white);
   padding-inline: 0;
+  outline-color: transparent;
 }
 
 .sl-link-button.minimal:hover {
   color: var(--sl-color-gray-2);
+  outline-color: transparent;
 }
 
 .sl-link-button svg {
@@ -57,7 +64,7 @@
 
 @media (min-width: 50rem) {
   .sl-link-button {
-    font-size: var(--sl-text-base);
-    padding: 0.5rem 1.15rem;
+    font-size: var(--sl-text-lg);
+    padding: 0.65rem 1.15rem;
   }
 }
