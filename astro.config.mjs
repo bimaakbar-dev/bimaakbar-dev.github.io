@@ -89,6 +89,8 @@ export default defineConfig({
         en: "c0desk1",
         id: "c0desk1"
       },
+      titleDelimiter: '|',
+      description: "Custom Starlight theme featuring a modern design",
       defaultLocale: "root",
       locales: {
         root: {
@@ -110,6 +112,11 @@ export default defineConfig({
       expressiveCode: expressiveCode,
       components: Overrides,
       social: [
+        {
+          icon: "github",
+          label: "Github",
+          href: "https://github.com/bimaakbar-dev",
+        },
         {
           icon: "discord",
           label: "Discord",
