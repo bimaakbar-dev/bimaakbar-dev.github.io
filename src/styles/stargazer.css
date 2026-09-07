@@ -66,15 +66,19 @@
 
 :root[data-theme="light"],
 [data-theme="light"] ::backdrop {
-  --sl-color-white: #FDF6E3;
-  --sl-color-gray-1: #4C3C30;
-  --sl-color-gray-2: #7A6250;
-  --sl-color-gray-3: #967F6D;
-  --sl-color-gray-4: #B5A89B;
-  --sl-color-gray-5: #E6D7B9;
-  --sl-color-gray-6: #FDF6E3;
-  --sl-color-black: #2D231B;
-
+  /*bg & border */
+  --sl-color-black: #FDF6E3; /* BG PRIMARY */
+  
+  --sl-color-gray-6: #E6D7B9; /* BG SECONDARY & HR SECOND */
+  --sl-color-gray-5: #D8C9AB; /* HR PRIMARY */
+  --sl-color-gray-4: #B5A89B; /* BG ALT SECOND */
+  
+  /*text*/
+  --sl-color-gray-3: #967F6D; /* FG MUTED */
+  --sl-color-gray-2: #7A6250; /* FG SECOND */
+  --sl-color-gray-1: #4C3C30; /* FG ALT PRIMARY */
+  --sl-color-white: #2D231B; /* FG PRIMARY */
+  
   --sl-hue-orange: 22;
   --sl-color-orange-low: hsl(var(--sl-hue-orange), 60%, 88%);
   --sl-color-orange: hsl(var(--sl-hue-orange), 80%, 55%);
