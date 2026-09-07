@@ -10,7 +10,10 @@ export class StarlightTOC extends HTMLElement {
     private trackBg: HTMLElement | null = this.querySelector('.toc-track-bg');
     private fill: HTMLElement | null = this.querySelector('.toc-thumb-fill');
 
-    private segments = new Map<HTMLAnchorElement, { top: number; bottom: number }>();
+    private dotDirection: 'top' | 'bottom' = 'bottom';
+    private lastY = typeof window !== 'undefined' ? window.scrollY : 0;
+
+    private segments = new Map<HTMLAnchorElement, { top: number; bottom: number; x: number }>();
 
     private tocHeadingSelector = `h1#${PAGE_TITLE_ID},:where(${[
         ...Array.from({ length: 1 + this.maxH - this.minH }).map((_, index) => `h${this.minH + index}`),
@@ -42,7 +45,6 @@ export class StarlightTOC extends HTMLElement {
         let height = 0;
         const path: string[] = [];
 
-        // Track the previous endpoint for smooth curve connections
         let prevX = -1;
         let prevRailBottom = 0;
 
@@ -53,47 +55,36 @@ export class StarlightTOC extends HTMLElement {
             const styles = getComputedStyle(link);
             const linkRect = link.getBoundingClientRect();
             
-            // 1. Get Text Size (fontSize) and Line Height
             const fontSize = parseFloat(styles.fontSize);
-            const lineHeight = parseFloat(styles.lineHeight) || fontSize * 1.3;
+            const lineHeight = parseFloat(styles.lineHeight) || fontSize * 1.35;
             const linkCenter = (linkRect.top - railRect.top) + (linkRect.height / 2);
             
-            // The segment boundaries for the fill indicator
+            // =========================================================================
+            // KUNCI PERBAIKAN: Acuan tunggal yang sinkron antara Thumb, Track, dan Dot
+            // =========================================================================
             const top = linkCenter - (lineHeight / 2);
             const bottom = linkCenter + (lineHeight / 2);
 
-            // 2. The remaining space dictates the curves. 
-            // The straight "rail" perfectly wraps just the text (fontSize)
-            const railTop = linkCenter - (fontSize / 2);
-            const railBottom = linkCenter + (fontSize / 2);
-
-            this.segments.set(link, { top, bottom });
+            this.segments.set(link, { top, bottom, x });
             width = Math.max(width, x);
             height = Math.max(height, bottom);
             
             if (i === 0) {
-                // First item starts from the absolute top and draws straight to railBottom
-                path.push(`M${x} ${top}`, `L${x} ${railBottom}`);
+                path.push(`M${x} ${top}`, `L${x} ${bottom}`);
             } else {
                 if (prevX !== x) {
-                    // 3. Draw a precise S-Curve using the leftover vertical space
-                    // Control points are placed exactly halfway between the previous and current text rails
-                    const midY = (prevRailBottom + railTop) / 2;
-                    path.push(`C${prevX} ${midY}, ${x} ${midY}, ${x} ${railTop}`);
+                    // Control point kurva disesuaikan persis dengan tinggi top/bottom segmen
+                    const midY = (prevRailBottom + top) / 2;
+                    path.push(`C${prevX} ${midY}, ${x} ${midY}, ${x} ${top}`, `L${x} ${bottom}`);
                 } else {
-                    // Straight line if there is no lane change
-                    path.push(`L${x} ${railTop}`);
+                    path.push(`L${x} ${bottom}`);
                 }
-                // Draw the straight line perfectly beside the text
-                path.push(`L${x} ${railBottom}`);
             }
             
-            // Store current coordinates to connect to the next curve
             prevX = x;
-            prevRailBottom = railBottom;
+            prevRailBottom = bottom;
         });
 
-        // Ensure the line extends perfectly to the very bottom of the last item
         if (prevX !== -1) {
             path.push(`L${prevX} ${height}`);
         }
@@ -102,8 +93,18 @@ export class StarlightTOC extends HTMLElement {
         const viewWidth = width + padding;
         const pathString = path.join(' ');
 
+        // Dot diposisikan tepat di batas absolut thumb tanpa ada selisih pixel
+        let dotSvg = '';
+        if (this._current) {
+            const currentSeg = this.segments.get(this._current);
+            if (currentSeg) {
+                const dotY = this.dotDirection === 'top' ? currentSeg.top : currentSeg.bottom;
+                dotSvg = `<circle cx="${currentSeg.x}" cy="${dotY}" r="3" fill="var(--sl-color-text-accent)" style="shape-rendering: geometricPrecision;" />`;
+            }
+        }
+
         if (this.trackBg) {
-            this.trackBg.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${viewWidth} ${height}" style="width: ${viewWidth}px; height: ${height}px;"><path d="${pathString}" stroke="var(--sl-color-hairline-light)" stroke-width="${strokeWidth}" stroke-linecap="round" stroke-linejoin="round" fill="none" /></svg>`;
+            this.trackBg.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${viewWidth} ${height}" style="width: ${viewWidth}px; height: ${height}px; overflow: visible;"><path d="${pathString}" stroke="var(--sl-color-hairline-light)" stroke-width="${strokeWidth}" stroke-linecap="round" stroke-linejoin="round" fill="none" style="shape-rendering: geometricPrecision;" />${dotSvg}</svg>`;
         }
 
         const svgMask = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${viewWidth} ${height}"><path d="${pathString}" stroke="black" stroke-width="${strokeWidth}" stroke-linecap="round" stroke-linejoin="round" fill="none" /></svg>`;
@@ -113,16 +114,19 @@ export class StarlightTOC extends HTMLElement {
         this.mask.style.height = `${height}px`;
         this.mask.style.maskImage = maskUrl;
         (this.mask.style as CSSStyleDeclaration & { webkitMaskImage: string }).webkitMaskImage = maskUrl;
-
     };
 
     private moveThumb = (link: HTMLAnchorElement) => {
         if (!this.fill) return;
         const seg = this.segments.get(link);
         if (!seg) return;
+        
+        // Tinggi dan posisi thumb diikat murni ke variabel `top` dan `bottom` segmen
         this.fill.style.transform = `translateY(${seg.top}px)`;
         this.fill.style.height = `${seg.bottom - seg.top}px`;
         this.fill.style.opacity = '1';
+        
+        this.buildTrack();
     };
 
     private onIdle = (cb: () => void) =>
@@ -162,6 +166,10 @@ export class StarlightTOC extends HTMLElement {
         };
 
         const setCurrent = (entries: IntersectionObserverEntry[]) => {
+            const currentScrollY = window.scrollY;
+            this.dotDirection = currentScrollY > this.lastY ? 'bottom' : 'top';
+            this.lastY = currentScrollY;
+
             for (const { isIntersecting, target } of entries) {
                 if (!isIntersecting) continue;
                 const heading = getElementHeading(target);
