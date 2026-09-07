@@ -3,11 +3,11 @@
   --sl-color-white: hsl(0, 0%, 98%);
   --sl-color-gray-1: hsl(0, 0%, 96%);
   --sl-color-gray-2: hsl(0, 0%, 80%);
-  --sl-color-gray-3: hsl(0, 0%, 60%);
-  --sl-color-gray-4: hsl(0, 0%, 35%);
-  --sl-color-gray-5: hsl(0, 0%, 12.9%);
-  --sl-color-gray-6: hsl(0, 0%, 8%);
-  --sl-color-black: hsl(0, 0%, 2%);
+  --sl-color-gray-3: hsla(0, 0%, 60%, 0.8);
+  --sl-color-gray-4: hsla(0, 0%, 35%, 0.8);
+  --sl-color-gray-5: hsla(0, 0%, 12.9%, 0.8);
+  --sl-color-gray-6: hsla(0, 0%, 8%, 0.8);
+  --sl-color-black: hsla(0, 0%, 2%, 0.8);
 
   --sl-hue-orange: 35;
   --sl-color-orange-low: hsl(var(--sl-hue-orange), 30%, 15%);
