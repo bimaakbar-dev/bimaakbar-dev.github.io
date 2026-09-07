@@ -68,7 +68,7 @@
 [data-theme="light"] ::backdrop {
   /*bg & border */
   --sl-color-black: #FDF6E3; /* BG PRIMARY */
-  
+  --sl-color-gray-7: #F5EAD6;
   --sl-color-gray-6: #E6D7B9; /* BG SECONDARY & HR SECOND */
   --sl-color-gray-5: #D8C9AB; /* HR PRIMARY */
   --sl-color-gray-4: #B5A89B; /* BG ALT SECOND */
@@ -78,6 +78,23 @@
   --sl-color-gray-2: #7A6250; /* FG SECOND */
   --sl-color-gray-1: #4C3C30; /* FG ALT PRIMARY */
   --sl-color-white: #2D231B; /* FG PRIMARY */
+  
+  --sl-color-accent-low: #E6D7B9;
+  --sl-color-accent: #C19A6B;
+  --sl-color-accent-high: #4C3C30;
+
+  --sl-color-text: var(--sl-color-white);
+  --sl-color-text-accent: var(--sl-color-accent-high);
+  --sl-color-text-invert: var(--sl-color-black);
+
+  --sl-color-bg: var(--sl-color-black);
+  --sl-color-bg-nav: var(--sl-color-gray-6);
+  --sl-color-bg-sidebar: var(--sl-color-gray-6);
+  --sl-color-bg-inline-code: var(--sl-color-gray-6);
+  --sl-color-bg-accent: var(--sl-color-accent-high);
+
+  --sl-color-hairline-light: var(--sl-color-gray-5);
+  --sl-color-hairline-shade: var(--sl-color-gray-6);
   
   --sl-hue-orange: 22;
   --sl-color-orange-low: hsl(var(--sl-hue-orange), 60%, 88%);
@@ -90,23 +107,6 @@
   --sl-color-green: hsl(var(--sl-hue-green), 60%, 40%);
   --sl-hue-purple: 270;
   --sl-color-purple: hsl(var(--sl-hue-purple), 60%, 55%);
-
-  --sl-color-accent-low: #7A6250;
-  --sl-color-accent: #C19A6B;
-  --sl-color-accent-high: #FDF6E3;
-
-  --sl-color-text: var(--sl-color-white);
-  --sl-color-text-accent: var(--sl-color-accent-high);
-  --sl-color-text-invert: var(--sl-color-black);
-
-  --sl-color-bg: var(--sl-color-black);
-  --sl-color-bg-nav: var(--sl-color-gray-6);
-  --sl-color-bg-sidebar: var(--sl-color-black);
-  --sl-color-bg-inline-code: var(--sl-color-gray-6);
-  --sl-color-bg-accent: var(--sl-color-accent-high);
-
-  --sl-color-hairline-light: var(--sl-color-gray-5);
-  --sl-color-hairline-shade: var(--sl-color-gray-6);
 
   --sl-shadow-sm: 0 1px 2px hsla(0, 0%, 0%, 0.04);
   --sl-shadow-md: 0 2px 4px hsla(0, 0%, 0%, 0.06);
