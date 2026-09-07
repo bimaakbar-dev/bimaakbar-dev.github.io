@@ -1,15 +1,128 @@
-@import "./components/Pagination.css";
-@import "./components/Search.css";
-@import "./components/SidebarSublist.css";
-@import "./components/SiteTitle.css";
+:root,
+::backdrop {
+  --sl-color-white: hsl(0, 0%, 98%);
+  --sl-color-gray-1: hsl(0, 0%, 96%);
+  --sl-color-gray-2: hsl(0, 0%, 80%);
+  --sl-color-gray-3: hsl(0, 0%, 60%);
+  --sl-color-gray-4: hsl(0, 0%, 35%);
+  --sl-color-gray-5: hsl(0, 0%, 12.9%);
+  --sl-color-gray-6: hsl(0, 0%, 8%);
+  --sl-color-black: hsl(0, 0%, 2%);
 
-@import "./user-components/Badge.css";
-@import "./user-components/Card.css";
-@import "./user-components/FileTree.css";
-@import "./user-components/LinkButton.css";
-@import "./user-components/LinkCard.css";
-@import "./user-components/Steps.css";
-@import "./user-components/Tabs.css";
+  --sl-hue-orange: 35;
+  --sl-color-orange-low: hsl(var(--sl-hue-orange), 30%, 15%);
+  --sl-color-orange: hsl(var(--sl-hue-orange), 90%, 60%);
+  --sl-color-orange-high: hsl(var(--sl-hue-orange), 70%, 85%);
+
+  --sl-hue-green: 150;
+  --sl-color-green-low: hsl(var(--sl-hue-green), 30%, 15%);
+  --sl-color-green: hsl(var(--sl-hue-green), 80%, 55%);
+  --sl-color-green-high: hsl(var(--sl-hue-green), 60%, 85%);
+
+  --sl-hue-blue: 212;
+  --sl-color-blue-low: hsl(var(--sl-hue-blue), 40%, 16%);
+  --sl-color-blue: hsl(var(--sl-hue-blue), 90%, 60%);
+  --sl-color-blue-high: hsl(var(--sl-hue-blue), 70%, 88%);
+
+  --sl-hue-purple: 270;
+  --sl-color-purple-low: hsl(var(--sl-hue-purple), 30%, 15%);
+  --sl-color-purple: hsl(var(--sl-hue-purple), 80%, 65%);
+  --sl-color-purple-high: hsl(var(--sl-hue-purple), 60%, 88%);
+
+  --sl-hue-red: 350;
+  --sl-color-red-low: hsl(var(--sl-hue-red), 30%, 15%);
+  --sl-color-red: hsl(var(--sl-hue-red), 85%, 65%);
+  --sl-color-red-high: hsl(var(--sl-hue-red), 70%, 88%);
+
+  --sl-color-accent-high: hsl(22, 100%, 60%);
+  --sl-color-accent: hsl(32, 100%, 55%);
+  --sl-color-accent-low: hsla(22, 100%, 60%, 0.603);
+
+  --sl-color-text: var(--sl-color-gray-2);
+
+  --sl-color-text-accent: var(--sl-color-accent);
+  --sl-color-text-invert: var(--sl-color-black);
+
+  --sl-color-bg: var(--sl-color-black);
+  --sl-color-bg-nav: var(--sl-color-bg);
+  --sl-color-bg-sidebar: var(--sl-color-bg);
+  --sl-color-bg-inline-code: var(--sl-color-gray-6);
+  
+  --sl-color-bg-accent: var(--sl-color-accent-high);
+
+  --sl-color-hairline-light: var(--sl-color-gray-5);
+  --sl-color-hairline: var(--sl-color-gray-6);
+  --sl-color-hairline-shade: var(--sl-color-gray-6);
+
+  --sl-color-backdrop-overlay: hsla(223, 13%, 10%, 0.66);
+
+  --sl-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.8);
+  --sl-shadow-md: 0 4px 12px rgb(0 0 0 / 0.7);
+  --sl-shadow-lg: 0 12px 24px rgb(0 0 0 / 0.8);
+
+  --overlay-bg: hsla(32, 100%, 18%, 0.137);
+  --overlay-bg-shadow: hsla(32, 100%, 55%, 0.4);
+}
+
+:root[data-theme="light"],
+[data-theme="light"] ::backdrop {
+  --sl-color-white: hsl(0, 0%, 3.9%);
+  --sl-color-gray-1: hsl(0, 0%, 4%);
+  --sl-color-gray-2: hsl(0, 0%, 15%);
+  --sl-color-gray-3: hsl(0, 0%, 45.1%);
+  --sl-color-gray-4: hsl(0, 0%, 60%);
+  --sl-color-gray-5: hsl(0, 0%, 80%);
+  --sl-color-gray-6: hsl(0, 0%, 96.1%);
+  --sl-color-black: hsl(0, 0%, 98%);
+
+  --sl-hue-orange: 35;
+  --sl-color-orange-low: hsl(var(--sl-hue-orange), 40%, 96%);
+  --sl-color-orange: hsl(var(--sl-hue-orange), 80%, 50%);
+  --sl-color-orange-high: hsl(var(--sl-hue-orange), 30%, 25%);
+
+  --sl-hue-green: 150;
+  --sl-color-green-low: hsl(var(--sl-hue-green), 40%, 96%);
+  --sl-color-green: hsl(var(--sl-hue-green), 70%, 40%);
+  --sl-color-green-high: hsl(var(--sl-hue-green), 30%, 20%);
+
+  --sl-hue-blue: 212;
+  --sl-color-blue-low: hsl(var(--sl-hue-blue), 40%, 96%);
+  --sl-color-blue: hsl(var(--sl-hue-blue), 80%, 45%);
+  --sl-color-blue-high: hsl(var(--sl-hue-blue), 30%, 25%);
+
+  --sl-hue-purple: 270;
+  --sl-color-purple-low: hsl(var(--sl-hue-purple), 40%, 96%);
+  --sl-color-purple: hsl(var(--sl-hue-purple), 70%, 55%);
+  --sl-color-purple-high: hsl(var(--sl-hue-purple), 30%, 25%);
+
+  --sl-hue-red: 350;
+  --sl-color-red-low: hsl(var(--sl-hue-red), 40%, 96%);
+  --sl-color-red: hsl(var(--sl-hue-red), 75%, 55%);
+  --sl-color-red-high: hsl(var(--sl-hue-red), 30%, 25%);
+
+  --sl-color-accent-high: hsl(22, 100%, 60%);
+  --sl-color-accent: hsl(32, 100%, 55%);
+  --sl-color-accent-low: hsla(22, 100%, 60%, 0.603);
+
+  --sl-color-text: var(--sl-color-gray-2);
+  --sl-color-text-accent: var(--sl-color-accent-high);
+  --sl-color-text-invert: var(--sl-color-black);
+
+  --sl-color-bg: var(--sl-color-black);
+  --sl-color-bg-nav: var(--sl-color-bg);
+  --sl-color-bg-sidebar: var(--sl-color-bg);
+  --sl-color-bg-inline-code: var(--sl-color-gray-6);
+  --sl-color-bg-accent: var(--sl-color-accent-high);
+
+  --sl-color-hairline-light: var(--sl-color-gray-5);
+  --sl-color-hairline-shade: var(--sl-color-gray-6);
+
+  --sl-color-backdrop-overlay: hsla(225, 9%, 36%, 0.66);
+
+  --sl-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
+  --sl-shadow-md: 0 4px 10px rgb(0 0 0 / 0.06);
+  --sl-shadow-lg: 0 10px 20px rgb(0 0 0 / 0.07);
+}
 
 [data-has-hero] .page {
   background:
@@ -29,4 +142,18 @@
 
 [data-has-hero] .hero > img {
   filter: drop-shadow(0 0 3rem var(--overlay-bg-shadow));
+}
+
+.expressive-code .copy button {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background-color: rgb(from var(--sl-color-gray-6) r g b / 80%);
+  -webkit-backdrop-filter: blur(16px) !important;
+  backdrop-filter: blur(16px) !important;
+  width: 2rem !important;
+  height: 2rem !important;
+}
+
+.expressive-code .copy button::after {
+  margin: 0.5rem !important;
 }
