@@ -56,7 +56,7 @@ const flat = depth === 0 && !isMobile ? flatten(toc) : null;
       <div class="toc-thumb-mask" aria-hidden="true">
         <div class="toc-thumb-fill" />
       </div>
-      <ul class:list={{ isMobile }}>
+      <ul>
         {toc.map((heading) => (
           <li>
             <a href={'#' + heading.slug}>
