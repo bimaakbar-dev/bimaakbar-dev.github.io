@@ -40,8 +40,13 @@ site-search dialog {
   background-color: color-mix(in srgb, var(--sl-color-gray-6) 90%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--sl-color-gray-5);
+  border: none;
   box-shadow: var(--sl-shadow-lg);
+}
+@media (min-width: 50rem) {
+  site-search dialog {
+    border: 1px solid var(--sl-color-gray-5);
+  }
 }
 
 site-search dialog::backdrop {

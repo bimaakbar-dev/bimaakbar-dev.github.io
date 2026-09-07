@@ -9,7 +9,11 @@
   padding: 1rem;
   box-shadow: none;
   position: relative;
-  background-color: var(--sl-color-black);
+  background-color: rgb(from var(--sl-color-gray-6) r g b / 100%);
+}
+
+[data-theme='light'] .sl-link-card {
+  background-color: rgb(from var(--sl-color-gray-7) r g b / 100%);
 }
 
 .sl-link-card a {
@@ -32,12 +36,13 @@
 .sl-link-card .title {
   color: var(--sl-color-white);
   font-weight: 500;
-  font-size: var(--sl-text-base);
+  font-size: var(--sl-text-sm);
 }
 
 .sl-link-card .description {
   color: var(--sl-color-gray-3);
   line-height: 1.5;
+  font-size: var(--sl-text-sm);
 }
 
 .sl-link-card .icon {
@@ -47,8 +52,17 @@
 .sl-link-card:hover {
   outline: 1px solid var(--sl-color-hairline-shade);
   transition: color 0.5s ease;
+  background-color: rgb(from var(--sl-color-gray-6) r g b / 50%);
 }
-
+[data-theme='light'] .sl-link-card:hover {
+  background-color: rgb(from var(--sl-color-gray-7) r g b / 50%);
+}
 .sl-link-card:hover .icon {
   color: var(--sl-color-white);
+}
+
+@media (min-width: 50rem) {
+  .sl-link-card .title {
+    font-size: var(--sl-text-body);
+  }
 }

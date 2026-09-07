@@ -6,6 +6,7 @@
   color: var(--sl-color-gray-3);
   box-shadow: none;
   font-size: var(--sl-text-xs);
+  background-color: rgb(from var(--sl-color-gray-6) r g b / 100%);
 }
 
 .pagination-links a:hover {

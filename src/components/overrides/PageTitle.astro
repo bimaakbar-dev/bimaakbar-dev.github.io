@@ -39,13 +39,13 @@ const fullMarkdown = `# ${title}\n\n${entry.body || ''}`;
           <span>{Astro.locals.t("blog.PostAuthor")}</span>
           <ul class="flex flex-wrap items-center gap-y-6 gap-x-4 list-none p-0 m-0 not-content">
             {author.map((a) => (
-              <li class="flex items-center gap-3 p-0">
+              <li class="flex items-center gap-2 p-0">
                 {a.avatar && (
                   <Image
                     src={a.avatar}
                     width={48}
                     height={48}
-                    class="my-0 inline-block rounded-full ring ring-(--sl-color-accent) size-6 md:size-8"
+                    class="my-0 inline-block rounded-full ring ring-(--sl-color-accent-low)/80 size-6 md:size-8"
                     alt={a.name || title}
                     loading="eager"
                     decoding="async"
@@ -83,7 +83,7 @@ const fullMarkdown = `# ${title}\n\n${entry.body || ''}`;
   )
 }
 
-<style>
+<style define:vars={{isBlogPost}}>
   .title {
     font-size: var(--sl-text-h1);
     font-weight: 600;

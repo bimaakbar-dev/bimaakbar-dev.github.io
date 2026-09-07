@@ -27,7 +27,7 @@
 }
 
 .tab [role="tab"][aria-selected="true"] {
-  --sl-tab-color-border: var(--sl-color-accent);
+  --sl-tab-color-border: var(--sl-color-accent-high);
   color: var(--sl-color-white);
 }
 

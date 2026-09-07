@@ -1,10 +1,15 @@
+[data-theme='light'] .card {
+  --sl-card-bg: var(--sl-color-gray-7);
+  background-color: var(--sl-color-gray-7);
+}
+
 .card {
   --sl-card-border: var(--sl-color-purple);
-  --sl-card-bg: rgb(from var(--sl-color-gray-6) r g b / 40%);
+  --sl-card-bg: var(--sl-color-gray-6);
 
   border: 1px solid var(--sl-color-hairline-light);
   border-radius: 0.5rem;
-  background-color: rgb(from var(--sl-color-gray-6) r g b / 40%);
+  background-color: var(--sl-color-gray-6);
   padding: 1rem;
   gap: 0.5rem;
 }
@@ -33,7 +38,7 @@
   align-items: start;
 }
 .card .icon {
-  font-size: var(--sl-text-lg);
+  font-size: var(--sl-text-xl);
   border: none;
   color: var(--sl-color-gray-3);
   background-color: transparent;
@@ -43,5 +48,6 @@
 }
 .card .body {
   margin: 0;
+  color: var(--sl-color-gray-2);
   font-size: clamp(var(--sl-text-sm), calc(0.5rem + 1vw), var(--sl-text-body));
 }

@@ -24,7 +24,7 @@ const { isBlog } = Astro.locals.starlightRoute;
   )
 }
 
-<style>
+<style define:vars={{isBlog}}>
   p {
     border: 1px solid var(--sl-color-orange);
     padding: 0.75em 1em;

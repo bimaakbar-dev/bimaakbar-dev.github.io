@@ -57,7 +57,7 @@ const { toc } = Astro.locals.starlightRoute;
 	top: calc(var(--sl-nav-height) - 1px);
 	inset-inline: 0;
 	border-top: 1px solid var(--sl-color-hairline-light);
-	background-color: rgb(from var(--sl-color-bg-nav) r g b / 80%);
+	background-color: rgb(from var(--sl-color-bg-nav) r g b / 100%);
 	-webkit-backdrop-filter: blur(16px);
   	backdrop-filter: blur(16px);
   }
@@ -100,7 +100,7 @@ const { toc } = Astro.locals.starlightRoute;
 	/*font-size: inherit;*/
   }
   .progress-bg {
-	color: rgb(from var(--sl-color-gray-4) r g b / 80%)
+	color: rgb(from var(--sl-color-hairline-light) r g b / 100%)
   }
   .progress-fill {
 	transition: stroke-dashoffset 0.15s ease-out;
@@ -109,7 +109,7 @@ const { toc } = Astro.locals.starlightRoute;
 	color: var(--sl-color-text-accent);
   }
   details[open] .progress-bg {
-	color: rgb(from var(--sl-color-accent) r g b / 20%)
+	color: rgb(from var(--sl-color-accent-high) r g b / 20%)
   }
   details .toggle:hover {
 	color: var(--sl-color-white);
@@ -132,7 +132,7 @@ const { toc } = Astro.locals.starlightRoute;
 	border-top: var(--border-top) solid var(--sl-color-hairline-shade);
 	max-height: calc(85vh - var(--sl-nav-height) - var(--sl-mobile-toc-height));
 	overflow-y: auto;
-	background-color: rgb(from var(--sl-color-bg-nav) r g b / 80%);
+	background-color: rgb(from var(--sl-color-bg-nav) r g b / 100%);
 	box-shadow: var(--sl-shadow-md);
 	overscroll-behavior: contain;
 	z-index: var(--sl-z-index-toc);

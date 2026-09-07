@@ -13,7 +13,7 @@ const { title, hero } = data;
 
 const actions = hero?.actions || [];
 
-const customHero = isDocsIndex || isBlogIndex;
+const customHero = isBlogIndex;
 ---
 
 {
@@ -24,7 +24,7 @@ const customHero = isDocsIndex || isBlogIndex;
       <div class="relative sl-flex flex-col flex-1 items-center gap-6 text-center z-20">
         <h1
           id={PAGE_TITLE_ID}
-          class="custom-hero-title mx-auto max-w-5xl text-(--sl-text-h3) sm:text-(--sl-text-h2) lg:text-(--sl-text-h1)"
+          class="custom-hero-title mx-auto max-w-5xl text-(--sl-text-h3) sm:text-(--sl-text-h2) md:text-(--sl-text-h1)"
           set:html={hero?.title || title}
         />
         {hero?.tagline && (
@@ -60,7 +60,7 @@ const customHero = isDocsIndex || isBlogIndex;
   )
 }
 
-<style>
+<style define:vars={{customHero}}>
   .custom-hero {
     row-gap: 6rem;
     width: 100%;
@@ -89,7 +89,7 @@ const customHero = isDocsIndex || isBlogIndex;
   }
 </style>
 
-<style is:global>
+<style is:global define:vars={{customHero}}>
   .content-panel .sl-container header {
     max-width: 52rem !important;
     padding-left: 0 !important;

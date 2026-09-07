@@ -49,7 +49,7 @@ ul.top-level ul li::before {
 ul.top-level ul li:has(> a[aria-current="page"])::after {
   content: "";
   position: absolute;
-  left: 0.45rem;
+  left: 0.5rem;
   top: 50%;
   transform: translateY(-50%);
   height: calc(var(--sl-text-base) * 1.4 - 4px);
@@ -64,14 +64,14 @@ ul.top-level ul li:has(> a[aria-current="page"])::before {
   inset: 0;
   height: 100%;
   width: 100%;
-  background-color: color-mix(in oklab, var(--sl-color-hairline-light) 40%, transparent);
+  background-color: color-mix(in oklab, var(--sl-color-hairline-light) 100%, transparent);
   border-radius: 0.35rem;
   z-index: -1;
 }
 
 @media (min-width: 50rem) {
   .top-level .large {
-    font-size: var(--sl-text-base);
+    font-size: var(--sl-text-sm);
   }
   .top-level li a {
     font-size: var(--sl-text-sm);

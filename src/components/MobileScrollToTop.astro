@@ -2,11 +2,11 @@
 import { Icon } from '@astrojs/starlight/components';
 ---
 
-<mobile-scroll-to-top>
+<scroll-to-top>
   <button aria-label={Astro.locals.t("component.scrollToTop")} class="scroll-top-btn">
     <Icon name="up-arrow" size="2em" />
   </button>
-</mobile-scroll-to-top>
+</scroll-to-top>
 
 <style>
   scroll-to-top {
@@ -15,9 +15,9 @@ import { Icon } from '@astrojs/starlight/components';
 
   .scroll-top-btn {
     position: fixed;
-    bottom: calc(env(--safe-area-inset-bottom, 1.5rem));
+    bottom: calc(env(--safe-area-inset-bottom, 2rem));
     right: 1.5rem;
-    z-index: var(--sl-z-index-nav, 90);
+    z-index: var(--sl-z-index-toc, 90);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,7 +45,7 @@ import { Icon } from '@astrojs/starlight/components';
     transform: scale(0.92);
   }
   @media (min-width: 50rem) {
-    mobile-scroll-to-top {
+    scroll-to-top {
       display: none;
     }
   }
@@ -79,5 +79,5 @@ import { Icon } from '@astrojs/starlight/components';
     }
   }
 
-  customElements.define('mobile-scroll-to-top', ScrollToTop);
+  customElements.define('scroll-to-top', ScrollToTop);
 </script>

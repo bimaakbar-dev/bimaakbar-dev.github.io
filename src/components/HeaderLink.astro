@@ -57,6 +57,8 @@ const linkClass = [className, "nav-link", active && "nav-link--active"]
     font-family: var(--font-montserrat);
     white-space: nowrap;
     vertical-align: middle;
+    border-radius: 99rem;
+    padding: 0;
   }
 
   .nav-link:hover {
@@ -65,5 +67,16 @@ const linkClass = [className, "nav-link", active && "nav-link--active"]
 
   .nav-link--active {
     color: var(--sl-color-accent);
+  }
+  @media (min-width: 50rem) {
+    .nav-link {
+      padding: 0.25rem 0.5rem;
+    }
+    .nav-link:hover {
+      background-color: rgb(from var(--sl-color-gray-6) r g b / 20%);
+    }
+    .nav-link--active {
+      background-color: rgb(from var(--sl-color-accent) r g b / 10%);
+    }
   }
 </style>

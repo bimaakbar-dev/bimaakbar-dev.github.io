@@ -1,5 +1,6 @@
 // src/config/sidebar.ts
 export const sidebarConfig = [
+  { label: 'Whats a c0desk1?', slug: "docs"},
   {
     label: "Getting Started",
     translations: {

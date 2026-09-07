@@ -31,7 +31,7 @@ const minutes = getReadingTimeMinutes(entry.body);
     title: entry.data.title,
     description: entry.data.description,
     editUrl: false,
-    template: "doc",
+    template: "splash",
     heroImage: entry.data.heroImage,
     pubDate: entry.data.pubDate,
     author: entry.data.author,
@@ -47,7 +47,7 @@ const minutes = getReadingTimeMinutes(entry.body);
 
 <style is:global>
   :root {
-    --sg-blog-content-width: 48rem;
+    --sg-blog-content-width: 45rem;
     --sg-blog-content-pad-x: var(--sl-content-pad-x);
   }
 
@@ -64,7 +64,7 @@ const minutes = getReadingTimeMinutes(entry.body);
   }
 
   .content-panel + .content-panel {
-    border-top: 1px solid var(--sl-color-gray-5);
+    border-top: 1px solid var(--sl-color-hairline);
     max-width: 100dvw;
     margin-inline: auto;
     margin-block: 0;

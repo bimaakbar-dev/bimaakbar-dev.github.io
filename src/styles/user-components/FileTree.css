@@ -1,3 +1,7 @@
+[data-theme='light'] starlight-file-tree {
+  background-color: var(--sl-color-gray-7);
+}
+
 starlight-file-tree {
   border: 1px solid var(--sl-color-hairline-light);
   border-radius: 0.5rem;
