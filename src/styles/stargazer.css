@@ -134,13 +134,13 @@
 }
 
 .expressive-code .copy button {
-  border: 1px solid var(--sl-color-gray-5);
+  border: 1px solid var(--sl-color-hairline-light);
   border-radius: 0.5rem;
   background-color: rgb(from var(--sl-color-gray-6) r g b / 80%);
   -webkit-backdrop-filter: blur(16px) !important;
   backdrop-filter: blur(16px) !important;
-  width: 2rem !important;
-  height: 2rem !important;
+  width: 2.25rem !important;
+  height: 2.25rem !important;
 }
 
 .expressive-code .copy button::after {
