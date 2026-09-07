@@ -37,9 +37,14 @@ export class StarlightTOC extends HTMLElement {
 
         this.segments.clear();
 
+        const strokeWidth = 1;
         let width = 0;
         let height = 0;
         const path: string[] = [];
+
+        // Track the previous endpoint for smooth curve connections
+        let prevX = -1;
+        let prevRailBottom = 0;
 
         links.forEach((link, i) => {
             const depth = Number(link.dataset.depth ?? 0);
@@ -48,46 +53,67 @@ export class StarlightTOC extends HTMLElement {
             const styles = getComputedStyle(link);
             const linkRect = link.getBoundingClientRect();
             
-            const fontSize = parseFloat(styles.fontSize) || 13;
+            // 1. Get Text Size (fontSize) and Line Height
+            const fontSize = parseFloat(styles.fontSize);
             const lineHeight = parseFloat(styles.lineHeight) || fontSize * 1.3;
             const linkCenter = (linkRect.top - railRect.top) + (linkRect.height / 2);
             
+            // The segment boundaries for the fill indicator
             const top = linkCenter - (lineHeight / 2);
             const bottom = linkCenter + (lineHeight / 2);
+
+            // 2. The remaining space dictates the curves. 
+            // The straight "rail" perfectly wraps just the text (fontSize)
+            const railTop = linkCenter - (fontSize / 2);
+            const railBottom = linkCenter + (fontSize / 2);
 
             this.segments.set(link, { top, bottom });
             width = Math.max(width, x);
             height = Math.max(height, bottom);
             
-            const prevLink = i > 0 ? links[i - 1] : null;
-            const prevDepth = prevLink ? Number(prevLink.dataset.depth ?? 0) : depth;
-            const prevX = this.laneOffset(prevDepth) + 1;
-
             if (i === 0) {
-                path.push(`M${x} ${top}`, `L${x} ${bottom}`);
-            } else if (prevX !== x) {
-				const radius = prevX < x ? 6 : 6;
-                const controlY = top - radius;
-                path.push(`C${prevX} ${controlY}, ${x} ${controlY}, ${x} ${top}`, `L${x} ${bottom}`);
+                // First item starts from the absolute top and draws straight to railBottom
+                path.push(`M${x} ${top}`, `L${x} ${railBottom}`);
             } else {
-                path.push(`L${x} ${bottom}`);
+                if (prevX !== x) {
+                    // 3. Draw a precise S-Curve using the leftover vertical space
+                    // Control points are placed exactly halfway between the previous and current text rails
+                    const midY = (prevRailBottom + railTop) / 2;
+                    path.push(`C${prevX} ${midY}, ${x} ${midY}, ${x} ${railTop}`);
+                } else {
+                    // Straight line if there is no lane change
+                    path.push(`L${x} ${railTop}`);
+                }
+                // Draw the straight line perfectly beside the text
+                path.push(`L${x} ${railBottom}`);
             }
+            
+            // Store current coordinates to connect to the next curve
+            prevX = x;
+            prevRailBottom = railBottom;
         });
 
-        const viewWidth = width + 4;
+        // Ensure the line extends perfectly to the very bottom of the last item
+        if (prevX !== -1) {
+            path.push(`L${prevX} ${height}`);
+        }
+
+        const padding = Math.ceil(strokeWidth / 2) + 1;
+        const viewWidth = width + padding;
         const pathString = path.join(' ');
 
         if (this.trackBg) {
-            this.trackBg.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${viewWidth} ${height}" style="width: ${viewWidth}px; height: ${height}px;"><path d="${pathString}" stroke="var(--sl-color-hairline)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" fill="none" /></svg>`;
+            this.trackBg.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${viewWidth} ${height}" style="width: ${viewWidth}px; height: ${height}px;"><path d="${pathString}" stroke="var(--sl-color-hairline-light)" stroke-width="${strokeWidth}" stroke-linecap="round" stroke-linejoin="round" fill="none" /></svg>`;
         }
 
-        const svgMask = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${viewWidth} ${height}"><path d="${pathString}" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" /></svg>`;
+        const svgMask = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${viewWidth} ${height}"><path d="${pathString}" stroke="black" stroke-width="${strokeWidth}" stroke-linecap="round" stroke-linejoin="round" fill="none" /></svg>`;
         const maskUrl = `url("data:image/svg+xml,${encodeURIComponent(svgMask)}")`;
 
         this.mask.style.width = `${viewWidth}px`;
         this.mask.style.height = `${height}px`;
         this.mask.style.maskImage = maskUrl;
         (this.mask.style as CSSStyleDeclaration & { webkitMaskImage: string }).webkitMaskImage = maskUrl;
+
     };
 
     private moveThumb = (link: HTMLAnchorElement) => {
