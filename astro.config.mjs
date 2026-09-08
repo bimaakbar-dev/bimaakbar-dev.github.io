@@ -5,15 +5,25 @@ import starlight from "@astrojs/starlight";
 import { sidebarConfig } from "./src/config/sidebar";
 import { expressiveCode } from "./src/config/expressive-code";
 import { Overrides } from "./src/components/overrides";
-
 import { satteri } from "@astrojs/markdown-satteri";
 import { hastExternalLink } from "./src/lib/plugins/satteri/hast/hast-external-link";
 import { hastTable } from "./src/lib/plugins/satteri/hast/hast-table";
-import { mdastReadingTimePlugin } from "./src/lib/plugins/satteri/mdast/mdast-reading-time";
 
 import tailwindcss from "@tailwindcss/vite";
 
 const site = "https://bimaakbar-dev.github.io/";
+const siteName = "c0desk1";
+const siteDesc = "Custom Starlight theme featuring a modern design";
+const siteLocale = {
+  root: {
+    label: "English",
+    lang: "en",
+  },
+  id: {
+    label: "Indonesia",
+    lang: "id",
+  }
+};
 
 // https://astro.build/config
 export default defineConfig({
@@ -64,9 +74,7 @@ export default defineConfig({
   ],
   markdown: {
     processor: satteri({
-      mdastPlugins: [
-        mdastReadingTimePlugin
-      ],
+      mdastPlugins: [],
       hastPlugins: [
         hastExternalLink,
         hastTable,
@@ -85,23 +93,9 @@ export default defineConfig({
 
   integrations: [
     starlight({
-      title: {
-        en: "c0desk1",
-        id: "c0desk1"
-      },
+      title: siteName,
       titleDelimiter: '|',
-      description: "Custom Starlight theme featuring a modern design",
-      defaultLocale: "root",
-      locales: {
-        root: {
-          label: "English",
-          lang: "en",
-        },
-        id: {
-          label: "Indonesia",
-          lang: "id",
-        },
-      },
+      description: siteDesc,
       logo: {
         light: "./src/assets/images/author/bimaakbar.svg",
         dark: "./src/assets/images/author/bimaakbar.svg",
@@ -109,6 +103,8 @@ export default defineConfig({
       },
       favicon: "/images/favicon.svg",
       customCss: ["./src/styles/global.css"],
+      defaultLocale: "root",
+      locales: siteLocale,
       expressiveCode: expressiveCode,
       components: Overrides,
       social: [
@@ -123,16 +119,16 @@ export default defineConfig({
           href: "https://discord.com/users/bimaakbardev",
         },
       ],
+      lastUpdated: true,
       editLink: {
         baseUrl:
-          "https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/edit/main/docs/",
+          "https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/edit/main/docs/docs/",
       },
+      routeMiddleware: "./src/routeData.ts",
       credits: true,
       sidebar: sidebarConfig,
-      routeMiddleware: "./src/routeData.ts",
     }),
   ],
-
   vite: {
     plugins: [tailwindcss()],
   },
