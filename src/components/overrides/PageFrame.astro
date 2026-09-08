@@ -1,7 +1,8 @@
 ---
 import MobileMenuToggle from './MobileMenuToggle.astro';
+import MobileMenu from "~/components/MobileMenu.astro";
 
-const { hasSidebar, isBlogIndex, isBlogPost } = Astro.locals.starlightRoute;
+const { hasSidebar, isCustomMenu, isBlogIndex, isBlogPost } = Astro.locals.starlightRoute;
 const customPageIndex = isBlogIndex || isBlogPost;
 ---
 { customPageIndex ? (
@@ -13,7 +14,7 @@ const customPageIndex = isBlogIndex || isBlogPost;
             {
                 hasSidebar && (
                     <nav class="sidebar print:hidden" aria-label={Astro.locals.t('sidebarNav.accessibleLabel')}>
-                        <MobileMenuToggle />
+                        {isCustomMenu ? ( <MobileMenu /> ): ( <MobileMenuToggle /> )}
                         <script>
                             class StarlightSidebarPane extends HTMLElement {
                                 constructor() {
