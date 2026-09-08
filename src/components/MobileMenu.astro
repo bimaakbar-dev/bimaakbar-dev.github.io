@@ -5,21 +5,26 @@ import MobileMenuFooter from "~/components/overrides/MobileMenuFooter.astro";
 import NavLinks from "./NavLinks.astro";
 ---
 
-<details class="mobile-menu sl-flex md:sl-hidden print:hidden">
+<details class="mobile-menu md:sl-hidden print:hidden">
   <summary class="menu-button">
-    <Icon name="bars" class="open-icon" size="1.333em" />
-    <Icon name="close" class="close-icon" size="1.333em" />
+    <Icon name="bars" class="open-icon" size="1em" />
+    <Icon name="close" class="close-icon" size="1em" />
     <span class="sr-only">{Astro.locals.t("menuButton.accessibleLabel")}</span>
   </summary>
-  <div class="dropdown-panel isolate">
+  <div class="dropdown-panel bg-(--sl-color-bg-nav) isolate">
     <NavLinks />
     <MobileMenuFooter />
   </div>
 </details>
 
 <style>
+  .mobile-menu {
+    display: inline-flex;
+    align-items: center;
+  }
+
   .mobile-menu summary {
-    position: fixed;
+    position: relative;
     top: calc((var(--sl-nav-height) - var(--sl-menu-button-size)) / 2);
     inset-inline-end: var(--sl-nav-pad-x);
     z-index: var(--sl-z-index-navbar);
@@ -32,6 +37,7 @@ import NavLinks from "./NavLinks.astro";
     justify-content: center;
     display: flex;
     flex-shrink: 0;
+    color: var(--sl-color-white);
   }
   .mobile-menu summary .menu-button svg {
     flex-shrink: 0;
@@ -56,7 +62,7 @@ import NavLinks from "./NavLinks.astro";
     max-width: calc(100dvw);
     padding-inline: 1rem;
     padding-block-start: 1rem;
-    background: var(--sl-color-gray-6);
+    
     z-index: var(--sl-z-index-toc);
     box-shadow: var(--sl-shadow-lg);
     border-bottom: 1px solid var(--sl-color-gray-5);
@@ -81,13 +87,3 @@ import NavLinks from "./NavLinks.astro";
     }
   }
 </style>
-
-<script>
-  document.addEventListener('click', function (e) {
-    const menu = document.querySelector('.mobile-menu');
-    if (!menu) return;
-    if (menu.open && !menu.contains(e.target)) {
-      menu.open = false;
-    }
-  });
-</script>
