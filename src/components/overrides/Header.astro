@@ -17,7 +17,7 @@ const shouldRenderSearch =
 	config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
 ---
 
-<div class="header">
+<div class="header" data-custom-menu={isCustomMenu ? "true" : "false"}>
   <div class="title-wrapper sl-flex">
     <SiteTitle />
   </div>
@@ -48,6 +48,12 @@ const shouldRenderSearch =
     align-items: center;
     height: 100%;
   }
+
+  .header[data-custom-menu="true"] {
+  padding-inline-end: calc(
+    var(--sl-nav-gap) + var(--sl-nav-pad-x) + var(--sl-menu-button-size)
+  );
+}
 
   @media (min-width: 50rem){
     :global(header) {
