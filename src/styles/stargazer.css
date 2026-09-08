@@ -85,7 +85,7 @@
 
   --sl-color-text: var(--sl-color-white);
   --sl-color-text-accent: var(--sl-color-accent-high);
-  --sl-color-text-invert: var(--sl-color-black);
+  --sl-color-text-invert: var(--sl-color-white);
 
   --sl-color-bg: var(--sl-color-black);
   --sl-color-bg-nav: var(--sl-color-gray-7);
