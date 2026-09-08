@@ -13,6 +13,7 @@ starlight-file-tree .highlight {
   border-radius: 0.25rem;
   font-weight: 400;
 }
-starlight-file-tree .directory > details > summary:hover ~ ul {
-	border-color: var(--sl-color-accent);
+
+starlight-file-tree .tree-entry {
+  flex-wrap: nowrap;
 }
