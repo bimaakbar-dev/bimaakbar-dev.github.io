@@ -38,7 +38,7 @@
   --sl-color-accent: hsl(32, 100%, 55%);
   --sl-color-accent-low: hsla(22, 100%, 60%, 0.603);
 
-  --sl-color-text: var(--sl-color-gray-1);
+  --sl-color-text: var(--sl-color-gray-2);
 
   --sl-color-text-accent: var(--sl-color-accent);
   --sl-color-text-invert: var(--sl-color-black);
@@ -114,7 +114,7 @@
 }
 
 
-[data-has-hero] .page {
+[data-has-hero] :is(.page){
   background:
     linear-gradient(215deg, var(--overlay-bg), transparent 40%),
     radial-gradient(var(--overlay-bg), transparent 40%)
@@ -123,17 +123,19 @@
       calc(100% + 20rem) / 60rem 30rem;
 }
 
-[data-has-hero] header {
+[data-has-hero] :is(header) {
   border-bottom: 1px solid transparent;
   background-color: transparent;
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
 }
 
-[data-has-hero] .hero > img {
+[data-has-hero] :is(.hero > img) {
   filter: drop-shadow(0 0 3rem var(--overlay-bg-shadow));
 }
-
+[isBlogPost] .main-frame {
+  padding-top: 0
+}
 .expressive-code .copy button {
   border: 1px solid var(--sl-color-hairline-light);
   border-radius: 0.5rem;
