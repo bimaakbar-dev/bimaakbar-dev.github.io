@@ -5,7 +5,7 @@ import MobileMenuFooter from "~/components/overrides/MobileMenuFooter.astro";
 import NavLinks from "./NavLinks.astro";
 ---
 
-<details class="mobile-menu md:sl-hidden print:hidden">
+<details class="mobile-menu sl-flex md:sl-hidden print:hidden">
   <summary class="menu-button">
     <Icon name="bars" class="open-icon" size="1.333em" />
     <Icon name="close" class="close-icon" size="1.333em" />
@@ -18,27 +18,27 @@ import NavLinks from "./NavLinks.astro";
 </details>
 
 <style>
-  .mobile-menu {
-    display: inline-flex;
-    align-items: center;
-  }
-
   .mobile-menu summary {
-    position: relative;
+    position: fixed;
+    top: calc((var(--sl-nav-height) - var(--sl-menu-button-size)) / 2);
+    inset-inline-end: var(--sl-nav-pad-x);
+    z-index: var(--sl-z-index-navbar);
     width: var(--sl-menu-button-size);
     height: var(--sl-menu-button-size);
-    padding: 0.25rem;
+    padding: 0.5rem;
     list-style: none;
     cursor: pointer;
+    display: flex;
     align-items: center;
     justify-content: center;
-    display: flex;
     flex-shrink: 0;
+    background-color: var(--sl-color-white);
+    color: var(--sl-color-black);
+    box-shadow: var(--sl-shadow-md);
+    border-radius: 50%;
+    line-height: 1;
   }
-  .mobile-menu summary .menu-button svg {
-    flex-shrink: 0;
-  }
-  
+
   .mobile-menu summary::-webkit-details-marker {
     display: none;
   }
@@ -50,15 +50,28 @@ import NavLinks from "./NavLinks.astro";
     display: none;
   }
 
+  .mobile-menu[open] summary {
+    background-color: var(--sl-color-gray-2);
+    box-shadow: none;
+  }
+
+  /* Tema terang */
+  :global([data-theme="light"]) .mobile-menu summary {
+    background-color: var(--sl-color-black);
+    color: var(--sl-color-white);
+  }
+  :global([data-theme="light"]) .mobile-menu[open] summary {
+    background-color: var(--sl-color-gray-5);
+  }
+
   .dropdown-panel {
     position: fixed;
-    top: calc(var(--sl-nav-height));
+    top: var(--sl-nav-height);
     inset-inline: 0;
     width: 100%;
-    max-width: calc(100dvw);
+    max-width: 100dvw;
     padding-inline: 1rem;
     padding-block-start: 1rem;
-    
     z-index: var(--sl-z-index-toc);
     box-shadow: var(--sl-shadow-lg);
     border-bottom: 1px solid var(--sl-color-gray-5);
@@ -83,3 +96,13 @@ import NavLinks from "./NavLinks.astro";
     }
   }
 </style>
+
+<script>
+  document.addEventListener('click', function (e) {
+    const menu = document.querySelector('.mobile-menu');
+    if (!menu) return;
+    if (menu.open && !menu.contains(e.target)) {
+      menu.open = false;
+    }
+  });
+</script>
