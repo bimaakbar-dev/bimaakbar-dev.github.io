@@ -24,19 +24,24 @@ import NavLinks from "./NavLinks.astro";
   }
 
   .mobile-menu summary {
+    position: fixed;
+    top: calc((var(--sl-nav-height) - var(--sl-menu-button-size)) / 2);
+    inset-inline-end: var(--sl-nav-pad-x);
+    z-index: var(--sl-z-index-navbar);
+    width: var(--sl-menu-button-size);
+    height: var(--sl-menu-button-size);
+    padding: 0.25rem;
     list-style: none;
-    display: flex;
+    cursor: pointer;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    border: 0;
-    background: transparent;
-    padding: 0.25rem;
-    border-radius: 0.5rem;
-    color: var(--sl-color-gray-1);
-    font-size: 1.5rem;
-    line-height: 1;
+    display: flex;
+    flex-shrink: 0;
   }
+  .mobile-menu summary .menu-button svg {
+    flex-shrink: 0;
+  }
+  
   .mobile-menu summary::-webkit-details-marker {
     display: none;
   }
