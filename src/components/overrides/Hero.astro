@@ -13,7 +13,7 @@ const { title, hero } = data;
 
 const actions = hero?.actions || [];
 
-const customHero = isBlogIndex;
+const customHero = isBlogIndex || '';
 ---
 
 {
@@ -86,20 +86,5 @@ const customHero = isBlogIndex;
     gap: 1rem 2rem;
     flex-wrap: wrap;
     justify-content: center;
-  }
-</style>
-
-<style is:global define:vars={{customHero}}>
-  .content-panel .sl-container header {
-    max-width: 52rem !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    position: relative;
-    z-index: 10;
-  }
-  .content-panel + .content-panel {
-    border-top: 1px solid var(--sl-color-hairline);
-    max-width: 52rem !important;
-    margin-inline: auto;
   }
 </style>
