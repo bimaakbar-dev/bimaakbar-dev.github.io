@@ -1,7 +1,6 @@
 ---
 title: Docs
 description: Get started building your docs site with Stradocs.
-template: splash
 editUrl: false
 lastUpdated: false
 hero:
@@ -11,36 +10,175 @@ hero:
     - text: Getting Started
       link: /docs/getting-started/introduction
       icon: rocket
+tableOfContents: false
+prev: false
+next: false
 ---
 
-import { Card, CardGrid } from "@astrojs/starlight/components";
+import {
+  Aside,
+  Card,
+  CardGrid,
+  LinkCard,
+  LinkButton,
+  Steps,
+} from "@astrojs/starlight/components";
+
 import AboutAstro from "~/components/about-astro.astro";
 
-## Next steps
+## Fitur Utama
 
 <CardGrid stagger>
-  <Card title="Update content" icon="pencil">
-    Edit `src/content/docs/index.mdx` to see this page change.
+  <Card title="Redesign Komponen" icon="pencil">
+    Header, Hero, Footer, dan banyak komponen Starlight lainnya diganti dengan
+    versi yang didesain ulang secara visual — bukan sekadar ganti warna.
   </Card>
-  <Card title="Change page layout" icon="document">
-    Delete `template: splash` in `src/content/docs/index.mdx` to display a
-    sidebar on this page.
+  <Card title="Sistem Blog Terintegrasi" icon="document">
+    Halaman blog lengkap dengan schema extension, multi-author, RelatedPost,
+    PopularPost, dan RSS feed — siap pakai tanpa konfigurasi tambahan.
   </Card>
-  <Card title="Add new content" icon="add-document">
-    Add Markdown or MDX files to `src/content/docs` to create new pages.
+  <Card title="Markdown Plugins Otomatis" icon="setting">
+    Plugin `satteriExternalLink` dan `satteriTable` aktif di seluruh konten
+    secara otomatis — tanpa import manual di setiap file.
   </Card>
-  <Card title="Configure your site" icon="setting">
-    Edit your `sidebar` and other config in `astro.config.mjs`.
+  <Card title="Font Lokal" icon="seti:font">
+    Montserrat, Inter, dan FiraCode dihosting lokal — tidak ada request ke CDN
+    eksternal, performa dan privasi terjaga.
   </Card>
-  <Card title="Read the docs" icon="open-book">
-    Learn more in [the Starlight Docs](https://starlight.astro.build/).
+  <Card title="OG Image Otomatis" icon="external">
+    Setiap halaman menghasilkan Open Graph image secara otomatis untuk tampilan
+    yang konsisten saat dibagikan di media sosial.
+  </Card>
+  <Card title="Bilingual" icon="translate">
+    Dikonfigurasi untuk English dan Indonesia sejak awal, termasuk i18n string
+    untuk seluruh komponen blog.
   </Card>
 </CardGrid>
 
-<AboutAstro title="Brought to you by">
-Astro is the all-in-one web framework designed for speed.
-Pull your content from anywhere and deploy everywhere, all powered by your favorite UI components and libraries.
+## Untuk Siapa?
 
-[Learn about Astro](https://astro.build/)
+<CardGrid>
+  <Card title="Developer" icon="laptop">
+    Dokumentasi proyek dengan tampilan profesional sejak hari pertama — tanpa
+    membangun dari nol.
+  </Card>
+  <Card title="Content Creator" icon="pencil">
+    Platform penulisan yang fleksibel dan bisa dikustomisasi sesuai kebutuhan.
+  </Card>
+  <Card title="Technical Writer" icon="document">
+    Fokus pada konten. Stradocs mengurus tipografi, layout, dan pengalaman baca.
+  </Card>
+  <Card title="Pelajar" icon="open-book">
+    Referensi arsitektur Astro + Starlight yang nyata — kodenya transparan dan
+    bisa dipelajari langsung.
+  </Card>
+</CardGrid>
+
+## Cara Kerja
+
+Stradocs adalah Starlight — bukan fork, bukan wrapper. Semua yang kamu tahu tentang Starlight tetap berlaku. Stradocs hanya menambahkan dan mengganti lapisan visual di atasnya.
+
+<Steps>
+
+1. ### Clone
+
+   Fork atau clone repositori Stradocs dari GitHub. Tidak ada package global yang perlu diinstall.
+
+   ```bash
+   git clone https://github.com/bimaakbar-dev/bimaakbar-dev.github.io.git
+   ```
+
+2. ### Kustomisasi
+
+   Sesuaikan `astro.config.mjs`, sidebar, font, dan konten. Arsitektur Stradocs dirancang mudah dibaca dan dimodifikasi.
+
+3. ### Deploy
+
+   Build dan deploy ke GitHub Pages atau platform pilihan kamu. Stradocs sudah dikonfigurasi untuk GitHub Pages sejak awal.
+
+</Steps>
+
+## Terinspirasi Dari
+
+Stradocs lahir dari referensi desain terbaik di ekosistem web modern.
+
+<CardGrid>
+  <LinkCard
+    title="Fumadocs"
+    description="Inspirasi utama pendekatan desain — bersih, teropini, dan tidak kompromi soal kualitas."
+    href="https://fumadocs.dev"
+  />
+  <LinkCard
+    title="Vercel"
+    description="Referensi estetika sistem desain — presisi, minimal, dan konsisten di setiap detail."
+    href="https://vercel.com"
+  />
+</CardGrid>
+
+## Dibuat Oleh
+
+Stradocs dikembangkan oleh **Bima Akbar** dan dirilis sebagai proyek open source yang bebas digunakan, di-fork, dan dikontribusikan oleh siapa saja.
+
+<CardGrid>
+  <LinkCard
+    title="GitHub"
+    description="Lihat source code, fork repositori, atau buka issue."
+    href="https://github.com/bimaakbar-dev/bimaakbar-dev.github.io"
+  />
+  <LinkCard
+    title="Profil Developer"
+    description="Bima Akbar — developer di balik Stradocs."
+    href="https://github.com/bimaakbar-dev"
+  />
+</CardGrid>
+
+## FAQ
+
+<details>
+  <summary>Apakah Stradocs menggantikan Starlight?</summary>
+
+Tidak. Stradocs adalah Starlight yang dikustomisasi — semua fitur, routing, dan konfigurasi Starlight tetap berfungsi normal. Stradocs hanya mengganti lapisan visual dan menambahkan sistem blog.
+
+</details>
+
+<details>
+  <summary>Apakah saya perlu tahu Astro untuk menggunakannya?</summary>
+
+Ya. Stradocs ditujukan untuk pengguna yang sudah familiar dengan Astro dan Starlight. Jika baru memulai, pelajari keduanya terlebih dahulu sebelum menggunakan Stradocs.
+
+</details>
+
+<details>
+  <summary>Apakah Stradocs gratis?</summary>
+
+Ya, sepenuhnya gratis dan open source. Fork repositori dan gunakan untuk proyek apapun tanpa biaya.
+
+</details>
+
+<details>
+  <summary>Bisakah saya berkontribusi?</summary>
+
+Tentu. Kontribusi dalam bentuk apapun sangat terbuka — bug report, pull request, saran fitur, atau sekadar diskusi di repositori GitHub.
+
+</details>
+
+<details>
+  <summary>Apakah Stradocs mendukung multi-bahasa?</summary>
+
+Ya. Stradocs dikonfigurasi untuk English dan Indonesia sejak awal. Bahasa tambahan bisa ditambahkan melalui konfigurasi `locales` di `astro.config.mjs`.
+
+</details>
+
+<AboutAstro title="Dipersembahkan oleh">
+
+Stradocs adalah tema custom dari Starlight dan dikembangkan oleh <span class="text-(--sl-color-accent-high)">**Bima Akbar**</span> yang terinspirasi dari **Vercel**, **Fumadocs**, dan berbagai sumber lainnya.
+
+<LinkButton
+  href="/id/docs/getting-started/introduction"
+  icon="open-book"
+  iconPlacement="start"
+>
+  Pelajari lebih lanjut
+</LinkButton>
 
 </AboutAstro>
