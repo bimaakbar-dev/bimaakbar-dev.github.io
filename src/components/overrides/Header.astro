@@ -70,6 +70,12 @@ const shouldRenderSearch =
     height: 2rem;
     border-inline-start: 1px solid var(--sl-color-gray-5);
   }
+  
+  .header[data-custom-menu="true"] {
+    padding-inline-end: calc(
+      var(--sl-nav-gap) + var(--sl-nav-pad-x) + var(--sl-menu-button-size)
+    );
+  }
 
   @media (min-width: 50rem) {
     :global(:root[data-has-sidebar]) {
@@ -107,6 +113,9 @@ const shouldRenderSearch =
         1fr
         auto;
       align-content: center;
+    }
+    .header[data-custom-menu="true"] {
+      padding-inline-end: var(--sl-nav-pad-x);
     }
   }
 </style>
