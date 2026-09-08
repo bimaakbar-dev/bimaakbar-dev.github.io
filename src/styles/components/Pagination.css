@@ -13,6 +13,15 @@
   background-color: rgb(from var(--sl-color-gray-6) r g b / 50%);
 }
 
+[data-theme='light'] .pagination-links a {
+  border: 1px solid var(--sl-color-hairline);
+  background-color: rgb(from var(--sl-color-gray-7) r g b / 100%);
+}
+
+[data-theme='light'] .pagination-links a:hover {
+  background-color: rgb(from var(--sl-color-gray-7) r g b / 50%);
+}
+
 .pagination-links .link-title {
   color: var(--sl-color-white);
   font-size: var(--sl-text-base);
