@@ -2,10 +2,10 @@
 // src/components/GlobalMobileMenu.astro
 import { Icon } from "@astrojs/starlight/components";
 import MobileMenuFooter from "~/components/overrides/MobileMenuFooter.astro";
-import NavLinks from "~/components/NavLinks.astro";
+import NavLinks from "./NavLinks.astro";
 ---
 
-<details class="global-mobile-menu md:sl-hidden print:hidden">
+<details class="mobile-menu md:sl-hidden print:hidden">
   <summary class="menu-button">
     <Icon name="bars" class="open-icon" size="0.9em" />
     <Icon name="close" class="close-icon" size="0.9em" />
@@ -18,20 +18,12 @@ import NavLinks from "~/components/NavLinks.astro";
 </details>
 
 <style>
-  .mobile-preferences {
-    justify-content: space-between;
-    flex-wrap: wrap;
-    border-top: 1px solid var(--sl-color-hariline-shade);
-    column-gap: 1rem;
-    padding: 0 !important;
-    margin-top: 1rem;
-  }
-  .global-mobile-menu {
+  .mobile-menu {
     display: inline-flex;
     align-items: center;
   }
 
-  .global-mobile-menu summary {
+  .mobile-menu summary {
     list-style: none;
     display: flex;
     align-items: center;
@@ -41,18 +33,18 @@ import NavLinks from "~/components/NavLinks.astro";
     background: transparent;
     padding: 0.25rem;
     border-radius: 0.5rem;
-    color: var(--sl-color-white);
+    color: var(--sl-color-gray-1);
     font-size: 1.5rem;
     line-height: 1;
   }
-  .global-mobile-menu summary::-webkit-details-marker {
+  .mobile-menu summary::-webkit-details-marker {
     display: none;
   }
 
-  .global-mobile-menu:not([open]) .close-icon {
+  .mobile-menu:not([open]) .close-icon {
     display: none;
   }
-  .global-mobile-menu[open] .open-icon {
+  .mobile-menu[open] .open-icon {
     display: none;
   }
 
@@ -65,9 +57,8 @@ import NavLinks from "~/components/NavLinks.astro";
     padding-inline: 1rem;
     padding-block-start: 1rem;
     
-    z-index: var(--sl-z-index-menu);
+    z-index: var(--sl-z-index-toc);
     box-shadow: var(--sl-shadow-lg);
-    z-index: var(--sl-z-index-dropdown);
     border-bottom: 1px solid var(--sl-color-gray-5);
     border-end-end-radius: 0.5rem;
     border-end-start-radius: 0.5rem;
@@ -85,8 +76,8 @@ import NavLinks from "~/components/NavLinks.astro";
   }
 
   @media (min-width: 50rem) {
-    .global-mobile-menu {
-      display: none !important;
+    .mobile-menu {
+      display: none;
     }
   }
 </style>
