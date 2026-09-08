@@ -1,6 +1,8 @@
 ---
+// src/components/overrides/Header.astro
 // @ts-nocheck
 import config from 'virtual:starlight/user-config';
+
 import LanguageSelect from "@astrojs/starlight/components/LanguageSelect.astro";
 import Search from "@astrojs/starlight/components/Search.astro";
 import SiteTitle from "@astrojs/starlight/components/SiteTitle.astro";
@@ -8,24 +10,25 @@ import SocialIcons from "./SocialIcons.astro";
 import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
 import NavLinks from "~/components/NavLinks.astro";
 import MobileMenu from "~/components/MobileMenu.astro";
+import GithubStar from '~/components/GithubStar.astro';
 
 const { isCustomMenu } = Astro.locals.starlightRoute;
 const shouldRenderSearch =
 	config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
 ---
 
-<div class="header">
+<div class="header" data-is-custom-menu={isCustomMenu ? "true" : "false"}>
   <div class="title-wrapper sl-flex">
     <SiteTitle />
   </div>
-  <div class="sl-hidden md:sl-flex print:hidden nav-group leading-none">
+  <div class="sl-hidden md:sl-flex print:hidden nav-group leading-none flex-1">
     <NavLinks />
   </div>
-  <div class="sl-flex right-group">
+  <div class="sl-flex">
     <div class="sl-flex print:hidden">
       {shouldRenderSearch && <Search />}
     </div>
-    <div class="sl-hidden md:sl-flex print:hidden right-group">
+    <div class="sl-hidden md:sl-flex print:hidden right-group" data-custom-hidden={isCustomMenu ? "true" : "false"}>
       <div class="sl-flex social-icons">
         <SocialIcons />
       </div>
@@ -34,9 +37,10 @@ const shouldRenderSearch =
     </div>
   </div>
 </div>
-{isCustomMenu && <MobileMenu />}
 
-<style>
+{isCustomMenu ? (<MobileMenu />) : (<div aria-hidden="true" />)}
+
+<style define:vars={{isCustomMenu}}>
   .header {
     display: flex;
     gap: var(--sl-nav-gap);
@@ -44,37 +48,32 @@ const shouldRenderSearch =
     align-items: center;
     height: 100%;
   }
-
-  @media (min-width: 50rem){
-    :global(header) {
-      border-bottom: none;
-    }
-  }
-
   .title-wrapper {
-    overflow: clip;
-    padding: 0.25rem;
-    margin: -0.25rem;
-    min-width: 0;
-  }
-    
+		overflow: clip;
+		padding: 0.25rem;
+		margin: -0.25rem;
+		min-width: 0;
+	}
   .nav-group,
   .right-group,
   .social-icons {
-    gap: var(--sl-nav-gap);
-    align-items: center;
+    gap: 1rem;
+		align-items: center;
   }
+  .social-icons::after {
+		content: '';
+		height: 2rem;
+		border-inline-end: 1px solid var(--sl-color-gray-5);
+	}
 
-  .social-icons::before {
-    content: "";
-    height: 2rem;
-    border-inline-start: 1px solid var(--sl-color-gray-5);
+  .header[data-is-custom-menu="true"] {
+		padding-inline-end: calc(
+			var(--sl-nav-gap) + var(--sl-nav-pad-x) + var(--sl-menu-button-size)
+  	);
   }
   
-  .header[data-custom-menu="true"] {
-    padding-inline-end: calc(
-      var(--sl-nav-gap) + var(--sl-nav-pad-x) + var(--sl-menu-button-size)
-    );
+  .right-group[data-is-custom-menu="true"][data-custom-hidden='true'] {
+    display: none;
   }
 
   @media (min-width: 50rem) {
@@ -86,11 +85,13 @@ const shouldRenderSearch =
       --__toc-width: 0rem;
     }
 
+    .header[data-is-custom-menu="true"] {
+      padding-inline-end: 0;
+		}
+
     .header {
-      --__sidebar-width: max(
-        0rem,
-        var(--sl-content-inline-start, 0rem) - var(--sl-nav-pad-x)
-      );
+     --__sidebar-width: max(0rem, var(--sl-content-inline-start, 0rem) - var(--sl-nav-pad-x));
+     
       --__main-column-fr: calc(
         (
           100% + var(--__sidebar-pad, 0rem) -
@@ -103,19 +104,12 @@ const shouldRenderSearch =
       display: grid;
       grid-template-columns:
         minmax(
-          calc(
-            var(--__sidebar-width) +
-            max(0rem, var(--__main-column-fr) - var(--sl-nav-gap)) -
-            var(--__sidebar-width)
-          ),
+          calc(max(0rem, var(--__main-column-fr) - var(--sl-nav-gap))),
           auto
-        )
+				)
         1fr
         auto;
       align-content: center;
-    }
-    .header[data-custom-menu="true"] {
-      padding-inline-end: var(--sl-nav-pad-x);
     }
   }
 </style>
