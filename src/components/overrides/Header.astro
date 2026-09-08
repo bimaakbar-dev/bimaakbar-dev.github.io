@@ -37,9 +37,9 @@ const shouldRenderSearch =
         <SocialIcons />
       </div>
     </div>
-    {isCustomMenu && <MobileMenu />}
   </div>
 </div>
+{isCustomMenu && <MobileMenu />}
 <style define:vars={{isCustomMenu}}>
   .header {
     display: flex;
@@ -50,10 +50,10 @@ const shouldRenderSearch =
   }
 
   .header[data-custom-menu="true"] {
-  padding-inline-end: calc(
-    var(--sl-nav-gap) + var(--sl-nav-pad-x) + var(--sl-menu-button-size)
-  );
-}
+    padding-inline-end: calc(
+      var(--sl-nav-gap) + var(--sl-nav-pad-x) + var(--sl-menu-button-size)
+    );
+  }
 
   @media (min-width: 50rem){
     :global(header) {
