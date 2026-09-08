@@ -34,10 +34,15 @@ const customIndex = isBlogIndex || isDocIndex;
       <Pagination />
     </div>
   ) : (
-    <Default>
+    <article class="sl-markdown-content">
       <slot />
-      <MobileScrollToTop />
-    </Default>
+    </article>
+    <div class="meta sl-flex">
+      <EditLink />
+      <LastUpdated />
+    </div>
+    <Pagination />
+    <MobileScrollToTop />
   )
 }
 
