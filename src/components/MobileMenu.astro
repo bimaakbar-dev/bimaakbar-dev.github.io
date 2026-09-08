@@ -11,7 +11,7 @@ import NavLinks from "./NavLinks.astro";
     <Icon name="close" class="close-icon" size="1.333em" />
     <span class="sr-only">{Astro.locals.t("menuButton.accessibleLabel")}</span>
   </summary>
-  <div class="dropdown-panel bg-(--sl-color-bg-nav) isolate">
+  <div class="dropdown-panel isolate">
     <NavLinks />
     <MobileMenuFooter />
   </div>
@@ -25,20 +25,18 @@ import NavLinks from "./NavLinks.astro";
     z-index: var(--sl-z-index-navbar);
     width: var(--sl-menu-button-size);
     height: var(--sl-menu-button-size);
-    padding: 0.5rem;
+    padding: 0.25rem;
     list-style: none;
     cursor: pointer;
-    display: flex;
     align-items: center;
     justify-content: center;
+    display: flex;
     flex-shrink: 0;
-    background-color: var(--sl-color-white);
-    color: var(--sl-color-black);
-    box-shadow: var(--sl-shadow-md);
-    border-radius: 50%;
-    line-height: 1;
   }
-
+  .mobile-menu summary .menu-button svg {
+    flex-shrink: 0;
+  }
+  
   .mobile-menu summary::-webkit-details-marker {
     display: none;
   }
@@ -50,28 +48,15 @@ import NavLinks from "./NavLinks.astro";
     display: none;
   }
 
-  .mobile-menu[open] summary {
-    background-color: var(--sl-color-gray-2);
-    box-shadow: none;
-  }
-
-  /* Tema terang */
-  :global([data-theme="light"]) .mobile-menu summary {
-    background-color: var(--sl-color-black);
-    color: var(--sl-color-white);
-  }
-  :global([data-theme="light"]) .mobile-menu[open] summary {
-    background-color: var(--sl-color-gray-5);
-  }
-
   .dropdown-panel {
     position: fixed;
-    top: var(--sl-nav-height);
+    top: calc(var(--sl-nav-height));
     inset-inline: 0;
     width: 100%;
-    max-width: 100dvw;
+    max-width: calc(100dvw);
     padding-inline: 1rem;
     padding-block-start: 1rem;
+    background: var(--sl-color-gray-6);
     z-index: var(--sl-z-index-toc);
     box-shadow: var(--sl-shadow-lg);
     border-bottom: 1px solid var(--sl-color-gray-5);
