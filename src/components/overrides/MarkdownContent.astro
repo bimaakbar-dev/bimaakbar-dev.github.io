@@ -9,7 +9,9 @@ import Pagination from "@astrojs/starlight/components/Pagination.astro";
 import RelatedPosts from "~/components/RelatedPosts.astro";
 import MobileScrollToTop from "../MobileScrollToTop.astro";
 
-const { entry, isBlogPost, isBlogIndex } = Astro.locals.starlightRoute;
+
+const { entry, isBlogPost, isBlogIndex, isDocIndex } = Astro.locals.starlightRoute;
+const customIndex = isBlogIndex || isDocIndex;
 ---
 
 {
@@ -18,7 +20,7 @@ const { entry, isBlogPost, isBlogIndex } = Astro.locals.starlightRoute;
       <article class="sl-markdown-content">
         <slot />
       </article>
-      <div class="meta sl-flex">
+      <div class="meta custom-meta sl-flex">
         <EditLink />
         <LastUpdated />
       </div>
@@ -26,8 +28,8 @@ const { entry, isBlogPost, isBlogIndex } = Astro.locals.starlightRoute;
       <RelatedPosts currentSlug={entry.id} />
       <MobileScrollToTop />
     </>
-  ) : isBlogIndex ? (
-    <div>
+  ) : customIndex ? (
+    <div class="not-content">
       <slot />
       <Pagination />
     </div>
@@ -54,6 +56,10 @@ const { entry, isBlogPost, isBlogIndex } = Astro.locals.starlightRoute;
     font-size: var(--sl-text-sm);
     color: var(--sl-color-gray-3);
     padding-inline: var(--sl-content-pad-x);
+  }
+  .custom-meta {
+    border-block: 1px solid var(--sl-color-hairline);
+    padding-block: 1rem;
   }
   .meta > :global(p:only-child) {
     margin-inline-start: auto;
