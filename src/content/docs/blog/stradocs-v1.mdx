@@ -1,12 +1,10 @@
 ---
 title: "Stradocs 1.0"
 description: "Introducing Stradocs 1.0 a ground-up redesign of the Astro Starlight theme, with an integrated blog system, local fonts, OG Image, and RSS."
-editUrl: https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/edit/main/src/content/docs/blog/id/stradocs-v1.mdx
+editUrl: https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/edit/main/src/content/docs/blog/stradocs-v1.mdx
 pubDate: 2026-09-04T09:40Z
 author:
   - name: "Bima Akbar"
-    avatar: ~/assets/images/author/bimaakbar-dev.svg
-  - name: "stradocs"
     avatar: ~/assets/images/author/bimaakbar.svg
 heroImage: ~/assets/images/blog/stradocs-v1.jpg
 tags:
@@ -15,7 +13,8 @@ tags:
   - Announcement
   - Stradocs
   - v1.0
-draft: false
+template: 'splash'
+lastUpdated: 2026-09-08T13:53Z
 ---
 
 import {
@@ -32,7 +31,15 @@ import {
 
 Inspired by **Fumadocs**'s clean and opinionated design approach, and **Vercel**'s precise and minimal aesthetic, Stradocs is built on one philosophy:
 
-> **Clean. Premium. Modern.**
+import Testimonial from '~/components/Testimonial.astro';
+
+<Testimonial
+  name="Bima Akbar"
+  handle="bimaakbar"
+  cite="https://twitter.com/astrodotbuild/status/1724934718745915558"
+>
+  Clean. Premium. Modern.
+</Testimonial>
 
 ## For who?
 
@@ -54,32 +61,9 @@ Inspired by **Fumadocs**'s clean and opinionated design approach, and **Vercel**
   </Card>
 </CardGrid>
 
-## Stack
+## Features
 
-<Tabs>
-  <TabItem label="Core" icon="rocket">
-    - [Astro](https://astro.build/) <Badge text="7.3" variant="note" />
-    - [Starlight](https://starlight.astro.build/) <Badge text="0.42" variant="note" />
-    - [TailwindCss](https://tailwindcss.com/)<Badge text="4.3" variant="note" />
-  </TabItem>
-  <TabItem label="Font" icon="seti:font">
-    | Role | Typeface | Format | 
-    |---|---|---| 
-    | Headings | Montserrat | `.woff2` (local) | 
-    | Body | Inter | `.woff2` (local) | 
-    | Mono / Code | FiraCode | `.woff2` (local) |
-  </TabItem>
-</Tabs>
-<br />
-<Aside type="tip">
-  All fonts use Astro's built-in `fontProviders.local()`. No requests to Google
-  Fonts or external CDNs. Performance and user privacy are maintained from the
-  very first load.
-</Aside>
-
-## Stradocs 1.0 Features
-
-### Starlight Component Redesign
+### Component Redesign
 
 Stradocs replaces most of Starlight's built-in components with redesigned versions. It's not just a CSS override—each component has its own markup and logic.
 
@@ -198,23 +182,41 @@ heroImage: ~/assets/images/blog/cover.jpg
 tags:
   - astro
   - tutorial
-draft: false
 ---
 ```
 
-| Field       | Type                              | Description                                           |
-| ----------- | --------------------------------- | ----------------------------------------------------- |
-| `pubDate`   | `Date` (optional)                 | Publication date; automatically coerced from string   |
-| `heroImage` | `ImageMetadata` (optional)        | Feature image, processed by Astro Image               |
-| `author`    | `{ name?, avatar? }[]` (optional) | Author array — supports multiple authors with avatars |
-| `tags`      | `string[]` (optional)             | Article categories/tags                               |
+<dl>
+  <dt>`pubDate`</dt>
+  <dd>
+    Type: `Date` (optional)
+    - Publication date; automatically coerced from string
+  </dd>
+  
+  <dt>`heroImage`</dt>
+  <dd>
+    Type: `ImageMetadata` (optional)
+    - Feature image, processed by Astro Image
+  </dd>
+  
+  <dt>`author`</dt>
+  <dd>
+    Type: `{ name?, avatar? }[]` (optional)
+    - Author array — supports multiple authors with avatars
+  </dd>
+  
+  <dt>`tags`</dt>
+  <dd>
+    Type: `string[]` (optional)
+    - Article categories/tags
+  </dd>
+</dl>
 
 <Aside type="tip">
   `author` is designed as an **array** — a single article can have more than one
   author, each with their own name and avatar.
 </Aside>
 
-### Dual Language Support
+### i18n Support
 
 Stradocs is configured bilingually from the start: **English** as the root and **Indonesian** in `/id`.
 
@@ -270,7 +272,7 @@ npm run dev
   finish.
 </Aside>
 
-<CardGrid>
+<CardGrid stagger>
   <LinkCard
     title="View Repository"
     description="Fork, explore the code, and make it your own."
@@ -285,9 +287,9 @@ npm run dev
 
 ## Credits
 
-Stradocs wasn't built in a vacuum. Thanks to the following projects and teams, it's foundation and inspiration:
+Thanks to the following projects and teams, it's foundation and inspiration:
 
-<CardGrid>
+<CardGrid stagger>
   <LinkCard
     title="Astro"
     description="The framework that makes it all possible — fast, flexible, and developer-experience-oriented."
