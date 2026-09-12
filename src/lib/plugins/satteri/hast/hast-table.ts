@@ -1,15 +1,16 @@
 // src/lib/plugins/satteri/table.ts
-import { defineHastPlugin } from 'satteri';
+import type { Element } from "hast";
+import { defineHastPlugin } from "satteri";
 
 export const hastTable = defineHastPlugin({
-  name: 'stradocs-table',
+  name: "satteri-table",
   element: {
-    filter: ['table'],
-    visit(node, ctx) {
+    filter: ["table"],
+    visit(node: Element, ctx) {
       ctx.replaceNode(node, {
-        type: 'element',
-        tagName: 'div',
-        properties: { className: ['table-wrapper'] },
+        type: "element",
+        tagName: "div",
+        properties: { className: ["table-wrapper"] },
         children: [node],
       });
     },

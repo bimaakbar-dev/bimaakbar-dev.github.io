@@ -1,0 +1,100 @@
+---
+title: "Struktur Proyek"
+description: "Penjelasan struktur folder Stradocs."
+lastUpdated: 2026-09-05
+---
+
+import {
+  Aside,
+  Card,
+  CardGrid,
+  FileTree,
+  LinkCard,
+} from "@astrojs/starlight/components";
+
+Stradocs mengikuti struktur standar proyek Astro + Starlight dengan beberapa direktori tambahan untuk kebutuhan blog, plugin, dan sistem styling custom. Halaman ini menjelaskan peran setiap folder dan file penting.
+
+<Aside type="tip">
+  Jika kamu sudah familiar dengan struktur proyek Astro atau Starlight, sebagian
+  besar folder di sini akan terasa familiar. Fokus pada direktori yang **tidak
+  ada** di Starlight default: `lib/`, `styles/components/`, dan struktur
+  `content/` yang diperluas.
+</Aside>
+
+## Struktur
+
+<FileTree>
+  - public/ 
+    - ...
+  - src/ 
+    - assets/ 
+      - fonts/ 
+      - images/ 
+        - ...
+    - components/
+      - overrides/
+        - ... # Overrides Starlight komponen
+      - ... # Kustom komponen
+    - config/
+      - ...
+    - content/ 
+      - docs/ 
+        - blog/ 
+          - ... # Rute untuk blog
+        - docs/
+          - ... # Digunakan sebagai rute /docs
+        - id/ 
+          - docs/ 
+            - ... # Rute docs untuk multi language
+          - blog/ 
+            - ...
+          - index.astro # Halaman utama rute multi language
+        - index.astro # Halaman utama rute root default
+      - i18n/ 
+        - en.json 
+        - id.json 
+      - 404.md 
+    - lib/ 
+      - plugins/ 
+        - satteri/
+          - ...
+      - pages/ 
+        - blog/ 
+          - [...slug].astro # Halaman kustom untuk blog details
+          - index.astro # Halaman kustom untuk blog index
+        - id/ 
+          - blog/ 
+            - [...slug].astro 
+            - index.astro 
+          - rss.xml.js
+        - rss.xml.js # Rss Feed
+      - styles/ 
+        - components/ 
+          - ... # Override komponen yg berada di components
+        - components-internal/ 
+          - ... # Override komponen yg berada di components-internals
+        - user-components/ 
+          - - ... # Override komponen yg berada di user-components
+        - asides.css 
+        - global.css # Bas untuk customCss
+        - markdown.css 
+        - reset.css
+        - stradocs.css # Kustom CSS tambahan
+      - constants.ts # Untuk Constanta Kustom
+      - content.config.ts 
+  - astro.config.mjs 
+  - CLAUDE.md 
+  - AGENTS.md 
+  - package.json 
+  - tsconfig.json
+</FileTree>
+
+## Langkah Selanjutnya
+
+<CardGrid>
+  <LinkCard
+    title="Panduan"
+    description="Pelajari cara kustomisasi Stradocs, instalasi, konfigurasi, dan cara menambahkan konten."
+    href="/id/docs/guides/installation"
+  />
+</CardGrid>

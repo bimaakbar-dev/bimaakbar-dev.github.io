@@ -1,0 +1,25 @@
+{
+  "action.CopyPage": "Salin halaman",
+  "action.CopyMarkdown": "Salin sebagai Markdown",
+  "action.ViewMarkdown": "Lihat sebagai Markdown",
+  "action.AgentSetup": "Pengaturan agen",
+
+  "blog.PostAuthor": "Oleh",
+  "blog.relatedPostLabel": "Postingan terkait",
+  "blog.PopularPostLabel": "Postingan populer",
+  
+  "component.preview": "Pratinjau",
+  "component.scrollToTop": "Geser ke atas",
+  
+  "nav.blog": "Blog",
+  "nav.docs": "Dokumentasi",
+  "nav.home": "Beranda",
+  
+  "plugin.readingTime": "menit baca",
+  "plugin.readingWords": "kata",
+
+  "rss.title": "Stradocs",
+  "rss.RssFeedLabel": "Berlangganan",
+  "rss.RssFeedTitle": "RSS",
+  "rss.RssFeedDesc": "Dapatkan informasi terkini dari"
+}

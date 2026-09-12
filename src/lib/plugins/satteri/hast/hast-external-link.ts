@@ -1,5 +1,5 @@
 // src/lib/plugins/satteri/external-link.ts
-import { defineHastPlugin } from 'satteri';
+import { defineHastPlugin } from "satteri";
 
 export interface LinkOptions {
   siteUrl?: string;
@@ -7,31 +7,38 @@ export interface LinkOptions {
 
 export const hastExternalLink = (options: LinkOptions = {}) => {
   return defineHastPlugin({
-    name: 'stradocs-external-link',
+    name: "external-link",
+
     element: {
-      filter: ['a'],
+      filter: ["a"],
       visit(node, ctx) {
         const href = node.properties?.href;
-        if (typeof href!== "string") return;
 
-        const isHttp = href.startsWith('http://') || href.startsWith('https://');
+        if (typeof href !== "string") return;
+
+        const isHttp =
+          href.startsWith("http://") || href.startsWith("https://");
+
         let isExternal = isHttp;
         if (isHttp && options.siteUrl) {
-          isExternal =!href.startsWith(options.siteUrl);
+          isExternal = !href.startsWith(options.siteUrl);
         }
 
-        if (!isExternal) return;
+        const currentClasses = node.properties?.className || [];
+        const classArray = Array.isArray(currentClasses)
+          ? currentClasses
+          : [currentClasses];
 
-        const current = node.properties?.className;
-        const classArray = Array.isArray(current)
-         ? current.filter(Boolean)
-          : current
-           ? [current]
-            : [];
+        const newClasses = [...classArray, "inline-link"];
 
-        ctx.setProperty(node, 'className', [...classArray, 'is-external']);
-        ctx.setProperty(node, 'target', '_blank');
-        ctx.setProperty(node, 'rel', 'nofollow noopener noreferrer');
+        if (isExternal) {
+          newClasses.push("is-external");
+
+          ctx.setProperty(node, "target", "_blank");
+          ctx.setProperty(node, "rel", "nofollow noopener noreferrer");
+        }
+
+        ctx.setProperty(node, "className", newClasses);
       },
     },
   });

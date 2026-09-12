@@ -1,0 +1,25 @@
+{
+  "action.CopyPage": "Copy Page",
+  "action.CopyMarkdown": "Copy as Markdown",
+  "action.ViewMarkdown": "View as Markdown",
+  "action.AgentSetup": "Agent setup",
+
+  "blog.PostAuthor": "By", 
+  "blog.relatedPostLabel": "Related posts",
+  "blog.PopularPostLabel": "Popular posts",
+  
+  "component.preview": "Preview",
+  "component.scrollToTop": "Scroll to top",
+  
+  "nav.blog": "Blog",
+  "nav.docs": "Docs",
+  "nav.home": "Home",
+  
+  "plugin.readingTime": "min read",
+  "plugin.readingWords": "words",
+
+  "rss.title": "Stradocs",
+  "rss.RssFeedLabel": "Subscribe",
+  "rss.RssFeedTitle": "RSS",
+  "rss.RssFeedDesc": "Stay up-to-date with news from the"
+}
