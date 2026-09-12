@@ -1,6 +1,6 @@
 ---
 title: "Stradocs 1.0"
-description: "Memperkenalkan Stradocs 1.0 Tema Astro Starlight dengan tampilan modern, minimalis, dan aesthetic.
+description: "Introducing Stradocs 1.0 a ground-up redesign of the Astro Starlight theme, with an integrated blog system, local fonts, OG Image, and RSS."
 pubDate: 2026-09-04T09:40Z
 template: splash
 author:
@@ -8,13 +8,12 @@ author:
     avatar: ~/assets/images/author/bimaakbar.svg
 heroImage: ~/assets/images/blog/stradocs-v1.jpg
 tags:
-  - astro
-  - starlight
-  - announcement
-  - stradocs
+  - Astro
+  - Starlight
+  - Announcement
+  - Stradocs
   - v1.0
-lastUpdated: 2026-09-11
-editUrl: false
+lastUpdated: 2026-09-08
 ---
 
 import {
@@ -28,116 +27,116 @@ import {
 
 import { CardGrid } from "~/stradocs/components";
 
-[Starlight](https://starlight.astro.build) adalah fondasi dokumentasi yang solid — ringan, berbasis MDX, dan terstruktur dengan baik. Untuk proyek yang ingin punya identitas visual sendiri, ini akan memakan waktu untuk menyesuaikannya.
+[Starlight](https://starlight.astro.build) is a solid documentation foundation — lightweight, MDX-based, and well-structured. But its default interface feels generic. For projects that want their own visual identity, that's a hindrance from day one.
 
-Terinspirasi oleh desain **Fumadocs** yang bersih, serta estetika sistem **Vercel** yang presisi dan minimal.
+Inspired by **Fumadocs**'s clean and opinionated design approach, and **Vercel**'s precise and minimal aesthetic.
 
-## Fitur
+## For who?
 
-### Redesign Komponen Starlight
+<CardGrid bento>
+  <Card title="Developer" icon="laptop">
+    Project documentation that looks good from day one — without having to
+    redesign from scratch.
+  </Card>
+  <Card title="Content Creator" icon="pencil">
+    A flexible, customizable writing platform that doesn't limit creativity.
+  </Card>
+  <Card title="Technical Writer" icon="document">
+    Focus on content. Stradocs takes care of typography, layout, and the reading
+    experience.
+  </Card>
+  <Card title="Student" icon="open-book">
+    A true Astro + Starlight architectural reference — the code is transparent
+    and traceable from the beginning.
+  </Card>
+</CardGrid>
 
-Stradocs mengganti sebagian besar komponen bawaan Starlight dengan menambah beberapa fitur baru.
+## Features
 
-<dl>
-  <dt>
-    `Banner.astro`
-  </dt>
-  <dd>
-    Kustom tampilan dengan menambah kan beberapa tektur agar membuat tampilannya lebih sedikit mencolok
-  </dd>
-  
-  <dt>
-    `ContentPanel.astro`
-  </dt>
-  <dd>
-    Menambahkan 2 opsi tampilan halaman untuk `Blog`, dan `Blog post` agar tidak bentrok dengan bawaan starlight.
-   </dd>
-</dl>
+### Starlight Component Redesign
+
+Stradocs replaces most of Starlight's built-in components with redesigned versions. It's not just a CSS override—each component has its own markup and logic.
 
 <CardGrid>
   <Card title="Header & Navigation" icon="bars">
-    Navigasi utama dengan desain yang lebih bersih dan kontrol penuh atas
-    struktur visual.
+    Main navigation with a cleaner design and full control over the visual
+    structure.
   </Card>
   <Card title="Hero" icon="star">
-    Seksi hero halaman utama dengan layout custom yang tidak terikat template
-    bawaan Starlight.
+    The main page hero section has a custom layout that is not tied to the
+    default Starlight template.
   </Card>
   <Card title="Footer" icon="information">
-    Footer dengan informasi, tautan sosial, dan struktur yang sepenuhnya
-    dikontrol.
+    Footer with information, social links and fully controlled structure.
   </Card>
   <Card title="Head & OG Image" icon="external">
-    Pengelolaan meta tag lengkap — termasuk Open Graph image otomatis untuk
-    setiap halaman.
+    Complete meta tag management including automatic Open Graph images for
+    every page.
   </Card>
   <Card title="MarkdownContent" icon="document">
-    Wrapper konten artikel dengan sistem tipografi custom yang konsisten di
-    seluruh halaman.
+    Wrapper article content with a custom typography system that is consistent
+    across pages.
   </Card>
   <Card title="PageTitle & Banner" icon="pen">
-    Judul halaman dan banner pengumuman dengan styling tersendiri.
+    Page titles and announcement banners with their own styling.
   </Card>
 </CardGrid>
 
 ### Markdown Plugins
 
 <Aside type="note">
-  Astro 7 menggunakan `@astrojs/markdown-satteri` sebagai markdown processor
-  default — pipeline berbasis Rust yang jauh lebih cepat dari remark/rehype.
+  Astro 7 uses `@astrojs/markdown-satteri` as the default markdown processor — a
+  Rust-based pipeline that is much faster than remark/rehype.
 </Aside>
 
-Stradocs menambahkan dua plugin custom berbasis hast yang bekerja di level AST:
+Stradocs adds two hast-based custom plugins that work at the AST level:
 
 <CardGrid>
   <Card title="satteriExternalLink" icon="external">
-    Memproses semua tautan eksternal secara otomatis. Setiap tautan keluar dari
-    situs mendapat atribut dan indikator visual yang tepat — tanpa penulis perlu
-    menulis markup tambahan.
+    Process all external links automatically. Every outbound link from the site
+    gets the proper attributes and visual indicators without the author
+    needing to write additional markup.
   </Card>
   <Card title="satteriTable" icon="list-format">
-    Membungkus setiap tabel dalam container responsif yang scrollable
-    horizontal. Berlaku otomatis untuk semua konten Markdown dan MDX, termasuk
-    konten yang sudah ada.
+    Wraps each table in a responsive, horizontally scrollable container.
+    Automatically applies to all Markdown and MDX content, including existing
+    content.
   </Card>
 </CardGrid>
 
 <Aside type="tip">
-  Karena kedua plugin bekerja di level hast AST, fiturnya aktif di **seluruh
-  file Markdown dan MDX** tanpa perlu import komponen tambahan di setiap file
-  konten.
+  Since both plugins work at the hash AST level, their features are active
+  across **all Markdown and MDX files** without the need to import additional
+  components in each content file.
 </Aside>
 
-### Sistem Blog Terintegrasi
+### Integrated Blog System
 
-Starlight dirancang untuk dokumentasi, bukan blog. Stradocs menambahkan sistem blog yang terintegrasi penuh — bukan plugin terpisah, melainkan bagian dari struktur proyek yang sama.
+Starlight was designed for documentation, not blogging. Stradocs adds a fully integrated blog system—not a separate plugin, but rather part of the same project structure.
 
 <CardGrid>
   <Card title="Blog Listing" icon="list-format">
-    Halaman daftar artikel dengan pagination dan filter berdasarkan tag.
+    Article listing page with pagination and filtering by tags.
   </Card>
-  <Card title="Halaman Artikel" icon="document">
-    Tampilan detail artikel individual dengan layout yang bersih dan terfokus
-    pada konten.
+  <Card title="Article Page" icon="document">
+    Detailed view of individual articles with a clean, content-focused layout.
   </Card>
   <Card title="RelatedPost" icon="forward-slash">
-    Menampilkan artikel terkait berdasarkan kesamaan tag di bawah setiap
-    artikel.
+    Displays related articles based on similar tags below each article.
   </Card>
   <Card title="PopularPost" icon="star">
-    Widget untuk menampilkan artikel-artikel yang diprioritaskan — di sidebar
-    atau inline.
+    Widget to display prioritized articles in the sidebar or inline.
   </Card>
 </CardGrid>
 
 <Aside>
-  Penggunaan komponen di dalam konten blog sama seperti bawaan Starlight. Buat
-  file `.mdx` untuk memanfaatkan komponen langsung di dalam artikel.
+  Using components within blog content is the same as with Starlight. Create a
+  `.mdx` file to use components directly within articles.
 </Aside>
 
-### Extended Schema untuk Blog
+### Extended Schema for Blogs
 
-Skema konten Starlight diperluas menggunakan opsi `extend` dari `docsSchema()`. Semua field bersifat opsional — halaman dokumentasi biasa tidak perlu menyertakannya.
+Starlight's content schema is extended using the `extend` option of `docsSchema()`. All fields are optional — regular documentation pages don't need to include them.
 
 ```ts
 // src/content/config.ts
@@ -159,16 +158,16 @@ schema: docsSchema({
 });
 ```
 
-Contoh frontmatter artikel blog:
+Example of blog article frontmatter:
 
 ```yaml
 ---
-title: "Judul Artikel"
-description: "Deskripsi singkat."
+title: "Article title"
+description: "Short description."
 pubDate: 2025-09-01
 author:
-  - name: "Bima Akbar"
-    avatar: ~/assets/images/author/bimaakbar-dev.svg
+  - name: "yourname"
+    avatar: ~/assets/images/author/your-image.jpg
 heroImage: ~/assets/images/blog/cover.jpg
 tags:
   - astro
@@ -177,23 +176,54 @@ draft: false
 ---
 ```
 
-| Field       | Tipe                              | Keterangan                                           |
-| ----------- | --------------------------------- | ---------------------------------------------------- |
-| `pubDate`   | `Date` (opsional)                 | Tanggal publikasi; di-coerce otomatis dari string    |
-| `heroImage` | `ImageMetadata` (opsional)        | Gambar utama, diproses Astro Image                   |
-| `author`    | `{ name?, avatar? }[]` (opsional) | Array penulis — mendukung multi-author dengan avatar |
-| `tags`      | `string[]` (opsional)             | Kategori / tag artikel                               |
+<dl>
+  <dt>
+    `pubDate`
+  </dt>
+  <dd>
+    `Date` (optional)
+    
+    Publication date; automatically coerced from string.
+  </dd>
+  
+  <dt>
+    `heroImage`
+  </dt>
+  <dd>
+    `ImageMetadata` (optional)
+    
+    Feature image, processed by Astro Image
+  </dd>
+  
+  <dt>
+    `author`
+  </dt>
+  <dd>
+    `{ name?, avatar? }[]` (optional)
+    
+    Author array — supports multiple authors with avatars
+  </dd>
+  
+  <dt>
+    `tags`
+  </dt>
+  <dd>
+    `string[]` (optional)
+    
+    Article categories/tags
+  </dd>
+</dl>
 
 <Aside type="tip">
-  `author` didesain sebagai **array** — satu artikel bisa memiliki lebih dari
-  satu penulis, masing-masing dengan nama dan avatar sendiri.
+  `author` is designed as an **array** — a single article can have more than one
+  author, each with their own name and avatar.
 </Aside>
 
-### Dukungan Dua Bahasa
+### Dual Language Support
 
-Stradocs dikonfigurasi bilingual sejak awal: **English** sebagai root dan **Indonesia** di `/id`.
+Stradocs is configured bilingually from the start: **English** as the root and **Indonesian** in `/id`.
 
-Selain routing i18n bawaan Starlight, string UI komponen blog juga bisa diterjemahkan penuh melalui i18n schema extension:
+In addition to Starlight's built-in i18n routing, the blog component's UI strings can also be fully translated via the i18n schema extension:
 
 ```ts
 schema: i18nSchema({
@@ -208,98 +238,79 @@ schema: i18nSchema({
 });
 ```
 
-Tidak ada string yang di-hardcode di dalam komponen — semuanya bisa diterjemahkan.
+There are no hardcoded strings inside the components — everything is translatable.
 
 ### OG Image & RSS
 
 <CardGrid>
   <Card title="OG Image" icon="external">
-    Setiap halaman — dokumentasi maupun artikel blog — menghasilkan Open Graph
-    image secara otomatis. Tampilan konsisten dan profesional saat tautan
-    dibagikan di media sosial atau platform pesan.
+    Every page—documentation and blog posts—automatically generates an Open
+    Graph image. This creates a consistent and professional appearance when
+    links are shared on social media or messaging platforms.
   </Card>
   <Card title="RSS Feed" icon="rss">
-    Feed RSS tersedia di `/rss.xml` dan mencakup seluruh entri blog secara
-    otomatis. Pembaca bisa berlangganan tanpa harus mengunjungi situs secara
-    manual.
+    The RSS feed is available in `/rss.xml` and automatically includes all blog
+    entries. Readers can subscribe without having to manually visit the site.
   </Card>
 </CardGrid>
 
 ## Open Source
 
-Stradocs dibangun oleh **Bima Akbar** dan dirilis sepenuhnya **gratis dan open source**. Tidak ada lisensi berbayar, tidak ada fitur yang dikunci. Kontribusi dalam bentuk apapun sangat terbuka — bug report, pull request, saran fitur, atau sekadar diskusi.
+Stradocs was built by **Bima Akbar** and is released completely free and open source. There are no paid licenses, no locked features. Contributions in any form are welcome—bug reports, pull requests, feature suggestions, or simply discussions.
 
 ```bash
 # Clone repositori
 git clone https://github.com/bimaakbar-dev/bimaakbar-dev.github.io.git my-docs
 
 cd my-docs
+
 npm install
+
 npm run dev
 ```
 
 <Aside type="note">
-  Arsitektur Stradocs dirancang agar mudah dibaca dan dimodifikasi. Tidak ada
-  abstraksi tersembunyi — hanya kode Astro yang terstruktur dan bisa ditelusuri
-  dari awal hingga akhir.
+  The Stradocs architecture is designed to be easy to read and modify. There are
+  no hidden abstractions—just structured, traceable Astro code from start to
+  finish.
 </Aside>
 
 <CardGrid>
   <LinkCard
-    title="Lihat Repositori"
-    description="Fork, eksplorasi kode, dan jadikan milik Anda."
+    title="View Repository"
+    description="Fork, explore the code, and make it your own."
     href="https://github.com/bimaakbar-dev/bimaakbar-dev.github.io"
   />
   <LinkCard
-    title="Lihat Demo"
-    description="Stradocs live di GitHub Pages."
+    title="View Demo"
+    description="Stradocs is live on GitHub Pages."
     href="https://bimaakbar-dev.github.io"
   />
 </CardGrid>
 
 ## Credits
 
-Stradocs tidak dibangun di ruang hampa. Terima kasih kepada proyek-proyek dan tim-tim berikut yang menjadi fondasi dan inspirasi di baliknya:
+Thanks to the following projects and teams, it's foundation and inspiration:
 
-<CardGrid variant="bento">
+<CardGrid>
   <LinkCard
     title="Astro"
-    description="Framework yang membuat semuanya mungkin — cepat, fleksibel, dan berorientasi pada developer experience."
+    description="The framework that makes it all possible — fast, flexible, and developer-experience-oriented."
     href="https://astro.build"
   />
   <LinkCard
     title="Starlight"
-    description="Fondasi dokumentasi Stradocs. Solid, terstruktur, dan extensible."
+    description="The foundation of Stradocs documentation. Solid, structured, and extensible."
     href="https://starlight.astro.build"
   />
   <LinkCard
     title="Fumadocs"
-    description="Inspirasi utama pendekatan desain — bersih, teropini, dan tidak kompromi soal kualitas."
+    description="The core inspiration for our design approach — clean, opinionated, and uncompromising on quality."
     href="https://fumadocs.vercel.app"
   />
   <LinkCard
     title="Vercel"
-    description="Referensi estetika sistem desain — presisi, minimal, dan konsisten di setiap detail."
+    description="The design system aesthetic reference — precise, minimal, and consistent in every detail."
     href="https://vercel.com"
-  />
-  <LinkCard
-    title="Montserrat"
-    description="Typeface heading Stradocs. Geometris dan berkarakter kuat."
-    href="https://fonts.google.com/specimen/Montserrat"
-  />
-  <LinkCard
-    title="Inter"
-    description="Typeface body Stradocs. Dirancang khusus untuk keterbacaan di layar."
-    href="https://rsms.me/inter"
-  />
-  <LinkCard
-    title="FiraCode"
-    description="Typeface monospace Stradocs. Mendukung ligatures untuk pengalaman membaca kode yang lebih baik."
-    href="https://github.com/tonsky/FiraCode"
-  />
-  <LinkCard
-    title="Tailwind CSS"
-    description="Utility-first CSS framework yang digunakan untuk styling custom di Stradocs."
-    href="https://tailwindcss.com"
   />
 </CardGrid>
