@@ -9,30 +9,46 @@ interface Props {
   limit?: number;
   exclude?: string[];
 }
-const { title = "Contributor", repo, limit = 5, exclude = ["dependabot[bot]", "renovate[bot]", "github-actions[bot]"] } = Astro.props;
 
-const cacheDir = path.join(process.cwd(), ".cache");
+const {
+  title = "Contributor",
+  repo,
+  limit = 5,
+  exclude = ["dependabot[bot]", "renovate[bot]", "github-actions[bot]"],
+} = Astro.props;
+
+const cacheDir  = path.join(process.cwd(), ".cache");
 const cacheFile = path.join(cacheDir, `contributors-${repo.replace("/", "-")}.json`);
+
 let contributors: any[] = [];
 
 try {
   if (existsSync(cacheFile)) {
-    const { mtimeMs } = await import("node:fs").then(m => m.promises.stat(cacheFile));
-    if (Date.now() - mtimeMs < 86400000) {
+    const { promises: fs } = await import("node:fs");
+    const { mtimeMs } = await fs.stat(cacheFile);
+    if (Date.now() - mtimeMs < 86_400_000) {
       contributors = JSON.parse(await readFile(cacheFile, "utf-8"));
     }
   }
+
   if (contributors.length === 0) {
-    const res = await fetch(`https://api.github.com/repos/${repo}/contributors?per_page=100`, {
-      headers: {
-        "User-Agent": "Stradocs",
-        Accept: "application/vnd.github+json",
-      ...(import.meta.env.GITHUB_TOKEN? { Authorization: `Bearer ${import.meta.env.GITHUB_TOKEN}` } : {}),
+    const res = await fetch(
+      `https://api.github.com/repos/${repo}/contributors?per_page=100`,
+      {
+        headers: {
+          "User-Agent": "Stradocs",
+          Accept: "application/vnd.github+json",
+          ...(import.meta.env.GITHUB_TOKEN
+            ? { Authorization: `Bearer ${import.meta.env.GITHUB_TOKEN}` }
+            : {}),
+        },
       },
-    });
+    );
+
     if (res.ok) {
-      let data = await res.json();
-      data = data.filter((c: any) =>!exclude.includes(c.login));
+      const data: any[] = (await res.json()).filter(
+        (c: any) => !exclude.includes(c.login),
+      );
       contributors = data;
       try {
         if (!existsSync(cacheDir)) await mkdir(cacheDir, { recursive: true });
@@ -42,7 +58,7 @@ try {
   }
 } catch {}
 
-const visible = contributors.slice(0, limit);
+const visible   = contributors.slice(0, limit);
 const remaining = Math.max(0, contributors.length - limit);
 ---
 
@@ -52,71 +68,97 @@ const remaining = Math.max(0, contributors.length - limit);
     {visible.map((c) => (
       <li role="listitem">
         <a href={c.html_url} target="_blank" rel="noopener noreferrer" title={c.login}>
-          <img src={`${c.avatar_url}&s=72`} alt={c.login} width="36" height="36" loading="lazy" decoding="async" />
+          <img
+            src={`${c.avatar_url}&s=72`}
+            alt={c.login}
+            width="36"
+            height="36"
+            loading="lazy"
+            decoding="async"
+          />
         </a>
       </li>
     ))}
     <li role="listitem">
       <a
-        href={remaining > 0? `https://github.com/${repo}/graphs/contributors` : `https://github.com/${repo}`}
-        target="_blank" rel="noopener noreferrer"
+        href={remaining > 0
+          ? `https://github.com/${repo}/graphs/contributors`
+          : `https://github.com/${repo}`}
+        target="_blank"
+        rel="noopener noreferrer"
         class:list={["stack-more", { "is-plus": remaining === 0 }]}
-        aria-label={remaining > 0? `${remaining} more` : "Become a contributor"}
+        aria-label={remaining > 0 ? `${remaining} more` : "Become a contributor"}
       >
-        {remaining > 0? `+${remaining}` : "+"}
+        {remaining > 0 ? `+${remaining}` : "+"}
       </a>
     </li>
   </ul>
 )}
 
 <style>
-.contributor-stack {
-  display: flex;
-  align-items: center;
-  list-style: none;
-  padding: 0;
-  margin: 0.5rem 0 0;
-  isolation: isolate;
-}
-.contributor-stack {
-  & li { margin-left: -10px; }
-  & li:first-child { margin-left: 0; }
-  & img {
-    width: 36px; height: 36px;
+  .contributor-stack {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+    isolation: isolate;
+
+    & li {
+      margin-left: -10px;
+    }
+    & li:first-child {
+      margin-left: 0;
+    }
+    & img {
+      display: block;
+      width: 36px;
+      height: 36px;
+      border-radius: 99rem;
+      border: 3px solid var(--sl-color-black);
+      background: var(--sl-color-gray-6);
+      object-fit: cover;
+    }
+    & a {
+      display: block;
+      border-radius: 99rem;
+      transition: transform 0.15s;
+    }
+  }
+
+  .stack-more {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
     border-radius: 99rem;
     border: 3px solid var(--sl-color-black);
-    background: var(--sl-color-gray-6);
-    display: block;
-    object-fit: cover;
+    background: var(--sl-color-gray-5);
+    color: var(--sl-color-white);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-decoration: none;
   }
-  & a { display: block; border-radius: 99rem; transition: transform.15s; }
-}
-.stack-more {
-  width: 48px; 
-  height: 48px;
-  border-radius: 99rem;
-  border: 3px solid var(--sl-color-black);
-  background: var(--sl-color-gray-5);
-  color: var(--sl-color-white);
-  display: grid;
-  place-items: center;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-decoration: none;
-}
-.stack-more.is-plus {
-  background: transparent;
-  border-style: dashed;
-  border-color: var(--sl-color-gray-4);
-  color: var(--sl-color-gray-2);
-}
+  .stack-more.is-plus {
+    background: transparent;
+    border-style: dashed;
+    border-color: var(--sl-color-gray-4);
+    color: var(--sl-color-gray-2);
+  }
 
-:global([data-theme="light"]) .contributor-stack img {
-  background: var(--sl-color-gray-7);
-}
+  :global([data-theme="light"]) .contributor-stack img {
+    background: var(--sl-color-gray-7);
+  }
 
-@media (hover: hover) {
-  .contributor-stack a:hover { transform: translateY(-2px); z-index: 2; position: relative; }
-  .stack-more.is-plus:hover { border-color: var(--sl-color-white); color: var(--sl-color-white); }
-}
+  @media (hover: hover) {
+    .contributor-stack a:hover {
+      position: relative;
+      z-index: 2;
+      transform: translateY(-2px);
+    }
+    .stack-more.is-plus:hover {
+      border-color: var(--sl-color-white);
+      color: var(--sl-color-white);
+    }
+  }
 </style>
