@@ -10,7 +10,6 @@
     & > code {
       font-family: var(--font-firaCode);
       font-size: var(--sl-text-code-sm);
-      line-height: inherit;
     }
   }
   & .frame {
