@@ -2,14 +2,16 @@
 import { defineConfig, fontProviders } from "astro/config";
 import starlight from "@astrojs/starlight";
 
-import { sidebarConfig } from "./src/config/sidebar";
 import markdocGrammar from './grammars/markdoc.tmLanguage.json'
+
+import { sidebarConfig } from "./src/config/sidebar";
 import { Overrides } from "./src/components/overrides";
 import { satteri } from "@astrojs/markdown-satteri";
 import { hastExternalLink } from "./src/lib/plugins/satteri/hast/hast-external-link";
 import { hastTable } from "./src/lib/plugins/satteri/hast/hast-table";
 import { hastAbbr } from "./src/lib/plugins/satteri/hast/hast-abbr";
-import { mdastStradocsAside } from './src/lib/plugins/satteri/mdast/mdast-stradocs-aside'
+import { mdastAbbr } from './src/lib/plugins/satteri/mdast/mdast-abbr';
+import { mdastStradocsAside } from './src/lib/plugins/satteri/mdast/mdast-stradocs-aside';
 
 const site = "https://bimaakbar-dev.github.io/";
 const siteName = "Stradocs";
@@ -75,15 +77,15 @@ export default defineConfig({
   markdown: {
     processor: satteri({
       hastPlugins: [
-        hastAbbr,
+        // hastAbbr,
         hastExternalLink,
         hastTable,
       ],
       mdastPlugins: [
+        mdastAbbr,
         mdastStradocsAside,
       ],
       features: {
-        frontmatter: true,
         headingAttributes: true,
         directive: true,
         superscript: true,
@@ -91,7 +93,7 @@ export default defineConfig({
         wikilinks: true,
         definitionList: true,
         smartPunctuation: true,
-        rawHtml: true
+        rawHtml: false
       },
     }),
   },
@@ -110,7 +112,7 @@ export default defineConfig({
       defaultLocale: "root",
       locales: siteLocale,
       expressiveCode: { 
-        // themes: ["github-dark", "vitesse-light"],
+        themes: ["github-dark", "vitesse-light"],
         shiki: {
           langs: [markdocGrammar] 
         }
