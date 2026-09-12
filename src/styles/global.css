@@ -1,10 +1,9 @@
-@import "./stargazer.css";
-@import "./anchor-links.css";
-@import "./asides.css";
-@import './stradocs/components/Asides.css';
+/* @import "./stargazer.css"; */
+@import "./reset.css";
 @import "./expressive-code.css";
 @import "./markdown.css";
-@import "./reset.css";
+@import "./anchor-links.css";
+@import "./asides.css";
 
 @import "./components/Pagination.css";
 @import "./components/Search.css";
@@ -18,3 +17,7 @@
 @import "./user-components/LinkCard.css";
 @import "./user-components/Steps.css";
 @import "./user-components/Tabs.css";
+
+@import './stradocs/components/Asides.css';
+
+@import './stargazer.css';
