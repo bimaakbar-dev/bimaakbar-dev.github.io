@@ -1,15 +1,18 @@
 import { defineHastPlugin } from "satteri";
 
 export const hastAbbr = defineHastPlugin({
-  name: "satteri-abbr",
+  name: "stradocs-abbr",
 
   element: {
     filter: ["abbr"],
     visit(node) {
-      const title = node.properties?.title;
-      if (typeof title !== "string" || !title.trim()) return;
+      if (node.tagName !== "abbr") return node;
 
-      // Return node baru → Sätteri ganti node yang dikunjungi dengan ini
+      const title = node.properties?.title;
+      if (typeof title !== "string" || !title.trim()) return node;
+
+      const tooltipId = `abbr-${Math.random().toString(36).slice(2, 9)}`;
+
       return {
         type: "element",
         tagName: "span",
@@ -18,13 +21,20 @@ export const hastAbbr = defineHastPlugin({
           {
             type: "element",
             tagName: "abbr",
-            properties: { title },
+            properties: {
+              "aria-label": title,
+              "aria-describedby": tooltipId,
+            },
             children: node.children ?? [],
           },
           {
             type: "element",
             tagName: "span",
-            properties: { className: ["abbr-tooltip"], role: "tooltip" },
+            properties: {
+              className: ["abbr-tooltip"],
+              role: "tooltip",
+              id: tooltipId,
+            },
             children: [{ type: "text", value: title }],
           },
         ],
