@@ -3,16 +3,18 @@ import { defineConfig, fontProviders } from "astro/config";
 import starlight from "@astrojs/starlight";
 
 import { sidebarConfig } from "./src/config/sidebar";
-import { expressiveCode } from "./src/config/expressive-code";
+import markdocGrammar from './grammars/markdoc.tmLanguage.json'
 import { Overrides } from "./src/components/overrides";
 import { satteri } from "@astrojs/markdown-satteri";
 import { hastExternalLink } from "./src/lib/plugins/satteri/hast/hast-external-link";
 import { hastTable } from "./src/lib/plugins/satteri/hast/hast-table";
+import { hastAbbr } from "./src/lib/plugins/satteri/hast/hast-abbr";
+import { mdastStradocsAside } from './src/lib/plugins/satteri/mdast/mdast-stradocs-aside'
 
 import tailwindcss from "@tailwindcss/vite";
 
 const site = "https://bimaakbar-dev.github.io/";
-const siteName = "c0desk1";
+const siteName = "Stradocs";
 const siteDesc = "Custom Starlight theme featuring a modern design";
 const siteLocale = {
   root: {
@@ -22,7 +24,7 @@ const siteLocale = {
   id: {
     label: "Indonesia",
     lang: "id",
-  }
+  },
 };
 
 // https://astro.build/config
@@ -74,23 +76,28 @@ export default defineConfig({
   ],
   markdown: {
     processor: satteri({
-      mdastPlugins: [],
       hastPlugins: [
+        hastAbbr,
         hastExternalLink,
         hastTable,
       ],
+      mdastPlugins: [
+        
+        mdastStradocsAside,
+      ],
       features: {
+        frontmatter: true,
         headingAttributes: true,
         directive: true,
         superscript: true,
         subscript: true,
         wikilinks: true,
         definitionList: true,
-        smartPunctuation: true
+        smartPunctuation: true,
+        rawHtml: true
       },
     }),
   },
-
   integrations: [
     starlight({
       title: siteName,
@@ -98,14 +105,19 @@ export default defineConfig({
       description: siteDesc,
       logo: {
         light: "./src/assets/images/author/bimaakbar.svg",
-        dark: "./src/assets/images/author/bimaakbar.svg",
+        dark: "./src/assets/images/logo/logo.svg",
         replacesTitle: false,
       },
       favicon: "/images/favicon.svg",
       customCss: ["./src/styles/global.css"],
       defaultLocale: "root",
       locales: siteLocale,
-      expressiveCode: expressiveCode,
+      expressiveCode: { 
+        // themes: ["github-dark", "vitesse-light"],
+        shiki: {
+          langs: [markdocGrammar] 
+        }
+      },
       components: Overrides,
       social: [
         {
@@ -129,6 +141,7 @@ export default defineConfig({
       sidebar: sidebarConfig,
     }),
   ],
+  
   vite: {
     plugins: [tailwindcss()],
   },
