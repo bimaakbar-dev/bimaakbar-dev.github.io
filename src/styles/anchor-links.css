@@ -1,0 +1,46 @@
+.sl-markdown-content {
+  & :is(.sl-heading-wrapper) {
+    /* The size of the SVG icon. Default 0.8275em */
+    --sl-anchor-icon-size: 0.7275em;
+	/* The horizontal space between the SVG icon and the end of the heading text. */
+    --sl-anchor-icon-gap: 0.25em;
+	/* The end of line space required to accommodate the anchor link. */
+    --sl-anchor-icon-space: calc(var(--sl-anchor-icon-size) + var(--sl-anchor-icon-gap));
+
+    line-height: var(--sl-line-height-headings);
+    vertical-align: middle;
+  }
+
+  & :is(.sl-anchor-icon > svg) {
+	display: inline;
+	width: var(--sl-anchor-icon-size);
+	/* Center the link icon SVG vertically in the line. */
+	vertical-align: middle;
+	transform: translateY(
+		calc((var(--sl-line-height-headings) - var(--sl-anchor-icon-size)) / 2)
+	);
+  }
+
+  & :not(h1, h2, h3, h4, h5, h6, .sl-heading-wrapper) + :is(.sl-heading-wrapper) {
+    margin-top: 1.5em;
+  }
+
+  & .sl-heading-wrapper.level-h1 {
+    font-size: var(--sl-text-h1);
+  }
+  & .sl-heading-wrapper.level-h2 {
+    font-size: var(--sl-text-h2);
+  }
+  & .sl-heading-wrapper.level-h3 {
+    font-size: var(--sl-text-h3);
+  }
+  & .sl-heading-wrapper.level-h4 {
+    font-size: var(--sl-text-h4);
+  }
+  & .sl-heading-wrapper.level-h5 {
+    font-size: var(--sl-text-h5);
+  }
+  & .sl-heading-wrapper.level-h6 {
+    font-size: var(--sl-text-h6);
+  }
+}

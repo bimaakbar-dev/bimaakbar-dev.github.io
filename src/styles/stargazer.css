@@ -1,0 +1,142 @@
+:root,
+::backdrop {
+  --sl-color-white: hsl(0, 0%, 98%);
+  --sl-color-gray-1: hsl(0, 0%, 96%);
+  --sl-color-gray-2: hsl(0, 0%, 80%);
+  --sl-color-gray-3: hsla(0, 0%, 60%, 0.8);
+  --sl-color-gray-4: hsla(0, 0%, 35%, 0.8);
+  --sl-color-gray-5: hsla(0, 0%, 12.9%, 0.8);
+  --sl-color-gray-6: hsla(0, 0%, 8%, 1.0);
+  --sl-color-black: hsla(0, 0%, 6%, 1.0);
+
+  --sl-hue-orange: 35;
+  --sl-color-orange-low: hsl(var(--sl-hue-orange), 30%, 15%);
+  --sl-color-orange: hsl(var(--sl-hue-orange), 90%, 60%);
+  --sl-color-orange-high: hsl(var(--sl-hue-orange), 70%, 85%);
+
+  --sl-hue-green: 150;
+  --sl-color-green-low: hsl(var(--sl-hue-green), 30%, 15%);
+  --sl-color-green: hsl(var(--sl-hue-green), 80%, 55%);
+  --sl-color-green-high: hsl(var(--sl-hue-green), 60%, 85%);
+
+  --sl-hue-blue: 212;
+  --sl-color-blue-low: hsl(var(--sl-hue-blue), 40%, 16%);
+  --sl-color-blue: hsl(var(--sl-hue-blue), 90%, 60%);
+  --sl-color-blue-high: hsl(var(--sl-hue-blue), 70%, 88%);
+
+  --sl-hue-purple: 270;
+  --sl-color-purple-low: hsl(var(--sl-hue-purple), 30%, 15%);
+  --sl-color-purple: hsl(var(--sl-hue-purple), 80%, 65%);
+  --sl-color-purple-high: hsl(var(--sl-hue-purple), 60%, 88%);
+
+  --sl-hue-red: 350;
+  --sl-color-red-low: hsl(var(--sl-hue-red), 30%, 15%);
+  --sl-color-red: hsl(var(--sl-hue-red), 85%, 65%);
+  --sl-color-red-high: hsl(var(--sl-hue-red), 70%, 88%);
+
+  --sl-color-accent-low: hsl(224, 54%, 20%);
+  --sl-color-accent: hsl(224, 100%, 60%);
+  --sl-color-accent-high: hsl(224, 100%, 85%);
+
+  /* disable for maintance
+  --sl-color-accent-high: hsl(22, 100%, 60%);
+  --sl-color-accent: hsl(32, 100%, 55%);
+  --sl-color-accent-low: hsla(22, 100%, 60%, 0.603);
+  */
+
+  --sl-color-text: var(--sl-color-gray-1);
+
+  --sl-color-text-accent: var(--sl-color-accent-high);
+  --sl-color-text-invert: var(--sl-color-black);
+
+  --sl-color-bg: var(--sl-color-black);
+  --sl-color-bg-nav: var(--sl-color-gray-6);
+  --sl-color-bg-sidebar: var(--sl-color-gray-6);
+  --sl-color-bg-inline-code: var(--sl-color-gray-6);
+  
+  --sl-color-bg-accent: var(--sl-color-accent-high);
+
+  --sl-color-hairline-light: var(--sl-color-gray-5);
+  --sl-color-hairline: var(--sl-color-gray-5);
+  --sl-color-hairline-shade: var(--sl-color-gray-5);
+
+  --sl-color-backdrop-overlay: hsla(223, 13%, 10%, 0.66);
+
+  --sl-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.8);
+  --sl-shadow-md: 0 4px 12px rgb(0 0 0 / 0.7);
+  --sl-shadow-lg: 0 12px 24px rgb(0 0 0 / 0.8);
+
+  --orange-hsl: 32, 100%, 57%;
+  --overlay-orangeblur: hsla(var(--orange-hsl), 0.2);
+
+  --purple-hsl: 255, 60%, 60%;
+	--overlay-blurple: hsla(var(--purple-hsl), 0.2);
+}
+
+:root[data-theme="light"],
+[data-theme="light"] ::backdrop {
+  --sl-color-black: #FAF3E8;
+  --sl-color-gray-7: #F3E9D9;
+  --sl-color-gray-6: #EADBC3;
+  --sl-color-gray-5: #DFCBAA;
+  --sl-color-gray-4: #C1AB8D;
+
+  --sl-color-gray-3: #A18A70;
+  --sl-color-gray-2: #82694E;
+  --sl-color-gray-1: #5C4936;
+  --sl-color-white: #433425;
+
+  --sl-color-accent-low: #EADBC3;
+  --sl-color-accent: #BD8862;
+  --sl-color-accent-high: #6E4A32;
+
+  --sl-color-text: var(--sl-color-white);
+  --sl-color-text-accent: var(--sl-color-accent-high);
+  --sl-color-text-invert: var(--sl-color-black);
+
+  --sl-color-bg: var(--sl-color-black);
+  --sl-color-bg-nav: var(--sl-color-gray-7);
+  --sl-color-bg-sidebar: var(--sl-color-gray-7);
+  --sl-color-bg-inline-code: var(--sl-color-gray-7);
+  --sl-color-bg-accent: var(--sl-color-accent-high);
+
+  --sl-color-hairline-light: var(--sl-color-gray-6);
+  --sl-color-hairline-shade: var(--sl-color-gray-6);
+
+  --sl-hue-orange: 26;
+  --sl-color-orange-low: hsl(var(--sl-hue-orange), 40%, 88%);
+  --sl-color-orange: hsl(var(--sl-hue-orange), 50%, 55%);
+  --sl-color-orange-high: hsl(var(--sl-hue-orange), 45%, 38%);
+
+  --sl-hue-blue: 205;
+  --sl-color-blue: hsl(var(--sl-hue-blue), 30%, 50%);
+  --sl-hue-green: 100;
+  --sl-color-green: hsl(var(--sl-hue-green), 25%, 42%);
+  --sl-hue-purple: 20;
+  --sl-color-purple: hsl(var(--sl-hue-purple), 30%, 52%);
+
+  --sl-shadow-sm: 0 1px 2px hsla(24, 30%, 25%, 0.05);
+  --sl-shadow-md: 0 2px 4px hsla(24, 30%, 25%, 0.07);
+  --sl-shadow-lg: 0 4px 8px hsla(24, 30%, 25%, 0.09);
+}
+
+
+[data-has-hero] :is(.page){
+  background:
+    linear-gradient(215deg, var(--overlay-blurple), transparent 40%),
+    radial-gradient(var(--overlay-blurple), transparent 40%)
+      no-repeat -60vw -40vh / 105vw 200vh,
+    radial-gradient(var(--overlay-blurple), transparent 65%) no-repeat 50%
+      calc(100% + 20rem) / 60rem 30rem;
+}
+
+[data-has-hero] :is(header):not([data-has-sidebar][data-has-hero] header) {
+  border-bottom: 1px solid transparent;
+  background-color: transparent;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+[data-has-hero] :is(.hero > img) {
+  filter: drop-shadow(0 0 3rem var(--overlay-blurple));
+}

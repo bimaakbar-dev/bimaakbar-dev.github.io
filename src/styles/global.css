@@ -1,0 +1,25 @@
+/* @layer base, starlight, theme, components, utilities;
+
+@import "@astrojs/starlight-tailwind";
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@import "./stargazer.css"; */
+@import "./anchor-links.css";
+@import "./asides.css";
+@import "./expressive-code.css";
+@import "./markdown.css";
+@import "./reset.css";
+
+@import "./components/Pagination.css";
+@import "./components/Search.css";
+@import "./components/SidebarSublist.css";
+@import "./components/SiteTitle.css";
+
+@import "./user-components/Badge.css";
+@import "./user-components/Card.css";
+@import "./user-components/FileTree.css";
+@import "./user-components/LinkButton.css";
+@import "./user-components/LinkCard.css";
+@import "./user-components/Steps.css";
+@import "./user-components/Tabs.css";

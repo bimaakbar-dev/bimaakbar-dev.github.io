@@ -1,0 +1,14 @@
+starlight-file-tree {
+  border: 1px solid var(--sl-color-hairline);
+  border-radius: 0.75rem;
+  background-color: var(--sl-color-gray-6);
+  font-size: var(--sl-text-xs);
+  padding: 1rem
+}
+starlight-file-tree .highlight {
+  border-radius: 0.25rem;
+  font-weight: 400;
+}
+[data-theme='light'] starlight-file-tree {
+  background-color: var(--sl-color-gray-7);
+}

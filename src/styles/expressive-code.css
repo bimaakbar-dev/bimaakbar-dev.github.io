@@ -1,0 +1,37 @@
+.sl-markdown-content {
+  & .expressive-code .frame {
+    box-shadow: none;
+  }
+  & .expressive-code .frame.has-title {
+    background: var(--sl-color-black) !important;
+    border-radius: 1rem;
+  }
+  & .expressive-code .frame.has-title header {
+    background: var(--sl-color-black) !important;
+  }
+  & .expressive-code .frame.is-terminal {
+    background: var(--sl-color-black) !important;
+    border-radius: 1rem;
+  }
+  & .expressive-code .frame.is-terminal header {
+    background: var(--sl-color-black) !important;
+  }
+  & .expressive-code .copy button {
+    border-radius: 0.5rem;
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    align-items: center;
+    justify-content: center;
+  }
+  & .expressive-code .copy button::after {
+    margin: 0.5rem !important;
+  }
+  & .expressive-code .copy button:focus {
+    outline-color: var(--sl-color-accent);
+  }
+}
+@media (hover: hover) {
+  .sl-markdown-content .expressive-code .copy button:hover {
+    outline-color: var(--sl-color-accent);
+  }
+}

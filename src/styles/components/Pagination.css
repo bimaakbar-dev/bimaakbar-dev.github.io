@@ -1,0 +1,35 @@
+.pagination-links {
+  & a {
+    position: relative;
+    gap: 0.5em;
+    border: 1px solid var(--sl-color-hairline-light);
+    border-radius: 0.75rem;
+    color: var(--sl-color-gray-3);
+    box-shadow: none;
+    font-size: var(--sl-text-xs);
+    background-color: rgb(from var(--sl-color-gray-6) r g b / 100%);
+  }
+  & a:hover {
+    background-color: rgb(from var(--sl-color-gray-6) r g b / 50%);
+  }
+  & .link-title {
+    color: var(--sl-color-white);
+    font-size: var(--sl-text-base);
+    line-height: var(--sl-line-height-headings);
+  }
+  & a svg {
+    position: relative;
+    top: 100%;
+    transform: translateY(-150%);
+    color: var(--sl-color-gray-4);
+  }
+}
+
+[data-theme='light'] .pagination-links {
+  & a {
+    background-color: rgb(from var(--sl-color-gray-7) r g b / 100%);
+  }
+  & a:hover {
+    background-color: rgb(from var(--sl-color-gray-7) r g b / 50%);
+  }
+}

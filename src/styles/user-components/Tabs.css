@@ -1,0 +1,43 @@
+/* Starlight Tabs Custom Styling */
+.tablist-wrapper {
+  overflow-x: auto;
+}
+
+.tablist-wrapper ~ [role="tabpanel"] {
+  margin-top: 1rem;
+}
+
+[role="tablist"] {
+  display: flex;
+  list-style: none;
+  border-bottom: 1px solid var(--sl-color-hairline-light);
+  padding: 0;
+  margin-bottom: 0.25rem;
+  font-size: var(--sl-text-sm);
+}
+
+.tab {
+  & > [role="tab"] {
+    --sl-tab-color-border: transparent;
+    gap: 0.5rem;
+    line-height: var(--sl-line-height-headings);
+    padding: 0.275em 1.25em;
+    box-shadow: 0 2px 0 var(--sl-tab-color-border);
+    color: var(--sl-color-gray-3);
+    font-weight: 500;
+  }
+  & > [role="tab"]:hover {
+    color: var(--sl-color-white);
+  }
+
+  & [role="tab"][aria-selected="true"] {
+    --sl-tab-color-border: var(--sl-color-accent-high);
+    color: var(--sl-color-white);
+  }
+}
+
+@media (min-width: 50rem) {
+  [role="tablist"] {
+    font-size: var(--sl-text-base);
+  }
+}
