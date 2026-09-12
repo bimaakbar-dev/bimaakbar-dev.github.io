@@ -25,7 +25,7 @@ try {
       headers: {
         "User-Agent": "Stradocs",
         Accept: "application/vnd.github+json",
-        ...(import.meta.env.GITHUB_TOKEN ? { Authorization: `Bearer ${import.meta.env.GITHUB_TOKEN}` } : {}),
+        ...(import.meta.env.GH_TOKEN ? { Authorization: `Bearer ${import.meta.env.GH_TOKEN}` } : {}),
       },
     });
     if (res.ok) {
@@ -72,8 +72,8 @@ const fmt = (n: number) => n >= 1000 ? `${(n/1000).toFixed(n >= 10000 ? 0 : 1)}k
   background: var(--sl-color-gray-6);
   text-decoration: none;
   color: var(--sl-color-text);
-  transition: all .15s;
-  margin-block: 1rem;
+  transition: all 0.15s;
+  margin-top: 1.5rem;
   & .repo-head { 
     display: flex; 
     align-items: center; 
