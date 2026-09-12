@@ -1,14 +1,13 @@
 ![Stardocs for Starlight Themes](.github/assets/images/banner.jpg 'Build the web you want')
 
 <p align="center">
-  <br/>
-  [![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
-  <br/>
   <a href="https://stradocs.dev">Stradocs</a> is a custom theme from Starlight developed by [Bima Akbar](https://github.com/bimaakbar-dev/) &mdash;
   <br />
   inspired by the design of <strong>Vercel</strong> and <strong>Fumadocs</strong>.
   <br/><br/>
 </p>
+
+[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
 
 [![Deploy site to Pages](https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/actions/workflows/astro.yml/badge.svg?branch=Dev)](https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/actions/workflows/astro.yml)
 
