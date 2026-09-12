@@ -1,13 +1,13 @@
 :root,
 ::backdrop {
-  --sl-color-white: hsl(0, 0%, 98%);
-  --sl-color-gray-1: hsl(0, 0%, 96%);
-  --sl-color-gray-2: hsl(0, 0%, 80%);
-  --sl-color-gray-3: hsla(0, 0%, 60%, 0.8);
-  --sl-color-gray-4: hsla(0, 0%, 35%, 0.8);
-  --sl-color-gray-5: hsla(0, 0%, 12.9%, 0.8);
-  --sl-color-gray-6: hsla(0, 0%, 8%, 1.0);
-  --sl-color-black: hsla(0, 0%, 6%, 1.0);
+  --sl-color-white: hsl(0, 0%, 92%);
+  --sl-color-gray-1: hsl(0, 0%, 98%);
+  --sl-color-gray-2: hsl(0, 0%, 86.9%);
+  --sl-color-gray-3: hsla(0, 0%, 70%, 0.8);
+  --sl-color-gray-4: hsl(0, 0%, 54.9%);
+  --sl-color-gray-5: hsla(0, 0%, 40.9%, 30%);
+  --sl-color-gray-6: hsl(0, 0%, 12.9%);
+  --sl-color-black: hsl(0, 0%, 7.04%);
 
   --sl-hue-orange: 35;
   --sl-color-orange-low: hsl(var(--sl-hue-orange), 30%, 15%);
@@ -19,10 +19,10 @@
   --sl-color-green: hsl(var(--sl-hue-green), 80%, 55%);
   --sl-color-green-high: hsl(var(--sl-hue-green), 60%, 85%);
 
-  --sl-hue-blue: 212;
-  --sl-color-blue-low: hsl(var(--sl-hue-blue), 40%, 16%);
-  --sl-color-blue: hsl(var(--sl-hue-blue), 90%, 60%);
-  --sl-color-blue-high: hsl(var(--sl-hue-blue), 70%, 88%);
+  --sl-hue-blue: 217;
+  --sl-color-blue-high: hsl(217, 91%, 60%);
+  --sl-color-blue:      hsl(217, 85%, 45%);
+  --sl-color-blue-low:  hsl(217, 50%, 16%);
 
   --sl-hue-purple: 270;
   --sl-color-purple-low: hsl(var(--sl-hue-purple), 30%, 15%);
@@ -50,8 +50,8 @@
   --sl-color-text-invert: var(--sl-color-black);
 
   --sl-color-bg: var(--sl-color-black);
-  --sl-color-bg-nav: var(--sl-color-black);
-  --sl-color-bg-sidebar: var(--sl-color-black);
+  --sl-color-bg-nav: var(--sl-color-gray-6);
+  --sl-color-bg-sidebar: var(--sl-color-gray-6);
   --sl-color-bg-inline-code: var(--sl-color-gray-6);
   
   --sl-color-bg-accent: var(--sl-color-accent-high);
