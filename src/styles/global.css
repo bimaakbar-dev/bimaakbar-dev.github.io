@@ -3,8 +3,9 @@
 @import "@astrojs/starlight-tailwind";
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities); 
+*/
 
-@import "./stargazer.css"; */
+@import "./stargazer.css";
 @import "./anchor-links.css";
 @import "./asides.css";
 @import "./expressive-code.css";
