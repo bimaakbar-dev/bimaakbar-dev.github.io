@@ -5,32 +5,9 @@
   --sl-font-system-mono:
     var(--font-firaCode), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     monospace;
+    
   --__sl-font: var(--sl-font-system);
   --__sl-font-mono: var(--sl-font-system-mono);
-
-  /* default font dari starlight
-     --sl-text-2xs: 0.75rem;
-    --sl-text-xs: 0.8125rem;
-    --sl-text-sm: 0.875rem;
-    --sl-text-base: 1rem;
-    --sl-text-lg: 1.125rem;
-    --sl-text-xl: 1.25rem;
-    --sl-text-2xl: 1.5rem;
-    --sl-text-3xl: 1.8125rem;
-    --sl-text-4xl: 2.1875rem;
-    --sl-text-5xl: 2.625rem;
-    --sl-text-6xl: 4rem; */
-
-  --sl-text-body: var(--sl-text-base);
-  --sl-text-body-sm: var(--sl-text-xs);
-  --sl-text-code: var(--sl-text-sm);
-  --sl-text-code-sm: var(--sl-text-xs);
-
-  --sl-text-h1: var(--sl-text-4xl);
-  --sl-text-h2: var(--sl-text-3xl);
-  --sl-text-h3: var(--sl-text-2xl);
-  --sl-text-h4: var(--sl-text-xl);
-  --sl-text-h5: var(--sl-text-lg);
 
   --sl-line-height: 1.75;
   --sl-line-height-headings: 1.2;
@@ -41,13 +18,13 @@
   --sl-mobile-toc-height: 2.75rem;
   --sl-sidebar-width: 18.75rem;
   --sl-content-width: 45rem;
-	--sl-content-pad-x: 1rem;
-	--sl-content-gap-y: 1rem;
+  --sl-content-pad-x: 1rem;
+  --sl-content-gap-y: 1rem;
 
   --sl-sidebar-pad-x: 1rem;
   
   --sl-main-pad: 0 0 3vh 0;
-	--sl-menu-button-size: 2rem;
+  --sl-menu-button-size: 2rem;
 
   --sl-nav-gap: var(--sl-content-pad-x);
   --sl-outline-offset-inside: -0.1875rem;
@@ -56,11 +33,6 @@
   --sl-z-index-menu: 5;
   --sl-z-index-navbar: 10;
   --sl-z-index-skiplink: 20;
-
-  --purple-hsl: 255, 60%, 60%;
-  --overlay-blurple: hsla(var(--purple-hsl), 0.2);
-
-  --copy-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2'/%3E%3Cpath d='M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 *,
@@ -69,10 +41,38 @@
   box-sizing: border-box;
 }
 
-* {
+::-webkit-scrollbar,
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-track-piece {
+  background: inherit;
+  border-radius: 99rem;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--sl-color-gray-2);
+  border: 4px solid transparent;
+  background-clip: content-box;
+  border-radius: 99rem
+}
+::-webkit-scrollbar-corner {
+  background: transparent
+}
+::-webkit-scrollbar-button {
+  display: none;
+}
 
-  scrollbar-color: var(--sl-color-gray-2) transparent;
-  /* scrollbar-width: thin; */
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--sl-color-accent-high);
+}
+
+::-moz-selection,
+::selection {
+  background: var(--sl-color-accent);
+  color: var(--sl-color-white);
+}
+[data-theme="light"]::-moz-selection,
+[data-theme="light"]::selection {
+  background: var(--sl-color-accent-high);
+  color: var(--sl-color-white);
 }
 
 html {
@@ -133,6 +133,7 @@ hr {
   color: var(--sl-color-hairline-light);
 }
 
+::-moz-placeholder,
 input::placeholder,
 textarea::placeholder {
   color: var(--sl-color-gray-3);
@@ -157,33 +158,6 @@ select:focus {
 option {
   background-color: var(--sl-color-bg-nav);
   color: var(--sl-color-gray-1);
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 99rem;
-  background: var(--sl-color-accent);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--sl-color-accent);
-}
-
-::selection {
-  background: var(--sl-color-accent);
-  color: var(--sl-color-white);
-}
-
-[data-theme="light"]::selection {
-  background: var(--sl-color-accent-high);
-  color: var(--sl-color-white);
-}
-
-.right-sidebar {
-  border-inline-start: none
 }
 
 @media (min-width: 50em) {

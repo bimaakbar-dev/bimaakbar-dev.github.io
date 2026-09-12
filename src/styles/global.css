@@ -2,7 +2,7 @@
 
 @import "@astrojs/starlight-tailwind";
 @import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/utilities.css" layer(utilities);
+@import "tailwindcss/utilities.css" layer(utilities); 
 
 @import "./stargazer.css"; */
 @import "./anchor-links.css";
@@ -10,6 +10,8 @@
 @import "./expressive-code.css";
 @import "./markdown.css";
 @import "./reset.css";
+
+@import './stradocs/components/Asides.css';
 
 @import "./components/Pagination.css";
 @import "./components/Search.css";

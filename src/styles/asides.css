@@ -38,9 +38,9 @@
   position: absolute;
   inset-block: 0.65rem;
   inset-inline-start: 0.5rem;
-  width: 0.15rem;
+  width: 3px;
   background-color: var(--sl-color-asides-border);
-  border-radius: 99rem;
+  border-radius: 999px;
   vertical-align: middle;
 }
 .starlight-aside__title {

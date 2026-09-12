@@ -1,14 +1,61 @@
 starlight-file-tree {
-  border: 1px solid var(--sl-color-hairline);
+  border: 1px solid var(--sl-color-gray-5);
   border-radius: 0.75rem;
   background-color: var(--sl-color-gray-6);
-  font-size: var(--sl-text-xs);
-  padding: 1rem
+  padding: 0.75rem
 }
-starlight-file-tree .highlight {
-  border-radius: 0.25rem;
-  font-weight: 400;
+
+starlight-file-tree {
+  & .directory > details > summary {
+    color: var(--sl-color-white);
+    &::marker,
+    &::-webkit-details-marker {
+      color: var(--sl-color-gray-3);
+    }
+  }
+
+  & ul:not( ul:first-child) {
+    border-inline-start: 1px solid var(--sl-color-gray-5);
+  }
+
+  & .file {
+    color: var(--sl-color-white);
+  }
+
+  & .empty {
+    color: var(--sl-color-gray-3);
+  }
+
+  & .comment {
+    color: var(--sl-color-gray-3);
+  }
+  & .highlight {
+    color: var(--sl-color-text-invert);
+    background-color: var(--sl-color-text-accent);
+    font-weight: 400;
+  }
+  & svg {
+    fill: var(--sl-color-gray-3);
+  }
 }
+
 [data-theme='light'] starlight-file-tree {
   background-color: var(--sl-color-gray-7);
+}
+
+@media (hover: hover) {
+  starlight-file-tree {
+    & .directory > details > summary:hover {
+      color: var(--sl-color-text-accent);  
+      & .tree-icon {
+        color: var(--sl-color-text-accent);
+      }
+      & ~ ul {
+        border-color: var(--sl-color-gray-4);
+      }
+      & .highlight .tree-icon {
+        color: var(--sl-color-white);
+      }
+    }
+  }
 }

@@ -31,6 +31,9 @@
     margin: 0;
     color: var(--sl-color-gray-2);
     font-size: clamp(var(--sl-text-sm), calc(0.5rem + 1vw), var(--sl-text-body));
+    & .expressive-code pre {
+      background: var(--sl-color-black);
+    }
   }
 }
 

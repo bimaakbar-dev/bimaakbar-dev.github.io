@@ -1,37 +1,182 @@
-.sl-markdown-content {
-  & .expressive-code .frame {
+/* expressive-code.css */
+
+.sl-markdown-content :is(.expressive-code) {
+  font-family: var(--font-inter);
+  font-size: inherit;
+  & pre {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.75rem;
+    background: var(--sl-color-gray-6);
+    & > code {
+      font-family: var(--font-firaCode);
+      font-size: var(--sl-text-code-sm);
+      line-height: inherit;
+    }
+  }
+  & .frame {
+    --header-border-radius: 0.75rem;
+    --tab-border-radius: 0.75rem;
+    --code-background: var(--sl-color-gray-6);
     box-shadow: none;
+
+    & .header {
+      border-radius: var(--header-border-radius) var(--header-border-radius) 0 0;
+      padding: 0;
+    }
+    
   }
-  & .expressive-code .frame.has-title {
-    background: var(--sl-color-black) !important;
-    border-radius: 1rem;
+
+  & .frame.has-title pre,
+  & .frame.has-title code,
+  & .frame.is-terminal pre,
+  & .frame.is-terminal code {
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
-  & .expressive-code .frame.has-title header {
-    background: var(--sl-color-black) !important;
+
+  & .frame.has-title {
+    --header-border-radius: 0.75rem;
+    --tab-border-radius: 0.75rem;
+    --code-background: var(--sl-color-bg);
+    background: var(--sl-color-gray-6);
+    
+    &:not(.is-terminal) .title {
+      color: var(--sl-color-white);
+      background: var(--sl-color-gray-6);
+      border: 1px solid var(--sl-color-gray-5);
+      border-bottom: none;
+      font-size: var(--sl-text-sm);
+      position: relative;
+    }
+    &:not(.is-terminal) .title::after {
+      content: "";
+      position: relative;
+      margin-inline-start: 1rem;
+      border-top: none;
+      border-bottom: none;
+    }
+
+    &:not(.is-terminal) .title::before {
+      --ic-close: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M4 4l8 8M12 4L4 12'/%3E%3C/svg%3E");
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      margin-inline-end: 0.5rem;
+      border-top: none;
+      border-bottom: none;
+      width: 1em;
+      height: 1em;
+      flex-shrink: 0;
+      background-color: var(--sl-color-gray-3);
+      -webkit-mask-image: var(--ic-close);
+      -webkit-mask-repeat: no-repeat;
+      mask-image: var(--ic-close);
+      mask-repeat: no-repeat;
+      pointer-events: none;
+      line-height: inherit;
+      font-size: inherit;
+    }
+
+    &:not(.is-terminal) .header {
+      background: var(--sl-color-black);
+      padding: 0;
+      line-height: 1.6;
+    }
+    &:not(.is-terminal) .header::before {
+      border: 1px solid var(--sl-color-gray-5);
+    }
   }
-  & .expressive-code .frame.is-terminal {
-    background: var(--sl-color-black) !important;
-    border-radius: 1rem;
+  & .frame.is-terminal {
+    --header-border-radius: 0.75rem;
+    --tab-border-radius: 0.75rem;
+    --code-background: var(--sl-color-gray-6);
+
+    background: var(--sl-color-gray-6);
+    & .header {
+      background: var(--sl-color-black);
+      padding: 0.25rem 1rem;
+      line-height: 1.6;
+      gap: 0.5rem;
+    }
+    & .header::before {
+      background-color: var(--sl-color-gray-3);
+      opacity: 0.2;
+    }
+    & .header::after {
+      border-bottom: 1px solid var(--sl-color-gray-5);
+    }
   }
-  & .expressive-code .frame.is-terminal header {
-    background: var(--sl-color-black) !important;
-  }
-  & .expressive-code .copy button {
-    border-radius: 0.5rem;
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
-    align-items: center;
-    justify-content: center;
-  }
-  & .expressive-code .copy button::after {
-    margin: 0.5rem !important;
-  }
-  & .expressive-code .copy button:focus {
-    outline-color: var(--sl-color-accent);
+  & .copy {
+    & button {
+      --ic-copy: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2'/%3E%3Cpath d='M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2'/%3E%3C/g%3E%3C/svg%3E");
+
+      background: rgb(var(--sl-color-black) / 80%);
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+      border: 0;
+      border-radius: 0.5rem;
+      width: 2rem;
+      height: 2rem;
+      -webkit-backdrop-filter: blur(24px);
+      backdrop-filter: blur(24px);
+      opacity: 0.75;
+
+    }
+    & button > svg {
+      flex-shrink: 0;
+    }
+    & button div {
+      background: rgb(var(--sl-color-black) / 80%);
+    }
+    & button::before {
+      border: 1px solid var(--sl-color-gray-5);
+    }
+    & button::after {
+      margin: 0.5em;
+      background-color: var(--sl-color-gray-1);
+      -webkit-mask: var(--ic-copy) center / contain no-repeat;
+      mask: var(--ic-copy) center / contain no-repeat;
+    }
+    & button:focus {
+      outline-color: var(--sl-color-accent);
+    }
+    & .feedback {
+      --tooltip-bg: var(--sl-color-black);
+      --tooltip-arrow-size: 0.35rem;
+      border-radius: 99rem;
+      color: var(--sl-color-white);
+      font-size: var(--sl-text-xs);
+      transform: translate3d(0, 0.25rem, 0);
+    }
   }
 }
+
+[data-theme='light'] .sl-markdown-content .expressive-code {
+  & pre {
+    background: var(--sl-color-gray-7);
+  }
+}
+
 @media (hover: hover) {
-  .sl-markdown-content .expressive-code .copy button:hover {
-    outline-color: var(--sl-color-accent);
+  .sl-markdown-content .expressive-code {
+    & .copy {
+      & button:hover {
+        outline-color: var(--sl-color-accent);
+      }
+    }
+  }
+}
+@media (max-width: 50em) {
+  .sl-markdown-content .expressive-code {
+    & .copy {
+      & button {
+        opacity: 1;
+      }
+    }
   }
 }
