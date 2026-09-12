@@ -1,0 +1,101 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  handle: string;
+  name: string;
+  cite?: string;
+}
+
+const { 
+  name, 
+  handle, 
+  cite 
+} = Astro.props;
+
+const avatars = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/images/testimonials/*.jpg",
+);
+const avatar = avatars[`../assets/images/testimonials/${handle}.jpg`];
+if (!avatar) {
+  throw new Error(`Could not resolve testimonial avatar for @${handle}`);
+}
+const src = (await avatar()).default;
+---
+
+<li class="testimonial sl-flex not-content">
+  <blockquote cite={cite}>
+    <slot />
+  </blockquote>
+  <div class="footer-quote sl-flex">
+    <Image class="avatar" height="48" width="48" {src} alt="" />
+    <div class="cite sl-flex">
+      <p class="name">{name}</p>
+      { cite && 
+        <span class="divider">|</span>
+        <a href={cite}>@{handle}</a>
+      }
+    </div>
+  </div>
+</li>
+
+<style>
+  .testimonial {
+    flex-direction: column;
+    position: relative;
+    gap: 0.5em;
+    border-radius: 0.5rem;
+    margin-block: 1.5rem;
+    list-style: none;
+    padding: 0;
+    & blockquote {
+      position: relative;
+      text-align: left;
+      color: var(--sl-color-white);
+      font-size: var(--sl-text-h3);
+      line-height: var(--sl-line-height-headings);
+      font-weight: 400;
+      & > :global(* + *) {
+        margin-top: 0.75em;
+      }
+    } 
+    & .footer-quote {
+      align-items: center;
+      gap: 0.5rem;
+      & img {
+        outline: 1px solid var(--sl-color-accent-low);
+        outline-offset: -1px;
+        border-radius: 99rem;
+        width: 1.333em;
+        height: 1.333em;
+        object-fit: cover;
+      }
+      & .cite {
+        align-items: center;
+        gap: 0.5rem;
+        & .name {
+          font-weight: 500;
+          font-size: var(--sl-text-sm);
+          color: var(--sl-color-gray-2);
+          line-height: var(--sl-line-height-headings);
+        }
+        & .divider {
+          color: var(--sl-color-gray-4);
+        } 
+        & a {
+          font-size: var(--sl-text-xs);
+          text-decoration: none;
+          color: var(--sl-color-accent-high);
+        } 
+      }
+    }
+  }
+  @media (hover: hover) {
+    a:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      color: var(--sl-color-accent);
+    }
+  }
+</style>

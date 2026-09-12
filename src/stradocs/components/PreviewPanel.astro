@@ -1,0 +1,67 @@
+---
+import { 
+  Tabs, 
+  TabItem 
+} from "@astrojs/starlight/components";
+
+const showContentTypeTabs = Astro.slots.has("markdoc");
+---
+<div class="not-content">
+  <figure class="preview-panel sl-block">
+    {
+      showContentTypeTabs ? (
+        <Tabs syncKey="content-type">
+          <TabItem label="MDX">
+            <slot />
+          </TabItem>
+          <TabItem label="Markdoc">
+            <slot name="markdoc" />
+          </TabItem>
+        </Tabs>
+      ) : (
+        <slot />
+      )
+    }
+    <div class="preview">
+      <figcaption>{Astro.locals.t("component.preview")}</figcaption>
+      <div class="preview-content">
+        <slot name="preview" />
+      </div>
+    </div>
+  </figure>
+</div>
+<style>
+  :global(.sl-markdown-content) .preview-panel {
+    & .preview {
+      margin-top: 0;
+      gap: 1em;
+      background: var(--sl-color-gray-6);
+      border: 1px solid var(--sl-color-hairline-light);
+      border-radius: 0.75rem;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-top: 0;
+      & figcaption {
+        font-size: var(--sl-text-base);
+        padding: 1rem;
+        margin-top: 0;
+      }
+      & .preview-content {
+        padding: 1rem;
+        padding-top: 0;
+        margin-top: 0;
+      }
+      & .preview-content :where(.card, .sl-link-card, .starlight-aside, starlight-file-tree, .expressive-code pre, .expressive-code .frame.has-title .title) {
+        background: var(--sl-color-black);
+      }
+    }
+    & .preview:only-child {
+      border-top: 1px solid var(--sl-color-hairline-light);
+      border-radius: 0.75rem;
+    }
+    & .expressive-code pre:not(.preview-content *) {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+</style>
