@@ -116,6 +116,76 @@
   & a.is-external:has(> img):not(:where(.not-content *))::after {
     display: none;
   }
+
+  & a:has(> img[alt*="avatar" i]) > img:not(:where(.not-content *)) {
+    height: 1.5em;
+    width: 1.5em;
+    border-radius: 50%;
+    outline: 1px solid var(--sl-color-gray-3);
+    outline-offset: -1px;
+    object-fit: cover;
+  }
+
+  & .avatar-stack {
+    display: inline-flex;
+    align-items: center;
+
+    & a:has(> img[alt*="avatar" i]) {
+      margin-inline-start: -0.5em;
+
+      &:first-child { margin-inline-start: 0; }
+
+      & > img {
+        box-shadow: 0 0 0 2px var(--sl-color-black);
+      }
+    }
+  }
+
+  & a:has(> img[alt*="status" i]):not(:where(.not-content *)) {
+    padding-inline: 0.5em;
+    border-radius: 99rem;
+    border: 1px solid var(--sl-color-hairline-light);
+    background: var(--sl-color-gray-6);
+    font-size: var(--sl-text-xs, 0.75rem);
+    text-decoration: none;
+    gap: 0.3em;
+
+    &:hover {
+      border-color: var(--sl-color-hairline);
+      opacity: 1;
+    }
+
+    & > img {
+      height: 0.5em;
+      width: 0.5em;
+      border-radius: 50%;
+      outline: none;
+    }
+  }
+
+  & a:has(> img[alt*="icon" i]):not(:where(.not-content *)) {
+    padding: 0.15em 0.55em 0.15em 0.35em;
+    border-radius: 8px;
+    border: 1px solid var(--sl-color-hairline-light);
+    background: var(--sl-color-gray-6);
+    font-size: var(--sl-text-xs, 0.75rem);
+    font-weight: 500;
+    gap: 0.35em;
+    text-decoration: none;
+
+    &:hover {
+      border-color: var(--sl-color-hairline);
+      opacity: 1;
+    }
+
+    & > img {
+      height: 1.25em;
+      width: 1.25em;
+      border-radius: 3px;
+      outline: none;
+      object-fit: contain;
+    }
+  }
 }
 
 /* ============================================================
@@ -595,12 +665,12 @@
   /* Tooltip — mobile: di bawah, center */
   & .abbr-tooltip {
     position: absolute;
-    left: 50%;
-    top: calc(100% + 10px);
-    transform: translateX(-50%) translateY(-4px);
-    z-index: 50;
+    left: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%) translateX(-4px);
+    max-width: 280px;
+    z-index: 9999;
     width: max-content;
-    max-width: min(240px, 70vw);
     padding: 8px 12px;
     border-radius: 10px;
     border: 1px solid var(--sl-color-gray-5);
@@ -611,53 +681,17 @@
     line-height: 1.5;
     white-space: normal;
     text-align: left;
-    box-shadow: 0 10px 30px rgb(0 0 0 / 0.25);
+    box-shadow: var(--sl-shadow-sm);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.15s ease, transform 0.15s ease;
-
-    &::before {
-      content: "";
-      position: absolute;
-      right: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      border: 6px solid transparent;
-      border-bottom-color: var(--sl-color-gray-6);
-    }
   }
-
   & .abbr:hover .abbr-tooltip,
   & .abbr:focus-visible .abbr-tooltip {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(-50%) translateX(0);
   }
 
-  /* Tooltip — desktop: di kanan, center */
-  @media (max-width: 50em) {
-    & .abbr-tooltip {
-      left: calc(100% + 10px);
-      top: 50%;
-      transform: translateY(-50%) translateX(-4px);
-      max-width: 280px;
-
-      &::before {
-        top: 50%;
-        bottom: auto;
-        left: auto;
-        right: 100%;
-        transform: translateY(-50%);
-        border: 6px solid transparent;
-        border-right-color: var(--sl-color-gray-6);
-        border-bottom-color: transparent;
-      }
-    }
-
-    & .abbr:hover .abbr-tooltip,
-    & .abbr:focus-visible .abbr-tooltip {
-      transform: translateY(-50%) translateX(0);
-    }
-  }
 }
 
 /* ============================================================
@@ -770,8 +804,6 @@
 .sl-markdown-content {
   & figure:not(:where(.not-content *)) {
     display: grid;
-    gap: 0.5rem;
-
     & :is(img, picture, video, iframe) { margin: 0; }
   }
 
@@ -809,7 +841,7 @@
 }
 
 /* ============================================================
-   Misc inline — q, dfn, var, samp, time, address, ruby
+   Misc inline, q, dfn, var, samp, time, address, ruby
    ============================================================ */
 .sl-markdown-content {
   & q:not(:where(.not-content *)) {
@@ -910,7 +942,7 @@
   }
 }
 
-@media (min-width: 50rem) {
+@media (min-width: 50em) {
   .sl-markdown-content {
     & blockquote:not(:where(.not-content *)) {
       font-size: var(--sl-text-h4);
@@ -919,7 +951,7 @@
       grid-template-columns: minmax(12rem, max-content) 1fr;
     }
     & dt:not(:where(.not-content *)) {
-      border-top: 1px solid var(--sl-color-hairline);
+      border-top: 0;
     }
     & dt:first-of-type + dd:not(:where(.not-content *)) {
       border-top: none;
