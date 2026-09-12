@@ -10,9 +10,9 @@
   <br/><br/>
 </p>
 
-<div align="center">
+<p align="center">
 [![Deploy site to Pages](https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/actions/workflows/astro.yml/badge.svg?branch=Dev)](https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/actions/workflows/astro.yml)
-</div>
+</p>
 
 
 ## Key Features
