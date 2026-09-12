@@ -8,9 +8,9 @@ import { Code } from "@astrojs/starlight/components";
 The `<Code>` component renders syntax highlighted code.
 It is useful when using a [Markdown code block](/guides/authoring-content/#code-blocks) is not possible, for example, to render data coming from external sources like files, databases, or APIs.
 
-import Preview from "~/components/component-preview.astro";
+import { PreviewPanel } from "~/stradocs/components";
 
-<Preview>
+<PreviewPanel>
 
 <Code
 	slot="preview"
@@ -22,7 +22,7 @@ title="example.md"
 ins={3}
 />
 
-</Preview>
+</PreviewPanel>
 
 ## Import
 
@@ -36,7 +36,7 @@ Use the `<Code>` component to render syntax highlighted code, for example when d
 
 See the [Expressive Code “Code Component” docs](https://expressive-code.com/key-features/code-component/) for full details on how to use the `<Code>` component and the list of available props.
 
-<Preview>
+<PreviewPanel>
 
 ```mdx
 import { Code } from "@astrojs/starlight/components";
@@ -72,7 +72,7 @@ export const highlights = ["file", "CMS"];
   mark={highlights}
 />
 
-</Preview>
+</PreviewPanel>
 
 ### Display imported code
 
