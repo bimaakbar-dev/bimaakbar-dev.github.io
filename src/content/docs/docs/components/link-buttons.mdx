@@ -7,15 +7,15 @@ import { LinkButton } from "@astrojs/starlight/components";
 
 To display visually distinct call-to-action links, use the `<LinkButton>` component.
 
-import Preview from "~/components/component-preview.astro";
+import { PreviewPanel } from "~/stradocs/components";
 
-<Preview>
+<PreviewPanel>
 
 <LinkButton slot="preview" href="/getting-started/">
   Read the docs
 </LinkButton>
 
-</Preview>
+</PreviewPanel>
 
 ## Import
 
@@ -31,7 +31,7 @@ A link button is useful for directing users to the most relevant or actionable c
 A `<LinkButton>` requires an [`href`](#href) attribute.
 Optionally, customize the appearance of the link button using the [`variant`](#variant) attribute, which can be set to `primary` (the default), `secondary`, or `minimal`.
 
-<Preview>
+<PreviewPanel>
 
 ```mdx
 import { LinkButton } from "@astrojs/starlight/components";
@@ -61,7 +61,7 @@ Configuration Reference
   </LinkButton>
 </Fragment>
 
-</Preview>
+</PreviewPanel>
 
 ### Add icons to link buttons
 
@@ -69,7 +69,7 @@ Include an icon in a link button using the [`icon`](#icon) attribute set to the 
 
 The [`iconPlacement`](#iconplacement) attribute can be used to place the icon before the text by setting it to `start` (defaults to `end`).
 
-<Preview>
+<PreviewPanel>
 
 ```mdx {6-7}
 import { LinkButton } from "@astrojs/starlight/components";
@@ -108,7 +108,7 @@ Related: Astro
   Related: Astro
 </LinkButton>
 
-</Preview>
+</PreviewPanel>
 
 ## Props
 

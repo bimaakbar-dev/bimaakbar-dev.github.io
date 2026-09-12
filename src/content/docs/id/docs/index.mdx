@@ -1,180 +1,66 @@
 ---
-title: Docs
-description: Get started building your docs site with Stradocs.
-template: doc
+title: Apa itu Stradocs?
+description: Custom Starlight theme featuring a modern design aesthetic and full layout flexibility.
 editUrl: false
 lastUpdated: false
 hero:
-  title: Welcome to Stradocs
-  tagline: Congrats on setting up a new Stradocs project!
-  actions:
-    - text: Getting Started
-      link: /docs/getting-started/introduction
-      icon: rocket
-tableOfContents: false
+  title: Stradocs
+  tagline: A custom Starlight theme that brings a clean, premium, and modern aesthetic to your documentation. Inspired by Vercel and Fumadocs.
+  image:
+    file: ~/assets/images/author/bimaakbar.svg
 prev: false
 next: false
+tableOfContents: false
 ---
 
-import {
-  Aside,
-  Card,
-  CardGrid,
-  LinkCard,
-  LinkButton,
-  Steps,
-} from "@astrojs/starlight/components";
+import { Card } from "@astrojs/starlight/components";
+import { CardGrid } from "~/stradocs/components";
+
+## Key Features
+
+<CardGrid bento>
+  <Card title="Redesigned Components" icon="pencil">
+    The Header, Hero, Footer, and many other Starlight components have been
+    replaced with visually redesigned versions—going beyond simple color
+    changes.
+  </Card>
+  <Card title="Integrated Blog System" icon="document">
+    A full-featured blog system including schema extensions, multi-author
+    support, Related Posts, Popular Posts, and RSS feeds—ready to use out of the
+    box.
+  </Card>
+  <Card title="Automatic Markdown Plugins" icon="setting">
+    The `satteriExternalLink` and `satteriTable` plugins are automatically
+    enabled across all content—no manual imports required in individual files.
+  </Card>
+  <Card title="Local Fonts" icon="seti:font">
+    Montserrat, Inter, and FiraCode are hosted locally—eliminating external CDN
+    requests to ensure optimal performance and privacy.
+  </Card>
+  <Card title="Automatic OG Images" icon="external">
+    Every page automatically generates an Open Graph image, ensuring a
+    consistent appearance when shared on social media.
+  </Card>
+  <Card title="Bilingual Support" icon="translate">
+    Pre-configured for English and Indonesian, including i18n strings for all
+    blog components.
+  </Card>
+</CardGrid>
+
+## How It Works
+
+Stradocs is Starlight—not a fork, not a wrapper. Everything you know about Starlight still applies. Stradocs simply adds and replaces the visual layer on top.
+
+import { ContributorList } from "~/stradocs/components";
+
+<ContributorList repo="bimaakbar-dev/bimaakbar-dev.github.io" limit={5} />
 
 import AboutAstro from "~/components/about-astro.astro";
 
-## Fitur Utama
+<AboutAstro title="Presented by">
 
-<CardGrid stagger>
-  <Card title="Redesign Komponen" icon="pencil">
-    Header, Hero, Footer, dan banyak komponen Starlight lainnya diganti dengan
-    versi yang didesain ulang secara visual — bukan sekadar ganti warna.
-  </Card>
-  <Card title="Sistem Blog Terintegrasi" icon="document">
-    Halaman blog lengkap dengan schema extension, multi-author, RelatedPost,
-    PopularPost, dan RSS feed — siap pakai tanpa konfigurasi tambahan.
-  </Card>
-  <Card title="Markdown Plugins Otomatis" icon="setting">
-    Plugin `satteriExternalLink` dan `satteriTable` aktif di seluruh konten
-    secara otomatis — tanpa import manual di setiap file.
-  </Card>
-  <Card title="Font Lokal" icon="seti:font">
-    Montserrat, Inter, dan FiraCode dihosting lokal — tidak ada request ke CDN
-    eksternal, performa dan privasi terjaga.
-  </Card>
-  <Card title="OG Image Otomatis" icon="external">
-    Setiap halaman menghasilkan Open Graph image secara otomatis untuk tampilan
-    yang konsisten saat dibagikan di media sosial.
-  </Card>
-  <Card title="Bilingual" icon="translate">
-    Dikonfigurasi untuk English dan Indonesia sejak awal, termasuk i18n string
-    untuk seluruh komponen blog.
-  </Card>
-</CardGrid>
+Stradocs is a custom theme from Starlight and developed by **Bima Akbar** who was inspired by **Vercel**, **Fumadocs**, and various sources.
 
-## Untuk Siapa?
-
-<CardGrid>
-  <Card title="Developer" icon="laptop">
-    Dokumentasi proyek dengan tampilan profesional sejak hari pertama — tanpa
-    membangun dari nol.
-  </Card>
-  <Card title="Content Creator" icon="pencil">
-    Platform penulisan yang fleksibel dan bisa dikustomisasi sesuai kebutuhan.
-  </Card>
-  <Card title="Technical Writer" icon="document">
-    Fokus pada konten. Stradocs mengurus tipografi, layout, dan pengalaman baca.
-  </Card>
-  <Card title="Pelajar" icon="open-book">
-    Referensi arsitektur Astro + Starlight yang nyata — kodenya transparan dan
-    bisa dipelajari langsung.
-  </Card>
-</CardGrid>
-
-## Cara Kerja
-
-Stradocs adalah Starlight — bukan fork, bukan wrapper. Semua yang kamu tahu tentang Starlight tetap berlaku. Stradocs hanya menambahkan dan mengganti lapisan visual di atasnya.
-
-<Steps>
-
-1. ### Clone
-
-   Fork atau clone repositori Stradocs dari GitHub. Tidak ada package global yang perlu diinstall.
-
-   ```bash
-   git clone https://github.com/bimaakbar-dev/bimaakbar-dev.github.io.git
-   ```
-
-2. ### Kustomisasi
-
-   Sesuaikan `astro.config.mjs`, sidebar, font, dan konten. Arsitektur Stradocs dirancang mudah dibaca dan dimodifikasi.
-
-3. ### Deploy
-
-   Build dan deploy ke GitHub Pages atau platform pilihan kamu. Stradocs sudah dikonfigurasi untuk GitHub Pages sejak awal.
-
-</Steps>
-
-## Terinspirasi Dari
-
-Stradocs lahir dari referensi desain terbaik di ekosistem web modern.
-
-<CardGrid>
-  <LinkCard
-    title="Fumadocs"
-    description="Inspirasi utama pendekatan desain — bersih, teropini, dan tidak kompromi soal kualitas."
-    href="https://fumadocs.dev"
-  />
-  <LinkCard
-    title="Vercel"
-    description="Referensi estetika sistem desain — presisi, minimal, dan konsisten di setiap detail."
-    href="https://vercel.com"
-  />
-</CardGrid>
-
-## Dibuat Oleh
-
-Stradocs dikembangkan oleh **Bima Akbar** dan dirilis sebagai proyek open source yang bebas digunakan, di-fork, dan dikontribusikan oleh siapa saja.
-
-<CardGrid>
-  <LinkCard
-    title="GitHub"
-    description="Lihat source code, fork repositori, atau buka issue."
-    href="https://github.com/bimaakbar-dev/bimaakbar-dev.github.io"
-  />
-  <LinkCard
-    title="Profil Developer"
-    description="Bima Akbar — developer di balik Stradocs."
-    href="https://github.com/bimaakbar-dev"
-  />
-</CardGrid>
-
-## FAQ
-
-<details>
-  <summary>Apakah Stradocs menggantikan Starlight?</summary>
-
-  Tidak. Stradocs adalah Starlight yang dikustomisasi — semua fitur, routing, dan konfigurasi Starlight tetap berfungsi normal. Stradocs hanya mengganti lapisan visual dan menambahkan sistem blog.
-</details>
-
-<details>
-  <summary>Apakah saya perlu tahu Astro untuk menggunakannya?</summary>
-
-  Ya. Stradocs ditujukan untuk pengguna yang sudah familiar dengan Astro dan Starlight. Jika baru memulai, pelajari keduanya terlebih dahulu sebelum menggunakan Stradocs.
-</details>
-
-<details>
-  <summary>Apakah Stradocs gratis?</summary>
-
-  Ya, sepenuhnya gratis dan open source. Fork repositori dan gunakan untuk proyek apapun tanpa biaya.
-</details>
-
-<details>
-  <summary>Bisakah saya berkontribusi?</summary>
-
-  Tentu. Kontribusi dalam bentuk apapun sangat terbuka — bug report, pull request, saran fitur, atau sekadar diskusi di repositori GitHub.
-</details>
-
-<details>
-  <summary>Apakah Stradocs mendukung multi-bahasa?</summary>
-
-  Ya. Stradocs dikonfigurasi untuk English dan Indonesia sejak awal. Bahasa tambahan bisa ditambahkan melalui konfigurasi `locales` di `astro.config.mjs`.
-</details>
-
-<AboutAstro title="Dipersembahkan oleh">
-
-Stradocs adalah tema custom dari Starlight dan dikembangkan oleh <span class="text-(--sl-color-accent-high)">**Bima Akbar**</span> yang terinspirasi dari **Vercel**, **Fumadocs**, dan berbagai sumber lainnya.
-
-<LinkButton
-  href="/id/docs/getting-started/introduction"
-  icon="open-book"
-  iconPlacement="start"
->
-  Pelajari lebih lanjut
-</LinkButton>
+[Learn more about Stradocs](/docs/getting-started/introduction)
 
 </AboutAstro>

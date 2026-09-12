@@ -7,15 +7,15 @@ import { Aside } from "@astrojs/starlight/components";
 
 To display secondary information alongside a page’s main content, use the `<Aside>` component.
 
-import Preview from "~/components/component-preview.astro";
+import { PreviewPanel } from "~/stradocs/components";
 
-<Preview>
+<PreviewPanel>
 
 <Aside slot="preview">
     Include nonessential, supplementary information in an `<Aside>`.
 </Aside>
 
-</Preview>
+</PreviewPanel>
 
 ## Import
 
@@ -29,7 +29,7 @@ Display an aside (also known as “admonitions” or “callouts”) using the `
 
 An `<Aside>` can have an optional [`type`](#type) attribute, which controls the aside’s color, icon, and default title.
 
-<Preview>
+<PreviewPanel>
 
 ````mdx
 import { Aside } from "@astrojs/starlight/components";
@@ -97,7 +97,7 @@ Do not give your password to anyone.
 
 </Fragment>
 
-</Preview>
+</PreviewPanel>
 
 Starlight also provides a custom syntax for rendering asides in Markdown and MDX as an alternative to the `<Aside>` component.
 See the [“Authoring Content in Markdown”](/guides/authoring-content/#asides) guide for details of the custom syntax.
@@ -106,7 +106,7 @@ See the [“Authoring Content in Markdown”](/guides/authoring-content/#asides)
 
 Override the default aside titles by using the [`title`](#title) attribute.
 
-<Preview>
+<PreviewPanel>
 
 ```mdx 'title="Watch out!"'
 import { Aside } from "@astrojs/starlight/components";
@@ -130,13 +130,13 @@ A warning aside *with* a custom title.
   A warning aside *with* a custom title.
 </Aside>
 
-</Preview>
+</PreviewPanel>
 
 ### Use custom icons
 
 Override the default aside icons by using the [`icon`](#icon) attribute set to the name of [one of Starlight’s built-in icons](/reference/icons/#all-icons).
 
-<Preview>
+<PreviewPanel>
 
 ```mdx 'icon="starlight"'
 import { Aside } from "@astrojs/starlight/components";
@@ -160,7 +160,7 @@ A tip aside *with* a custom icon.
   A tip aside *with* a custom icon.
 </Aside>
 
-</Preview>
+</PreviewPanel>
 
 ## Props
 

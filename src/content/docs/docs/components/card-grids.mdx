@@ -5,13 +5,14 @@ sidebar:
   order: 4
 ---
 
-import { Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
+import { Card, LinkCard } from "@astrojs/starlight/components";
+import { CardGrid } from "~/stradocs/components";
 
 To wrap multiple [`<Card>`](/components/cards/) or [`<LinkCard>`](/components/link-cards/) components in a grid, use the`<CardGrid>` component.
 
-import Preview from "~/components/component-preview.astro";
+import { PreviewPanel } from "~/stradocs/components";
 
-<Preview>
+<PreviewPanel>
 
 <CardGrid slot="preview">
   <Card title="Stars" icon="star">
@@ -22,12 +23,12 @@ import Preview from "~/components/component-preview.astro";
   </Card>
 </CardGrid>
 
-</Preview>
+</PreviewPanel>
 
 ## Import
 
 ```tsx
-import { CardGrid } from "@astrojs/starlight/components";
+import { CardGrid } from "~/stradocs/components";
 ```
 
 ## Usage
@@ -36,7 +37,7 @@ import { CardGrid } from "@astrojs/starlight/components";
 
 Display multiple [`<Card>`](/components/cards/) components side-by-side when there’s enough space by grouping them using the `<CardGrid>` component.
 
-<Preview>
+<PreviewPanel>
 
 ```mdx {3,10}
 import { Card, CardGrid } from "@astrojs/starlight/components";
@@ -76,13 +77,13 @@ More information you want to share.
   </Card>
 </CardGrid>
 
-</Preview>
+</PreviewPanel>
 
 ### Group link cards
 
 Display multiple [`<LinkCard>`](/components/link-cards/) components side-by-side when there’s enough space by grouping them using the `<CardGrid>` component.
 
-<Preview>
+<PreviewPanel>
 
 ```mdx {3,6}
 import { LinkCard, CardGrid } from "@astrojs/starlight/components";
@@ -110,7 +111,7 @@ import { LinkCard, CardGrid } from "@astrojs/starlight/components";
   <LinkCard title="Components" href="/components/using-components/" />
 </CardGrid>
 
-</Preview>
+</PreviewPanel>
 
 ### Stagger cards
 
@@ -118,7 +119,7 @@ Shift the second column of the grid vertically to add visual interest by adding 
 
 This attribute is useful on your home page to display your project’s key features.
 
-<Preview>
+<PreviewPanel>
 
 ```mdx "stagger"
 import { Card, CardGrid } from "@astrojs/starlight/components";
@@ -158,7 +159,7 @@ More information you want to share.
   </Card>
 </CardGrid>
 
-</Preview>
+</PreviewPanel>
 
 ## Props
 

@@ -1,36 +1,20 @@
 ---
-title: Whats a Stradocs?
-description: Stradocs is custom Starlight theme featuring a modern design aesthetic view.
-template: splash
+title: Stradocs
+description: Custom Starlight theme featuring a modern design aesthetic and full layout flexibility.
 editUrl: false
 lastUpdated: false
 hero:
   title: Stradocs
   tagline: A custom Starlight theme that brings a clean, premium, and modern aesthetic to your documentation. Inspired by Vercel and Fumadocs.
   image:
-    file: ~/assets/images/author/bimaakbar.svg
-  actions:
-    - text: Start Documentation
-      link: /docs/getting-started/introduction
-      icon: rocket
-    - text: Read blog
-      link: /blog/
-      icon: open-book
-      variant: secondary
-banner:
-  content: |
-    Stradocs V1.0 Officially Released!
-    <a href="/blog/stradocs-v1">Read more →</a>
-head:
-  - tag: title
-    content: Stradocs
+    file: ~/assets/images/logo/logo.svg
 prev: false
 next: false
+tableOfContents: false
 ---
 
 import { Card } from "@astrojs/starlight/components";
-import AboutAstro from "~/components/about-astro.astro";
-import CardGrid from "~/components/CardGrid.astro";
+import { CardGrid } from "~/stradocs/components";
 
 ## Key Features
 
@@ -67,11 +51,11 @@ import CardGrid from "~/components/CardGrid.astro";
 
 Stradocs is Starlight—not a fork, not a wrapper. Everything you know about Starlight still applies. Stradocs simply adds and replaces the visual layer on top.
 
-import ContributorList from "~/components/ContributorList.astro";
-
-## Contributor
+import { ContributorList } from "~/stradocs/components";
 
 <ContributorList repo="bimaakbar-dev/bimaakbar-dev.github.io" limit={5} />
+
+import AboutAstro from "~/components/about-astro.astro";
 
 <AboutAstro title="Presented by">
 

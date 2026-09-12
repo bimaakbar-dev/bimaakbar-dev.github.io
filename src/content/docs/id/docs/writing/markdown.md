@@ -1,212 +1,384 @@
 ---
-title: "Markdown"
-description: "Pelajari cara menulis konten Markdown di Stradocs."
+title: Markdown
+description: Preview semua elemen typography di markdown
 ---
 
-Berikut adalah contoh beberapa sintaks dasar Markdown yang dapat digunakan saat menulis konten Markdown di Astro.
+# H1 - The Quick Brown Fox
+Lorem ipsum dolor sit amet consectetur adipisicing elit.
 
-## Headings
+## H2 - The Quick Brown Fox
+Lorem ipsum dolor sit amet consectetur adipisicing elit.
 
-Elemen HTML `<h1>` hingga `<h6>` berikut merepresentasikan enam tingkat judul bagian. `<h1>` merupakan tingkat bagian tertinggi, sedangkan `<h6>` adalah yang terendah.
+### H3 - The Quick Brown Fox
+Lorem ipsum dolor sit amet consectetur adipisicing elit.
 
-# H1
+#### H4 - The Quick Brown Fox
+Lorem ipsum dolor sit amet consectetur adipisicing elit.
 
-## H2
+##### H5 - The Quick Brown Fox
+Lorem ipsum dolor sit amet consectetur adipisicing elit.
 
-### H3
-
-#### H4
-
-##### H5
-
-###### H6
+###### H6 - The Quick Brown Fox
+Lorem ipsum dolor sit amet consectetur adipisicing elit.
 
 ## Paragraph
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 
-Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur, cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus dolorer sperchicium faceata tiustia prat.
-
-Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat.
-
-## Images
-
-### Syntax
-
+## Links
 ```markdown
-![Alt text](./full/or/relative/path/of/image)
+[internal link](#)
+
+[external link](external-url)
+
+[`code link`](#)
+
+[![badge](url-icon)](url-badge)
+
+[![alt name](url-avatar) name](url-profile) 
+
+[![name](url-avatar)](url-profile)
 ```
 
-### Output
+- [internal link](#)
+- [external link](external-url)
+- [`code link`](#)
+- [![badge](/.github/assets/images/logo.svg)](/)
+- [![alt name](../../../../../assets/images/author/bimaakbar.svg) name](/) 
+- [![alt name](../../../../../assets/images/author/bimaakbar.svg)](/)
 
-![blog placeholder](../../../../../assets/images/blog/blog-placeholder-about.jpg)
-
-## Blockquotes
-
-Elemen `blockquote` merepresentasikan konten yang dikutip dari sumber lain, yang dapat disertai dengan kutipan sumber (yang wajib berada di dalam elemen `footer` atau `cite`) serta perubahan sebaris seperti anotasi dan singkatan.
-
-### Blockquote without attribution
-
-#### Syntax
-
+## Text Formatting
 ```markdown
-> Tiam, ad mint andaepu dandae nostion secatur sequo quae.  
-> **Perhatikan** bahwa Anda dapat menggunakan _sintaks Markdown_ di dalam blockquote.
+<b>Bold</b>
+
+<strong>Bold</strong>
+
+<i>Italic</i>
+
+<em>Italic</em>
+
+<b><i>Bold Italic</i></b>
+
+<strong><em>Bold Italic</em></strong>
+
+<s>strikethrough</s>
+
+<del>strikethrough</del>
+
+~~strikethrough~~
+
+<ins>inserted</ins>
+
+<u>inserted</u>
+
+<mark>highlighted</mark>
+
+<small>small</small>
+
+<abbr title="HyperText Markup Language">HTML</abbr>
 ```
 
-#### Output
+- **Bold**
+  - <b>Bold</b>
+- *Italic*
+  - <i>Italic</i>
+- ***Bold + Italic***
+  - <b><i>Bold + Italic</i></b>
+- <s>strikethrough</s>
+  - <del>strikethrough</del>
+    - ~~strikethrough~~
+- <ins>inserted</ins>
+  - <u>inserted</u>
+- <mark>highlighted</mark>
+- <small>small</small>
 
-> Tiam, ad mint andaepu dandae nostion secatur sequo quae.  
-> **Perhatikan** bahwa Anda dapat menggunakan _sintaks Markdown_ di dalam blockquote.
+<abbr title="HyperText Markup Language">HTML</abbr>
 
-### Blockquote with attribution
+> [!WARNING]
+> `abbr` masih bug
 
-#### Syntax
-
+## Inline Typography
 ```markdown
-> Jangan berkomunikasi dengan berbagi memori, berbagilah memori dengan berkomunikasi.<br>
-> — <cite>Rob Pike[^1]</cite>
+<kbd>Ctrl</kbd> + <kbd>C</kbd>
+
+<samp>Hello, World!</samp>
+
+<var>x</var> = <var>y</var> + 2
+
+<dfn>API</dfn>
+
+`inline code`
+
+Dia berkata <q>ini adalah quote pendek</q> di dalam paragraf.
 ```
 
-#### Output
+- <kbd>Ctrl</kbd> + <kbd>C</kbd>
+- <samp>Hello, World!</samp>
+- <var>x</var> = <var>y</var> + 2
+- <dfn>API</dfn>
+- `inline code`
+- Dia berkata <q>ini adalah quote pendek</q> di dalam paragraf.
 
-> Jangan berkomunikasi dengan berbagi memori, berbagilah memori dengan berkomunikasi.<br>
-> — <cite>Rob Pike[^1]</cite>
-
-[^1]: Kutipan di atas diambil dari [ceramah](https://www.youtube.com/watch?v=PAAkCSZUG1c) Rob Pike pada acara Gopherfest, 18 November 2015.
-
-## Tables
-
-### Syntax
-
+## Blockquote
 ```markdown
-| Italics   | Bold     | Code   |
-| --------- | -------- | ------ |
-| _italics_ | **bold** | `code` |
+> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+>
+> <cite>John Doe, Penulis</cite>
 ```
 
-### Output
+> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
-| Italics   | Bold     | Code   |
-| --------- | -------- | ------ |
-| _italics_ | **bold** | `code` |
+> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+>
+> <cite>John Doe, Penulis</cite>
 
-## Code Blocks
-
-### Syntax
-
-Kita bisa menggunakan tiga tanda backtick (```) pada baris baru, menuliskan potongan kode (snippet), lalu menutupnya dengan tiga tanda backtick lagi di baris baru; untuk menyoroti sintaks bahasa tertentu, tuliskan nama bahasa tersebut (satu kata) setelah tiga tanda backtick yang pertama, misalnya: html, javascript, css, markdown, typescript, txt, atau bash.
-
-````markdown
-```html
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Contoh Dokumen HTML5</title>
-  </head>
-  <body>
-    <p>Test</p>
-  </body>
-</html>
-```
-````
-
-### Output
-
-```html
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Contoh Dokumen HTML5</title>
-  </head>
-  <body>
-    <p>Test</p>
-  </body>
-</html>
-```
-
-## List Types
-
-### Ordered List
-
-#### Syntax
-
+## Subscript & Superscript
 ```markdown
-1. Butir pertama
-2. Butir kedua
-3. Butir ketiga
+H<sub>2</sub>O dan CO<sub>2</sub>
+
+x<sup>2</sup> + y<sup>2</sup> = z<sup>2</sup>
 ```
 
-#### Output
+- H<sub>2</sub>O dan CO<sub>2</sub>
+- x<sup>2</sup> + y<sup>2</sup> = z<sup>2</sup>
 
-1. Butir pertama
-2. Butir kedua
-3. Butir ketiga
+Footnote: footnote[^1] dan footnote[^2].
+
+## Time & Address
+```markdown
+<time datetime="2026-05-13">13 May 2026</time>
+
+<address>Jl. Sudirman No. 123, Jakarta</address>
+```
+
+- <time datetime="2026-09-12">12 September 2026</time>
+- <address>Jl. Sudirman No. 123, Jakarta</address>
+ 
+## Ruby
+```markdown
+<ruby>日本語<rt>にほんご</rt></ruby>
+```
+
+- <ruby>日本語<rt>にほんご</rt></ruby>
+
+## Lists
 
 ### Unordered List
-
-#### Syntax
-
 ```markdown
-- Butir daftar
-- Butir lainnya
-- Dan butir lainnya
+- Item 1
+- Item 2
+    - Nested item 2.1
+    - Nested item 2.2
+      - Nested item 2.2.1
+      - Nested item 2.2.2
+- Item 3
 ```
 
-#### Output
+- Item 1
+- Item 2
+    - Nested item 2.1
+    - Nested item 2.2
+      - Nested item 2.2.1
+      - Nested item 2.2.2
+- Item 3
 
-- Butir daftar
-- Butir lainnya
-- Dan butir lainnya
-
-### Nested list
-
-#### Syntax
-
+### Ordered List
 ```markdown
-- Fruit
-  - Apple
-  - Orange
-  - Banana
-- Dairy
-  - Milk
-  - Cheese
+1. First item
+2. Second item
+      1. Nested ordered 2.1
+      2. Nested ordered 2.2
+3. Third item
 ```
 
-#### Output
+1. First item
+2. Second item
+      1. Nested ordered 2.1
+      2. Nested ordered 2.2
+3. Third item
 
-- Fruit
-  - Apple
-  - Orange
-  - Banana
-- Dairy
-  - Milk
-  - Cheese
-
-## Elemen Lainnya — abbr, sub, sup, kbd, mark
-
-### Syntax
-
+### Task List
 ```markdown
-<abbr title="Graphics Interchange Format">GIF</abbr> adalah format gambar bitmap..
-
-H<sub>2</sub>O
-
-X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
-
-Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
-
-Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
+- [x] Task yang sudah selesai
+- [ ] Task yang belum selesai
+- [ ] Task lain dengan **bold** dan `code`
+- [x] Task dengan [link](#)
 ```
 
-### Output
+- [x] Task yang sudah selesai
+- [ ] Task yang belum selesai
+- [ ] Task lain dengan **bold** dan `code`
+- [x] Task dengan [link](#)
 
-<abbr title="Graphics Interchange Format">GIF</abbr> adalah format gambar bitmap..
+### Definition List
+```markdown
+HTML
+: HyperText Markup Language adalah bahasa markup untuk web
 
-H<sub>2</sub>O
+CSS
+: Cascading Style Sheets untuk styling
 
-X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
+API
+: Application Programming Interface
 
-Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
+`code-term`
+: Definisi untuk istilah yang berupa `code`
 
-Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
+// Atau
+
+<dl>
+  <dt>HTML</dt>
+  <dd>HyperText Markup Language adalah bahasa markup untuk web</dd>
+  
+  <dt>CSS</dt>
+  <dd>Cascading Style Sheets untuk styling</dd>
+  
+  <dt>API</dt>
+  <dd>Application Programming Interface</dd>
+  
+  <dt><code>code-term</code></dt>
+  <dd>Definisi untuk istilah yang berupa <code>code</code></dd>
+</dl>
+```
+
+<dl>
+  <dt>HTML</dt>
+  <dd>HyperText Markup Language adalah bahasa markup untuk web</dd>
+  
+  <dt>CSS</dt>
+  <dd>Cascading Style Sheets untuk styling</dd>
+  
+  <dt>API</dt>
+  <dd>Application Programming Interface</dd>
+  
+  <dt><code>code-term</code></dt>
+  <dd>Definisi untuk istilah yang berupa <code>code</code></dd>
+</dl>
+
+## Images & Media
+```markdown
+![Alt text image](/.github/assets/images/banner.jpg)
+
+<figure>
+  <img src="/.github/assets/banner.jpg" alt="Alt text figure" />
+  <figcaption>Ini adalah figcaption untuk figure di atas.</figcaption>
+</figure>
+
+<video title="Video" poster="/.github/assets/images/banner.jpg" width={720} height={480} controls="true" muted="true" autoplay="true" loop="false" preload>
+  <source src="/.github/assets/videos/video.mp4" />
+</video>
+```
+
+![Alt text image](/.github/assets/images/banner.jpg)
+
+<figure>
+  <img src="/.github/assets/images/banner.jpg" alt="Alt text figure" />
+  <figcaption>Ini adalah figcaption untuk figure di atas.</figcaption>
+</figure>
+
+<video title="Video" poster="/.github/assets/images/banner.jpg" width={720} height={480} controls="true" muted="true" autoplay="true" loop="false" preload>
+  <source src="/.github/assets/videos/video.mp4" />
+</video>
+
+## Table
+
+```markdown
+| Column 1 | Column 2 | Column 3 |
+| :---- | :----- | :----- |
+| Data 1 | Data 2 | Data 3 |
+| Data 1 | Data 2 | Data 3 |
+
+// Atau
+
+<table>
+  <thead>
+    <th>Column 1</th>
+    <th>Column 2</th>
+    <th>Column 3</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Data 1</td>
+      <td>Data 2</td>
+      <td>Data 3</td>
+    </tr>
+    <tr>
+      <td>Data 1</td>
+      <td>Data 2</td>
+      <td>Data 3</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+<table>
+  <thead>
+    <th>Column 1</th>
+    <th>Column 2</th>
+    <th>Column 3</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Data 1</td>
+      <td>Data 2</td>
+      <td>Data 3</td>
+    </tr>
+    <tr>
+      <td>Data 1</td>
+      <td>Data 2</td>
+      <td>Data 3</td>
+    </tr>
+  </tbody>
+</table>
+
+## Details & Summary
+
+```markdown
+<details>
+<summary>Click untuk buka details</summary>
+
+Ini adalah content di dalam details. Bisa ada **bold**, `code`, dan [link](#).
+
+- List di dalam details
+- Item 2
+
+> Blockquote di dalam details
+
+</details>
+```
+
+<details>
+<summary>Click untuk buka details</summary>
+
+Ini adalah content di dalam details. Bisa ada **bold**, `code`, dan [link](#).
+
+- List di dalam details
+- Item 2
+
+> Blockquote di dalam details
+
+</details>
+
+## Horizontal Rule
+
+```markdown
+Di atas ada hr.
+
+---
+
+Di bawah ada hr.
+
+---
+```
+
+Di atas ada hr.
+
+---
+
+Di bawah ada hr.
+
+---
+
+[^1]: Ini adalah footnote pertama dengan **bold** dan `code`.
+[^2]: Footnote kedua dengan [link](https://example.com).

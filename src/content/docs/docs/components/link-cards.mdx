@@ -9,9 +9,9 @@ import { LinkCard } from "@astrojs/starlight/components";
 
 To display links to different pages prominently, use the `<LinkCard>` component.
 
-import Preview from "~/components/component-preview.astro";
+import { PreviewPanel } from "~/stradocs/components";
 
-<Preview>
+<PreviewPanel>
 
 <LinkCard
   slot="preview"
@@ -20,7 +20,7 @@ import Preview from "~/components/component-preview.astro";
   href="/guides/customization/"
 />
 
-</Preview>
+</PreviewPanel>
 
 ## Import
 
@@ -33,7 +33,7 @@ import { LinkCard } from "@astrojs/starlight/components";
 Display a link prominently using the `<LinkCard>` component.
 Each `<LinkCard>` requires a [`title`](#title) and an [`href`](#href) attribute.
 
-<Preview>
+<PreviewPanel>
 
 ```mdx
 import { LinkCard } from "@astrojs/starlight/components";
@@ -55,13 +55,13 @@ import { LinkCard } from "@astrojs/starlight/components";
   href="/guides/authoring-content/"
 />
 
-</Preview>
+</PreviewPanel>
 
 ### Add a link description
 
 Add a short description to a link card using the [`description`](#description) attribute.
 
-<Preview>
+<PreviewPanel>
 
 ```mdx {6}
 import { LinkCard } from "@astrojs/starlight/components";
@@ -91,7 +91,7 @@ import { LinkCard } from "@astrojs/starlight/components";
   description="Configure Starlight to support multiple languages."
 />
 
-</Preview>
+</PreviewPanel>
 
 ### Group link cards
 

@@ -9,15 +9,15 @@ import { Card } from "@astrojs/starlight/components";
 
 To display content in a box matching Starlight’s styles, use the `<Card>` component.
 
-import Preview from "~/components/component-preview.astro";
+import { PreviewPanel } from "~/stradocs/components";
 
-<Preview>
+<PreviewPanel>
 
 <Card slot="preview" title="Moons" icon="moon">
   Io, Europa, Ganymede
 </Card>
 
-</Preview>
+</PreviewPanel>
 
 ## Import
 
@@ -29,7 +29,7 @@ import { Card } from "@astrojs/starlight/components";
 
 Display a card using the `<Card>` component and provide a [`title`](#title) for the card.
 
-<Preview>
+<PreviewPanel>
 
 ```mdx
 import { Card } from "@astrojs/starlight/components";
@@ -51,13 +51,13 @@ Interesting content you want to highlight.
   Interesting content you want to highlight.
 </Card>
 
-</Preview>
+</PreviewPanel>
 
 ### Add icons to cards
 
 Include an icon in a card using the [`icon`](#icon) attribute set to the name of [one of Starlight’s built-in icons](/reference/icons/#all-icons).
 
-<Preview>
+<PreviewPanel>
 
 ```mdx 'icon="star"'
 import { Card } from "@astrojs/starlight/components";
@@ -81,7 +81,7 @@ Sirius, Vega, Betelgeuse
   Sirius, Vega, Betelgeuse
 </Card>
 
-</Preview>
+</PreviewPanel>
 
 ### Group cards
 
@@ -94,27 +94,17 @@ See the [“Group cards”](/components/card-grids/#group-cards) guide for an ex
 
 The `<Card>` component accepts the following props:
 
-<dl>
-  <dt>
-    ### `title`
-  </dt>
-  <dd>
-    **required**
+`title`
+: **required**
 
-    **type:** `string`
+  **type:** `string`
+  
+  The title of the card to display.
 
-    The title of the card to display.
-  </dd>
+`icon`
+: **type:** `string`
 
-  <dt>
-    ### `icon`
-  </dt>
-  <dd>
-    **type:** `string`
-
-    A card can include an `icon` attribute set to the name of [one of Starlight’s built-in icons](/reference/icons/#all-icons).
-  </dd>
-</dl>
+  A card can include an `icon` attribute set to the name of [one of Starlight’s built-in icons](/reference/icons/#all-icons).
 
 
 

@@ -7,9 +7,9 @@ import { Icon } from "@astrojs/starlight/components";
 
 To display icons from Starlight’s [built-in icon set](/reference/icons/#all-icons), use the `<Icon>` component.
 
-import Preview from "~/components/component-preview.astro";
+import { PreviewPanel } from "~/stradocs/components";
 
-<Preview>
+<PreviewPanel>
 
 <Icon
   slot="preview"
@@ -18,7 +18,7 @@ import Preview from "~/components/component-preview.astro";
   size="4rem"
 />
 
-</Preview>
+</PreviewPanel>
 
 ## Import
 
@@ -31,7 +31,7 @@ import { Icon } from "@astrojs/starlight/components";
 Display an icon using the `<Icon>` component.
 An icon requires a [`name`](#name) set to [one of Starlight’s built-in icons](/reference/icons/#all-icons) and can optionally include a [`label`](#label) to provide context for screen readers.
 
-<Preview>
+<PreviewPanel>
 
 ```mdx
 import { Icon } from "@astrojs/starlight/components";
@@ -54,14 +54,14 @@ import { Icon } from "@astrojs/starlight/components";
   <Icon name="starlight" label="The Starlight logo" />
 </Fragment>
 
-</Preview>
+</PreviewPanel>
 
 ### Customize icons
 
 The [`size`](#size) and [`color`](#color) attributes can be used to adjust the icon’s appearance using CSS units and color values.
 The [`class`](#class) attribute can be used to add custom CSS classes to the icon.
 
-<Preview>
+<PreviewPanel>
 
 ```mdx
 import { Icon } from "@astrojs/starlight/components";
@@ -84,7 +84,7 @@ import { Icon } from "@astrojs/starlight/components";
   <Icon name="rocket" color="var(--sl-color-text-accent)" />
 </Fragment>
 
-</Preview>
+</PreviewPanel>
 
 ## Props
 

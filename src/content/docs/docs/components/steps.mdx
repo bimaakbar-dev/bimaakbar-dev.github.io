@@ -7,9 +7,9 @@ import { Tabs, TabItem, Steps } from "@astrojs/starlight/components";
 
 To style a numbered list of tasks to create step-by-step guides, use the `<Steps>` component.
 
-import Preview from "~/components/component-preview.astro";
+import { PreviewPanel } from "~/stradocs/components";
 
-<Preview>
+<PreviewPanel>
 
 <Steps slot="preview">
 
@@ -47,7 +47,7 @@ import Preview from "~/components/component-preview.astro";
 
 </Steps>
 
-</Preview>
+</PreviewPanel>
 
 ## Import
 
@@ -63,7 +63,7 @@ This is useful for more complex step-by-step guides where each step needs to be 
 Wrap `<Steps>` around a standard Markdown ordered list.
 All the usual Markdown syntax is applicable inside `<Steps>`.
 
-<Preview>
+<PreviewPanel>
 
 ````mdx
 import { Steps } from "@astrojs/starlight/components";
@@ -111,7 +111,7 @@ import { Steps } from "@astrojs/starlight/components";
 
 </Steps>
 
-</Preview>
+</PreviewPanel>
 
 ## Props
 

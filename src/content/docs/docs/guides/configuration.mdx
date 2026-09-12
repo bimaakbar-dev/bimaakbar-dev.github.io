@@ -6,10 +6,11 @@ description: "Stradocs configuration guide — which files to modify and for wha
 import {
   Aside,
   Card,
-  CardGrid,
   FileTree,
   LinkCard,
 } from "@astrojs/starlight/components";
+
+import { CardGrid } from "~/stradocs/components";
 
 Stradocs does not have a dedicated configuration file. All configurations are distributed across four main files, each with distinct and separate responsibilities.
 
@@ -97,6 +98,8 @@ The main Astro configuration file. This is the first place to look when customiz
   After changing `site`, rerun `npm run build` to ensure all generated URLs use
   the correct domain.
 </Aside>
+
+---
 
 ### `src/config/sidebar.ts`
 
