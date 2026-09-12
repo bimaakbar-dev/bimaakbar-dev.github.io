@@ -37,6 +37,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 [![alt name](url-avatar) name](url-profile) 
 
 [![name](url-avatar)](url-profile)
+
+<https://example.com>
+
+<email@example.com>
 ```
 
 - [internal link](#)
@@ -45,6 +49,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 - [![badge](../../../../../assets/images/logo/logo.svg)](/)
 - [![alt name](../../../../../assets/images/author/bimaakbar.svg) name](/) 
 - [![alt name](../../../../../assets/images/author/bimaakbar.svg)](/)
+- <https://example.com>
+- <email@example.com>
 
 ## Text Formatting
 ```markdown
@@ -90,11 +96,36 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
   - <u>inserted</u>
 - <mark>highlighted</mark>
 - <small>small</small>
+- <abbr title="HyperText Markup Language">HTML</abbr>
 
-<abbr title="HyperText Markup Language">HTML</abbr>
+## Escape karakter
 
-> [!WARNING]
-> `abbr` masih bug
+```markdown
+\*bukan italic\*
+
+\_bukan italic\_
+
+\`bukan code\`
+
+\#bukan heading
+
+\[bukan link\]
+
+\\backslash
+```
+
+\*bukan italic\*
+
+\_bukan italic\_
+
+\`bukan code\`
+
+\#bukan heading
+
+\[bukan link\]
+
+\\backslash
+
 
 ## Inline Typography
 ```markdown
@@ -125,6 +156,18 @@ Dia berkata <q>ini adalah quote pendek</q> di dalam paragraf.
 > Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 >
 > <cite>John Doe, Penulis</cite>
+
+> Level 1
+>
+> > Level 2
+> >
+> > > Level 3
+
+> **Catatan**
+>
+> > **Sub-catatan**
+> >
+> > > **Sub-sub-catatan**
 ```
 
 > Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -132,6 +175,18 @@ Dia berkata <q>ini adalah quote pendek</q> di dalam paragraf.
 > Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 >
 > <cite>John Doe, Penulis</cite>
+
+> Level 1
+>
+> > Level 2
+> >
+> > > Level 3
+
+> **Catatan**
+>
+> > **Sub-catatan**
+> >
+> > > **Sub-sub-catatan**
 
 ## Subscript & Superscript
 ```markdown
@@ -190,6 +245,24 @@ Footnote: footnote[^1] dan footnote[^2].
       1. Nested ordered 2.1
       2. Nested ordered 2.2
 3. Third item
+
+1. Item pertama
+2. Item kedua
+   - Unordered di dalam ordered
+   - Item lain
+     - Nested lebih dalam
+3. Item ketiga
+
+3. Mulai dari 3
+4. Lanjut dari 4
+
+- Item
+  > Blockquote di dalam list
+  
+- Item lain
+  ~~~js
+  code di dalam list
+  ~~~
 ```
 
 1. First item
@@ -197,6 +270,59 @@ Footnote: footnote[^1] dan footnote[^2].
       1. Nested ordered 2.1
       2. Nested ordered 2.2
 3. Third item
+
+1. Item pertama
+2. Item kedua
+   - Unordered di dalam ordered
+   - Item lain
+     - Nested lebih dalam
+3. Item ketiga
+
+3. Mulai dari 3
+4. Lanjut dari 4
+
+- Item
+  > Blockquote di dalam list
+  
+- Item lain
+  ```js
+  code di dalam list
+  ```
+
+```mermaid
+graph TD
+  A[Start] --> B{Apakah berhasil?}
+  B -->|Ya| C[Selesai]
+  B -->|Tidak| D[Retry]
+  D --> B
+```
+
+```mermaid
+sequenceDiagram
+  User->>Server: Request login
+  Server->>DB: Query user
+  DB-->>Server: User data
+  Server-->>User: Token
+```
+
+## Math
+
+Inline: $E = mc^2$
+
+Block:
+
+$$
+\int_{a}^{b} f(x) \, dx = F(b) - F(a)
+$$
+
+Matrix:
+
+$$
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+$$
 
 ### Task List
 ```markdown
@@ -262,27 +388,27 @@ API
 
 <picture>
   <source srcset="image.jpg" type="image/jpg" />
-  <img src="/.github/assets/banner.jpg" alt="Alt text" />
+  <img src="/og.jpg" alt="Alt text" />
 </picture>
 
 <figure>
-  <img src="/.github/assets/banner.jpg" alt="Alt text figure" />
+  <img src="/og.jpg" alt="Alt text figure" />
   <figcaption>Ini adalah figcaption untuk figure di atas.</figcaption>
 </figure>
 
 <figure>
   <a href="/">
-    <img src="path/to/image.jpg" alt="Alt text" />
+    <img src="/og.jpg" alt="Alt text" />
   </a>
   <figcaption>Klik gambar untuk membuka situs.</figcaption>
 </figure>
 
-<video title="Video" poster="/.github/assets/banner.jpg" width={720} height={480} controls muted autoplay loop="false" preload>
+<video title="Video" poster="/og.jpg" width={720} height={480} controls muted autoplay loop="false" preload>
   <source src="/.github/assets/videos/video.mp4" />
   Browser Anda tidak mendukung tag video.
 </video>
 
-[![Tonton video](thumbnail.jpg)](https://youtu.be/VIDEO_ID)
+[![Tonton video](/og.jpg)](https://youtu.be/VIDEO_ID)
 
 <iframe
   width="560"
@@ -295,31 +421,31 @@ API
 ></iframe>
 ```
 
-![Alt text image](/.github/assets/banner.jpg 'Title image')
+![Alt text image](/og.jpg 'Title image')
 
 <picture>
   <source srcset="image.jpg" type="image/jpg" />
-  <img src="/.github/assets/banner.jpg" alt="Alt text" />
+  <img src="/og.jpg" alt="Alt text" />
 </picture>
 
 <figure>
   <a href="/">
-    <img src="/.github/assets/banner.jpg" alt="Alt text" />
+    <img src="/og.jpg" alt="Alt text" />
   </a>
   <figcaption>Klik gambar untuk membuka situs.</figcaption>
 </figure>
 
 <figure>
-  <img src="/.github/assets/banner.jpg" alt="Alt text figure" />
+  <img src="/og.jpg" alt="Alt text figure" />
   <figcaption>Ini adalah figcaption untuk figure di atas.</figcaption>
 </figure>
 
-<video title="Video" poster="/.github/assets/banner.jpg" width={720} height={480} controls muted autoplay loop="false" preload>
+<video title="Video" poster="/og.jpg" width={720} height={480} controls muted autoplay loop="false" preload>
   <source src="/.github/assets/videos/video.mp4" />
   Browser Anda tidak mendukung tag video.
 </video>
 
-[![Tonton video](/.github/assets/videos/video.mp4)](https://youtu.be/VIDEO_ID)
+[![Tonton video](/og.jpg)](https://youtu.be/VIDEO_ID)
 
 <iframe
   width="560"
@@ -429,6 +555,56 @@ Di atas ada hr.
 Di bawah ada hr.
 
 ---
+
+## Hardline Break
+
+```markdown
+Baris 1  
+Baris 2 (dua spasi di akhir baris)
+
+Baris 1<br />
+Baris 2 (pakai tag br)
+
+Baris 1\
+Baris 2 (backslash di akhir baris)
+```
+
+Baris 1  
+Baris 2 (dua spasi di akhir baris)
+
+Baris 1<br />
+Baris 2 (pakai tag br)
+
+Baris 1\
+Baris 2 (backslash di akhir baris)
+
+```markdown
+<!-- Ini komentar, tidak akan muncul di output -->
+
+Teks di bawah komentar.
+```
+
+<!-- Ini komentar, tidak akan muncul di output -->
+
+Teks di bawah komentar.
+
+## Html Entitas 
+```markdown
+&copy; &reg; &trade; &amp; &lt; &gt; &nbsp; &mdash; &ndash; &hellip; &laquo; &raquo; &times; &divide;
+```
+
+&copy; &reg; &trade; &amp; &lt; &gt; &nbsp; &mdash; &ndash; &hellip; &laquo; &raquo; &times; &divide;
+
+## Emoji Code
+```markdown
+:smile: :rocket: :fire: :tada: :sparkles: :heart: :+1: :-1:
+
+:warning: :bulb: :books: :memo: :bug: :zap:
+```
+
+:smile: :rocket: :fire: :tada: :sparkles: :heart: :+1: :-1:
+
+:warning: :bulb: :books: :memo: :bug: :zap:
 
 [^1]: Ini adalah footnote pertama dengan **bold** dan `code`.
 [^2]: Footnote kedua dengan [link](/).
