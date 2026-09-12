@@ -6,7 +6,7 @@ import {
 
 const showContentTypeTabs = Astro.slots.has("markdoc");
 ---
-<div class="not-content">
+<div class="sl-block not-content">
   <figure class="preview-panel sl-block">
     {
       showContentTypeTabs ? (
@@ -63,5 +63,9 @@ const showContentTypeTabs = Astro.slots.has("markdoc");
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
+  }
+  [data-theme='light'] :global(.sl-markdown-content) .preview-panel {
+    background: var(--sl-color-gray-7);
+    border: 1px solid var(--sl-color-hairline);
   }
 </style>
