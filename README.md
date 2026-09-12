@@ -1,4 +1,4 @@
-![Stardocs for Starlight Themes](.github/assets/images/banner.jpg)
+![Stradocs for Starlight Themes](.github/assets/images/banner.jpg)
 
 <p align="center">
   <a href="https://github.com/bimaakbar-dev/">Stradocs</a> is a custom theme from Starlight developed by <b>Bima Akbar</b>
