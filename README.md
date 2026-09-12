@@ -14,6 +14,8 @@
  ![Stardocs for Starlight Themes](.github/assets/banner.jpg 'Build the web you want')
 </div>
 
+[![Deploy site to Pages](https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/actions/workflows/astro.yml/badge.svg?branch=Dev)](https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/actions/workflows/astro.yml)
+
 
 ## Key Features
 
