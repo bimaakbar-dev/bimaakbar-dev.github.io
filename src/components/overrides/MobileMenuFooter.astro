@@ -1,0 +1,39 @@
+---
+import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro';
+import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
+import SocialIcons from "./SocialIcons.astro";
+---
+
+<div class="mobile-preferences sl-flex">
+	<div class="sl-flex footer-select">
+		<ThemeSelect />
+		<LanguageSelect />
+	</div>
+	<div class="social-icons">
+        <SocialIcons />
+    </div>
+</div>
+
+<style>
+  .mobile-preferences {
+    justify-content: space-between;
+	flex-wrap: wrap;
+	border-top: 1px solid var(--sl-color-gray-6);
+	column-gap: 1rem;
+	padding: 0.25rem 0;
+	margin-block-end: env(safe-area-inset-bottom);
+	margin-block-start: 1rem;
+	align-items: center;
+	& .footer-select {
+      align-items: center;
+	  gap: 0.75em;
+	}
+    & .social-icons {
+	  display: flex;
+	  margin-inline-start: auto;
+	  gap: var(--sl-nav-gap);
+	  align-items: center;
+	  padding-block: 1rem;
+	}
+  }
+</style>

@@ -1,0 +1,93 @@
+---
+// src/components/GlobalMobileMenu.astro
+import { Icon } from "@astrojs/starlight/components";
+import MobileMenuFooter from "~/components/overrides/MobileMenuFooter.astro";
+import NavLinks from "./NavLinks.astro";
+---
+
+<details class="mobile-menu sl-block md:sl-hidden print:hidden">
+  <summary aria-controls="mobile-menu-panel" class="menu-button">
+    <Icon name="bars" class="open-icon" size="1.333em" />
+    <Icon name="close" class="close-icon" size="1.333em" />
+    <span class="sr-only">{Astro.locals.t("menuButton.accessibleLabel")}</span>
+  </summary>
+  <div id="mobile-menu-panel" class="dropdown-panel">
+    <NavLinks />
+    <MobileMenuFooter />
+  </div>
+</details>
+
+<style>
+  .mobile-menu summary {
+    position: fixed;
+    top: calc((var(--sl-nav-height) - var(--sl-menu-button-size)) / 2);
+    inset-inline-end: var(--sl-nav-pad-x);
+    z-index: var(--sl-z-index-navbar);
+    width: var(--sl-menu-button-size);
+    height: var(--sl-menu-button-size);
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+    background-color: transparent;
+    color: var(--sl-color-white);
+    box-shadow: none;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-shrink: 0;
+  }
+  .mobile-menu summary:has([open]) {
+    color: var(--sl-color-white);
+  }
+  .mobile-menu summary .menu-button svg {
+    flex-shrink: 0;
+  }
+  .mobile-menu summary::-webkit-details-marker {
+    display: none;
+  }
+  .mobile-menu:not([open]) .close-icon {
+    display: none;
+  }
+  .mobile-menu[open] .open-icon {
+    display: none;
+  }
+  .dropdown-panel {
+    position: fixed;
+    top: calc(var(--sl-nav-height));
+    inset-inline: 0;
+    width: 100%;
+    max-width: calc(100dvw);
+    padding-inline: 1rem;
+    padding-block-start: 1rem;
+    background: var(--sl-color-gray-6);
+    z-index: var(--sl-z-index-toc);
+    box-shadow: var(--sl-shadow-lg);
+    border-bottom: 1px solid var(--sl-color-gray-5);
+    border-end-end-radius: 0.5rem;
+    border-end-start-radius: 0.5rem;
+  }
+  .dropdown-panel :global(.nav-links) {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .dropdown-panel :global(.nav-link) {
+    font-size: var(--sl-text-body);
+    padding: 0.5rem 0;
+    width: 100%;
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('click', (e) => {
+    const menu = document.querySelector('.mobile-menu');
+    if (!(menu instanceof HTMLDetailsElement)) return;
+    if (!menu.open) return;
+
+    const target = e.target;
+    if (!(target instanceof Node)) return;
+
+    if (!menu.contains(target)) {
+      menu.open = false;
+    }
+  });
+</script>

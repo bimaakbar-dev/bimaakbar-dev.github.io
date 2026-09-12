@@ -1,0 +1,76 @@
+---
+// src/components/overwrite/MarkdownContent.astro
+import "@astrojs/starlight/style/markdown.css";
+
+import EditLink from "@astrojs/starlight/components/EditLink.astro";
+import LastUpdated from "@astrojs/starlight/components/LastUpdated.astro";
+import Pagination from "@astrojs/starlight/components/Pagination.astro";
+
+import RelatedPosts from "~/components/RelatedPosts.astro";
+import MobileScrollToTop from "../MobileScrollToTop.astro";
+
+
+const { entry, isBlogPost, isBlogIndex, isDocIndex } = Astro.locals.starlightRoute;
+const customIndex = isBlogIndex || isDocIndex;
+
+---
+
+{
+  isBlogPost ? (
+    <>
+      <article class="sl-markdown-content">
+        <slot />
+      </article>
+      <div class="custom-meta sl-flex">
+        {entry.data.editUrl && (<EditLink />)}
+        <LastUpdated />
+      </div>
+      <Pagination />
+      <RelatedPosts currentSlug={entry.id} />
+      <MobileScrollToTop />
+    </>
+  ) : customIndex ? (
+    <div class="not-content">
+      <slot />
+      <Pagination />
+    </div>
+  ) : (
+    <article class="sl-markdown-content">
+      <slot />
+    </article>
+    <div class="meta sl-flex">
+      <EditLink />
+      <LastUpdated />
+    </div>
+    <Pagination />
+    <MobileScrollToTop />
+  )
+}
+
+<style>
+  .meta {
+    width: 100%;
+    gap: 0.75em 3rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+    margin-top: 3rem;
+  }
+  .custom-meta {
+    width: 100%;
+    gap: 0.75em 3rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+    margin-top: 1rem;
+    padding-block: var(--sl-content-gap-y);
+  }
+  :where(.meta, .custom-meta) > :global(p:only-child) {
+    margin-inline-start: auto;
+  }
+  :global([data-has-sidebar][data-has-hero] hr) {
+    display: none;
+  }
+</style>

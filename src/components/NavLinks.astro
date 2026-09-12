@@ -1,0 +1,22 @@
+---
+import HeaderLink from "./HeaderLink.astro";
+
+const { docsBasePath, blogBasePath } = Astro.locals.starlightRoute;
+const t = Astro.locals.t;
+---
+
+<nav class="nav-links sl-flex">
+  <HeaderLink href={`${docsBasePath}`} matchPrefix>
+    {t("nav.docs")}
+  </HeaderLink>
+  <HeaderLink href={`${blogBasePath}`} matchPrefix>
+    {t("nav.blog")}
+  </HeaderLink>
+</nav>
+
+<style>
+  .nav-links {
+    gap: 0.5rem;
+    align-items: center;
+  }
+</style>

@@ -1,0 +1,71 @@
+---
+import config from 'virtual:starlight/user-config';
+import { Icon } from "@astrojs/starlight/components";
+import SocialIcons from "./SocialIcons.astro";
+
+const { 
+  siteTitle, 
+  siteTitleHref 
+} = Astro.locals.starlightRoute;
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="sl-flex site-footer">
+  <div class="sl-flex social-icons">
+    <SocialIcons />
+  </div>
+  <span class="copyright sl-flex">
+    <a class="sl-flex kudos" href={siteTitleHref}>
+      {siteTitle}
+    </a>
+    {currentYear}
+    {config.credits && (
+      <a class="sl-flex kudos" href="https://starlight.astro.build">
+        <Icon name="starlight" />
+        {Astro.locals.t('builtWithStarlight.label')}
+      </a>
+    )}
+  </span>
+</footer>
+
+<style>
+  .site-footer {
+    flex-direction: column;
+    gap: 0.25em;
+    align-items: center;
+    margin-inline: auto;
+    border-top: 1px solid var(--sl-color-hairline);
+    padding-top: 2rem;
+    & .social-icons {
+      display: flex;
+      gap: var(--sl-nav-gap);
+      align-items: center;
+    }
+    & .copyright {
+      align-items: center;
+      line-height: 1;
+      font-size: var(--sl-text-xs);
+      color: var(--sl-color-gray-3);
+      margin-block: 1rem;
+      margin-inline: auto;
+      gap: 0.5em;
+      & .kudos {
+        align-items: center;
+        gap: 0.5em;
+        font-size: var(--sl-text-xs);
+        text-decoration: none;
+        color: var(--sl-color-gray-3);
+        line-height: var(--sl-line-height);
+        & :global(svg) {
+          color: var(--sl-color-orange);
+        }
+      }
+    }
+  }
+  @media (hover: hover) {
+    .copyright .kudos:hover {
+      color: var(--sl-color-white);
+    }
+  } 
+</style>

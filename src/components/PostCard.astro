@@ -1,0 +1,159 @@
+---
+// src/components/PostCard.astro
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import FormattedDate from "./FormattedDate.astro";
+
+const route = Astro.locals.starlightRoute as any;
+const { blogPrefix, blogBasePath } = route;
+
+const allPosts = await getCollection("docs", ({ id, data }) => {
+  if (data.draft) return false;
+  return id.startsWith(blogPrefix);
+});
+
+const blogPosts = allPosts
+  .filter(
+    (post): post is typeof post & { data: { pubDate: Date } } =>
+      post.data.pubDate !== undefined,
+  )
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+{
+  blogPosts.map((post) => {
+    const { data } = post;
+    const { title, description, pubDate, heroImage } = data;
+    const slug = post.id.slice(blogPrefix.length);
+    const href = `${blogBasePath}/${slug}`;
+    return (
+      <li class="post-list not-content">
+        <article class="post-card">
+          <header>
+            <FormattedDate class="date" date={pubDate} />
+          </header>
+          <div class="cover">
+            {heroImage && (
+              <Image
+                width={766}
+                height={328}
+                src={heroImage}
+                class="card-image"
+                alt={title}
+                loading="eager"
+                decoding="async"
+              />
+            )}
+          </div>
+          <div class="content">
+            <h3 class="title">
+              <a href={href} class="post-card-link">
+                {title}
+              </a>
+            </h3>
+            {description && <p class="description">{description}</p>}
+          </div>
+        </article>
+      </li>
+    );
+  })
+}
+
+<style>
+  .post-list {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    & .post-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 1.25em;
+      border-radius: 0.75rem;
+      border: 1px solid var(--sl-color-gray-5);
+      background: var(--sl-color-gray-6);
+      outline: 1px solid transparent;
+      transition: transform 0.3s ease-out;
+      & .date {
+        font-family: var(--__sl-font-mono);
+        color: var(--sl-color-gray-2);
+      }
+      & .cover {
+        margin: 1em -1.25em;
+        & img {
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+          aspect-ratio: 16/9;
+        }
+      }
+      & .content {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        margin-top: 1.25em;
+        gap: 0.75em;
+        & h3 {
+          font-size: var(--sl-text-h4);
+          font-weight: 600;
+          line-height: var(--sl-line-height-headings);
+          text-align: start;
+          color: var(--sl-color-white);
+          margin: 0;
+          & a {
+            font-size: inherit;
+            line-height: inherit;
+            font-weight: inherit;
+            color: inherit;
+            text-decoration: none;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+          }
+          & a::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+          }
+        }
+        & p {
+          font-size: var(--sl-text-body);
+          line-height: var(--sl-line-height);
+          text-align: start;
+          margin: 0;
+          color: var(--sl-color-gray-2);
+        }
+      }
+    }
+    & .post-card:focus-within {
+      outline-color: var(--sl-color-accent-high);
+    }
+  }
+  
+  :global([data-theme='light']) .post-card {
+    background: var(--sl-color-gray-7);
+  }
+  
+  @media (hover: hover) {
+    .post-card:hover {
+      transform: scale(1.03);
+    }
+  }
+  
+  @media (min-width: 50rem) {
+    .post-list {
+      & .post-card {
+        & .content {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 1em 1.5em;
+          align-items: start;
+          margin-top: 0;
+          & h3 {
+            font-size: var(--sl-text-h3);
+          }
+        }
+      }
+    }
+  }
+</style>

@@ -1,0 +1,150 @@
+---
+// src/components/overrides/Hero.astro
+import Default from "@astrojs/starlight/components/Hero.astro";
+import { PAGE_TITLE_ID } from "~/constants";
+import { LinkButton } from "@astrojs/starlight/components";
+
+const { 
+  entry, 
+  isBlogIndex 
+} = Astro.locals.starlightRoute;
+
+const data = entry.data as any;
+
+const { 
+  title, 
+  hero 
+} = data;
+
+const actions: any[] = hero?.actions || [];
+const customHero = isBlogIndex;
+---
+
+{
+  customHero? (
+    <div class="custom-hero not-content">
+      <div class="hero-line" />
+      <div class="hero-grid" />
+      <header class="sl-flex">
+        <h1 id={PAGE_TITLE_ID} set:html={hero?.title || title} />
+        {hero?.tagline && <p set:html={hero.tagline} />}
+        {actions.length > 0 && (
+          <div class="sl-flex hero-actions">
+            {actions.map((action: any) => {
+              const { text, link: href, variant, icon, attrs = {} } = action;
+              const { class: className,...restAttrs } = attrs;
+              const iconName = typeof icon === 'string'? icon : icon?.name;
+              return (
+                <LinkButton href={href} variant={variant} icon={iconName} class:list={[className]} {...restAttrs}>
+                  {text}
+                </LinkButton>
+              );
+            })}
+          </div>
+        )}
+      </header>
+    </div>
+  ) : (
+    <Default />
+  )
+}
+
+<style>
+  .custom-hero {
+    position: relative;
+    display: grid;
+    width: 100%;
+    row-gap: 6rem;
+    padding-block: 3rem;
+    padding-bottom: 6rem;
+    overflow: clip;
+    z-index: 10;
+    border-block-end: 1px solid var(--sl-color-hairline);
+    & .hero-line {
+      position: absolute;
+      inset-inline: 0;
+      top: 0;
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(
+        to right,
+        transparent,
+        var(--sl-color-accent-high),
+        transparent
+      );
+      opacity: 0.5;
+    }
+
+    & .hero-grid {
+      pointer-events: none;
+      position: absolute;
+      inset-inline: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(128, 128, 128, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(128, 128, 128, 0.1) 1px, transparent 1px);
+      background-size: 24px 24px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, #000 40%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, #000 40%, transparent 100%);
+    }
+    & header {
+      position: relative;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      z-index: 20;
+      gap: 1.5em;
+    }
+    & h1 {
+      font-weight: 600;
+      line-height: var(--sl-line-height-headings);
+      color: var(--sl-color-white);
+      margin-inline: auto;
+      max-width: 64rem;
+      font-size: var(--sl-text-h3);
+    }
+    & p {
+      font-size: var(--sl-text-body);
+      font-weight: 300;
+      line-height: var(--sl-line-height);
+      color: var(--sl-color-gray-2);
+    }
+    & .hero-actions {
+      gap: 1em 2em;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  } 
+
+  @media (min-width: 40rem) {
+   .custom-hero {
+      padding-block: 3.5rem;
+      & h1 {
+        font-size: var(--sl-text-h2);
+      }
+    }
+  }
+
+  @media (min-width: 50rem) {
+   .custom-hero {
+      padding-block: 4rem;
+    }
+  }
+
+  @media (min-width: 64rem) {
+   .custom-hero {
+      padding-block: 4.5rem;
+      & h1 {
+        font-size: var(--sl-text-h1);
+      }
+    }
+  }
+
+  @media (min-width: 72rem) {
+   .custom-hero {
+      padding-block: 5rem;
+    }
+  }
+</style>

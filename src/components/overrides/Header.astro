@@ -1,0 +1,89 @@
+---
+// src/components/overrides/Header.astro
+import config from 'virtual:starlight/user-config';
+import LanguageSelect from "@astrojs/starlight/components/LanguageSelect.astro";
+import Search from "@astrojs/starlight/components/Search.astro";
+import SiteTitle from "@astrojs/starlight/components/SiteTitle.astro";
+import SocialIcons from "./SocialIcons.astro";
+import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
+import NavLinks from "../NavLinks.astro";
+import GithubStar from '../GithubStar.astro';
+import MobileMenu from "../MobileMenu.astro";
+
+const { isCustomMenu } = Astro.locals.starlightRoute;
+const shouldRenderSearch = config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
+---
+
+<div class="header" data-is-custom-menu={isCustomMenu ? "true" : "false"}>
+  <div class="title-wrapper sl-flex">
+    <SiteTitle />
+  </div>
+  <div class="nav-group sl-hidden md:sl-flex print:hidden">
+    <NavLinks />
+  </div>
+  <div class="right-group sl-flex">
+    <div class="sl-flex print:hidden">
+      {shouldRenderSearch && <Search />}
+    </div>
+    <div class="controls-group sl-hidden md:sl-flex">
+      <ThemeSelect />
+      <LanguageSelect />
+      <div class="social-icons sl-flex">
+        <SocialIcons />
+      </div>
+      <GithubStar repo="bimaakbar-dev/bimaakbar-dev" />
+    </div>
+  </div>
+</div>
+
+{isCustomMenu ? <MobileMenu /> : <div aria-hidden="true" />}
+
+<style>
+  .header {
+    display: flex;
+    gap: var(--sl-nav-gap);
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+  }
+
+  .title-wrapper {
+    overflow: clip;
+    padding: 0.25rem;
+    margin: -0.25rem;
+    min-width: 0;
+  }
+
+  .nav-group {
+    flex: 1;
+  }
+  
+  .nav-group,
+  .controls-group,
+  .right-group,
+  .social-icons {
+    gap: 1em;
+    align-items: center;
+  }
+
+  .social-icons::before {
+    content: '';
+    height: 2rem;
+    border-inline-start: 1px solid var(--sl-color-gray-5);
+  }
+
+  .header[data-is-custom-menu="true"] {
+    padding-inline-end: calc(var(--sl-nav-gap) + var(--sl-menu-button-size));
+  }
+
+  @media (min-width: 50rem) {
+    .header {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-content: center;
+    }
+    .header[data-is-custom-menu="true"] {
+      padding-inline-end: 0;
+    }
+  }
+</style>

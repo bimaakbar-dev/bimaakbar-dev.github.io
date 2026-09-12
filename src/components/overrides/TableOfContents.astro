@@ -1,0 +1,53 @@
+---
+import ScrollToTop from '../ScrollToTop.astro';
+import TableOfContentsList from './components-internals/TableOfContents/TableOfContentsList.astro';
+
+const { toc } = Astro.locals.starlightRoute;
+---
+
+{
+    toc && (
+        <starlight-toc data-min-h={toc.minHeadingLevel} data-max-h={toc.maxHeadingLevel}>
+            <nav aria-labelledby="starlight__on-this-page">
+                <h2 id="starlight__on-this-page">{Astro.locals.t('tableOfContents.onThisPage')}</h2>
+                <TableOfContentsList toc={toc.items} />
+                <div class="toc-sticky-footer">
+                    <ScrollToTop />
+                </div>
+            </nav>
+        </starlight-toc>
+    )
+}
+
+<style is:global>
+    starlight-toc { 
+      & h2#starlight__on-this-page {
+        font-size: var(--sl-text-xs);
+        font-weight: 500;
+      }
+
+      & .toc-sticky-footer {
+        position: sticky;
+        bottom: 0;
+        background-color: var(--sl-color-black);
+        padding-top: 0;
+        padding-bottom: 0.75rem;
+        z-index: 2;
+      }
+
+      & .toc-sticky-footer::before {
+        content: "";
+        position: absolute;
+        top: -1rem;
+        left: 0;
+        width: 100%;
+        height: 1rem;
+        background: linear-gradient(transparent, var(--sl-color-black));
+        pointer-events: none;
+      }
+    }
+</style>
+
+<script>
+    import "./components-internals/TableOfContents/starlight-toc";
+</script>

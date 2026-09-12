@@ -1,0 +1,43 @@
+---
+import { LinkButton } from "@astrojs/starlight/components";
+
+const { siteTitle, rssUrl } = Astro.locals.starlightRoute;
+---
+
+<div class="rss-feed not-content">
+  <h2 set:html={`${Astro.locals.t("rss.RssFeedLabel")}`}  />
+  <p set:html={`${Astro.locals.t("rss.RssFeedDesc")} ${siteTitle}`} />
+  <LinkButton
+    href={rssUrl as string}
+    variant="secondary"
+    icon="rss"
+    iconPlacement="start"
+  >
+    {Astro.locals.t("rss.RssFeedTitle")}
+  </LinkButton>
+</div>
+
+<style>
+  .rss-feed {
+    padding: 1.25rem;
+    color: var(--sl-color-text);
+    font-size: var(--sl-text-body);
+    flex-direction: column;
+    border-block-start: 1px solid var(--sl-color-hairline);
+    & h2 {
+      color: var(--sl-color-white);
+      font-weight: 400;
+      font-family: var(--__sl-font-mono);
+      font-size: var(--sl-text-lg);
+    }
+    & p {
+      margin-block: 0.5rem;
+    }
+  }
+  @media (min-width: 72rem) {
+    .rss-feed {
+      border-block-start: 1px solid var(--sl-color-hairline);
+      padding: 2rem;
+    }
+  }
+</style>

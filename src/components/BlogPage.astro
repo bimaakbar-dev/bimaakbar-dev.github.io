@@ -1,0 +1,76 @@
+---
+// src/components/BlogPage.astro
+
+import PopularPosts from "./PopularPosts.astro";
+import RSSFeed from "./RSSFeed.astro";
+import PostCard from "./PostCard.astro";
+
+const { entry } = Astro.props;
+
+const excludeCurrentId = entry?.id;
+---
+
+<div class="page-custom sl-flex not-content">
+  <aside class="left-layout">
+    <PopularPosts limit={5} excludeCurrent={excludeCurrentId} />
+    <RSSFeed />
+  </aside>
+  <section class="post-section">
+    <ul>
+      <PostCard />
+    </ul>
+  </section>
+</div>
+
+<style>
+  .page-custom {
+    flex-direction: column-reverse;
+    flex: 1;
+    & .left-layout {
+      min-width: 16rem;
+      padding-block: 1rem;
+      border-block-start: 1px solid var(--sl-color-hairline);
+      border-inline-end: none;
+    }
+    & .post-section {
+      margin-inline: auto;
+      padding: 1rem;
+      max-width: 54rem;
+      & ul {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        align-items: center;
+        row-gap: 1rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
+  @media (min-width: 50rem) {
+    .page-custom {
+      flex-direction: row;
+    }
+    .post-section ul {
+      row-gap: 1.5rem;
+    }
+  }
+  @media (min-width: 64rem) {
+    .page-custom {
+      & .left-layout {
+        min-width: 16rem;
+        border-inline-end: 1px solid var(--sl-color-hairline);
+        border-block-start: none;
+        padding-block: 1rem;
+        max-width: 20rem;
+      }
+      & .post-section {
+        padding: 3rem;
+        & ul {
+          row-gap: 2rem;
+        }
+      }
+    }
+  }
+</style>

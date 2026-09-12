@@ -1,0 +1,155 @@
+---
+// src/components/RelatedPosts.astro
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+interface Props {
+  currentSlug: string;
+  limit?: number;
+}
+
+const { currentSlug, limit = 4 } = Astro.props as Props;
+const route = Astro.locals.starlightRoute as any;
+const { blogPrefix, blogBasePath, entry, id } = route;
+
+const currentId = id || currentSlug;
+const currentTags: string[] = entry?.data?.tags || [];
+
+if (currentTags.length === 0) return;
+
+const allPosts = await getCollection("docs", ({ data }) => !data.draft);
+
+const relatedPosts = allPosts
+  .filter((p) => p.id.startsWith(blogPrefix))
+  .filter((p) => p.id !== currentId)
+  .filter((p) => p.data.tags?.some((t: string) => currentTags.includes(t)))
+  .sort((a, b) => {
+    const da = a.data.pubDate ? +new Date(a.data.pubDate) : 0;
+    const db = b.data.pubDate ? +new Date(b.data.pubDate) : 0;
+    return db - da;
+  })
+  .slice(0, limit);
+
+if (relatedPosts.length === 0) return;
+
+const getHref = (post: { id: string }) => {
+  const slug = post.id.slice(blogPrefix.length);
+  return `${blogBasePath}/${slug}`;
+};
+---
+
+<hr />
+<nav aria-labelledby="_related-posts" class="related-post not-content">
+  <h2 id="_related-posts" set:html={Astro.locals.t("blog.relatedPostLabel")} />
+  <ul>
+    {relatedPosts.map((post) => (
+      <li>
+        <article class="related-card sl-flex">
+          {post.data.heroImage && (
+            <Image
+              src={post.data.heroImage}
+              alt={post.data.title}
+              width={1000}
+              height={429}
+              loading="lazy"
+              decoding="async"
+              class="related-card-image"
+            />
+          )}
+          <div class="related-card-content sl-flex">
+            <a href={getHref(post)} class="related-card-title">{post.data.title}</a>
+            {post.data.description && <p>{post.data.description}</p>}
+          </div>
+        </article>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .related-post {
+    & ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+      padding: 0;
+      list-style: none;
+      gap: 2rem;
+      margin-block: 1rem;
+    }
+  
+    & ul li {
+      list-style: none;
+    }
+
+    & h2 {
+      font-size: var(--sl-text-h3);
+      font-weight: 500;
+      line-height: var(--sl-line-height-headings);
+      color: var(--sl-color-white);
+    }
+  }
+
+  .related-card {
+    position: relative;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid var(--sl-color-hairline-light);
+    border-radius: 0.75rem;
+    background: var(--sl-color-gray-6);
+    color: var(--sl-color-gray-2);
+    overflow: hidden;
+    outline: 1px solid transparent;
+    transition: transform 0.3s ease-out;
+    & img {
+      display: block;
+      width: 100%;
+      max-height: 12rem;
+      height: auto;
+      object-fit: cover;
+    }
+    & .related-card-content {
+      flex-direction: column;
+      flex: 1;
+      padding: 1rem 1.5rem;
+      gap: 1rem;
+      & a {
+        font-size: var(--sl-text-h4);
+        line-height: var(--sl-line-height-headings);
+        color: var(--sl-color-white);
+        text-decoration: none;
+        outline: none;
+        text-wrap: pretty;
+        -webkit-tap-highlight-color: transparent;
+      }
+      & a::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+      }
+      & p {
+        color: var(--sl-color-gray-2);
+        font-size: var(--sl-text-body);
+        line-height: var(--sl-line-height);
+        margin: 0;
+      }
+    }
+  }
+  .related-card:focus-within {
+    outline-color: var(--sl-color-accent-high);
+  }
+  :global([data-theme="light"]) .related-card {
+    background: var(--sl-color-gray-7);
+  }
+  
+  @media (hover: hover) {
+    .related-card:hover {
+      transform: scale(1.03);
+    }
+  }
+
+  @media (min-width: 50rem) {
+    .related-card-content a {
+      font-size: var(--sl-text-h3);
+    }
+  }
+</style>

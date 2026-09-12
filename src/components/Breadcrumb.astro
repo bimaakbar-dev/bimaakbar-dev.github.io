@@ -1,0 +1,81 @@
+---
+// src/components/ui/Breadcrumb.astro
+import { Icon } from "@astrojs/starlight/components";
+
+interface BreadcrumbItem {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+  class?: string;
+}
+
+const { items } = Astro.props;
+---
+
+{
+  items.length > 0 && (
+    <nav aria-label="Breadcrumb" class="sl-flex breadcrumb not-content">
+        <ul class="sl-flex">
+            {items.map((item: BreadcrumbItem, index: number) => (
+                <li class="sl-flex">
+                    {index > 0 && (
+                        <Icon name={"right-caret"} size="1em"/>
+                    )}
+                    {index === items.length - 1 ? (
+                        <span class="label">
+                            {item.label}
+                        </span>
+                    ) : (
+                        <a href={item.href}>{item.label}</a>
+                    )}
+                </li>
+            ))}
+        </ul>
+    </nav>
+  )
+}
+
+<style>
+    .breadcrumb {
+        align-items: center;
+        gap: 1em;
+        font-size: var(--sl-text-xs);
+        color: var(--sl-color-gray-3);
+        font-weight: 500;
+    }
+    .breadcrumb {
+
+        & ul {
+            flex-wrap: wrap;
+            align-items: center;
+            list-style: none;
+            padding: 0;
+        }
+        & ul > li {
+            padding: 0;
+            align-items: center;
+            vertical-align: middle;
+        }
+        & ul > li svg {
+            font-size: 1.333em;
+            flex-shrink: 0;
+            margin-inline: 0.25em;
+        }
+        & ul > li .label {
+            color: var(--sl-color-gray-2)
+        }
+        & ul > li a {
+            text-decoration: none;
+            color: var(--sl-color-gray-2)
+        }
+    }
+    @media (hover: hover) {
+        .breadcrumb  ul > li a:hover {
+            color: var(--sl-color-white);
+            transition: color 0.4s ease;
+        }
+    }
+</style>

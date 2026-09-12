@@ -1,0 +1,163 @@
+---
+const { banner } = Astro.locals.starlightRoute.entry.data;
+
+const stars = [
+  { left: 1, top: 30, opacity: 70 },
+  { left: 3, top: 70, opacity: 50 },
+  { left: 5, top: 22, opacity: 60 },
+  { left: 7, top: 58, opacity: 45 },
+  { left: 9, top: 84, opacity: 55 },
+  { left: 12, top: 36, opacity: 50 },
+  { left: 15, top: 18, opacity: 60 },
+  { left: 18, top: 64, opacity: 40 },
+  { left: 21, top: 80, opacity: 50 },
+  { left: 24, top: 28, opacity: 55 },
+  { left: 76, top: 24, opacity: 55 },
+  { left: 79, top: 76, opacity: 50 },
+  { left: 82, top: 40, opacity: 60 },
+  { left: 85, top: 60, opacity: 45 },
+  { left: 88, top: 18, opacity: 50 },
+  { left: 91, top: 82, opacity: 60 },
+  { left: 94, top: 32, opacity: 55 },
+  { left: 96, top: 66, opacity: 45 },
+  { left: 98, top: 24, opacity: 50 },
+  { left: 99, top: 78, opacity: 60 },
+];
+---
+
+{
+  banner && (
+    <div class="stargazer-banner">
+      <span aria-hidden="true" class="dots dots--left" />
+      <span aria-hidden="true" class="dots dots--right" />
+      <span aria-hidden="true" class="stargazer-wrapper">
+        {stars.map((s) => (
+          <span
+            class="stargazer"
+            style={`left:${s.left}%; top:${s.top}%; opacity:${s.opacity / 100};`}
+          />
+        ))}
+      </span>
+      <div class="sl-banner" data-pagefind-ignore set:html={banner.content} />
+    </div>
+  )
+}
+
+<style>
+  .stargazer-banner {
+    --__sl-banner-text: var(--sl-color-white);
+    position: relative;
+    padding: 0.875em 1.25em;
+    background:
+      radial-gradient(50rem 25rem at -10% -60%, var(--overlay-blurple), transparent 60%),
+      radial-gradient(40rem 20rem at 110% 150%, var(--overlay-blurple), transparent 60%),
+      linear-gradient(90deg, var(--sl-color-gray-6) 0%, var(--sl-color-black) 50%, var(--sl-color-gray-6) 100%);
+    border-bottom: 1px solid var(--sl-color-hairline);
+    overflow: hidden;
+    isolation: isolate;
+    text-align: center;
+    text-wrap: balance;
+    box-shadow: var(--sl-shadow-sm);
+  }
+
+  .dots {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 28%;
+    max-width: 20rem;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.18;
+    background-image: radial-gradient(var(--sl-color-gray-1) 1.2px, transparent 1.2px);
+    background-size: 12px 12px;
+  }
+  .dots--left {
+    left: 0;
+    -webkit-mask-image: linear-gradient(to right, black 20%, transparent 95%);
+    mask-image: linear-gradient(to right, black 20%, transparent 95%);
+  }
+  .dots--right {
+    right: 0;
+    -webkit-mask-image: linear-gradient(to left, black 20%, transparent 95%);
+    mask-image: linear-gradient(to left, black 20%, transparent 95%);
+  }
+
+  .stargazer-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      105deg,
+      transparent 35%,
+      transparent 42%,
+      var(--sl-color-accent-high) 50%,
+      transparent 58%,
+      transparent 65%
+    );
+    background-size: 200% 100%;
+    background-position: -100% 0;
+    animation: stargazer-shine 6s ease-in-out infinite;
+    mix-blend-mode: soft-light;
+    opacity: 0.65;
+  }
+
+  @keyframes stargazer-shine {
+    0% { background-position: -100% 0; }
+    45% { background-position: 150% 0; }
+    100% { background-position: 150% 0; }
+  }
+
+  .stargazer-wrapper {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .stargazer {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    border-radius: 50%;
+    background: var(--sl-color-gray-2);
+  }
+  .sl-banner {
+    position: relative;
+    z-index: 2;
+    color: var(--__sl-banner-text);
+    font-size: var(--sl-text-sm);
+    line-height: 1.4;
+    padding: 0;
+    background: transparent;
+  }
+  .sl-banner :global(a) {
+    color: inherit;
+    font-weight: 600;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--sl-color-accent-high);
+  }
+
+  :global([data-theme="light"]) .stargazer-banner {
+    --__sl-banner-text: var(--sl-color-gray-1);
+    background:
+      radial-gradient(50rem 25rem at -10% -60%, var(--overlay-blurple), transparent 60%),
+      linear-gradient(90deg, var(--sl-color-gray-6) 0%, var(--sl-color-gray-7) 100%);
+  }
+  :global([data-theme="light"]) .dots {
+    opacity: 0.12;
+  }
+
+  @media (min-width: 50rem) {
+    .stargazer-banner {
+      border-bottom: 1px solid var(--sl-color-hairline);
+    }
+    .sl-banner {
+      font-size: var(--sl-text-base);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .stargazer-banner::before { animation: none; opacity: 0; }
+  }
+</style>
