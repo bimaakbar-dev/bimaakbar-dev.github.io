@@ -1,7 +1,7 @@
-![Stardocs for Starlight Themes](.github/assets/images/banner.jpg 'Build the web you want')
+![Stardocs for Starlight Themes](.github/assets/images/banner.jpg)
 
 <p align="center">
-  <a href="https://stradocs.dev">Stradocs</a> is a custom theme from Starlight developed by [Bima Akbar](https://github.com/bimaakbar-dev/) &mdash;
+  <a href="https://github.com/bimaakbar-dev/">Stradocs</a> is a custom theme from Starlight developed by <b>Bima Akbar</b>
   <br />
   inspired by the design of <strong>Vercel</strong> and <strong>Fumadocs</strong>.
   <br/><br/>
