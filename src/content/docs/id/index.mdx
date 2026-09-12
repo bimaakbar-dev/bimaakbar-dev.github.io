@@ -29,7 +29,9 @@ next: false
 ---
 
 import { Card } from "@astrojs/starlight/components";
-import { CardGrid } from "~/stradocs/components";
+import { CardGrid, GithubCard, ContributorList } from "~/stradocs/components";
+
+<GithubCard repo="bimaakbar-dev/bimaakbar-dev.github.io" />
 
 ## Key Features
 
@@ -65,10 +67,6 @@ import { CardGrid } from "~/stradocs/components";
 ## How It Works
 
 Stradocs is Starlight—not a fork, not a wrapper. Everything you know about Starlight still applies. Stradocs simply adds and replaces the visual layer on top.
-
-import { ContributorList } from "~/stradocs/components";
-
-## Contributor
 
 <ContributorList repo="bimaakbar-dev/bimaakbar-dev.github.io" limit={5} />
 
