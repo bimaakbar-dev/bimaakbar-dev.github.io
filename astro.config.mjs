@@ -113,7 +113,7 @@ export default defineConfig({
       defaultLocale: "root",
       locales: siteLocale,
       expressiveCode: { 
-        // themes: ["github-dark", "vitesse-light"],
+        themes: ["github-dark", "vitesse-light"],
         shiki: {
           langs: [markdocGrammar] 
         }
