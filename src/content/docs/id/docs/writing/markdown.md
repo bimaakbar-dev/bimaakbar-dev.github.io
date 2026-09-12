@@ -42,7 +42,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 - [internal link](#)
 - [external link](external-url)
 - [`code link`](#)
-- [![badge](/.github/assets/images/logo.svg)](/)
+- [![badge](../../../../../assets/images/logo/logo.svg)](/)
 - [![alt name](../../../../../assets/images/author/bimaakbar.svg) name](/) 
 - [![alt name](../../../../../assets/images/author/bimaakbar.svg)](/)
 
@@ -258,28 +258,78 @@ API
 
 ## Images & Media
 ```markdown
-![Alt text image](/.github/assets/images/banner.jpg)
+![Alt text image](/.github/assets/banner.jpg 'Title image')
+
+<picture>
+  <source srcset="image.jpg" type="image/jpg" />
+  <img src="/.github/assets/banner.jpg" alt="Alt text" />
+</picture>
 
 <figure>
   <img src="/.github/assets/banner.jpg" alt="Alt text figure" />
   <figcaption>Ini adalah figcaption untuk figure di atas.</figcaption>
 </figure>
 
-<video title="Video" poster="/.github/assets/images/banner.jpg" width={720} height={480} controls="true" muted="true" autoplay="true" loop="false" preload>
+<figure>
+  <a href="/">
+    <img src="path/to/image.jpg" alt="Alt text" />
+  </a>
+  <figcaption>Klik gambar untuk membuka situs.</figcaption>
+</figure>
+
+<video title="Video" poster="/.github/assets/banner.jpg" width={720} height={480} controls muted autoplay loop="false" preload>
   <source src="/.github/assets/videos/video.mp4" />
+  Browser Anda tidak mendukung tag video.
 </video>
+
+[![Tonton video](thumbnail.jpg)](https://youtu.be/VIDEO_ID)
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/VIDEO_ID"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
 ```
 
-![Alt text image](/.github/assets/images/banner.jpg)
+![Alt text image](/.github/assets/banner.jpg 'Title image')
+
+<picture>
+  <source srcset="image.jpg" type="image/jpg" />
+  <img src="/.github/assets/banner.jpg" alt="Alt text" />
+</picture>
 
 <figure>
-  <img src="/.github/assets/images/banner.jpg" alt="Alt text figure" />
+  <a href="/">
+    <img src="/.github/assets/banner.jpg" alt="Alt text" />
+  </a>
+  <figcaption>Klik gambar untuk membuka situs.</figcaption>
+</figure>
+
+<figure>
+  <img src="/.github/assets/banner.jpg" alt="Alt text figure" />
   <figcaption>Ini adalah figcaption untuk figure di atas.</figcaption>
 </figure>
 
-<video title="Video" poster="/.github/assets/images/banner.jpg" width={720} height={480} controls="true" muted="true" autoplay="true" loop="false" preload>
+<video title="Video" poster="/.github/assets/banner.jpg" width={720} height={480} controls muted autoplay loop="false" preload>
   <source src="/.github/assets/videos/video.mp4" />
+  Browser Anda tidak mendukung tag video.
 </video>
+
+[![Tonton video](/.github/assets/videos/video.mp4)](https://youtu.be/VIDEO_ID)
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/VIDEO_ID"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
 
 ## Table
 
@@ -381,4 +431,4 @@ Di bawah ada hr.
 ---
 
 [^1]: Ini adalah footnote pertama dengan **bold** dan `code`.
-[^2]: Footnote kedua dengan [link](https://example.com).
+[^2]: Footnote kedua dengan [link](/).
