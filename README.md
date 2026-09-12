@@ -1,4 +1,4 @@
-![Stardocs for Starlight Themes](.github/assets/images/banner.jpg 'Build the web you want')
+![Stardocs for Starlight Themes](https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/github/assets/images/banner.jpg 'Build the web you want')
 
 <p align="center">
   <br/>
