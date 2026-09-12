@@ -1,84 +1,104 @@
 ---
-import { Icon } from '@astrojs/starlight/components';
+import { Icon } from "@astrojs/starlight/components";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
 
-interface Props { repo: string }
+interface Props {
+  repo: string;
+}
+
 const { repo } = Astro.props;
 
-const cacheDir = path.join(process.cwd(), ".cache");
+const cacheDir  = path.join(process.cwd(), ".cache");
 const cachePath = path.join(cacheDir, `stars-${repo.replaceAll("/", "-")}.json`);
+
 let stars = 0;
 
 try {
   if (existsSync(cachePath)) {
-    const raw = await readFile(cachePath, "utf-8");
-    const json = JSON.parse(raw);
-    if (Date.now() - new Date(json.at).getTime() < 6 * 60 * 60 * 1000) stars = json.stars;
+    const json = JSON.parse(await readFile(cachePath, "utf-8"));
+    if (Date.now() - new Date(json.at).getTime() < 6 * 60 * 60 * 1000) {
+      stars = json.stars;
+    }
   }
+
   if (!stars) {
     const res = await fetch(`https://api.github.com/repos/${repo}`, {
       headers: {
         "User-Agent": "Stradocs",
         Accept: "application/vnd.github+json",
-        ...(import.meta.env.GITHUB_TOKEN ? { Authorization: `Bearer ${import.meta.env.GITHUB_TOKEN}` } : {}),
+        ...(import.meta.env.GH_TOKEN
+          ? { Authorization: `Bearer ${import.meta.env.GH_TOKEN}` }
+          : {}),
       },
     });
+
     if (res.ok) {
-      stars = (await res.json()).stargazers_count || 0;
+      stars = (await res.json()).stargazers_count ?? 0;
       try {
         if (!existsSync(cacheDir)) await mkdir(cacheDir, { recursive: true });
-        await writeFile(cachePath, JSON.stringify({ stars, at: new Date().toISOString() }));
+        await writeFile(
+          cachePath,
+          JSON.stringify({ stars, at: new Date().toISOString() }),
+        );
       } catch {}
     }
   }
 } catch {}
 
-const fmt = (n: number) => (n >= 1000 ? `${(n / 1000).toFixed(n >= 10000 ? 0 : 1)}k` : `${n}`);
+const fmt = (n: number) =>
+  n >= 1000 ? `${(n / 1000).toFixed(n >= 10_000 ? 0 : 1)}k` : `${n}`;
 ---
 
-<a href={`https://github.com/${repo}`} target="_blank" rel="noopener noreferrer" class="github-stars">
-  <Icon name="github" size='1.125em'/>
-  <span class="counter">{stars ? fmt(stars) : "-"}</span>
-  <Icon name="star" size='1.125em' class="star-gold" />
+<a
+  href={`https://github.com/${repo}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="github-stars"
+>
+  <Icon name="github" size="1.125em" />
+  <span class="counter">{stars ? fmt(stars) : "−"}</span>
+  <Icon name="star" size="1.125em" class="star-gold" />
 </a>
 
 <style>
   .github-stars {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.35em;
     padding: 0.35em 0.75em;
-    font-size: var(--sl-text-sm);
-    font-weight: 500;
     border: 1px solid var(--sl-color-hairline);
     border-radius: 99rem;
     background: var(--sl-color-black);
     color: var(--sl-color-text);
+    font-size: var(--sl-text-sm);
+    font-weight: 500;
     text-decoration: none;
     vertical-align: middle;
-    justify-items: center;
+
     & .counter {
       color: var(--sl-color-white);
     }
-    & > svg {
-      width: 1em;
-      height: 1em;
-      flex-shrink: 0;
-    }
-    & .star-gold { 
+    & .star-gold {
       color: #facc15;
     }
+    & > svg {
+      flex-shrink: 0;
+      width: 1em;
+      height: 1em;
+    }
   }
+
   @media (hover: hover) {
-    .github-stars:hover { 
+    .github-stars:hover {
       background: var(--sl-color-gray-6);
-      border-color: var(--sl-color-hairline-light); 
+      border-color: var(--sl-color-hairline-light);
     }
     :global([data-theme="light"]) .github-stars:hover {
       background: var(--sl-color-gray-7);
-      border-color: var(--sl-color-hairline-light); 
+      border-color: var(--sl-color-hairline-light);
     }
   }
 </style>
