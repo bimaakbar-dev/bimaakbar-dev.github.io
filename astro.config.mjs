@@ -11,8 +11,6 @@ import { hastTable } from "./src/lib/plugins/satteri/hast/hast-table";
 import { hastAbbr } from "./src/lib/plugins/satteri/hast/hast-abbr";
 import { mdastStradocsAside } from './src/lib/plugins/satteri/mdast/mdast-stradocs-aside'
 
-import tailwindcss from "@tailwindcss/vite";
-
 const site = "https://bimaakbar-dev.github.io/";
 const siteName = "Stradocs";
 const siteDesc = "Custom Starlight theme featuring a modern design";
@@ -82,7 +80,6 @@ export default defineConfig({
         hastTable,
       ],
       mdastPlugins: [
-        
         mdastStradocsAside,
       ],
       features: {
@@ -141,8 +138,4 @@ export default defineConfig({
       sidebar: sidebarConfig,
     }),
   ],
-  
-  vite: {
-    plugins: [tailwindcss()],
-  },
 });
