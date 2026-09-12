@@ -43,12 +43,18 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 <email@example.com>
 ```
 
-- [internal link](#)
+- [internal link](#_top)
 - [external link](external-url)
-- [`code link`](#)
-- [![badge](../../../../../assets/images/logo/logo.svg)](/)
-- [![alt name](../../../../../assets/images/author/bimaakbar.svg) name](/) 
-- [![alt name](../../../../../assets/images/author/bimaakbar.svg)](/)
+- [`code link`](#_top)
+- [![badge](../../../../../assets/images/logo/logo.svg)](#_top)
+- [![alt name](../../../../../assets/images/author/bimaakbar.svg) name](#_top) 
+- [![alt name](../../../../../assets/images/author/bimaakbar.svg)](#_top)
+- [![status online](/.github/assets/images/logo.svg) Online](#_top)
+- [![icon astro](/.github/assets/images/logo.svg) Astro](#_top)
+- [![avatar a](../../../../../assets/images/author/bimaakbar.svg)](#_top) [![avatar b](../../../../../assets/images/author/bimaakbar.svg)](#_top) [![avatar c](../../../../../assets/images/author/bimaakbar.svg)](#_top)
+- [![avatar bima](../../../../../assets/images/author/bimaakbar-dev.svg)](#_top)
+- [![avatar bima](../../../../../assets/images/author/bimaakbar-dev.svg) Bima Akbar](#_top)
+
 - <https://example.com>
 - <email@example.com>
 
@@ -421,31 +427,31 @@ API
 ></iframe>
 ```
 
-![Alt text image](/og.jpg 'Title image')
+![Alt text](/.github/assets/images/banner.jpg 'Title image')
 
 <picture>
   <source srcset="image.jpg" type="image/jpg" />
-  <img src="/og.jpg" alt="Alt text" />
+  <img src="/.github/assets/images/banner.jpg" alt="Alt text" />
 </picture>
 
 <figure>
   <a href="/">
-    <img src="/og.jpg" alt="Alt text" />
+    <img src="/.github/assets/images/banner.jpg" alt="Alt text" />
   </a>
   <figcaption>Klik gambar untuk membuka situs.</figcaption>
 </figure>
 
 <figure>
-  <img src="/og.jpg" alt="Alt text figure" />
+  <img src="/.github/assets/images/banner.jpg" alt="Alt text figure" />
   <figcaption>Ini adalah figcaption untuk figure di atas.</figcaption>
 </figure>
 
-<video title="Video" poster="/og.jpg" width={720} height={480} controls muted autoplay loop="false" preload>
+<video title="Video" poster="/.github/assets/images/banner.jpg" width={720} height={480} controls muted autoplay loop="false" preload>
   <source src="/.github/assets/videos/video.mp4" />
   Browser Anda tidak mendukung tag video.
 </video>
 
-[![Tonton video](/og.jpg)](https://youtu.be/VIDEO_ID)
+[![Tonton video](/.github/assets/images/banner.jpg)](https://youtu.be/VIDEO_ID)
 
 <iframe
   width="560"
