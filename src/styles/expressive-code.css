@@ -82,7 +82,7 @@
     &:not(.is-terminal) .header {
       background: var(--sl-color-black);
       padding: 0;
-      line-height: 1.6;
+      line-height: inherit;
     }
     &:not(.is-terminal) .header::before {
       border: 1px solid var(--sl-color-gray-5);
