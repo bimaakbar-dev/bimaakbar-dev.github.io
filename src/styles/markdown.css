@@ -1,4 +1,5 @@
 .sl-markdown-content {
+  display: block;
   flex: 1;
   isolation: isolate;
   width: 100%;
@@ -282,7 +283,7 @@
       content: "";
       position: absolute;
       inset-block: 0;
-      inset-inline-start: 0;
+      inset-inline-start: 0.25em;
       width: 3px;
       background: var(--sl-color-accent-high);
       border-radius: 99rem;
@@ -482,7 +483,6 @@
 
 [data-theme="dark"] .sl-markdown-content {
   & kbd:not(:where(.not-content *)) {
-    /* Dark: E — stealth matte black */
     background: #111113;
     color: #888899;
     border: 1px solid #2a2a30;
@@ -619,7 +619,7 @@
     &::before {
       content: "";
       position: absolute;
-      bottom: 100%;
+      right: 100%;
       left: 50%;
       transform: translateX(-50%);
       border: 6px solid transparent;
@@ -634,7 +634,7 @@
   }
 
   /* Tooltip — desktop: di kanan, center */
-  @media (min-width: 50em) {
+  @media (max-width: 50em) {
     & .abbr-tooltip {
       left: calc(100% + 10px);
       top: 50%;
