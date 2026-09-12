@@ -42,10 +42,8 @@
 }
 
 ::-webkit-scrollbar,
-::-webkit-scrollbar-track,
-::-webkit-scrollbar-track-piece {
-  background: inherit;
-  border-radius: 99rem;
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
   background-color: var(--sl-color-gray-2);
