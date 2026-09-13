@@ -623,82 +623,46 @@
 }
 
 /* ============================================================
-   Abbr + Tooltip
+   Abbr
    ============================================================ */
 .sl-markdown-content {
-  & .abbr {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    vertical-align: middle;
-    z-index: 0;
-    font-size: var(--sl-text-sm);
-  }
-
-  & .abbr abbr {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25em;
-    padding-inline: 0.125em;
-    cursor: help;
+  & abbr:not(:where(.not-content *)) {
     text-decoration: underline;
     text-decoration-style: dotted;
     text-decoration-thickness: 1.5px;
     text-underline-offset: 4px;
-    text-decoration-color: var(--sl-color-gray-1);
+    text-decoration-color: var(--sl-color-gray-3);
+    cursor: help;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25em;
+    padding-inline: 0.125em;
     font-feature-settings: "calt" 1;
-
-    &::after {
-      --ic-abbr: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' fill-rule='evenodd' d='M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10M11 8a1 1 0 0 0 1 1h.008a1 1 0 1 0 0-2H12a1 1 0 0 0-1 1m1 9a1 1 0 0 0 1-1v-5a1 1 0 1 0-2 0v5a1 1 0 0 0 1 1' clip-rule='evenodd'/%3E%3C/svg%3E");
-
-      content: "";
-      display: inline-block;
-      flex-shrink: 0;
-      width: 1em;
-      height: 1em;
-      background-color: var(--sl-color-gray-3);
-      mask-image: var(--ic-abbr);
-      mask-repeat: no-repeat;
-      -webkit-mask-image: var(--ic-abbr);
-      -webkit-mask-repeat: no-repeat;
-    }
+    font-size: inherit;
   }
 
-  & .abbr:hover abbr,
-  & .abbr:focus-visible abbr {
+  & abbr:not(:where(.not-content *))::after {
+    --ic-abbr: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' fill-rule='evenodd' d='M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10M11 8a1 1 0 0 0 1 1h.008a1 1 0 1 0 0-2H12a1 1 0 0 0-1 1m1 9a1 1 0 0 0 1-1v-5a1 1 0 1 0-2 0v5a1 1 0 0 0 1 1' clip-rule='evenodd'/%3E%3C/svg%3E");
+    content: "";
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    background-color: var(--sl-color-gray-3);
+    -webkit-mask-image: var(--ic-abbr);
+    mask-image: var(--ic-abbr);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+
+  & abbr:hover:not(:where(.not-content *)),
+  & abbr:focus-visible:not(:where(.not-content *)) {
     text-decoration-color: var(--sl-color-white);
-    &::after { background-color: var(--sl-color-white); }
   }
-
-  & .abbr-tooltip {
-    position: absolute;
-    left: calc(100% + 10px);
-    top: 50%;
-    transform: translateY(-50%) translateX(-4px);
-    max-width: 280px;
-    z-index: 9999;
-    width: max-content;
-    padding: 8px 12px;
-    border-radius: 10px;
-    border: 1px solid var(--sl-color-gray-5);
-    background: var(--sl-color-gray-6);
-    color: var(--sl-color-white);
-    font-size: var(--sl-text-2xs);
-    font-weight: 400;
-    line-height: 1.5;
-    white-space: normal;
-    text-align: left;
-    box-shadow: var(--sl-shadow-sm);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.15s ease, transform 0.15s ease;
+  & abbr:hover:not(:where(.not-content *))::after,
+  & abbr:focus-visible:not(:where(.not-content *))::after {
+    background-color: var(--sl-color-white);
   }
-  & .abbr:hover .abbr-tooltip,
-  & .abbr:focus-visible .abbr-tooltip {
-    opacity: 1;
-    transform: translateY(-50%) translateX(0);
-  }
-
 }
 
 /* ============================================================
