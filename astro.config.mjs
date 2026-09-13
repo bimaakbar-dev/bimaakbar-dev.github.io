@@ -9,8 +9,6 @@ import { Overrides } from "./src/components/overrides";
 import { satteri } from "@astrojs/markdown-satteri";
 import { hastExternalLink } from "./src/lib/plugins/satteri/hast/hast-external-link";
 import { hastTable } from "./src/lib/plugins/satteri/hast/hast-table";
-import { hastAbbr } from "./src/lib/plugins/satteri/hast/hast-abbr";
-import { mdastAbbr } from './src/lib/plugins/satteri/mdast/mdast-abbr';
 import { mdastStradocsAside } from './src/lib/plugins/satteri/mdast/mdast-stradocs-aside';
 
 const site = "https://bimaakbar-dev.github.io/";
@@ -77,12 +75,10 @@ export default defineConfig({
   markdown: {
     processor: satteri({
       hastPlugins: [
-        // hastAbbr,
         hastExternalLink,
         hastTable,
       ],
       mdastPlugins: [
-        mdastAbbr,
         mdastStradocsAside,
       ],
       features: {
