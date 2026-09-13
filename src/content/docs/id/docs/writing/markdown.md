@@ -32,11 +32,27 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 
 [`code link`](#)
 
-[![badge](url-icon)](url-badge)
+[![badge name](url-icon)](url-badge)
 
-[![alt name](url-avatar) name](url-profile) 
+[![avatar name](url-avatar) name](url-profile) 
 
-[![name](url-avatar)](url-profile)
+[![avatar name](url-avatar)](url-profile)
+
+[![status online](/.github/assets/images/logo.svg) Online](#_top)
+
+[![icon name](/.github/assets/images/logo.svg) Astro](#_top)
+
+<div class='avatar-stack'>
+
+[![avatar a](../../../../../assets/images/author/bimaakbar.svg)](#_top) 
+[![avatar b](../../../../../assets/images/author/bimaakbar.svg)](#_top) 
+[![avatar c](../../../../../assets/images/author/bimaakbar.svg)](#_top)
+
+</div>
+
+[![avatar bima](../../../../../assets/images/author/bimaakbar-dev.svg)](#_top)
+
+[![avatar bima](../../../../../assets/images/author/bimaakbar-dev.svg) Bima Akbar](#_top)
 
 <https://example.com>
 
@@ -46,37 +62,42 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 - [internal link](#_top)
 - [external link](external-url)
 - [`code link`](#_top)
-- [![badge](../../../../../assets/images/logo/logo.svg)](#_top)
-- [![alt name](../../../../../assets/images/author/bimaakbar.svg) name](#_top) 
-- [![alt name](../../../../../assets/images/author/bimaakbar.svg)](#_top)
-- [![status online](/.github/assets/images/logo.svg) Online](#_top)
-- [![icon astro](/.github/assets/images/logo.svg) Astro](#_top)
-- [![avatar a](../../../../../assets/images/author/bimaakbar.svg)](#_top) [![avatar b](../../../../../assets/images/author/bimaakbar.svg)](#_top) [![avatar c](../../../../../assets/images/author/bimaakbar.svg)](#_top)
-- [![avatar bima](../../../../../assets/images/author/bimaakbar-dev.svg)](#_top)
-- [![avatar bima](../../../../../assets/images/author/bimaakbar-dev.svg) Bima Akbar](#_top)
+- [![badge astro](/images/astro.svg)](#_top)
+- [![status online](/images/dot.svg) Online](#_top)
+- [![icon astro](/images/astro.svg) Astro](#_top)
+
+- <div class='avatar-stack'>
+
+    [![avatar a](../../../../../assets/images/author/bimaakbar.svg)](#_top) 
+    [![avatar b](../../../../../assets/images/author/bimaakbar.svg)](#_top) 
+    [![avatar c](../../../../../assets/images/author/bimaakbar.svg)](#_top)
+
+  </div>
+
+- [![avatar bima](../../../../../assets/images/author/bimaakbar.svg)](#_top)
+- [![avatar bima](../../../../../assets/images/author/bimaakbar.svg) Bima Akbar](#_top)
 
 - <https://example.com>
 - <email@example.com>
 
+
 ## Text Formatting
-```markdown
-<b>Bold</b>
+~~~markdown
+<b>Bold</b> <!-- atau --> **Bold**
 
 <strong>Bold</strong>
 
-<i>Italic</i>
+<i>Italic</i> <!-- atau --> *Italic*, _Italic_
 
 <em>Italic</em>
 
-<b><i>Bold Italic</i></b>
+<b><i>Bold Italic</i></b> <!-- atau --> ***Bold + Italic***, _**Bold + Italic**_
 
 <strong><em>Bold Italic</em></strong>
 
 <s>strikethrough</s>
 
-<del>strikethrough</del>
-
-~~strikethrough~~
+<del>strikethrough</del> <!-- Atau --> ~~strikethrough~~
 
 <ins>inserted</ins>
 
@@ -87,7 +108,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 <small>small</small>
 
 <abbr title="HyperText Markup Language">HTML</abbr>
-```
+~~~
 
 - **Bold**
   - <b>Bold</b>
@@ -97,9 +118,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
   - <b><i>Bold + Italic</i></b>
 - <s>strikethrough</s>
   - <del>strikethrough</del>
-    - ~~strikethrough~~
-- <ins>inserted</ins>
-  - <u>inserted</u>
+- <u>inserted</u>
+  - <ins>inserted</ins>
 - <mark>highlighted</mark>
 - <small>small</small>
 - <abbr title="HyperText Markup Language">HTML</abbr>
@@ -199,10 +219,19 @@ Dia berkata <q>ini adalah quote pendek</q> di dalam paragraf.
 H<sub>2</sub>O dan CO<sub>2</sub>
 
 x<sup>2</sup> + y<sup>2</sup> = z<sup>2</sup>
+
+<!-- Atau -->
+
+H^2^O dan CO^2^
+
+x~2~ + y~2~ = z~2~
 ```
 
 - H<sub>2</sub>O dan CO<sub>2</sub>
 - x<sup>2</sup> + y<sup>2</sup> = z<sup>2</sup>
+
+- H^2^O dan CO^2^
+- x~2~ + y~2~ = z~2~
 
 Footnote: footnote[^1] dan footnote[^2].
 
@@ -227,12 +256,13 @@ Footnote: footnote[^1] dan footnote[^2].
 
 ### Unordered List
 ```markdown
+<!-- `-` Bisa diganti dengan `+` -->
 - Item 1
 - Item 2
     - Nested item 2.1
     - Nested item 2.2
-      - Nested item 2.2.1
-      - Nested item 2.2.2
+      + Nested item 2.2.1
+      + Nested item 2.2.2
 - Item 3
 ```
 
@@ -240,8 +270,8 @@ Footnote: footnote[^1] dan footnote[^2].
 - Item 2
     - Nested item 2.1
     - Nested item 2.2
-      - Nested item 2.2.1
-      - Nested item 2.2.2
+      + Nested item 2.2.1
+      + Nested item 2.2.2
 - Item 3
 
 ### Ordered List
@@ -252,6 +282,8 @@ Footnote: footnote[^1] dan footnote[^2].
       2. Nested ordered 2.2
 3. Third item
 
+<!-- -->
+
 1. Item pertama
 2. Item kedua
    - Unordered di dalam ordered
@@ -259,16 +291,14 @@ Footnote: footnote[^1] dan footnote[^2].
      - Nested lebih dalam
 3. Item ketiga
 
-3. Mulai dari 3
-4. Lanjut dari 4
-
-- Item
-  > Blockquote di dalam list
-  
-- Item lain
-  ~~~js
-  code di dalam list
-  ~~~
+4. Mulai dari 3
+5. Lanjut dari 4
+  - Item
+    > Blockquote di dalam list
+  - Item lain
+    ~~~js
+    code di dalam list
+    ~~~
 ```
 
 1. First item
@@ -277,6 +307,8 @@ Footnote: footnote[^1] dan footnote[^2].
       2. Nested ordered 2.2
 3. Third item
 
+---
+
 1. Item pertama
 2. Item kedua
    - Unordered di dalam ordered
@@ -284,51 +316,14 @@ Footnote: footnote[^1] dan footnote[^2].
      - Nested lebih dalam
 3. Item ketiga
 
-3. Mulai dari 3
-4. Lanjut dari 4
-
-- Item
-  > Blockquote di dalam list
-  
-- Item lain
-  ```js
-  code di dalam list
-  ```
-
-```mermaid
-graph TD
-  A[Start] --> B{Apakah berhasil?}
-  B -->|Ya| C[Selesai]
-  B -->|Tidak| D[Retry]
-  D --> B
-```
-
-```mermaid
-sequenceDiagram
-  User->>Server: Request login
-  Server->>DB: Query user
-  DB-->>Server: User data
-  Server-->>User: Token
-```
-
-## Math
-
-Inline: $E = mc^2$
-
-Block:
-
-$$
-\int_{a}^{b} f(x) \, dx = F(b) - F(a)
-$$
-
-Matrix:
-
-$$
-\begin{pmatrix}
-a & b \\
-c & d
-\end{pmatrix}
-$$
+4. Mulai dari 3
+5. Lanjut dari 4
+  - Item
+    > Blockquote di dalam list
+  - Item lain
+    ~~~js
+    code di dalam list
+    ~~~
 
 ### Task List
 ```markdown
@@ -374,19 +369,17 @@ API
 </dl>
 ```
 
-<dl>
-  <dt>HTML</dt>
-  <dd>HyperText Markup Language adalah bahasa markup untuk web</dd>
-  
-  <dt>CSS</dt>
-  <dd>Cascading Style Sheets untuk styling</dd>
-  
-  <dt>API</dt>
-  <dd>Application Programming Interface</dd>
-  
-  <dt><code>code-term</code></dt>
-  <dd>Definisi untuk istilah yang berupa <code>code</code></dd>
-</dl>
+HTML
+: HyperText Markup Language adalah bahasa markup untuk web
+
+CSS
+: Cascading Style Sheets untuk styling
+
+API
+: Application Programming Interface
+
+`code-term`
+: Definisi untuk istilah yang berupa `code`
 
 ## Images & Media
 ```markdown
@@ -611,6 +604,60 @@ Teks di bawah komentar.
 :smile: :rocket: :fire: :tada: :sparkles: :heart: :+1: :-1:
 
 :warning: :bulb: :books: :memo: :bug: :zap:
+
+## Mermaid
+
+```mermaid
+graph TD
+  A[Start] --> B{Apakah berhasil?}
+  B -->|Ya| C[Selesai]
+  B -->|Tidak| D[Retry]
+  D --> B
+```
+
+```mermaid
+sequenceDiagram
+  User->>Server: Request login
+  Server->>DB: Query user
+  DB-->>Server: User data
+  Server-->>User: Token
+```
+
+## Math
+```markdown
+Inline: $$E = mc^2$$
+
+Block:
+
+$$
+\int_{a}^{b} f(x) \, dx = F(b) - F(a)
+$$
+
+Matrix:
+
+$$
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+$$
+```
+Inline: $$E = mc^2$$
+
+Block:
+
+$$
+\int_{a}^{b} f(x) \, dx = F(b) - F(a)
+$$
+
+Matrix:
+
+$$
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+$$
 
 [^1]: Ini adalah footnote pertama dengan **bold** dan `code`.
 [^2]: Footnote kedua dengan [link](/).

@@ -21,7 +21,7 @@
     position: relative;
     top: 100%;
     transform: translateY(-150%);
-    color: var(--sl-color-gray-4);
+    color: var(--sl-color-gray-3);
   }
 }
 

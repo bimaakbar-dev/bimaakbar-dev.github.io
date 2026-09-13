@@ -29,11 +29,11 @@ next: false
 ---
 
 import { Card } from "@astrojs/starlight/components";
-import { CardGrid } from "~/stradocs/components";
+import { CardGrid, ContributorList, GithubCard } from "~/stradocs/components";
 
 ## Key Features
 
-<CardGrid bento>
+<CardGrid variant="feature">
   <Card title="Redesigned Components" icon="pencil">
     The Header, Hero, Footer, and many other Starlight components have been
     replaced with visually redesigned versions—going beyond simple color
@@ -66,11 +66,9 @@ import { CardGrid } from "~/stradocs/components";
 
 Stradocs is Starlight—not a fork, not a wrapper. Everything you know about Starlight still applies. Stradocs simply adds and replaces the visual layer on top.
 
-import { ContributorList } from "~/stradocs/components";
+<GithubCard repo="bimaakbar-dev/bimaakbar-dev.github.io" />
 
-## Contributor
-
-<ContributorList repo="bimaakbar-dev/bimaakbar-dev.github.io" limit={5} />
+<ContributorList repo="bimaakbar-dev/bimaakbar-dev.github.io" />
 
 import AboutAstro from "~/components/about-astro.astro";
 

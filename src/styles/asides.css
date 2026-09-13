@@ -24,7 +24,7 @@
   box-sizing: border-box;
   position: relative;
   padding: 1em 1.25em 1em 1.65em;
-  outline: 1px solid var(--sl-color-hairline-light);
+  outline: 1px solid var(--sl-color-hairline);
   border-radius: 0.75rem;
   background-color: var(--sl-color-gray-6);
   border-inline-start: none;

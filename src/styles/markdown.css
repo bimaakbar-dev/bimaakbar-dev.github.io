@@ -126,6 +126,10 @@
     object-fit: cover;
   }
 
+  li:has(.avatar-stack):not(:where(.not-content *)) {
+    margin: 0;
+  }
+
   & .avatar-stack {
     display: inline-flex;
     align-items: center;
@@ -136,7 +140,10 @@
       &:first-child { margin-inline-start: 0; }
 
       & > img {
-        box-shadow: 0 0 0 2px var(--sl-color-black);
+        height: 2em;
+        width: 2em;
+        box-shadow: var(--sl-shadow-sm);
+        outline: none;
       }
     }
   }
@@ -344,7 +351,7 @@
     display: block;
     padding-inline-start: 1.5rem;
     padding-inline-end: 1rem;
-    padding-block: 1rem;
+    padding-block: 0.5em;
     border-inline-start: none;
     color: var(--sl-color-white);
     font-size: var(--sl-text-h5);
@@ -352,7 +359,7 @@
     &::before {
       content: "";
       position: absolute;
-      inset-block: 0;
+      inset-block: 0.5em;
       inset-inline-start: 0.25em;
       width: 3px;
       background: var(--sl-color-accent-high);
@@ -394,6 +401,7 @@
   }
   & thead:not(:where(.not-content *)) {
     border-radius: 0.75rem;
+    background-color: var(--sl-color-gray-6);
     overflow: hidden;
   }
   & thead th:not(:where(.not-content *)) {
@@ -624,6 +632,7 @@
     align-items: center;
     vertical-align: middle;
     z-index: 0;
+    font-size: var(--sl-text-sm);
   }
 
   & .abbr abbr {
@@ -636,7 +645,7 @@
     text-decoration-style: dotted;
     text-decoration-thickness: 1.5px;
     text-underline-offset: 4px;
-    text-decoration-color: var(--sl-color-gray-3);
+    text-decoration-color: var(--sl-color-gray-1);
     font-feature-settings: "calt" 1;
 
     &::after {
@@ -658,11 +667,9 @@
   & .abbr:hover abbr,
   & .abbr:focus-visible abbr {
     text-decoration-color: var(--sl-color-white);
-
     &::after { background-color: var(--sl-color-white); }
   }
 
-  /* Tooltip — mobile: di bawah, center */
   & .abbr-tooltip {
     position: absolute;
     left: calc(100% + 10px);
@@ -676,7 +683,7 @@
     border: 1px solid var(--sl-color-gray-5);
     background: var(--sl-color-gray-6);
     color: var(--sl-color-white);
-    font-size: 13px;
+    font-size: var(--sl-text-2xs);
     font-weight: 400;
     line-height: 1.5;
     white-space: normal;

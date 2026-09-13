@@ -22,50 +22,44 @@ const showContentTypeTabs = Astro.slots.has("markdoc");
         <slot />
       )
     }
-    <div class="preview">
+    <div class="sl-flex preview">
       <figcaption>{Astro.locals.t("component.preview")}</figcaption>
-      <div class="preview-content">
+      <aside class="preview-content">
         <slot name="preview" />
-      </div>
+      </aside>
     </div>
   </figure>
 </div>
 <style>
-  :global(.sl-markdown-content) .preview-panel {
+  :global(.sl-markdown-content .preview-panel) {
+    border-radius: 0.75rem;
     & .preview {
-      margin-top: 0;
-      gap: 1em;
-      background: var(--sl-color-gray-6);
-      border: 1px solid var(--sl-color-hairline-light);
+      flex-direction: column;
+      gap: 0.5em;
+      background: var(--sl-color-gray-4);
+      border: 1px solid var(--sl-color-hairline);
       border-radius: 0.75rem;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
       border-top: 0;
+      padding: 1rem;
       & figcaption {
-        font-size: var(--sl-text-base);
-        padding: 1rem;
+        font-size: var(--sl-text-body);
         margin-top: 0;
       }
       & .preview-content {
-        padding: 1rem;
-        padding-top: 0;
-        margin-top: 0;
-      }
-      & .preview-content :where(.card, .sl-link-card, .starlight-aside, starlight-file-tree, .expressive-code pre, .expressive-code .frame.has-title .title) {
-        background: var(--sl-color-black);
+        display: block;
+        flex-direction: column;
+        gap: 1em;
       }
     }
     & .preview:only-child {
-      border-top: 1px solid var(--sl-color-hairline-light);
+      border-top: 1px solid var(--sl-color-hairline);
       border-radius: 0.75rem;
     }
     & .expressive-code pre:not(.preview-content *) {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
-  }
-  [data-theme='light'] :global(.sl-markdown-content) .preview-panel {
-    background: var(--sl-color-gray-7);
-    border: 1px solid var(--sl-color-hairline);
   }
 </style>

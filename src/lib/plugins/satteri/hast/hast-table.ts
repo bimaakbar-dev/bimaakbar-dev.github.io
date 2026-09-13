@@ -6,6 +6,7 @@ export const hastTable = defineHastPlugin({
   element: {
     filter: ['table'],
     visit(node, ctx) {
+    	if (node.tagName !== "table") return node;
       ctx.replaceNode(node, {
         type: 'element',
         tagName: 'div',

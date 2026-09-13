@@ -5,7 +5,7 @@ const CLOSE_ABBR = /^<\/abbr\s*>/i;
 const TITLE_ATTR = /\btitle\s*=\s*(?:"([^"]*)"|'([^']*)')/i;
 
 export const mdastAbbr = defineMdastPlugin({
-  name: "stradocs-abbr",
+  name: "satteri-abbr",
 
   paragraph(node, ctx) {
     const children = node.children;
