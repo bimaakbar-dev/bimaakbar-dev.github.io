@@ -2,16 +2,18 @@
 // src/components/overrides/Header.astro
 import config from 'virtual:starlight/user-config';
 import LanguageSelect from "@astrojs/starlight/components/LanguageSelect.astro";
-import Search from "./Search.astro";
+import Search from "@astrojs/starlight/components/Search.astro";
 import SiteTitle from "@astrojs/starlight/components/SiteTitle.astro";
 import SocialIcons from "./SocialIcons.astro";
 import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
 import NavLinks from "../NavLinks.astro";
 import GithubStar from '~/stradocs/components/GithubStar.astro';
+import SearchDialog from '~/stradocs/components/SearchDialog.astro';
 import MobileMenu from "../MobileMenu.astro";
+import MobileSearchToggle from '~/stradocs/components/MobileSearchToggle.astro';
 
 const { isCustomMenu } = Astro.locals.starlightRoute;
-const shouldRenderSearch = config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
+const shouldRenderSearch = config.pagefind || config.components.Search !== './Search.astro';
 ---
 
 <div class="header" data-is-custom-menu={isCustomMenu ? "true" : "false"}>
@@ -22,7 +24,8 @@ const shouldRenderSearch = config.pagefind || config.components.Search !== '@ast
     <NavLinks />
   </div>
   <div class="right-group sl-flex">
-    <div class="sl-flex md:sl-hidden print:hidden">
+    <div class="sl-flex print:hidden">
+      <MobileSearchToggle />
       {shouldRenderSearch && <Search />}
     </div>
     <div class="controls-group sl-hidden md:sl-flex">
@@ -35,8 +38,9 @@ const shouldRenderSearch = config.pagefind || config.components.Search !== '@ast
     </div>
   </div>
 </div>
-
 {isCustomMenu ? <MobileMenu /> : <div aria-hidden="true" />}
+
+<SearchDialog />
 
 <style>
   .header {
