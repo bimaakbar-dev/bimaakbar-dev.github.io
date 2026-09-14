@@ -2,445 +2,388 @@
 import project from 'virtual:starlight/project-context';
 
 const pagefindTranslations = {
-  placeholder: Astro.locals.t('search.label'),
-  ...Object.fromEntries(
-    Object.entries(Astro.locals.t.all())
-      .filter(([key]) => key.startsWith('pagefind.'))
-      .map(([key, value]) => [key.replace('pagefind.', ''), value])
-  ),
+	placeholder: Astro.locals.t('search.label'),
+	...Object.fromEntries(
+		Object.entries(Astro.locals.t.all())
+			.filter(([key]) => key.startsWith('pagefind.'))
+			.map(([key, value]) => [key.replace('pagefind.', ''), value])
+	),
 };
 
-const dataAttributes: DOMStringMap = {
-  'data-translations': JSON.stringify(pagefindTranslations),
-};
+const dataAttributes: DOMStringMap = { 'data-translations': JSON.stringify(pagefindTranslations) };
 if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash'] = '';
 ---
 
 <site-search {...dataAttributes}>
-  <dialog aria-label={Astro.locals.t('search.label')}>
-    <div class="sd-frame">
-      <div class="sd-bar">
-        <div id="starlight__search" />
-        <button class="sd-close" data-close-modal aria-label={Astro.locals.t('search.cancelLabel')}>
-          <span class="sd-close-esc">ESC</span>
-          <svg class="sd-close-x" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
-            <path d="M18 6 6 18M6 6l12 12"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-  </dialog>
+	<dialog style="padding:0" aria-label={Astro.locals.t('search.label')}>
+		<div class="dialog-frame sl-flex">
+			<button data-close-modal class="sl-flex md:sl-hidden">
+				{Astro.locals.t('search.cancelLabel')}
+			</button>
+			{
+				import.meta.env.DEV ? (
+					<div style="margin: auto; text-align: center; white-space: pre-line;" dir="ltr">
+						<p>{Astro.locals.t('search.devWarning')}</p>
+					</div>
+				) : (
+					<div class="search-container">
+						<div id="starlight__search" />
+					</div>
+				)
+			}
+		</div>
+	</dialog>
 </site-search>
 
-<script>
-  import { pagefindUserConfig } from 'virtual:starlight/pagefind-config';
-
-  class SiteSearch extends HTMLElement {
-    constructor() {
-      super();
-
-      const dialog = this.querySelector('dialog')!;
-      const closeBtn = this.querySelector<HTMLButtonElement>('[data-close-modal]')!;
-      const frame = this.querySelector('.sd-frame')!;
-
-      const onClick = (e: MouseEvent) => {
-        if (!frame.contains(e.target as Node)) closeModal();
-      };
-
-      const openModal = () => {
-        dialog.showModal();
-        document.body.toggleAttribute('data-search-modal-open', true);
-        this.querySelector<HTMLInputElement>('input')?.focus();
-        setTimeout(() => window.addEventListener('click', onClick), 0);
-      };
-
-      const closeModal = () => {
-        dialog.close();
-        document.body.toggleAttribute('data-search-modal-open', false);
-        window.removeEventListener('click', onClick);
-      };
-
-      (window as any).openSearch = openModal;
-      (window as any).closeSearch = closeModal;
-
-      closeBtn.addEventListener('click', closeModal);
-
-      dialog.addEventListener('close', () => {
-        document.body.toggleAttribute('data-search-modal-open', false);
-        window.removeEventListener('click', onClick);
-      });
-
-      window.addEventListener('keydown', (e) => {
-        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-          e.preventDefault();
-          dialog.open ? closeModal() : openModal();
-        }
-        if (e.key === 'Escape' && dialog.open) {
-          e.preventDefault();
-          closeModal();
-        }
-      });
-
-      window.addEventListener('DOMContentLoaded', () => {
-        if (import.meta.env.DEV) return;
-        const onIdle = window.requestIdleCallback || ((cb: () => void) => setTimeout(cb, 1));
-        onIdle(async () => {
-          const translations = (() => {
-            try { return JSON.parse(this.dataset.translations || '{}'); } catch { return {}; }
-          })();
-          const shouldStrip = this.dataset.stripTrailingSlash !== undefined;
-          const fmt = shouldStrip
-            ? (p: string) => p.replace(/(.)\/(#.*)?$/, '$1$2')
-            : (p: string) => p;
-
-          // @ts-expect-error
-          const { PagefindUI } = await import('@pagefind/default-ui');
-          new PagefindUI({
-            ...pagefindUserConfig,
-            element: '#starlight__search',
-            baseUrl: import.meta.env.BASE_URL,
-            bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/',
-            showImages: false,
-            translations,
-            showSubResults: true,
-            processResult: (result: { url: string; sub_results: Array<{ url: string }> }) => {
-              result.url = fmt(result.url);
-              result.sub_results = result.sub_results.map((s) => ({ ...s, url: fmt(s.url) }));
-            },
-          });
-        });
-      });
-    }
-  }
-
-  customElements.define('site-search', SiteSearch);
+<script is:inline>
+	(() => {
+		const openBtns = document.querySelectorAll('button[data-open-search-modal]');
+		openBtns.forEach(openBtn => {
+			const shortcut = openBtn?.querySelector('kbd');
+			if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+			const platformKey = shortcut.querySelector('kbd');
+			if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+				platformKey.textContent = '⌘';
+				openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+			}
+			shortcut.style.display = '';
+		});
+	})();
 </script>
 
+<script>
+	import { pagefindUserConfig } from 'virtual:starlight/pagefind-config';
+
+	class SiteSearch extends HTMLElement {
+		constructor() {
+			super();
+			const openBtns = document.querySelectorAll<HTMLButtonElement>('button[data-open-search-modal]');
+			const closeBtn = this.querySelector<HTMLButtonElement>('button[data-close-modal]')!;
+			const dialog = this.querySelector('dialog')!;
+			const dialogFrame = this.querySelector('.dialog-frame')!;
+
+			const onClick = (event: MouseEvent) => {
+				const isLink = 'href' in (event.target || {});
+				if (
+					isLink ||
+					(document.body.contains(event.target as Node) &&
+						!dialogFrame.contains(event.target as Node))
+				) {
+					closeModal();
+				}
+			};
+
+			const openModal = (event?: MouseEvent) => {
+				dialog.showModal();
+				document.body.toggleAttribute('data-search-modal-open', true);
+				this.querySelector('input')?.focus();
+				event?.stopPropagation();
+				window.addEventListener('click', onClick);
+			};
+
+			const closeModal = () => dialog.close();
+
+			openBtns.forEach(openBtn => {
+				openBtn.addEventListener('click', openModal);
+				openBtn.disabled = false;
+			});
+			
+			closeBtn.addEventListener('click', closeModal);
+
+			dialog.addEventListener('close', () => {
+				document.body.toggleAttribute('data-search-modal-open', false);
+				window.removeEventListener('click', onClick);
+			});
+
+			window.addEventListener('keydown', (e) => {
+				if ((e.metaKey === true || e.ctrlKey === true) && e.key === 'k') {
+					dialog.open ? closeModal() : openModal();
+					e.preventDefault();
+				}
+			});
+
+			let translations = {};
+			try {
+				translations = JSON.parse(this.dataset.translations || '{}');
+			} catch {}
+
+			const shouldStrip = this.dataset.stripTrailingSlash !== undefined;
+			const stripTrailingSlash = (path: string) => path.replace(/(.)\/(#.*)?$/, '$1$2');
+			const formatURL = shouldStrip ? stripTrailingSlash : (path: string) => path;
+
+			window.addEventListener('DOMContentLoaded', () => {
+				if (import.meta.env.DEV) return;
+				const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
+				onIdle(async () => {
+					const { PagefindUI } = await import('@pagefind/default-ui');
+					new PagefindUI({
+						...pagefindUserConfig,
+						element: '#starlight__search',
+						baseUrl: import.meta.env.BASE_URL,
+						bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/',
+						showImages: false,
+						translations,
+						showSubResults: true,
+						processResult: (result: { url: string; sub_results: Array<{ url: string }> }) => {
+							result.url = formatURL(result.url);
+							result.sub_results = result.sub_results.map((sub_result) => {
+								sub_result.url = formatURL(sub_result.url);
+								return sub_result;
+							});
+						},
+					});
+				});
+			});
+		}
+	}
+	customElements.define('site-search', SiteSearch);
+</script>
+
+<style>
+	@layer starlight.core {
+		site-search {
+			display: contents;
+		}
+		dialog {
+			margin: 0;
+			background-color: var(--sl-color-gray-6);
+			border: 1px solid var(--sl-color-gray-5);
+			width: 100%;
+			max-width: 100%;
+			height: 100%;
+			max-height: 100%;
+			box-shadow: var(--sl-shadow-lg);
+		}
+		dialog[open] {
+			display: flex;
+		}
+		dialog::backdrop {
+			background-color: var(--sl-color-backdrop-overlay);
+			-webkit-backdrop-filter: blur(0.25rem);
+			backdrop-filter: blur(0.25rem);
+		}
+		.dialog-frame {
+			position: relative;
+			overflow: auto;
+			flex-direction: column;
+			flex-grow: 1;
+			gap: 1rem;
+			padding: 1rem;
+		}
+		button[data-close-modal] {
+			position: absolute;
+			z-index: 1;
+			align-items: center;
+			align-self: flex-end;
+			height: calc(64px * var(--pagefind-ui-scale));
+			padding: 0.25rem;
+			border: 0;
+			background: transparent;
+			cursor: pointer;
+			color: var(--sl-color-text-accent);
+		}
+		#starlight__search {
+			--pagefind-ui-primary: var(--sl-color-text);
+			--pagefind-ui-text: var(--sl-color-gray-2);
+			--pagefind-ui-font: var(--__sl-font);
+			--pagefind-ui-background: var(--sl-color-black);
+			--pagefind-ui-border: var(--sl-color-gray-5);
+			--pagefind-ui-border-width: 1px;
+			--pagefind-ui-tag: var(--sl-color-gray-5);
+			--sl-search-cancel-space: 5rem;
+		}
+		@media (min-width: 50rem) {
+			#starlight__search {
+				--sl-search-cancel-space: 0px;
+			}
+			dialog {
+				margin: 4rem auto auto;
+				border-radius: 0.5rem;
+				width: 90%;
+				max-width: 40rem;
+				height: max-content;
+				min-height: 15rem;
+				max-height: calc(100% - 8rem);
+			}
+			.dialog-frame {
+				padding: 1.5rem;
+			}
+		}
+	}
+</style>
 <style is:global>
-  @import url('@pagefind/default-ui/css/ui.css') layer(starlight.core);
+	@import url('@pagefind/default-ui/css/ui.css') layer(starlight.core);
 
-  @layer starlight.core {
-    [data-search-modal-open] { overflow: hidden; }
+	@layer starlight.core {
+		/* Flip page and tree icons around the vertical axis when in an RTL layout. */
+		[dir='rtl'] .pagefind-ui__result-title::before,
+		[dir='rtl'] .pagefind-ui__result-nested::before {
+			transform: matrix(-1, 0, 0, 1, 0, 0);
+		}
+		[data-search-modal-open] {
+			overflow: hidden;
+		}
+		#starlight__search {
+			--sl-search-result-spacing: calc(1.25rem * var(--pagefind-ui-scale));
+			--sl-search-result-pad-inline-start: calc(3.75rem * var(--pagefind-ui-scale));
+			--sl-search-result-pad-inline-end: calc(1.25rem * var(--pagefind-ui-scale));
+			--sl-search-result-pad-block: calc(0.9375rem * var(--pagefind-ui-scale));
+			--sl-search-result-nested-pad-block: calc(0.625rem * var(--pagefind-ui-scale));
+			--sl-search-corners: calc(0.3125rem * var(--pagefind-ui-scale));
+			--sl-search-page-icon-size: calc(1.875rem * var(--pagefind-ui-scale));
+			--sl-search-page-icon-inline-start: calc(
+				(var(--sl-search-result-pad-inline-start) - var(--sl-search-page-icon-size)) / 2
+			);
+			--sl-search-tree-diagram-size: calc(2.5rem * var(--pagefind-ui-scale));
+			--sl-search-tree-diagram-inline-start: calc(
+				(var(--sl-search-result-pad-inline-start) - var(--sl-search-tree-diagram-size)) / 2
+			);
 
-    site-search { display: contents; }
+			& .pagefind-ui__form::before {
+				--pagefind-ui-text: var(--sl-color-gray-1);
+				opacity: 1;
+			}
+			& .pagefind-ui__search-input {
+				color: var(--sl-color-white);
+				font-weight: 400;
+				width: calc(100% - var(--sl-search-cancel-space));
+			}
+			& input:focus {
+				--pagefind-ui-border: var(--sl-color-accent);
+			}
+			& .pagefind-ui__search-clear {
+				inset-inline-end: var(--sl-search-cancel-space);
+				width: calc(60px * var(--pagefind-ui-scale));
+				padding: 0;
+				background-color: transparent;
+				overflow: hidden;
+				&:focus {
+					outline: 1px solid var(--sl-color-accent);
+				}
+				&::before {
+					content: '';
+					-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m13.41 12 6.3-6.29a1 1 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1 1 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 .33 1.64 1 1 0 0 0 1.09-.22l6.29-6.3 6.29 6.3a1 1 0 0 0 1.64-.33 1 1 0 0 0-.22-1.09L13.41 12Z'/%3E%3C/svg%3E")
+						center / 50% no-repeat;
+					mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m13.41 12 6.3-6.29a1 1 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1 1 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 .33 1.64 1 1 0 0 0 1.09-.22l6.29-6.3 6.29 6.3a1 1 0 0 0 1.64-.33 1 1 0 0 0-.22-1.09L13.41 12Z'/%3E%3C/svg%3E")
+						center / 50% no-repeat;
+					background-color: var(--sl-color-text-accent);
+					display: block;
+					width: 100%;
+					height: 100%;
+				}
+			}
+			& .pagefind-ui__result {
+				border: 0;
+				padding: 0;
+				& > * + * {
+					margin-top: var(--sl-search-result-spacing);
+				}
+			}
+			& .pagefind-ui__result-nested {
+				position: relative;
+				padding: var(--sl-search-result-nested-pad-block) var(--sl-search-result-pad-inline-end);
+				padding-inline-start: var(--sl-search-result-pad-inline-start);
+				background-color: var(--sl-color-black);
+				&:hover,
+				&:focus-within {
+					background-color: var(--sl-color-accent-low);
+				} {
+					outline: 1px solid var(--sl-color-accent-high);
+				}
+				&::before {
+					content: '';
+					position: absolute;
+					inset-block: 0;
+					inset-inline-start: var(--sl-search-tree-diagram-inline-start);
+					width: var(--sl-search-tree-diagram-size);
+					background: var(--sl-color-gray-4);
+					-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000m6-988H8'/%3E%3C/svg%3E")
+						0% 0% / 100% no-repeat;
+					mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000m6-988H8'/%3E%3C/svg%3E")
+						0% 0% / 100% no-repeat;
+				}
+				&:last-of-type::before {
+					-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 16 16'%3E%3Cpath d='M8 0v12m6 0H8'/%3E%3C/svg%3E");
+					mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 16 16'%3E%3Cpath d='M8 0v12m6 0H8'/%3E%3C/svg%3E");
+				}
+				& .pagefind-ui__result-link {
+					position: unset;
+					--pagefind-ui-text: var(--sl-color-white);
+					font-weight: 600;
+					&:hover {
+						text-decoration: none;
+					}
+					&::before {
+						content: unset;
+					}
+					&::after {
+						content: '';
+						position: absolute;
+						inset: 0;
+					}
+				}
+				
+			}
+			& .pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)) {
+				position: relative;
+				&:hover,
+				&:focus-within { 
+					background-color: var(--sl-color-accent-low); 
+				} {
+					outline: 1px solid var(--sl-color-accent-high);
+				}
+			}
+			& .pagefind-ui__result-thumb,
+			& .pagefind-ui__result-inner {
+				align-items: stretch;
+				gap: 1px;
+				& > :first-child {
+					border-radius: var(--sl-search-corners) var(--sl-search-corners) 0 0;
+				}
+				& > :last-child {
+					border-radius: 0 0 var(--sl-search-corners) var(--sl-search-corners);
+				}
+				& > .pagefind-ui__result-title {
+					padding: var(--sl-search-result-pad-block) var(--sl-search-result-pad-inline-end);
+					padding-inline-start: var(--sl-search-result-pad-inline-start);
+				}
+				& > .pagefind-ui__result-title::before {
+					content: '';
+					position: absolute;
+					inset-block: 0;
+					inset-inline-start: var(--sl-search-page-icon-inline-start);
+					width: var(--sl-search-page-icon-size);
+					background: var(--sl-color-gray-3);
+					-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M9 10h1a1 1 0 1 0 0-2H9a1 1 0 0 0 0 2Zm0 2a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2H9Zm11-3V8l-6-6a1 1 0 0 0-1 0H7a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V9Zm-6-4 3 3h-2a1 1 0 0 1-1-1V5Zm4 14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5v3a3 3 0 0 0 3 3h3v9Zm-3-3H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2Z'/%3E%3C/svg%3E")
+						center no-repeat;
+					mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M9 10h1a1 1 0 1 0 0-2H9a1 1 0 0 0 0 2Zm0 2a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2H9Zm11-3V8l-6-6a1 1 0 0 0-1 0H7a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V9Zm-6-4 3 3h-2a1 1 0 0 1-1-1V5Zm4 14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5v3a3 3 0 0 0 3 3h3v9Zm-3-3H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2Z'/%3E%3C/svg%3E")
+						center no-repeat;
+				}
+				{
+					margin-top: 0;
+				}
+			}
 
-    /* ── Dialog ──────────────────────────────────────────────── */
-    site-search dialog {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      max-width: 100%;
-      height: 100%;
-      max-height: 100%;
-      background: transparent;
-      border: 0;
-      opacity: 0;
-      transform: translateY(8px) scale(0.985);
-      transition:
-        opacity 0.16s ease,
-        transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-        overlay 0.16s allow-discrete,
-        display 0.16s allow-discrete;
-    }
-    site-search dialog[open] {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-    @starting-style {
-      site-search dialog[open] {
-        opacity: 0;
-        transform: translateY(8px) scale(0.985);
-      }
-    }
-    site-search dialog::backdrop {
-      background: color-mix(in srgb, var(--sl-color-black) 72%, transparent);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      opacity: 0;
-      transition:
-        opacity 0.16s ease,
-        overlay 0.16s allow-discrete,
-        display 0.16s allow-discrete;
-    }
-    site-search dialog[open]::backdrop { opacity: 1; }
-    @starting-style {
-      site-search dialog[open]::backdrop { opacity: 0; }
-    }
+			& .pagefind-ui__result-excerpt {
+				font-size: calc(1rem * var(--pagefind-ui-scale));
+				overflow-wrap: anywhere;
+			}
 
-    /* ── Frame ───────────────────────────────────────────────── */
-    .sd-frame {
-      width: 90%;
-      max-width: 38rem;
-      margin-top: 10vh;
-      background: var(--sl-color-bg);
-      border: 1px solid color-mix(in srgb, var(--sl-color-white) 9%, transparent);
-      border-radius: 0.875rem;
-      box-shadow:
-        0 0 0 1px color-mix(in srgb, var(--sl-color-black) 20%, transparent),
-        0 8px 16px -4px color-mix(in srgb, var(--sl-color-black) 32%, transparent),
-        0 32px 64px -16px color-mix(in srgb, var(--sl-color-black) 48%, transparent);
-      overflow: hidden;
-      max-height: 72vh;
-      display: flex;
-      flex-direction: column;
-    }
+			& mark {
+				color: var(--sl-color-gray-2);
+				background-color: transparent;
+				font-weight: 600;
+			}
 
-    /* ── Bar (input + close) ─────────────────────────────────── */
-    .sd-bar {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0 0.75rem 0 0;
-      flex-shrink: 0;
-    }
+			& .pagefind-ui__filter-value::before {
+				border-color: var(--sl-color-text-invert);
+			}
 
-    /* ── Close ───────────────────────────────────────────────── */
-    .sd-close {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      height: 1.625rem;
-      padding: 0 0.45rem;
-      border: 1px solid color-mix(in srgb, var(--sl-color-white) 8%, transparent);
-      border-radius: 0.375rem;
-      background: transparent;
-      color: color-mix(in srgb, var(--sl-color-white) 30%, transparent);
-      cursor: pointer;
-      transition: border-color 0.12s ease, color 0.12s ease, background-color 0.12s ease;
-    }
-    .sd-close:hover {
-      border-color: color-mix(in srgb, var(--sl-color-white) 16%, transparent);
-      color: color-mix(in srgb, var(--sl-color-white) 65%, transparent);
-      background: color-mix(in srgb, var(--sl-color-white) 4%, transparent);
-    }
-
-    .sd-close-esc {
-      font-family: var(--sl-font-mono, monospace);
-      font-size: 0.625rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      display: none;
-    }
-    .sd-close-x { display: block; }
-
-    @media (min-width: 50rem) {
-      .sd-close-esc { display: block; }
-      .sd-close-x   { display: none; }
-    }
-
-    /* ── Mobile fullscreen ───────────────────────────────────── */
-    @media (max-width: 50rem) {
-      .sd-frame {
-        width: 100%;
-        max-width: 100%;
-        max-height: 100dvh;
-        height: 100dvh;
-        margin-top: 0;
-        border-radius: 0;
-        border: 0;
-        box-shadow: none;
-      }
-      site-search dialog::backdrop {
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        background: var(--sl-color-bg);
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      site-search dialog,
-      site-search dialog::backdrop { transition-duration: 0.01ms; }
-    }
-
-    /* ═══════════════════════════════════════════════════════════
-       Pagefind UI overrides
-    ═══════════════════════════════════════════════════════════ */
-    #starlight__search {
-      flex: 1;
-      min-height: 0;
-      width: 100%;
-
-      --pagefind-ui-scale: 0.875;
-      --pagefind-ui-primary: var(--sl-color-accent-high);
-      --pagefind-ui-text: var(--sl-color-gray-2);
-      --pagefind-ui-font: var(--sl-font, system-ui, sans-serif);
-      --pagefind-ui-background: transparent;
-      --pagefind-ui-border: color-mix(in srgb, var(--sl-color-white) 8%, transparent);
-      --pagefind-ui-border-width: 1px;
-      --pagefind-ui-border-radius: 0.5rem;
-      --pagefind-ui-tag: color-mix(in srgb, var(--sl-color-white) 6%, transparent);
-    }
-
-    /* Form wrapper — buang padding bawaan */
-    #starlight__search .pagefind-ui__form {
-      padding: 0;
-    }
-
-    /* Input — styling ulang jadi satu dengan bar */
-    #starlight__search .pagefind-ui__search-input {
-      height: 3.125rem !important;
-      border: 0 !important;
-      border-radius: 0 !important;
-      border-bottom: 1px solid color-mix(in srgb, var(--sl-color-white) 6%, transparent) !important;
-      background: transparent !important;
-      color: var(--sl-color-white) !important;
-      font-size: 0.9375rem !important;
-      font-weight: 400 !important;
-      letter-spacing: -0.005em !important;
-      padding-inline-start: 2.75rem !important;
-      box-shadow: none !important;
-      outline: none !important;
-      width: 100% !important;
-    }
-    #starlight__search .pagefind-ui__search-input:focus {
-      border-color: color-mix(in srgb, var(--sl-color-white) 10%, transparent) !important;
-      box-shadow: none !important;
-    }
-    #starlight__search .pagefind-ui__search-input::placeholder {
-      color: color-mix(in srgb, var(--sl-color-white) 25%, transparent) !important;
-    }
-
-    /* Icon kaca pembesar bawaan pagefind */
-    #starlight__search .pagefind-ui__form::before {
-      opacity: 0.35 !important;
-      top: 0 !important;
-      height: 3.125rem !important;
-    }
-
-    /* Clear button */
-    #starlight__search .pagefind-ui__search-clear {
-      top: 0 !important;
-      height: 3.125rem !important;
-      right: 0.75rem !important;
-      width: 2rem !important;
-      background: transparent !important;
-      opacity: 0.4;
-      transition: opacity 0.12s ease !important;
-    }
-    #starlight__search .pagefind-ui__search-clear:hover { opacity: 0.8; }
-    #starlight__search .pagefind-ui__search-clear::before {
-      background-color: var(--sl-color-white) !important;
-    }
-
-    /* Results scroll area */
-    #starlight__search .pagefind-ui__drawer {
-      padding: 0.35rem 0.5rem 0.75rem;
-      max-height: calc(72vh - 3.125rem);
-      overflow-y: auto;
-      overscroll-behavior: contain;
-    }
-    @media (max-width: 50rem) {
-      #starlight__search .pagefind-ui__drawer {
-        max-height: calc(100dvh - 3.125rem);
-      }
-    }
-
-    #starlight__search .pagefind-ui__results > * + * { margin-top: 2px; }
-    #starlight__search .pagefind-ui__result { border: 0; padding: 0; }
-
-    #starlight__search .pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)),
-    #starlight__search .pagefind-ui__result-nested {
-      background: transparent;
-      border-radius: 0.5rem;
-      transition: background-color 0.1s ease;
-    }
-    #starlight__search .pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)):hover,
-    #starlight__search .pagefind-ui__result-nested:hover {
-      background: color-mix(in srgb, var(--sl-color-white) 4%, transparent);
-    }
-    #starlight__search .pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)):focus-within,
-    #starlight__search .pagefind-ui__result-nested:focus-within {
-      background: color-mix(in srgb, var(--sl-color-accent) 8%, transparent);
-      outline: 1px solid color-mix(in srgb, var(--sl-color-accent) 30%, transparent);
-    }
-
-    #starlight__search .pagefind-ui__result-inner > .pagefind-ui__result-title {
-      padding: 0.6rem 1rem 0.6rem 2.5rem;
-    }
-    #starlight__search .pagefind-ui__result-nested {
-      padding: 0.4rem 1rem 0.4rem 2.5rem;
-    }
-
-    /* Page icon */
-    #starlight__search .pagefind-ui__result-inner > .pagefind-ui__result-title::before {
-      content: '';
-      position: absolute;
-      inset-block: 0;
-      inset-inline-start: 0.625rem;
-      width: 1.25rem;
-      background: color-mix(in srgb, var(--sl-color-white) 22%, transparent);
-      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M9 10h1a1 1 0 1 0 0-2H9a1 1 0 0 0 0 2Zm0 2a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2H9Zm11-3V8l-6-6a1 1 0 0 0-1 0H7a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V9Zm-6-4 3 3h-2a1 1 0 0 1-1-1V5Zm4 14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5v3a3 3 0 0 0 3 3h3v9Zm-3-3H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2Z'/%3E%3C/svg%3E") center no-repeat;
-      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24'%3E%3Cpath d='M9 10h1a1 1 0 1 0 0-2H9a1 1 0 0 0 0 2Zm0 2a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2H9Zm11-3V8l-6-6a1 1 0 0 0-1 0H7a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V9Zm-6-4 3 3h-2a1 1 0 0 1-1-1V5Zm4 14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5v3a3 3 0 0 0 3 3h3v9Zm-3-3H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2Z'/%3E%3C/svg%3E") center no-repeat;
-    }
-
-    /* Tree connector */
-    #starlight__search .pagefind-ui__result-nested::before {
-      content: '';
-      position: absolute;
-      inset-block: 0;
-      inset-inline-start: 0.75rem;
-      width: 1rem;
-      background: color-mix(in srgb, var(--sl-color-white) 10%, transparent);
-      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000m6-988H8'/%3E%3C/svg%3E") 0% 0% / 100% no-repeat;
-      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' viewBox='0 0 16 1000' preserveAspectRatio='xMinYMin slice'%3E%3Cpath d='M8 0v1000m6-988H8'/%3E%3C/svg%3E") 0% 0% / 100% no-repeat;
-    }
-    #starlight__search .pagefind-ui__result-nested:last-of-type::before {
-      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 16 16'%3E%3Cpath d='M8 0v12m6 0H8'/%3E%3C/svg%3E");
-      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 16 16'%3E%3Cpath d='M8 0v12m6 0H8'/%3E%3C/svg%3E");
-    }
-
-    /* Link */
-    #starlight__search .pagefind-ui__result-link {
-      position: unset;
-      color: var(--sl-color-white);
-      font-size: 0.875rem;
-      font-weight: 500;
-      letter-spacing: -0.01em;
-    }
-    #starlight__search .pagefind-ui__result-link:hover { text-decoration: none; }
-    #starlight__search .pagefind-ui__result-link::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-    }
-    #starlight__search .pagefind-ui__result-nested .pagefind-ui__result-link::before { content: unset; }
-
-    /* Excerpt */
-    #starlight__search .pagefind-ui__result-excerpt {
-      font-size: 0.8125rem;
-      color: color-mix(in srgb, var(--sl-color-white) 40%, transparent);
-      line-height: 1.5;
-      overflow-wrap: anywhere;
-      margin-top: 0.15rem;
-    }
-
-    #starlight__search mark {
-      background: transparent;
-      color: var(--sl-color-accent-high);
-      font-weight: 600;
-    }
-
-    /* Message (no results, loading) */
-    #starlight__search .pagefind-ui__message {
-      padding: 2.5rem 1rem;
-      text-align: center;
-      font-size: 0.875rem;
-      color: color-mix(in srgb, var(--sl-color-white) 30%, transparent);
-    }
-
-    /* Inner structure */
-    #starlight__search .pagefind-ui__result-thumb,
-    #starlight__search .pagefind-ui__result-inner  { margin-top: 0; }
-    #starlight__search .pagefind-ui__result-inner  { align-items: stretch; gap: 1px; }
-    #starlight__search .pagefind-ui__result-inner > :first-child { border-radius: 0.5rem 0.5rem 0 0; }
-    #starlight__search .pagefind-ui__result-inner > :last-child  { border-radius: 0 0 0.5rem 0.5rem; }
-
-    /* RTL */
-    [dir='rtl'] .pagefind-ui__result-title::before,
-    [dir='rtl'] .pagefind-ui__result-nested::before { transform: matrix(-1, 0, 0, 1, 0, 0); }
-  }
+			& .pagefind-ui__result-tags {
+				background-color: var(--sl-color-black);
+				margin-top: 0;
+				padding: var(--sl-search-result-nested-pad-block) var(--sl-search-result-pad-inline-end);
+			}
+		}
+	}
 </style>
