@@ -1,6 +1,11 @@
 // src/env.d.ts
 
 /// <reference types="astro/client" />
+interface Window {
+  openOramaSearch: () => void;
+  closeOramaSearch: () => void;
+}
+
 declare module 'starlight:route-data' {
   interface StarlightRouteData {
     isCustomMenu?: boolean;
