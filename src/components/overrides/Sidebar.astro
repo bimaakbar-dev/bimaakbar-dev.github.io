@@ -1,19 +1,13 @@
 ---
-import config from 'virtual:starlight/user-config';
-
 import MobileMenuFooter from './MobileMenuFooter.astro';
 import SidebarPersister from '@astrojs/starlight/components/SidebarPersister.astro';
 import SidebarSublist from '@astrojs/starlight/components/SidebarSublist.astro';
-import Search from "@astrojs/starlight/components/Search.astro";
-import searchToggle from './searchToggle.astro';
-
-const shouldRenderSearch = config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
-
-const { sidebar } = Astro.locals.starlightRoute;
+import SearchToggle from './searchToggle.astro';
 ---
 
 <div class="sl-flex print:hidden">
-  <searchToggle />
+  <SearchToggle />
+</div>
 
 <SidebarPersister>
 	<SidebarSublist sublist={sidebar} />
