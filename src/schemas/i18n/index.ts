@@ -6,7 +6,7 @@ import { blogI18nSchema } from "./blogI18nSchema";
 import { componentsI18nSchema } from "./componentsI18nSchema";
 import { navigationI18nSchema } from "./navigationI18nSchema";
 import { rssI18nSchema } from "./rssI18nSchema";
-import { seacrhI18nSchema } from './searchI18nSchema';
+import { searchI18nSchema } from './searchI18nSchema';
 
 export const customI18nSchema = z.object({
   ...actionI18nSchema().shape,
@@ -14,7 +14,7 @@ export const customI18nSchema = z.object({
   ...componentsI18nSchema().shape,
   ...navigationI18nSchema().shape,
   ...rssI18nSchema().shape,
-  ...seacrhI18nSchema().shape
+  ...searchI18nSchema().shape
 }).partial();
 
 export { actionI18nSchema, blogI18nSchema, componentsI18nSchema, navigationI18nSchema, rssI18nSchema, searchI18nSchema };
