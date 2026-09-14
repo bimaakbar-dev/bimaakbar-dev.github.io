@@ -136,7 +136,8 @@ export default defineConfig({
       },
       routeMiddleware: "./src/routeData.ts",
       credits: true,
-      sidebar: sidebarConfig
+      sidebar: sidebarConfig,
+      pagefinde: false
     }),
   ],
   experimental: {
