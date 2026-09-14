@@ -51,11 +51,12 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
       };
 
       const openModal = () => {
-        dialog.showModal();
-        document.body.toggleAttribute('data-search-modal-open', true);
-        this.querySelector<HTMLInputElement>('input')?.focus();
-        window.addEventListener('click', onClick);
-      };
+  		dialog.showModal();
+  document.body.toggleAttribute('data-search-modal-open', true);
+  this.querySelector<HTMLInputElement>('input')?.focus();
+  // Tunda sampai event click selesai bubbling
+  setTimeout(() => window.addEventListener('click', onClick), 0);
+};
 
       const closeModal = () => {
         dialog.close();
