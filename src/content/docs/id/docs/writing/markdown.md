@@ -28,7 +28,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 ```markdown
 [internal link](#)
 
-[external link](external-url)
+[external link](https://example.com)
 
 [`code link`](#)
 
@@ -37,8 +37,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 [![avatar name](url-avatar) name](url-profile) 
 
 [![avatar name](url-avatar)](url-profile)
-
-[![status online](/.github/assets/images/logo.svg) Online](#_top)
 
 [![icon name](/.github/assets/images/logo.svg) Astro](#_top)
 
@@ -60,11 +58,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 ```
 
 - [internal link](#_top)
-- [external link](external-url)
+- [external link](https://example.com)
 - [`code link`](#_top)
-- [![badge astro](/images/astro.svg)](#_top)
-- [![status online](/images/dot.svg) Online](#_top)
-- [![icon astro](/images/astro.svg) Astro](#_top)
+- [![badge astro](/images/astro.svg)](#_top) [![badge tailwindcss](/images/tailwindcss.svg)](#_top) [![badge reactjs](/images/reactjs.svg)](#_top)
+- [![icon Astro](/images/astro.svg) Astro](#_top) [![icon TailwindCSS](/images/tailwindcss.svg) TailwindCSS](#_top) [![icon React](/images/reactjs.svg) React](#_top)
 
 - <div class='avatar-stack'>
 
@@ -74,8 +71,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 
   </div>
 
-- [![avatar bima](../../../../../assets/images/author/bimaakbar.svg)](#_top)
-- [![avatar bima](../../../../../assets/images/author/bimaakbar.svg) Bima Akbar](#_top)
+- [![avatar Bima Akbar](../../../../../assets/images/author/bimaakbar.svg)](#_top)
+- [![Bima Akbar](../../../../../assets/images/author/bimaakbar.svg) Bima Akbar](#_top)
 
 - <https://example.com>
 - <email@example.com>
@@ -155,7 +152,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 
 ## Inline Typography
 ```markdown
-<kbd>Ctrl</kbd> + <kbd>C</kbd>
+<kbd>Ctrl</kbd> + <kbd>C</kbd>  
 
 <samp>Hello, World!</samp>
 
@@ -168,7 +165,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 Dia berkata <q>ini adalah quote pendek</q> di dalam paragraf.
 ```
 
-- <kbd>Ctrl</kbd> + <kbd>C</kbd>
+- <kbd>Ctrl</kbd> + <kbd>C</kbd>  
 - <samp>Hello, World!</samp>
 - <var>x</var> = <var>y</var> + 2
 - <dfn>API</dfn>

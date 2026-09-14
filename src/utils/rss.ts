@@ -7,6 +7,7 @@ export async function getBlogPosts(locale?: string) {
   return all.filter((e: any) => {
     const id = e.id as string;
     if (locale) return id.startsWith(`${locale}/blog/`);
+    
     const [first, second] = id.split("/");
     if (first.length === 2 && second === "blog") return false;
     return id.startsWith("blog/") || id.startsWith("docs/blog/");

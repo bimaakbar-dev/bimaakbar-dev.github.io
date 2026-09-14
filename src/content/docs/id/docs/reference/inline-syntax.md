@@ -1,6 +1,10 @@
 ---
 title: 'Sintak Markdown'
 description: 'Pelajari kode sintak markdown untuk tipe teks di Stradocs'
+sidebar:
+  badge:
+    text: New
+    variant: default
 ---
 
 Berikut beberapa cara penulisan kode sintak didalam markdown untuk model `teks` atau `inline`.

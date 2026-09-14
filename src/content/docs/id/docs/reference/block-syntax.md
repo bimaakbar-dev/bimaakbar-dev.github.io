@@ -1,6 +1,10 @@
 ---
 title: 'Paragraf Sintak'
 description: 'Pelajari bagaimana cara penulisan sintak tipe paragraf dalam markdown di Stradocs'
+sidebar:
+  badge: 
+    text: New
+    variant: default
 ---
 
 ## Blockquote
@@ -78,7 +82,7 @@ Cara penulisan ini sedikit berbeda dengan list sebelumnya, yang mana menggunakan
 Untuk penulisan Definisi List tidak sama dengan list nya, Kalimat pertama akan menjadi Kepala, dan kalimat kedua menggunakan simbol `:` akan menjadi deskripsinya.  
 Sebagai Contoh:  
 
-```markdown {13}
+```markdown ins={13}
 Item 1
 : Deskripsi 1
 
@@ -255,7 +259,7 @@ Isi paragraf
 ```
 
 ## Line Break
-Menambahkan Line Break antar kalimat bisa menggunakan *Spasi sebanyak 2 kali* diakhir teks terkahir, atau menggunakan tag `<br/>`.  
+Menambahkan Line Break antar kalimat bisa menggunakan *Spasi sebanyak 2 kali* diakhir teks terkahir, atau dengan `<br/>`.  
 
 ```markdown {1} {4}
 Baris 1  <!-- Spasi disini --> 
