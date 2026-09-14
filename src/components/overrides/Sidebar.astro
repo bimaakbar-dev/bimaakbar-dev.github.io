@@ -5,12 +5,15 @@ import MobileMenuFooter from './MobileMenuFooter.astro';
 import SidebarPersister from '@astrojs/starlight/components/SidebarPersister.astro';
 import SidebarSublist from '@astrojs/starlight/components/SidebarSublist.astro';
 import Search from "@astrojs/starlight/components/Search.astro";
+import searchToggle from './searchToggle.astro';
 
 const shouldRenderSearch = config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
 
 const { sidebar } = Astro.locals.starlightRoute;
 ---
 
+<div class="sl-flex print:hidden">
+  <searchToggle />
 
 <SidebarPersister>
 	<SidebarSublist sublist={sidebar} />
