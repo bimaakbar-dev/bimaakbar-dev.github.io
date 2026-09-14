@@ -1,12 +1,10 @@
 /* @import "./stargazer.css"; */
 @import "./reset.css";
-@import "./expressive-code.css";
 @import "./markdown.css";
 @import "./anchor-links.css";
 @import "./asides.css";
 
 @import "./components/Pagination.css";
-@import "./components/Search.css";
 @import "./components/SidebarSublist.css";
 @import "./components/SiteTitle.css";
 
@@ -20,4 +18,4 @@
 
 @import './stradocs/components/Asides.css';
 
-@import './stargazer.css';
+@import './stradocs/Token.css';

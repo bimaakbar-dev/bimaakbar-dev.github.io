@@ -14,6 +14,8 @@ export const Overrides = {
   MobileTableOfContents: "./src/components/overrides/MobileTableOfContents.astro",
   PageFrame: "./src/components/overrides/PageFrame.astro",
   PageTitle: "./src/components/overrides/PageTitle.astro",
+  Search: "./src/components/overrides/Search.astro",
+  Sidebar: "./src/components/overrides/Sidebar.astro",
   SkipLink: "./src/components/overrides/SkipLink.astro",
   TableOfContents: "./src/components/overrides/TableOfContents.astro",
 } as const;

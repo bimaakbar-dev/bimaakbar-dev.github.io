@@ -2,7 +2,7 @@
 // src/components/overrides/Header.astro
 import config from 'virtual:starlight/user-config';
 import LanguageSelect from "@astrojs/starlight/components/LanguageSelect.astro";
-import Search from "@astrojs/starlight/components/Search.astro";
+import Search from "./Search.astro";
 import SiteTitle from "@astrojs/starlight/components/SiteTitle.astro";
 import SocialIcons from "./SocialIcons.astro";
 import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
@@ -22,7 +22,7 @@ const shouldRenderSearch = config.pagefind || config.components.Search !== '@ast
     <NavLinks />
   </div>
   <div class="right-group sl-flex">
-    <div class="sl-flex print:hidden">
+    <div class="sl-flex md:sl-hidden print:hidden">
       {shouldRenderSearch && <Search />}
     </div>
     <div class="controls-group sl-hidden md:sl-flex">

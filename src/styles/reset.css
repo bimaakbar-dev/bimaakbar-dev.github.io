@@ -5,7 +5,7 @@
   --sl-font-system-mono:
     var(--font-firaCode), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     monospace;
-    
+  /*
   --__sl-font: var(--sl-font-system);
   --__sl-font-mono: var(--sl-font-system-mono);
 
@@ -33,6 +33,7 @@
   --sl-z-index-menu: 5;
   --sl-z-index-navbar: 10;
   --sl-z-index-skiplink: 20;
+  */
 }
 
 *,

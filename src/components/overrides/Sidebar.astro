@@ -1,0 +1,21 @@
+---
+import config from 'virtual:starlight/user-config';
+
+import MobileMenuFooter from './MobileMenuFooter.astro';
+import SidebarPersister from '@astrojs/starlight/components/SidebarPersister.astro';
+import SidebarSublist from '@astrojs/starlight/components/SidebarSublist.astro';
+import Search from "@astrojs/starlight/components/Search.astro";
+
+const shouldRenderSearch = config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
+
+const { sidebar } = Astro.locals.starlightRoute;
+---
+
+
+<SidebarPersister>
+	<SidebarSublist sublist={sidebar} />
+</SidebarPersister>
+
+<div class="md:sl-hidden">
+	<MobileMenuFooter />
+</div>

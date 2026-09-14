@@ -18,12 +18,8 @@ export const onRequest = defineRouteMiddleware(async (context) => {
 
   let mdUrl = "";
   if (entry?.id) {
-    if (entry.id.startsWith("docs/")) {
-      mdUrl = `/docs/${entry.id.replace(/^docs\//, "")}.md`;
-    } else if (entry.id.includes("/docs/")) {
-      const [loc, , ...rest] = entry.id.split("/");
-      mdUrl = `/${loc}/docs/${rest.join("/")}.md`;
-    }
+    const cleanPath = entry.id.replace(/\.(md|mdx)$/, "");
+    mdUrl = `/${cleanPath}.md`;
   }
   
   const llmsUrl = `${base}/docs/llms.txt`;

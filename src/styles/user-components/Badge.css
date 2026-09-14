@@ -1,7 +1,7 @@
 /* Badge.css */
 
 :root {
-  --sl-badge-default-bg: rgb(from var(--sl-color-accent-low) r g b / 10%);
+  --sl-badge-default-bg: rgb(from var(--sl-color-accent) r g b / 20%);
   --sl-badge-default-border: transparent;
   --sl-badge-default-text: var(--sl-color-accent-high);
 
@@ -56,7 +56,7 @@
   border: 1px solid var(--sl-color-border-badge);
   border-radius: 99rem;
   font-weight: 500;
-  padding: 0.125em 0.5em;
+  padding-inline: 0.5em;
   color: var(--sl-color-text-badge);
   background-color: var(--sl-color-bg-badge);
   letter-spacing: 0.025em;

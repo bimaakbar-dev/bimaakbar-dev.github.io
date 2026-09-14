@@ -9,48 +9,44 @@ import { Icon } from "@astrojs/starlight/components";
 </button>
 
 <style>
-  @layer starlight.core {
-    button {
-      position: fixed;
-      top: calc((var(--sl-nav-height) - var(--sl-menu-button-size)) / 2);
-      inset-inline-end: var(--sl-nav-pad-x);
-      z-index: var(--sl-z-index-navbar);
-      width: var(--sl-menu-button-size);
-      height: var(--sl-menu-button-size);
-      border: 0;
-      padding: 0;
-      border-radius: 50%;
-      background-color: transparent;
-      color: var(--sl-color-white);
-      box-shadow: none;
-      cursor: pointer;
-      align-items: center;
-      justify-content: center;
-    }
-
-    button:has(~ :popover-open) {
-      background-color: transparent;
-      color: var(--sl-color-white);
-      box-shadow: none;
-    }
-
-    button:has(~ :popover-open) .open-menu {
-      display: none;
-    }
-
-    button:not(:has(~ :popover-open)) .close-menu {
-      display: none;
-    }
-
-    :global([data-theme='light']) button {
+	@layer starlight.core {
+		button {
+			position: fixed;
+			top: calc((var(--sl-nav-height) - var(--sl-menu-button-size)) / 2);
+			inset-inline-end: var(--sl-nav-pad-x);
+			z-index: var(--sl-z-index-navbar);
+			width: var(--sl-menu-button-size);
+			height: var(--sl-menu-button-size);
+			border: 0;
+			padding: 0;
+			border-radius: 50%;
 			background-color: transparent;
 			color: var(--sl-color-white);
-      box-shadow: none;
+			box-shadow: none;
+			cursor: pointer;
+			align-items: center;
+			justify-content: center;
+			&:has(~ :popover-open) {
+				background-color: transparent;
+				color: var(--sl-color-white);
+				box-shadow: none;
+				& .open-menu {
+					display: none;
+				}
+			}
+			&:not(:has(~ :popover-open)) .close-menu {
+				display: none;
+			}
 		}
-    :global([data-theme='light']) button:has(~ :popover-open) {
+		:global([data-theme='light']) button {
 			background-color: transparent;
+			color: var(--sl-color-white);
+			box-shadow: none;
+			&:has(~ :popover-open) {
+				background-color: transparent;
+			}
 		}
-  }
+	}
 </style>
 
 <style is:global>

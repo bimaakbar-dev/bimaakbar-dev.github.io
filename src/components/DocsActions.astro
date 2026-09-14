@@ -12,7 +12,11 @@ const { mdUrl } = Astro.locals.starlightRoute;
 if (!mdUrl) return;
 ---
 
-<page-actions class:list={["sl-flex page-actions not-content", className]} data-md-url={mdUrl}>
+<page-actions 
+  class:list={["sl-flex page-actions not-content", className]} 
+  data-md-url={mdUrl}
+  data-copied-text="Copied!" 
+>
   <button type="button" data-action="copy-url" class="action-link" aria-label={t("action.CopyPage")}>
     <Icon name="link" size='1.125em'/>
     <span aria-live="polite">{t("action.CopyPage")}</span>
@@ -55,11 +59,13 @@ if (!mdUrl) return;
       border: 0;
       cursor: pointer;
     }
-    $ .action-link:focus-visible {
+    /* FIX: Ubah $ menjadi & */
+    & .action-link:focus-visible {
       outline: 2px solid var(--sl-color-accent-high);
       background: var(--sl-color-gray-6);
     }
-    $ .action-link.is-done {
+    /* FIX: Ubah $ menjadi & */
+    & .action-link.is-done {
       color: var(--sl-color-text-accent);
     }
   }
@@ -89,11 +95,14 @@ if (!mdUrl) return;
   class PageActions extends HTMLElement {
     connectedCallback() {
       const mdUrl = this.dataset.mdUrl || "";
+      const copiedText = this.dataset.copiedText || "Copied!";
+
       this.querySelectorAll<HTMLButtonElement>("button[data-action]").forEach((btn) => {
         btn.addEventListener("click", async () => {
           const action = btn.dataset.action;
           const label = btn.querySelector("[aria-live]") as HTMLElement;
           const original = label?.textContent || "";
+          
           try {
             if (action === "copy-url") {
               await navigator.clipboard.writeText(window.location.href);
@@ -103,9 +112,11 @@ if (!mdUrl) return;
               const text = await res.text();
               await navigator.clipboard.writeText(text);
             }
+            
             if (label) {
               btn.classList.add("is-done");
-              label.textContent = "Copied!";
+              label.textContent = copiedText;
+              
               setTimeout(() => {
                 btn.classList.remove("is-done");
                 label.textContent = original;
@@ -118,6 +129,7 @@ if (!mdUrl) return;
       });
     }
   }
+  
   if (!customElements.get("page-actions")) {
     customElements.define("page-actions", PageActions);
   }

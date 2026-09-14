@@ -6,60 +6,62 @@ import {
 
 const showContentTypeTabs = Astro.slots.has("markdoc");
 ---
-<div class="sl-block not-content">
-  <figure class="preview-panel sl-block">
-    {
-      showContentTypeTabs ? (
-        <Tabs syncKey="content-type">
-          <TabItem label="MDX">
-            <slot />
-          </TabItem>
-          <TabItem label="Markdoc">
-            <slot name="markdoc" />
-          </TabItem>
-        </Tabs>
-      ) : (
-        <slot />
-      )
-    }
-    <div class="sl-flex preview">
-      <figcaption>{Astro.locals.t("component.preview")}</figcaption>
-      <aside class="preview-content">
-        <slot name="preview" />
-      </aside>
+
+<figure class="preview-panel sl-block">
+  {
+    showContentTypeTabs ? (
+      <Tabs syncKey="content-type">
+        <TabItem label="MDX">
+          <slot />
+        </TabItem>
+        <TabItem label="Markdoc">
+          <slot name="markdoc" />
+        </TabItem>
+      </Tabs>
+    ) : (
+      <slot />
+    )
+  }
+  <div class="preview">
+    <caption>{Astro.locals.t("component.preview")}</caption>
+    <div class="preview-content">
+      <slot name="preview" />
     </div>
-  </figure>
-</div>
-<style>
-  :global(.sl-markdown-content .preview-panel) {
-    border-radius: 0.75rem;
-    & .preview {
-      flex-direction: column;
-      gap: 0.5em;
-      background: var(--sl-color-gray-4);
-      border: 1px solid var(--sl-color-hairline);
+  </div>
+</figure>
+
+<style is:global>
+  .sl-markdown-content {
+
+    & .preview-panel {
       border-radius: 0.75rem;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-      border-top: 0;
-      padding: 1rem;
-      & figcaption {
-        font-size: var(--sl-text-body);
-        margin-top: 0;
-      }
-      & .preview-content {
-        display: block;
+      & .preview {
+        display: flex;
         flex-direction: column;
         gap: 1em;
+        background: var(--sl-color-gray-4);
+        border: 1px solid var(--sl-color-hairline);
+        border-radius: 0.75rem;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-top: 0;
+        padding: 1rem;
+        margin-top: 0;
+        & caption {
+          font-size: var(--sl-text-body);
+        }
+        & .preview-content {
+          display: block;
+        }
       }
-    }
-    & .preview:only-child {
-      border-top: 1px solid var(--sl-color-hairline);
-      border-radius: 0.75rem;
-    }
-    & .expressive-code pre:not(.preview-content *) {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
+      & .preview:only-child {
+        border-top: 1px solid var(--sl-color-hairline);
+        border-radius: 0.75rem;
+      }
+      & .expressive-code pre:not(.preview-content *) {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
     }
   }
 </style>
