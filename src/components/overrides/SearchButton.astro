@@ -21,12 +21,29 @@ const { variant = 'icon-only', class: className } = Astro.props;
 	{variant === 'bar' && (
 		<>
 			<span class="sl-hidden md:sl-block" aria-hidden="true">{Astro.locals.t('search.label')}</span>
-			<kbd class="sl-hidden md:sl-flex" style="display: none;">
-				<kbd>{Astro.locals.t('search.ctrlKey')}</kbd><kbd>K</kbd>
+			<kbd class="sl-hidden md:sl-flex search-kbd" style="display: none;">
+				<kbd class="platform-key">{Astro.locals.t('search.ctrlKey')}</kbd><kbd>K</kbd>
 			</kbd>
 		</>
 	)}
 </button>
+
+<script is:inline>
+	(() => {
+		const currentBtn = document.currentScript?.previousElementSibling;
+		if (!currentBtn) return;
+		
+		const shortcut = currentBtn.querySelector('.search-kbd');
+		if (!shortcut) return;
+
+		const platformKey = shortcut.querySelector('.platform-key');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			currentBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script>
 
 <style>
 	button {
@@ -59,7 +76,7 @@ const { variant = 'icon-only', class: className } = Astro.props;
 	}
 	button.bar > :last-child {
 		margin-inline-start: auto;
-	}
+    }
 
 	button > kbd {
 		border-radius: 0.25rem;
