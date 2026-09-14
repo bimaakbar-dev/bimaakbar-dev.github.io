@@ -10,8 +10,7 @@ import NavLinks from "../NavLinks.astro";
 import GithubStar from '~/stradocs/components/GithubStar.astro';
 import SearchDialog from '~/stradocs/components/SearchDialog.astro';
 import MobileMenu from "../MobileMenu.astro";
-import MobileSearchToggle from '~/stradocs/components/MobileSearchToggle.astro';
-import searchMobileToggle from './searchMobileToggle.astro';
+import SearchMobileToggle from './searchMobileToggle.astro';
 
 const { isCustomMenu } = Astro.locals.starlightRoute;
 const shouldRenderSearch = config.pagefind || config.components.Search !== './Search.astro';
@@ -25,9 +24,8 @@ const shouldRenderSearch = config.pagefind || config.components.Search !== './Se
     <NavLinks />
   </div>
   <div class="right-group sl-flex">
-    <div class="sl-flex print:hidden">
-   
-      <searchMobileToggle />  
+    <div class="sl-flex print:hidden">   
+      <SearchMobileToggle />  
     </div>
     <div class="controls-group sl-hidden md:sl-flex">
       <ThemeSelect />
@@ -41,7 +39,6 @@ const shouldRenderSearch = config.pagefind || config.components.Search !== './Se
 </div>
 {isCustomMenu ? <MobileMenu /> : <div aria-hidden="true" />}
 { shouldRenderSearch && <Search /> }
-<SearchDialog />
 
 <style>
   .header {
