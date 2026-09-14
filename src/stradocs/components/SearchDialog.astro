@@ -1,0 +1,886 @@
+---
+import { Icon } from "@astrojs/starlight/components";
+
+const t = Astro.locals.t;
+
+const i18n = {
+  placeholder:  t("search.input_label"),
+  clear:        t("search.clear_search"),
+  close:        t("search.cancelLabel"),
+  filtersLabel: t("search.filters_label"),
+  zero:         t("search.zero_results"),
+  one:          t("search.one_result"),
+  many:         t("search.many_results"),
+  alt:          t("search.alt_search"),
+  suggestion:   t("search.search_suggestion"),
+  searching:    t("search.searching"),
+  loadMore:     t("search.load_more"),
+  allChip:      "All",
+};
+---
+
+<site-search>
+  <script type="application/json" id="orama-i18n" set:html={JSON.stringify(i18n)} />
+
+  <dialog>
+    <div class="search-frame">
+      <div class="search-bar">
+        <Icon name="magnifier" size="1rem" class="search-bar-icon" />
+        <input
+          class="search-input"
+          type="text"
+          placeholder={i18n.placeholder}
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button class="search-clear" type="button" aria-label={i18n.clear}>
+          <span class='sl-hidden md:sl-flex'><Icon name="close" size="0.85rem" /></span>
+          <span class="sl-flex md:sl-hidden">{Astro.locals.t('search.cancelLabel')}</span>
+        </button>
+        <button class="search-close" type="button" aria-label={i18n.close}>
+          <kbd class="search-close-esc">ESC</kbd>
+          <span class="search-close-x"><Icon name="close" size="1rem" /></span>
+        </button>
+      </div>
+
+      <div class="search-body">
+        <div class="search-filters" hidden></div>
+        <p class="search-status"></p>
+        <ul class="search-result-list" id="orama-results"></ul>
+        <button class="search-more" type="button" hidden></button>
+      </div>
+    </div>
+  </dialog>
+
+  <template id="tpl-doc">
+    <Icon name="document" size="1rem" />
+  </template>
+</site-search>
+
+<script>
+  import { create, insert, search } from "@orama/orama";
+
+  const PAGE_SIZE = 10;
+  const MAX_HITS = 50;
+
+  const root = document.querySelector("site-search")!;
+  const i18n = JSON.parse(
+    root.querySelector<HTMLScriptElement>("#orama-i18n")!.textContent!
+  ) as Record<string, string>;
+
+  const dialog   = root.querySelector("dialog") as HTMLDialogElement;
+  const bar      = root.querySelector<HTMLElement>(".search-bar")!;
+  const input    = root.querySelector<HTMLInputElement>(".search-input")!;
+  const clearBtn = root.querySelector<HTMLButtonElement>(".search-clear")!;
+  const closeBtn = root.querySelector<HTMLButtonElement>(".search-close")!;
+  const body     = root.querySelector<HTMLElement>(".search-body")!;
+  const filters  = root.querySelector<HTMLElement>(".search-filters")!;
+  const status   = root.querySelector<HTMLElement>(".search-status")!;
+  const list     = root.querySelector<HTMLElement>(".search-result-list")!;
+  const more     = root.querySelector<HTMLButtonElement>(".search-more")!;
+  const ICON     = root.querySelector<HTMLTemplateElement>("#tpl-doc")!.innerHTML;
+
+  let db: any = null;
+  let indexCache: any[] = [];
+  let debounce: number | undefined;
+  let searchId = 0;
+  let activeIndex = -1;
+  let cards: HTMLAnchorElement[] = [];
+
+  let currentTerm = "";
+  let allHits: any[] = [];
+  let altTermUsed: string | null = null;
+  let suggestions: string[] = [];
+  let shownCount = PAGE_SIZE;
+  let activeFilter: string | null = null;
+
+  /* ── Helpers ─────────────────────────────────────────────────── */
+  const escape = (s: string) =>
+    s.replace(/[&<>"']/g, (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]!)
+    );
+
+  const highlight = (text: string, term: string) => {
+    const e = escape(text);
+    if (!term) return e;
+    const safe = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return e.replace(new RegExp(`(${safe})`, "gi"), "<mark>$1</mark>");
+  };
+
+  const fmt = (tmpl: string, term: string, count?: number) =>
+    tmpl
+      .replace("[COUNT]", String(count ?? ""))
+      .replace("[SEARCH_TERM]", `<strong>${escape(term)}</strong>`);
+
+  const fmtAlt = (tmpl: string, term: string, altTerm: string) =>
+    tmpl
+      .replace("[SEARCH_TERM]", `<strong>${escape(term)}</strong>`)
+      .replace("[DIFFERENT_TERM]", `<strong>${escape(altTerm)}</strong>`);
+
+  const sectionOf = (slug: string) => {
+    const seg = (slug || "").split("/").filter(Boolean)[0] || "";
+    return seg.replace(/[-_]/g, " ");
+  };
+
+  /* ── Init ────────────────────────────────────────────────────── */
+  async function init() {
+    if (db) return;
+    try {
+      const data = await fetch("/search-index.json").then((r) => r.json());
+      indexCache = data;
+      db = await create({
+        schema: { title: "string", description: "string", slug: "string", body: "string" },
+      });
+      for (const item of data) await insert(db, item);
+    } catch (err) {
+      console.error("Index load failed:", err);
+    }
+  }
+
+  const open = async () => {
+    dialog.showModal();
+    document.documentElement.setAttribute("data-search-modal-open", "");
+    input.focus();
+    await init();
+  };
+
+  const close = () => {
+    dialog.close();
+    document.documentElement.removeAttribute("data-search-modal-open");
+    input.value = "";
+    currentTerm = "";
+    allHits = [];
+    altTermUsed = null;
+    suggestions = [];
+    shownCount = PAGE_SIZE;
+    activeFilter = null;
+    render();
+  };
+
+  (window as any).openOramaSearch = open;
+  (window as any).closeOramaSearch = close;
+
+  clearBtn.addEventListener("click", () => {
+    input.value = "";
+    currentTerm = "";
+    allHits = [];
+    altTermUsed = null;
+    suggestions = [];
+    shownCount = PAGE_SIZE;
+    activeFilter = null;
+    input.focus();
+    render();
+  });
+
+  closeBtn.addEventListener("click", close);
+
+  dialog.addEventListener("click", (e) => { if (e.target === dialog) close(); });
+
+  /* ── Filters (chips per section) ─────────────────────────────── */
+  const sectionsFromHits = (hits: any[]) => {
+    const set = new Set<string>();
+    for (const h of hits) {
+      const s = sectionOf(h.document.slug);
+      if (s) set.add(s);
+    }
+    return Array.from(set);
+  };
+
+  const applyFilter = (hits: any[]) => {
+    if (!activeFilter) return hits;
+    return hits.filter((h) => sectionOf(h.document.slug) === activeFilter);
+  };
+
+  const renderFilters = (sections: string[]) => {
+    if (sections.length < 2) {
+      filters.hidden = true;
+      filters.innerHTML = "";
+      return;
+    }
+    filters.hidden = false;
+    filters.innerHTML =
+      `<span class="search-filters-label">${escape(i18n.filtersLabel)}</span>` +
+      `<div class="search-filters-chips">` +
+        `<button type="button" class="search-chip${activeFilter === null ? " search-is-active" : ""}" data-section="">${escape(i18n.allChip)}</button>` +
+        sections.map((s) =>
+          `<button type="button" class="search-chip${activeFilter === s ? " search-is-active" : ""}" data-section="${escape(s)}">${escape(s)}</button>`
+        ).join("") +
+      `</div>`;
+  };
+
+  filters.addEventListener("click", (e) => {
+    const chip = (e.target as HTMLElement).closest<HTMLButtonElement>(".search-chip");
+    if (!chip) return;
+    const sec = chip.dataset.section || "";
+    activeFilter = sec || null;
+    shownCount = PAGE_SIZE;
+    render();
+  });
+
+  /* ── Suggestion builder ──────────────────────────────────────── */
+  const buildSuggestions = (term: string) => {
+    const q = term.toLowerCase().trim();
+    if (q.length < 2) return [];
+    const prefix = q.slice(0, Math.min(q.length, 4));
+    const seen = new Set<string>();
+    const out: string[] = [];
+    for (const item of indexCache) {
+      const title = (item.title || "").toLowerCase();
+      if (title.includes(prefix) && !seen.has(item.title)) {
+        seen.add(item.title);
+        out.push(item.title);
+        if (out.length >= 4) break;
+      }
+    }
+    return out;
+  };
+
+  /* ── Render ──────────────────────────────────────────────────── */
+  const syncActive = (scroll = true) => {
+    for (let i = 0; i < cards.length; i++) {
+      cards[i].classList.toggle("search-is-active", i === activeIndex);
+    }
+    if (scroll && activeIndex >= 0) cards[activeIndex].scrollIntoView({ block: "nearest" });
+  };
+
+  const render = () => {
+    // Empty state
+    if (!currentTerm) {
+      body.classList.remove("search-has-content");
+      bar.classList.remove("search-has-content");
+      status.textContent = "";
+      status.className = "search-status";
+      list.innerHTML = "";
+      more.hidden = true;
+      filters.hidden = true;
+      cards = [];
+      activeIndex = -1;
+      return;
+    }
+
+    body.classList.add("search-has-content");
+    bar.classList.add("search-has-content");
+
+    // No results (zero / alt failed / suggestion)
+    if (!allHits.length) {
+      if (suggestions.length) {
+        status.className = "search-status search-status--center";
+        status.innerHTML =
+          `<span>${i18n.suggestion.replace("[SEARCH_TERM]", `<strong>${escape(currentTerm)}</strong>`)}</span>` +
+          `<div class="search-suggestions">` +
+            suggestions.map((s) =>
+              `<button type="button" class="search-suggestion" data-term="${escape(s)}">${escape(s)}</button>`
+            ).join("") +
+          `</div>`;
+      } else {
+        status.className = "search-status search-status--center";
+        status.innerHTML = fmt(i18n.zero, currentTerm);
+      }
+      renderFilters([]);
+      list.innerHTML = "";
+      more.hidden = true;
+      cards = [];
+      activeIndex = -1;
+      return;
+    }
+
+    // Results
+    const filtered = applyFilter(allHits);
+    const total = filtered.length;
+
+    // Status message
+    if (altTermUsed) {
+      status.className = "search-status search-status--notice";
+      status.innerHTML = fmtAlt(i18n.alt, currentTerm, altTermUsed);
+    } else {
+      status.className = "search-status search-status--count";
+      status.innerHTML = fmt(total === 1 ? i18n.one : i18n.many, currentTerm, total);
+    }
+
+    renderFilters(sectionsFromHits(allHits));
+
+    // List
+    const shown = filtered.slice(0, shownCount);
+    const prevActive = activeIndex;
+
+    list.innerHTML = shown
+      .map(
+        (hit, i) => `
+      <li>
+        <a href="${escape(hit.document.slug)}"
+           class="search-item"
+           data-index="${i}">
+          <span class="search-item-icon">${ICON}</span>
+          <span class="search-item-body">
+            <span class="search-item-title">${highlight(hit.document.title, currentTerm)}</span>
+            <span class="search-item-desc">${highlight(hit.document.description || "", currentTerm)}</span>
+          </span>
+        </a>
+      </li>`
+      )
+      .join("");
+
+    cards = Array.from(list.querySelectorAll<HTMLAnchorElement>(".search-item"));
+    activeIndex = prevActive >= 0 && prevActive < cards.length ? prevActive : 0;
+    syncActive(false);
+
+    more.hidden = total <= shownCount;
+    more.textContent = i18n.loadMore;
+  };
+
+  /* ── Suggestion click ───────────────────────────────────────── */
+  status.addEventListener("click", (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>(".search-suggestion");
+    if (!btn) return;
+    const term = btn.dataset.term || "";
+    input.value = term;
+    input.focus();
+    runSearch(term);
+  });
+
+  /* ── Load more ──────────────────────────────────────────────── */
+  more.addEventListener("click", () => {
+    shownCount += PAGE_SIZE;
+    render();
+  });
+
+  /* ── Search ─────────────────────────────────────────────────── */
+  const runSearch = async (term: string) => {
+    const myId = ++searchId;
+
+    if (!db || !term.trim()) {
+      currentTerm = "";
+      allHits = [];
+      altTermUsed = null;
+      suggestions = [];
+      shownCount = PAGE_SIZE;
+      activeFilter = null;
+      render();
+      return;
+    }
+
+    // Searching state
+    currentTerm = term;
+    allHits = [];
+    altTermUsed = null;
+    suggestions = [];
+    activeFilter = null;
+    shownCount = PAGE_SIZE;
+    status.className = "search-status search-status--center";
+    status.innerHTML = fmt(i18n.searching, term);
+    body.classList.add("search-has-content");
+    bar.classList.add("search-has-content");
+    filters.hidden = true;
+    list.innerHTML = "";
+    more.hidden = true;
+
+    try {
+      const result = await search(db, {
+        term,
+        properties: ["title", "description", "body"],
+        limit: MAX_HITS,
+      });
+      if (myId !== searchId) return;
+
+      let hits = result.hits;
+      let altTerm: string | null = null;
+
+      // Alt search: fallback ke kata terpanjang kalau query multi-kata gagal
+      if (!hits.length) {
+        const words = term.trim().split(/\s+/).filter((w) => w.length >= 3);
+        if (words.length > 1) {
+          const candidate = [...words].sort((a, b) => b.length - a.length)[0];
+          if (candidate.toLowerCase() !== term.toLowerCase()) {
+            const altResult = await search(db, {
+              term: candidate,
+              properties: ["title", "description", "body"],
+              limit: MAX_HITS,
+            });
+            if (myId !== searchId) return;
+            if (altResult.hits.length) {
+              hits = altResult.hits;
+              altTerm = candidate;
+            }
+          }
+        }
+      }
+
+      allHits = hits;
+      altTermUsed = altTerm;
+      suggestions = hits.length ? [] : buildSuggestions(term);
+
+      render();
+    } catch (err) {
+      if (myId !== searchId) return;
+      console.error("Search failed:", err);
+      currentTerm = term;
+      allHits = [];
+      altTermUsed = null;
+      suggestions = [];
+      render();
+    }
+  };
+
+  input.addEventListener("input", () => {
+    const term = input.value;
+    window.clearTimeout(debounce);
+    debounce = window.setTimeout(() => runSearch(term), 140);
+  });
+
+  /* ── Keyboard ───────────────────────────────────────────────── */
+  window.addEventListener("keydown", (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+      e.preventDefault();
+      dialog.open ? close() : open();
+      return;
+    }
+    if (!dialog.open) return;
+
+    if (e.key === "Escape") { e.preventDefault(); close(); return; }
+    if (!cards.length) return;
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      activeIndex = (activeIndex + 1) % cards.length;
+      syncActive();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      activeIndex = (activeIndex - 1 + cards.length) % cards.length;
+      syncActive();
+    } else if (e.key === "Enter" && activeIndex >= 0) {
+      e.preventDefault();
+      cards[activeIndex].click();
+    }
+  });
+
+  /* ── Hover delegation ───────────────────────────────────────── */
+  list.addEventListener(
+    "mouseover",
+    (e) => {
+      const el = (e.target as HTMLElement).closest<HTMLAnchorElement>(".search-item");
+      if (!el) return;
+      const idx = Number(el.dataset.index);
+      if (idx === activeIndex) return;
+      activeIndex = idx;
+      syncActive(false);
+    },
+    { passive: true }
+  );
+</script>
+
+<style is:global>
+  [data-search-modal-open] { overflow: hidden; }
+
+  site-search { display: contents; }
+
+  /* ── Dialog ────────────────────────────────────────────────────── */
+  site-search dialog {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    background: var(--sl-color-black);
+    color: var(--sl-color-white);
+    border: 1px solid color-mix(in srgb, var(--sl-color-hairline) 8%, transparent);
+    opacity: 0;
+    transform: translateY(6px) scale(0.99);
+    transition:
+      opacity 0.15s ease,
+      transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+      overlay 0.15s allow-discrete,
+      display 0.15s allow-discrete;
+  }
+  site-search dialog[open] {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  @starting-style {
+    site-search dialog[open] { opacity: 0; transform: translateY(6px) scale(0.99); }
+  }
+  site-search dialog::backdrop {
+    background: color-mix(in srgb, var(--sl-color-backdrop-overlay) 60%, transparent);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+  site-search dialog[open]::backdrop { opacity: 1; }
+
+  /* ── Frame ─────────────────────────────────────────────────────── */
+  .search-frame {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    width: 100%;
+  }
+
+  /* ── Bar ───────────────────────────────────────────────────────── */
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    height: var(--sl-nav-height);
+    flex-shrink: 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+  .search-bar.search-has-content {
+    border-bottom-color: color-mix(in srgb, var(--sl-color-white) 6%, transparent);
+  }
+
+  .search-bar-icon { color: var(--sl-color-gray-3); flex-shrink: 0; }
+
+  .search-input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    color: var(--sl-color-white);
+    font-family: inherit;
+    font-size: 0.9375rem;
+    letter-spacing: -0.005em;
+    outline: none;
+  }
+  .search-input::placeholder { color: var(--sl-color-gray-3); }
+
+  .search-clear {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0.375rem;
+    background: transparent;
+    color: var(--sl-color-gray-3);
+    cursor: pointer;
+    flex-shrink: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.1s ease, background-color 0.1s ease, color 0.1s ease;
+  }
+  .search-input:not(:placeholder-shown) ~ .search-clear {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .search-clear:hover {
+    background: color-mix(in srgb, var(--sl-color-white) 6%, transparent);
+    color: var(--sl-color-gray-1);
+  }
+
+  .search-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.75rem;
+    height: 1.5rem;
+    padding: 0 0.35rem;
+    border: 0;
+    border-radius: 0.375rem;
+    background: transparent;
+    color: var(--sl-color-gray-3);
+    cursor: pointer;
+    flex-shrink: 0;
+    font-family: var(--sl-font-mono);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    transition: background-color 0.1s ease, color 0.1s ease;
+  }
+  .search-close:hover {
+    background: color-mix(in srgb, var(--sl-color-white) 6%, transparent);
+    color: var(--sl-color-gray-1);
+  }
+  .search-close-esc { display: none; }
+  .search-close-x {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0 -0.35rem 0 0;
+  }
+
+  /* ── Body ──────────────────────────────────────────────────────── */
+  .search-body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 0;
+    display: none;
+    overscroll-behavior: contain;
+  }
+  .search-body.search-has-content { display: block; }
+
+  /* ── Filters chips ─────────────────────────────────────────────── */
+  .search-filters {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.65rem 0.85rem 0.35rem;
+    flex-wrap: wrap;
+  }
+  .search-filters[hidden] { display: none; }
+
+  .search-filters-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--sl-color-gray-3);
+    opacity: 0.8;
+    flex-shrink: 0;
+  }
+
+  .search-filters-chips {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+  }
+
+  .search-chip {
+    padding: 0.2rem 0.55rem;
+    border: 1px solid color-mix(in srgb, var(--sl-color-white) 7%, transparent);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--sl-color-gray-3);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    text-transform: capitalize;
+    transition:
+      background-color 0.12s ease,
+      border-color 0.12s ease,
+      color 0.12s ease;
+  }
+  .search-chip:hover {
+    color: var(--sl-color-gray-1);
+    border-color: color-mix(in srgb, var(--sl-color-white) 12%, transparent);
+  }
+  .search-chip.search-is-active {
+    background: color-mix(in srgb, var(--sl-color-accent) 15%, transparent);
+    border-color: color-mix(in srgb, var(--sl-color-accent) 40%, transparent);
+    color: var(--sl-color-accent-high);
+  }
+
+  /* ── Status ────────────────────────────────────────────────────── */
+  .search-status {
+    margin: 0;
+    padding: 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--sl-color-gray-3);
+  }
+  .search-status:empty { display: none; }
+
+  .search-status--center {
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+  }
+  .search-status--count {
+    padding: 0.3rem 0.85rem 0.35rem;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  .search-status--notice {
+    padding: 0.55rem 0.85rem;
+    margin: 0.35rem 0.35rem 0;
+    text-align: left;
+    font-size: 0.75rem;
+    line-height: 1.45;
+    color: var(--sl-color-gray-2);
+    background: color-mix(in srgb, var(--sl-color-accent) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--sl-color-accent) 25%, transparent);
+    border-radius: 0.45rem;
+  }
+
+  .search-status strong {
+    color: var(--sl-color-gray-1);
+    font-weight: 500;
+  }
+
+  /* ── Suggestions ───────────────────────────────────────────────── */
+  .search-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    justify-content: center;
+    margin-top: 0.85rem;
+  }
+
+  .search-suggestion {
+    padding: 0.35rem 0.7rem;
+    border: 1px solid color-mix(in srgb, var(--sl-color-white) 8%, transparent);
+    border-radius: 0.5rem;
+    background: transparent;
+    color: var(--sl-color-gray-2);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    transition:
+      background-color 0.12s ease,
+      border-color 0.12s ease,
+      color 0.12s ease;
+  }
+  .search-suggestion:hover {
+    background: color-mix(in srgb, var(--sl-color-white) 5%, transparent);
+    border-color: color-mix(in srgb, var(--sl-color-white) 14%, transparent);
+    color: var(--sl-color-white);
+  }
+
+  /* ── List ──────────────────────────────────────────────────────── */
+  .search-result-list {
+    list-style: none;
+    margin: 0;
+    padding: 0 0.35rem;
+  }
+  .search-result-list:empty { padding: 0; }
+
+  .search-item {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+  }
+  .search-item.search-is-active {
+    background: color-mix(in srgb, var(--sl-color-white) 5%, transparent);
+  }
+
+  .search-item-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.15rem;
+    height: 1.15rem;
+    flex-shrink: 0;
+    color: var(--sl-color-gray-3);
+  }
+  .search-item.search-is-active .search-item-icon { color: var(--sl-color-gray-1); }
+
+  .search-item-body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .search-item-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--sl-color-white);
+    letter-spacing: -0.005em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .search-item-desc {
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--sl-color-gray-3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .search-item mark {
+    background: transparent;
+    color: var(--sl-color-accent-high);
+    font-weight: 600;
+    padding: 0;
+  }
+
+  /* ── Load more ─────────────────────────────────────────────────── */
+  .search-more {
+    display: block;
+    width: calc(100% - 1rem);
+    margin: 0.4rem 0.5rem 0.6rem;
+    padding: 0.55rem 0.75rem;
+    background: transparent;
+    border: 1px solid color-mix(in srgb, var(--sl-color-white) 7%, transparent);
+    border-radius: 0.5rem;
+    color: var(--sl-color-gray-3);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    transition:
+      background-color 0.12s ease,
+      border-color 0.12s ease,
+      color 0.12s ease;
+  }
+  .search-more:hover {
+    background: color-mix(in srgb, var(--sl-color-white) 4%, transparent);
+    border-color: color-mix(in srgb, var(--sl-color-white) 12%, transparent);
+    color: var(--sl-color-gray-1);
+  }
+  .search-more[hidden] { display: none; }
+
+  /* ── Desktop ───────────────────────────────────────────────────── */
+  @media (min-width: 50rem) {
+    site-search dialog {
+      margin: 8vh auto auto;
+      border-radius: 0.75rem;
+      width: 100%;
+      max-width: 36rem;
+      height: max-content;
+      max-height: 70vh;
+      box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.08),
+        0 20px 48px -12px rgba(0, 0, 0, 0.5);
+    }
+    .search-close-esc { display: inline-flex; }
+    .search-close-x { display: none; }
+    .search-bar { height: 3rem; }
+  }
+
+  /* ── Mobile: fullscreen ────────────────────────────────────────── */
+  @media (max-width: 50rem) {
+    site-search dialog {
+      border: 0;
+      border-radius: 0;
+      height: 100dvh;
+      max-height: 100dvh;
+    }
+    site-search dialog::backdrop {
+      background: var(--sl-color-bg);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    .search-bar { padding: 0 0.75rem; }
+    .search-result-list {
+      padding: 0 0.35rem max(0.5rem, env(safe-area-inset-bottom));
+    }
+    .search-item { padding: 0.7rem 0.75rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    site-search dialog,
+    site-search dialog::backdrop,
+    .search-bar,
+    .search-clear,
+    .search-close,
+    .search-more,
+    .search-chip,
+    .search-suggestion { transition-duration: 0.01ms; }
+  }
+</style>
