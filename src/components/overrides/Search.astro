@@ -20,9 +20,6 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
   <dialog aria-label={Astro.locals.t('search.label')}>
     <div class="sd-frame">
       <div class="sd-bar">
-        <svg class="sd-bar-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-        </svg>
         <div id="starlight__search" />
         <button class="sd-close" data-close-modal aria-label={Astro.locals.t('search.cancelLabel')}>
           <span class="sd-close-esc">ESC</span>
@@ -51,12 +48,11 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
       };
 
       const openModal = () => {
-  		dialog.showModal();
-  document.body.toggleAttribute('data-search-modal-open', true);
-  this.querySelector<HTMLInputElement>('input')?.focus();
-  // Tunda sampai event click selesai bubbling
-  setTimeout(() => window.addEventListener('click', onClick), 0);
-};
+        dialog.showModal();
+        document.body.toggleAttribute('data-search-modal-open', true);
+        this.querySelector<HTMLInputElement>('input')?.focus();
+        setTimeout(() => window.addEventListener('click', onClick), 0);
+      };
 
       const closeModal = () => {
         dialog.close();
@@ -192,19 +188,12 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
       flex-direction: column;
     }
 
-    /* ── Bar ─────────────────────────────────────────────────── */
+    /* ── Bar (input + close) ─────────────────────────────────── */
     .sd-bar {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0 0.75rem 0 1rem;
-      height: 3.125rem;
-      flex-shrink: 0;
-      border-bottom: 1px solid color-mix(in srgb, var(--sl-color-white) 6%, transparent);
-    }
-
-    .sd-bar-icon {
-      color: color-mix(in srgb, var(--sl-color-white) 28%, transparent);
+      padding: 0 0.75rem 0 0;
       flex-shrink: 0;
     }
 
@@ -273,8 +262,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
     #starlight__search {
       flex: 1;
       min-height: 0;
-      overflow-y: auto;
-      overscroll-behavior: contain;
+      width: 100%;
 
       --pagefind-ui-scale: 0.875;
       --pagefind-ui-primary: var(--sl-color-accent-high);
@@ -287,16 +275,70 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
       --pagefind-ui-tag: color-mix(in srgb, var(--sl-color-white) 6%, transparent);
     }
 
-    /* Sembunyikan input bawaan Pagefind — kita pakai input di .sd-bar */
-    #starlight__search .pagefind-ui__form { padding: 0; }
-    #starlight__search .pagefind-ui__search-input  { display: none !important; }
-    #starlight__search .pagefind-ui__form::before  { display: none; }
-    #starlight__search .pagefind-ui__search-clear  { display: none !important; }
+    /* Form wrapper — buang padding bawaan */
+    #starlight__search .pagefind-ui__form {
+      padding: 0;
+    }
 
-    /* Results */
+    /* Input — styling ulang jadi satu dengan bar */
+    #starlight__search .pagefind-ui__search-input {
+      height: 3.125rem !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      border-bottom: 1px solid color-mix(in srgb, var(--sl-color-white) 6%, transparent) !important;
+      background: transparent !important;
+      color: var(--sl-color-white) !important;
+      font-size: 0.9375rem !important;
+      font-weight: 400 !important;
+      letter-spacing: -0.005em !important;
+      padding-inline-start: 2.75rem !important;
+      box-shadow: none !important;
+      outline: none !important;
+      width: 100% !important;
+    }
+    #starlight__search .pagefind-ui__search-input:focus {
+      border-color: color-mix(in srgb, var(--sl-color-white) 10%, transparent) !important;
+      box-shadow: none !important;
+    }
+    #starlight__search .pagefind-ui__search-input::placeholder {
+      color: color-mix(in srgb, var(--sl-color-white) 25%, transparent) !important;
+    }
+
+    /* Icon kaca pembesar bawaan pagefind */
+    #starlight__search .pagefind-ui__form::before {
+      opacity: 0.35 !important;
+      top: 0 !important;
+      height: 3.125rem !important;
+    }
+
+    /* Clear button */
+    #starlight__search .pagefind-ui__search-clear {
+      top: 0 !important;
+      height: 3.125rem !important;
+      right: 0.75rem !important;
+      width: 2rem !important;
+      background: transparent !important;
+      opacity: 0.4;
+      transition: opacity 0.12s ease !important;
+    }
+    #starlight__search .pagefind-ui__search-clear:hover { opacity: 0.8; }
+    #starlight__search .pagefind-ui__search-clear::before {
+      background-color: var(--sl-color-white) !important;
+    }
+
+    /* Results scroll area */
     #starlight__search .pagefind-ui__drawer {
       padding: 0.35rem 0.5rem 0.75rem;
+      max-height: calc(72vh - 3.125rem);
+      overflow-y: auto;
+      overscroll-behavior: contain;
     }
+    @media (max-width: 50rem) {
+      #starlight__search .pagefind-ui__drawer {
+        max-height: calc(100dvh - 3.125rem);
+      }
+    }
+
     #starlight__search .pagefind-ui__results > * + * { margin-top: 2px; }
     #starlight__search .pagefind-ui__result { border: 0; padding: 0; }
 
@@ -316,7 +358,6 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
       outline: 1px solid color-mix(in srgb, var(--sl-color-accent) 30%, transparent);
     }
 
-    /* Padding result */
     #starlight__search .pagefind-ui__result-inner > .pagefind-ui__result-title {
       padding: 0.6rem 1rem 0.6rem 2.5rem;
     }
@@ -391,7 +432,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
       color: color-mix(in srgb, var(--sl-color-white) 30%, transparent);
     }
 
-    /* Inner structure reset */
+    /* Inner structure */
     #starlight__search .pagefind-ui__result-thumb,
     #starlight__search .pagefind-ui__result-inner  { margin-top: 0; }
     #starlight__search .pagefind-ui__result-inner  { align-items: stretch; gap: 1px; }
