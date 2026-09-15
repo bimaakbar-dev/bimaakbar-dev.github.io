@@ -15,9 +15,9 @@ const {
 } = Astro.props;
 
 const avatars = import.meta.glob<{ default: ImageMetadata }>(
-  "../assets/images/testimonials/*.jpg",
+  "../../assets/images/testimonials/*.jpg",
 );
-const avatar = avatars[`../assets/images/testimonials/${handle}.jpg`];
+const avatar = avatars[`../../assets/images/testimonials/${handle}.jpg`];
 if (!avatar) {
   throw new Error(`Could not resolve testimonial avatar for @${handle}`);
 }
