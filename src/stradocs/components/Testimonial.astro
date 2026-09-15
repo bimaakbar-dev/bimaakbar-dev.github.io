@@ -33,7 +33,6 @@ const src = (await avatar()).default;
     <div class="cite sl-flex">
       <p class="name">{name}</p>
       { cite && 
-        <span class="divider">|</span>
         <a href={cite}>@{handle}</a>
       }
     </div>
@@ -45,7 +44,6 @@ const src = (await avatar()).default;
     flex-direction: column;
     position: relative;
     gap: 0.5em;
-    border-radius: 0.5rem;
     margin-block: 1.5rem;
     list-style: none;
     padding: 0;
@@ -56,6 +54,12 @@ const src = (await avatar()).default;
       font-size: var(--sl-text-h3);
       line-height: var(--sl-line-height-headings);
       font-weight: 400;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      border-bottom-left-radius: none;
+      border: 1px solid var(--sl-color-gray-hairline);
+      background: var(--sl-color-gray-6);
+      
       & > :global(* + *) {
         margin-top: 0.75em;
       }
@@ -67,11 +71,12 @@ const src = (await avatar()).default;
         outline: 1px solid var(--sl-color-accent-low);
         outline-offset: -1px;
         border-radius: 99rem;
-        width: 1.333em;
-        height: 1.333em;
+        width: 2rem;
+        height: 2rem;
         object-fit: cover;
       }
       & .cite {
+        flex-direction: column;
         align-items: center;
         gap: 0.5rem;
         & .name {
@@ -80,9 +85,6 @@ const src = (await avatar()).default;
           color: var(--sl-color-gray-2);
           line-height: var(--sl-line-height-headings);
         }
-        & .divider {
-          color: var(--sl-color-gray-4);
-        } 
         & a {
           font-size: var(--sl-text-xs);
           text-decoration: none;
