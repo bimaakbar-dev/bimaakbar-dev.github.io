@@ -21,13 +21,13 @@ const blogPosts = allPosts
 ---
 
 {
-  blogPosts.map((post) => {
+  blogPosts.map((post, index) => {
     const { data } = post;
     const { title, description, pubDate, heroImage } = data;
     const slug = post.id.slice(blogPrefix.length);
     const href = `${blogBasePath}/${slug}`;
     return (
-      <li class="post-list not-content">
+      <li class="not-content">
         <article class="post-card">
           <header>
             <FormattedDate class="date" date={pubDate} />
@@ -38,20 +38,19 @@ const blogPosts = allPosts
                 width={766}
                 height={328}
                 src={heroImage}
-                class="card-image"
                 alt={title}
-                loading="eager"
+                loading={index > 3 ? "eager" : "lazy"}
                 decoding="async"
               />
             )}
           </div>
           <div class="content">
-            <h3 class="title">
-              <a href={href} class="post-card-link">
+            <h3>
+              <a href={href}>
                 {title}
               </a>
             </h3>
-            {description && <p class="description">{description}</p>}
+            {description && <p>{description}</p>}
           </div>
         </article>
       </li>
@@ -60,40 +59,57 @@ const blogPosts = allPosts
 }
 
 <style>
-  .post-list {
+  li {
     width: 100%;
     list-style: none;
     padding: 0;
+
     & .post-card {
       position: relative;
       display: flex;
       flex-direction: column;
       height: 100%;
+
       padding: 1.25em;
+
       border-radius: 0.75rem;
       border: 1px solid var(--sl-color-gray-5);
       background: var(--sl-color-gray-6);
       outline: 1px solid transparent;
-      transition: transform 0.3s ease-out;
-      & .date {
+
+      @media (prefers-reduced-motion: no-preference) {
+        transition: transform 0.3s ease-out;
+      }
+
+      &:hover {
+        @media (prefers-reduced-motion: no-preference) {
+          transform: scale(1.03);
+        }
+      }
+
+      & header .date {
         font-family: var(--__sl-font-mono);
         color: var(--sl-color-gray-2);
       }
+
       & .cover {
         margin: 1em -1.25em;
+
         & img {
           width: 100%;
           height: auto;
           object-fit: cover;
-          aspect-ratio: 16/9;
         }
       }
+
       & .content {
         display: flex;
         flex-direction: column;
         flex: 1;
+
         margin-top: 1.25em;
         gap: 0.75em;
+
         & h3 {
           font-size: var(--sl-text-h4);
           font-weight: 600;
@@ -101,6 +117,7 @@ const blogPosts = allPosts
           text-align: start;
           color: var(--sl-color-white);
           margin: 0;
+
           & a {
             font-size: inherit;
             line-height: inherit;
@@ -109,13 +126,15 @@ const blogPosts = allPosts
             text-decoration: none;
             outline: none;
             -webkit-tap-highlight-color: transparent;
-          }
-          & a::after {
-            content: '';
-            position: absolute;
-            inset: 0;
+
+            &::after {
+              content: '';
+              position: absolute;
+              inset: 0;
+            }
           }
         }
+
         & p {
           font-size: var(--sl-text-body);
           line-height: var(--sl-line-height);
@@ -125,23 +144,18 @@ const blogPosts = allPosts
         }
       }
     }
-    & .post-card:focus-within {
+
+    &:focus-within {
       outline-color: var(--sl-color-accent-high);
     }
   }
-  
-  :global([data-theme='light']) .post-card {
+
+  [data-theme='light'] .post-card {
     background: var(--sl-color-gray-7);
   }
-  
-  @media (hover: hover) {
-    .post-card:hover {
-      transform: scale(1.03);
-    }
-  }
-  
+
   @media (min-width: 50rem) {
-    .post-list {
+    li {
       & .post-card {
         & .content {
           display: grid;
@@ -149,6 +163,7 @@ const blogPosts = allPosts
           gap: 1em 1.5em;
           align-items: start;
           margin-top: 0;
+
           & h3 {
             font-size: var(--sl-text-h3);
           }
