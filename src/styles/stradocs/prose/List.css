@@ -74,27 +74,25 @@
     margin-block: 2rem;
     font-size: var(--sl-text-sm);
     line-height: inherit;
-    & > dt:first-of-type + dd {
-      border-top: 1px solid var(--sl-color-hairline);
-    }
-
     & > dt:not(:where(.not-content *)) {
       padding-block: 1rem;
       padding-inline: 0;
       margin: 0;
       color: var(--sl-color-white);
       font-weight: 400;
+      font-size: var(--sl-text-body);
       white-space: nowrap;
-
-      &:has(code) {
+      &:first-of-type + dd {
+        border-top: 1px solid var(--sl-color-hairline);
+      }
+      & code {
         font-size: var(--sl-text-body);
         padding-inline: 0.25em;
       }
-      &:has(h3) code {
+      & :is(h2, h3, h4, h5, h6) code {
         font-size: var(--sl-text-body);
       }
     }
-
     & > dd:not(:where(.not-content *)) {
       margin: 0;
       padding-block: 1rem;
@@ -103,11 +101,9 @@
       border-top: 1px solid var(--sl-color-hairline);
       word-break: break-word;
       overflow-wrap: break-word;
-
       & p:not(:where(.not-content *)) {
         margin: 0;
       }
-
       &:has(code) {
         font-size: var(--sl-text-code-sm);
         padding-inline: 0.25em;
@@ -120,11 +116,11 @@
   .sl-markdown-content {
     & dl:not(:where(.not-content *)) {
       grid-template-columns: minmax(12rem, max-content) 1fr;
-      & > dt:first-of-type + dd:not(:where(.not-content *)) {
-        border-top: none;
-      }
       & > dt:not(:where(.not-content *)) {
         border-top: 0;
+        &:first-of-type + dd:not(:where(.not-content *)) {
+          border-top: none;
+        }
       }
     }
   }

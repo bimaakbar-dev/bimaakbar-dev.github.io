@@ -5,11 +5,11 @@ import SocialIcons from "./SocialIcons.astro";
 ---
 
 <div class="mobile-preferences sl-flex">
-	<div class="sl-flex footer-select">
+	<div class="footer-select sl-flex">
 		<ThemeSelect />
 		<LanguageSelect />
 	</div>
-	<div class="social-icons">
+	<div class="social-icons sl-flex">
         <SocialIcons />
     </div>
 </div>
@@ -29,7 +29,6 @@ import SocialIcons from "./SocialIcons.astro";
 	  gap: 0.75em;
 	}
     & .social-icons {
-	  display: flex;
 	  margin-inline-start: auto;
 	  gap: var(--sl-nav-gap);
 	  align-items: center;

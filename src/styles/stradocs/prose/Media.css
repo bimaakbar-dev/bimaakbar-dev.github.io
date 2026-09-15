@@ -104,6 +104,7 @@
 				max-width: 100%;
 				height: auto;
     		}
+
     		&[aria-label]::after {
 				content: attr(aria-label);
 				font-size: var(--sl-text-sm);

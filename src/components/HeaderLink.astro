@@ -33,7 +33,7 @@ const isActive = (): boolean => {
 };
 
 const active = isActive();
-const linkClass = [className, "nav-link", active && "nav-link--active"]
+const linkClass = [active && "is-active"]
   .filter(Boolean)
   .join(" ");
 ---
@@ -48,7 +48,7 @@ const linkClass = [className, "nav-link", active && "nav-link--active"]
 </a>
 
 <style>
-  .nav-link {
+  a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -61,35 +61,26 @@ const linkClass = [className, "nav-link", active && "nav-link--active"]
     line-height: 1;
     padding: 0.5em 0.875em;
     border-radius: 999px;
-    
-  }
-
-  .nav-link--active {
-    color: var(--sl-color-accent-high);
-  }
-
-  :global([data-theme="light"]) .nav-link {
-    color: var(--sl-color-gray-2);
-  }
-  :global([data-theme="light"]) .nav-link--active {
-    background-color: var(--sl-color-gray-6);
-    color: var(--sl-color-accent-high);
-  }
-
-  @media (hover: hover) {
-    .nav-link:hover {
+    &:hover {
       color: var(--sl-color-white);
     }
-    .nav-link--active:hover {
-      filter: brightness(1.15);
+    &.is-active {
+      color: var(--sl-color-accent-high);
+      &:hover {
+        filter: brightness(1.15);
+      }
     }
   }
-
+  [data-theme="light"] a {
+    color: var(--sl-color-gray-2);
+    &.is-active {
+      color: var(--sl-color-accent-high);
+    }
+  }
   @media (max-width: 50rem) {
-    .nav-link {
-      padding: 0.375em 0.625em;
-      font-size: var(--sl-text-xs);
-      justify-content: start;
+    a {
+      padding: 0;
+      font-size: var(--sl-text-base);
     }
   }
 </style>

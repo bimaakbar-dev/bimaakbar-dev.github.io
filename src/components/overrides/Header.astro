@@ -1,19 +1,22 @@
 ---
 // src/components/overrides/Header.astro
 import config from 'virtual:starlight/user-config';
-import LanguageSelect from "@astrojs/starlight/components/LanguageSelect.astro";
-import Search from "./Search.astro";
 import SiteTitle from "@astrojs/starlight/components/SiteTitle.astro";
-import SocialIcons from "./SocialIcons.astro";
-import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
-import NavLinks from "../NavLinks.astro";
-import GithubStar from '~/stradocs/components/GithubStar.astro';
-import SearchDialog from '~/stradocs/components/SearchDialog.astro';
-import MobileMenu from "../MobileMenu.astro";
-import SearchButton from './SearchButton.astro';
 
-const { isCustomMenu } = Astro.locals.starlightRoute;
+import NavLinks from "../NavLinks.astro";
+import SearchToggle from '../SearchToggle.astro';
+
+import Search from "./Search.astro";
+import LanguageSelect from "@astrojs/starlight/components/LanguageSelect.astro";
+import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
+import SocialIcons from "./SocialIcons.astro";
+
+import GithubStar from '~/stradocs/components/GithubStar.astro';
+import MobileMenu from "../MobileMenu.astro";
+
 const shouldRenderSearch = config.pagefind || config.components.Search !== './Search.astro';
+const { isCustomMenu } = Astro.locals.starlightRoute;
+const GithubRepo = 'bimaakbar-dev/bimaakbar-dev.github.io';
 ---
 
 <div class="header" data-is-custom-menu={isCustomMenu ? "true" : "false"}>
@@ -24,8 +27,8 @@ const shouldRenderSearch = config.pagefind || config.components.Search !== './Se
     <NavLinks />
   </div>
   <div class="right-group sl-flex">
-    <div class="sl-flex md:sl-hidden print:hidden">   
-      <SearchButton variant='icon-only' />  
+    <div class="sl-flex md:sl-hidden print:hidden">
+      <SearchToggle variant="icon-only" />
     </div>
     <div class="controls-group sl-hidden md:sl-flex">
       <ThemeSelect />
@@ -33,13 +36,13 @@ const shouldRenderSearch = config.pagefind || config.components.Search !== './Se
       <div class="social-icons sl-flex">
         <SocialIcons />
       </div>
-      <GithubStar repo="bimaakbar-dev/bimaakbar-dev" />
+      <GithubStar repo={GithubRepo} />
     </div>
   </div>
 </div>
-{isCustomMenu ? <MobileMenu /> : <div aria-hidden="true" />}
-{ shouldRenderSearch && <Search /> }
 
+{isCustomMenu ? <MobileMenu /> : <div class="sr-only" aria-hidden="true" />}
+{shouldRenderSearch && <Search />}
 
 <style>
   .header {

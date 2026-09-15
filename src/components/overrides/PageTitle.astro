@@ -6,7 +6,11 @@ import FormattedDate from "../FormattedDate.astro";
 import DocsActions from '../DocsActions.astro'
 import Breadcrumb from "../Breadcrumb.astro";
 
-const { entry, docsBasePath, isBlogPost } = Astro.locals.starlightRoute
+const { 
+	entry,
+	docsBasePath, 
+	isBlogPost 
+} = Astro.locals.starlightRoute
 
 const {
   title,
@@ -21,71 +25,65 @@ const breadcrumbItems = [
   { label: entry.data.title, href: `/${entry.id}` },
 ];
 
-const rt = getReadingTime(entry.body ?? '');
+const readingTime = getReadingTime(entry.body ?? '');
 ---
 
-{
-  isBlogPost ? (
-    <div class="hero-image not-content">
-      {heroImage && (
-        <Image
-          width={1500}
-          height={643}
-          src={heroImage}
-          class="sl-block"
-          alt={title}
-          loading="eager"
-          decoding="async"
-        />
-      )}
-    </div>
-    <header class="blog-post-header">
-      {pubDate && <FormattedDate date={pubDate} class="post-date" />}
-
-      <h1 id={PAGE_TITLE_ID} class="post-title" set:html={title} />
-
-      {author && (
-        <div class="post-author sl-flex">
-          <span>{Astro.locals.t("blog.PostAuthor")}</span>
-          <ul class="sl-flex not-content">
-            {author.map((a) => (
-              <li class="sl-flex">
-                {a.avatar && (
-                  <Image
-                    src={a.avatar}
-                    width={48}
-                    height={48}
-                    alt={a.name || title}
-                    loading="eager"
-                    decoding="async"
-                    aria-hidden="true"
-                  />
-                )}
-                <span>{a.name}</span>
-              </li>
-            ))}
-          </ul>
-
-          {rt && <p class="post-reading-time">{rt.text} {Astro.locals.t("plugin.readingTime")}</p>}
-          
-        </div>
-      )}
-    </header>
-  ) : (
-    <div class="sl-flex page-title">
-      <Breadcrumb items={breadcrumbItems} />
-      <h1 id={PAGE_TITLE_ID} class="title" set:html={title} />
-      {description && (
-        <p class="description" set:html={description} />
-      )}
-      <div class="page-actions sl-flex">
-        <DocsActions />
+{ isBlogPost ? (
+  <div class="hero-image not-content">
+    {heroImage && (
+      <Image
+        width={1500}
+        height={643}
+        src={heroImage}
+        class="sl-block"
+        alt={title}
+        loading="eager"
+        decoding="async"
+      />
+    )}
+  </div>
+  <header class="blog-post-header">
+    <div class="post-meta sl-flex">
+			{pubDate && <FormattedDate date={pubDate} class="post-date" />}
+			{readingTime && <p class="post-reading-time">{readingTime.text} {Astro.locals.t("plugin.readingTime")}</p>}
+		</div>
+		<h1 id={PAGE_TITLE_ID} class="post-title" set:html={title} />
+    {author && (
+      <div class="post-author sl-flex">
+        <span>{Astro.locals.t("blog.PostAuthor")}</span>
+        <ul class="sl-flex not-content">
+          {author.map((a) => (
+            <li class="sl-flex">
+              {a.avatar && (
+                <Image
+                  src={a.avatar}
+                  width={48}
+                  height={48}
+                  alt={a.name || title}
+                  loading="eager"
+                  decoding="async"
+                  aria-hidden="true"
+                />
+              )}
+              <span>{a.name}</span>
+            </li>
+          ))}
+        </ul>
       </div>
-    </div>
-  )
-}
+    )}
+	</header>
+	) : (
+  <header class="page-title sl-flex">
+		<Breadcrumb items={breadcrumbItems} />
+		<h1 id={PAGE_TITLE_ID} class="title" set:html={title} />
+		{description && <p class="description" set:html={description} />}
+		<div class="page-actions sl-flex">
+			<DocsActions />
+		</div>
+	</header>
+)}
 
-<style define:vars={{isBlogPost}}>
+<style>
   .hero-image {
     margin-inline: auto;
     width: 100%;
@@ -103,6 +101,7 @@ const rt = getReadingTime(entry.body ?? '');
     position: relative;
     flex-direction: column;
     margin-inline: auto;
+    flex: 1;
     width: 100%;
     text-align: center;
     padding: 1rem 1.5rem;
@@ -110,6 +109,28 @@ const rt = getReadingTime(entry.body ?? '');
     z-index: 10;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
+    & :where(.post-meta .post-date, .post-meta .post-reading-time, .post-author,) {
+      font-size: var(--sl-text-body);
+      font-weight: 500;
+      line-height: var(--sl-line-height);
+      color: var(--sl-color-gray-2);
+      font-family: var(--font-firaCode);
+    }
+    & .post-meta {
+      justify-items: center;
+      margin-inline: auto;
+      width: max-content;
+      align-items: center;
+      gap: 0.5em;
+      & .post-reading-time {
+        white-space: nowrap;
+        &::before {
+          content: '•';
+          padding-inline-end: 0.5em;
+          color: var(--sl-color-gray-3);
+        }
+      }
+    }
     & .post-title {
       font-size: var(--sl-text-h2);
       font-weight: 600;
@@ -117,13 +138,6 @@ const rt = getReadingTime(entry.body ?? '');
       color: var(--sl-color-white);
       text-align: center;
       margin-block: 0.5em;
-    }
-    & :where(.post-date, .post-author, .post-reading-time) {
-      font-size: var(--sl-text-body);
-      font-weight: 500;
-      line-height: var(--sl-line-height);
-      color: var(--sl-color-gray-2);
-      font-family: var(--__sl-font-mono);
     }
     & .post-author {
       flex-wrap: wrap;
@@ -137,28 +151,20 @@ const rt = getReadingTime(entry.body ?? '');
         gap: 1em 0.75em;
         list-style: none;
         padding: 0;
-        margin: 0
-      }
-      & ul li {
-        align-items: center;
-        gap: 0.5em;
-      }
-      & ul li > img {
         margin: 0;
-        display: inline-block;
-        border-radius: 99rem;
-        width: 1.5em;
-        height: 1.5em;
-        box-shadow: inset 0 0 0 1px var(--sl-color-hairline-shade);
+        & li {
+          align-items: center;
+          gap: 0.5em;
+          & > img {
+            margin: 0;
+            display: inline-block;
+            border-radius: 99rem;
+            width: 1.5em;
+            height: 1.5em;
+            box-shadow: inset 0 0 0 1px var(--sl-color-hairline-shade);
+          }
+        }
       }
-    }
-    & .post-reading-time {
-      white-space: nowrap;
-    }
-    & .post-reading-time::before {
-      content: '•';
-      padding-inline-end: 0.5em;
-      color: var(--sl-color-gray-3);
     }
   }
   .page-title {

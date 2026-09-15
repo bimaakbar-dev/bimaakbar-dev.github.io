@@ -11,40 +11,40 @@ import { Icon } from '@astrojs/starlight/components';
 <style>
   scroll-to-top {
     display: block;
+    & button {
+      position: fixed;
+      bottom: calc(env(--safe-area-inset-bottom, 1.5rem));
+      right: 1.5rem;
+      z-index: var(--sl-z-index-menu);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5em;
+      height: 2.5em;
+      border-radius: 99rem;
+      background-color: var(--sl-color-gray-6);
+      color: var(--sl-color-white);
+      border: 1px solid var(--sl-color-gray-5);
+      box-shadow: var(--sl-shadow-md);
+      opacity: 0;
+      transform: translateY(1rem);
+      pointer-events: none;
+      cursor: pointer;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      & svg {
+        flex-shrink: 0;
+      }
+      &.visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      &:active {
+        transform: scale(0.92);
+      }
+    }
   }
-
-  .scroll-top-btn {
-    position: fixed;
-    bottom: calc(env(--safe-area-inset-bottom, 1.5rem));
-    right: 1.5rem;
-    z-index: var(--sl-z-index-menu);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.5em;
-    height: 2.5em;
-    border-radius: 99rem;
-    background-color: var(--sl-color-gray-6);
-    color: var(--sl-color-white);
-    border: 1px solid var(--sl-color-gray-5);
-    box-shadow: var(--sl-shadow-md);
-    opacity: 0;
-    transform: translateY(1rem);
-    pointer-events: none;
-    cursor: pointer;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-
-  .scroll-top-btn.visible {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-
-  .scroll-top-btn:active {
-    transform: scale(0.92);
-  }
-  [data-theme='light'] .scroll-top-btn {
+  [data-theme='light'] scroll-to-top button {
     background-color: var(--sl-color-gray-7);
   }
   @media (min-width: 50em) {
@@ -58,7 +58,7 @@ import { Icon } from '@astrojs/starlight/components';
   class ScrollToTop extends HTMLElement {
     constructor() {
       super();
-      const button = this.querySelector('.scroll-top-btn');
+      const button = this.querySelector('button');
       if (!button) return;
 
       const toggleVisibility = () => {

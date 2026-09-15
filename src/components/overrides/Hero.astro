@@ -20,34 +20,32 @@ const actions: any[] = hero?.actions || [];
 const customHero = isBlogIndex;
 ---
 
-{
-  customHero? (
-    <div class="custom-hero not-content">
-      <div class="hero-line" />
-      <div class="hero-grid" />
-      <header class="sl-flex">
-        <h1 id={PAGE_TITLE_ID} set:html={hero?.title || title} />
-        {hero?.tagline && <p set:html={hero.tagline} />}
-        {actions.length > 0 && (
-          <div class="sl-flex hero-actions">
-            {actions.map((action: any) => {
-              const { text, link: href, variant, icon, attrs = {} } = action;
-              const { class: className,...restAttrs } = attrs;
-              const iconName = typeof icon === 'string'? icon : icon?.name;
-              return (
-                <LinkButton href={href} variant={variant} icon={iconName} class:list={[className]} {...restAttrs}>
-                  {text}
-                </LinkButton>
-              );
-            })}
-          </div>
-        )}
-      </header>
-    </div>
-  ) : (
-    <Default />
-  )
-}
+{ customHero? (
+	<div class="custom-hero not-content">
+		<div class="hero-line" />
+		<div class="hero-grid" />
+		<header class="sl-flex">
+			<h1 id={PAGE_TITLE_ID} set:html={hero?.title || title} />
+			{hero?.tagline && <p set:html={hero.tagline} />}
+			{actions.length > 0 && (
+				<div class="sl-flex hero-actions">
+					{actions.map((action: any) => {
+						const { text, link: href, variant, icon, attrs = {} } = action;
+						const { class: className,...restAttrs } = attrs;
+						const iconName = typeof icon === 'string'? icon : icon?.name;
+						return (
+							<LinkButton href={href} variant={variant} icon={iconName} class:list={[className]} {...restAttrs}>
+								{text}
+							</LinkButton>
+						);
+					})}
+				</div>
+			)}
+		</header>
+	</div>
+	) : (
+	<Default />
+)}
 
 <style>
   .custom-hero {
@@ -96,32 +94,35 @@ const customHero = isBlogIndex;
       text-align: center;
       z-index: 20;
       gap: 1.5em;
-    }
-    & h1 {
-      font-weight: 600;
-      line-height: var(--sl-line-height-headings);
-      color: var(--sl-color-white);
       margin-inline: auto;
-      max-width: 64rem;
-      font-size: var(--sl-text-h3);
-    }
-    & p {
-      font-size: var(--sl-text-body);
-      font-weight: 300;
-      line-height: var(--sl-line-height);
-      color: var(--sl-color-gray-2);
-    }
-    & .hero-actions {
-      gap: 1em 2em;
-      flex-wrap: wrap;
-      justify-content: center;
+      padding-inline: var(--sl-content-pad-x);
+      width: 100%;
+      & h1 {
+        font-weight: 600;
+        line-height: var(--sl-line-height-headings);
+        color: var(--sl-color-white);
+        margin-inline: auto;
+        max-width: 64rem;
+        font-size: var(--sl-text-h3);
+      }
+      & p {
+        font-size: var(--sl-text-body);
+        font-weight: 300;
+        line-height: var(--sl-line-height);
+        color: var(--sl-color-gray-2);
+      }
+      & .hero-actions {
+        gap: 1em 2em;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
     }
   } 
 
   @media (min-width: 40rem) {
    .custom-hero {
       padding-block: 3.5rem;
-      & h1 {
+      & header h1 {
         font-size: var(--sl-text-h2);
       }
     }
@@ -136,7 +137,7 @@ const customHero = isBlogIndex;
   @media (min-width: 64rem) {
    .custom-hero {
       padding-block: 4.5rem;
-      & h1 {
+      & header h1 {
         font-size: var(--sl-text-h1);
       }
     }

@@ -12,30 +12,30 @@ import { Icon } from '@astrojs/starlight/components';
 <style>
   desktop-scroll-to-top {
     display: block;
-    margin-top: 1.5rem; 
+    margin-top: 1rem; 
+    & button {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      width: 100%;
+
+      background: transparent;
+      border: none;
+      border-top: 1px solid var(--sl-color-hairline-light);
+      padding-top: 1rem;
+      
+      color: var(--sl-color-gray-3);
+      font-size: var(--sl-text-sm);
+      cursor: pointer;
+      transition: color 0.2s ease;
+      &:hover {
+        color: var(--sl-color-white);
+      }
+      & svg {
+        flex-shrink: 0;
+      }
+    }
   }
-
-  .desktop-scroll-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    width: 100%;
-
-    background: transparent;
-    border: none;
-    border-top: 1px solid var(--sl-color-hairline-light);
-    padding-top: 1rem;
-    
-    color: var(--sl-color-gray-3);
-    font-size: var(--sl-text-sm);
-    cursor: pointer;
-    transition: color 0.2s ease;
-  }
-
-  .desktop-scroll-btn:hover {
-    color: var(--sl-color-white);
-  }
-
   @media (max-width: 50rem) {
     desktop-scroll-to-top {
       display: none;

@@ -12,11 +12,7 @@ const { mdUrl } = Astro.locals.starlightRoute;
 if (!mdUrl) return;
 ---
 
-<page-actions 
-  class:list={["sl-flex page-actions not-content", className]} 
-  data-md-url={mdUrl}
-  data-copied-text="Copied!" 
->
+<page-actions class:list={["sl-flex page-actions not-content", className]} data-md-url={mdUrl}>
   <button type="button" data-action="copy-url" class="action-link" aria-label={t("action.CopyPage")}>
     <Icon name="link" size='1.125em'/>
     <span aria-live="polite">{t("action.CopyPage")}</span>
@@ -34,14 +30,12 @@ if (!mdUrl) return;
 </page-actions>
 
 <style>
-  .page-actions {
+  page-actions {
     font-size: var(--sl-text-2xs);
     align-items: center;
     flex-wrap: wrap;
     margin-inline-start: -0.5rem;
     gap: 0.25rem;
-  }
-  .page-actions {
     & .divider {
       color: var(--sl-color-hairline);
       user-select: none;
@@ -58,34 +52,29 @@ if (!mdUrl) return;
       background: transparent;
       border: 0;
       cursor: pointer;
-    }
-    /* FIX: Ubah $ menjadi & */
-    & .action-link:focus-visible {
-      outline: 2px solid var(--sl-color-accent-high);
-      background: var(--sl-color-gray-6);
-    }
-    /* FIX: Ubah $ menjadi & */
-    & .action-link.is-done {
-      color: var(--sl-color-text-accent);
+      transition: color 0.3s ease;
+      &:focus-visible {
+        outline: 2px solid var(--sl-color-accent-high);
+        background: var(--sl-color-gray-6);
+      }
+      &:hover {
+        color: var(--sl-color-text-accent);
+      }
+      &.is-done {
+        color: var(--sl-color-text-accent);
+      }
     }
   }
-  :global([data-theme="light"]) .page-actions {
+  [data-theme="light"] page-actions {
     & .action-link {
       color: var(--sl-color-gray-3);
-    }
-  }
-  @media (hover: hover) {
-    .action-link:hover {
-      color: var(--sl-color-text-accent);
-      background: rgb(from var(--sl-color-gray-6) r g b / 50%);
-    }
-    :global([data-theme="light"]) .page-actions .action-link:hover {
-      background: var(--sl-color-gray-7);
-      color: var(--sl-color-accent-high);
+      &:hover {
+        color: var(--sl-color-accent-high);
+      }
     }
   }
   @media (min-width: 50rem) {
-    .page-actions {
+    page-actions {
       font-size: var(--sl-text-xs);
     }
   }
@@ -95,14 +84,11 @@ if (!mdUrl) return;
   class PageActions extends HTMLElement {
     connectedCallback() {
       const mdUrl = this.dataset.mdUrl || "";
-      const copiedText = this.dataset.copiedText || "Copied!";
-
       this.querySelectorAll<HTMLButtonElement>("button[data-action]").forEach((btn) => {
         btn.addEventListener("click", async () => {
           const action = btn.dataset.action;
           const label = btn.querySelector("[aria-live]") as HTMLElement;
           const original = label?.textContent || "";
-          
           try {
             if (action === "copy-url") {
               await navigator.clipboard.writeText(window.location.href);
@@ -112,11 +98,9 @@ if (!mdUrl) return;
               const text = await res.text();
               await navigator.clipboard.writeText(text);
             }
-            
             if (label) {
               btn.classList.add("is-done");
-              label.textContent = copiedText;
-              
+              label.textContent = "Copied!";
               setTimeout(() => {
                 btn.classList.remove("is-done");
                 label.textContent = original;
@@ -129,7 +113,6 @@ if (!mdUrl) return;
       });
     }
   }
-  
   if (!customElements.get("page-actions")) {
     customElements.define("page-actions", PageActions);
   }

@@ -39,28 +39,24 @@ const ogImageAlt = data.title || siteDescription;
 <Font cssVariable="--font-firaCode" preload />
 
 <Default>
-  <slot />
+	<slot />
 </Default>
 
-{
-  isBlog && (
-    <link
-      rel="alternate"
-      type="application/rss+xml"
-      title="RSS Feed"
-      href={rssUrl as string}
-    />
-  )
-}
+{isBlog && (
+	<link
+		rel="alternate"
+		type="application/rss+xml"
+		title="RSS Feed"
+		href={rssUrl as string}
+	/>
+)}
 
-{
-  !hasManualOg && entry && (
-    <>
+{!hasManualOg && entry && (
+	<>
       <meta property="og:image" content={absolutOg} />
       <meta property="og:image:alt" content={ogImageAlt} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:image" content={absolutOg} />
       <meta name="twitter:image:alt" content={ogImageAlt} />
     </>
-  )
-}
+)}

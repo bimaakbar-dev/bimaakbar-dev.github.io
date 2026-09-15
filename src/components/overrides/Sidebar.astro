@@ -1,15 +1,15 @@
 ---
-import MobileMenuFooter from './MobileMenuFooter.astro';
 import SidebarPersister from '@astrojs/starlight/components/SidebarPersister.astro';
 import SidebarSublist from '@astrojs/starlight/components/SidebarSublist.astro';
-import SearchButton from './SearchButton.astro';
+import SearchToggle from "../SearchToggle.astro";
+import MobileMenuFooter from './MobileMenuFooter.astro';
 
 const { sidebar } = Astro.locals.starlightRoute;
 ---
 
-<div class="sl-hidden md:sl-block print:hidden">
-  <SearchButton variant='bar' />
-</div>
+<div class="sl-hidden md:sl-flex print:hidden">
+	<SearchToggle variant='bar' />
+</div>
 
 <SidebarPersister>
 	<SidebarSublist sublist={sidebar} />

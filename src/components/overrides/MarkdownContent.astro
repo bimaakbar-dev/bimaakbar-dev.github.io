@@ -15,37 +15,33 @@ const customIndex = isBlogIndex || isDocIndex;
 
 ---
 
-{
-  isBlogPost ? (
-    <>
-      <article class="sl-markdown-content">
-        <slot />
-      </article>
-      <div class="custom-meta sl-flex">
-        {entry.data.editUrl && (<EditLink />)}
-        <LastUpdated />
-      </div>
-      <Pagination />
-      <RelatedPosts currentSlug={entry.id} />
-      <MobileScrollToTop />
-    </>
-  ) : customIndex ? (
-    <div class="not-content">
-      <slot />
-      <Pagination />
-    </div>
-  ) : (
-    <article class="sl-markdown-content">
-      <slot />
-    </article>
-    <div class="meta sl-flex">
-      <EditLink />
-      <LastUpdated />
-    </div>
-    <Pagination />
-    <MobileScrollToTop />
-  )
-}
+{isBlogPost ? (
+	<article class="sl-markdown-content">
+		<slot />
+	</article>
+	<div class="custom-meta sl-flex">
+		<EditLink />
+		<LastUpdated />
+	</div>
+	<Pagination />
+	<RelatedPosts currentSlug={entry.id} />
+	<MobileScrollToTop />
+	) : customIndex ? (
+	<div class="not-content">
+		<slot />		
+	</div>
+	<Pagination />
+	) : (
+	<article class="sl-markdown-content">
+		<slot />
+	</article>
+	<div class="meta sl-flex">
+		<EditLink />
+		<LastUpdated />
+	</div>
+	<Pagination />
+	<MobileScrollToTop />
+)}
 
 <style>
   .meta {
