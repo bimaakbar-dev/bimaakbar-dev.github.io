@@ -5,99 +5,95 @@ import { Image } from "astro:assets";
 interface Props {
   handle: string;
   name: string;
+  role?: string;
   cite?: string;
 }
 
-const { 
-  name, 
-  handle, 
-  cite 
-} = Astro.props;
+const { name, handle, role, cite } = Astro.props;
 
 const avatars = import.meta.glob<{ default: ImageMetadata }>(
   "../../assets/images/testimonials/*.jpg",
 );
-const avatar = avatars[`../../assets/images/testimonials/${handle}.jpg`];
+const avatarPath = `../../assets/images/testimonials/${handle}.jpg`;
+const avatar = avatars[avatarPath];
 if (!avatar) {
-  throw new Error(`Could not resolve testimonial avatar for @${handle}`);
+  throw new Error(
+    `Avatar not found for @${handle}. Available: ${Object.keys(avatars).join(", ")}`
+  );
 }
 const src = (await avatar()).default;
 ---
 
-<li class="testimonial sl-flex not-content">
+<li class="testimonial not-content">
   <blockquote cite={cite}>
     <slot />
   </blockquote>
-  <div class="footer-quote sl-flex">
-    <Image class="avatar" height="48" width="48" {src} alt="" />
-    <div class="cite sl-flex">
-      <p class="name">{name}</p>
-      { cite && 
-        <a href={cite}>@{handle}</a>
-      }
+  <div class="attribution">
+    <Image class="avatar" width="40" height="40" {src} alt={name} />
+    <div class="meta">
+      <span class="name">{name}</span>
+      {role && <span class="role">{role}</span>}
     </div>
   </div>
 </li>
 
 <style>
   .testimonial {
-    flex-direction: column;
-    position: relative;
-    gap: 0.5em;
-    margin-block: 1.5rem;
     list-style: none;
     padding: 0;
-    & blockquote {
-      position: relative;
-      text-align: left;
-      color: var(--sl-color-white);
-      font-size: var(--sl-text-h3);
-      line-height: var(--sl-line-height-headings);
-      font-weight: 400;
-      padding: 1rem;
-      border-radius: 0.75rem;
-      border-bottom-left-radius: 0;
-      border: 1px solid var(--sl-color-gray-hairline);
-      background: var(--sl-color-gray-6);
-      
-      & > :global(* + *) {
-        margin-top: 0.75em;
-      }
-    } 
-    & .footer-quote {
-      align-items: center;
-      gap: 0.5rem;
-      & img {
-        outline: 1px solid var(--sl-color-accent-low);
-        outline-offset: -1px;
-        border-radius: 99rem;
-        width: 2.5rem;
-        height: 2.5rem;
-        object-fit: cover;
-      }
-      & .cite {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.25rem;
-        & .name {
-          font-weight: 500;
-          font-size: var(--sl-text-sm);
-          color: var(--sl-color-gray-2);
-          line-height: var(--sl-line-height-headings);
-        }
-        & a {
-          font-size: var(--sl-text-2xs);
-          text-decoration: none;
-          color: var(--sl-color-accent-high);
-        } 
-      }
+    margin-block: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  blockquote {
+    margin: 0;
+    padding: 1rem 1.25rem;
+    border-radius: 0.75rem;
+    border-bottom-left-radius: 0;
+    border: 1px solid var(--sl-color-gray-5);
+    background: var(--sl-color-gray-6);
+    color: var(--sl-color-white);
+    font-size: var(--sl-text-body-sm);
+    line-height: var(--sl-line-height);
+
+    & > :global(* + *) {
+      margin-top: 0.5em;
     }
   }
-  @media (hover: hover) {
-    a:hover {
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      color: var(--sl-color-accent);
-    }
+
+  .attribution {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding-inline-start: 0.25rem;
+  }
+
+  .avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 99rem;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .name {
+    font-size: var(--sl-text-sm);
+    font-weight: 600;
+    color: var(--sl-color-white);
+    line-height: 1.3;
+  }
+
+  .role {
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+    line-height: 1.3;
   }
 </style>
