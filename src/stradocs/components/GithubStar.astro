@@ -55,50 +55,40 @@ const fmt = (n: number) =>
   href={`https://github.com/${repo}`}
   target="_blank"
   rel="noopener noreferrer"
-  class="github-stars"
+  aria-label={stars ? `${stars} stars on GitHub` : "View on GitHub"}
 >
-  <Icon name="github" size="1.125em" />
-  <span class="counter">{stars ? fmt(stars) : "−"}</span>
-  <Icon name="star" size="1.125em" class="star-gold" />
+  <Icon name="github" />
+  <span class="counter" aria-hidden="true">{stars ? fmt(stars) : "−"}</span>
+  <Icon name="star" class="star-gold" />
 </a>
 
 <style>
-  .github-stars {
+  a {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
     gap: 0.35em;
     padding: 0.35em 0.75em;
     border: 1px solid var(--sl-color-hairline);
     border-radius: 99rem;
     background: var(--sl-color-black);
-    color: var(--sl-color-text);
+    color: var(--sl-color-gray-2);
     font-size: var(--sl-text-sm);
     font-weight: 500;
     text-decoration: none;
     vertical-align: middle;
-
-    & .counter {
-      color: var(--sl-color-white);
-    }
     & .star-gold {
       color: #facc15;
     }
     & > svg {
       flex-shrink: 0;
-      width: 1em;
-      height: 1em;
+      width: 1.125em;
+      height: 1.125em;
+    }
+    &:hover {
+      background: var(--sl-color-gray-6);
     }
   }
-
-  @media (hover: hover) {
-    .github-stars:hover {
-      background: var(--sl-color-gray-6);
-      border-color: var(--sl-color-hairline-light);
-    }
-    :global([data-theme="light"]) .github-stars:hover {
-      background: var(--sl-color-gray-7);
-      border-color: var(--sl-color-hairline-light);
-    }
+  [data-theme='light'] a:hover {
+    background: var(--sl-color-gray-7);
   }
 </style>
