@@ -56,7 +56,7 @@ const src = (await avatar()).default;
       font-weight: 400;
       padding: 1rem;
       border-radius: 0.75rem;
-      border-bottom-left-radius: none;
+      border-bottom-left-radius: 0;
       border: 1px solid var(--sl-color-gray-hairline);
       background: var(--sl-color-gray-6);
       
@@ -71,14 +71,14 @@ const src = (await avatar()).default;
         outline: 1px solid var(--sl-color-accent-low);
         outline-offset: -1px;
         border-radius: 99rem;
-        width: 2rem;
-        height: 2rem;
+        width: 2.5rem;
+        height: 2.5rem;
         object-fit: cover;
       }
       & .cite {
         flex-direction: column;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0.25rem;
         & .name {
           font-weight: 500;
           font-size: var(--sl-text-sm);
@@ -86,7 +86,7 @@ const src = (await avatar()).default;
           line-height: var(--sl-line-height-headings);
         }
         & a {
-          font-size: var(--sl-text-xs);
+          font-size: var(--sl-text-2xs);
           text-decoration: none;
           color: var(--sl-color-accent-high);
         } 
