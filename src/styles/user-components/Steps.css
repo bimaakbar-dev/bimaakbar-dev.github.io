@@ -9,7 +9,7 @@
   }
 
   & > li::after {
-    background-color: var(--sl-color-hairline-light);
+    background-color: var(--sl-color-hairline);
   }
 }
 
