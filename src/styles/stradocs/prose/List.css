@@ -38,7 +38,7 @@
         height: 1.1em;
         margin: 0;
         margin-block-start: calc((var(--sl-line-height, 1.75) * 1em - 1.1em) / 2);
-        border: 1.5px solid var(--sl-color-hairline-light);
+        border: 1.5px solid var(--sl-color-hairline);
         border-radius: 0.25rem;
         background-color: transparent;
         cursor: pointer;

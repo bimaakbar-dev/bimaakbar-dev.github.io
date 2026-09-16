@@ -1,9 +1,9 @@
 /* Card.css */
 
 .card {
-  --sl-card-border: var(--sl-color-hairline-light);
+  --sl-card-border: var(--sl-color-hairline);
   --sl-card-bg: var(--sl-color-gray-6);
-  border: 1px solid var(--sl-color-hairline-light);
+  border: 1px solid var(--sl-color-hairline);
   border-radius: 0.75rem;
   background-color: var(--sl-color-gray-4);
   padding: 1rem;
@@ -39,7 +39,7 @@
 .card:nth-child(4n + 3),
 .card:nth-child(4n + 4),
 .card:nth-child(4n + 5) {
-  --sl-card-border: var(--sl-color-hairline-light);
+  --sl-card-border: var(--sl-color-hairline);
   --sl-card-bg: var(--sl-color-gray-6);
 }
 
@@ -51,4 +51,5 @@
 [data-theme='light'] .card:nth-child(4n + 5) {
   --sl-card-bg: var(--sl-color-gray-7);
   background-color: var(--sl-color-gray-7);
+  box-shadow: var(--highlight-inset), var(--shadow-float);
 }

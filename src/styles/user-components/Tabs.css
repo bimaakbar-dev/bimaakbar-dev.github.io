@@ -1,6 +1,6 @@
 /* Starlight Tabs Custom Styling */
 [role="tablist"] {
-  border-bottom: 2px solid var(--sl-color-hairline-light);
+  border-bottom: 2px solid var(--sl-color-hairline);
   font-size: var(--sl-text-sm);
 }
 

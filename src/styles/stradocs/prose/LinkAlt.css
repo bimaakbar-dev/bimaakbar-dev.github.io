@@ -86,7 +86,7 @@
     border-radius: 8px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    border: 1px solid var(--sl-color-hairline-light);
+    border: 1px solid var(--sl-color-hairline);
     background: var(--sl-color-gray-6);
     font-size: var(--sl-text-xs, 0.75rem);
     font-weight: 500;

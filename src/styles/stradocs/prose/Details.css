@@ -1,8 +1,8 @@
 /* Details.css */
 .sl-markdown-content {
   & details:not(:where(.not-content *)) {
-    --sl-details-border-color: var(--sl-color-hairline-light);
-    --sl-details-border-color--hover: var(--sl-color-hairline);
+    --sl-details-border-color: var(--sl-color-hairline);
+    --sl-details-border-color--hover: var(--sl-color-hairline-shade);
 
     border: 1px solid var(--sl-details-border-color);
     border-radius: 0.75rem;

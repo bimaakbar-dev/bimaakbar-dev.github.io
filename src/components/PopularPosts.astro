@@ -39,7 +39,7 @@ const popularPosts = allEntries
 ---
 
 {popularPosts.length > 0 && (
-  <div class="popular-post not-content">
+  <div class="popular-post sl-flex not-content">
     <h3 id="_popular-posts" set:html={Astro.locals.t("blog.PopularPostLabel")} />
     <nav aria-labelledby="_popular-posts">
       <ul>
@@ -58,37 +58,37 @@ const popularPosts = allEntries
 
 <style>
   .popular-post { 
+    flex-direction: column;
+    gap: 0.75rem;
     padding: 1.25rem;
     & h3 {
       color: var(--sl-color-white);
       font-weight: 400;
       font-family: var(--__sl-font-mono);
-      font-size: var(--sl-text-lg);
+      font-size: var(--sl-text-base);
     }
     & nav ul {
       list-style: none; 
       padding: 0; 
-      margin: 0.5rem 0 0;
+      margin: 0;
       & li {
         margin-bottom: 0.25rem;
+        padding: 0; 
         & a {
           display: block;
-          padding: 0.3rem 0;
           text-decoration: none;
           color: var(--sl-color-accent-high);
           font-size: var(--sl-text-lg);
+          &:hover {
+            text-decoration: underline; 
+          }
         }
       }
     }
   }
-  @media (hover: hover) {
-    a:hover { 
-      text-decoration: underline; 
-    }
-  }
   @media (min-width: 72rem) { 
     .popular-post { 
-      padding: 2rem; 
+      padding: 1.75rem; 
     }
   }
 </style>

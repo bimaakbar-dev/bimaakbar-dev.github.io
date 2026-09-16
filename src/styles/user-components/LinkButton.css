@@ -39,7 +39,7 @@
 
 .sl-link-button.secondary {
   background: transparent;
-  border-color: var(--sl-color-hairline-light);
+  border-color: var(--sl-color-hairline);
   color: var(--sl-color-white);
   outline-color: transparent;
 }

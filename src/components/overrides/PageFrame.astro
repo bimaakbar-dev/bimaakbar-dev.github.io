@@ -9,7 +9,7 @@ const {
 
 const customPageIndex = isBlogIndex || isBlogPost;
 ---
-<div class="page sl-flex">
+<div class={customPageIndex ? "custom-page sl-flex" : "page sl-flex"}>
 	<header class="header">
 		<slot name="header" />
 	</header>
@@ -44,6 +44,7 @@ const customPageIndex = isBlogIndex || isBlogPost;
 </div>
 
 <style>
+	.custom-page,
 	.page {
 		flex-direction: column;
 		min-height: 100vh;

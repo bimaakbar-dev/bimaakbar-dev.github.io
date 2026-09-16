@@ -23,7 +23,7 @@
       font-size: var(--sl-text-sm);
 
       &::before {
-        content: "—";
+        content: "\2014";
         padding-inline-end: 0.5rem;
         color: var(--sl-color-gray-3);
       }
