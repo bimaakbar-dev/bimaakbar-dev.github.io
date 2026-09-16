@@ -155,6 +155,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 				flex-grow: 1;
 				gap: 1rem;
 				padding: 1rem;
+				scrollbar-gutter: stable;
 				& button[data-close-modal] {
 					position: absolute;
 					z-index: 1;
@@ -232,7 +233,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 	& .pagefind-ui__search-input {
 		height: calc(48px * var(--pagefind-ui-scale));
 		padding: 0 calc(44px * var(--pagefind-ui-scale)) 0 calc(44px * var(--pagefind-ui-scale));
-		background-color: var(--sl-color-black);
+		background-color: var(--sl-color-gray-6);
 		border: 1px solid var(--pagefind-ui-border);
 		border-radius: var(--sl-search-corners);
 		color: var(--sl-color-white);
@@ -337,7 +338,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 	/* ===== Result Title (card utama) ===== */
 	& .pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)) {
 		position: relative;
-		background-color: var(--sl-color-black);
+		background-color: var(--sl-color-gray-6);
 		border-radius: var(--sl-search-corners);
 		transition: background-color var(--sl-search-transition), outline-color var(--sl-search-transition);
 		outline: 1px solid transparent;
@@ -374,7 +375,7 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 	/* ===== Nested Result (sub-hasil) ===== */
 	& .pagefind-ui__result-nested {
 		position: relative;
-		background-color: var(--sl-color-black);
+		background-color: var(--sl-color-gray-6);
 		padding: var(--sl-search-result-nested-pad-block) var(--sl-search-result-pad-inline-end);
 		padding-inline-start: var(--sl-search-result-pad-inline-start);
 		outline: 1px solid transparent;
@@ -438,7 +439,6 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 	& mark {
 		color: var(--sl-color-white);
 		background-color: color-mix(in srgb, var(--sl-color-accent) 22%, transparent);
-		border-radius: 3px;
 		padding: 0.05em 0.2em;
 		font-weight: 600;
 	}
@@ -545,11 +545,11 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 	& .pagefind-ui__button {
 		margin-top: calc(20px * var(--pagefind-ui-scale));
 		height: calc(40px * var(--pagefind-ui-scale));
-		border: 1px solid var(--sl-color-gray-5);
-		border-radius: 999px;
+		border: 1px solid var(--sl-color-hairline);
+		border-radius: 0.75rem;
 		background: transparent;
 		color: var(--sl-color-gray-2);
-		font-size: calc(13px * var(--pagefind-ui-scale));
+		font-size: calc(var(--sl-text-base) * var(--pagefind-ui-scale));
 		font-weight: 500;
 		text-align: center;
 		width: 100%;
@@ -567,4 +567,13 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 		}
 	}
 	}
+	
+	[data-theme='light'] #starlight__search {
+		& .pagefind-ui__search-input,
+		& .pagefind-ui__result-title:not(:where(.pagefind-ui__result-nested *)),
+		& .pagefind-ui__result-nested {
+			background: var(--sl-color-gray-7);
+		}
+	}
+		
 </style>
