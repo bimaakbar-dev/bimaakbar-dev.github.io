@@ -1,89 +1,92 @@
 ---
-import { Icon } from "@astrojs/starlight/components";
-
-interface Props {
-	variant?: 'icon-only' | 'bar';
-	class?: string;
-}
-
-const { variant = 'icon-only', class: className } = Astro.props;
+// Taruh di sidebar desktop
+// Menampilkan shortcut Ctrl/⌘ + K
 ---
 
 <button
-	type="button"
-	data-open-search-modal
-	disabled
-	aria-label={Astro.locals.t('search.label')}
-	aria-keyshortcuts="Control+K"
-	class:list={[className, variant]}
+  type="button"
+  class="st-desktop"
+  onclick="window.openSearch?.()"
+  aria-label="Cari dokumentasi"
+  aria-keyshortcuts="Control+K"
 >
-	<Icon name="magnifier" />
-	{variant === 'bar' && (
-		<>
-			<span class="sl-hidden md:sl-block" aria-hidden="true">{Astro.locals.t('search.label')}</span>
-			<kbd class="sl-hidden md:sl-flex search-kbd" style="display: none;">
-				<kbd class="platform-key">{Astro.locals.t('search.ctrlKey')}</kbd><kbd>K</kbd>
-			</kbd>
-		</>
-	)}
+  <svg class="st-desktop-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+  </svg>
+  <span class="st-desktop-label">Cari</span>
+  <kbd class="st-desktop-kbd" aria-hidden="true">
+    <kbd class="st-desktop-modifier">Ctrl</kbd><kbd>K</kbd>
+  </kbd>
 </button>
 
 <script is:inline>
-	(() => {
-		const currentBtn = document.currentScript?.previousElementSibling;
-		if (!currentBtn) return;
-		
-		const shortcut = currentBtn.querySelector('kbd');
-		if (!shortcut) return;
-
-		const platformKey = shortcut.querySelector('.platform-key');
-		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
-			platformKey.textContent = '⌘';
-			currentBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
-		}
-		shortcut.style.display = '';
-	})();
+  (() => {
+    const btn = document.querySelector('.st-desktop');
+    const modifier = btn?.querySelector('.st-desktop-modifier');
+    if (!modifier) return;
+    if (/(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+      modifier.textContent = '⌘';
+      btn?.setAttribute('aria-keyshortcuts', 'Meta+K');
+    }
+  })();
 </script>
 
 <style>
-	button {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 0.5rem;
-		border: 0;
-		background-color: transparent;
-		color: var(--sl-color-gray-1);
-		cursor: pointer;
-		height: 2.5rem;
-		font-size: var(--sl-text-xl);
-		&.bar {
-			border: 1px solid var(--sl-color-gray-5);
-			border-radius: 0.5rem;
-			padding-inline-start: 0.75rem;
-			padding-inline-end: 0.5rem;
-			background-color: var(--sl-color-black);
-			color: var(--sl-color-gray-2);
-			font-size: var(--sl-text-sm);
-			width: 100%;
-			max-width: 22rem;
-			
-			&:hover {
-				border-color: var(--sl-color-gray-6);
-				color: var(--sl-color-white);
-				outline: none;
-			}
-			& > :last-child {
-				margin-inline-start: auto;
-			}
-		}
-		& > kbd {
-			border-radius: 0.25rem;
-			font-size: var(--sl-text-2xs);
-			gap: 0.25em;
-			padding-inline: 0.375rem;
-			background-color: var(--sl-color-gray-6);
-			font-family: var(--__sl-font);
-		}
-	}
+  .st-desktop {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid color-mix(in srgb, var(--sl-color-white) 8%, transparent);
+    border-radius: 0.6rem;
+    background: color-mix(in srgb, var(--sl-color-white) 2%, transparent);
+    color: color-mix(in srgb, var(--sl-color-white) 35%, transparent);
+    cursor: pointer;
+    font-family: var(--sl-font, system-ui, sans-serif);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    text-align: left;
+    transition:
+      border-color 0.12s ease,
+      background-color 0.12s ease,
+      color 0.12s ease;
+  }
+  .st-desktop:hover {
+    border-color: color-mix(in srgb, var(--sl-color-white) 14%, transparent);
+    background: color-mix(in srgb, var(--sl-color-white) 4%, transparent);
+    color: color-mix(in srgb, var(--sl-color-white) 55%, transparent);
+  }
+  .st-desktop:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+  }
+
+  .st-desktop-icon { flex-shrink: 0; }
+
+  .st-desktop-label { flex: 1; }
+
+  .st-desktop-kbd {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+    flex-shrink: 0;
+  }
+  .st-desktop-kbd kbd {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.1rem 0.3rem;
+    border: 1px solid color-mix(in srgb, var(--sl-color-white) 10%, transparent);
+    border-radius: 0.25rem;
+    background: color-mix(in srgb, var(--sl-color-white) 4%, transparent);
+    font-family: var(--sl-font-mono, monospace);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+  }
+
+  @media (min-width: 50rem) {
+    .st-desktop { display: flex; }
+  }
 </style>

@@ -39,10 +39,14 @@ const readingTime = getReadingTime(entry.body ?? '');
         alt={title}
         loading="eager"
         decoding="async"
+        fetchpriority='high'
+        quality='high' 
+        fit='cover' 
+        position='center'
       />
     )}
   </div>
-  <header class="blog-post-header">
+  <header class="blog-post-header sl-flex">
     <div class="post-meta sl-flex">
 			{pubDate && <FormattedDate date={pubDate} class="post-date" />}
 			{readingTime && <p class="post-reading-time">{readingTime.text} {Astro.locals.t("plugin.readingTime")}</p>}
@@ -59,10 +63,13 @@ const readingTime = getReadingTime(entry.body ?? '');
                   src={a.avatar}
                   width={48}
                   height={48}
-                  alt={a.name || title}
+                  alt={a.name || ''}
                   loading="eager"
                   decoding="async"
-                  aria-hidden="true"
+                  fetchpriority="low"
+                  quality='mid' 
+                  fit='cover' 
+                  position='center'
                 />
               )}
               <span>{a.name}</span>
@@ -91,7 +98,6 @@ const readingTime = getReadingTime(entry.body ?? '');
     position: relative;
     z-index: 0;
     & img {
-      object-fit: cover;
       width: 100%;
       height: auto;
       min-height: 15rem;
@@ -109,7 +115,7 @@ const readingTime = getReadingTime(entry.body ?? '');
     z-index: 10;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
-    & :where(.post-meta .post-date, .post-meta .post-reading-time, .post-author,) {
+    & :where(.post-meta .post-date, .post-meta .post-reading-time, .post-author) {
       font-size: var(--sl-text-body);
       font-weight: 500;
       line-height: var(--sl-line-height);
@@ -117,11 +123,10 @@ const readingTime = getReadingTime(entry.body ?? '');
       font-family: var(--font-firaCode);
     }
     & .post-meta {
-      justify-items: center;
       margin-inline: auto;
       width: max-content;
       align-items: center;
-      gap: 0.5em;
+      gap: 0.5rem;
       & .post-reading-time {
         white-space: nowrap;
         &::before {
@@ -137,31 +142,31 @@ const readingTime = getReadingTime(entry.body ?? '');
       line-height: var(--sl-line-height-headings);
       color: var(--sl-color-white);
       text-align: center;
-      margin-block: 0.5em;
+      margin-block: 0.5rem;
     }
     & .post-author {
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      gap: 0.75em 1em;
+      gap: 0.75rem 1rem;
       padding-inline: var(--sl-content-pad-x);
       & ul {
         flex-wrap: wrap;
         align-items: center;
-        gap: 1em 0.75em;
+        gap: 1rem 0.75rem;
         list-style: none;
         padding: 0;
         margin: 0;
         & li {
           align-items: center;
-          gap: 0.5em;
+          gap: 0.5rem;
           & > img {
             margin: 0;
             display: inline-block;
             border-radius: 99rem;
-            width: 1.5em;
-            height: 1.5em;
-            box-shadow: inset 0 0 0 1px var(--sl-color-hairline-shade);
+            width: 1.75em;
+            height: 1.75em;
+            box-shadow: inset 0 0 0 1px var(--sl-color-hairline);
           }
         }
       }
@@ -186,19 +191,16 @@ const readingTime = getReadingTime(entry.body ?? '');
     }
     & .page-actions {
       margin-block-start: auto;
-      gap: 0.75em 0.35em;
+      gap: 0.75rem 0.35rem;
     }
   }
   @media (min-width: 50rem) {
     .hero-image {
       margin-bottom: -3rem;
     }
-    .page-title .post-title {
-      font-size: var(--sl-text-h1);
-    }
     .blog-post-header .post-author > ul li > img {
-      width: 2em;
-      height: 2em;
+      width: 2.5em;
+      height: 2.5em;
     }
   }
   @media (min-width: 72rem) {
