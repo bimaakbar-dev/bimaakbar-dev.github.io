@@ -4,7 +4,7 @@
   grid-template-columns: 1fr auto;
   gap: 0.5em;
   border: none;
-  outline: 1px solid var(--sl-color-hairline-light);
+  outline: 1px solid var(--sl-color-hairline);
   border-radius: 0.75rem;
   padding: 1rem;
   box-shadow: none;
