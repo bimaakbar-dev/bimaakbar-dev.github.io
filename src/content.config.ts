@@ -15,7 +15,7 @@ export const collections = {
       extend: ({ image }) =>
         z.object({
           pubDate: z.coerce.date().optional(),
-          heroImage: z.optional(image()),
+          heroImage: z.union([image(), z.string()]).optional(),
           author: z.array(
             z.object({
               name: z.string().optional(),
