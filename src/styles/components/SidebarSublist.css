@@ -13,7 +13,7 @@ ul.top-level ul li::before {
 	left: var(--sl-sidebar-item-padding-inline);
   height: 100%;
   width: 1px;
-  background-color: var(--sl-color-hairline-light);
+  background-color: var(--sl-color-hairline);
   content: "";
 }
 
@@ -66,7 +66,7 @@ ul.top-level ul li:has(> a[aria-current="page"])::before {
   inset: 0;
   height: 100%;
   width: 100%;
-  background-color: color-mix(in oklab, var(--sl-color-hairline-light) 100%, transparent);
+  background-color: color-mix(in oklab, var(--sl-color-hairline) 100%, transparent);
   border-radius: 0.5rem;
   z-index: -1;
 }
