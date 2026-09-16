@@ -1,0 +1,25 @@
+{
+  "action.CopyPage": "ページをコピー",
+  "action.CopyMarkdown": "Markdownとしてコピー",
+  "action.ViewMarkdown": "Markdownとして表示",
+  "action.AgentSetup": "エージェント設定",
+  
+  "blog.PostAuthor": "著者",
+  "blog.relatedPostLabel": "関連記事",
+  "blog.PopularPostLabel": "人気の記事",
+  
+  "component.preview": "プレビュー",
+  "component.scrollToTop": "トップへ戻る",
+  
+  "nav.blog": "ブログ",
+  "nav.docs": "ドキュメント",
+  "nav.home": "ホーム",
+  
+  "plugin.readingTime": "分で読める",
+  "plugin.readingWords": "単語",
+  
+  "rss.title": "Stradocs",
+  "rss.RssFeedLabel": "購読する",
+  "rss.RssFeedTitle": "RSS",
+  "rss.RssFeedDesc": "からの最新情報を入手"
+}

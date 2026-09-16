@@ -5,139 +5,147 @@ import TableOfContentsList from './components-internals/TableOfContents/TableOfC
 const { toc } = Astro.locals.starlightRoute;
 ---
 
-{
-	toc && (
-		<mobile-starlight-toc data-min-h={toc.minHeadingLevel} data-max-h={toc.maxHeadingLevel}>
-			<nav aria-labelledby="starlight__on-this-page--mobile">
-				<details id="starlight__mobile-toc">
-					<summary id="starlight__on-this-page--mobile" class="sl-flex">
-						<span class="toggle sl-flex items-center">
-							<span class="progress-circle-wrapper">
-								<svg class="progress-circle" viewBox="0 0 24 24" width="24" height="24" focusable="false" aria-hidden="true">
-									<circle
-										cx="12"
-										cy="12"
-										r="11"
-										fill="none"
-										stroke="var(--sl-color-gray-5)"
-										stroke-width="2"
-										opacity="0.5"
-									/>
-									<circle
-										class="progress-fill"
-										cx="12"
-										cy="12"
-										r="11"
-										fill="none"
-										stroke="var(--sl-color-accent)"
-										stroke-width="2"
-										stroke-linecap="round"
-										stroke-dasharray="69.115"
-										stroke-dashoffset="69.115"
-										transform="rotate(-90 12 12)"
-									/>
-								</svg>
-							</span>
-							{Astro.locals.t('tableOfContents.onThisPage')}
-							<Icon name={'right-caret'} class="caret" size="1rem" />
-						</span>
-						<span class="display-current" />
-					</summary>
-					<div class="dropdown">
-						<TableOfContentsList toc={toc.items} isMobile />
-					</div>
-				</details>
-			</nav>
-		</mobile-starlight-toc>
-	)
-}
+{toc && (
+	<mobile-starlight-toc data-min-h={toc.minHeadingLevel} data-max-h={toc.maxHeadingLevel}>
+		<nav aria-labelledby="starlight__on-this-page--mobile">
+			<details id="starlight__mobile-toc">
+				<summary id="starlight__on-this-page--mobile" class="sl-flex">
+					<span class="toggle">
+						<svg class="progress-circle" viewBox="0 0 18 18" focusable="false" aria-hidden="true">
+							<circle
+								cx="9"
+								cy="9"
+								r="7.5"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1.5"
+								class="progress-bg"
+							/>
+							<circle
+								class="progress-fill"
+								cx="9"
+								cy="9"
+								r="7.5"
+								fill="none"
+								stroke="var(--sl-color-accent-high)"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-dasharray="47.12388980384689"
+								stroke-dashoffset="47.12388980384689"
+								transform="rotate(-90 9 9)"
+							/>
+						</svg>
+						{Astro.locals.t('tableOfContents.onThisPage')}
+						<Icon name={'right-caret'} class="caret" size="1rem" />
+					</span>
+					<span class="display-current" />
+				</summary>
+				<div class="dropdown">
+					<TableOfContentsList toc={toc.items} isMobile />
+				</div>
+			</details>
+		</nav>
+	</mobile-starlight-toc>
+)}
 
 <style>
-  nav {
-    position: fixed;
-	z-index: var(--sl-z-index-toc);
-	top: calc(var(--sl-nav-height) - 1px);
-	inset-inline: 0;
-	border-top: 1px solid var(--sl-color-hairline);
-	background-color: var(--sl-color-bg-nav);
-  }
-  @media (min-width: 50rem) {
-	nav {
-	  inset-inline-start: var(--sl-content-inline-start, 0);
+	mobile-starlight-toc nav {
+		position: fixed;
+		z-index: var(--sl-z-index-menu);
+		top: calc(var(--sl-nav-height) - 1px);
+		inset-inline: 0;
+		border-top: 1px solid var(--sl-color-hairline-light);
+		background-color: rgb(from var(--sl-color-bg-nav) r g b / 100%);
+		-webkit-backdrop-filter: blur(16px);
+		backdrop-filter: blur(16px);
+		& details {
+			&[open] {
+				& > .toggle {
+					color: var(--sl-color-text-accent);
+				}
+				& > .progress-bg {
+					color: rgb(from var(--sl-color-accent-high) r g b / 20%)
+				}
+				& > .caret {
+					transform: rotateZ(90deg);
+				}
+			}
+			& summary {
+				gap: 0.5em;
+				align-items: center;
+				height: var(--sl-mobile-toc-height);
+				border-bottom: 1px solid var(--sl-color-hairline-shade);
+				padding: 0.5rem 1rem;
+				font-size: var(--sl-text-xs);
+    			line-height: 1.25;
+				outline-offset: var(--sl-outline-offset-inside);
+				box-shadow: none;
+				&::marker,
+				&::-webkit-details-marker {
+					display: none;
+				}
+				& .toggle {
+    				display: inline-flex;
+					gap: 0.5em;
+					align-items: center;
+					line-height: inherit;
+					user-select: none;
+					cursor: pointer;
+					vertical-align: baseline;
+					height: 100%;
+					flex-shrink: 0;
+					&:hover {
+						color: var(--sl-color-text-accent);
+					}	
+					& .progress-circle {
+						display: block;
+						width: 1.25em;
+    					height: 1.25em;
+						flex-shrink: 0;
+						vertical-align: middle;
+						/*font-size: inherit;*/
+						& .progress-bg {
+							color: rgb(from var(--sl-color-hairline) r g b / 100%)
+						}
+						& .progress-fill {
+							transition: stroke-dashoffset 0.15s ease-out;
+						}
+					}
+					& .caret {
+						color: var(--sl-color-gray-2);
+					}
+				}
+				& .display-current {
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					overflow: hidden;
+					color: var(--sl-color-text);
+				}
+			}
+			& .dropdown {
+				--border-top: 1px;
+				margin-top: calc(-1 * var(--border-top));
+				border-block: var(--border-top) solid var(--sl-color-hairline-shade);
+				max-height: calc(85vh - var(--sl-nav-height) - var(--sl-mobile-toc-height));
+				overflow-y: auto;
+				background-color: rgb(from var(--sl-color-bg-nav) r g b / 100%);
+				box-shadow: var(--sl-shadow-md);
+				overscroll-behavior: contain;
+				z-index: var(--sl-z-index-toc);
+				padding-block: 0.5rem;
+				padding-inline: 0.25rem;
+				scrollbar-gutter: stable;
+			}
+		}
 	}
-  }
-  summary {
-	gap: 0.5rem;
-	align-items: center;
-	height: var(--sl-mobile-toc-height);
-	border-bottom: 1px solid var(--sl-color-hairline-shade);
-	padding: 0.5rem 1rem;
-	font-size: var(--sl-text-xs);
-	outline-offset: var(--sl-outline-offset-inside);
-  }
-  summary::marker,
-  summary::-webkit-details-marker {
-	display: none;
-  }
-  .toggle {
-    flex-shrink: 0;
-	gap: 0.5rem;
-	align-items: center;
-	line-height: 1;
-	user-select: none;
-	cursor: pointer;
-	vertical-align: middle;
-	min-height: 1.375rem;
-	height: 100%;
-	position: relative;
-  }
-  .progress-circle-wrapper {
-	display: block;
-	align-items: center;
-	justify-content: center;
-	flex-shrink: 0;
-	width: 1em;
-    height: 1em;
-  }
-  .progress-circle {
-	display: block;
-	width: 1.333em;
-	height: 1.333em;
-	flex-shrink: 0;
-	font-size: inherit;
-  }
-  .progress-fill {
-	transition: stroke-dasharray 0.15s ease-out;
-  }
-  details[open] .toggle {
-	color: var(--sl-color-text-accent);
-  }
-  details .toggle:hover {
-	color: var(--sl-color-white);
-  }
-  [dir='rtl'] .caret {
-	transform: rotateZ(180deg);
-  }
-  details[open] .caret {
-	transform: rotateZ(90deg);
-  }
-  .display-current {
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	color: var(--sl-color-white);
-  }
-  .dropdown {
-	--border-top: 1px;
-	margin-top: calc(-1 * var(--border-top));
-	border-top: var(--border-top) solid var(--sl-color-hairline-shade);
-	max-height: calc(85vh - var(--sl-nav-height) - var(--sl-mobile-toc-height));
-	overflow-y: auto;
-	background-color: var(--sl-color-black);
-	box-shadow: var(--sl-shadow-md);
-	overscroll-behavior: contain;
-	z-index: var(--sl-z-index-toc);
-  }
+	[dir='rtl'] mobile-starlight-toc > .caret {
+		transform: rotateZ(180deg);
+	}
+	@media (min-width: 50rem) {
+		mobile-starlight-toc {
+			display: none;
+		}
+	}
 </style>
 
 <script>
@@ -155,15 +163,15 @@ const { toc } = Astro.locals.starlightRoute;
 			const details = this.querySelector('details');
 			if (!details) return;
 
-			const circumference = 69.115;
+			const circumference = 47.12388980384689;
 
 			const updateProgress = () => {
 				const scrollTop = window.scrollY;
 				const docHeight = document.documentElement.scrollHeight - window.innerHeight;
 				const progress = docHeight > 0 ? Math.min(scrollTop / docHeight, 1) : 0;
-				const drawn = progress * circumference;
+				const offset = circumference * (1 - progress);
 				const circle = this.querySelector('.progress-fill') as SVGCircleElement | null;
-				if (circle) circle.style.strokeDasharray = `${drawn} ${circumference - drawn}`;
+				if (circle) circle.style.strokeDashoffset = offset.toString();
 			};
 
 			window.addEventListener('scroll', updateProgress, { passive: true });

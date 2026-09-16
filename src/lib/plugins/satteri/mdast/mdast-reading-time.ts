@@ -1,14 +1,18 @@
-import getReadingTime from "reading-time";
+import { getReadingTime } from "~/utils/readingTime";
 import { defineMdastPlugin } from "satteri";
 
-export const mdastReadingTimePlugin = defineMdastPlugin({
+export const mdastReadingTime = defineMdastPlugin({
   name: "mdast-reading-time",
-  after(root, context) {
-    const textOnPage = context.textContent(root);
-    const readingTime = getReadingTime(textOnPage);
+  after(root, ctx) {
+    const textOnPage = ctx.textContent(root);
+    const rt = getReadingTime(textOnPage);
 
-    if (context.data.astro !== undefined) {
-      context.data.astro.frontmatter.minutesRead = readingTime.text;
+    if (ctx.data.astro) {
+      ctx.data.astro.frontmatter.minutesRead = rt.text;
+      ctx.data.astro.frontmatter.readingTime = { minutes: rt.minutes, words: rt.words };
     }
+    
+    (ctx.data as any).minutesRead = rt.text;
+    (ctx.data as any).readingTime = { minutes: rt.minutes, words: rt.words };
   },
 });

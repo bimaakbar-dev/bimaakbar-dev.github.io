@@ -1,0 +1,80 @@
+/* Table.css */
+.sl-markdown-content {
+  & .table-wrapper:not(:where(.not-content *)) {
+    display: block;
+    position: relative;
+    margin: 2.5rem 0;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  & .table-wrapper > table:not(:where(.not-content *)) {
+    display: table;
+    width: 100%;
+    min-width: max-content;
+    border-spacing: 0;
+    border-collapse: separate;
+    table-layout: auto;
+    overflow: visible;
+  }
+  & thead:not(:where(.not-content *)) {
+    border-radius: 0.75rem;
+    background-color: var(--sl-color-gray-6);
+    overflow: hidden;
+  }
+  & thead th:not(:where(.not-content *)) {
+    padding: 0.75em 1em;
+    border-block: 1px solid var(--sl-color-hairline);
+    color: var(--sl-color-white);
+    font-weight: 500;
+    font-size: var(--sl-text-sm);
+    line-height: 1.2;
+    white-space: nowrap;
+
+    &:first-child {
+      border-inline-start: 1px solid var(--sl-color-hairline);
+      border-start-start-radius: 0.75rem;
+      border-end-start-radius: 0.75rem;
+    }
+    &:last-child {
+      border-inline-end: 1px solid var(--sl-color-hairline);
+      border-start-end-radius: 0.75rem;
+      border-end-end-radius: 0.75rem;
+    }
+  }
+  & th:not(:where(.not-content *)) {
+    margin: 0;
+    border-bottom: none;
+  }
+  & td:not(:where(.not-content *)) {
+    padding: 0.5em 1em;
+    font-size: var(--sl-text-sm);
+    border-bottom: none;
+    margin: 0;
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+  & tbody tr:first-child td:not(:where(.not-content *)) {
+    padding-top: 1rem;
+  }
+  & tbody tr:not(:first-child) td:not(:where(.not-content *)) {
+    border-top: 1px solid var(--sl-color-hairline);
+  }
+  & :is(td a, td code):not(:where(.not-content *)) {
+    white-space: nowrap;
+  }
+}
+
+[data-theme="light"] .sl-markdown-content {
+	& thead th:not(:where(.not-content *)) {
+    background-color: var(--sl-color-gray-7);
+  }
+}
+
+@media (hover: none) {
+  .sl-markdown-content {
+    & tbody tr:hover td:not(:where(.not-content *)) {
+      background: var(--sl-color-gray-6);
+    }
+  }
+}

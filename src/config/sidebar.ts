@@ -1,12 +1,10 @@
 // src/config/sidebar.ts
 export const sidebarConfig = [
-  {
-    label: "Getting Started",
+  { label: 'Whats a c0desk1?', 
     translations: {
-      id: "Memulai",
-    },
-    items: [{ autogenerate: { directory: "docs/getting-started" } }],
-  },
+      id: "Apa itu Stradocs?",
+    }, 
+    slug: "docs"},
   {
     label: "Guides",
     translations: {

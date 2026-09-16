@@ -7,13 +7,13 @@ import { Badge } from "@astrojs/starlight/components";
 
 To display small pieces of information, such as a status or category, use the `<Badge>` component.
 
-import Preview from "~/components/component-preview.astro";
+import { PreviewPanel } from "~/stradocs/components";
 
-<Preview>
+<PreviewPanel>
 
 <Badge slot="preview" text="New" />
 
-</Preview>
+</PreviewPanel>
 
 ## Import
 
@@ -28,7 +28,7 @@ Display a badge using the `<Badge>` component and pass the content you want to d
 By default, the badge will use the theme accent color of your site.
 To use a built-in badge color, set the [`variant`](#variant) attribute to one of the supported values.
 
-<Preview>
+<PreviewPanel>
 
 ```mdx
 import { Badge } from "@astrojs/starlight/components";
@@ -60,13 +60,13 @@ import { Badge } from "@astrojs/starlight/components";
   - <Badge text="Danger" variant="danger" />
 </Fragment>
 
-</Preview>
+</PreviewPanel>
 
 ### Use different sizes
 
 Use the [`size`](#size) attribute to control the size of the badge text.
 
-<Preview>
+<PreviewPanel>
 
 ```mdx /size="\w+"/
 import { Badge } from "@astrojs/starlight/components";
@@ -92,13 +92,13 @@ import { Badge } from "@astrojs/starlight/components";
   - <Badge text="New, improved, and bigger" size="large" />
 </Fragment>
 
-</Preview>
+</PreviewPanel>
 
 ### Customize badges
 
 Customize badges by using any other `<span>` attributes such as `class` or `style` with custom CSS.
 
-<Preview>
+<PreviewPanel>
 
 ```mdx "style={{ fontStyle: 'italic' }}"
 import { Badge } from "@astrojs/starlight/components";
@@ -121,30 +121,41 @@ import { Badge } from "@astrojs/starlight/components";
   style={{ fontStyle: "italic" }}
 />
 
-</Preview>
+</PreviewPanel>
 
-## `<Badge>` Props
+## Props
 
 **Implementation:** [`Badge.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Badge.astro)
 
 The `<Badge>` component accepts the following props and also any [other `<span>` attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes):
 
-### `text`
+<dl>
+  <dt>
+    ### `text`
+  </dt>
+  <dd>
+    **required**  
+    **type:** `string`
 
-**required**  
-**type:** `string`
+    The text content to display in the badge.
+  </dd>
 
-The text content to display in the badge.
+  <dt>
+    ### `variant`
+  </dt>
+  <dd>
+    **type:** `'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'`  
+    **default:** `'default'`
 
-### `variant`
+    The badge color variant to use: `note` (blue), `tip` (purple), `danger` (red), `caution` (orange), `success` (green), or `default` (theme accent color).
+  </dd>
 
-**type:** `'note' | 'danger' | 'success' | 'caution' | 'tip' | 'default'`  
-**default:** `'default'`
+  <dt>
+    ### `size`
+  </dt>
+  <dd>
+    **type:** `'small' | 'medium' | 'large'`
 
-The badge color variant to use: `note` (blue), `tip` (purple), `danger` (red), `caution` (orange), `success` (green), or `default` (theme accent color).
-
-### `size`
-
-**type:** `'small' | 'medium' | 'large'`
-
-Defines the size of the badge to display.
+    Defines the size of the badge to display.
+  </dd>
+</dl>

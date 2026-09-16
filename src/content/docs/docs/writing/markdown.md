@@ -7,7 +7,7 @@ Here is a sample of some basic Markdown syntax that can be used when writing Mar
 
 ## Headings
 
-The following HTML `<h1>`—`<h6>` elements represent six levels of section headings. `<h1>` is the highest section level while `<h6>` is the lowest.
+The following HTML `<h1>...<h6>` elements represent six levels of section headings. `<h1>` is the highest section level while `<h6>` is the lowest.
 
 # H1
 
@@ -63,13 +63,13 @@ The blockquote element represents content that is quoted from another source, op
 
 ```markdown
 > Don't communicate by sharing memory, share memory by communicating.<br>
-> — <cite>Rob Pike[^1]</cite>
+> <cite>— Rob Pike[^1]</cite>
 ```
 
 #### Output
 
 > Don't communicate by sharing memory, share memory by communicating.<br>
-> — <cite>Rob Pike[^1]</cite>
+> <cite>Rob Pike[^1]</cite>
 
 [^1]: The above quote is excerpted from Rob Pike's [talk](https://www.youtube.com/watch?v=PAAkCSZUG1c) during Gopherfest, November 18, 2015.
 
@@ -93,9 +93,9 @@ The blockquote element represents content that is quoted from another source, op
 
 ### Syntax
 
-we can use 3 backticks ``` in new line and write snippet and close with 3 backticks on new line and to highlight language specific syntax, write one word of language name after first 3 backticks, for eg. html, javascript, css, markdown, typescript, txt, bash
+we can use 3 backticks [```] in new line and write snippet and close with 3 backticks on new line and to highlight language specific syntax, write one word of language name after first 3 backticks, for eg. html, javascript, css, markdown, typescript, txt, bash
 
-````markdown
+~~~markdown
 ```html
 <!doctype html>
 <html lang="en">
@@ -108,7 +108,7 @@ we can use 3 backticks ``` in new line and write snippet and close with 3 backti
   </body>
 </html>
 ```
-````
+~~~
 
 ### Output
 
@@ -183,11 +183,25 @@ we can use 3 backticks ``` in new line and write snippet and close with 3 backti
   - Milk
   - Cheese
 
+### Task List
+
+#### Syntax
+
+```markdown
+- [ ] No
+- [X] Yes
+```
+
+#### Output
+
+- [ ] No
+- [X] Yes
+
 ## Other Elements — abbr, sub, sup, kbd, mark
 
 ### Syntax
 
-```markdown
+~~~markdown
 <abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
 
 H<sub>2</sub>O
@@ -197,7 +211,7 @@ X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
 Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
 
 Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
-```
+~~~
 
 ### Output
 
@@ -210,3 +224,12 @@ X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
 Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
 
 Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
+
+
+<dl>
+  <dt><code>label</code></dt>
+  <dd>Label yang tampil di breadcrumb. Wajib diisi.</dd>
+
+  <dt><code>href</code></dt>
+  <dd>URL tujuan. Kalau kosong, jadi teks biasa.</dd>
+</dl>

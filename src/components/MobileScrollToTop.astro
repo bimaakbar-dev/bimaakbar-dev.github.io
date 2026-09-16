@@ -2,50 +2,54 @@
 import { Icon } from '@astrojs/starlight/components';
 ---
 
-<mobile-scroll-to-top>
+<scroll-to-top>
   <button aria-label={Astro.locals.t("component.scrollToTop")} class="scroll-top-btn">
     <Icon name="up-arrow" size="2em" />
   </button>
-</mobile-scroll-to-top>
+</scroll-to-top>
 
 <style>
   scroll-to-top {
     display: block;
+    & button {
+      position: fixed;
+      bottom: calc(env(--safe-area-inset-bottom, 1.5rem));
+      right: 1.5rem;
+      z-index: var(--sl-z-index-menu);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5em;
+      height: 2.5em;
+      border-radius: 99rem;
+      background-color: var(--sl-color-gray-6);
+      color: var(--sl-color-white);
+      border: 1px solid var(--sl-color-gray-5);
+      box-shadow: var(--sl-shadow-md);
+      opacity: 0;
+      transform: translateY(1rem);
+      pointer-events: none;
+      cursor: pointer;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      & svg {
+        flex-shrink: 0;
+      }
+      &.visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      &:active {
+        transform: scale(0.92);
+      }
+    }
   }
-
-  .scroll-top-btn {
-    position: fixed;
-    bottom: calc(env(--safe-area-inset-bottom, 1.5rem));
-    right: 1.5rem;
-    z-index: var(--sl-z-index-nav, 90);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 99rem;
-    background-color: var(--sl-color-black);
-    color: var(--sl-color-white);
-    border: 1px solid var(--sl-color-gray-5);
-    box-shadow: var(--sl-shadow-md);
-    opacity: 0;
-    transform: translateY(1rem);
-    pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    cursor: pointer;
+  [data-theme='light'] scroll-to-top button {
+    background-color: var(--sl-color-gray-7);
+    box-shadow: var(--highlight-inset), var(--shadow-float);
   }
-
-  .scroll-top-btn.visible {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-
-  .scroll-top-btn:active {
-    transform: scale(0.92);
-  }
-  @media (min-width: 50rem) {
-    mobile-scroll-to-top {
+  @media (min-width: 50em) {
+    scroll-to-top {
       display: none;
     }
   }
@@ -55,7 +59,7 @@ import { Icon } from '@astrojs/starlight/components';
   class ScrollToTop extends HTMLElement {
     constructor() {
       super();
-      const button = this.querySelector('.scroll-top-btn');
+      const button = this.querySelector('button');
       if (!button) return;
 
       const toggleVisibility = () => {
@@ -79,5 +83,5 @@ import { Icon } from '@astrojs/starlight/components';
     }
   }
 
-  customElements.define('mobile-scroll-to-top', ScrollToTop);
+  customElements.define('scroll-to-top', ScrollToTop);
 </script>

@@ -1,46 +1,48 @@
 ---
-title: Docs
-description: Get started building your docs site with Stradocs.
-template: splash
+title: Stradocs
+description: Custom Starlight theme featuring a modern design aesthetic and full layout flexibility.
 editUrl: false
 lastUpdated: false
 hero:
-  title: Welcome to Stradocs
-  tagline: Congrats on setting up a new Stradocs project!
-  actions:
-    - text: Getting Started
-      link: /docs/getting-started/introduction
-      icon: rocket
+  title: Stradocs
+  tagline: A custom Starlight theme that brings a clean, premium, and modern aesthetic to your documentation. Inspired by Vercel and Fumadocs.
+  image:
+    file: ~/assets/images/logo/logo.svg
+prev: false
+next: false
+tableOfContents: false
 ---
 
-import { Card, CardGrid } from "@astrojs/starlight/components";
-import AboutAstro from "~/components/about-astro.astro";
+import { Card } from "@astrojs/starlight/components";
+import { CardGrid } from "~/stradocs/components";
 
-## Next steps
+## Key Features
 
-<CardGrid stagger>
-  <Card title="Update content" icon="pencil">
-    Edit `src/content/docs/index.mdx` to see this page change.
+<CardGrid bento>
+  <Card title="Redesigned Components" icon="pencil">
+    The Header, Hero, Footer, and many other Starlight components have been
+    replaced with visually redesigned versions—going beyond simple color
+    changes.
   </Card>
-  <Card title="Change page layout" icon="document">
-    Delete `template: splash` in `src/content/docs/index.mdx` to display a
-    sidebar on this page.
+  <Card title="Integrated Blog System" icon="document">
+    A full-featured blog system including schema extensions, multi-author
+    support, Related Posts, Popular Posts, and RSS feeds—ready to use out of the
+    box.
   </Card>
-  <Card title="Add new content" icon="add-document">
-    Add Markdown or MDX files to `src/content/docs` to create new pages.
+  <Card title="Automatic Markdown Plugins" icon="setting">
+    The `satteriExternalLink` and `satteriTable` plugins are automatically
+    enabled across all content—no manual imports required in individual files.
   </Card>
-  <Card title="Configure your site" icon="setting">
-    Edit your `sidebar` and other config in `astro.config.mjs`.
+  <Card title="Local Fonts" icon="seti:font">
+    Montserrat, Inter, and FiraCode are hosted locally—eliminating external CDN
+    requests to ensure optimal performance and privacy.
   </Card>
-  <Card title="Read the docs" icon="open-book">
-    Learn more in [the Starlight Docs](https://starlight.astro.build/).
+  <Card title="Automatic OG Images" icon="external">
+    Every page automatically generates an Open Graph image, ensuring a
+    consistent appearance when shared on social media.
+  </Card>
+  <Card title="Bilingual Support" icon="translate">
+    Pre-configured for English and Indonesian, including i18n strings for all
+    blog components.
   </Card>
 </CardGrid>
-
-<AboutAstro title="Brought to you by">
-Astro is the all-in-one web framework designed for speed.
-Pull your content from anywhere and deploy everywhere, all powered by your favorite UI components and libraries.
-
-[Learn about Astro](https://astro.build/)
-
-</AboutAstro>

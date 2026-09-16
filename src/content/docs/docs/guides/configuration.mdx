@@ -6,19 +6,24 @@ description: "Stradocs configuration guide — which files to modify and for wha
 import {
   Aside,
   Card,
-  CardGrid,
   FileTree,
   LinkCard,
 } from "@astrojs/starlight/components";
 
+import { CardGrid } from "~/stradocs/components";
+
 Stradocs does not have a dedicated configuration file. All configurations are distributed across four main files, each with distinct and separate responsibilities.
 
 <FileTree>
-  - src/ - config/ - sidebar.ts - expressive-code.ts - constants.ts -
-  astro.config.mjs
+  - src/ 
+    - config/ 
+      - sidebar.ts 
+      - expressive-code.ts 
+      - constants.ts 
+  - astro.config.mjs
 </FileTree>
 
-## `astro.config.mjs`
+### `astro.config.mjs`
 
 The main Astro configuration file. This is the first place to look when customizing Stradocs for your project.
 
@@ -89,7 +94,6 @@ The main Astro configuration file. This is the first place to look when customiz
     ```
 
   </Card>
-
 <Aside type="caution">
   After changing `site`, rerun `npm run build` to ensure all generated URLs use
   the correct domain.
@@ -97,7 +101,7 @@ The main Astro configuration file. This is the first place to look when customiz
 
 ---
 
-## `src/config/sidebar.ts`
+### `src/config/sidebar.ts`
 
 Navigation sidebar structure configuration. All groups, labels, page order, and external links in the sidebar are managed from this file.
 
@@ -149,7 +153,7 @@ export const sidebarConfig = [
   for a complete reference.
 </Aside>
 
-## `src/config/expressive-code.ts`
+### `src/config/expressive-code.ts`
 
 Configure the appearance of code blocks using Expressive Code—Starlight's built-in syntax highlighting library.
 
@@ -163,7 +167,7 @@ export const expressiveCodeConfig = {
 
 Modify this file to change the code block theme, enable additional plugins, or customize the appearance of frames and line numbers.
 
-## `src/constants.ts`
+### `src/constants.ts`
 
 Constants shared across the project—a single location for values ​​used by multiple components.
 
@@ -181,7 +185,7 @@ export { PAGE_TITLE_ID };
   to be made in one place.
 </Aside>
 
-## `src/styles/global.css`
+### `src/styles/global.css`
 
 The Stradocs CSS entry point. All visual customizations—colors, typography, spacing—are centralized here via CSS custom properties.
 
@@ -201,9 +205,9 @@ The Stradocs CSS entry point. All visual customizations—colors, typography, sp
   complete list of variables that can be overridden.
 </Aside>
 
-## The next step
+## Next step
 
-<CardGrid>
+<CardGrid stagger>
   <LinkCard
     title="Adding Content"
     description="How to add documentation pages and new blog articles."

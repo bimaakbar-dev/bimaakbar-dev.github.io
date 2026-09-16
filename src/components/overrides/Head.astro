@@ -2,7 +2,12 @@
 import Default from "@astrojs/starlight/components/Head.astro";
 import { Font } from "astro:assets";
 
-const { entry, isBlog, rssUrl } = Astro.locals.starlightRoute;
+const { 
+  entry, 
+  siteDescription, 
+  isBlog, 
+  rssUrl 
+} = Astro.locals.starlightRoute;
 
 const data = (entry?.data as any) || {};
 
@@ -15,8 +20,9 @@ if (data.heroImage) {
 }
 
 const hasManualOg = data.head?.some(
-  (h: any) => h.attrs?.property === "og-image",
+  (h: any) => h.attrs?.property === "og:image",
 );
+
 const absolutOg = (() => {
   try {
     return new URL(ogImage, Astro.site || Astro.url).href;
@@ -25,7 +31,7 @@ const absolutOg = (() => {
   }
 })();
 
-const ogImageAlt = data.title || "Make your docs shine with Starlight";
+const ogImageAlt = data.title || siteDescription;
 ---
 
 <Font cssVariable="--font-montserrat" preload />
@@ -33,27 +39,24 @@ const ogImageAlt = data.title || "Make your docs shine with Starlight";
 <Font cssVariable="--font-firaCode" preload />
 
 <Default>
-  <slot />
+	<slot />
 </Default>
 
-{
-  isBlog && (
-    <link
-      rel="alternate"
-      type="application/rss+xml"
-      title="RSS Feed"
-      href={rssUrl as string}
-    />
-  )
-}
+{isBlog && (
+	<link
+		rel="alternate"
+		type="application/rss+xml"
+		title="RSS Feed"
+		href={rssUrl as string}
+	/>
+)}
 
-{
-  !hasManualOg && entry && (
-    <>
+{!hasManualOg && entry && (
+	<>
       <meta property="og:image" content={absolutOg} />
-      <meta name="twitter:image" content={absolutOg} />
       <meta property="og:image:alt" content={ogImageAlt} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:image" content={absolutOg} />
       <meta name="twitter:image:alt" content={ogImageAlt} />
     </>
-  )
-}
+)}

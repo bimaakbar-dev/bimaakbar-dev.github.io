@@ -5,17 +5,17 @@ interface Props {
 }
 
 const { date, class: className } = Astro.props;
-const { lang } = Astro.locals.starlightRoute || {};
+const { lang } = Astro.locals.starlightRoute;
 
-const locale = lang || "en";
+const locale = lang;
 ---
-
-<time class={className} datetime={date.toISOString()}>
-  {
-    date.toLocaleDateString(locale, {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    })
-  }
-</time>
+<p>
+  <time class={className} datetime={date.toISOString()}>
+    { date.toLocaleDateString(locale, {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      })
+    }
+  </time>
+</p>

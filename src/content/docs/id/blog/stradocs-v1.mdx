@@ -1,11 +1,11 @@
 ---
 title: "Stradocs 1.0"
 description: "Memperkenalkan Stradocs 1.0 Tema Astro Starlight yang didesain ulang dari nol, dengan sistem blog terintegrasi, font lokal, OG Image, dan RSS."
-editUrl: https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/
 pubDate: 2026-09-04T09:40Z
+template: splash
 author:
   - name: "Bima Akbar"
-    avatar: ~/assets/images/author/bimaakbar-dev.svg
+    avatar: ~/assets/images/author/bimaakbar.svg
 heroImage: ~/assets/images/blog/stradocs-v1.jpg
 tags:
   - astro
@@ -13,18 +13,19 @@ tags:
   - announcement
   - stradocs
   - v1.0
-draft: false
+lastUpdated: 2026-09-08
 ---
 
 import {
   Aside,
   Badge,
   Card,
-  CardGrid,
   LinkCard,
   Tabs,
   TabItem,
 } from "@astrojs/starlight/components";
+
+import { CardGrid } from "~/stradocs/components";
 
 [Astro Starlight](https://starlight.astro.build) adalah fondasi dokumentasi yang solid — ringan, berbasis MDX, dan terstruktur dengan baik. Tapi tampilannya yang default terasa generik. Untuk proyek yang ingin punya identitas visual sendiri, itu jadi hambatan sejak hari pertama.
 
@@ -53,29 +54,6 @@ Bukan starter kit asal jadi — melainkan tema yang sudah memikirkan tipografi, 
     bisa ditelusuri dari awal.
   </Card>
 </CardGrid>
-
-## Stack
-
-<Tabs>
-  <TabItem label="Core" icon="rocket">
-    - [Astro](https://astro.build/) <Badge text="7.3" variant="note" />
-    - [Starlight](https://starlight.astro.build/){" "}
-    <Badge text="0.42" variant="note" />
-    - [TailwindCss](https://tailwindcss.com/){" "}
-    <Badge text="4.3" variant="note" />
-  </TabItem>
-  <TabItem label="Font" icon="seti:font">
-    | Peran | Typeface | Format | |---|---|---| | Heading | Montserrat |
-    `.woff2` (lokal) | | Body | Inter | `.woff2` (lokal) | | Mono / Kode |
-    FiraCode | `.woff2` (lokal) |
-  </TabItem>
-</Tabs>
-
-<Aside type="tip">
-  Semua font menggunakan `fontProviders.local()` bawaan Astro — tidak ada
-  request ke Google Fonts atau CDN eksternal. Performa dan privasi pengguna
-  terjaga sejak load pertama.
-</Aside>
 
 ## Fitur Stradocs 1.0
 
@@ -290,7 +268,7 @@ npm run dev
 
 Stradocs tidak dibangun di ruang hampa. Terima kasih kepada proyek-proyek dan tim-tim berikut yang menjadi fondasi dan inspirasi di baliknya:
 
-<CardGrid>
+<CardGrid variant="bento">
   <LinkCard
     title="Astro"
     description="Framework yang membuat semuanya mungkin — cepat, fleksibel, dan berorientasi pada developer experience."
@@ -310,25 +288,5 @@ Stradocs tidak dibangun di ruang hampa. Terima kasih kepada proyek-proyek dan ti
     title="Vercel"
     description="Referensi estetika sistem desain — presisi, minimal, dan konsisten di setiap detail."
     href="https://vercel.com"
-  />
-  <LinkCard
-    title="Montserrat"
-    description="Typeface heading Stradocs. Geometris dan berkarakter kuat."
-    href="https://fonts.google.com/specimen/Montserrat"
-  />
-  <LinkCard
-    title="Inter"
-    description="Typeface body Stradocs. Dirancang khusus untuk keterbacaan di layar."
-    href="https://rsms.me/inter"
-  />
-  <LinkCard
-    title="FiraCode"
-    description="Typeface monospace Stradocs. Mendukung ligatures untuk pengalaman membaca kode yang lebih baik."
-    href="https://github.com/tonsky/FiraCode"
-  />
-  <LinkCard
-    title="Tailwind CSS"
-    description="Utility-first CSS framework yang digunakan untuk styling custom di Stradocs."
-    href="https://tailwindcss.com"
   />
 </CardGrid>

@@ -23,31 +23,36 @@
   display: block;
   box-sizing: border-box;
   position: relative;
-  padding: 1rem 1.25rem 1rem 1.65rem;
-  outline: 1px solid var(--sl-color-hairline-light);
-  border-radius: 0.5rem;
-  background-color: rgb(from var(--sl-color-gray-6) r g b / 50%);
+  padding: 1em 1.25em 1em 1.65em;
+  outline: 1px solid var(--sl-color-hairline);
+  border-radius: 0.75rem;
+  background-color: var(--sl-color-gray-6);
   border-inline-start: none;
   color: var(--sl-color-text);
+}
+[data-theme='light'] .starlight-aside {
+  background-color: var(--sl-color-gray-7);
 }
 .starlight-aside::before {
   content: "";
   position: absolute;
   inset-block: 0.65rem;
   inset-inline-start: 0.5rem;
-  width: 0.15rem;
+  width: 3px;
   background-color: var(--sl-color-asides-border);
-  border-radius: 99rem;
+  border-radius: 999px;
   vertical-align: middle;
 }
 .starlight-aside__title {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.5em;
   align-items: center;
   font-size: var(--sl-text-sm);
   font-weight: 500;
   line-height: var(--sl-line-height-headings);
   color: var(--sl-color-asides-text-accent);
+  text-align: start;
+  vertical-align: middle;
 }
 .starlight-aside__icon {
   font-size: 1em;
@@ -57,11 +62,14 @@
   vertical-align: middle;
   color: inherit; 
 }
+.starlight-aside__content {
+  text-align: start;
+}
 .starlight-aside__content:empty {
 	display: none;
 }
 .starlight-aside__title + .starlight-aside__content {
-  margin-top: 0.5rem;
+  margin-top: 0.5em;
   font-size: var(--sl-text-sm);
 }
 .starlight-aside__content a {

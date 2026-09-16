@@ -1,5 +1,4 @@
 ---
-import logo from "~/assets/images/author/bimaakbar-dev.svg";
 interface Props {
   title: string;
 }
@@ -34,16 +33,18 @@ const { title } = Astro.props;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 0.5rem;
+    gap: 0.5em;
   }
-  article > :global(*) {
-    max-width: 50ch;
-    /* margin-top: 0 !important; */
-  }
-  small {
-    color: var(--sl-color-gray-3);
-  }
-  svg {
-    width: 15rem;
+  article {
+    & > :global(*) {
+      max-width: 50ch;
+      /* margin-top: 0 !important; */
+    }
+    & small {
+      color: var(--sl-color-gray-3);
+    }
+    & svg {
+      width: 15rem;
+    }
   }
 </style>

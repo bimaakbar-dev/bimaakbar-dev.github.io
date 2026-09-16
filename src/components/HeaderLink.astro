@@ -33,7 +33,7 @@ const isActive = (): boolean => {
 };
 
 const active = isActive();
-const linkClass = [className, "nav-link", active && "nav-link--active"]
+const linkClass = [active && "is-active"]
   .filter(Boolean)
   .join(" ");
 ---
@@ -48,22 +48,39 @@ const linkClass = [className, "nav-link", active && "nav-link--active"]
 </a>
 
 <style>
-  .nav-link {
-    display: inline-block;
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     text-decoration: none;
     color: var(--sl-color-gray-2);
-    font-size: var(--sl-text-base);
-    font-weight: 600;
+    font-size: var(--sl-text-sm);
+    font-weight: 500;
     font-family: var(--font-montserrat);
     white-space: nowrap;
-    vertical-align: middle;
+    line-height: 1;
+    padding: 0.5em 0.875em;
+    border-radius: 999px;
+    &:hover {
+      color: var(--sl-color-white);
+    }
+    &.is-active {
+      color: var(--sl-color-accent-high);
+      &:hover {
+        filter: brightness(1.15);
+      }
+    }
   }
-
-  .nav-link:hover {
-    color: var(--sl-color-white);
+  [data-theme="light"] a {
+    color: var(--sl-color-gray-2);
+    &.is-active {
+      color: var(--sl-color-accent-high);
+    }
   }
-
-  .nav-link--active {
-    color: var(--sl-color-accent);
+  @media (max-width: 50rem) {
+    a {
+      padding: 0;
+      font-size: var(--sl-text-base);
+    }
   }
 </style>

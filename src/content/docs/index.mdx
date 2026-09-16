@@ -3,27 +3,37 @@ title: Stradocs
 description: Custom Starlight theme featuring a modern design aesthetic and full layout flexibility.
 template: splash
 editUrl: false
+lastUpdated: false
 hero:
   title: Stradocs
   tagline: A custom Starlight theme that brings a clean, premium, and modern aesthetic to your documentation. Inspired by Vercel and Fumadocs.
   image:
-    file: ~/assets/images/author/bimaakbar.svg
+    file: ~/assets/images/logo/logo.svg
   actions:
     - text: Start Documentation
-      link: /docs/getting-started/introduction
+      link: /docs/
       icon: rocket
+    - text: Read blog
+      link: /blog/
+      icon: open-book
+      variant: secondary
 banner:
   content: |
     Stradocs V1.0 Officially Released!
     <a href="/blog/stradocs-v1">Read more →</a>
+head:
+  - tag: title
+    content: Stradocs
+prev: false
+next: false
 ---
 
-import { Card, CardGrid } from "@astrojs/starlight/components";
-import AboutAstro from "~/components/about-astro.astro";
+import { Card } from "@astrojs/starlight/components";
+import { CardGrid, ContributorList, GithubCard } from "~/stradocs/components";
 
 ## Key Features
 
-<CardGrid stagger>
+<CardGrid variant="feature">
   <Card title="Redesigned Components" icon="pencil">
     The Header, Hero, Footer, and many other Starlight components have been
     replaced with visually redesigned versions—going beyond simple color
@@ -56,26 +66,11 @@ import AboutAstro from "~/components/about-astro.astro";
 
 Stradocs is Starlight—not a fork, not a wrapper. Everything you know about Starlight still applies. Stradocs simply adds and replaces the visual layer on top.
 
-## Next steps
+<GithubCard repo="bimaakbar-dev/bimaakbar-dev.github.io" />
 
-<CardGrid stagger>
-  <Card title="Update content" icon="pencil">
-    Edit `src/content/docs/index.mdx` to see this page change.
-  </Card>
-  <Card title="Change page layout" icon="document">
-    Delete `template: splash` in `src/content/docs/index.mdx` to display a
-    sidebar on this page.
-  </Card>
-  <Card title="Add new content" icon="add-document">
-    Add Markdown or MDX files to `src/content/docs` to create new pages.
-  </Card>
-  <Card title="Configure your site" icon="setting">
-    Edit your `sidebar` and other config in `astro.config.mjs`.
-  </Card>
-  <Card title="Read the docs" icon="open-book">
-    Learn more in [the Starlight Docs](https://starlight.astro.build/).
-  </Card>
-</CardGrid>
+<ContributorList repo="bimaakbar-dev/bimaakbar-dev.github.io" />
+
+import AboutAstro from "~/components/about-astro.astro";
 
 <AboutAstro title="Presented by">
 

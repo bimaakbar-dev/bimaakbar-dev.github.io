@@ -36,13 +36,13 @@ Stradocs is distributed as a GitHub repository that can be directly forked or cl
 
    Fork via GitHub if you want to save changes to your own repository, or clone directly if you just want to explore locally.
 
-   ```bash
+   ```bash title='Command Prompt'
    git clone https://github.com/bimaakbar-dev/bimaakbar-dev.github.io.git my-docs
    ```
 
 2. **Enter the project directory**
 
-   ```bash
+   ```bash title='Command Prompt'
    cd my-docs
    ```
 
@@ -50,13 +50,19 @@ Stradocs is distributed as a GitHub repository that can be directly forked or cl
 
    <Tabs>
      <TabItem label="npm" icon="seti:npm">
-       ```bash npm install ```
+      ```bash title='Command Prompt'
+      npm install 
+      ```
      </TabItem>
      <TabItem label="pnpm" icon="pnpm">
-       ```bash pnpm install ```
+      ```bash title='Command Prompt'
+      pnpm install 
+      ```
      </TabItem>
      <TabItem label="yarn" icon="seti:yarn">
-       ```bash yarn install ```
+      ```bash title='Command Prompt'
+      yarn install 
+      ```
      </TabItem>
    </Tabs>
 
@@ -64,13 +70,19 @@ Stradocs is distributed as a GitHub repository that can be directly forked or cl
 
    <Tabs>
      <TabItem label="npm" icon="seti:npm">
-       ```bash npm run dev ```
+      ```bash title='Command Prompt'
+      npm run dev 
+      ```
      </TabItem>
      <TabItem label="pnpm" icon="pnpm">
-       ```bash pnpm dev ```
+      ```bash title='Command Prompt'
+      pnpm dev 
+      ```
      </TabItem>
      <TabItem label="yarn" icon="seti:yarn">
-       ```bash yarn dev ```
+      ```bash title='Command Prompt'
+      yarn dev 
+      ```
      </TabItem>
    </Tabs>
 
@@ -92,35 +104,31 @@ When ready to deploy, run the build command:
 
 <Tabs>
   <TabItem label="npm" icon="seti:npm">
-    ```bash npm run build ```
+    ```bash title='Command Prompt'
+    npm run build 
+    ```
   </TabItem>
   <TabItem label="pnpm" icon="pnpm">
-    ```bash pnpm build ```
+    ```bash title='Command Prompt'
+    pnpm build 
+    ```
   </TabItem>
   <TabItem label="yarn" icon="seti:yarn">
-    ```bash yarn build ```
+    ```bash title='Command Prompt'
+    yarn build 
+    ```
   </TabItem>
 </Tabs>
 
 The build output will be located in the `dist/` folder. Stradocs is configured to deploy to **GitHub Pages**—the `site` configuration in `astro.config.mjs` is already set to the repository URL.
 
 <Aside>
-  If you want to deploy to another platform, adjust the `site` and `base` values
-  ​​in `astro.config.mjs` according to the Astro documentation for the target
-  platform.
+  If you want to deploy to another platform, adjust the `site` and `base` values in `astro.config.mjs` according to the Astro documentation for the target platform.
 </Aside>
 
-## The next step
-
-<CardGrid>
-  <LinkCard
-    title="Configuration"
-    description="Adjust the Stradocs configuration—sidebar, site title, and more."
-    href="/docs/guides/configuration"
-  />
-  <LinkCard
-    title="Project Structure"
-    description="Understand the Stradocs folder structure before starting customization."
-    href="/docs/getting-started/project-structure"
-  />
-</CardGrid>
+## Next step
+<LinkCard
+  title="Configuration"
+  description="Adjust the Stradocs configuration—sidebar, site title, and more."
+  href="/docs/guides/configuration"
+/>

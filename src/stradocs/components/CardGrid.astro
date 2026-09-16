@@ -1,0 +1,38 @@
+---
+interface Props {
+  stagger?: boolean;
+  bento?: boolean;
+  variant?: "default" | "stagger" | "bento" | "masonry" | "feature" | "dense";
+}
+const props = Astro.props as Props;
+const variant = props.variant ?? (props.bento ? "bento" : props.stagger ? "stagger" : "default");
+---
+
+<div class:list={['card-grid', variant !== 'default' ? `is-${variant}` : undefined]}>
+  <slot />
+</div>
+
+<style>
+@layer starlight.components {
+  .card-grid { display: grid; grid-template-columns: 100%; gap: 1rem; }
+  .card-grid > :global(*) { margin-top: 0 !important; }
+  @media (min-width: 50rem) {
+    .card-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .is-stagger { --stagger-height: 5rem; padding-bottom: var(--stagger-height); }
+    .is-stagger > :global(*:nth-child(2n)) { transform: translateY(var(--stagger-height)); }
+    .is-bento { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; }
+    .is-bento > :global(*:first-child) { grid-column: span 2; grid-row: span 2; }
+    .is-bento > :global(*:nth-child(4)) { grid-column: span 3; }
+    .is-masonry { display: block; column-count: 2; column-gap: 1rem; }
+    .is-masonry > :global(*) { break-inside: avoid; margin-bottom: 1rem; }
+    .is-feature { grid-template-columns: repeat(3, 1fr); }
+    .is-feature > :global(*:first-child) { grid-column: span 3; }
+    .is-dense { grid-template-columns: repeat(3, 1fr); gap: 0.85rem; }
+  }
+  @media (max-width: 50rem) {
+    .is-masonry { column-count: 1; }
+    .is-stagger { padding-bottom: 0; }
+    .is-stagger > :global(*) { transform: none !important; }
+  }
+}
+</style>
