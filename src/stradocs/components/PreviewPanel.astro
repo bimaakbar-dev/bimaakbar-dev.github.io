@@ -23,7 +23,7 @@ const showContentTypeTabs = Astro.slots.has("markdoc");
     )
   }
   <div class="preview">
-    <caption>{Astro.locals.t("component.preview")}</caption>
+    <p>{Astro.locals.t("component.preview")}</p>
     <div class="preview-content">
       <slot name="preview" />
     </div>
@@ -38,8 +38,7 @@ const showContentTypeTabs = Astro.slots.has("markdoc");
       & .preview {
         display: flex;
         flex-direction: column;
-        gap: 1em;
-        background: var(--sl-color-gray-4);
+        gap: 0.75em;
         border: 1px solid var(--sl-color-hairline);
         border-radius: 0.75rem;
         border-top-left-radius: 0;
@@ -47,11 +46,14 @@ const showContentTypeTabs = Astro.slots.has("markdoc");
         border-top: 0;
         padding: 1rem;
         margin-top: 0;
-        & caption {
+        & p {
           font-size: var(--sl-text-body);
+          margin: 0;
+          padding: 0
         }
         & .preview-content {
           display: block;
+          margin-top: 0;
         }
       }
       & .preview:only-child {
