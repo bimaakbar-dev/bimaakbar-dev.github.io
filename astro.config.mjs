@@ -11,9 +11,9 @@ import { hastTable } from "./src/lib/plugins/satteri/hast/hast-table";
 import { mdastStradocsAside } from './src/lib/plugins/satteri/mdast/mdast-stradocs-aside'
 import { mermaidPlugin } from "./src/lib/plugins/satteri/mdast/satteri-plugin-mermaid";
 
-const site = "https://bimaakbar-dev.github.io/";
-const siteName = "Stradocs";
-const siteDesc = "Custom Starlight theme featuring a modern design";
+const site = "https://c0desk1.github.io/";
+const siteName = "c0desk1";
+const siteDesc = "Berbagi Tutorial, tips dan trik tentang teknologi, anime, dan game";
 const siteLocale = {
   root: {
     label: "English",
