@@ -8,7 +8,7 @@ const customNotice = isBlogPost;
 ---
 
 <p class={customNotice ? "sl-flex custom-fallback" : 'sl-flex'}'>
-  <Icon name="warning" size="1.333em" color="var(--sl-color-orange-high)" />
+  <Icon name="warning" color="var(--sl-color-orange-high)" />
   <span>{Astro.locals.t("i18n.untranslatedContent")}</span>
 </p>
 
@@ -37,5 +37,6 @@ const customNotice = isBlogPost;
   p.custom-fallback {
     margin-inline: auto;
     margin-bottom: 1rem;
+    padding-inline: var(--sl-content-pad-x);
   }
 </style>
