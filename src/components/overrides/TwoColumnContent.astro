@@ -1,0 +1,91 @@
+---
+//overrides
+const { 
+    toc,
+	isBlogIndex, 
+	isBlogPost,
+	isLegalPage
+} = Astro.locals.starlightRoute;
+
+const customPageTwoColumn = isBlogIndex || isBlogPost || isLegalPage;
+---
+{ customPageTwoColumn ? (
+	<>
+		<div class="custom-main-pane">
+			<slot />
+		</div>
+	</>
+) : (
+    <div class="lg:sl-flex">
+	{ toc && (
+		<aside class="right-sidebar-container print:hidden">
+			<div class="right-sidebar">
+				<slot name="right-sidebar" />
+			</div>
+		</aside>
+	)}
+	<div class="main-pane">
+        <slot />
+    </div>
+</div>
+)}
+
+<style>
+	.custom-main-pane {
+		isolation: isolate;
+	}
+	@media (min-width: 72rem) {
+		.custom-main-pane {
+			width: 100%;
+		}
+		:global([data-has-sidebar][data-has-toc]) .custom-main-pane {
+			--sl-content-margin-inline: auto 0;
+			width: 100%
+		}
+	}
+</style>
+
+<style>
+	.main-pane {
+		isolation: isolate;
+	}
+
+	@media (min-width: 72rem) {
+		.right-sidebar-container {
+			order: 2;
+			position: relative;
+			width: max(
+				var(--sl-sidebar-width),
+				calc(
+					var(--sl-sidebar-width) + (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2
+				)
+			);
+		}
+
+		.right-sidebar {
+			position: fixed;
+			top: 0;
+			border-inline-start: none;
+			padding-top: var(--sl-nav-height);
+			width: 100%;
+			height: 100vh;
+			overflow-y: auto;
+			scrollbar-width: none;
+		}
+		.main-pane {
+			width: 100%;
+		}
+
+		:global([data-has-sidebar][data-has-toc]) .main-pane {
+			--sl-content-margin-inline: auto 0;
+
+			order: 1;
+			width: min(
+				calc(100% - var(--sl-sidebar-width)),
+				calc(
+					var(--sl-content-width) + (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2
+				)
+			);
+		}
+	}
+</style>

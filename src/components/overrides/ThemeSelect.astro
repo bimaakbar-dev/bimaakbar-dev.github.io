@@ -1,0 +1,126 @@
+---
+// src/components/ThemeSelect.astro
+import { Icon } from '@astrojs/starlight/components';
+const label = Astro.locals.t('themeSelect.accessibleLabel');
+---
+
+<theme-cycle-toggle>
+  <button
+    type="button"
+    class="theme-cycle"
+    aria-label={label}
+    title={label}
+    data-theme-cycle
+    data-mode="auto"
+  >
+    <Icon name="laptop" class="theme-cycle__icon theme-cycle__icon--auto" />
+    <Icon name="sun" class="theme-cycle__icon theme-cycle__icon--light" />
+    <Icon name="moon" class="theme-cycle__icon theme-cycle__icon--dark" />
+  </button>
+</theme-cycle-toggle>
+
+<script is:inline>
+  StarlightThemeProvider.updatePickers();
+</script>
+
+<script>
+  type Theme = 'auto' | 'dark' | 'light';
+
+  const storageKey = 'starlight-theme';
+
+  const parseTheme = (theme: unknown): Theme =>
+    theme === 'auto' || theme === 'dark' || theme === 'light' ? theme : 'auto';
+
+  const loadTheme = (): Theme =>
+    parseTheme(typeof localStorage !== 'undefined' ? localStorage.getItem(storageKey) : null);
+
+  function storeTheme(theme: Theme): void {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(storageKey, theme === 'light' || theme === 'dark' ? theme : '');
+    }
+  }
+
+  const getPreferredColorScheme = (): 'light' | 'dark' =>
+    matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+
+  // ⚡ Sync SEMUA tombol di halaman, bukan cuma satu
+  function syncAllButtons(theme: Theme): void {
+    document.querySelectorAll<HTMLElement>('[data-theme-cycle]').forEach((btn) => {
+      btn.dataset.mode = theme;
+    });
+  }
+
+  function onThemeChange(theme: Theme): void {
+    StarlightThemeProvider.updatePickers(theme);
+    document.documentElement.dataset.theme = theme === 'auto' ? getPreferredColorScheme() : theme;
+    storeTheme(theme);
+    syncAllButtons(theme);
+  }
+
+  matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
+    if (loadTheme() === 'auto') onThemeChange('auto');
+  });
+
+  class ThemeCycleToggle extends HTMLElement {
+    constructor() {
+      super();
+      onThemeChange(loadTheme());
+
+      // Tiap instance punya listener sendiri
+      this.querySelector<HTMLButtonElement>('[data-theme-cycle]')?.addEventListener('click', () => {
+        const current = loadTheme();
+        const next: Theme =
+          current === 'auto' ? 'light' :
+          current === 'light' ? 'dark' :
+          'auto';
+        onThemeChange(next);
+      });
+    }
+  }
+
+  if (!customElements.get('theme-cycle-toggle')) {
+    customElements.define('theme-cycle-toggle', ThemeCycleToggle);
+  }
+</script>
+
+<style>
+  :global(theme-cycle-toggle) {
+    display: contents;
+  }
+
+  .theme-cycle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.5rem;
+    background: transparent;
+    color: var(--sl-color-gray-2);
+    cursor: pointer;
+    transition: color 0.15s ease;
+  }
+
+  .theme-cycle:hover {
+    color: var(--sl-color-white);
+    background: var(--sl-color-gray-6);
+    border-color: var(--sl-color-gray-5);
+  }
+
+  .theme-cycle:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+  }
+
+  .theme-cycle__icon {
+    width: 1rem;
+    height: 1rem;
+    display: none;
+  }
+
+  .theme-cycle[data-mode='auto'] .theme-cycle__icon--auto  { display: block; }
+  .theme-cycle[data-mode='light'] .theme-cycle__icon--light { display: block; }
+  .theme-cycle[data-mode='dark'] .theme-cycle__icon--dark  { display: block; }
+</style>
