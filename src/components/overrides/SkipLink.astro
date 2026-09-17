@@ -1,0 +1,43 @@
+---
+import { PAGE_TITLE_ID } from "~/constants";
+---
+
+<a class="sl-skip-link" href={`#${PAGE_TITLE_ID}`}>
+  {Astro.locals.t("skipLink.label")}
+</a>
+
+<style>
+  @layer starlight.core {
+    a {
+      clip: rect(0, 0, 0, 0);
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%) translateY(-200%);
+      transition: none;
+      color: var(--sl-color-text-white);
+      background-color: var(--sl-color-bg-accent);
+      border: none;
+      outline: 2px solid var(--sl-color-accent-low);
+      top: calc(env(safe-area-inset-top) + var(--sl-nav-height) + 1rem);
+      z-index: var(--sl-z-index-skiplink);
+      text-decoration: none;
+      line-height: var(--sl-line-height-headings);
+
+      width: fit-content;
+      margin-top: 0.75rem;
+      padding: 0.5em 1em;
+      display: inline-flex;
+      justify-content: center;
+      font-weight: 600;
+      border-radius: 9999px;
+    }
+
+    a:focus {
+      clip: unset;
+      transform: translateX(-50%) translateY(0);
+      display: block;
+      text-decoration: none;
+      box-shadow: var(--sl-shadow-lg);
+    }
+  }
+</style>

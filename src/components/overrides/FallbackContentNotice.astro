@@ -1,0 +1,32 @@
+---
+import { Icon } from "@astrojs/starlight/components";
+---
+
+<p class="sl-flex custom-content-notice">
+  <Icon name="warning" size="1.333em" color="var(--sl-color-orange-high)" />
+  <span>{Astro.locals.t("i18n.untranslatedContent")}</span>
+</p>
+
+<style>
+  .custom-content-notice {
+    border: 1px solid var(--sl-color-orange);
+    padding: 0.75em 1em;
+    background-color: var(--sl-color-orange-low);
+    color: var(--sl-color-orange-high);
+    width: max-content;
+    max-width: 100%;
+    align-items: center;
+    gap: 0.75em;
+    font-size: var(--sl-text-body-sm);
+    line-height: var(--sl-line-height-headings);
+    border-radius: 0.75rem;
+    vertical-align: middle;
+    & svg {
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 1em;
+      height: 1em;
+    }
+  }
+</style>
