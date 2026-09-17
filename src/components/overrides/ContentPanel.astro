@@ -62,13 +62,18 @@ const {
 		}
 		& :global(.sl-blog-container p.custom-fallback) {
 		  margin-inline: auto;
-		  width: min(50rem, 100% - 2rem);
+		  width: min(var(--sl-content-width), 100% - var(--sl-content-pad-x) - 1rem);
 		}
 	}
 	@media (min-width: 72rem) {
 		.sl-custom-container,
 		.sl-blog-container {
 			margin-inline: var(--sl-content-margin-inline, auto);
+		}
+		.custom-blog-post-content-panel {
+		    & :global(.sl-blog-container p.custom-fallback) {
+		  	width: min(var(--sl-content-width), 100% - var(--sl-content-pad-x) - 2rem);
+			}
 		}
 	}
 </style>
