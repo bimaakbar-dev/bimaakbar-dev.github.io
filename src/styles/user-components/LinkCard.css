@@ -1,74 +1,103 @@
-/* Link Card */
+/* LinkCard.css */
+
+:root {
+  --ds-card-radius:   0.75rem;
+  --ds-card-padding:  1rem;
+  --ds-card-gap:      0.5em;
+
+  --ds-card-bg:             transparent;
+  --ds-card-bg-hover:       rgb(from var(--sl-color-gray-6) r g b / 40%);
+  --ds-card-border:         var(--sl-color-hairline);
+  --ds-card-border-hover:   var(--sl-color-gray-4);
+
+  --ds-card-title-color:        var(--sl-color-white);
+  --ds-card-title-size:         var(--sl-text-sm);
+  --ds-card-title-size-lg:      var(--sl-text-body);
+  --ds-card-title-weight:       500;
+
+  --ds-card-desc-color:         var(--sl-color-gray-2);
+  --ds-card-desc-size:          var(--sl-text-sm);
+
+  --ds-card-icon-color:         var(--sl-color-gray-3);
+  --ds-card-icon-color-hover:   var(--sl-color-white);
+}
+
+:root[data-theme="light"],
+[data-theme="light"] ::backdrop {
+  --ds-card-bg:           var(--sl-color-gray-7);
+  --ds-card-bg-hover:     var(--sl-color-gray-7);
+  --ds-card-border:       hsla(0, 0%, 0%, 0.1);
+  --ds-card-border-hover: hsla(0, 0%, 0%, 0.22);
+
+  --ds-card-title-color:      var(--sl-color-white);
+  --ds-card-icon-color-hover: var(--sl-color-gray-2);
+}
+
+/* ── Komponen ─────────────────────────────────────────── */
+
 .sl-link-card {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 0.5em;
+  gap: var(--ds-card-gap);
   border: none;
-  outline: 1px solid var(--sl-color-hairline);
-  border-radius: 0.75rem;
-  padding: 1rem;
+  outline: 1px solid var(--ds-card-border);
+  border-radius: var(--ds-card-radius);
+  padding: var(--ds-card-padding);
   box-shadow: none;
   position: relative;
-  background-color: rgb(from var(--sl-color-gray-6) r g b / 100%);
+  background-color: var(--ds-card-bg);
+  transition:
+    background 140ms ease,
+    outline-color 140ms ease;
 }
 
-.sl-link-card {
-  & a {
-    text-decoration: none;
-    line-height: var(--sl-line-height-headings);
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  & a::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-  }
-
-  & .stack {
-    flex-direction: column;
-    gap: 0.5em;
-  }
-
-  & .title {
-    color: var(--sl-color-white);
-    font-weight: 500;
-    font-size: var(--sl-text-sm);
-  }
-
-  & .description {
-    color: var(--sl-color-gray-2);
-    line-height: 1.5;
-    font-size: var(--sl-text-sm);
-  }
-
-  & .icon {
-    color: var(--sl-color-gray-3);
-  }
+.sl-link-card a {
+  text-decoration: none;
+  line-height: var(--sl-line-height-headings);
+  -webkit-tap-highlight-color: transparent;
 }
 
-[data-theme='light'] .sl-link-card {
-  background-color: rgb(from var(--sl-color-gray-7) r g b / 100%);
+.sl-link-card a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.sl-link-card .stack {
+  flex-direction: column;
+  gap: var(--ds-card-gap);
+}
+
+.sl-link-card .title {
+  color: var(--ds-card-title-color);
+  font-weight: var(--ds-card-title-weight);
+  font-size: var(--ds-card-title-size);
+}
+
+.sl-link-card .description {
+  color: var(--ds-card-desc-color);
+  font-size: var(--ds-card-desc-size);
+  line-height: 1.5;
+}
+
+.sl-link-card .icon {
+  color: var(--ds-card-icon-color);
+  transition: color 140ms ease;
 }
 
 @media (hover: hover) {
   .sl-link-card:hover {
-    outline: 1px solid var(--sl-color-hairline-shade);
-    transition: color 0.5s ease;
-    background-color: rgb(from var(--sl-color-gray-6) r g b / 50%);
+    outline-color: var(--ds-card-border-hover);
+    background-color: var(--ds-card-bg-hover);
   }
 
   .sl-link-card:hover .icon {
-    color: var(--sl-color-white);
-  }
-  
-  [data-theme='light'] .sl-link-card:hover {
-    background-color: rgb(from var(--sl-color-gray-7) r g b / 50%);
+    color: var(--ds-card-icon-color-hover);
   }
 }
 
 @media (min-width: 50rem) {
   .sl-link-card .title {
-    font-size: var(--sl-text-body);
+    font-size: var(--ds-card-title-size-lg);
   }
 }

@@ -1,31 +1,86 @@
-/* Starlight Tabs Custom Styling */
+/* Tabs.css */
+
+:root {
+  --ds-tab-border-width:    2px;
+  --ds-tab-border-inactive: transparent;
+  --ds-tab-border-active:   var(--sl-color-accent-high);
+
+  --ds-tab-text-inactive:   var(--sl-color-gray-3);
+  --ds-tab-text-hover:      var(--sl-color-white);
+  --ds-tab-text-active:     var(--sl-color-white);
+  --ds-tab-text-weight:     500;
+  --ds-tab-text-weight-active: 500;
+
+  --ds-tab-padding:         0.275rem 1.25rem;
+  --ds-tab-gap:             0.5rem;
+
+  --ds-tab-font-size:       var(--sl-text-sm);
+  --ds-tab-font-size-lg:    var(--sl-text-base);
+
+  --ds-tab-list-border:     var(--sl-color-hairline);
+  --ds-tab-panel-gap:       1rem;
+}
+
+[data-theme="light"] {
+  --ds-tab-border-active:      var(--sl-color-accent);
+  --ds-tab-text-inactive:      var(--sl-color-gray-3);
+  --ds-tab-text-hover:         var(--sl-color-white);
+  --ds-tab-text-active:        var(--sl-color-white);
+  --ds-tab-list-border:        var(--sl-color-hairline);
+}
+
+/* ── Komponen ─────────────────────────────────────────── */
+
+.tablist-wrapper {
+  overflow-x: auto;
+}
+
 [role="tablist"] {
-  border-bottom: 2px solid var(--sl-color-hairline);
-  font-size: var(--sl-text-sm);
+  display: flex;
+  list-style: none;
+  padding: 0;
+  border-bottom: var(--ds-tab-border-width) solid var(--ds-tab-list-border);
+  font-size: var(--ds-tab-font-size);
 }
 
 .tab {
-  & > [role="tab"] {
-    --sl-tab-color-border: transparent;
-    box-shadow: 0 2px 0 var(--sl-tab-color-border);
-    color: var(--sl-color-gray-3);
-    font-weight: 500;
-  }
-  & [role="tab"][aria-selected="true"] {
-    --sl-tab-color-border: var(--sl-color-accent-high);
-    color: var(--sl-color-white);
-    font-weight: 500;
-  }
+  display: flex;
+}
+
+.tab > [role="tab"] {
+  --sl-tab-color-border: var(--ds-tab-border-inactive);
+  display: flex;
+  align-items: center;
+  gap: var(--ds-tab-gap);
+  line-height: var(--sl-line-height-headings);
+  padding: var(--ds-tab-padding);
+  text-decoration: none;
+  box-shadow: 0 var(--ds-tab-border-width) 0 var(--sl-tab-color-border);
+  color: var(--ds-tab-text-inactive);
+  font-weight: var(--ds-tab-text-weight);
+  outline-offset: var(--sl-outline-offset-inside);
+  overflow-wrap: initial;
+  transition: color 120ms ease;
+}
+
+.tab > [role="tab"][aria-selected="true"] {
+  --sl-tab-color-border: var(--ds-tab-border-active);
+  color: var(--ds-tab-text-active);
+  font-weight: var(--ds-tab-text-weight-active);
+}
+
+.tablist-wrapper ~ [role="tabpanel"] {
+  margin-top: var(--ds-tab-panel-gap);
 }
 
 @media (hover: hover) {
   .tab > [role="tab"]:hover {
-    color: var(--sl-color-white);
+    color: var(--ds-tab-text-hover);
   }
 }
 
 @media (min-width: 50rem) {
   [role="tablist"] {
-    font-size: var(--sl-text-base);
+    font-size: var(--ds-tab-font-size-lg);
   }
 }

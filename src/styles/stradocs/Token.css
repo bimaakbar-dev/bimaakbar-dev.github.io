@@ -75,59 +75,66 @@
 
 :root[data-theme="light"],
 [data-theme="light"] ::backdrop {
-  --sl-color-black: hsl(0, 0%, 96%);
-  --sl-color-gray-7: hsl(0, 0%, 94.7%);
-  --sl-color-gray-6: hsl(0, 0%, 98%);
-  --sl-color-gray-5: hsla(0, 0%, 80%, 50%);
-  --sl-color-gray-4: hsl(100, 5%, 74%);
+  /* ===== Base background ===== */
+  --sl-color-bg:               hsl(0, 0%, 96%);       /* page */
+  --sl-color-bg-nav:           hsl(0, 0%, 96%);       /* navbar */
+  --sl-color-bg-sidebar:       hsl(0, 0%, 96%);       /* sidebar */
+  --sl-color-bg-inline-code:   hsl(0, 0%, 94.7%);     /* inline code */
+  --sl-color-bg-accent:        var(--sl-color-accent);
+  --sl-color-black:            hsl(0, 0%, 96%);       /* bg token (light = light) */
 
-  --sl-color-gray-3: hsl(0, 0%, 45.1%);
-  --sl-color-gray-2: hsl(150, 6%, 42%);
-  --sl-color-gray-1: hsl(150, 10%, 29%);
-  --sl-color-white: hsl(0, 0%, 3.9%);
+  /* ===== Text scale (dark → light) ===== */
+  --sl-color-white:            hsl(0, 0%, 3.9%);      /* primary text */
+  --sl-color-gray-1:           hsl(150, 10%, 15%);    /* alt text */
+  --sl-color-gray-2:           hsl(150, 8%, 30%);     /* secondary text */
+  --sl-color-gray-3:           hsl(0, 0%, 45.1%);     /* muted / disabled */
+  --sl-color-gray-4:           hsl(100, 5%, 74%);     /* icon / hover text */
+  --sl-color-gray-5:           hsla(0, 0%, 80%, 50%); /* default border */
+  --sl-color-gray-6:           hsl(0, 0%, 94.7%);     /* card bg */
+  --sl-color-gray-7:           hsl(0, 0%, 98%);       /* subtle bg / popover */
 
-  --sl-color-accent-low: hsl(145, 50%, 92%);
-  --sl-color-accent: hsl(145, 42%, 48%);
-  --sl-color-accent-high: hsl(145, 55%, 32%);
+  /* ===== Text semantic ===== */
+  --sl-color-text:             var(--sl-color-white);
+  --sl-color-text-accent:      var(--sl-color-accent-high);
+  --sl-color-text-invert:      hsl(0, 0%, 98%);       /* text on dark bg */
 
-  --sl-color-text: var(--sl-color-white);
-  --sl-color-text-accent: var(--sl-color-accent-high);
-  --sl-color-text-invert: var(--sl-color-black);
+  /* ===== Borders ===== */
+  --sl-color-hairline-light:   var(--sl-color-gray-7);/* paling halus */
+  --sl-color-hairline:         var(--sl-color-gray-5);/* default border */
+  --sl-color-hairline-shade:   var(--sl-color-gray-5);/* sama seperti default */
 
-  --sl-color-bg: var(--sl-color-black);
-  --sl-color-bg-nav: var(--sl-color-black);
-  --sl-color-bg-sidebar: var(--sl-color-black);
-  --sl-color-bg-inline-code: var(--sl-color-gray-7);
-  --sl-color-bg-accent: var(--sl-color-accent);
+  /* ===== Accent (green) ===== */
+  --sl-color-accent-low:       hsl(145, 50%, 92%);
+  --sl-color-accent:           hsl(145, 42%, 48%);
+  --sl-color-accent-high:      hsl(145, 55%, 32%);
 
-  --sl-color-hairline-light: var(--sl-color-gray-6);
-  --sl-color-hairline-shade: var(--sl-color-gray-5);
-
+  /* ===== Status colors ===== */
   --sl-hue-orange: 30;
-  --sl-color-orange-low: hsl(var(--sl-hue-orange), 70%, 93%);
-  --sl-color-orange: hsl(var(--sl-hue-orange), 55%, 52%);
-  --sl-color-orange-high: hsl(var(--sl-hue-orange), 55%, 36%);
+  --sl-color-orange-low:       hsl(var(--sl-hue-orange), 70%, 93%);
+  --sl-color-orange:           hsl(var(--sl-hue-orange), 55%, 52%);
+  --sl-color-orange-high:      hsl(var(--sl-hue-orange), 55%, 36%);
 
   --sl-hue-blue: 205;
-  --sl-color-blue-low: hsl(var(--sl-hue-blue), 60%, 93%);
-  --sl-color-blue: hsl(var(--sl-hue-blue), 45%, 50%);
-  --sl-color-blue-high: hsl(var(--sl-hue-blue), 50%, 34%);
+  --sl-color-blue-low:         hsl(var(--sl-hue-blue), 60%, 93%);
+  --sl-color-blue:             hsl(var(--sl-hue-blue), 45%, 50%);
+  --sl-color-blue-high:        hsl(var(--sl-hue-blue), 50%, 34%);
 
   --sl-hue-green: 145;
-  --sl-color-green-low: hsl(var(--sl-hue-green), 50%, 92%);
-  --sl-color-green: hsl(var(--sl-hue-green), 42%, 48%);
-  --sl-color-green-high: hsl(var(--sl-hue-green), 55%, 32%);
+  --sl-color-green-low:        hsl(var(--sl-hue-green), 50%, 92%);
+  --sl-color-green:            hsl(var(--sl-hue-green), 42%, 48%);
+  --sl-color-green-high:       hsl(var(--sl-hue-green), 55%, 32%);
 
   --sl-hue-purple: 280;
-  --sl-color-purple-low: hsl(var(--sl-hue-purple), 45%, 93%);
-  --sl-color-purple: hsl(var(--sl-hue-purple), 35%, 55%);
-  --sl-color-purple-high: hsl(var(--sl-hue-purple), 40%, 38%);
+  --sl-color-purple-low:       hsl(var(--sl-hue-purple), 45%, 93%);
+  --sl-color-purple:           hsl(var(--sl-hue-purple), 35%, 55%);
+  --sl-color-purple-high:      hsl(var(--sl-hue-purple), 40%, 38%);
 
   --sl-hue-red: 5;
-  --sl-color-red-low: hsl(var(--sl-hue-red), 65%, 93%);
-  --sl-color-red: hsl(var(--sl-hue-red), 55%, 52%);
-  --sl-color-red-high: hsl(var(--sl-hue-red), 55%, 36%);
+  --sl-color-red-low:          hsl(var(--sl-hue-red), 65%, 93%);
+  --sl-color-red:              hsl(var(--sl-hue-red), 55%, 52%);
+  --sl-color-red-high:         hsl(var(--sl-hue-red), 55%, 36%);
 
+  /* ===== Shadows ===== */
   --sl-shadow-sm:
     0 1px 2px hsl(150 25% 20% / 0.04),
     0 1px 1px hsl(150 25% 20% / 0.03);
@@ -147,18 +154,10 @@
     0 4px 8px hsl(150 25% 20% / 0.06),
     0 12px 20px hsl(150 25% 20% / 0.05);
 
+  /* ===== Overlay / blur ===== */
   --hue-green: 145;
   --green: hsl(var(--hue-green) 42% 48%);
   --overlay-greenblur: hsl(var(--hue-green) 42% 48% / 0.2);
-}
-
-[data-has-hero] :is(.page):not([data-has-sidebar][data-has-hero] .page){
-  background:
-    linear-gradient(215deg, var(--overlay-blurple), transparent 40%),
-    radial-gradient(var(--overlay-blurple), transparent 40%)
-      no-repeat -60vw -40vh / 105vw 200vh,
-    radial-gradient(var(--overlay-blurple), transparent 65%) no-repeat 50%
-      calc(100% + 20rem) / 60rem 30rem;
 }
 
 [data-has-hero] :is(header):not([data-has-sidebar][data-has-hero] header) {
@@ -166,20 +165,4 @@
   background-color: transparent;
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
-}
-
-[data-has-hero] :is(.hero > img) {
-  filter: drop-shadow(0 0 3rem var(--overlay-blurple));
-}
-
-[data-theme='light'][data-has-hero] :is(.page):not([data-has-sidebar][data-has-hero] .page){
-  background:
-    linear-gradient(215deg, var(--overlay-greenblur), transparent 40%),
-    radial-gradient(var(--overlay-greenblur), transparent 40%)
-      no-repeat -60vw -40vh / 105vw 200vh,
-    radial-gradient(var(--overlay-greenblur), transparent 65%) no-repeat 50%
-      calc(100% + 20rem) / 60rem 30rem;
-}
-[data-theme='light'][data-has-hero] :is(.hero > img) {
-  filter: drop-shadow(0 0 3rem var(--overlay-greenblur));
 }
