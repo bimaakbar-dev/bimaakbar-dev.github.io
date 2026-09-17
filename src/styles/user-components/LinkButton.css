@@ -58,8 +58,6 @@
   padding: var(--ds-btn-pad-y) var(--ds-btn-pad-x);
   text-decoration: none;
   transition:
-    background var(--ds-duration-base) var(--ds-ease),
-    border-color var(--ds-duration-base) var(--ds-ease),
     color var(--ds-duration-base) var(--ds-ease),
     opacity var(--ds-duration-base) var(--ds-ease);
 }

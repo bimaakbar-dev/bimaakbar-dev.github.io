@@ -38,11 +38,6 @@
     color: var(--sl-color-accent-high);
     text-decoration: none;
   }
-  & a.is-external:not(:where(.not-content *)):hover::after {
-    transform: translateY(-2px);
-    z-index: 2;
-    position: relative;
-  }
   & a.is-external:not(:where(.not-content *)):hover {
     text-decoration: none;
     

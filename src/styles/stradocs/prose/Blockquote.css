@@ -12,10 +12,10 @@
     &::before {
       content: "";
       position: absolute;
-      inset-block: 0.5em;
+      inset-block: 0.75em;
       inset-inline-start: 0.25em;
       width: 3px;
-      background: var(--sl-color-accent-high);
+      background: var(--sl-color-gray-4);
       border-radius: 99rem;
     }
     & cite:not(:where(.not-content *)) {

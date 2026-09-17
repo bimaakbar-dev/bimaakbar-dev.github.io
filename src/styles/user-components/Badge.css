@@ -82,12 +82,6 @@
   line-height: 1;
 }
 
-.sidebar-content a[aria-current='page'] > .sl-badge {
-  --sl-color-bg-badge:     transparent;
-  --sl-color-border-badge: currentColor;
-  color: inherit;
-}
-
 /* Heading inline */
 .sl-markdown-content :is(h1, h2, h3, h4, h5, h6) .sl-badge {
   vertical-align: middle;

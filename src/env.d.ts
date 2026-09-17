@@ -22,6 +22,7 @@ declare module 'starlight:route-data' {
     mdUrl?: string;
     llmsUrl?: string;
     safeLocale?: string;
+    isLegalPage?: boolean;
   }
 }
 

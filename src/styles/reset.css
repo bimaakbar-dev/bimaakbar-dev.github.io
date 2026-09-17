@@ -159,10 +159,6 @@ option {
   color: var(--sl-color-gray-1);
 }
 
-.right-sidebar {
-  border-inline-start: none
-}
-
 @media (min-width: 50em) {
   :root {
     --sl-nav-height: 4rem;

@@ -46,9 +46,6 @@
   padding: 0;
   margin-block: var(--sl-content-gap-y, 1.5rem);
   overflow: hidden;
-  transition:
-    border-color var(--ds-details-marker-duration) ease,
-    background var(--ds-details-marker-duration) ease;
 }
 
 .sl-markdown-content details:not(:where(.not-content *)):has(> summary:hover) {
@@ -97,7 +94,6 @@
   -webkit-mask-position: center;
   transition:
     transform var(--ds-details-marker-duration) ease,
-    background-color var(--ds-details-marker-duration) ease;
 }
 
 .sl-markdown-content details:not(:where(.not-content *)) > summary:not(:where(.not-content *)):hover::before {
@@ -115,11 +111,7 @@
 
 /* Body content */
 .sl-markdown-content details:not(:where(.not-content *)) > *:not(summary):not(:where(.not-content *)) {
-  padding-inline-start: calc(
-    var(--ds-details-body-spacing) +
-    var(--ds-details-marker-size) +
-    0.5rem
-  );
+  padding-inline-start: var(--ds-details-body-spacing);
   padding-inline-end: var(--ds-details-body-spacing);
   color: var(--ds-details-body-color);
   font-size: var(--ds-details-body-size);
