@@ -11,18 +11,18 @@ import { hastTable } from "./src/lib/plugins/satteri/hast/hast-table";
 import { mdastStradocsAside } from './src/lib/plugins/satteri/mdast/mdast-stradocs-aside'
 import { mermaidPlugin } from "./src/lib/plugins/satteri/mdast/satteri-plugin-mermaid";
 
-const site = "https://c0desk1.github.io/";
+const site = "https://c0desk1.my.id/";
 const siteName = "c0desk1";
-const siteDesc = "Berbagi Tutorial, tips dan trik tentang teknologi, anime, dan game";
+const siteDesc = "Kumpulan trik dan tips dari dunia Game, Anime, dan Coding yang kamu cari.";
 const siteLocale = {
   root: {
-    label: "English",
-    lang: "en",
-  },
-  id: {
     label: "Indonesia",
     lang: "id",
   },
+  // en: {
+  //  label: "English",
+  //  lang: "en",
+  // },
 };
 
 // https://astro.build/config
@@ -103,7 +103,7 @@ export default defineConfig({
       description: siteDesc,
       logo: {
         light: "./src/assets/images/author/bimaakbar.svg",
-        dark: "./src/assets/images/logo/logo.svg",
+        dark: "./src/assets/images/author/bimaakbar.svg",
         replacesTitle: false,
       },
       favicon: "/images/favicon.svg",
@@ -121,18 +121,13 @@ export default defineConfig({
         {
           icon: "github",
           label: "Github",
-          href: "https://github.com/bimaakbar-dev",
-        },
-        {
-          icon: "discord",
-          label: "Discord",
-          href: "https://discord.com/users/bimaakbardev",
+          href: "https://github.com/c0desk1",
         },
       ],
       lastUpdated: true,
       editLink: {
         baseUrl:
-          "https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/edit/main/",
+          "https://github.com/c0desk1/c0desk1.github.io/edit/main/",
       },
       routeMiddleware: "./src/routeData.ts",
       credits: true,
