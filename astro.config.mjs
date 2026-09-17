@@ -19,10 +19,10 @@ const siteLocale = {
     label: "Indonesia",
     lang: "id",
   },
-  // en: {
-  //  label: "English",
-  //  lang: "en",
-  // },
+  en: {
+  label: "English",
+  lang: "en",
+  },
 };
 
 // https://astro.build/config
