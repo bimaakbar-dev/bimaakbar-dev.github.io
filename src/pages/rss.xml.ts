@@ -3,7 +3,7 @@ import rss from "@astrojs/rss";
 import { getBlogPosts, getRssT } from "~/utils/rss";
 
 export async function GET(context: any) {
-  const t = await getRssT("en");
+  const t = await getRssT("id");
   const posts = await getBlogPosts();
   const topPosts = posts.slice(0, 50);
 
