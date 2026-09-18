@@ -33,7 +33,7 @@ const { variant = 'icon-only', class: className } = Astro.props;
 		const currentBtn = document.currentScript?.previousElementSibling;
 		if (!currentBtn) return;
 		
-		const shortcut = currentBtn.querySelector('.search-kbd');
+		const shortcut = currentBtn.querySelector('kbd');
 		if (!shortcut) return;
 
 		const platformKey = shortcut.querySelector('.platform-key');
@@ -57,33 +57,30 @@ const { variant = 'icon-only', class: className } = Astro.props;
 		cursor: pointer;
 		height: 2.5rem;
 		font-size: var(--sl-text-xl);
-	}
-
-	button.bar {
-		border: 1px solid var(--sl-color-gray-5);
-		border-radius: 0.5rem;
-		padding-inline-start: 0.75rem;
-		padding-inline-end: 0.5rem;
-		background-color: var(--sl-color-black);
-		color: var(--sl-color-gray-2);
-		font-size: var(--sl-text-sm);
-		width: 100%;
-		max-width: 22rem;
-	}
-	button.bar:hover {
-		border-color: var(--sl-color-gray-2);
-		color: var(--sl-color-white);
-	}
-	button.bar > :last-child {
-		margin-inline-start: auto;
-    }
-
-	button > kbd {
-		border-radius: 0.25rem;
-		font-size: var(--sl-text-2xs);
-		gap: 0.25em;
-		padding-inline: 0.375rem;
-		background-color: var(--sl-color-gray-6);
-		font-family: var(--__sl-font);
+		&.bar {
+			border: 1px solid var(--sl-color-gray-5);
+			border-radius: 0.75rem;
+			padding-inline-start: 0.75rem;
+			padding-inline-end: 0.5rem;
+			background-color: var(--sl-color-gray-6);
+			color: var(--sl-color-gray-2);
+			font-size: var(--sl-text-sm);
+			width: 100%;
+			max-width: 22rem;
+			&:hover {
+				color: var(--sl-color-white);
+			}
+			& > :last-child {
+				margin-inline-start: auto;
+			}
+		}
+		& kbd {
+			border-radius: 0.25rem;
+			font-size: var(--sl-text-2xs);
+			gap: 0.25em;
+			padding-inline: 0.25em;
+			background-color: var(--sl-color-black);
+			font-family: var(--__sl-font);
+		}
 	}
 </style>

@@ -1,14 +1,19 @@
 ---
 import { Icon } from "@astrojs/starlight/components";
+const { 
+	isBlogPost
+} = Astro.locals.starlightRoute;
+
+const customNotice = isBlogPost;
 ---
 
-<p class="sl-flex custom-content-notice">
-  <Icon name="warning" size="1.333em" color="var(--sl-color-orange-high)" />
+<p class={customNotice ? "sl-flex custom-fallback" : 'sl-flex'}'>
+  <Icon name="warning" size="1.5em" color="var(--sl-color-orange-high)" />
   <span>{Astro.locals.t("i18n.untranslatedContent")}</span>
 </p>
 
 <style>
-  .custom-content-notice {
+  p {
     border: 1px solid var(--sl-color-orange);
     padding: 0.75em 1em;
     background-color: var(--sl-color-orange-low);
@@ -28,5 +33,11 @@ import { Icon } from "@astrojs/starlight/components";
       width: 1em;
       height: 1em;
     }
+  }
+  p.custom-fallback {
+    margin-inline: auto;
+    margin-bottom: 1rem;
+    width: min(var(--sl-content-width), calc(100% - var(--sl-content-pad-x)));
+    max-width: 45rem;
   }
 </style>

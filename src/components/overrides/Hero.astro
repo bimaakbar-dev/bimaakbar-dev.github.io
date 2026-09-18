@@ -3,6 +3,7 @@
 import Default from "@astrojs/starlight/components/Hero.astro";
 import { PAGE_TITLE_ID } from "~/constants";
 import { LinkButton } from "@astrojs/starlight/components";
+import FluidInkLite from '~/stradocs/components/FluidInkLite.astro';
 
 const { 
   entry, 
@@ -20,32 +21,33 @@ const actions: any[] = hero?.actions || [];
 const customHero = isBlogIndex;
 ---
 
-{ customHero? (
-	<div class="custom-hero not-content">
-		<div class="hero-line" />
-		<div class="hero-grid" />
-		<header class="sl-flex">
-			<h1 id={PAGE_TITLE_ID} set:html={hero?.title || title} />
-			{hero?.tagline && <p set:html={hero.tagline} />}
-			{actions.length > 0 && (
-				<div class="sl-flex hero-actions">
-					{actions.map((action: any) => {
-						const { text, link: href, variant, icon, attrs = {} } = action;
-						const { class: className,...restAttrs } = attrs;
-						const iconName = typeof icon === 'string'? icon : icon?.name;
-						return (
-							<LinkButton href={href} variant={variant} icon={iconName} class:list={[className]} {...restAttrs}>
-								{text}
-							</LinkButton>
-						);
-					})}
-				</div>
-			)}
-		</header>
-	</div>
+{ 
+  customHero? (
+    <div class="custom-hero not-content">
+      <div class="hero-grid" />
+      <header class="sl-flex">
+        <h1 id={PAGE_TITLE_ID} set:html={hero?.title || title} />
+        {hero?.tagline && <p set:html={hero.tagline} />}
+        {actions.length > 0 && (
+          <div class="sl-flex hero-actions">
+            {actions.map((action: any) => {
+              const { text, link: href, variant, icon, attrs = {} } = action;
+              const { class: className,...restAttrs } = attrs;
+              const iconName = typeof icon === 'string'? icon : icon?.name;
+              return (
+                <LinkButton href={href} variant={variant} icon={iconName} class:list={[className]} {...restAttrs}>
+                  {text}
+                </LinkButton>
+              );
+            })}
+          </div>
+        )}
+      </header>
+    </div>
 	) : (
-	<Default />
-)}
+	  <Default />
+  )
+}
 
 <style>
   .custom-hero {
@@ -56,20 +58,6 @@ const customHero = isBlogIndex;
     overflow: clip;
     z-index: 10;
     border-block-end: 1px solid var(--sl-color-hairline);
-    & .hero-line {
-      position: absolute;
-      inset-inline: 0;
-      top: 0;
-      height: 1px;
-      width: 100%;
-      background: linear-gradient(
-        to right,
-        transparent,
-        var(--sl-color-accent-high),
-        transparent
-      );
-      opacity: 0.5;
-    }
     & .hero-grid {
       pointer-events: none;
       position: absolute;

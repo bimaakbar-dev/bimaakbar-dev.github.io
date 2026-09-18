@@ -16,21 +16,41 @@ const customIndex = isBlogIndex || isDocIndex;
 ---
 
 {isBlogPost ? (
-	<article class="sl-markdown-content">
-		<slot />
-	</article>
-	<div class="custom-meta sl-flex">
-		<EditLink />
-		<LastUpdated />
-	</div>
-	<Pagination />
-	<RelatedPosts currentSlug={entry.id} />
-	<MobileScrollToTop />
+  <>
+    <article class="sl-markdown-content">
+      <slot />
+    </article>
+    <script async src="https://news.google.com/swg/js/v1/swg-basic.js"></script>
+    <script is:inline>
+      //@ts-ignore
+      (self.SWG_BASIC = self.SWG_BASIC || []).push((basicSubscriptions) => {
+        basicSubscriptions.init({
+          type: "NewsArticle",
+          isPartOfType: ["Product"],
+          isPartOfProductId: "CAow3NjGDA:openaccess",
+          clientOptions: { theme: "dark", lang: "id" },
+        });
+      });
+    </script>
+    {import.meta.env.PRODUCTION && (
+      <script src="https://quge5.com/88/tag.min.js" data-zone="266896" async data-cfasync="false"></script>
+    )}
+    <div rrm-inline-cta="1b7a649f-eb54-48c5-8106-f2ac499dfc5f"></div>
+    <div class="custom-meta sl-flex">
+      <EditLink />
+      <LastUpdated />
+    </div>
+    <Pagination />
+    <RelatedPosts currentSlug={entry.id} />
+    <hr />
+    <MobileScrollToTop />
+  </>
 	) : customIndex ? (
 	<div class="not-content">
 		<slot />		
 	</div>
 	<Pagination />
+  <hr />
 	) : (
 	<article class="sl-markdown-content">
 		<slot />

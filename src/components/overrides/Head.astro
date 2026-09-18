@@ -1,6 +1,7 @@
 ---
 import Default from "@astrojs/starlight/components/Head.astro";
 import { Font } from "astro:assets";
+import { SEO } from '~/constants';
 
 const { 
   entry, 
@@ -59,4 +60,23 @@ const ogImageAlt = data.title || siteDescription;
       <meta name="twitter:image" content={absolutOg} />
       <meta name="twitter:image:alt" content={ogImageAlt} />
     </>
+)}
+{import.meta.env.DEV && (
+  <meta name="google-site-verification" content={SEO.verification.google} />
+  <meta name="msvalidate.01" content={SEO.verification.bing} />
+  <meta name="yandex-verification" content={SEO.verification.yandex} />
+  <meta name="google-adsense-account" content={SEO.ads.google} />
+  <meta name="monetag" content={SEO.ads.monetag} />
+
+  <script is:inline>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+      var f = d.getElementsByTagName(s)[0], j = d.createElement(s), 
+      dl = l != "dataLayer" ? "&l=" + l : ""; 
+      j.async = true; 
+      j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, "script", "dataLayer", "GTM-NJJPZV2M");
+  </script>
 )}

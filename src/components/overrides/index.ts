@@ -18,4 +18,6 @@ export const Overrides = {
   Sidebar: "./src/components/overrides/Sidebar.astro",
   SkipLink: "./src/components/overrides/SkipLink.astro",
   TableOfContents: "./src/components/overrides/TableOfContents.astro",
+  TwoColumnContent: "./src/components/overrides/TwoColumnContent.astro",
+  ThemeSelect: "./src/components/overrides/ThemeSelect.astro"
 } as const;

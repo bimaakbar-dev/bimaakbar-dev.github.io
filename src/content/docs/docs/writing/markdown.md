@@ -1,235 +1,660 @@
 ---
-title: "Markdown"
-description: "Learn how to writing Markdown content in Stradocs."
+title: Markdown
+description: Preview semua elemen typography di markdown
 ---
 
-Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.
+# H1 - The Quick Brown Fox
+Lorem ipsum dolor sit amet consectetur adipisicing elit.
 
-## Headings
+## H2 - The Quick Brown Fox
+Lorem ipsum dolor sit amet consectetur adipisicing elit.
 
-The following HTML `<h1>...<h6>` elements represent six levels of section headings. `<h1>` is the highest section level while `<h6>` is the lowest.
+### H3 - The Quick Brown Fox
+Lorem ipsum dolor sit amet consectetur adipisicing elit.
 
-# H1
+#### H4 - The Quick Brown Fox
+Lorem ipsum dolor sit amet consectetur adipisicing elit.
 
-## H2
+##### H5 - The Quick Brown Fox
+Lorem ipsum dolor sit amet consectetur adipisicing elit.
 
-### H3
-
-#### H4
-
-##### H5
-
-###### H6
+###### H6 - The Quick Brown Fox
+Lorem ipsum dolor sit amet consectetur adipisicing elit.
 
 ## Paragraph
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 
-Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur, cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus dolorer sperchicium faceata tiustia prat.
-
-Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat.
-
-## Images
-
-### Syntax
-
+## Links
 ```markdown
-![Alt text](./full/or/relative/path/of/image)
+[internal link](#)
+
+[external link](https://example.com)
+
+[`code link`](#)
+
+[![badge name](url-icon)](url-badge)
+
+[![avatar name](url-avatar) name](url-profile) 
+
+[![avatar name](url-avatar)](url-profile)
+
+[![icon name](/.github/assets/images/logo.svg) Astro](#_top)
+
+<div class='avatar-stack'>
+
+[![avatar a](../../../../../assets/images/author/bimaakbar.svg)](#_top) 
+[![avatar b](../../../../../assets/images/author/bimaakbar.svg)](#_top) 
+[![avatar c](../../../../../assets/images/author/bimaakbar.svg)](#_top)
+
+</div>
+
+[![avatar bima](../../../../../assets/images/author/bimaakbar-dev.svg)](#_top)
+
+[![avatar bima](../../../../../assets/images/author/bimaakbar-dev.svg) Bima Akbar](#_top)
+
+<https://example.com>
+
+<email@example.com>
 ```
 
-### Output
+- [internal link](#_top)
+- [external link](https://example.com)
+- [`code link`](#_top)
+- [![badge astro](/images/astro.svg)](#_top) [![badge tailwindcss](/images/tailwindcss.svg)](#_top) [![badge reactjs](/images/reactjs.svg)](#_top)
+- [![icon Astro](/images/astro.svg) Astro](#_top) [![icon TailwindCSS](/images/tailwindcss.svg) TailwindCSS](#_top) [![icon React](/images/reactjs.svg) React](#_top)
 
-![blog placeholder](../../../../assets/images/blog/blog-placeholder-about.jpg)
+- <div class='avatar-stack'>
 
-## Blockquotes
+    [![avatar a](../../../../assets/images/author/bimaakbar.svg)](#_top) 
+    [![avatar b](../../../../assets/images/author/bimaakbar.svg)](#_top) 
+    [![avatar c](../../../../assets/images/author/bimaakbar.svg)](#_top)
 
-The blockquote element represents content that is quoted from another source, optionally with a citation which must be within a `footer` or `cite` element, and optionally with in-line changes such as annotations and abbreviations.
+  </div>
 
-### Blockquote without attribution
+- [![avatar Bima Akbar](../../../../assets/images/author/bimaakbar.svg)](#_top)
+- [![Bima Akbar](../../../../assets/images/author/bimaakbar.svg) Bima Akbar](#_top)
 
-#### Syntax
+- <https://example.com>
+- <email@example.com>
 
-```markdown
-> Tiam, ad mint andaepu dandae nostion secatur sequo quae.  
-> **Note** that you can use _Markdown syntax_ within a blockquote.
-```
 
-#### Output
-
-> Tiam, ad mint andaepu dandae nostion secatur sequo quae.  
-> **Note** that you can use _Markdown syntax_ within a blockquote.
-
-### Blockquote with attribution
-
-#### Syntax
-
-```markdown
-> Don't communicate by sharing memory, share memory by communicating.<br>
-> <cite>— Rob Pike[^1]</cite>
-```
-
-#### Output
-
-> Don't communicate by sharing memory, share memory by communicating.<br>
-> <cite>Rob Pike[^1]</cite>
-
-[^1]: The above quote is excerpted from Rob Pike's [talk](https://www.youtube.com/watch?v=PAAkCSZUG1c) during Gopherfest, November 18, 2015.
-
-## Tables
-
-### Syntax
-
-```markdown
-| Italics   | Bold     | Code   |
-| --------- | -------- | ------ |
-| _italics_ | **bold** | `code` |
-```
-
-### Output
-
-| Italics   | Bold     | Code   |
-| --------- | -------- | ------ |
-| _italics_ | **bold** | `code` |
-
-## Code Blocks
-
-### Syntax
-
-we can use 3 backticks [```] in new line and write snippet and close with 3 backticks on new line and to highlight language specific syntax, write one word of language name after first 3 backticks, for eg. html, javascript, css, markdown, typescript, txt, bash
-
+## Text Formatting
 ~~~markdown
-```html
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Example HTML5 Document</title>
-  </head>
-  <body>
-    <p>Test</p>
-  </body>
-</html>
-```
+<b>Bold</b> <!-- atau --> **Bold**
+
+<strong>Bold</strong>
+
+<i>Italic</i> <!-- atau --> *Italic*, _Italic_
+
+<em>Italic</em>
+
+<b><i>Bold Italic</i></b> <!-- atau --> ***Bold + Italic***, _**Bold + Italic**_
+
+<strong><em>Bold Italic</em></strong>
+
+<s>strikethrough</s>
+
+<del>strikethrough</del> <!-- Atau --> ~~strikethrough~~
+
+<ins>inserted</ins>
+
+<u>inserted</u>
+
+<mark>highlighted</mark>
+
+<small>small</small>
+
+<abbr title="HyperText Markup Language">HTML</abbr>
 ~~~
 
-### Output
+- **Bold**
+  - <b>Bold</b>
+- *Italic*
+  - <i>Italic</i>
+- ***Bold + Italic***
+  - <b><i>Bold + Italic</i></b>
+- <s>strikethrough</s>
+  - <del>strikethrough</del>
+- <u>inserted</u>
+  - <ins>inserted</ins>
+- <mark>highlighted</mark>
+- <small>small</small>
+- <abbr title="HyperText Markup Language">HTML</abbr>
 
-```html
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Example HTML5 Document</title>
-  </head>
-  <body>
-    <p>Test</p>
-  </body>
-</html>
-```
-
-## List Types
-
-### Ordered List
-
-#### Syntax
+## Escape karakter
 
 ```markdown
-1. First item
-2. Second item
-3. Third item
+\*bukan italic\*
+
+\_bukan italic\_
+
+\`bukan code\`
+
+\#bukan heading
+
+\[bukan link\]
+
+\\backslash
 ```
 
-#### Output
+\*bukan italic\*
 
-1. First item
-2. Second item
-3. Third item
+\_bukan italic\_
+
+\`bukan code\`
+
+\#bukan heading
+
+\[bukan link\]
+
+\\backslash
+
+
+## Inline Typography
+```markdown
+<kbd>Ctrl</kbd> + <kbd>C</kbd>  
+
+<samp>Hello, World!</samp>
+
+<var>x</var> = <var>y</var> + 2
+
+<dfn>API</dfn>
+
+`inline code`
+
+Dia berkata <q>ini adalah quote pendek</q> di dalam paragraf.
+```
+
+- <kbd>Ctrl</kbd> + <kbd>C</kbd>  
+- <samp>Hello, World!</samp>
+- <var>x</var> = <var>y</var> + 2
+- <dfn>API</dfn>
+- `inline code`
+- Dia berkata <q>ini adalah quote pendek</q> di dalam paragraf.
+
+## Blockquote
+```markdown
+> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+>
+> <cite>John Doe, Penulis</cite>
+
+> Level 1
+>
+> > Level 2
+> >
+> > > Level 3
+
+> **Catatan**
+>
+> > **Sub-catatan**
+> >
+> > > **Sub-sub-catatan**
+```
+
+> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+>
+> <cite>John Doe, Penulis</cite>
+
+> Level 1
+>
+> > Level 2
+> >
+> > > Level 3
+
+> **Catatan**
+>
+> > **Sub-catatan**
+> >
+> > > **Sub-sub-catatan**
+
+## Subscript & Superscript
+```markdown
+H<sub>2</sub>O dan CO<sub>2</sub>
+
+x<sup>2</sup> + y<sup>2</sup> = z<sup>2</sup>
+
+<!-- Atau -->
+
+H^2^O dan CO^2^
+
+x~2~ + y~2~ = z~2~
+```
+
+- H<sub>2</sub>O dan CO<sub>2</sub>
+- x<sup>2</sup> + y<sup>2</sup> = z<sup>2</sup>
+
+- H^2^O dan CO^2^
+- x~2~ + y~2~ = z~2~
+
+Footnote: footnote[^1] dan footnote[^2].
+
+## Time & Address
+```markdown
+<time datetime="2026-05-13">13 May 2026</time>
+
+<address>Jl. Sudirman No. 123, Jakarta</address>
+```
+
+- <time datetime="2026-09-12">12 September 2026</time>
+- <address>Jl. Sudirman No. 123, Jakarta</address>
+ 
+## Ruby
+```markdown
+<ruby>日本語<rt>にほんご</rt></ruby>
+```
+
+- <ruby>日本語<rt>にほんご</rt></ruby>
+
+## Lists
 
 ### Unordered List
-
-#### Syntax
-
 ```markdown
-- List item
-- Another item
-- And another item
+<!-- `-` Bisa diganti dengan `+` -->
+- Item 1
+- Item 2
+    - Nested item 2.1
+    - Nested item 2.2
+      + Nested item 2.2.1
+      + Nested item 2.2.2
+- Item 3
 ```
 
-#### Output
+- Item 1
+- Item 2
+    - Nested item 2.1
+    - Nested item 2.2
+      + Nested item 2.2.1
+      + Nested item 2.2.2
+- Item 3
 
-- List item
-- Another item
-- And another item
-
-### Nested list
-
-#### Syntax
-
+### Ordered List
 ```markdown
-- Fruit
-  - Apple
-  - Orange
-  - Banana
-- Dairy
-  - Milk
-  - Cheese
+1. First item
+2. Second item
+      1. Nested ordered 2.1
+      2. Nested ordered 2.2
+3. Third item
+
+<!-- -->
+
+1. Item pertama
+2. Item kedua
+   - Unordered di dalam ordered
+   - Item lain
+     - Nested lebih dalam
+3. Item ketiga
+
+4. Mulai dari 3
+5. Lanjut dari 4
+  - Item
+    > Blockquote di dalam list
+  - Item lain
+    ~~~js
+    code di dalam list
+    ~~~
 ```
 
-#### Output
+1. First item
+2. Second item
+      1. Nested ordered 2.1
+      2. Nested ordered 2.2
+3. Third item
 
-- Fruit
-  - Apple
-  - Orange
-  - Banana
-- Dairy
-  - Milk
-  - Cheese
+---
+
+1. Item pertama
+2. Item kedua
+   - Unordered di dalam ordered
+   - Item lain
+     - Nested lebih dalam
+3. Item ketiga
+
+4. Mulai dari 3
+5. Lanjut dari 4
+  - Item
+    > Blockquote di dalam list
+  - Item lain
+    ~~~js
+    code di dalam list
+    ~~~
 
 ### Task List
-
-#### Syntax
-
 ```markdown
-- [ ] No
-- [X] Yes
+- [x] Task yang sudah selesai
+- [ ] Task yang belum selesai
+- [ ] Task lain dengan **bold** dan `code`
+- [x] Task dengan [link](#)
 ```
 
-#### Output
+- [x] Task yang sudah selesai
+- [ ] Task yang belum selesai
+- [ ] Task lain dengan **bold** dan `code`
+- [x] Task dengan [link](#)
 
-- [ ] No
-- [X] Yes
+### Definition List
+```markdown
+HTML
+: HyperText Markup Language adalah bahasa markup untuk web
 
-## Other Elements — abbr, sub, sup, kbd, mark
+CSS
+: Cascading Style Sheets untuk styling
 
-### Syntax
+API
+: Application Programming Interface
 
-~~~markdown
-<abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
+`code-term`
+: Definisi untuk istilah yang berupa `code`
 
-H<sub>2</sub>O
-
-X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
-
-Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
-
-Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
-~~~
-
-### Output
-
-<abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
-
-H<sub>2</sub>O
-
-X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
-
-Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
-
-Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
-
+// Atau
 
 <dl>
-  <dt><code>label</code></dt>
-  <dd>Label yang tampil di breadcrumb. Wajib diisi.</dd>
-
-  <dt><code>href</code></dt>
-  <dd>URL tujuan. Kalau kosong, jadi teks biasa.</dd>
+  <dt>HTML</dt>
+  <dd>HyperText Markup Language adalah bahasa markup untuk web</dd>
+  
+  <dt>CSS</dt>
+  <dd>Cascading Style Sheets untuk styling</dd>
+  
+  <dt>API</dt>
+  <dd>Application Programming Interface</dd>
+  
+  <dt><code>code-term</code></dt>
+  <dd>Definisi untuk istilah yang berupa <code>code</code></dd>
 </dl>
+```
+
+HTML
+: HyperText Markup Language adalah bahasa markup untuk web
+
+CSS
+: Cascading Style Sheets untuk styling
+
+API
+: Application Programming Interface
+
+`code-term`
+: Definisi untuk istilah yang berupa `code`
+
+## Images & Media
+```markdown
+![Alt text image](/.github/assets/banner.jpg 'Title image')
+
+<picture>
+  <source srcset="image.jpg" type="image/jpg" />
+  <img src="/og.jpg" alt="Alt text" />
+</picture>
+
+<figure>
+  <img src="/og.jpg" alt="Alt text figure" />
+  <figcaption>Ini adalah figcaption untuk figure di atas.</figcaption>
+</figure>
+
+<figure>
+  <a href="/">
+    <img src="/og.jpg" alt="Alt text" />
+  </a>
+  <figcaption>Klik gambar untuk membuka situs.</figcaption>
+</figure>
+
+<video title="Video" poster="/og.jpg" width={720} height={480} controls muted autoplay loop="false" preload>
+  <source src="/.github/assets/videos/video.mp4" />
+  Browser Anda tidak mendukung tag video.
+</video>
+
+[![Tonton video](/og.jpg)](https://youtu.be/VIDEO_ID)
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/VIDEO_ID"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
+```
+
+![Alt text](/.github/assets/images/banner.jpg 'Title image')
+
+<picture>
+  <source srcset="image.jpg" type="image/jpg" />
+  <img src="/.github/assets/images/banner.jpg" alt="Alt text" />
+</picture>
+
+<figure>
+  <a href="/">
+    <img src="/.github/assets/images/banner.jpg" alt="Alt text" />
+  </a>
+  <figcaption>Klik gambar untuk membuka situs.</figcaption>
+</figure>
+
+<figure>
+  <img src="/.github/assets/images/banner.jpg" alt="Alt text figure" />
+  <figcaption>Ini adalah figcaption untuk figure di atas.</figcaption>
+</figure>
+
+<video title="Video" poster="/.github/assets/images/banner.jpg" width={720} height={480} controls muted autoplay loop="false" preload>
+  <source src="/.github/assets/videos/video.mp4" />
+  Browser Anda tidak mendukung tag video.
+</video>
+
+[![Tonton video](/.github/assets/images/banner.jpg)](https://youtu.be/VIDEO_ID)
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/VIDEO_ID"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
+
+## Table
+
+```markdown
+| Column 1 | Column 2 | Column 3 |
+| :---- | :----- | :----- |
+| Data 1 | Data 2 | Data 3 |
+| Data 1 | Data 2 | Data 3 |
+
+// Atau
+
+<table>
+  <thead>
+    <th>Column 1</th>
+    <th>Column 2</th>
+    <th>Column 3</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Data 1</td>
+      <td>Data 2</td>
+      <td>Data 3</td>
+    </tr>
+    <tr>
+      <td>Data 1</td>
+      <td>Data 2</td>
+      <td>Data 3</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+<table>
+  <thead>
+    <th>Column 1</th>
+    <th>Column 2</th>
+    <th>Column 3</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Data 1</td>
+      <td>Data 2</td>
+      <td>Data 3</td>
+    </tr>
+    <tr>
+      <td>Data 1</td>
+      <td>Data 2</td>
+      <td>Data 3</td>
+    </tr>
+  </tbody>
+</table>
+
+## Details & Summary
+
+```markdown
+<details>
+<summary>Click untuk buka details</summary>
+
+Ini adalah content di dalam details. Bisa ada **bold**, `code`, dan [link](#).
+
+- List di dalam details
+- Item 2
+
+> Blockquote di dalam details
+
+</details>
+```
+
+<details>
+<summary>Click untuk buka details</summary>
+
+Ini adalah content di dalam details. Bisa ada **bold**, `code`, dan [link](#).
+
+- List di dalam details
+- Item 2
+
+> Blockquote di dalam details
+
+</details>
+
+## Horizontal Rule
+
+```markdown
+Di atas ada hr.
+
+---
+
+Di bawah ada hr.
+
+---
+```
+
+Di atas ada hr.
+
+---
+
+Di bawah ada hr.
+
+---
+
+## Hardline Break
+
+```markdown
+Baris 1  
+Baris 2 (dua spasi di akhir baris)
+
+Baris 1<br />
+Baris 2 (pakai tag br)
+
+Baris 1\
+Baris 2 (backslash di akhir baris)
+```
+
+Baris 1  
+Baris 2 (dua spasi di akhir baris)
+
+Baris 1<br />
+Baris 2 (pakai tag br)
+
+Baris 1\
+Baris 2 (backslash di akhir baris)
+
+```markdown
+<!-- Ini komentar, tidak akan muncul di output -->
+
+Teks di bawah komentar.
+```
+
+<!-- Ini komentar, tidak akan muncul di output -->
+
+Teks di bawah komentar.
+
+## Html Entitas 
+```markdown
+&copy; &reg; &trade; &amp; &lt; &gt; &nbsp; &mdash; &ndash; &hellip; &laquo; &raquo; &times; &divide;
+```
+
+&copy; &reg; &trade; &amp; &lt; &gt; &nbsp; &mdash; &ndash; &hellip; &laquo; &raquo; &times; &divide;
+
+## Emoji Code
+```markdown
+:smile: :rocket: :fire: :tada: :sparkles: :heart: :+1: :-1:
+
+:warning: :bulb: :books: :memo: :bug: :zap:
+```
+
+:smile: :rocket: :fire: :tada: :sparkles: :heart: :+1: :-1:
+
+:warning: :bulb: :books: :memo: :bug: :zap:
+
+## Mermaid
+
+```mermaid
+graph TD
+  A[Start] --> B{Apakah berhasil?}
+  B -->|Ya| C[Selesai]
+  B -->|Tidak| D[Retry]
+  D --> B
+```
+
+```mermaid
+sequenceDiagram
+  User->>Server: Request login
+  Server->>DB: Query user
+  DB-->>Server: User data
+  Server-->>User: Token
+```
+
+## Math
+```markdown
+Inline: $$E = mc^2$$
+
+Block:
+
+$$
+\int_{a}^{b} f(x) \, dx = F(b) - F(a)
+$$
+
+Matrix:
+
+$$
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+$$
+```
+Inline: $$E = mc^2$$
+
+Block:
+
+$$
+\int_{a}^{b} f(x) \, dx = F(b) - F(a)
+$$
+
+Matrix:
+
+$$
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+$$
+
+[^1]: Ini adalah footnote pertama dengan **bold** dan `code`.
+[^2]: Footnote kedua dengan [link](/).

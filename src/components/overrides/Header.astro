@@ -8,7 +8,7 @@ import SearchToggle from '../SearchToggle.astro';
 
 import Search from "./Search.astro";
 import LanguageSelect from "@astrojs/starlight/components/LanguageSelect.astro";
-import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
+import ThemeSelect from "./ThemeSelect.astro";
 import SocialIcons from "./SocialIcons.astro";
 
 import GithubStar from '~/stradocs/components/GithubStar.astro';
@@ -19,7 +19,7 @@ const { isCustomMenu } = Astro.locals.starlightRoute;
 const GithubRepo = 'bimaakbar-dev/bimaakbar-dev.github.io';
 ---
 
-<div class="header" data-is-custom-menu={isCustomMenu ? "true" : "false"}>
+<div class="header custom-header" data-is-custom-menu={isCustomMenu ? "true" : "false"}>
   <div class="title-wrapper sl-flex">
     <SiteTitle />
   </div>
@@ -36,7 +36,7 @@ const GithubRepo = 'bimaakbar-dev/bimaakbar-dev.github.io';
       <div class="social-icons sl-flex">
         <SocialIcons />
       </div>
-      <GithubStar repo={GithubRepo} />
+      <!-- <GithubStar repo={GithubRepo} /> -->
     </div>
   </div>
 </div>

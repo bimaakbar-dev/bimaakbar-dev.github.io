@@ -1,28 +1,33 @@
 ---
+//overrides
 import Default from '@astrojs/starlight/components/ContentPanel.astro';
 
 const { 
   isBlogPost, 
-  isBlogIndex 
+  isBlogIndex,
+  isLegalPage
 } = Astro.locals.starlightRoute;
 ---
-{ isBlogIndex ? (
-	<div class="custom-content-panel">
-		<div class="sl-custom-container">
-			<slot />
+
+{ 
+	isBlogIndex ? (
+		<div class="custom-content-panel">
+			<div class="sl-custom-container">
+				<slot />
+			</div>
 		</div>
-	</div>
-	) : isBlogPost ? (
-	<div class="custom-blog-post-content-panel">
-		<div class="sl-blog-container">
-			<slot />
+	) : isBlogPost || isLegalPage ? (
+		<div class="custom-blog-post-content-panel">
+			<div class="sl-blog-container">
+				<slot />
+			</div>
 		</div>
-	</div>
-    ) : (
-	<Default>
-		<slot/>
-	</Default>
-)}
+	) : (
+		<Default>
+			<slot/>
+		</Default>
+	)
+}
 
 <style>
 	.custom-content-panel {
@@ -40,10 +45,11 @@ const {
 	.custom-blog-post-content-panel {
 		padding: 0;
 		max-width: 100dvw;
+		margin: 0 auto;
 		& + .custom-blog-post-content-panel {
 			border-top: 1px solid var(--sl-color-hairline);
 			padding-block: 1.5rem;
-			padding-inline: var(--sl-content-pad-x);
+			padding-inline: calc(var(--sl-content-pad-x) + 0rem);
 			max-width: 50rem;
 			margin-inline: auto;
 		}

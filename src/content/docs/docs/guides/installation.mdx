@@ -1,8 +1,9 @@
 ---
-title: "Installation"
-description: "How to clone and run Stradocs in a local environment."
+title: "Instalasi"
+description: "Cara clone dan menjalankan Stradocs di local environment."
 sidebar:
   order: 1
+draft: true
 ---
 
 import {
@@ -14,33 +15,33 @@ import {
   CardGrid,
 } from "@astrojs/starlight/components";
 
-Stradocs is distributed as a GitHub repository that can be directly forked or cloned. There are no packages to install globally—simply clone, install dependencies, and you're ready to go.
+Stradocs didistribusikan sebagai repositori GitHub yang bisa langsung di-fork atau di-clone. Tidak ada package yang perlu diinstall secara global — cukup clone, install dependencies, dan langsung jalan.
 
 <Aside type="tip">
-  Stradocs is built on Astro and Starlight. Make sure you are familiar with both
-  before proceeding.
+  Stradocs dibangun di atas Astro dan Starlight. Pastikan kamu sudah familiar
+  dengan keduanya sebelum melanjutkan.
 </Aside>
 
 ## Requirements
 
-| Requirement | Minimum Version    |
-| ----------- | ------------------ |
-| Node.js     | `18.20.8` or later |
-| Git         | Latest version     |
+| Requirement | Versi Minimum             |
+| ----------- | ------------------------- |
+| Node.js     | `18.20.8` atau lebih baru |
+| Git         | Versi terbaru             |
 
-## Clone Repository
+## Clone Repositori
 
 <Steps>
 
-1. **Fork or clone the Stradocs repository.**
+1. **Fork atau clone repositori Stradocs**
 
-   Fork via GitHub if you want to save changes to your own repository, or clone directly if you just want to explore locally.
+   Fork melalui GitHub jika ingin menyimpan perubahan ke repositori kamu sendiri, atau clone langsung jika hanya ingin eksplorasi lokal.
 
    ```bash title='Command Prompt'
    git clone https://github.com/bimaakbar-dev/bimaakbar-dev.github.io.git my-docs
    ```
 
-2. **Enter the project directory**
+2. **Masuk ke direktori proyek**
 
    ```bash title='Command Prompt'
    cd my-docs
@@ -50,57 +51,57 @@ Stradocs is distributed as a GitHub repository that can be directly forked or cl
 
    <Tabs>
      <TabItem label="npm" icon="seti:npm">
-      ```bash title='Command Prompt'
-      npm install 
-      ```
+       ```bash title='Command Prompt'
+       npm install 
+       ```
      </TabItem>
      <TabItem label="pnpm" icon="pnpm">
-      ```bash title='Command Prompt'
-      pnpm install 
-      ```
+       ```bash title='Command Prompt'
+       pnpm install 
+       ```
      </TabItem>
      <TabItem label="yarn" icon="seti:yarn">
-      ```bash title='Command Prompt'
-      yarn install 
-      ```
+       ```bash title='Command Prompt'
+       yarn install 
+       ```
      </TabItem>
    </Tabs>
 
-4. **Run the development server**
+4. **Jalankan development server**
 
    <Tabs>
      <TabItem label="npm" icon="seti:npm">
-      ```bash title='Command Prompt'
-      npm run dev 
-      ```
+       ```bash title='Command Prompt'
+       npm run dev 
+       ```
      </TabItem>
      <TabItem label="pnpm" icon="pnpm">
-      ```bash title='Command Prompt'
-      pnpm dev 
-      ```
+       ```bash title='Command Prompt'
+       pnpm dev 
+       ```
      </TabItem>
      <TabItem label="yarn" icon="seti:yarn">
-      ```bash title='Command Prompt'
-      yarn dev 
-      ```
+       ```bash title='Command Prompt'
+       yarn dev 
+       ```
      </TabItem>
    </Tabs>
 
-   Open [http://localhost:4321](http://localhost:4321) in your browser. Stradocs is ready to use.
+   Buka [http://localhost:4321](http://localhost:4321) di browser. Stradocs siap digunakan.
 
 </Steps>
 
-## Available Scripts
+## Scripts yang Tersedia
 
-| Script            | Description                                                     |
-| ----------------- | --------------------------------------------------------------- |
-| `npm run dev`     | Runs the development server at `localhost:4321` with hot reload |
-| `npm run build`   | Builds for production into the `dist/` folder                   |
-| `npm run preview` | Previews the build locally before deployment                    |
+| Script            | Keterangan                                                           |
+| ----------------- | -------------------------------------------------------------------- |
+| `npm run dev`     | Menjalankan development server di `localhost:4321` dengan hot reload |
+| `npm run build`   | Build untuk production ke folder `dist/`                             |
+| `npm run preview` | Preview hasil build secara lokal sebelum deploy                      |
 
-## Build for Production
+## Build untuk Production
 
-When ready to deploy, run the build command:
+Saat siap deploy, jalankan build command:
 
 <Tabs>
   <TabItem label="npm" icon="seti:npm">
@@ -120,15 +121,17 @@ When ready to deploy, run the build command:
   </TabItem>
 </Tabs>
 
-The build output will be located in the `dist/` folder. Stradocs is configured to deploy to **GitHub Pages**—the `site` configuration in `astro.config.mjs` is already set to the repository URL.
+Output build akan berada di folder `dist/`. Stradocs dikonfigurasi untuk deploy ke **GitHub Pages** — konfigurasi `site` di `astro.config.mjs` sudah diset ke URL repositori.
 
 <Aside>
-  If you want to deploy to another platform, adjust the `site` and `base` values in `astro.config.mjs` according to the Astro documentation for the target platform.
+  Jika ingin deploy ke platform lain, sesuaikan nilai `site` dan `base` di
+  `astro.config.mjs` mengikuti dokumentasi Astro untuk platform yang dituju.
 </Aside>
 
-## Next step
+## Langkah Selanjutnya
+
 <LinkCard
-  title="Configuration"
-  description="Adjust the Stradocs configuration—sidebar, site title, and more."
-  href="/docs/guides/configuration"
+  title="Konfigurasi"
+  description="Sesuaikan konfigurasi Stradocs — sidebar, site title, dan lainnya."
+  href="/id/docs/guides/configuration"
 />

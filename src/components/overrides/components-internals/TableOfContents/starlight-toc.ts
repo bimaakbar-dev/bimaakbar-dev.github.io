@@ -104,7 +104,7 @@ export class StarlightTOC extends HTMLElement {
         }
 
         if (this.trackBg) {
-            this.trackBg.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${viewWidth} ${height}" style="width: ${viewWidth}px; height: ${height}px; overflow: visible;"><path d="${pathString}" stroke="var(--sl-color-hairline)" stroke-width="${strokeWidth}" stroke-linecap="round" stroke-linejoin="round" fill="none" style="shape-rendering: geometricPrecision;" />${dotSvg}</svg>`;
+            this.trackBg.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${viewWidth} ${height}" style="width: ${viewWidth}px; height: ${height}px; overflow: visible;"><path d="${pathString}" stroke="var(--sl-color-gray-5)" stroke-width="${strokeWidth}" stroke-linecap="round" stroke-linejoin="round" fill="none" style="shape-rendering: geometricPrecision;" />${dotSvg}</svg>`;
         }
 
         const svgMask = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${viewWidth} ${height}"><path d="${pathString}" stroke="black" stroke-width="${strokeWidth}" stroke-linecap="round" stroke-linejoin="round" fill="none" /></svg>`;

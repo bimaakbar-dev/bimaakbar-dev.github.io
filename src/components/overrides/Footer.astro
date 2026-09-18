@@ -5,65 +5,192 @@ import SocialIcons from "./SocialIcons.astro";
 
 const { 
   siteTitle, 
-  siteTitleHref 
+  siteTitleHref, 
+  blogBasePath, 
+  docsBasePath,
+  isDocs,
+  safeLocale
 } = Astro.locals.starlightRoute;
 
-const currentYear = new Date().getFullYear();
----
+const localize = (path: string): string => {
+  if (safeLocale === 'root') return path;
+  const clean = path.startsWith('/') ? path : `/${path}`;
+  return `/${safeLocale}${clean}`;
+};
 
-<footer class="sl-flex site-footer">
-	<div class="sl-flex social-icons">
-		<SocialIcons />
-	</div>
-	<span class="copyright sl-flex">
-		<a class="sl-flex kudos" href={siteTitleHref}>
-			{siteTitle}
-		</a>
-		{currentYear}
-		{config.credits && (
-			<a class="sl-flex kudos" href="https://starlight.astro.build">
-				<Icon name="starlight" />
-				{Astro.locals.t('builtWithStarlight.label')}
-			</a>
-		)}
-	</span>
+const t = Astro.locals.t;
+const currentYear = new Date().getFullYear();
+
+const navGroups = [
+  {
+    label: t('footer.nav'),
+    links: [
+      !isDocs && { text: t('nav.blog'), href: blogBasePath },
+      { text: t('nav.docs'), href: docsBasePath },
+      { text: t('nav.about'), href: localize('/about/') },
+    ].filter(Boolean) as { text: string; href: string }[],
+  },
+  {
+    label: t('footer.legal'),
+    links: [
+      { text: t('footer.privacy'), href: localize('/privacy/') },
+      { text: t('footer.terms'), href: localize('/terms/') },
+    ],
+  },
+];
+---
+<footer class="sl-flex">
+  <!--<nav class="site-footer__nav" aria-label={t('footer.nav')}>
+    {navGroups.map((group) => (
+      group.links.length > 0 && (
+        <div class="nav-group">
+          <p class="nav-group__label">{group.label}</p>
+          <ul class="nav-group__list">
+            {group.links.map((link) => (
+              <li>
+                <a href={link.href}>{link.text}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    ))}
+  </nav>-->
+  <div class="site-footer__bottom sl-flex">
+    <div class="site-footer__social">
+      <SocialIcons />
+    </div>
+
+    <div class="site-footer__credits">
+      <a class="kudos" href={siteTitleHref}>
+        {siteTitle}
+        <span class="copyright">© {currentYear}</span>
+      </a>
+      {config.credits && (
+        <a class="kudos" href="https://starlight.astro.build">
+          <Icon name="starlight" />
+          {Astro.locals.t('builtWithStarlight.label')}
+        </a>
+      )}
+    </div>
+  </div>
 </footer>
 
 <style>
-	.site-footer {
-    	flex-direction: column;
-    	gap: 0.25em;
-    	align-items: center;
-   	 margin-inline: auto;
-    	border-top: 1px solid var(--sl-color-hairline);
-    	padding-top: 2rem;
-    	& .social-icons {
-			display: flex;
-			gap: var(--sl-nav-gap);
-			align-items: center;
-		}
-		& .copyright {
-			align-items: center;
-			line-height: 1;
-			font-size: var(--sl-text-xs);
-			color: var(--sl-color-gray-3);
-			margin-block: 1rem;
-			margin-inline: auto;
-			gap: 0.5em;
-			& .kudos {
-				align-items: center;
-				gap: 0.5em;
-				font-size: var(--sl-text-xs);
-				text-decoration: none;
-				color: var(--sl-color-gray-3);
-				line-height: var(--sl-line-height);
-				& :global(svg) {
-					color: var(--sl-color-orange);
-				}
-				&:hover {
-					color: var(--sl-color-white);
-				}
-			}
-		}
-	}
+  footer {
+    flex-direction: column;
+    gap: 2rem;
+    padding-inline: var(--sl-content-pad-x);
+    max-width: 50rem;
+    margin-inline: auto;
+    width: 100%;
+  }
+  .site-footer__nav {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .nav-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .nav-group__label {
+    margin: 0;
+    font-size: var(--sl-text-2xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--sl-color-gray-3);
+  }
+
+  .nav-group__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .nav-group__list a {
+    display: inline-block;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-2);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .nav-group__list a:hover {
+    color: var(--sl-color-white);
+  }
+
+  .site-footer__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    padding-top: 1.5rem;
+    /* border-top: 1px solid var(--sl-color-hairline); */
+    width: 100%;
+  }
+
+  .site-footer__social {
+    display: flex;
+    align-items: center;
+    gap: var(--sl-nav-gap);
+  }
+
+  .site-footer__credits {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .kudos {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: var(--sl-text-xs);
+    text-decoration: none;
+    color: var(--sl-color-gray-3);
+    line-height: var(--sl-line-height);
+    transition: color 0.15s ease;
+  }
+
+  .kudos :global(svg) {
+    color: var(--sl-color-orange);
+  }
+
+  .kudos:hover {
+    color: var(--sl-color-white);
+  }
+
+  .copyright {
+    color: var(--sl-color-gray-3);
+    margin-inline-start: 0.25em;
+  }
+
+  @media (max-width: 50rem) {
+    .site-footer__nav {
+      flex-direction: column;
+      gap: 1.5rem;
+	  width: 100%;
+    }
+
+    .site-footer__bottom {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .site-footer__credits {
+      justify-content: center;
+    }
+  }
 </style>
