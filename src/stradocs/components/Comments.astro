@@ -39,7 +39,7 @@ const giscusTheme = '/giscus-theme.css';
 <script is:inline define:vars={{ origin: Astro.url.origin }}>
   function syncGiscusTheme() {
     const theme = document.documentElement.dataset.theme;
-    const iframe = document.querySelector('.giscus iframe.giscus-frame');
+    const iframe = document.querySelector('iframe.giscus-frame');
     if (!iframe || !(iframe instanceof HTMLIFrameElement)) return;
 
     const themeUrl = theme === 'dark'
@@ -65,10 +65,13 @@ const giscusTheme = '/giscus-theme.css';
 
 <style>
   .comments {
-    margin-block: 3rem;
     max-width: 50rem;
     margin-inline: auto;
-    padding-inline: var(--sl-content-pad-x);
+    width: 100%;
+    align-items: center;
+    border-top: 1px solid var(--sl-color-gray-5);
+    padding-top: var(--sl-content-gap-y);
+    padding-inline: 0;
   }
 
   .comments__title {
