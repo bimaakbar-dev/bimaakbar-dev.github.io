@@ -8,6 +8,7 @@ import Pagination from "@astrojs/starlight/components/Pagination.astro";
 
 import RelatedPosts from "~/components/RelatedPosts.astro";
 import MobileScrollToTop from "../MobileScrollToTop.astro";
+import Comments from "~/stradocs/components/Comments.astro";
 
 
 const { entry, isBlogPost, isBlogIndex, isDocIndex } = Astro.locals.starlightRoute;
@@ -39,6 +40,7 @@ const customIndex = isBlogIndex || isDocIndex;
       <LastUpdated />
     </div>
     <Pagination />
+    <Comments />
     <RelatedPosts currentSlug={entry.id} />
     <hr />
     <MobileScrollToTop />
