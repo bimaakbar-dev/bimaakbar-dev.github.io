@@ -95,7 +95,7 @@ const getHref = (post: { id: string }) => {
     position: relative;
     flex-direction: column;
     height: 100%;
-    border: 1px solid var(--sl-color-hairline);
+    border: 1px solid var(--sl-color-gray-5);
     border-radius: 0.75rem;
     background: transparent;
     color: var(--sl-color-gray-2);
@@ -103,26 +103,23 @@ const getHref = (post: { id: string }) => {
     outline: 1px solid transparent;
     transition:
       background 140ms ease,
-      border-color 140ms ease;
   }
 
   @media (hover: hover) {
     .related-card:hover {
       background: rgb(from var(--sl-color-gray-6) r g b / 40%);
-      border-color: var(--sl-color-gray-4);
     }
   }
 
   [data-theme="light"] .related-card {
     background: var(--sl-color-gray-7);
-    border-color: hsla(0, 0%, 0%, 0.1);
+    border-color: var(--sl-color-gray-6);
     box-shadow: var(--shadow-float);
   }
 
   @media (hover: hover) {
     [data-theme="light"] .related-card:hover {
       background: var(--sl-color-gray-7);
-      border-color: hsla(0, 0%, 0%, 0.22);
       box-shadow: var(--sl-shadow-md);
     }
   }

@@ -19,7 +19,7 @@
       margin: 0;
       border: none;
       border-radius: 999px;
-      outline: 1px solid var(--sl-color-gray-3);
+      outline: 1px solid var(--sl-color-gray-5);
       outline-offset: -1px;
       object-fit: cover;
     }
@@ -35,7 +35,7 @@
     height: 1.5em;
     width: 1.5em;
     border-radius: 50%;
-    outline: 1px solid var(--sl-color-gray-3);
+    outline: 1px solid var(--sl-color-gray-5);
     outline-offset: -1px;
     object-fit: cover;
     vertical-align: baseline;
@@ -86,7 +86,7 @@
     border-radius: 8px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    border: 1px solid var(--sl-color-hairline);
+    border: 1px solid var(--sl-color-gray-5);
     background: var(--sl-color-gray-6);
     font-size: var(--sl-text-xs, 0.75rem);
     font-weight: 500;

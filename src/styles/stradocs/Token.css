@@ -75,40 +75,34 @@
 
 :root[data-theme="light"],
 [data-theme="light"] ::backdrop {
-  /* ===== Base background ===== */
-  --sl-color-bg:               hsl(0, 0%, 96%);       /* page */
-  --sl-color-bg-nav:           hsl(0, 0%, 96%);       /* navbar */
-  --sl-color-bg-sidebar:       hsl(0, 0%, 96%);       /* sidebar */
-  --sl-color-bg-inline-code:   hsl(0, 0%, 94.7%);     /* inline code */
+  --sl-color-bg:               hsl(0, 0%, 96%);
+  --sl-color-bg-nav:           hsl(0, 0%, 96%);
+  --sl-color-bg-sidebar:       hsl(0, 0%, 96%);
+  --sl-color-bg-inline-code:   hsl(0, 0%, 94.7%);
   --sl-color-bg-accent:        var(--sl-color-accent);
-  --sl-color-black:            hsl(0, 0%, 96%);       /* bg token (light = light) */
+  --sl-color-black:            hsl(0, 0%, 96%);
 
-  /* ===== Text scale (dark → light) ===== */
-  --sl-color-white:            hsl(0, 0%, 3.9%);      /* primary text */
-  --sl-color-gray-1:           hsl(150, 10%, 15%);    /* alt text */
-  --sl-color-gray-2:           hsl(150, 8%, 30%);     /* secondary text */
-  --sl-color-gray-3:           hsl(0, 0%, 45.1%);     /* muted / disabled */
-  --sl-color-gray-4:           hsl(100, 5%, 74%);     /* icon / hover text */
-  --sl-color-gray-5:           hsla(0, 0%, 80%, 50%); /* default border */
-  --sl-color-gray-6:           hsl(0, 0%, 94.7%);     /* card bg */
-  --sl-color-gray-7:           hsl(0, 0%, 98%);       /* subtle bg / popover */
+  --sl-color-white:            hsl(0, 0%, 3.9%);
+  --sl-color-gray-1:           hsl(150, 10%, 15%);
+  --sl-color-gray-2:           hsl(150, 8%, 30%);
+  --sl-color-gray-3:           hsl(0, 0%, 45.1%);
+  --sl-color-gray-4:           hsl(100, 5%, 74%);
+  --sl-color-gray-5:           hsla(0, 0%, 80%, 50%);
+  --sl-color-gray-6:           hsl(0, 0%, 94.7%);
+  --sl-color-gray-7:           hsl(0, 0%, 98%);
 
-  /* ===== Text semantic ===== */
   --sl-color-text:             var(--sl-color-white);
   --sl-color-text-accent:      var(--sl-color-accent-high);
-  --sl-color-text-invert:      hsl(0, 0%, 98%);       /* text on dark bg */
+  --sl-color-text-invert:      hsl(0, 0%, 98%);
 
-  /* ===== Borders ===== */
-  --sl-color-hairline-light:   var(--sl-color-gray-7);/* paling halus */
-  --sl-color-hairline:         var(--sl-color-gray-5);/* default border */
-  --sl-color-hairline-shade:   var(--sl-color-gray-5);/* sama seperti default */
+  --sl-color-hairline-light:   var(--sl-color-gray-7);
+  --sl-color-hairline:         var(--sl-color-gray-5);
+  --sl-color-hairline-shade:   var(--sl-color-gray-5);
 
-  /* ===== Accent (green) ===== */
   --sl-color-accent-low:       hsl(145, 50%, 92%);
   --sl-color-accent:           hsl(145, 42%, 48%);
   --sl-color-accent-high:      hsl(145, 55%, 32%);
 
-  /* ===== Status colors ===== */
   --sl-hue-orange: 30;
   --sl-color-orange-low:       hsl(var(--sl-hue-orange), 70%, 93%);
   --sl-color-orange:           hsl(var(--sl-hue-orange), 55%, 52%);
@@ -134,7 +128,6 @@
   --sl-color-red:              hsl(var(--sl-hue-red), 55%, 52%);
   --sl-color-red-high:         hsl(var(--sl-hue-red), 55%, 36%);
 
-  /* ===== Shadows ===== */
   --sl-shadow-sm:
     0 1px 2px hsl(150 25% 20% / 0.04),
     0 1px 1px hsl(150 25% 20% / 0.03);
@@ -154,7 +147,6 @@
     0 4px 8px hsl(150 25% 20% / 0.06),
     0 12px 20px hsl(150 25% 20% / 0.05);
 
-  /* ===== Overlay / blur ===== */
   --hue-green: 145;
   --green: hsl(var(--hue-green) 42% 48%);
   --overlay-greenblur: hsl(var(--hue-green) 42% 48% / 0.2);

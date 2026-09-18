@@ -5,7 +5,7 @@
   --ds-steps-bullet-weight:     500;
   --ds-steps-bullet-bg:         var(--sl-color-gray-6);
   --ds-steps-bullet-border:     var(--sl-color-gray-5);
-  --ds-steps-guide-color:       var(--sl-color-hairline);
+  --ds-steps-guide-color:       var(--sl-color-gray-5);
 }
 
 [data-theme="light"] {

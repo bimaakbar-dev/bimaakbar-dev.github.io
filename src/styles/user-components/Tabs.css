@@ -17,7 +17,7 @@
   --ds-tab-font-size:       var(--sl-text-sm);
   --ds-tab-font-size-lg:    var(--sl-text-base);
 
-  --ds-tab-list-border:     var(--sl-color-hairline);
+  --ds-tab-list-border:     var(--sl-color-gray-5);
   --ds-tab-panel-gap:       1rem;
 }
 
@@ -26,7 +26,6 @@
   --ds-tab-text-inactive:      var(--sl-color-gray-3);
   --ds-tab-text-hover:         var(--sl-color-white);
   --ds-tab-text-active:        var(--sl-color-white);
-  --ds-tab-list-border:        var(--sl-color-hairline);
 }
 
 /* ── Komponen ─────────────────────────────────────────── */

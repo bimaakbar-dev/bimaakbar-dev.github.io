@@ -8,7 +8,7 @@
     margin-inline: auto;
     border-radius: 0.75rem;
     border: 1px solid var(--sl-color-black);
-    outline: 2px solid var(--sl-color-hairline);
+    outline: 2px solid var(--sl-color-gray-5);
   }
 }
 
@@ -45,7 +45,7 @@
     width: 100%;
     border-radius: 0.75rem;
     border: 1px solid var(--sl-color-black);
-    outline: 2px solid var(--sl-color-hairline);
+    outline: 2px solid var(--sl-color-gray-5);
   }
 }
 
@@ -63,7 +63,7 @@
 .sl-markdown-content {
 	& figure.mermaid:not(:where(.not-content *)) {
 		--mermaid-bg:           var(--sl-color-gray-6);
-		--mermaid-border:       var(--sl-color-hairline-light);
+		--mermaid-border:       var(--sl-color-gray-5);
 		--mermaid-radius:       0.75rem;
 		--mermaid-padding: 2rem 1.5rem;
 		--mermaid-min-height:   120px;
@@ -124,6 +124,11 @@
 			}
 		}
 	}
+}
+
+/* Hr */
+.sl-markdown-content hr:not(:where(.not-content *)) {
+  color: var(--sl-color-gray-6);
 }
 
 @media (max-width: 50rem) {

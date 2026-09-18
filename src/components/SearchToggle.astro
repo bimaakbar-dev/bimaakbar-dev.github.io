@@ -53,17 +53,17 @@ const { variant = 'icon-only', class: className } = Astro.props;
 		gap: 0.5rem;
 		border: 0;
 		background-color: transparent;
-		color: var(--sl-color-gray-1);
+		color: var(--sl-color-white);
 		cursor: pointer;
 		height: 2.5rem;
 		font-size: var(--sl-text-xl);
 		&.bar {
 			border: 1px solid var(--sl-color-gray-5);
-			border-radius: 0.75rem;
+			border-radius: 99rem;
 			padding-inline-start: 0.75rem;
 			padding-inline-end: 0.5rem;
 			background-color: var(--sl-color-gray-6);
-			color: var(--sl-color-gray-2);
+			color: var(--sl-color-gray-3);
 			font-size: var(--sl-text-sm);
 			width: 100%;
 			max-width: 22rem;
@@ -73,14 +73,23 @@ const { variant = 'icon-only', class: className } = Astro.props;
 			& > :last-child {
 				margin-inline-start: auto;
 			}
+			& kbd {
+				border-radius: 0.25rem;
+				font-size: var(--sl-text-2xs);
+				gap: 0.25em;
+				padding-inline: 0.25em;
+				background-color: var(--sl-color-black);
+				font-family: var(--__sl-font);
+			}
 		}
-		& kbd {
-			border-radius: 0.25rem;
-			font-size: var(--sl-text-2xs);
-			gap: 0.25em;
-			padding-inline: 0.25em;
-			background-color: var(--sl-color-black);
-			font-family: var(--__sl-font);
+		
+	}
+	[data-theme='light'] button {
+		&.bar {
+			background-color: var(--sl-color-gray-7);
+			& kbd {
+				background-color: var(--sl-color-accent);
+			}
 		}
 	}
 </style>

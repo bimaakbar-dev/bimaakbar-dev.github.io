@@ -129,7 +129,7 @@ hr {
   border: none;
   background-color: currentColor;
   height: 1px;
-  color: var(--sl-color-hairline-light);
+  color: var(--sl-color-gray-6);
 }
 
 ::-moz-placeholder,
@@ -139,7 +139,7 @@ textarea::placeholder {
 }
 
 select {
-  border: 1px solid var(--sl-color-hairline);
+  border: 1px solid var(--sl-color-gray-5);
   background-color: transparent;
   border-radius: 99rem;
   box-shadow: none;
@@ -152,6 +152,11 @@ select:hover,
 select:focus {
   background-color: rgb(from var(--sl-color-gray-6) r g b / 80%);
   outline: none;
+}
+
+:global([data-theme='light'] select:hover,
+[data-theme='light'] select:focus) {
+  background-color: rgb(from var(--sl-color-gray-7) r g b / 80%);
 }
 
 option {

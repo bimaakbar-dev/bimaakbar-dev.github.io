@@ -6,7 +6,7 @@
   --ds-card-feature-gap:     0.5em;
 
   --ds-card-feature-bg:      var(--sl-color-gray-6);
-  --ds-card-feature-border:  var(--sl-color-hairline);
+  --ds-card-feature-border:  var(--sl-color-gray-5);
 
   --ds-card-feature-title-color:  var(--sl-color-white);
   --ds-card-feature-title-size:   var(--sl-text-base);

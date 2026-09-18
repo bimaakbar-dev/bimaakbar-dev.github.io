@@ -2,7 +2,7 @@
 
 :root {
   --ds-details-radius:          0.75rem;
-  --ds-details-border:          var(--sl-color-hairline);
+  --ds-details-border:          var(--sl-color-gray-5);
   --ds-details-border-hover:    var(--sl-color-gray-4);
   --ds-details-bg:              transparent;
   --ds-details-bg-hover:        rgb(from var(--sl-color-gray-6) r g b / 40%);
@@ -16,18 +16,17 @@
   --ds-details-marker-color:          var(--sl-color-gray-3);
   --ds-details-marker-color-hover:    var(--sl-color-white);
   --ds-details-marker-size:           1.25em;
-  --ds-details-marker-hint:           4px;
   --ds-details-marker-duration:       140ms;
 
   --ds-details-body-color:      var(--sl-color-gray-2);
   --ds-details-body-size:       var(--sl-text-sm);
-  --ds-details-body-spacing:    0.75rem;
+  --ds-details-body-spacing:    1rem;
 }
 
 [data-theme="light"] {
   --ds-details-bg:              var(--sl-color-gray-7);
   --ds-details-bg-hover:        var(--sl-color-gray-7);
-  --ds-details-border:          hsla(0, 0%, 0%, 0.1);
+
   --ds-details-border-hover:    hsla(0, 0%, 0%, 0.24);
 
   --ds-details-summary-color:       var(--sl-color-gray-2);
@@ -41,10 +40,9 @@
 
 .sl-markdown-content details:not(:where(.not-content *)) {
   border: 1px solid var(--ds-details-border);
-  border-radius: var(--ds-details-radius);
   background: var(--ds-details-bg);
+  border-radius: 0.75rem;
   padding: 0;
-  margin-block: var(--sl-content-gap-y, 1.5rem);
   overflow: hidden;
 }
 
@@ -98,7 +96,11 @@
 
 .sl-markdown-content details:not(:where(.not-content *)) > summary:not(:where(.not-content *)):hover::before {
   background-color: var(--ds-details-marker-color-hover);
-  transform: translateX(var(--ds-details-marker-hint));
+}
+
+.sl-markdown-content details[open]:not(:where(.not-content *)) > summary:not(:where(.not-content *)) {
+  border-block-end: 1px solid var(--ds-details-border);
+
 }
 
 .sl-markdown-content details[open]:not(:where(.not-content *)) > summary:not(:where(.not-content *))::before {
@@ -111,13 +113,12 @@
 
 /* Body content */
 .sl-markdown-content details:not(:where(.not-content *)) > *:not(summary):not(:where(.not-content *)) {
-  padding-inline-start: var(--ds-details-body-spacing);
-  padding-inline-end: var(--ds-details-body-spacing);
+  margin-inline-start: var(--ds-details-body-spacing);
+  margin-inline-end: var(--ds-details-body-spacing);
   color: var(--ds-details-body-color);
   font-size: var(--ds-details-body-size);
-  margin-top: 0;
 }
 
 .sl-markdown-content details:not(:where(.not-content *)) > *:not(summary):not(:where(.not-content *)):last-child {
-  padding-block-end: var(--ds-details-body-spacing);
+  margin-block-end: var(--ds-details-body-spacing);
 }

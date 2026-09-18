@@ -13,7 +13,7 @@ ul.top-level ul li::before {
 	left: var(--sl-sidebar-item-padding-inline);
   height: 100%;
   width: 1px;
-  background-color: var(--sl-color-hairline);
+  background-color: var(--sl-color-gray-5);
   content: "";
 }
 
@@ -43,7 +43,7 @@ ul.top-level ul li::before {
   & > li a[aria-current="page"]:focus {
     position: relative;
     color: var(--sl-color-text-accent);
-    background-color: color-mix(in oklab, var(--sl-color-hairline-shade) 0%, transparent);
+    background-color: transparent;
     font-weight: 500;
   }
 }
@@ -66,11 +66,21 @@ ul.top-level ul li:has(> a[aria-current="page"])::before {
   inset: 0;
   height: 100%;
   width: 100%;
-  background-color: color-mix(in oklab, var(--sl-color-hairline) 100%, transparent);
+  background-color: color-mix(in oklab, var(--sl-color-gray-5) 100%, transparent);
   border-radius: 0.5rem;
   z-index: -1;
 }
 
+[data-theme='light'] {
+  & ul.top-level > li a[aria-current="page"],
+  & ul.top-level > li a[aria-current="page"]:hover,
+  & ul.top-level > li a[aria-current="page"]:focus{
+    background-color: transparent;
+  }
+  & ul.top-level ul li:has(> a[aria-current="page"])::before {
+    background-color: color-mix(in oklab, var(--sl-color-gray-5) 40%, transparent);
+  }
+}
 @media (min-width: 50rem) {
   .top-level {
     & .large,

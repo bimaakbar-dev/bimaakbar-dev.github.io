@@ -4,7 +4,7 @@
   --ds-filetree-radius:   0.75rem;
   --ds-filetree-padding:  0.75rem;
   --ds-filetree-bg:       var(--sl-color-gray-6);
-  --ds-filetree-border:   var(--sl-color-hairline);
+  --ds-filetree-border:   var(--sl-color-gray-5);
 
   --ds-filetree-dir-color:        var(--sl-color-white);
   --ds-filetree-dir-color-hover:  var(--sl-color-text-accent);

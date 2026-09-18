@@ -70,32 +70,29 @@ const blogPosts = allPosts
     height: 100%;
     padding: 1.25em;
     border-radius: 0.75rem;
-    border: 1px solid var(--sl-color-hairline);
+    border: 1px solid var(--sl-color-gray-5);
     
     background: rgb(from var(--sl-color-gray-6) r g b / 40%);
     outline: 1px solid transparent;
     transition:
       background 140ms ease,
-      border-color 140ms ease;
   }
 
   @media (hover: hover) {
     .post-card:hover {
       background: transparent;
-      border-color: var(--sl-color-gray-4);
     }
   }
 
   [data-theme='light'] .post-card {
     background: var(--sl-color-gray-7);
-    border-color: hsla(0, 0%, 0%, 0.1);
+    border-color: var(--sl-color-gray-6);
     box-shadow: var(--shadow-float);
   }
 
   @media (hover: hover) {
     [data-theme='light'] .post-card:hover {
-      background: var(--sl-color-gray-7);
-      border-color: hsla(0, 0%, 0%, 0.22);
+      background: var(--sl-color-black);
       box-shadow: var(--sl-shadow-md);
     }
   }

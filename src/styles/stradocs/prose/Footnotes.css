@@ -5,7 +5,7 @@
   & .footnotes:not(:where(.not-content *)) {
     margin-top: 1.5rem;
     font-size: var(--sl-text-sm);
-    color: var(--sl-color-gray-3);
+    color: var(--sl-color-gray-2);
     & ol:not(:where(.not-content *)) {
       padding-inline-start: 1.25rem;
       & li:not(:where(.not-content *)) {

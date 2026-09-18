@@ -38,7 +38,7 @@
         height: 1.1em;
         margin: 0;
         margin-block-start: calc((var(--sl-line-height, 1.75) * 1em - 1.1em) / 2);
-        border: 1.5px solid var(--sl-color-hairline);
+        border: 1.5px solid var(--sl-color-gray-5);
         border-radius: 0.25rem;
         background-color: transparent;
         cursor: pointer;
@@ -83,7 +83,7 @@
       font-size: var(--sl-text-body);
       white-space: nowrap;
       &:first-of-type + dd {
-        border-top: 1px solid var(--sl-color-hairline);
+        border-top: 1px solid var(--sl-color-gray-5);
       }
       & code {
         font-size: var(--sl-text-body);
@@ -98,11 +98,14 @@
       padding-block: 1rem;
       padding-inline: 0;
       color: var(--sl-color-gray-2);
-      border-top: 1px solid var(--sl-color-hairline);
+      border-top: 1px solid var(--sl-color-gray-5);
       word-break: break-word;
       overflow-wrap: break-word;
       & p:not(:where(.not-content *)) {
-        margin: 0;
+        margin-top: 0.5rem;
+        &:first-child {
+          margin-top: 0;
+        }
       }
       &:has(code) {
         font-size: var(--sl-text-code-sm);

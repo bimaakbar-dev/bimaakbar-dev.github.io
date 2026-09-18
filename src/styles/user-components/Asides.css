@@ -23,8 +23,8 @@
   display: block;
   box-sizing: border-box;
   position: relative;
-  padding: 1em 1.25em 1em 1.65em;
-  outline: 1px solid var(--sl-color-hairline);
+  padding: 1em 1em 1em 1.65em;
+  outline: 1px solid var(--sl-color-gray-5);
   border-radius: 0.75rem;
   background-color: var(--sl-color-gray-6);
   border-inline-start: none;
@@ -52,16 +52,18 @@
   line-height: var(--sl-line-height-headings);
   color: var(--sl-color-asides-text-accent);
   text-align: start;
+  vertical-align: middle;
 }
 .starlight-aside__icon {
   font-size: 1em;
   flex-shrink: 0;
   width: 1.25em;
   height: 1.25em;
-  vertical-align: middle;
+  align-items: center;
   color: inherit; 
 }
 .starlight-aside__content {
+  color: var(--sl-color-gray-2);
   text-align: start;
 }
 .starlight-aside__content:empty {
@@ -72,5 +74,6 @@
   font-size: var(--sl-text-sm);
 }
 .starlight-aside__content a {
+  color: var(--sl-color-asides-text-accent);
   text-decoration-color: var(--sl-color-asides-text-accent);
 }

@@ -2,11 +2,10 @@
 
 :root {
   --ds-table-margin:      2.5rem 0;
-  --ds-table-radius:      0.75rem;
+  --ds-table-radius:      0.5rem;
 
-  /* Dark — Linear: head ghosted, row hover hampir invisible */
-  --ds-table-head-bg:         rgb(from var(--sl-color-gray-6) r g b / 40%);
-  --ds-table-head-border:     var(--sl-color-hairline);
+  --ds-table-head-bg:         rgb(from var(--sl-color-gray-6) r g b / 80%);
+  --ds-table-head-border:     var(--sl-color-gray-5);
   --ds-table-head-color:      var(--sl-color-white);
   --ds-table-head-size:       var(--sl-text-sm);
   --ds-table-head-weight:     500;
@@ -15,19 +14,15 @@
   --ds-table-body-size:       var(--sl-text-sm);
   --ds-table-body-pad:        0.5em 1em;
   --ds-table-body-pad-first:  1rem;
-  --ds-table-row-border:      var(--sl-color-hairline);
+  --ds-table-row-border:      var(--sl-color-gray-5);
   --ds-table-row-bg-hover:    rgb(from var(--sl-color-gray-6) r g b / 30%);
 
   --ds-table-wrapper-shadow:  none;
 }
 
 [data-theme="light"] {
-  /* Light — Apple: head solid putih, border bawah tegas, shadow di wrapper */
   --ds-table-head-bg:         var(--sl-color-gray-7);
-  --ds-table-head-border:     hsla(0, 0%, 0%, 0.1);
   --ds-table-head-color:      var(--sl-color-white);
-
-  --ds-table-row-border:      hsla(0, 0%, 0%, 0.07);
   --ds-table-row-bg-hover:    hsla(0, 0%, 0%, 0.03);
 
   --ds-table-wrapper-shadow:  var(--shadow-float);

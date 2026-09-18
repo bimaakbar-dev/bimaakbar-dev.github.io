@@ -1,7 +1,6 @@
 ---
 // src/components/ThemeSelect.astro
 import { Icon } from '@astrojs/starlight/components';
-
 const label = Astro.locals.t('themeSelect.accessibleLabel');
 ---
 
@@ -94,36 +93,34 @@ const label = Astro.locals.t('themeSelect.accessibleLabel');
     width: 2rem;
     height: 2rem;
     padding: 0;
-    border: 1px solid var(--sl-color-hairline);
+    border: 1px solid var(--sl-color-gray-5);
     border-radius: 99rem;
     background: transparent;
     color: var(--sl-color-gray-2);
     cursor: pointer;
     transition: color 0.15s ease;
-
     &:hover {
-    	color: var(--sl-color-white);
-    	background: var(--sl-color-gray-6);
-    	border-color: var(--sl-color-gray-5);
+      color: var(--sl-color-white);
+      background: var(--sl-color-gray-6);
+      border-color: var(--sl-color-gray-5);
     }
     &:focus-visible {
-    	outline: 2px solid var(--sl-color-accent);
-    	outline-offset: 2px;
+      outline: 2px solid var(--sl-color-accent);
+      outline-offset: 2px;
     }
     & svg {
-    	flex-shrink: 0;
-    	width: 1rem;
-    	height: 1rem;
-    	display: none;
+      flex-shrink: 0;
+      width: 1rem;
+      height: 1rem;
+      display: none;
     }
-    &[data-mode='auto'] .auto {
-    	display: block;
-    }
-    &[data-mode='light'] .light {
-    	display: block;
-    }
+    &[data-mode='auto'] .auto,
+    &[data-mode='light'] .light,
     &[data-mode='dark'] .dark {
-    	display: block;
+      display: block;
     }
+  }
+  [data-theme='light'] button:hover {
+    background: var(--sl-color-gray-7);
   }
 </style>
