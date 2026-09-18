@@ -139,9 +139,9 @@ textarea::placeholder {
 }
 
 select {
-  border: none;
+  border: 1px solid var(--sl-color-hairline);
   background-color: transparent;
-  border-radius: 0.5rem;
+  border-radius: 99rem;
   box-shadow: none;
   color: var(--sl-color-gray-2);
   padding-block: 0.375em !important;
@@ -150,7 +150,7 @@ select {
 
 select:hover,
 select:focus {
-  background-color: rgb(from var(--sl-color-gray-6) r g b / 20%);
+  background-color: rgb(from var(--sl-color-gray-6) r g b / 80%);
   outline: none;
 }
 
