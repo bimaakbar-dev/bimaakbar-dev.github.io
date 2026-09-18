@@ -1,0 +1,1030 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const serverURL = 'https://bimaakbar-dev-comments.bimasaktiakbarr.workers.dev/api';
+
+const path = Astro.url.pathname;
+---
+
+<section class:list={['c-comments', className]} data-comments data-server={serverURL} data-path={path}>
+  <header class="c-comments__header">
+    <h2 class="c-comments__title">Komentar</h2>
+    <span class="c-comments__count" data-count>—</span>
+  </header>
+
+  <div class="c-comments__auth" data-auth hidden>
+    <img class="c-comments__auth-avatar" data-user-avatar alt="" />
+    <span class="c-comments__auth-name" data-user-name></span>
+    <button type="button" class="c-comments__auth-btn" data-logout>Keluar</button>
+  </div>
+
+  <form class="c-comments__form" data-form>
+    <p class="c-comments__form-to" data-form-to hidden></p>
+
+    <div class="c-comments__row">
+      <input
+        type="text"
+        name="nick"
+        placeholder="Nama"
+        maxlength="50"
+        required
+        data-field="nick"
+      />
+      <input
+        type="email"
+        name="mail"
+        placeholder="Email (opsional, untuk gravatar)"
+        data-field="mail"
+      />
+    </div>
+
+    <input
+      type="url"
+      name="link"
+      placeholder="Website (opsional)"
+      data-field="link"
+    />
+
+    <textarea
+      name="comment"
+      placeholder="Tulis komentar... (mendukung Markdown)"
+      rows="4"
+      required
+      data-field="comment"
+    ></textarea>
+
+    <!-- Honeypot -->
+    <input
+      type="text"
+      name="hp"
+      tabindex="-1"
+      autocomplete="off"
+      aria-hidden="true"
+      class="c-comments__hp"
+    />
+
+    <div class="c-comments__actions">
+      <p class="c-comments__status" data-status></p>
+      <button type="button" class="c-comments__cancel" data-cancel hidden>Batal</button>
+      <button type="submit" class="c-comments__submit" data-submit>Kirim</button>
+    </div>
+  </form>
+
+  <!-- Auth prompt (user belum login) -->
+  <div class="c-comments__auth-prompt" data-auth-prompt>
+    <span>Atau</span>
+    <button type="button" class="c-comments__link" data-open-login>Masuk</button>
+    <span>/</span>
+    <button type="button" class="c-comments__link" data-open-register>Daftar</button>
+    <span>untuk komentar dengan akun.</span>
+  </div>
+
+  <!-- List komentar -->
+  <div class="c-comments__list" data-list>
+    <p class="c-comments__loading">Memuat komentar…</p>
+  </div>
+
+  <!-- Pagination -->
+  <div class="c-comments__pagination" data-pagination hidden></div>
+
+  <dialog class="c-auth-modal" data-auth-modal>
+  <form class="c-auth-modal__form" data-auth-form>
+    <h3 class="c-auth-modal__title" data-auth-title>Masuk</h3>
+
+    <input
+      type="text"
+      name="nick"
+      placeholder="Nama"
+      data-auth-field="nick"
+      hidden
+    />
+    <input
+      type="email"
+      name="email"
+      placeholder="Email"
+      required
+      data-auth-field="email"
+    />
+    <input
+      type="password"
+      name="password"
+      placeholder="Password"
+      required
+      minlength="6"
+      data-auth-field="password"
+    />
+
+    <p class="c-auth-modal__msg" data-auth-msg></p>
+
+    <div class="c-auth-modal__actions">
+      <button type="button" class="c-auth-modal__btn" data-auth-close>Batal</button>
+      <button type="submit" class="c-auth-modal__btn c-auth-modal__btn--primary" data-auth-submit>
+        Masuk
+      </button>
+    </div>
+  </form>
+</dialog>
+</section>
+
+<script>
+  import { WalineClient, type WalineComment, type WalineUser } from '~/utils/waline';
+
+  function bootCommentSection(root: HTMLElement) {
+    if (root.dataset.booted) return;
+    root.dataset.booted = '1';
+
+    const serverURL = root.dataset.server!;
+    const path = root.dataset.path!;
+    const client = new WalineClient(serverURL);
+
+    const $ = <T extends HTMLElement = HTMLElement>(sel: string) => root.querySelector<T>(sel);
+    const $$ = <T extends HTMLElement = HTMLElement>(sel: string) => root.querySelectorAll<T>(sel);
+
+    const form = $<HTMLFormElement>('[data-form]')!;
+    const listEl = $<HTMLElement>('[data-list]')!;
+    const statusEl = $<HTMLElement>('[data-status]')!;
+    const countEl = $<HTMLElement>('[data-count]')!;
+    const submitBtn = $<HTMLButtonElement>('[data-submit]')!;
+    const cancelBtn = $<HTMLButtonElement>('[data-cancel]')!;
+    const formToEl = $<HTMLElement>('[data-form-to]')!;
+
+    const authBar = $<HTMLElement>('[data-auth]')!;
+    const userAvatar = $<HTMLImageElement>('[data-user-avatar]')!;
+    const userName = $<HTMLElement>('[data-user-name]')!;
+    const logoutBtn = $<HTMLButtonElement>('[data-logout]')!;
+    const authPrompt = $<HTMLElement>('[data-auth-prompt]')!;
+    const openLogin = $<HTMLButtonElement>('[data-open-login]')!;
+    const openRegister = $<HTMLButtonElement>('[data-open-register]')!;
+
+    const modal = $<HTMLDialogElement>('[data-auth-modal]')!;
+    const modalForm = $<HTMLFormElement>('[data-auth-form]')!;
+    const modalTitle = $<HTMLElement>('[data-auth-title]')!;
+    const modalMsg = $<HTMLElement>('[data-auth-msg]')!;
+    const modalSubmit = $<HTMLButtonElement>('[data-auth-submit]')!;
+    const modalClose = $<HTMLButtonElement>('[data-auth-close]')!;
+    const nickField = modalForm.querySelector<HTMLInputElement>('[data-auth-field="nick"]')!;
+
+    let currentUser: WalineUser | null = null;
+    let replyTo: WalineComment | null = null;
+    let currentPage = 1;
+    let authMode: 'login' | 'register' = 'login';
+
+    const esc = (s: string) =>
+      s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
+
+    const fmtDate = (iso: string) => {
+      const d = new Date(iso);
+      const diff = (Date.now() - d.getTime()) / 1000;
+      if (diff < 60) return 'baru saja';
+      if (diff < 3600) return `${Math.floor(diff / 60)} menit lalu`;
+      if (diff < 86400) return `${Math.floor(diff / 3600)} jam lalu`;
+      if (diff < 604800) return `${Math.floor(diff / 86400)} hari lalu`;
+      return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+    };
+
+    function commentItem(c: WalineComment, isReply = false): string {
+      const canDelete = currentUser && currentUser.email === c.mail;
+      return `
+        <article class="c-item${isReply ? ' c-item--reply' : ''}" data-comment-id="${c.objectId}">
+          <img class="c-item__avatar" src="${esc(c.avatar)}" alt="" loading="lazy" />
+          <div class="c-item__body">
+            <header class="c-item__header">
+              ${c.link
+                ? `<a class="c-item__name" href="${esc(c.link)}" target="_blank" rel="noopener nofollow">${esc(c.nick)}</a>`
+                : `<span class="c-item__name">${esc(c.nick)}</span>`}
+              ${c.status === 'waiting' ? '<span class="c-item__badge">menunggu moderasi</span>' : ''}
+              <time class="c-item__date">${fmtDate(c.insertedAt)}</time>
+            </header>
+            <div class="c-item__content">${c.comment}</div>
+            <div class="c-item__actions">
+              <button type="button" class="c-item__action" data-reply="${c.objectId}" data-nick="${esc(c.nick)}">Balas</button>
+              ${canDelete ? `<button type="button" class="c-item__action c-item__action--danger" data-delete="${c.objectId}">Hapus</button>` : ''}
+            </div>
+          </div>
+        </article>
+        ${c.children?.map((child) => commentItem(child, true)).join('') ?? ''}
+      `;
+    }
+
+    function renderList(comments: WalineComment[]) {
+      if (!comments.length) {
+        listEl.innerHTML = '<p class="c-comments__empty">Belum ada komentar. Jadilah yang pertama.</p>';
+        return;
+      }
+      listEl.innerHTML = comments.map((c) => commentItem(c)).join('');
+    }
+
+    async function loadComments(page = 1) {
+      listEl.innerHTML = '<p class="c-comments__loading">Memuat komentar…</p>';
+      try {
+        const res = await client.listComments(path, page, 20);
+        if (res.errno !== 0) throw new Error(res.errmsg);
+        countEl.textContent = String(res.data.count ?? 0);
+        renderList(res.data.data ?? []);
+        currentPage = page;
+        renderPagination(res.data.totalPages ?? 1, page);
+      } catch (e) {
+        listEl.innerHTML = `<p class="c-comments__error">Gagal memuat komentar: ${esc(String(e))}</p>`;
+      }
+    }
+
+    function renderPagination(totalPages: number, current: number) {
+      const el = $<HTMLElement>('[data-pagination]')!;
+      if (totalPages <= 1) {
+        el.hidden = true;
+        return;
+      }
+      el.hidden = false;
+      el.innerHTML = `
+        ${current > 1 ? `<button type="button" data-page="${current - 1}">← Sebelumnya</button>` : ''}
+        <span>Halaman ${current} dari ${totalPages}</span>
+        ${current < totalPages ? `<button type="button" data-page="${current + 1}">Selanjutnya →</button>` : ''}
+      `;
+    }
+
+    // ── Form submission ─────────────────────────────
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      if (fd.get('hp')) return; // honeypot
+
+      submitBtn.disabled = true;
+      statusEl.textContent = 'Mengirim…';
+      statusEl.removeAttribute('data-state');
+
+      try {
+        const res = await client.submitComment({
+          comment: String(fd.get('comment') ?? '').trim(),
+          nick: String(fd.get('nick') ?? '').trim(),
+          mail: String(fd.get('mail') ?? '').trim() || undefined,
+          link: String(fd.get('link') ?? '').trim() || undefined,
+          url: path,
+          pid: replyTo?.objectId,
+        });
+
+        if (res.errno !== 0) {
+          statusEl.textContent = res.errmsg || 'Gagal mengirim.';
+          statusEl.setAttribute('data-state', 'error');
+        } else {
+          statusEl.textContent = res.data.status === 'waiting'
+            ? 'Komentar menunggu moderasi.'
+            : 'Komentar terkirim.';
+          form.reset();
+          if (currentUser) {
+            (form.querySelector('[data-field="nick"]') as HTMLInputElement).value = currentUser.nick;
+            (form.querySelector('[data-field="mail"]') as HTMLInputElement).value = currentUser.email;
+          }
+          cancelReply();
+          await loadComments(1);
+        }
+      } catch {
+        statusEl.textContent = 'Terjadi kesalahan jaringan.';
+        statusEl.setAttribute('data-state', 'error');
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+
+    // ── Reply ───────────────────────────────────────
+    function setReply(id: string, nick: string) {
+      replyTo = { objectId: id } as WalineComment;
+      formToEl.hidden = false;
+      formToEl.textContent = `Membalas @${nick}`;
+      cancelBtn.hidden = false;
+      form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      (form.querySelector('[data-field="comment"]') as HTMLTextAreaElement).focus();
+    }
+
+    function cancelReply() {
+      replyTo = null;
+      formToEl.hidden = true;
+      formToEl.textContent = '';
+      cancelBtn.hidden = true;
+    }
+
+    cancelBtn.addEventListener('click', cancelReply);
+
+    // ── Delegated events (list) ─────────────────────
+    listEl.addEventListener('click', async (e) => {
+      const target = e.target as HTMLElement;
+      const replyBtn = target.closest<HTMLButtonElement>('[data-reply]');
+      const deleteBtn = target.closest<HTMLButtonElement>('[data-delete]');
+
+      if (replyBtn) {
+        setReply(replyBtn.dataset.reply!, replyBtn.dataset.nick!);
+      }
+
+      if (deleteBtn) {
+        if (!confirm('Hapus komentar ini?')) return;
+        const res = await client.deleteComment(deleteBtn.dataset.delete!);
+        if (res.errno === 0) await loadComments(currentPage);
+        else alert(res.errmsg || 'Gagal menghapus.');
+      }
+    });
+
+    // Pagination clicks
+    $<HTMLElement>('[data-pagination]')!.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-page]');
+      if (btn) loadComments(Number(btn.dataset.page));
+    });
+
+    // ── Auth ────────────────────────────────────────
+    function openAuthModal(mode: 'login' | 'register') {
+      authMode = mode;
+      modalTitle.textContent = mode === 'login' ? 'Masuk' : 'Daftar';
+      modalSubmit.textContent = mode === 'login' ? 'Masuk' : 'Daftar';
+      nickField.hidden = mode === 'login';
+      nickField.required = mode === 'register';
+      modalMsg.textContent = '';
+      modalMsg.removeAttribute('data-state');
+      modalForm.reset();
+      modal.showModal();
+    }
+
+    openLogin.addEventListener('click', () => openAuthModal('login'));
+    openRegister.addEventListener('click', () => openAuthModal('register'));
+    modalClose.addEventListener('click', () => modal.close());
+
+    modalForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(modalForm);
+      const email = String(fd.get('email') ?? '');
+      const password = String(fd.get('password') ?? '');
+      const nick = String(fd.get('nick') ?? '');
+
+      modalSubmit.disabled = true;
+      modalMsg.textContent = 'Memproses…';
+
+      try {
+        const res = authMode === 'login'
+          ? await client.login(email, password)
+          : await client.register({ email, password, nick, url: path });
+
+        if (res.errno !== 0) {
+          modalMsg.textContent = res.errmsg || 'Gagal.';
+          modalMsg.setAttribute('data-state', 'error');
+          return;
+        }
+
+        if (authMode === 'register') {
+          modalMsg.textContent = 'Berhasil daftar. Silakan masuk.';
+          modalMsg.setAttribute('data-state', 'success');
+          setTimeout(() => openAuthModal('login'), 1200);
+          return;
+        }
+
+        modal.close();
+        await refreshUser();
+        await loadComments(1);
+      } catch {
+        modalMsg.textContent = 'Terjadi kesalahan jaringan.';
+        modalMsg.setAttribute('data-state', 'error');
+      } finally {
+        modalSubmit.disabled = false;
+      }
+    });
+
+    logoutBtn.addEventListener('click', async () => {
+      await client.logout();
+      await refreshUser();
+    });
+
+    async function refreshUser() {
+      currentUser = await client.getCurrentUser();
+
+      if (currentUser) {
+        authBar.hidden = false;
+        authPrompt.hidden = true;
+        userAvatar.src = currentUser.avatar;
+        userName.textContent = currentUser.nick;
+
+        (form.querySelector('[data-field="nick"]') as HTMLInputElement).value = currentUser.nick;
+        (form.querySelector('[data-field="mail"]') as HTMLInputElement).value = currentUser.email;
+      } else {
+        authBar.hidden = true;
+        authPrompt.hidden = false;
+      }
+    }
+
+    // ── Init ────────────────────────────────────────
+    refreshUser().then(() => loadComments(1));
+  }
+
+  function init() {
+    document.querySelectorAll<HTMLElement>('[data-comments]').forEach(bootCommentSection);
+  }
+
+  init();
+  document.addEventListener('astro:page-load', init);
+</script>
+
+<style is:global>
+  /* ── Root ──────────────────────────────────────────── */
+  .c-comments {
+    max-width: 50rem;
+    margin-inline: auto;
+    padding-inline: 0;
+    padding-block-start: var(--sl-content-gap-y);
+    width: 100%;
+    border-top: 1px solid var(--sl-color-gray-5)
+  }
+
+  /* ── Header ────────────────────────────────────────── */
+  .c-comments__header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .c-comments__title {
+    margin: 0;
+    font-size: var(--sl-text-h3);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--sl-color-white);
+  }
+
+  .c-comments__count {
+    padding: 0.125rem 0.5rem;
+    border-radius: 999px;
+    background: var(--sl-color-gray-6);
+    color: var(--sl-color-gray-3);
+    font-family: var(--sl-font-mono);
+    font-size: var(--sl-text-2xs);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  /* ── Auth bar (user login) ─────────────────────────── */
+  .c-comments__auth {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.75rem;
+    background: var(--sl-color-gray-6);
+    font-size: var(--sl-text-sm);
+  }
+
+  .c-comments__auth-avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: var(--sl-color-gray-5);
+    outline: 1px solid var(--sl-color-gray-6);
+  }
+
+  .c-comments__auth-name {
+    color: var(--sl-color-white);
+    font-weight: 600;
+    font-size: var(--sl-text-sm);
+  }
+
+  .c-comments__auth-btn {
+    margin-inline-start: auto;
+    padding: 0.375rem 0.875rem;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.5rem;
+    background: transparent;
+    color: var(--sl-color-gray-2);
+    font: inherit;
+    font-size: var(--sl-text-xs);
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .c-comments__auth-btn:hover {
+    color: var(--sl-color-white);
+    background: var(--sl-color-gray-5);
+    border-color: var(--sl-color-gray-4);
+  }
+
+  .c-comments__auth-btn:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+  }
+
+  /* ── Form ──────────────────────────────────────────── */
+  .c-comments__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 1rem;
+    background: var(--sl-color-gray-6);
+  }
+
+  .c-comments__form-to {
+    margin: 0;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    background: var(--sl-color-accent-low);
+    color: var(--sl-color-text-accent);
+    font-size: var(--sl-text-xs);
+    font-weight: 600;
+  }
+
+  .c-comments__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  @media (max-width: 30rem) {
+    .c-comments__row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .c-comments__form input,
+  .c-comments__form textarea {
+    width: 100%;
+    padding: 0.625rem 0.875rem;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.5rem;
+    background: var(--sl-color-bg);
+    color: var(--sl-color-text);
+    font: inherit;
+    font-size: var(--sl-text-sm);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  }
+
+  .c-comments__form input::placeholder,
+  .c-comments__form textarea::placeholder {
+    color: var(--sl-color-gray-3);
+  }
+
+  .c-comments__form input:hover,
+  .c-comments__form textarea:hover {
+    border-color: var(--sl-color-gray-4);
+  }
+
+  .c-comments__form input:focus,
+  .c-comments__form textarea:focus {
+    outline: none;
+    border-color: var(--sl-color-accent);
+    background: var(--sl-color-bg);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--sl-color-accent) 22%, transparent);
+  }
+
+  .c-comments__form textarea {
+    resize: vertical;
+    min-height: 7rem;
+    font-family: inherit;
+    line-height: 1.6;
+  }
+
+  .c-comments__hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .c-comments__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+  }
+
+  .c-comments__status {
+    flex: 1;
+    margin: 0;
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+  }
+
+  .c-comments__status[data-state='error'] {
+    color: var(--sl-color-red-high);
+  }
+
+  .c-comments__cancel,
+  .c-comments__submit {
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+    font: inherit;
+    font-size: var(--sl-text-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+  }
+
+  .c-comments__cancel {
+    border: 1px solid var(--sl-color-hairline);
+    background: transparent;
+    color: var(--sl-color-gray-2);
+  }
+
+  .c-comments__cancel:hover {
+    color: var(--sl-color-white);
+    background: var(--sl-color-gray-5);
+    border-color: var(--sl-color-gray-4);
+  }
+
+  .c-comments__submit {
+    border: 1px solid var(--sl-color-accent-high);
+    background: var(--sl-color-accent-high);
+    color: var(--sl-color-text-invert);
+  }
+
+  .c-comments__submit:hover {
+    opacity: 0.85;
+  }
+
+  .c-comments__submit:focus-visible,
+  .c-comments__cancel:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+  }
+
+  .c-comments__submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* ── Auth prompt (guest) ───────────────────────────── */
+  .c-comments__auth-prompt {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.375rem;
+    margin: 0 0 2rem;
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+  }
+
+  .c-comments__link {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--sl-color-text-accent);
+    font: inherit;
+    font-size: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  .c-comments__link:hover {
+    color: var(--sl-color-accent);
+  }
+
+  .c-comments__link:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* ── List ──────────────────────────────────────────── */
+  .c-comments__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .c-comments__loading,
+  .c-comments__empty,
+  .c-comments__error {
+    margin: 0;
+    padding: 2rem 1rem;
+    text-align: center;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+
+  .c-comments__error {
+    color: var(--sl-color-red-high);
+  }
+
+  /* ── Comment item ──────────────────────────────────── */
+  .c-item {
+    display: flex;
+    gap: 0.875rem;
+    padding: 1rem 1.125rem;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.75rem;
+    background: var(--sl-color-bg);
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+  }
+
+  .c-item:hover {
+    border-color: var(--sl-color-gray-4);
+    background: color-mix(in srgb, var(--sl-color-gray-6) 30%, var(--sl-color-bg));
+  }
+
+  .c-item--reply {
+    margin-inline-start: 2.5rem;
+    margin-top: 0.75rem;
+    border-inline-start-width: 2px;
+    border-inline-start-color: var(--sl-color-hairline);
+  }
+
+  .c-item__avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+    outline: 1px solid var(--sl-color-hairline);
+    object-fit: cover;
+    background: var(--sl-color-gray-6);
+  }
+
+  .c-item__body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .c-item__header {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .c-item__name {
+    font-size: var(--sl-text-sm);
+    font-weight: 600;
+    color: var(--sl-color-white);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .c-item__name:hover {
+    color: var(--sl-color-text-accent);
+  }
+
+  .c-item__badge {
+    padding: 0.125rem 0.5rem;
+    border-radius: 999px;
+    background: var(--sl-color-orange-low);
+    color: var(--sl-color-orange-high);
+    font-size: var(--sl-text-2xs);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .c-item__date {
+    font-family: var(--sl-font-mono);
+    font-size: var(--sl-text-2xs);
+    color: var(--sl-color-gray-3);
+  }
+
+  .c-item__content {
+    color: var(--sl-color-gray-2);
+    font-size: var(--sl-text-sm);
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+  }
+
+  .c-item__content p { margin: 0 0 0.5em; }
+  .c-item__content p:last-child { margin-bottom: 0; }
+
+  .c-item__content a {
+    color: var(--sl-color-text-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .c-item__content a:hover {
+    color: var(--sl-color-accent);
+  }
+
+  .c-item__content code {
+    padding: 0.1em 0.4em;
+    border-radius: 0.375rem;
+    background: var(--sl-color-bg-inline-code);
+    color: var(--sl-color-text);
+    font-family: var(--sl-font-mono);
+    font-size: 0.875em;
+  }
+
+  .c-item__content pre {
+    margin: 0.5em 0;
+    padding: 0.875rem;
+    border-radius: 0.5rem;
+    background: var(--sl-color-bg-inline-code);
+    overflow-x: auto;
+    font-size: var(--sl-text-xs);
+  }
+
+  .c-item__content pre code {
+    padding: 0;
+    background: transparent;
+  }
+
+  .c-item__content blockquote {
+    margin: 0.5em 0;
+    padding: 0.5em 0.875rem;
+    border-inline-start: 2px solid var(--sl-color-hairline);
+    color: var(--sl-color-gray-3);
+  }
+
+  .c-item__actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.75rem;
+  }
+
+  .c-item__action {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--sl-color-gray-3);
+    font: inherit;
+    font-size: var(--sl-text-xs);
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.15s ease;
+  }
+
+  .c-item__action:hover {
+    color: var(--sl-color-text-accent);
+  }
+
+  .c-item__action:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .c-item__action--danger:hover {
+    color: var(--sl-color-red-high);
+  }
+
+  /* ── Pagination ────────────────────────────────────── */
+  .c-comments__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--sl-color-hairline);
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+  }
+
+  .c-comments__pagination button {
+    padding: 0.375rem 0.875rem;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.5rem;
+    background: transparent;
+    color: var(--sl-color-gray-2);
+    font: inherit;
+    font-size: var(--sl-text-xs);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .c-comments__pagination button:hover {
+    color: var(--sl-color-white);
+    background: var(--sl-color-gray-6);
+    border-color: var(--sl-color-gray-4);
+  }
+
+  .c-comments__pagination button:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+  }
+
+  /* ── Auth modal ────────────────────────────────────── */
+  .c-auth-modal {
+    margin: auto;
+    padding: 0;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 1rem;
+    background: var(--sl-color-bg);
+    color: var(--sl-color-text);
+    max-width: 24rem;
+    width: 90%;
+    box-shadow: var(--sl-shadow-lg);
+  }
+
+  .c-auth-modal::backdrop {
+    background: var(--sl-color-backdrop-overlay);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+  }
+
+  .c-auth-modal__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.75rem;
+  }
+
+  .c-auth-modal__title {
+    margin: 0 0 0.5rem;
+    font-size: var(--sl-text-h4);
+    font-weight: 600;
+    color: var(--sl-color-white);
+    letter-spacing: -0.02em;
+  }
+
+  .c-auth-modal__form input {
+    padding: 0.625rem 0.875rem;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.5rem;
+    background: var(--sl-color-bg);
+    color: var(--sl-color-text);
+    font: inherit;
+    font-size: var(--sl-text-sm);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .c-auth-modal__form input::placeholder {
+    color: var(--sl-color-gray-3);
+  }
+
+  .c-auth-modal__form input:hover {
+    border-color: var(--sl-color-gray-4);
+  }
+
+  .c-auth-modal__form input:focus {
+    outline: none;
+    border-color: var(--sl-color-accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--sl-color-accent) 22%, transparent);
+  }
+
+  .c-auth-modal__msg {
+    margin: 0;
+    min-height: 1.2em;
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+  }
+
+  .c-auth-modal__msg[data-state='error'] { color: var(--sl-color-red-high); }
+  .c-auth-modal__msg[data-state='success'] { color: var(--sl-color-green-high); }
+
+  .c-auth-modal__actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+  }
+
+  .c-auth-modal__btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.5rem;
+    background: transparent;
+    color: var(--sl-color-gray-2);
+    font: inherit;
+    font-size: var(--sl-text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .c-auth-modal__btn:hover {
+    color: var(--sl-color-white);
+    background: var(--sl-color-gray-6);
+    border-color: var(--sl-color-gray-4);
+  }
+
+  .c-auth-modal__btn--primary {
+    background: var(--sl-color-accent-high);
+    border-color: var(--sl-color-accent-high);
+    color: var(--sl-color-text-invert);
+    font-weight: 600;
+  }
+
+  .c-auth-modal__btn--primary:hover {
+    opacity: 0.85;
+    color: var(--sl-color-text-invert);
+    background: var(--sl-color-accent-high);
+  }
+
+  .c-auth-modal__btn:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+  }
+
+  /* ── Reduced motion ────────────────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .c-comments *,
+    .c-comments *::before,
+    .c-comments *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+</style>
