@@ -1,0 +1,95 @@
+/* FileTree.css */
+
+:root {
+  --ds-filetree-radius:   0.75rem;
+  --ds-filetree-padding:  0.75rem;
+  --ds-filetree-bg:       var(--sl-color-gray-6);
+  --ds-filetree-border:   var(--sl-color-gray-5);
+
+  --ds-filetree-dir-color:        var(--sl-color-white);
+  --ds-filetree-dir-color-hover:  var(--sl-color-text-accent);
+  --ds-filetree-dir-marker:       var(--sl-color-gray-3);
+
+  --ds-filetree-indent-border:        var(--sl-color-gray-5);
+  --ds-filetree-indent-border-hover:  var(--sl-color-gray-4);
+
+  --ds-filetree-file-color:     var(--sl-color-white);
+  --ds-filetree-empty-color:    var(--sl-color-gray-3);
+  --ds-filetree-comment-color:  var(--sl-color-gray-3);
+  --ds-filetree-icon-color:     var(--sl-color-gray-3);
+
+  --ds-filetree-highlight-bg:     var(--sl-color-text-accent);
+  --ds-filetree-highlight-color:  var(--sl-color-text-invert);
+  --ds-filetree-highlight-weight: 400;
+  --ds-filetree-highlight-radius: 0.25rem;
+}
+
+[data-theme="light"] {
+  --ds-filetree-bg: var(--sl-color-gray-7);
+}
+
+/* ── Komponen ─────────────────────────────────────────── */
+
+starlight-file-tree {
+  border: 1px solid var(--ds-filetree-border);
+  border-radius: var(--ds-filetree-radius);
+  background-color: var(--ds-filetree-bg);
+  padding: var(--ds-filetree-padding);
+}
+
+/* Directory */
+starlight-file-tree .directory > details > summary {
+  color: var(--ds-filetree-dir-color);
+}
+
+starlight-file-tree .directory > details > summary::marker,
+starlight-file-tree .directory > details > summary::-webkit-details-marker {
+  color: var(--ds-filetree-dir-marker);
+}
+
+/* Indent guide */
+starlight-file-tree ul:not(ul:first-child) {
+  border-inline-start-color: var(--ds-filetree-indent-border);
+}
+
+/* File, empty, comment */
+starlight-file-tree .file    { color: var(--ds-filetree-file-color); }
+starlight-file-tree .empty   { color: var(--ds-filetree-empty-color); }
+starlight-file-tree .comment { color: var(--ds-filetree-comment-color); }
+
+/* Icon */
+starlight-file-tree svg {
+  fill: var(--ds-filetree-icon-color);
+}
+
+/* Highlight */
+starlight-file-tree .highlight {
+  color: var(--ds-filetree-highlight-color);
+  background-color: var(--ds-filetree-highlight-bg);
+  font-weight: var(--ds-filetree-highlight-weight);
+  border-radius: var(--ds-filetree-highlight-radius);
+}
+
+starlight-file-tree .highlight svg.tree-icon {
+  fill: currentColor;
+}
+
+/* ── Hover ────────────────────────────────────────────── */
+
+@media (hover: hover) {
+  starlight-file-tree .directory > details > summary:hover,
+  starlight-file-tree .directory > details > summary:hover .tree-icon {
+    color: var(--ds-filetree-dir-color-hover);
+    fill: currentColor;
+    cursor: pointer;
+  }
+
+  starlight-file-tree .directory > details > summary:hover ~ ul {
+    border-color: var(--ds-filetree-indent-border-hover);
+  }
+
+  starlight-file-tree .directory > details > summary:hover .highlight .tree-icon {
+    color: var(--ds-filetree-highlight-color);
+    fill: currentColor;
+  }
+}

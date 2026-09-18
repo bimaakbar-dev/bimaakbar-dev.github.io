@@ -1,0 +1,159 @@
+---
+import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { existsSync } from "node:fs";
+import path from "node:path";
+
+interface Props {
+  title?: string;
+  repo: string;
+  limit?: number;
+  exclude?: string[];
+}
+
+const {
+  title = "Contributors",
+  repo,
+  limit = 10,
+  exclude = ["dependabot[bot]", "renovate[bot]", "github-actions[bot]"],
+} = Astro.props;
+
+const cacheDir  = path.join(process.cwd(), ".cache");
+const cacheFile = path.join(cacheDir, `contributors-${repo.replace("/", "-")}.json`);
+
+let contributors: any[] = [];
+
+try {
+  if (existsSync(cacheFile)) {
+    const { promises: fs } = await import("node:fs");
+    const { mtimeMs } = await fs.stat(cacheFile);
+    if (Date.now() - mtimeMs < 86_400_000) {
+      contributors = JSON.parse(await readFile(cacheFile, "utf-8"));
+    }
+  }
+
+  if (contributors.length === 0) {
+    const res = await fetch(
+      `https://api.github.com/repos/${repo}/contributors?per_page=100`,
+      {
+        headers: {
+          "User-Agent": "Stradocs",
+          Accept: "application/vnd.github+json",
+          ...(import.meta.env.GH_TOKEN
+            ? { Authorization: `Bearer ${import.meta.env.GH_TOKEN}` }
+            : {}),
+        },
+      },
+    );
+
+    if (res.ok) {
+      const data: any[] = (await res.json()).filter(
+        (c: any) => !exclude.includes(c.login),
+      );
+      contributors = data;
+      try {
+        if (!existsSync(cacheDir)) await mkdir(cacheDir, { recursive: true });
+        await writeFile(cacheFile, JSON.stringify(data, null, 2));
+      } catch {}
+    }
+  }
+} catch {}
+
+const visible   = contributors.slice(0, limit);
+const remaining = Math.max(0, contributors.length - limit);
+---
+
+{visible.length > 0 && (
+  <h2 set:html={title} />
+  <ul class="contributor-stack not-content" role="list" aria-label="Contributors">
+    {visible.map((c) => (
+      <li role="listitem">
+        <a href={c.html_url} target="_blank" rel="noopener noreferrer" class="avatar-wrap" title={c.login}>
+          <img
+            src={`${c.avatar_url}&s=72`}
+            alt={c.login}
+            width="34"
+            height="34"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+      </li>
+    ))}
+    {remaining > 0 && (
+      <li role="listitem">
+        <a
+          href={`https://github.com/${repo}/graphs/contributors`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="chip-count"
+          aria-label={`${remaining} more contributors`}
+        >
+          +{remaining}
+        </a>
+      </li>
+    )}
+  </ul>
+)}
+
+<style>
+  .contributor-stack {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+    isolation: isolate;
+
+    & li {
+      margin-left: -8px;
+    }
+    & li:first-child {
+      margin-left: 0;
+    }
+  }
+
+  .avatar-wrap {
+    display: block;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2.5px var(--sl-color-black);
+    transition: transform 0.15s;
+
+    & img {
+      display: block;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: var(--sl-color-gray-6);
+    }
+  }
+
+  .chip-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2.5px var(--sl-color-black);
+    background: color-mix(in srgb, #c9a84c 12%, var(--sl-color-black));
+    color: #c9a84c;
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.15s, background 0.15s;
+  }
+
+  @media (hover: hover) {
+    .avatar-wrap:hover,
+    .chip-count:hover {
+      transform: translateY(-3px);
+      z-index: 2;
+      position: relative;
+    }
+
+    .chip-count:hover {
+      background: color-mix(in srgb, #c9a84c 20%, var(--sl-color-black));
+    }
+  }
+</style>

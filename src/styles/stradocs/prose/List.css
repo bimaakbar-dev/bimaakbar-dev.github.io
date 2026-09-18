@@ -1,0 +1,130 @@
+/* List.css */
+.sl-markdown-content {
+  & :is(ul, ol):not(:where(.not-content *)) > li::marker {
+    color: var(--sl-color-gray-3);
+  }
+  & li:not(:where(.not-content *)) {
+    margin-bottom: 0.5rem;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  & :is(ul ul, ol ol, ul ol, ol ul):not(:where(.not-content *)) {
+    margin-top: 0.5rem;
+  }
+}
+
+/* Task List */
+.sl-markdown-content {
+  & ul.contains-task-list {
+    list-style: none;
+    padding-inline-start: 0;
+    
+    & > li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5em;
+      list-style: none;
+      margin-block: 0.375em;
+      line-height: 1.6;
+
+      & input[type="checkbox"]:not(:where(.not-content *)) {
+        appearance: none;
+        -webkit-appearance: none;
+        flex-shrink: 0;
+        display: inline-grid;
+        place-content: center;
+        width: 1.1em;
+        height: 1.1em;
+        margin: 0;
+        margin-block-start: calc((var(--sl-line-height, 1.75) * 1em - 1.1em) / 2);
+        border: 1.5px solid var(--sl-color-gray-5);
+        border-radius: 0.25rem;
+        background-color: transparent;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        &:checked {
+          background-color: var(--sl-color-bg-accent);
+          border-color: transparent;
+          &::before {
+            content: "";
+            width: 0.6em;
+            height: 0.32em;
+            border-left: 2px solid var(--sl-color-text-invert);
+            border-bottom: 2px solid var(--sl-color-text-invert);
+            transform: rotate(-45deg) translate(0.5px, -0.5px);
+            transform-origin: center;
+          }
+        }
+        &:hover {
+          border-color: var(--sl-color-gray-3);
+        }
+      }
+    }
+  }
+}
+
+/* Definisi List */
+.sl-markdown-content {
+  & dl:not(:where(.not-content *)) {
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 0;
+    align-items: start;
+    margin-block: 2rem;
+    font-size: var(--sl-text-sm);
+    line-height: inherit;
+    & > dt:not(:where(.not-content *)) {
+      padding-block: 1rem;
+      padding-inline: 0;
+      margin: 0;
+      color: var(--sl-color-white);
+      font-weight: 400;
+      font-size: var(--sl-text-body);
+      white-space: nowrap;
+      &:first-of-type + dd {
+        border-top: 1px solid var(--sl-color-gray-5);
+      }
+      & code {
+        font-size: var(--sl-text-body);
+        padding-inline: 0.25em;
+      }
+      & :is(h2, h3, h4, h5, h6) code {
+        font-size: var(--sl-text-body);
+      }
+    }
+    & > dd:not(:where(.not-content *)) {
+      margin: 0;
+      padding-block: 1rem;
+      padding-inline: 0;
+      color: var(--sl-color-gray-2);
+      border-top: 1px solid var(--sl-color-gray-5);
+      word-break: break-word;
+      overflow-wrap: break-word;
+      & p:not(:where(.not-content *)) {
+        margin-top: 0.5rem;
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+      &:has(code) {
+        font-size: var(--sl-text-code-sm);
+        padding-inline: 0.25em;
+      }
+    }
+  }
+}
+
+@media (min-width: 50em) {
+  .sl-markdown-content {
+    & dl:not(:where(.not-content *)) {
+      grid-template-columns: minmax(12rem, max-content) 1fr;
+      & > dt:not(:where(.not-content *)) {
+        border-top: 0;
+        &:first-of-type + dd:not(:where(.not-content *)) {
+          border-top: none;
+        }
+      }
+    }
+  }
+}

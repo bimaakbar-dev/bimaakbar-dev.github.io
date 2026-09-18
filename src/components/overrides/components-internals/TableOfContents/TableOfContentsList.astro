@@ -1,0 +1,222 @@
+---
+// src/components/overrides/components-internal/TableOfContents/TableOfContentsList.astro
+
+import type { TocItem } from '~/utils/generateToc';
+
+interface Props {
+  toc: TocItem[];
+  depth?: number;
+  isMobile?: boolean;
+}
+
+const { toc, isMobile = false, depth = 0 } = Astro.props;
+
+interface FlatItem {
+  text: string;
+  slug: string;
+  depth: number;
+}
+
+function flatten(items: TocItem[], level = 0): FlatItem[] {
+  return items.flatMap((item) => [
+    { text: item.text, slug: item.slug, depth: level },
+    ...flatten(item.children, level + 1),
+  ]);
+}
+
+function itemOffset(d: number) {
+  if (d <= 0) return 1;
+  if (d === 1) return 2;
+  return 3;
+}
+
+const flat = depth === 0 && !isMobile ? flatten(toc) : null;
+---
+
+{
+  flat ? (
+    <div class="toc-rail">
+      <div class="toc-track-bg" aria-hidden="true"></div>
+      <div class="toc-thumb-mask" aria-hidden="true">
+        <div class="toc-thumb-fill" />
+      </div>
+      <ul>
+        {flat.map((item) => (
+          <li style={`padding-inline-start:${itemOffset(item.depth)}em`}>
+            <a href={'#' + item.slug} data-depth={item.depth}>
+              <span>{item.text}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ) : (
+    <div class="toc-rail is-mobile">
+      <div class="toc-track-bg" aria-hidden="true"></div>
+      <div class="toc-thumb-mask" aria-hidden="true">
+        <div class="toc-thumb-fill" />
+      </div>
+      <ul class:list={[{ isMobile }]}>
+        {toc.map((heading) => (
+          <li>
+            <a href={'#' + heading.slug} data-depth={depth}>
+              <span>{heading.text}</span>
+            </a>
+            {heading.children.length > 0 && (
+              <Astro.self toc={heading.children} depth={depth + 1} isMobile={isMobile} />
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+<style define:vars={{ depth }}>
+    :global(starlight-toc) {
+      & .toc-rail {
+        position: relative;
+        --toc-item-pad-block: 0.4em;
+      }
+      & .toc-rail ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+      & .toc-rail li {
+        position: relative;
+        font-weight: 500;
+      }
+      & .toc-track-bg {
+        position: absolute;
+        top: 0;
+        inset-inline-start: 2px;
+        pointer-events: none;
+        z-index: 1;
+      }
+      & .toc-thumb-mask {
+        position: absolute;
+        top: 0;
+        inset-inline-start: 2px;
+        pointer-events: none;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        z-index: 2;
+      }
+      & .toc-thumb-fill {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: var(--sl-color-text-accent);
+        opacity: 0;
+        transition: transform 0.25s ease, height 0.25s ease, opacity 0.15s ease;
+      }
+      & a {
+        display: block;
+        padding-block: var(--toc-item-pad-block);
+        padding-inline-end: 0.5em;
+        line-height: 1.4;
+        font-size: var(--sl-text-xs);
+        color: var(--sl-color-gray-3);
+        text-decoration: none;
+        transition: color 0.15s ease;
+      }
+      & a[aria-current='true'],
+      & a[aria-current='true']:focus {
+        color: var(--sl-color-text-accent);
+        background-color: transparent;
+        font-weight: 500;
+      }
+    }
+    :global(mobile-starlight-toc) {
+      & .toc-rail.is-mobile {
+        --toc-item-pad-block: 0.5em;
+        position: relative;
+        padding-inline-start: 1.75rem;
+      }
+      & .toc-rail.is-mobile .toc-rail.is-mobile {
+        padding-inline-start: 0.75rem;
+      }
+      & .toc-rail.is-mobile .toc-rail.is-mobile .toc-rail.is-mobile {
+        padding-inline-start: 0.75rem;
+      }
+      & .toc-rail.is-mobile ul.isMobile {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+      & .toc-rail.is-mobile .toc-track-bg {
+        position: absolute;
+        top: 0;
+        inset-inline-start: 1rem;
+        pointer-events: none;
+        z-index: 1;
+      }
+      & .toc-rail.is-mobile .toc-thumb-mask {
+        position: absolute;
+        top: 0;
+        inset-inline-start: 1rem;
+        pointer-events: none;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        z-index: 2;
+      }
+      & .toc-rail.is-mobile .toc-thumb-fill {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: var(--sl-color-text-accent);
+        opacity: 0;
+        transition: transform 0.25s ease, height 0.25s ease, opacity 0.15s ease;
+      }
+      & .isMobile a {
+        --pad-inline: 1em;
+        display: flex;
+        justify-content: space-between;
+        gap: var(--pad-inline);
+        border-top: 0;
+        border-radius: 0;
+        padding-block: 0.5em;
+        color: var(--sl-color-text);
+        font-size: var(--sl-text-xs);
+        text-decoration: none;
+        outline-offset: var(--sl-outline-offset-inside);
+        background-color: transparent;
+      }
+      & .isMobile:first-child > li:first-child > a {
+        border-top: 0;
+      }
+      & a[aria-current='true'],
+      & a[aria-current='true']:focus {
+        color: var(--sl-color-text-accent);
+        background-color: transparent;
+      }
+      & a[aria-current='true']::after {
+        display: none;
+        content: '';
+        width: 1em;
+        background-color: var(--sl-color-text-accent);
+        -webkit-mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxNCAxNCc+PHBhdGggZD0nTTEwLjkxNCA0LjIwNmEuNTgzLjU4MyAwIDAgMC0uODI4IDBMNS43NCA4LjU1NyAzLjkxNCA2LjcyNmEuNTk2LjU5NiAwIDAgMC0uODI4Ljg1N2wyLjI0IDIuMjRhLjU4My41ODMgMCAwIDAgLjgyOCAwbDQuNzYtNC43NmEuNTgzLjU4MyAwIDAgMCAwLS44NTdaJy8+PC9zdmc+Cg==');
+        mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxNCAxNCc+PHBhdGggZD0nTTEwLjkxNCA0LjIwNmEuNTgzLjU4MyAwIDAgMC0uODI4IDBMNS43NCA4LjU1NyAzLjkxNCA2LjcyNmEuNTk2LjU5NiAwIDAgMC0uODI4Ljg1N2wyLjI0IDIuMjRhLjU4My41ODMgMCAwIDAgLjgyOCAwbDQuNzYtNC43NmEuNTgzLjU4MyAwIDAgMCAwLS44NTdaJy8+PC9zdmc+Cg==');
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        flex-shrink: 0;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      :global(starlight-toc) .toc-thumb-fill,
+      :global(starlight-toc) a,
+      :global(mobile-starlight-toc) .toc-rail.is-mobile .toc-thumb-fill,
+      :global(mobile-starlight-toc) .isMobile a {
+        transition: none;
+      }
+    }
+    @media (hover: hover) {
+      :global(starlight-toc) a:hover {
+        color: var(--sl-color-text-accent);
+        background-color: transparent;
+      }
+    }
+</style>
