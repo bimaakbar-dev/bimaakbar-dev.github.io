@@ -1,23 +1,24 @@
 ---
 // src/components/ThemeSelect.astro
 import { Icon } from '@astrojs/starlight/components';
+
 const label = Astro.locals.t('themeSelect.accessibleLabel');
 ---
 
-<theme-cycle-toggle>
+<theme-toggle>
   <button
     type="button"
     class="theme-cycle"
     aria-label={label}
     title={label}
-    data-theme-cycle
+    data-theme-toggle
     data-mode="auto"
   >
-    <Icon name="laptop" class="theme-cycle__icon theme-cycle__icon--auto" />
-    <Icon name="sun" class="theme-cycle__icon theme-cycle__icon--light" />
-    <Icon name="moon" class="theme-cycle__icon theme-cycle__icon--dark" />
+    <Icon name="laptop" class="auto" />
+    <Icon name="sun" class="light" />
+    <Icon name="moon" class="dark" />
   </button>
-</theme-cycle-toggle>
+</theme-toggle>
 
 <script is:inline>
   StarlightThemeProvider.updatePickers();
@@ -43,9 +44,8 @@ const label = Astro.locals.t('themeSelect.accessibleLabel');
   const getPreferredColorScheme = (): 'light' | 'dark' =>
     matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
 
-  // ⚡ Sync SEMUA tombol di halaman, bukan cuma satu
   function syncAllButtons(theme: Theme): void {
-    document.querySelectorAll<HTMLElement>('[data-theme-cycle]').forEach((btn) => {
+    document.querySelectorAll<HTMLElement>('[data-theme-toggle]').forEach((btn) => {
       btn.dataset.mode = theme;
     });
   }
@@ -61,13 +61,12 @@ const label = Astro.locals.t('themeSelect.accessibleLabel');
     if (loadTheme() === 'auto') onThemeChange('auto');
   });
 
-  class ThemeCycleToggle extends HTMLElement {
+  class ThemeToggle extends HTMLElement {
     constructor() {
       super();
       onThemeChange(loadTheme());
 
-      // Tiap instance punya listener sendiri
-      this.querySelector<HTMLButtonElement>('[data-theme-cycle]')?.addEventListener('click', () => {
+      this.querySelector<HTMLButtonElement>('[data-theme-toggle]')?.addEventListener('click', () => {
         const current = loadTheme();
         const next: Theme =
           current === 'auto' ? 'light' :
@@ -78,17 +77,17 @@ const label = Astro.locals.t('themeSelect.accessibleLabel');
     }
   }
 
-  if (!customElements.get('theme-cycle-toggle')) {
-    customElements.define('theme-cycle-toggle', ThemeCycleToggle);
+  if (!customElements.get('theme-toggle')) {
+    customElements.define('theme-toggle', ThemeToggle);
   }
 </script>
 
 <style>
-  :global(theme-cycle-toggle) {
+  :global(theme-toggle) {
     display: contents;
   }
 
-  .theme-cycle {
+  button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -96,31 +95,35 @@ const label = Astro.locals.t('themeSelect.accessibleLabel');
     height: 2rem;
     padding: 0;
     border: 1px solid var(--sl-color-hairline);
-    border-radius: 0.5rem;
+    border-radius: 99rem;
     background: transparent;
     color: var(--sl-color-gray-2);
     cursor: pointer;
     transition: color 0.15s ease;
-  }
 
-  .theme-cycle:hover {
-    color: var(--sl-color-white);
-    background: var(--sl-color-gray-6);
-    border-color: var(--sl-color-gray-5);
+    &:hover {
+    	color: var(--sl-color-white);
+    	background: var(--sl-color-gray-6);
+    	border-color: var(--sl-color-gray-5);
+    }
+    &:focus-visible {
+    	outline: 2px solid var(--sl-color-accent);
+    	outline-offset: 2px;
+    }
+    & svg {
+    	flex-shrink: 0;
+    	width: 1rem;
+    	height: 1rem;
+    	display: none;
+    }
+    &[data-mode='auto'] .auto {
+    	display: block;
+    }
+    &[data-mode='light'] .light {
+    	display: block;
+    }
+    &[data-mode='dark'] .dark {
+    	display: block;
+    }
   }
-
-  .theme-cycle:focus-visible {
-    outline: 2px solid var(--sl-color-accent);
-    outline-offset: 2px;
-  }
-
-  .theme-cycle__icon {
-    width: 1rem;
-    height: 1rem;
-    display: none;
-  }
-
-  .theme-cycle[data-mode='auto'] .theme-cycle__icon--auto  { display: block; }
-  .theme-cycle[data-mode='light'] .theme-cycle__icon--light { display: block; }
-  .theme-cycle[data-mode='dark'] .theme-cycle__icon--dark  { display: block; }
 </style>
