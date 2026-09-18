@@ -6,10 +6,8 @@ const { class: className } = Astro.props;
 
 const repo = 'bimaakbar-dev/bimaakbar-dev.github.io';
 const repoId = 'R_kgDOUKMOFQ';
-const category = 'Comments' || 'General';
+const category = 'Comments';
 const categoryId = 'DIC_kwDOUKMOFc4DEm1Q';
-
-const giscusTheme = '/giscus-theme.css';
 ---
 
 <section class:list={['comments', className]}>
@@ -22,7 +20,7 @@ const giscusTheme = '/giscus-theme.css';
       data-repo-id={repoId}
       data-category={category}
       data-category-id={categoryId}
-      data-mapping="og:title"
+      data-mapping="pathname"
       data-strict="0"
       data-reactions-enabled="1"
       data-emit-metadata="0"
@@ -36,12 +34,42 @@ const giscusTheme = '/giscus-theme.css';
   </div>
 </section>
 
+<script is:inline>
+  (function() {
+    const DARK_THEME = 'dark_dimmed';
+    const LIGHT_THEME = 'light';
+
+    function sendThemeToGiscus() {
+      const frame = document.querySelector('iframe.giscus-frame');
+      if (!frame) return;
+
+      const theme = document.documentElement.dataset.theme || 'dark';
+      const giscusTheme = theme === 'dark' ? DARK_THEME : LIGHT_THEME;
+
+      frame.contentWindow?.postMessage(
+        { giscus: { setConfig: { theme: giscusTheme } } },
+        'https://giscus.app'
+      );
+    }
+
+    window.addEventListener('message', (e) => {
+      if (e.origin !== 'https://giscus.app') return;
+      if (typeof e.data !== 'object' || !e.data.giscus) return;
+      sendThemeToGiscus();
+    });
+
+    new MutationObserver(sendThemeToGiscus).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+  })();
+</script>
+
 <style>
   .comments {
     max-width: 50rem;
     margin-inline: auto;
     width: 100%;
-    align-items: center;
     border-top: 1px solid var(--sl-color-gray-5);
     padding-top: var(--sl-content-gap-y);
     padding-inline: 0;
