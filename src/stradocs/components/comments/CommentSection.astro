@@ -6,11 +6,15 @@ interface Props {
 const { class: className } = Astro.props;
 
 const serverURL = 'https://bimaakbar-dev-comments.bimasaktiakbarr.workers.dev/api';
-
 const path = Astro.url.pathname;
 ---
 
-<section class:list={['c-comments', className]} data-comments data-server={serverURL} data-path={path}>
+<section
+  class:list={['c-comments', className]}
+  data-comments
+  data-server={serverURL}
+  data-path={path}
+>
   <header class="c-comments__header">
     <h2 class="c-comments__title">Komentar</h2>
     <span class="c-comments__count" data-count>—</span>
@@ -32,12 +36,14 @@ const path = Astro.url.pathname;
         placeholder="Nama"
         maxlength="50"
         required
+        autocomplete="nickname"
         data-field="nick"
       />
       <input
         type="email"
         name="mail"
         placeholder="Email (opsional, untuk gravatar)"
+        autocomplete="email"
         data-field="mail"
       />
     </div>
@@ -46,6 +52,7 @@ const path = Astro.url.pathname;
       type="url"
       name="link"
       placeholder="Website (opsional)"
+      autocomplete="url"
       data-field="link"
     />
 
@@ -57,7 +64,6 @@ const path = Astro.url.pathname;
       data-field="comment"
     ></textarea>
 
-    <!-- Honeypot -->
     <input
       type="text"
       name="hp"
@@ -74,7 +80,6 @@ const path = Astro.url.pathname;
     </div>
   </form>
 
-  <!-- Auth prompt (user belum login) -->
   <div class="c-comments__auth-prompt" data-auth-prompt>
     <span>Atau</span>
     <button type="button" class="c-comments__link" data-open-login>Masuk</button>
@@ -83,51 +88,56 @@ const path = Astro.url.pathname;
     <span>untuk komentar dengan akun.</span>
   </div>
 
-  <!-- List komentar -->
   <div class="c-comments__list" data-list>
     <p class="c-comments__loading">Memuat komentar…</p>
   </div>
 
-  <!-- Pagination -->
   <div class="c-comments__pagination" data-pagination hidden></div>
 
   <dialog class="c-auth-modal" data-auth-modal>
-  <form class="c-auth-modal__form" data-auth-form>
-    <h3 class="c-auth-modal__title" data-auth-title>Masuk</h3>
+    <form class="c-auth-modal__form" data-auth-form>
+      <h3 class="c-auth-modal__title" data-auth-title>Masuk</h3>
 
-    <input
-      type="text"
-      name="nick"
-      placeholder="Nama"
-      data-auth-field="nick"
-      hidden
-    />
-    <input
-      type="email"
-      name="email"
-      placeholder="Email"
-      required
-      data-auth-field="email"
-    />
-    <input
-      type="password"
-      name="password"
-      placeholder="Password"
-      required
-      minlength="6"
-      data-auth-field="password"
-    />
+      <input
+        type="text"
+        name="nick"
+        placeholder="Nama"
+        autocomplete="nickname"
+        data-auth-field="nick"
+        hidden
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        required
+        autocomplete="email"
+        data-auth-field="email"
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        required
+        minlength="6"
+        autocomplete="current-password"
+        data-auth-field="password"
+      />
 
-    <p class="c-auth-modal__msg" data-auth-msg></p>
+      <p class="c-auth-modal__msg" data-auth-msg></p>
 
-    <div class="c-auth-modal__actions">
-      <button type="button" class="c-auth-modal__btn" data-auth-close>Batal</button>
-      <button type="submit" class="c-auth-modal__btn c-auth-modal__btn--primary" data-auth-submit>
-        Masuk
-      </button>
-    </div>
-  </form>
-</dialog>
+      <div class="c-auth-modal__actions">
+        <button type="button" class="c-auth-modal__btn" data-auth-close>Batal</button>
+        <button
+          type="submit"
+          class="c-auth-modal__btn c-auth-modal__btn--primary"
+          data-auth-submit
+        >
+          Masuk
+        </button>
+      </div>
+    </form>
+  </dialog>
 </section>
 
 <script>
@@ -142,7 +152,6 @@ const path = Astro.url.pathname;
     const client = new WalineClient(serverURL);
 
     const $ = <T extends HTMLElement = HTMLElement>(sel: string) => root.querySelector<T>(sel);
-    const $$ = <T extends HTMLElement = HTMLElement>(sel: string) => root.querySelectorAll<T>(sel);
 
     const form = $<HTMLFormElement>('[data-form]')!;
     const listEl = $<HTMLElement>('[data-list]')!;
@@ -174,7 +183,11 @@ const path = Astro.url.pathname;
     let authMode: 'login' | 'register' = 'login';
 
     const esc = (s: string) =>
-      s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
+      s.replace(
+        /[&<>"']/g,
+        (c) =>
+          ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!,
+      );
 
     const fmtDate = (iso: string) => {
       const d = new Date(iso);
@@ -183,7 +196,11 @@ const path = Astro.url.pathname;
       if (diff < 3600) return `${Math.floor(diff / 60)} menit lalu`;
       if (diff < 86400) return `${Math.floor(diff / 3600)} jam lalu`;
       if (diff < 604800) return `${Math.floor(diff / 86400)} hari lalu`;
-      return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+      return d.toLocaleDateString('id-ID', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+      });
     };
 
     function commentItem(c: WalineComment, isReply = false): string {
@@ -193,16 +210,22 @@ const path = Astro.url.pathname;
           <img class="c-item__avatar" src="${esc(c.avatar)}" alt="" loading="lazy" />
           <div class="c-item__body">
             <header class="c-item__header">
-              ${c.link
-                ? `<a class="c-item__name" href="${esc(c.link)}" target="_blank" rel="noopener nofollow">${esc(c.nick)}</a>`
-                : `<span class="c-item__name">${esc(c.nick)}</span>`}
+              ${
+                c.link
+                  ? `<a class="c-item__name" href="${esc(c.link)}" target="_blank" rel="noopener nofollow">${esc(c.nick)}</a>`
+                  : `<span class="c-item__name">${esc(c.nick)}</span>`
+              }
               ${c.status === 'waiting' ? '<span class="c-item__badge">menunggu moderasi</span>' : ''}
               <time class="c-item__date">${fmtDate(c.insertedAt)}</time>
             </header>
             <div class="c-item__content">${c.comment}</div>
             <div class="c-item__actions">
               <button type="button" class="c-item__action" data-reply="${c.objectId}" data-nick="${esc(c.nick)}">Balas</button>
-              ${canDelete ? `<button type="button" class="c-item__action c-item__action--danger" data-delete="${c.objectId}">Hapus</button>` : ''}
+              ${
+                canDelete
+                  ? `<button type="button" class="c-item__action c-item__action--danger" data-delete="${c.objectId}">Hapus</button>`
+                  : ''
+              }
             </div>
           </div>
         </article>
@@ -212,7 +235,8 @@ const path = Astro.url.pathname;
 
     function renderList(comments: WalineComment[]) {
       if (!comments.length) {
-        listEl.innerHTML = '<p class="c-comments__empty">Belum ada komentar. Jadilah yang pertama.</p>';
+        listEl.innerHTML =
+          '<p class="c-comments__empty">Belum ada komentar. Jadilah yang pertama.</p>';
         return;
       }
       listEl.innerHTML = comments.map((c) => commentItem(c)).join('');
@@ -246,11 +270,10 @@ const path = Astro.url.pathname;
       `;
     }
 
-    // ── Form submission ─────────────────────────────
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const fd = new FormData(form);
-      if (fd.get('hp')) return; // honeypot
+      if (fd.get('hp')) return;
 
       submitBtn.disabled = true;
       statusEl.textContent = 'Mengirim…';
@@ -270,13 +293,16 @@ const path = Astro.url.pathname;
           statusEl.textContent = res.errmsg || 'Gagal mengirim.';
           statusEl.setAttribute('data-state', 'error');
         } else {
-          statusEl.textContent = res.data.status === 'waiting'
-            ? 'Komentar menunggu moderasi.'
-            : 'Komentar terkirim.';
+          statusEl.textContent =
+            res.data.status === 'waiting'
+              ? 'Komentar menunggu moderasi.'
+              : 'Komentar terkirim.';
           form.reset();
           if (currentUser) {
-            (form.querySelector('[data-field="nick"]') as HTMLInputElement).value = currentUser.nick;
-            (form.querySelector('[data-field="mail"]') as HTMLInputElement).value = currentUser.email;
+            (form.querySelector('[data-field="nick"]') as HTMLInputElement).value =
+              currentUser.nick;
+            (form.querySelector('[data-field="mail"]') as HTMLInputElement).value =
+              currentUser.email;
           }
           cancelReply();
           await loadComments(1);
@@ -289,7 +315,6 @@ const path = Astro.url.pathname;
       }
     });
 
-    // ── Reply ───────────────────────────────────────
     function setReply(id: string, nick: string) {
       replyTo = { objectId: id } as WalineComment;
       formToEl.hidden = false;
@@ -308,7 +333,6 @@ const path = Astro.url.pathname;
 
     cancelBtn.addEventListener('click', cancelReply);
 
-    // ── Delegated events (list) ─────────────────────
     listEl.addEventListener('click', async (e) => {
       const target = e.target as HTMLElement;
       const replyBtn = target.closest<HTMLButtonElement>('[data-reply]');
@@ -326,13 +350,11 @@ const path = Astro.url.pathname;
       }
     });
 
-    // Pagination clicks
     $<HTMLElement>('[data-pagination]')!.addEventListener('click', (e) => {
       const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-page]');
       if (btn) loadComments(Number(btn.dataset.page));
     });
 
-    // ── Auth ────────────────────────────────────────
     function openAuthModal(mode: 'login' | 'register') {
       authMode = mode;
       modalTitle.textContent = mode === 'login' ? 'Masuk' : 'Daftar';
@@ -360,9 +382,10 @@ const path = Astro.url.pathname;
       modalMsg.textContent = 'Memproses…';
 
       try {
-        const res = authMode === 'login'
-          ? await client.login(email, password)
-          : await client.register({ email, password, nick, url: path });
+        const res =
+          authMode === 'login'
+            ? await client.login(email, password)
+            : await client.register({ email, password, nick, url: path });
 
         if (res.errno !== 0) {
           modalMsg.textContent = res.errmsg || 'Gagal.';
@@ -402,15 +425,16 @@ const path = Astro.url.pathname;
         userAvatar.src = currentUser.avatar;
         userName.textContent = currentUser.nick;
 
-        (form.querySelector('[data-field="nick"]') as HTMLInputElement).value = currentUser.nick;
-        (form.querySelector('[data-field="mail"]') as HTMLInputElement).value = currentUser.email;
+        (form.querySelector('[data-field="nick"]') as HTMLInputElement).value =
+          currentUser.nick;
+        (form.querySelector('[data-field="mail"]') as HTMLInputElement).value =
+          currentUser.email;
       } else {
         authBar.hidden = true;
         authPrompt.hidden = false;
       }
     }
 
-    // ── Init ────────────────────────────────────────
     refreshUser().then(() => loadComments(1));
   }
 
@@ -418,94 +442,100 @@ const path = Astro.url.pathname;
     document.querySelectorAll<HTMLElement>('[data-comments]').forEach(bootCommentSection);
   }
 
-  init();
-  document.addEventListener('astro:page-load', init);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 </script>
 
 <style is:global>
+  .c-comments [hidden] {
+    display: none !important;
+  }
+
   /* ── Root ──────────────────────────────────────────── */
   .c-comments {
     max-width: 50rem;
     margin-inline: auto;
     padding-inline: 0;
-    padding-block-start: var(--sl-content-gap-y);
+    padding-block: 3rem;
     width: 100%;
-    border-top: 1px solid var(--sl-color-gray-5)
+    border-top: 1px solid var(--sl-color-gray-5);
+    font-family: var(--sl-font);
+    font-feature-settings: 'cv11', 'ss01';
+    font-variant-numeric: tabular-nums;
   }
 
   /* ── Header ────────────────────────────────────────── */
   .c-comments__header {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 2rem;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
   }
 
   .c-comments__title {
     margin: 0;
     font-size: var(--sl-text-h3);
     font-weight: 600;
-    letter-spacing: -0.02em;
     color: var(--sl-color-white);
   }
 
   .c-comments__count {
-    padding: 0.125rem 0.5rem;
+    padding: 0.0625rem 0.375rem;
     border-radius: 999px;
     background: var(--sl-color-gray-6);
     color: var(--sl-color-gray-3);
     font-family: var(--sl-font-mono);
-    font-size: var(--sl-text-2xs);
+    font-size: 0.6875rem;
     font-weight: 500;
     line-height: 1.5;
+    letter-spacing: 0;
   }
 
-  /* ── Auth bar (user login) ─────────────────────────── */
+  /* ── Auth bar ──────────────────────────────────────── */
   .c-comments__auth {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.875rem 1rem;
-    margin-bottom: 1.5rem;
+    gap: 0.625rem;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 1rem;
     border: 1px solid var(--sl-color-gray-5);
-    border-radius: 0.75rem;
-    background: var(--sl-color-gray-6);
-    font-size: var(--sl-text-sm);
+    border-radius: 0.375rem;
+    background: var(--sl-color-bg);
+    font-size: 0.8125rem;
   }
 
   .c-comments__auth-avatar {
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
     border-radius: 50%;
     flex-shrink: 0;
-    background: var(--sl-color-gray-5);
-    outline: 1px solid var(--sl-color-gray-6);
+    background: var(--sl-color-gray-6);
   }
 
   .c-comments__auth-name {
     color: var(--sl-color-white);
-    font-weight: 600;
-    font-size: var(--sl-text-sm);
+    font-weight: 500;
   }
 
   .c-comments__auth-btn {
     margin-inline-start: auto;
-    padding: 0.375rem 0.875rem;
-    border: 1px solid var(--sl-color-hairline);
-    border-radius: 0.5rem;
+    padding: 0.1875rem 0.5rem;
+    border: 0;
+    border-radius: 0.25rem;
     background: transparent;
-    color: var(--sl-color-gray-2);
+    color: var(--sl-color-gray-3);
     font: inherit;
-    font-size: var(--sl-text-xs);
-    font-weight: 500;
+    font-size: 0.75rem;
     cursor: pointer;
-    transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+    transition: color 0.12s ease;
   }
 
   .c-comments__auth-btn:hover {
     color: var(--sl-color-white);
-    background: var(--sl-color-gray-5);
-    border-color: var(--sl-color-gray-4);
+    background: var(--sl-color-gray-6);
   }
 
   .c-comments__auth-btn:focus-visible {
@@ -517,28 +547,25 @@ const path = Astro.url.pathname;
   .c-comments__form {
     display: flex;
     flex-direction: column;
-    gap: 0.875rem;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    border: 1px solid var(--sl-color-hairline);
-    border-radius: 1rem;
-    background: var(--sl-color-gray-6);
+    gap: 0.5rem;
+    padding: 0;
+    margin-bottom: 2rem;
   }
 
   .c-comments__form-to {
     margin: 0;
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.5rem;
+    padding: 0.375rem 0.625rem;
+    border-radius: 0.375rem;
     background: var(--sl-color-accent-low);
     color: var(--sl-color-text-accent);
-    font-size: var(--sl-text-xs);
-    font-weight: 600;
+    font-size: 0.75rem;
+    font-weight: 500;
   }
 
   .c-comments__row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
+    gap: 0.5rem;
   }
 
   @media (max-width: 30rem) {
@@ -550,19 +577,21 @@ const path = Astro.url.pathname;
   .c-comments__form input,
   .c-comments__form textarea {
     width: 100%;
-    padding: 0.625rem 0.875rem;
+    padding: 0.5rem 0.75rem;
     border: 1px solid var(--sl-color-hairline);
-    border-radius: 0.5rem;
+    border-radius: 0.375rem;
     background: var(--sl-color-bg);
     color: var(--sl-color-text);
     font: inherit;
-    font-size: var(--sl-text-sm);
-    transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    transition: border-color 0.12s ease, box-shadow 0.12s ease;
   }
 
   .c-comments__form input::placeholder,
   .c-comments__form textarea::placeholder {
     color: var(--sl-color-gray-3);
+    opacity: 0.8;
   }
 
   .c-comments__form input:hover,
@@ -573,16 +602,15 @@ const path = Astro.url.pathname;
   .c-comments__form input:focus,
   .c-comments__form textarea:focus {
     outline: none;
-    border-color: var(--sl-color-accent);
-    background: var(--sl-color-bg);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--sl-color-accent) 22%, transparent);
+    border-color: var(--sl-color-gray-3);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--sl-color-gray-4) 30%, transparent);
   }
 
   .c-comments__form textarea {
     resize: vertical;
-    min-height: 7rem;
+    min-height: 5.5rem;
     font-family: inherit;
-    line-height: 1.6;
+    line-height: 1.5;
   }
 
   .c-comments__hp {
@@ -597,14 +625,14 @@ const path = Astro.url.pathname;
   .c-comments__actions {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.5rem;
     margin-top: 0.25rem;
   }
 
   .c-comments__status {
     flex: 1;
     margin: 0;
-    font-size: var(--sl-text-xs);
+    font-size: 0.75rem;
     color: var(--sl-color-gray-3);
   }
 
@@ -614,31 +642,30 @@ const path = Astro.url.pathname;
 
   .c-comments__cancel,
   .c-comments__submit {
-    padding: 0.5rem 1.25rem;
-    border-radius: 0.5rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
     font: inherit;
-    font-size: var(--sl-text-sm);
-    font-weight: 600;
+    font-size: 0.75rem;
+    font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+    transition: color 0.12s ease, opacity 0.12s ease;
   }
 
   .c-comments__cancel {
-    border: 1px solid var(--sl-color-hairline);
+    border: 1px solid var(--sl-color-gray-5);
     background: transparent;
     color: var(--sl-color-gray-2);
   }
 
   .c-comments__cancel:hover {
     color: var(--sl-color-white);
-    background: var(--sl-color-gray-5);
     border-color: var(--sl-color-gray-4);
   }
 
   .c-comments__submit {
-    border: 1px solid var(--sl-color-accent-high);
-    background: var(--sl-color-accent-high);
-    color: var(--sl-color-text-invert);
+    border: 1px solid var(--sl-color-gray-5);
+    background: var(--sl-color-gray-6);
+    color: var(--sl-color-white);
   }
 
   .c-comments__submit:hover {
@@ -656,14 +683,16 @@ const path = Astro.url.pathname;
     cursor: not-allowed;
   }
 
-  /* ── Auth prompt (guest) ───────────────────────────── */
+  /* ── Auth prompt ──────────────────────────────────── */
   .c-comments__auth-prompt {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.375rem;
+    gap: 0.25rem;
     margin: 0 0 2rem;
-    font-size: var(--sl-text-xs);
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--sl-color-gray-5);
+    font-size: 0.75rem;
     color: var(--sl-color-gray-3);
   }
 
@@ -671,18 +700,19 @@ const path = Astro.url.pathname;
     padding: 0;
     border: 0;
     background: none;
-    color: var(--sl-color-text-accent);
+    color: var(--sl-color-white);
     font: inherit;
     font-size: inherit;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
     text-decoration: underline;
     text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
+    text-underline-offset: 2px;
+    transition: opacity 0.12s ease;
   }
 
   .c-comments__link:hover {
-    color: var(--sl-color-accent);
+    opacity: 0.7;
   }
 
   .c-comments__link:focus-visible {
@@ -691,20 +721,20 @@ const path = Astro.url.pathname;
     border-radius: 2px;
   }
 
-  /* ── List ──────────────────────────────────────────── */
+  /* ── List ─────────────────────────────────────────── */
   .c-comments__list {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0;
   }
 
   .c-comments__loading,
   .c-comments__empty,
   .c-comments__error {
     margin: 0;
-    padding: 2rem 1rem;
+    padding: 2rem 0;
     text-align: center;
-    font-size: var(--sl-text-sm);
+    font-size: 0.8125rem;
     color: var(--sl-color-gray-3);
   }
 
@@ -712,35 +742,35 @@ const path = Astro.url.pathname;
     color: var(--sl-color-red-high);
   }
 
-  /* ── Comment item ──────────────────────────────────── */
   .c-item {
     display: flex;
-    gap: 0.875rem;
-    padding: 1rem 1.125rem;
-    border: 1px solid var(--sl-color-hairline);
-    border-radius: 0.75rem;
-    background: var(--sl-color-bg);
-    transition: border-color 0.15s ease, background-color 0.15s ease;
+    gap: 0.75rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--sl-color-gray-5);
+    background: transparent;
+    transition: background-color 0.12s ease;
+  }
+
+  .c-item:first-child {
+    border-top: 1px solid var(--sl-color-gray-5);
   }
 
   .c-item:hover {
-    border-color: var(--sl-color-gray-4);
-    background: color-mix(in srgb, var(--sl-color-gray-6) 30%, var(--sl-color-bg));
+    background: color-mix(in srgb, var(--sl-color-gray-6) 40%, transparent);
   }
 
   .c-item--reply {
-    margin-inline-start: 2.5rem;
-    margin-top: 0.75rem;
-    border-inline-start-width: 2px;
-    border-inline-start-color: var(--sl-color-hairline);
+    margin-inline-start: 2rem;
+    padding-inline-start: 1rem;
+    border-inline-start: 2px solid var(--sl-color-hairline);
+    border-bottom: 1px solid var(--sl-color-hairline);
   }
 
   .c-item__avatar {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2rem;
+    height: 2rem;
     border-radius: 50%;
     flex-shrink: 0;
-    outline: 1px solid var(--sl-color-hairline);
     object-fit: cover;
     background: var(--sl-color-gray-6);
   }
@@ -754,62 +784,70 @@ const path = Astro.url.pathname;
     display: flex;
     align-items: baseline;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .c-item__name {
-    font-size: var(--sl-text-sm);
-    font-weight: 600;
-    color: var(--sl-color-white);
-    text-decoration: none;
-    transition: color 0.15s ease;
-  }
-
-  .c-item__name:hover {
-    color: var(--sl-color-text-accent);
-  }
-
-  .c-item__badge {
-    padding: 0.125rem 0.5rem;
-    border-radius: 999px;
-    background: var(--sl-color-orange-low);
-    color: var(--sl-color-orange-high);
-    font-size: var(--sl-text-2xs);
-    font-weight: 500;
+    gap: 0.375rem;
+    margin-bottom: 0.25rem;
     line-height: 1.4;
   }
 
+  .c-item__name {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--sl-color-white);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  .c-item__name:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+
+  .c-item__badge {
+    padding: 0.0625rem 0.375rem;
+    border-radius: 999px;
+    background: var(--sl-color-orange-low);
+    color: var(--sl-color-orange-high);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
   .c-item__date {
-    font-family: var(--sl-font-mono);
-    font-size: var(--sl-text-2xs);
+    font-size: 0.75rem;
     color: var(--sl-color-gray-3);
+    font-family: inherit;
   }
 
   .c-item__content {
     color: var(--sl-color-gray-2);
-    font-size: var(--sl-text-sm);
-    line-height: 1.65;
+    font-size: 0.8125rem;
+    line-height: 1.6;
     overflow-wrap: anywhere;
   }
 
-  .c-item__content p { margin: 0 0 0.5em; }
-  .c-item__content p:last-child { margin-bottom: 0; }
+  .c-item__content p {
+    margin: 0 0 0.4em;
+  }
+  .c-item__content p:last-child {
+    margin-bottom: 0;
+  }
 
   .c-item__content a {
-    color: var(--sl-color-text-accent);
+    color: var(--sl-color-white);
     text-decoration: underline;
+    text-decoration-thickness: 1px;
     text-underline-offset: 2px;
   }
 
   .c-item__content a:hover {
-    color: var(--sl-color-accent);
+    opacity: 0.7;
   }
 
   .c-item__content code {
-    padding: 0.1em 0.4em;
-    border-radius: 0.375rem;
-    background: var(--sl-color-bg-inline-code);
+    padding: 0.1em 0.35em;
+    border-radius: 0.25rem;
+    background: var(--sl-color-gray-6);
     color: var(--sl-color-text);
     font-family: var(--sl-font-mono);
     font-size: 0.875em;
@@ -817,11 +855,11 @@ const path = Astro.url.pathname;
 
   .c-item__content pre {
     margin: 0.5em 0;
-    padding: 0.875rem;
-    border-radius: 0.5rem;
-    background: var(--sl-color-bg-inline-code);
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    background: var(--sl-color-gray-6);
     overflow-x: auto;
-    font-size: var(--sl-text-xs);
+    font-size: 0.75rem;
   }
 
   .c-item__content pre code {
@@ -831,15 +869,15 @@ const path = Astro.url.pathname;
 
   .c-item__content blockquote {
     margin: 0.5em 0;
-    padding: 0.5em 0.875rem;
-    border-inline-start: 2px solid var(--sl-color-hairline);
+    padding: 0.25em 0.75rem;
+    border-inline-start: 2px solid var(--sl-color-gray-5);
     color: var(--sl-color-gray-3);
   }
 
   .c-item__actions {
     display: flex;
-    gap: 1rem;
-    margin-top: 0.75rem;
+    gap: 0.75rem;
+    margin-top: 0.375rem;
   }
 
   .c-item__action {
@@ -848,14 +886,14 @@ const path = Astro.url.pathname;
     background: none;
     color: var(--sl-color-gray-3);
     font: inherit;
-    font-size: var(--sl-text-xs);
+    font-size: 0.75rem;
     font-weight: 500;
     cursor: pointer;
-    transition: color 0.15s ease;
+    transition: color 0.12s ease;
   }
 
   .c-item__action:hover {
-    color: var(--sl-color-text-accent);
+    color: var(--sl-color-white);
   }
 
   .c-item__action:focus-visible {
@@ -868,34 +906,30 @@ const path = Astro.url.pathname;
     color: var(--sl-color-red-high);
   }
 
-  /* ── Pagination ────────────────────────────────────── */
+  /* ── Pagination ───────────────────────────────────── */
   .c-comments__pagination {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 1rem;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--sl-color-hairline);
-    font-size: var(--sl-text-xs);
+    margin-top: 1.5rem;
+    font-size: 0.75rem;
     color: var(--sl-color-gray-3);
   }
 
   .c-comments__pagination button {
-    padding: 0.375rem 0.875rem;
+    padding: 0.375rem 0.75rem;
     border: 1px solid var(--sl-color-hairline);
-    border-radius: 0.5rem;
+    border-radius: 0.375rem;
     background: transparent;
-    color: var(--sl-color-gray-2);
+    color: var(--sl-color-white);
     font: inherit;
-    font-size: var(--sl-text-xs);
+    font-size: 0.75rem;
     font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
   }
 
   .c-comments__pagination button:hover {
-    color: var(--sl-color-white);
     background: var(--sl-color-gray-6);
     border-color: var(--sl-color-gray-4);
   }
@@ -905,53 +939,56 @@ const path = Astro.url.pathname;
     outline-offset: 2px;
   }
 
-  /* ── Auth modal ────────────────────────────────────── */
+  /* ── Auth modal ───────────────────────────────────── */
   .c-auth-modal {
     margin: auto;
     padding: 0;
     border: 1px solid var(--sl-color-hairline);
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     background: var(--sl-color-bg);
     color: var(--sl-color-text);
-    max-width: 24rem;
+    max-width: 22rem;
     width: 90%;
-    box-shadow: var(--sl-shadow-lg);
+    box-shadow:
+      0 0 0 1px var(--sl-color-hairline),
+      0 20px 40px -12px rgb(0 0 0 / 0.4);
   }
 
   .c-auth-modal::backdrop {
     background: var(--sl-color-backdrop-overlay);
-    -webkit-backdrop-filter: blur(4px);
-    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
   }
 
   .c-auth-modal__form {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    padding: 1.75rem;
+    gap: 0.5rem;
+    padding: 1.25rem;
   }
 
   .c-auth-modal__title {
-    margin: 0 0 0.5rem;
-    font-size: var(--sl-text-h4);
+    margin: 0 0 0.25rem;
+    font-size: 0.9375rem;
     font-weight: 600;
     color: var(--sl-color-white);
     letter-spacing: -0.02em;
   }
 
   .c-auth-modal__form input {
-    padding: 0.625rem 0.875rem;
+    padding: 0.5rem 0.75rem;
     border: 1px solid var(--sl-color-hairline);
-    border-radius: 0.5rem;
+    border-radius: 0.375rem;
     background: var(--sl-color-bg);
     color: var(--sl-color-text);
     font: inherit;
-    font-size: var(--sl-text-sm);
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    font-size: 0.8125rem;
+    transition: border-color 0.12s ease, box-shadow 0.12s ease;
   }
 
   .c-auth-modal__form input::placeholder {
     color: var(--sl-color-gray-3);
+    opacity: 0.8;
   }
 
   .c-auth-modal__form input:hover {
@@ -960,57 +997,61 @@ const path = Astro.url.pathname;
 
   .c-auth-modal__form input:focus {
     outline: none;
-    border-color: var(--sl-color-accent);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--sl-color-accent) 22%, transparent);
+    border-color: var(--sl-color-gray-3);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--sl-color-gray-4) 30%, transparent);
   }
 
   .c-auth-modal__msg {
     margin: 0;
     min-height: 1.2em;
-    font-size: var(--sl-text-xs);
+    font-size: 0.75rem;
     color: var(--sl-color-gray-3);
   }
 
-  .c-auth-modal__msg[data-state='error'] { color: var(--sl-color-red-high); }
-  .c-auth-modal__msg[data-state='success'] { color: var(--sl-color-green-high); }
+  .c-auth-modal__msg[data-state='error'] {
+    color: var(--sl-color-red-high);
+  }
+  .c-auth-modal__msg[data-state='success'] {
+    color: var(--sl-color-green-high);
+  }
 
   .c-auth-modal__actions {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.375rem;
     justify-content: flex-end;
     margin-top: 0.5rem;
   }
 
   .c-auth-modal__btn {
-    padding: 0.5rem 1rem;
+    padding: 0.375rem 0.75rem;
     border: 1px solid var(--sl-color-hairline);
-    border-radius: 0.5rem;
+    border-radius: 0.375rem;
     background: transparent;
-    color: var(--sl-color-gray-2);
+    color: var(--sl-color-white);
     font: inherit;
-    font-size: var(--sl-text-sm);
+    font-size: 0.75rem;
     font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    transition: background-color 0.12s ease, border-color 0.12s ease,
+      opacity 0.12s ease;
   }
 
   .c-auth-modal__btn:hover {
-    color: var(--sl-color-white);
     background: var(--sl-color-gray-6);
     border-color: var(--sl-color-gray-4);
   }
 
   .c-auth-modal__btn--primary {
-    background: var(--sl-color-accent-high);
-    border-color: var(--sl-color-accent-high);
-    color: var(--sl-color-text-invert);
-    font-weight: 600;
+    background: var(--sl-color-black);
+    border-color: var(--sl-color-black);
+    color: var(--sl-color-white);
   }
 
   .c-auth-modal__btn--primary:hover {
     opacity: 0.85;
-    color: var(--sl-color-text-invert);
-    background: var(--sl-color-accent-high);
+    background: var(--sl-color-black);
+    border-color: var(--sl-color-black);
+    color: var(--sl-color-white);
   }
 
   .c-auth-modal__btn:focus-visible {
@@ -1018,7 +1059,6 @@ const path = Astro.url.pathname;
     outline-offset: 2px;
   }
 
-  /* ── Reduced motion ────────────────────────────────── */
   @media (prefers-reduced-motion: reduce) {
     .c-comments *,
     .c-comments *::before,
