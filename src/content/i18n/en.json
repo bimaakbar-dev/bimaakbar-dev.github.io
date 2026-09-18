@@ -1,0 +1,41 @@
+{
+  "action.CopyPage": "Copy Page",
+  "action.CopyMarkdown": "Copy as Markdown",
+  "action.ViewMarkdown": "View as Markdown",
+  "action.AgentSetup": "Agent setup",
+
+  "blog.PostAuthor": "By", 
+  "blog.relatedPostLabel": "Related posts",
+  "blog.PopularPostLabel": "Popular posts",
+  
+  "component.preview": "Preview",
+  "component.scrollToTop": "Scroll to top",
+  
+  "nav.blog": "Blog",
+  "nav.docs": "Docs",
+  "nav.home": "Home",
+  "nav.about": "About",
+  "footer.nav": "Navigation",
+  "footer.legal": "Legal",
+  "footer.privacy": "Privacy Policy",
+  "footer.terms": "Terms of Service",
+  
+  "plugin.readingTime": "min read",
+  "plugin.readingWords": "words",
+
+  "rss.title": "Stradocs",
+  "rss.RssFeedLabel": "Subscribe",
+  "rss.RssFeedTitle": "RSS",
+  "rss.RssFeedDesc": "Stay up-to-date with news from the",
+
+  "search.clear_search": "Clear",
+  "search.load_more": "Load more results",
+  "search.input_label": "Search this site",
+  "search.filters_label": "Filters",
+  "search.zero_results": "No results for [SEARCH_TERM]",
+  "search.many_results": "[COUNT] results for [SEARCH_TERM]",
+  "search.one_result": "[COUNT] result for [SEARCH_TERM]",
+  "search.alt_search": "No results for [SEARCH_TERM]. Showing results for [DIFFERENT_TERM] instead",
+  "search.search_suggestion": "No results for [SEARCH_TERM]. Try one of the following searches:",
+  "search.searching": "Searching for [SEARCH_TERM]..."
+}
