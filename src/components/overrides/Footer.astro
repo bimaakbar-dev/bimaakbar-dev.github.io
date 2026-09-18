@@ -39,7 +39,7 @@ const navGroups = [
   },
 ];
 ---
-<footer class="site-footer sl-flex">
+<footer class="sl-flex">
   <!--<nav class="site-footer__nav" aria-label={t('footer.nav')}>
     {navGroups.map((group) => (
       group.links.length > 0 && (
@@ -77,16 +77,14 @@ const navGroups = [
 </footer>
 
 <style>
-  .site-footer {
+  footer {
     flex-direction: column;
     gap: 2rem;
-    padding-block-end: 2rem;
     padding-inline: var(--sl-content-pad-x);
     max-width: 50rem;
     margin-inline: auto;
     width: 100%;
   }
-
   .site-footer__nav {
     display: flex;
     gap: 3rem;

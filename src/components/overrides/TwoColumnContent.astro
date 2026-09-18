@@ -61,7 +61,6 @@ const customPageTwoColumn = isBlogIndex || isBlogPost || isLegalPage;
 				)
 			);
 		}
-
 		.right-sidebar {
 			position: fixed;
 			top: 0;
@@ -75,7 +74,6 @@ const customPageTwoColumn = isBlogIndex || isBlogPost || isLegalPage;
 		.main-pane {
 			width: 100%;
 		}
-
 		:global([data-has-sidebar][data-has-toc]) .main-pane {
 			--sl-content-margin-inline: auto 0;
 
@@ -86,6 +84,11 @@ const customPageTwoColumn = isBlogIndex || isBlogPost || isLegalPage;
 					var(--sl-content-width) + (100% - var(--sl-content-width) - var(--sl-sidebar-width)) / 2
 				)
 			);
+		}
+		:global([data-has-sidebar]) .main-pane {
+			--sl-content-margin-inline: auto 0;
+			order: 1;
+			width: 100%;
 		}
 	}
 </style>

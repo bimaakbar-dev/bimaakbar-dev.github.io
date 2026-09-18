@@ -1,6 +1,7 @@
 ---
 title: 'Asides'
 description: 'Pelajari cara menggunakan aside dalam markdown untuk menampilkan informasi tambahan di Stradocs.'
+draft: true
 ---
 
 Komponen **Asides** di Stradocs menggunakan cara penulisan **Github**, bisa digunakan dalam **MDX** dan **Markdown** dengan simbol `> [!variant]`.  
@@ -37,6 +38,14 @@ import { PreviewPanel } from '~/stradocs/components';
 </Fragment>
 
 </PreviewPanel>  
+
+## Default Starlight
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type='note'>
+  Lorem ipsum dolor sit amet.
+</Aside>
 
 ## Props  
 Komponen ini mempunyai beberapa jenis `variant`:

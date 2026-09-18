@@ -119,12 +119,12 @@ const readingTime = getReadingTime(entry.body ?? '');
     max-width: 72rem;
     position: relative;
     z-index: 0;
-    margin-bottom: 0;
+    margin-bottom: -1rem;
     & img {
       width: 100%;
       height: auto;
-      min-height: 15rem;
-	    object-fit: cover;
+      min-height: 18rem;
+      object-fit: cover;
     }
   }
   .blog-post-header {
@@ -134,12 +134,13 @@ const readingTime = getReadingTime(entry.body ?? '');
     flex: 1;
     width: 100%;
     text-align: center;
-    padding: 1rem 1.5rem;
+    padding-inline: var(--sl-content-pad-x);
+    padding-block: var(--sl-content-gap-y);
     background: var(--sl-color-black);
     z-index: 10;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
-    & :where(.post-meta .post-date, .post-meta .post-reading-time) {
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+    & :where(.post-meta .post-date, .post-meta .post-reading-time, .post-author) {
       font-size: var(--sl-text-body);
       font-weight: 500;
       color: var(--sl-color-gray-2);
@@ -166,36 +167,29 @@ const readingTime = getReadingTime(entry.body ?? '');
       color: var(--sl-color-white);
       text-align: center;
       margin-block: 0.5rem;
+      text-wrap: balance;
     }
     & .post-author {
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
       gap: 0.75rem 1rem;
-      padding-inline: var(--sl-content-pad-x);
-      color: var(--sl-color-gray-2);
-      font-weight: 500;
-
       & .author-group {
         align-items: center;
         gap: 0.75rem;
       }
-
       & .author-avatars {
         list-style: none;
         padding: 0;
         margin: 0;
         align-items: center;
         isolation: isolate;
-
         & .avatar-item {
           position: relative;
           line-height: 0;
-
           & + .avatar-item {
             margin-inline-start: -0.5em;
           }
-
           & > img {
             margin: 0;
             display: block;
@@ -209,18 +203,14 @@ const readingTime = getReadingTime(entry.body ?? '');
               inset 0 0 0 1px var(--sl-color-black);
             transition: transform 0.15s ease;
           }
-
-          &:hover > img {
-            transform: translateY(-2px);
-          }
         }
       }
-
       & .author-names {
         margin: 0;
       }
     }
   }
+
   .page-title {
     flex-direction: column;
     gap: 1rem;
@@ -230,13 +220,15 @@ const readingTime = getReadingTime(entry.body ?? '');
       font-weight: 600;
       line-height: var(--sl-line-height-headings);
       color: var(--sl-color-white);
-      margin: 0
+      margin: 0;
+      text-wrap: balance;
     }
     & .description {
       font-size: var(--sl-text-sm);
       line-height: var(--sl-line-height);
       color: var(--sl-color-gray-2);
-      margin: 0
+      margin: 0;
+      text-wrap: pretty;
     }
     & .page-actions {
       margin-block-start: auto;
@@ -276,6 +268,9 @@ const readingTime = getReadingTime(entry.body ?? '');
   @media (min-width: 50rem) {
     .hero-image {
       margin-bottom: -3rem;
+    }
+    .blog-post-header {
+      padding-block: var(--sl-content-gap-y);
     }
     .blog-post-header .post-author .author-avatars .avatar-item > img {
       width: 2rem;

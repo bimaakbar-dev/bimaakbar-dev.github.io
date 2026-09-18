@@ -11,50 +11,52 @@ const {
 
 const customPageIndex = isBlogIndex || isBlogPost || isLegalPage;
 ---
-{ customPageIndex ? (
-	<div class="custom-page sl-flex">
-		<header class="custom-header">
-			<slot name="header" />
-		</header>
-		<div class="custom-main-frame">
-			<slot />
+{ 
+	customPageIndex ? (
+		<div class="custom-page sl-flex">
+			<header class="custom-header">
+				<slot name="header" />
+			</header>
+			<div class="custom-main-frame">
+				<slot />
+			</div>
 		</div>
-	</div>
-) : (
-	<div class="page sl-flex">
-	<header class="header">
-		<slot name="header" />
-	</header>
-	{hasSidebar && (
-		<nav class="sidebar print:hidden" aria-label={Astro.locals.t('sidebarNav.accessibleLabel')}>
-			<MobileMenuToggle />
-			<script>
-				class StarlightSidebarPane extends HTMLElement {
-					constructor() {
-						super();
-						matchMedia('(min-width: 50em)').addEventListener('change', () => this.hidePopover());
-						this.addEventListener('toggle', ({ newState }) => this.trapFocus(newState === 'open'));
-					}
-					trapFocus(shouldTrap: boolean) {
-						document.querySelectorAll<HTMLElement>('.main-frame, .sl-skip-link').forEach((el) => {
-							el.toggleAttribute('inert', shouldTrap);
-						});
-					}
-				}
-				customElements.define('sl-sidebar-pane', StarlightSidebarPane);
-			</script>
-			<sl-sidebar-pane popover="" id="starlight__sidebar" class="sidebar-pane">
-				<div class="sidebar-content sl-flex">
-					<slot name="sidebar" />
-				</div>
-			</sl-sidebar-pane>
-		</nav>
-	)}
-	<div class="main-frame">
-		<slot />
-	</div>
-</div>
-)}
+	) : (
+		<div class="page sl-flex">
+			<header class="header">
+				<slot name="header" />
+			</header>
+			{hasSidebar && (
+				<nav class="sidebar print:hidden" aria-label={Astro.locals.t('sidebarNav.accessibleLabel')}>
+					<MobileMenuToggle />
+					<script>
+						class StarlightSidebarPane extends HTMLElement {
+							constructor() {
+								super();
+								matchMedia('(min-width: 50em)').addEventListener('change', () => this.hidePopover());
+								this.addEventListener('toggle', ({ newState }) => this.trapFocus(newState === 'open'));
+							}
+							trapFocus(shouldTrap: boolean) {
+								document.querySelectorAll<HTMLElement>('.main-frame, .sl-skip-link').forEach((el) => {
+									el.toggleAttribute('inert', shouldTrap);
+								});
+							}
+						}
+						customElements.define('sl-sidebar-pane', StarlightSidebarPane);
+					</script>
+					<sl-sidebar-pane popover="" id="starlight__sidebar" class="sidebar-pane">
+						<div class="sidebar-content sl-flex">
+							<slot name="sidebar" />
+						</div>
+					</sl-sidebar-pane>
+				</nav>
+			)}
+			<div class="main-frame">
+				<slot />
+			</div>
+		</div>
+	)
+}
 
 <style>
 	.custom-page,

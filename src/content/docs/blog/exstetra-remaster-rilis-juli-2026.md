@@ -21,7 +21,6 @@ pubDate: 2026-05-25T09:51Z
 lastUpdated: 2026-05-25
 draft: false
 heroImage: https://cdn.c0desk1.my.id/img/AgACAgUAAxkBAAOMahO8_a8ah_L_MBd8GN_kTVp1zGUAAs4Oaxu4D6BUhP9ClK_ukmcBAAMCAAN5AAM7BA
-template: splash
 editUrl: false
 ---
 

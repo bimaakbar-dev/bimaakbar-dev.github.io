@@ -19,7 +19,6 @@ pubDate: 2026-05-26T16:18Z
 lastUpdated: 2026-05-26
 draft: false
 editUrl: false
-template: splash
 ---
 Bosan dengan game *survival crafting* yang itu-itu saja? Kini hadir *Solarpunk*, sebuah game baru yang menawarkan pengalaman segar dengan menggabungkan dua genre populer: *farming* ala *Stardew Valley* dan eksplorasi dunia mirip *Valheim*, semuanya berlatar di pulau-pulau terapung yang indah.
 
