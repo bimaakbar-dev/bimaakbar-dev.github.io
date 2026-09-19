@@ -43,6 +43,10 @@ const customIndex = isBlogIndex || isDocIndex;
 			<article class="sl-markdown-content">
 				<slot />
 			</article>
+			<div class="meta sl-flex">
+				<LastUpdated />
+			</div>
+			<hr />
 	) : (
 		<article class="sl-markdown-content">
 			<slot />
@@ -55,15 +59,12 @@ const customIndex = isBlogIndex || isDocIndex;
 			<Comments />
 		</div>
 		<Pagination />
-		<MobileScrollToTop />
 		<hr />
+		<MobileScrollToTop />
 	)
 }
 
 <style>
-	:global([data-has-hero] .comments) {
-    	display: none;
-  	}
 	.meta {
 		width: 100%;
 		gap: 0.75em 3rem;
@@ -89,4 +90,7 @@ const customIndex = isBlogIndex || isDocIndex;
 	:global([data-has-hero] hr) {
 		display: none;
 	}
+	:global([data-has-hero] .comments) {
+    	display: none;
+    }
 </style>
