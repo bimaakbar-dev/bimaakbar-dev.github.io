@@ -61,31 +61,29 @@ const ogImageAlt = data.title || siteDescription;
       <meta name="twitter:image:alt" content={ogImageAlt} />
     </>
 )}
-
 <meta name="google-site-verification" content={SEO.verification.google} />
 <meta name="msvalidate.01" content={SEO.verification.bing} />
 <meta name="yandex-verification" content={SEO.verification.yandex} />
-<!--<meta name="google-adsense-account" content={SEO.ads.google} />-->
-<!--<meta name="monetag" content={SEO.ads.monetag} />-->
+<meta name="google-adsense-account" content={SEO.ads.google} />
 <script is:inline>
-	(function (w, d, s, l, i) {
-		w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0], j = d.createElement(s), 
-        dl = l != "dataLayer" ? "&l=" + l : ""; 
-        j.async = true; 
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-    })
-    (window, document, "script", "dataLayer", "GTM-NJJPZV2M");
+  (function (w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+    var f = d.getElementsByTagName(s)[0], j = d.createElement(s), 
+    dl = l != "dataLayer" ? "&l=" + l : ""; 
+    j.async = true; 
+    j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+    f.parentNode.insertBefore(j, f);
+  })(window, document, "script", "dataLayer", "GTM-NJJPZV2M");
 </script>
+<script async src=`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${SEO.ads.google}` crossorigin="anonymous"></script>
 <script async type="application/javascript" src="https://news.google.com/swg/js/v1/swg-basic.js"></script>
 <script is:inline>
   (self.SWG_BASIC = self.SWG_BASIC || []).push( basicSubscriptions => {
     basicSubscriptions.init({
       type: "NewsArticle",
       isPartOfType: ["Product"],
-      isPartOfProductId: "CAowk9PMDA:openaccess",
+      isPartOfProductId: `CAowk9PMDA:openaccess`,
       clientOptions: { theme: "light", lang: "id" },
     });
   });
