@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+Disallow: /docs/*
+Disallow: /en/docs/*
+
 Sitemap: https://c0desk1.my.id/sitemap-index.xml
