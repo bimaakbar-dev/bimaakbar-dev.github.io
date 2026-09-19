@@ -55,13 +55,11 @@ export class WalineClient {
   }
 
   private async request<T>(path: string, options: RequestInit = {}): Promise<ApiResponse<T>> {
-    const headers: HeadersInit = {
+    const headers: Record<string, string> = {
       'Content-Type': 'application/json',
-      ...(options.headers ?? {}),
+      ...((options.headers as Record<string, string>) ?? {}),
     };
-    if (this.token) {
-      (headers as Record<string, string>)['Authorization'] = `Bearer ${this.token}`;
-    }
+    if (this.token) headers['Authorization'] = `Bearer ${this.token}`;
 
     const res = await fetch(`${this.serverURL}${path}`, { ...options, headers });
     return res.json();
@@ -84,12 +82,11 @@ export class WalineClient {
     mail?: string;
     link?: string;
     url: string;
-    pid?: string;      // parent id, untuk reply
+    pid?: string;
   }) {
-    const ua = navigator.userAgent;
     return this.request<WalineComment>('/comment', {
       method: 'POST',
-      body: JSON.stringify({ ...input, ua }),
+      body: JSON.stringify({ ...input, ua: navigator.userAgent }),
     });
   }
 
@@ -98,29 +95,42 @@ export class WalineClient {
   }
 
   // ── Auth ──────────────────────────────────────────
-  async login(email: string, password: string) {
-    const res = await this.request<{ token: string; user: WalineUser }>('/token', {
-      method: 'POST',
-      body: JSON.stringify({ email, password }),
-    });
-    if (res.errno === 0) this.token = res.data.token;
-    return res;
-  }
-
+  // ✅ Register: POST /api/user
   async register(input: { email: string; password: string; nick: string; url: string }) {
-    return this.request<WalineUser>('/register', {
+    return this.request<WalineUser>('/user', {
       method: 'POST',
       body: JSON.stringify(input),
     });
   }
 
-  async getCurrentUser() {
-    if (!this.token) return null;
-    const res = await this.request<WalineUser>('/user');
-    return res.errno === 0 ? res.data : null;
+  // ✅ Login: POST /api/token
+  async login(email: string, password: string) {
+    const res = await this.request<{ token: string; user: WalineUser }>('/token', {
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+    });
+    if (res.errno === 0 && res.data?.token) this.token = res.data.token;
+    return res;
   }
 
+  // ✅ Current user: GET /api/token (bukan /user)
+  async getCurrentUser(): Promise<WalineUser | null> {
+    if (!this.token) return null;
+    try {
+      const res = await this.request<WalineUser>('/token', { method: 'GET' });
+      return res.errno === 0 ? res.data : null;
+    } catch {
+      return null;
+    }
+  }
+
+  // ✅ Logout: DELETE /api/token
   async logout() {
+    if (this.token) {
+      try {
+        await this.request<null>('/token', { method: 'DELETE' });
+      } catch {}
+    }
     this.token = null;
   }
 }
