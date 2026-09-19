@@ -120,6 +120,11 @@ export default defineConfig({
           label: "Github",
           href: "https://github.com/c0desk1",
         },
+        {
+          icon: 'discord',
+          label: 'Discord',
+          href: 'https://discord.com/users/bimaakbardev'
+        }
       ],
       lastUpdated: true,
       editLink: {
