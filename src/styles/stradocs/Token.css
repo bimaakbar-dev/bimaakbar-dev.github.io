@@ -74,14 +74,7 @@
 }
 
 :root[data-theme="light"],
-[data-theme="light"] ::backdrop {
-  --sl-color-bg:               hsl(0, 0%, 96%);
-  --sl-color-bg-nav:           hsl(0, 0%, 96%);
-  --sl-color-bg-sidebar:       hsl(0, 0%, 96%);
-  --sl-color-bg-inline-code:   hsl(0, 0%, 94.7%);
-  --sl-color-bg-accent:        var(--sl-color-accent-high);
-  --sl-color-black:            hsl(0, 0%, 96%);
-
+[data-theme="light"] ::backdrop {  
   --sl-color-white:            hsl(0, 0%, 3.9%);
   --sl-color-gray-1:           hsl(150, 10%, 15%);
   --sl-color-gray-2:           hsl(150, 8%, 30%);
@@ -90,6 +83,22 @@
   --sl-color-gray-5:           hsla(0, 0%, 80%, 50%);
   --sl-color-gray-6:           hsl(0, 0%, 94.7%);
   --sl-color-gray-7:           hsl(0, 0%, 98%);
+  --sl-color-black:            hsl(0, 0%, 96%);
+  
+  /* Disabled for now
+  --sl-color-accent-low:       hsl(145, 50%, 92%);
+  --sl-color-accent:           hsl(145, 42%, 48%);
+  --sl-color-accent-high:      hsl(145, 55%, 32%);
+  */
+  --sl-color-accent-low: hsla(0, 0%, 82%, 50%);
+  --sl-color-accent-high: hsl(0, 0%, 9%);
+  --sl-color-accent: hsla(0, 0%, 82%, 50%);
+  
+  --sl-color-bg:               var(--sl-color-black);
+  --sl-color-bg-nav:           var(--sl-color-black);
+  --sl-color-bg-sidebar:       var(--sl-color-black);
+  --sl-color-bg-inline-code:   var(--sl-color-gray-7);
+  --sl-color-bg-accent:        var(--sl-color-accent-high);
 
   --sl-color-text:             var(--sl-color-white);
   --sl-color-text-accent:      var(--sl-color-accent-high);
@@ -97,7 +106,7 @@
 
   --sl-color-hairline-light:   var(--sl-color-gray-7);
   --sl-color-hairline:         var(--sl-color-gray-5);
-  --sl-color-hairline-shade:   var(--sl-color-gray-5);
+  --sl-color-hairline-shade:   var(--sl-color-gray-6);
 
   --sl-hue-orange: 30;
   --sl-color-orange-low:       hsl(var(--sl-hue-orange), 70%, 93%);
@@ -123,15 +132,6 @@
   --sl-color-red-low:          hsl(var(--sl-hue-red), 65%, 93%);
   --sl-color-red:              hsl(var(--sl-hue-red), 55%, 52%);
   --sl-color-red-high:         hsl(var(--sl-hue-red), 55%, 36%);
-
-  /* Disabled for now
-  --sl-color-accent-low:       hsl(145, 50%, 92%);
-  --sl-color-accent:           hsl(145, 42%, 48%);
-  --sl-color-accent-high:      hsl(145, 55%, 32%);
-  */
-  --sl-color-accent-low: hsla(0, 0%, 82%, 50%);
-  --sl-color-accent-high: hsl(0, 0%, 9%);
-  --sl-color-accent: hsla(0, 0%, 82%, 50%);
 
   --sl-shadow-sm:
     0 1px 2px hsl(150 25% 20% / 0.04),
