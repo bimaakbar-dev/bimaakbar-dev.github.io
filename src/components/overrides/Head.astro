@@ -6,8 +6,10 @@ import { SEO } from '~/constants';
 const { 
   entry, 
   siteDescription, 
-  isBlog, 
-  rssUrl 
+  isBlog,
+  isBlogPost,
+  rssUrl,
+  siteTitle,
 } = Astro.locals.starlightRoute;
 
 const data = (entry?.data as any) || {};
@@ -33,6 +35,7 @@ const absolutOg = (() => {
 })();
 
 const ogImageAlt = data.title || siteDescription;
+const renderReaderRevenue = isBlogPost;
 ---
 
 <Font cssVariable="--font-montserrat" preload />
@@ -46,17 +49,8 @@ const ogImageAlt = data.title || siteDescription;
 <link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96" />
 <link rel="shortcut icon" href="/images/favicons/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="BimaakbarDEV" />
+<meta name="apple-mobile-web-app-title" content={siteTitle} />
 <link rel="manifest" href="/images/favicons/site.webmanifest" />
-
-{isBlog && (
-	<link
-		rel="alternate"
-		type="application/rss+xml"
-		title="RSS Feed"
-		href={rssUrl as string}
-	/>
-)}
 
 {!hasManualOg && entry && (
 	<>
@@ -67,10 +61,12 @@ const ogImageAlt = data.title || siteDescription;
       <meta name="twitter:image:alt" content={ogImageAlt} />
     </>
 )}
+
 <meta name="google-site-verification" content={SEO.verification.google} />
 <meta name="msvalidate.01" content={SEO.verification.bing} />
 <meta name="yandex-verification" content={SEO.verification.yandex} />
 <meta name="google-adsense-account" content={SEO.ads.google} />
+
 <script is:inline>
   (function (w, d, s, l, i) {
     // @ts-ignore
@@ -92,15 +88,31 @@ const ogImageAlt = data.title || siteDescription;
   src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${SEO.ads.google}`}
   crossorigin="anonymous"
 ></script>
-<script async type="application/javascript" src="https://news.google.com/swg/js/v1/swg-basic.js"></script>
-<script is:inline>
-  // @ts-ignore
-  (self.SWG_BASIC = self.SWG_BASIC || []).push( basicSubscriptions => {
-    basicSubscriptions.init({
-      type: "NewsArticle",
-      isPartOfType: ["Product"],
-      isPartOfProductId: `CAowk9PMDA:openaccess`,
-      clientOptions: { theme: "light", lang: "id" },
-    });
-  });
-</script>
+{ 
+	isBlog && (
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS Feed"
+			href={rssUrl as string}
+		/>
+	)
+}
+{ 
+	isBlogPost && (
+	<>
+		<script async type="application/javascript" src="https://news.google.com/swg/js/v1/swg-basic.js"></script>
+		<script is:inline>
+  		  // @ts-ignore
+			(self.SWG_BASIC = self.SWG_BASIC || []).push( basicSubscriptions => {
+    			basicSubscriptions.init({
+      			  type: "NewsArticle",
+      			  isPartOfType: ["Product"],
+      			  isPartOfProductId: `CAowk9PMDA:openaccess`,
+      			  clientOptions: { theme: "light", lang: "id" },
+    			});
+  		  });
+		</script>
+	</>
+	)
+}
