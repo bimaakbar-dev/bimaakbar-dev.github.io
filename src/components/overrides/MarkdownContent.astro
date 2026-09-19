@@ -54,9 +54,7 @@ const customIndex = isBlogIndex || isDocIndex;
 			<EditLink />
 			<LastUpdated />
 		</div>
-		<div class="comments">
-			<Comments />
-		</div>
+		<Comments />
 		<Pagination />
 		<MobileScrollToTop />
 	)
@@ -85,7 +83,4 @@ const customIndex = isBlogIndex || isDocIndex;
 	:where(.meta, .custom-meta) > :global(p:only-child) {
 		margin-inline-start: auto;
 	}
-	:global([data-has-hero] .comments) {
-    	display: none;
-    }
 </style>
