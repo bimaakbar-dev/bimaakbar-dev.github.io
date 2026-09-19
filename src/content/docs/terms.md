@@ -5,142 +5,111 @@ editUrl: false
 lastUpdated: 2026-09-19
 ---
 
-Your privacy is important to us. This Privacy Policy explains what information we collect, how we use it, and your rights regarding that information when you visit our website.
-
-We comply with applicable privacy laws, including the General Data Protection Regulation (GDPR) and ePrivacy Directive, and we work with advertising partners such as **Google AdSense** to display relevant ads.
-
----
+Your privacy matters. This Privacy Policy explains what data **BimaakbarDEV** ("we", "our") collects, how we use it, and your rights when you visit this website. We comply with the **GDPR**, **ePrivacy Directive**, and other applicable privacy laws.
 
 ## 1. Information We Collect
 
-We may collect the following types of data:
-
 | Category | Examples | Method |
 |----------|----------|--------|
-| **Technical data** | IP address, browser type, device, operating system, screen resolution | Automatically via analytics & server logs |
-| **Usage data** | Pages visited, time spent, clicks, scroll depth, referral source | Automatically via analytics (Google Analytics) |
-| **Communication data** | Name, email address, message content | Submitted via contact or comment forms |
-| **Cookies & similar technologies** | User preferences, session IDs, ad tracking identifiers | Stored on your device (see Section 4) |
+| **Technical data** | IP address, browser, device, OS | Server logs (GitHub Pages, Cloudflare) |
+| **Usage data** | Pages visited, time spent, referral source | Google Analytics |
+| **Comment data** | Name, email, website URL, message, IP, User-Agent | Waline & Giscus |
+| **Reader data** | Email, survey responses, contribution data | Reader Revenue Manager |
+| **Cookies** | Session IDs, ad identifiers, preferences | See Section 4 |
 
-We do **not** collect sensitive personal data (e.g., health, political opinions, biometric data).
+We do **not** collect sensitive personal data (health, political views, biometrics).
 
 ## 2. How We Use Your Information
 
-We use the collected information for the following purposes:
+- Operate, maintain, and improve the website
+- Analyze traffic and performance (Google Analytics)
+- Display relevant ads (Google AdSense)
+- Process contributions and reader surveys (Reader Revenue Manager)
+- Enable comments (Waline, Giscus)
+- Detect spam, fraud, and security threats
 
-- To operate, maintain, and improve the website
-- To analyze traffic, user behavior, and performance (using Google Analytics)
-- To personalize content and user experience (e.g., dark/light mode preference)
-- To serve relevant advertisements through **Google AdSense**
-- To respond to your inquiries or comments
-- To detect and prevent fraud or security issues
+We **do not sell** your personal data.
 
-We do **not** sell your personal data to third parties.
+## 3. Third-Party Services
 
-## 3. Third-Party Services (Data Processors)
+| Service | Purpose | Privacy Policy |
+|---------|---------|----------------|
+| **Google Analytics** | Traffic analysis | [policies.google.com/privacy](https://policies.google.com/privacy) |
+| **Google AdSense** | Advertising | [policies.google.com/technologies/ads](https://policies.google.com/technologies/ads) |
+| **Reader Revenue Manager** | Contributions, surveys, newsletter | [policies.google.com/privacy](https://policies.google.com/privacy) |
+| **Giscus** | Comments (via GitHub Discussions) | [giscus PRIVACY-POLICY](https://github.com/giscus/giscus/blob/main/PRIVACY-POLICY.md) |
+| **Waline** | Comments (backend on Cloudflare Workers) | [waline.js.org/privacy](https://waline.js.org/en/advanced/privacy.html) |
+| **Cloudflare** | Hosting, CDN, DDoS protection, D1 database | [cloudflare.com/privacypolicy](https://www.cloudflare.com/privacypolicy/) |
+| **GitHub** | Hosting (GitHub Pages) | [GitHub Privacy Statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement) |
 
-We use the following third-party services that may process your data:
+**Hosting & data transfer:** BimaakbarDEV is hosted on GitHub Pages (US-based infrastructure). GitHub processes server-side access logs, including IP addresses, which may involve transfer of data outside the EU/EEA under GitHub's Standard Contractual Clauses (SCC).
 
-| Service | Function | Data Location | Privacy Policy |
-|---------|----------|---------------|----------------|
-| **Google Analytics** | Traffic analysis | Google servers (US/EU) | [Google Privacy](https://policies.google.com/privacy) |
-| **Google AdSense** | Advertising | Google servers | [Google AdSense](https://policies.google.com/technologies/ads) |
-| **GitHub** | Hosting (repository) | GitHub servers | [GitHub Privacy](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement) |
+## 4. Cookies & Consent
 
-These third parties may collect and process your data according to their own privacy policies. We recommend you review them.
+We use cookies for functionality, analytics, and advertising.
 
-## 4. Cookies & Similar Technologies
+| Type | Purpose | Example |
+|------|---------|---------|
+| **Strictly necessary** | Site security, load balancing | Cloudflare `__cf_bm`, `cf_clearance` |
+| **Preference** | Remember your settings (theme, language) | Dark/light mode, font size |
+| **Analytics** | Anonymous traffic statistics | Google Analytics |
+| **Advertising** | Relevant ads, frequency capping | Google AdSense |
 
-This website uses **cookies** and similar tracking technologies to enhance functionality, analyze traffic, and serve personalized ads.
+**Consent Management (CMP):** We use a Google-certified Consent Management Platform integrated with the **IAB Transparency and Consent Framework (TCF) v2.3**. On your first visit, a banner lets you accept, reject, or customize cookies. You can change your choice anytime via the "Cookie Preferences" link in the footer.
 
-### What are cookies?
-Cookies are small text files stored on your device when you visit a website. They help remember your preferences and track your activity.
+Without advertising cookies, you will still see ads — but they will be **non-personalized**.
 
-### Types of cookies we use:
+## 5. Advertising & Reader Revenue
 
-| Type | Purpose | Examples |
-|------|---------|----------|
-| **Strictly Necessary** | Required for basic site functions (navigation, security) | Session cookies, load balancing |
-| **Preference Cookies** | Remember your settings (theme, language) | Dark/light mode, font size |
-| **Analytics Cookies** | Collect anonymous usage statistics | Google Analytics |
-| **Advertising Cookies** | Deliver relevant ads, limit ad frequency | Google AdSense |
+**Google AdSense** uses cookies to serve ads based on your prior visits to this and other websites. You can opt out of personalized advertising at [Google Ad Settings](https://adssettings.google.com/) or via [NAI opt-out](https://optout.networkadvertising.org/).
 
-### Consent Management (CMP)
-We use a **Consent Management Platform** to obtain and manage your cookie preferences. When you first visit our website, a banner will appear allowing you to accept, reject, or customize your cookie settings. You can change your preferences at any time by clicking the "Cookie Preferences" link in the footer.
+**Reader Revenue Manager (RRM)** lets readers support BimaakbarDEV through contributions, surveys, or newsletter sign-up. Payment data (including card details) is processed **directly by Google** — we do **not** store your payment information on our servers. Survey responses and email addresses collected via RRM are processed by Google on our behalf.
 
-**Your choices:**
-- Accept all cookies
-- Reject non-essential cookies (only necessary cookies will be used)
-- Manage specific vendor preferences
+## 6. Comments (Waline & Giscus)
 
-Without accepting advertising cookies, you will still see ads, but they may be less relevant (non-personalized).
+**Waline** (self-hosted on Cloudflare Workers with D1 database) stores your name, email, website URL, comment content, IP address, and User-Agent. Data is used solely for comment functionality, spam prevention, and rate limiting. It is stored in an encrypted Cloudflare D1 database and never shared with third parties.
 
-## 5. Advertising & Mediation
+**Giscus** stores comments in **GitHub Discussions** of this site's repository. To comment, you must authorize Giscus via **GitHub OAuth**. Comment data is governed by GitHub's Privacy Statement.
 
-This website uses **Google AdSense** and **Yandex Ads** to display relevant advertisements.
+## 7. Data Retention
 
-### How Google AdSense works:
-- Google uses cookies to serve ads based on your prior visits to our website or other websites.
-- Google's use of advertising cookies enables it and its partners to serve ads to you based on your visit to our site and/or other sites on the Internet.
-- You may opt out of personalized advertising by visiting [Google Ad Settings](https://adssettings.google.com/).
+| Data | Retention |
+|------|-----------|
+| Analytics | 14 months (Google Analytics) |
+| Ad tracking | Up to 13 months (Google) |
+| Comments (Waline, Giscus) | Until deleted by user or site owner |
+| RRM surveys & emails | As long as needed for the stated purpose |
+| Contact messages | 12 months |
 
-### Opt-out options:
-- **Google Ad Settings**: [https://adssettings.google.com/](https://adssettings.google.com/)
-- **Network Advertising Initiative (NAI)** opt-out: [https://optout.networkadvertising.org/](https://optout.networkadvertising.org/)
-- **Your Online Choices (EDAA)**: [https://www.youronlinechoices.com/](https://www.youronlinechoices.com/)
+After the retention period, data is deleted or anonymized.
 
-## 6. Data Retention
+## 8. Data Security
 
-We retain your personal data only as long as necessary for the purposes outlined in this policy:
+We implement HTTPS/TLS encryption, restrict access to personal data, and keep software updated. However, no method of transmission over the Internet is 100% secure.
 
-- **Analytics data**: 14–26 months (Google Analytics)
-- **Ad tracking data**: up to 13 months (Google)
-- **Contact form messages**: 12 months (or until resolved)
+## 9. Children's Privacy
 
-After the retention period, data is automatically deleted or anonymized.
+BimaakbarDEV is not intended for children under 13 (or 16 in certain jurisdictions). We do not knowingly collect data from children. If you believe we have inadvertently collected data from a child, contact us and we will delete it.
 
-## 7. Data Security
+## 10. Your Rights
 
-We implement reasonable security measures to protect your data from unauthorized access, alteration, or disclosure. These include:
+Depending on your location (EU/EEA, UK, Brazil, California), you may have the right to:
 
-- SSL/TLS encryption (HTTPS)
-- Regular software updates
-- Restricted access to personal data
+- **Access**, **correct**, or **delete** your personal data
+- **Restrict** or **object** to processing
+- **Port** your data to another service
+- **Withdraw consent** at any time
 
-However, **no method of transmission over the Internet is 100% secure**. We cannot guarantee absolute security.
+To exercise these rights, contact us at [hello@c0desk1.my.id](mailto:hello@c0desk1.my.id). We respond within 30 days. EU residents may also lodge a complaint with their local Data Protection Authority (DPA).
 
-## 8. Children's Privacy
+## 11. Do Not Track (DNT)
 
-Our website is **not intended for children under the age of 13** (or under 16 in certain jurisdictions). We do not knowingly collect personal data from children. If you believe we have inadvertently collected data from a child, please contact us immediately, and we will delete it.
+We do not currently respond to "Do Not Track" signals, as no standard has been adopted. You can still control cookies via the consent banner and browser settings.
 
-## 9. Your Rights (Based on Your Location)
+## 12. Changes to This Privacy Policy
 
-Depending on your jurisdiction (e.g., EU/EEA, UK, Brazil, California), you may have the following rights:
+We may update this Privacy Policy periodically. Changes will be posted on this page with a revised "Last Updated" date. Continued use of BimaakbarDEV constitutes acceptance of the updated policy.
 
-- **Right to access** – Request a copy of your personal data.
-- **Right to rectification** – Correct inaccurate or incomplete data.
-- **Right to erasure** (right to be forgotten) – Request deletion of your data.
-- **Right to restrict processing** – Limit how we use your data.
-- **Right to data portability** – Receive your data in a structured, machine-readable format.
-- **Right to object** – Object to processing for direct marketing or legitimate interests.
-- **Right to withdraw consent** – Withdraw previously given consent (e.g., cookies).
+## 13. Contact
 
-To exercise these rights, contact us at: [[hello@c0desk1.my.id]]. We will respond within 30 days.
-
-For EU residents, you also have the right to lodge a complaint with your local Data Protection Authority (DPA).
-
-## 10. Do Not Track (DNT)
-
-Our website does not currently respond to "Do Not Track" signals because no standard has been adopted. However, you can still control cookies and ad personalization through the consent banner and browser settings.
-
-## 11. Changes to This Privacy Policy
-
-We may update this Privacy Policy from time to time to reflect changes in our practices, legal requirements, or third-party services. Any updates will be posted on this page with a revised "Last Updated" date.
-
-We encourage you to review this page periodically. Continued use of the website after changes constitutes acceptance of the updated policy.
-
-## 12. Contact Us
-
-If you have any questions, concerns, or requests regarding this Privacy Policy or your data, please contact us at [[hello@c0desk1.my.id]].
-
-For privacy-related issues, you may also reach our data protection officer (if applicable) at the same email.
+For privacy questions or data requests, reach us at [hello@c0desk1.my.id](mailto:hello@c0desk1.my.id).
