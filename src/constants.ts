@@ -8,8 +8,8 @@ export { PAGE_TITLE_ID };
 export const SEO = {
   verification: {
     google: "IjIuPUCBy2m_fCIWYihtBdvwdk2hBBwt2-LyMb-RGjE",
-    bing: "",
-    yandex: "1878480c0d7b5510",
+    bing: "7CFD9CF1E14CB523FAC8FA8F0E5D2939",
+    yandex: "5ba65a96bd30184f",
   },
 
   ads: {
