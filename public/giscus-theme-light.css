@@ -1,6 +1,6 @@
 main {
-  --color-fg-default: hsl(0, 0%, 3.9%);
-  --color-text-primary: hsl(0, 0%, 3.9%);
+  --color-fg-default: hsl(0, 0%, 9%);
+  --color-text-primary: hsl(0, 0%, 9%);
   --color-fg-muted: hsl(0, 0%, 45.1%);
   --color-text-secondary: hsl(0, 0%, 45.1%);
   --color-fg-subtle: hsla(0, 0%, 45.1%, 0.7);
@@ -8,15 +8,15 @@ main {
 
   --color-canvas-default: hsl(0, 0%, 96%);
   --color-bg-primary: hsl(0, 0%, 96%);
-  --color-canvas-overlay: hsl(0, 0%, 98%);
-  --color-bg-secondary: hsl(0, 0%, 98%);
-  --color-canvas-inset: hsl(0, 0%, 94.7%);
-  --color-canvas-subtle: hsl(0, 0%, 94.7%);
-  --color-bg-tertiary: hsl(0, 0%, 94.7%);
+  --color-canvas-overlay: hsl(0, 0%, 96%);
+  --color-bg-secondary: hsl(0, 0%, 96%);
+  --color-canvas-inset: hsl(0, 0%, 93.1%);
+  --color-canvas-subtle: hsl(0, 0%, 93.1%);
+  --color-bg-tertiary: hsl(0, 0%, 93.1%);
   --color-bg-canvas: hsl(0, 0%, 96%);
-  --color-bg-overlay: hsl(0, 0%, 98%);
-  --color-bg-inset: hsl(0, 0%, 94.7%);
-  --color-bg-subtle: hsl(0, 0%, 94.7%);
+  --color-bg-overlay: hsl(0, 0%, 96%);
+  --color-bg-inset: hsl(0, 0%, 93.1%);
+  --color-bg-subtle: hsl(0, 0%, 93.1%);
 
   --color-border-default: hsla(0, 0%, 80%, 50%);
   --color-border-primary: hsla(0, 0%, 80%, 50%);
@@ -25,9 +25,9 @@ main {
   --color-neutral-muted: hsla(0, 0%, 80%, 40%);
 
   --color-accent-fg: hsl(0, 0%, 9%);
-  --color-accent-emphasis: hsla(0, 0%, 30%, 0.9);
-  --color-accent-muted: hsla(0, 0%, 30%, 0.4);
-  --color-accent-subtle: hsla(0, 0%, 82%, 20%);
+  --color-accent-emphasis: hsl(0, 0%, 9%);
+  --color-accent-muted: hsla(0, 0%, 9%, 0.4);
+  --color-accent-subtle: hsla(0, 0%, 82%, 50%);
 
   --color-success-fg: hsl(145, 42%, 38%);
   --color-attention-fg: hsl(30, 55%, 40%);
@@ -37,24 +37,34 @@ main {
   --color-danger-muted: hsla(5, 55%, 45%, 0.4);
   --color-danger-subtle: hsla(5, 55%, 45%, 0.1);
 
-  --color-btn-text: hsl(0, 0%, 3.9%);
-  --color-btn-bg: hsl(0, 0%, 100%);
+  --color-btn-text: hsl(0, 0%, 9%);
+  --color-btn-bg: hsl(0, 0%, 96%);
   --color-btn-border: hsla(0, 0%, 80%, 50%);
-  --color-btn-hover-bg: hsl(0, 0%, 98%);
+  --color-btn-hover-bg: hsl(0, 0%, 93.1%);
   --color-btn-hover-border: hsla(0, 0%, 60%, 60%);
-  --color-btn-selected-bg: hsla(0, 0%, 82%, 40%);
-  --color-btn-primary-text: hsl(0, 0%, 98%);
-  --color-btn-primary-bg: hsl(0, 0%, 9%);
-  --color-btn-primary-hover-bg: hsl(0, 0%, 20%);
+  --color-btn-selected-bg: hsla(0, 0%, 82%, 50%);
 
-  --color-action-list-item-default-hover-bg: hsl(0, 0%, 94.7%);
-  --color-segmented-control-bg: hsl(0, 0%, 94.7%);
-  --color-segmented-control-button-bg: hsl(0, 0%, 100%);
+  --color-btn-primary-text: hsl(0, 0%, 96%);
+  --color-btn-primary-bg: hsl(0, 0%, 9%);
+  --color-btn-primary-border: hsl(0, 0%, 9%);
+  --color-btn-primary-shadow: 0 0 #0000;
+  --color-btn-primary-inset-shadow: 0 0 #0000;
+  --color-btn-primary-hover-bg: hsl(0, 0%, 20%);
+  --color-btn-primary-hover-border: hsl(0, 0%, 20%);
+  --color-btn-primary-selected-bg: hsl(0, 0%, 0%);
+  --color-btn-primary-selected-shadow: 0 0 #0000;
+  --color-btn-primary-disabled-text: hsla(0, 0%, 96%, 0.6);
+  --color-btn-primary-disabled-bg: hsla(0, 0%, 9%, 0.5);
+  --color-btn-primary-disabled-border: hsla(0, 0%, 9%, 0.5);
+
+  --color-action-list-item-default-hover-bg: hsl(0, 0%, 93.1%);
+  --color-segmented-control-bg: hsl(0, 0%, 93.1%);
+  --color-segmented-control-button-bg: hsl(0, 0%, 96%);
   --color-segmented-control-button-selected-border: hsla(0, 0%, 50%, 50%);
-  --color-scale-gray-7: hsl(0, 0%, 94.7%);
-  --color-scale-blue-8: hsla(0, 0%, 82%, 40%);
-  --color-social-reaction-bg-hover: hsl(0, 0%, 94.7%);
-  --color-social-reaction-bg-reacted-hover: hsla(0, 0%, 82%, 40%);
+  --color-scale-gray-7: hsl(0, 0%, 93.1%);
+  --color-scale-blue-8: hsla(0, 0%, 82%, 50%);
+  --color-social-reaction-bg-hover: hsl(0, 0%, 93.1%);
+  --color-social-reaction-bg-reacted-hover: hsla(0, 0%, 82%, 50%);
 }
 
 .gsc-comment-box {
@@ -94,7 +104,7 @@ main {
 }
 
 .gsc-reply-box > button {
-  border-radius: 0.5rem !important;
+  border-radius: 0 0 0.5rem 0.5rem !important;
 }
 
 .BtnGroup {
