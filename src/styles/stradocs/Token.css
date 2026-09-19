@@ -90,23 +90,23 @@
   --sl-color-accent:           hsl(145, 42%, 48%);
   --sl-color-accent-high:      hsl(145, 55%, 32%);
   */
+  
   --sl-color-accent-low: hsla(0, 0%, 82%, 50%);
   --sl-color-accent-high: hsl(0, 0%, 9%);
   --sl-color-accent: hsla(0, 0%, 82%, 50%);
   
   --sl-color-bg:               var(--sl-color-black);
   --sl-color-bg-nav:           var(--sl-color-black);
-  --sl-color-bg-sidebar:       var(--sl-color-black);
+  --sl-color-bg-sidebar:       var(--sl-color-gray-7);
   --sl-color-bg-inline-code:   var(--sl-color-gray-6);
   --sl-color-bg-accent:        var(--sl-color-accent-high);
 
   --sl-color-text:             var(--sl-color-white);
   --sl-color-text-accent:      var(--sl-color-accent-high);
-  --sl-color-text-invert:      hsl(0, 0%, 98%);
+  --sl-color-text-invert:      var(--sl-color-black);
 
   --sl-color-hairline-light:   var(--sl-color-gray-6);
-  --sl-color-hairline:         var(--sl-color-gray-5);
-  --sl-color-hairline-shade:   var(--sl-color-gray-7);
+  --sl-color-hairline-shade:   var(--sl-color-gray-6);
 
   --sl-hue-orange: 30;
   --sl-color-orange-low:       hsl(var(--sl-hue-orange), 70%, 93%);
