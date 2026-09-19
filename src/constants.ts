@@ -16,10 +16,12 @@ export const SEO = {
     google: "ca-pub-4943136052113535",
     yandex: "R-A-19179231",
     monetag: "98464dea950ab2405c90bcb6fc2f1226",
+    readerRevenue: "CAowk9PMDA",
   },
 
   analytics: {
     google: "G-2TKFP229HJ",
     yandex: "108731154",
+    googleTag: "GTM-NJJPZV2M"
   },
 } as const;
