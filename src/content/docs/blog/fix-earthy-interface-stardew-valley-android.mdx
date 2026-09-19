@@ -1,0 +1,105 @@
+---
+title: "Fix DaisyNiko's Earthy Interface untuk Stardew Valley Android 1.6"
+description: "Mod UI populer ini akhirnya punya versi mobile. Ini cara memasang patch DaisyNiko's Earthy Interface di Stardew Valley Android 1.6 tanpa ribet."
+pubDate: 2026-09-19
+heroImage: "~/assets/images/blog/daisyniko-earthy-mobile-hero.webp"
+author:
+  - name: "Bima Akbar"
+    avatar: "~/assets/images/author/bimaakbar.svg"
+tags: [
+  "stardew-valley",
+  "modding",
+  "android",
+  "game"
+]
+editUrl: false
+draft: false
+---
+
+import { Aside, Steps } from "@astrojs/starlight/components"
+
+DaisyNiko's Earthy Interface adalah salah satu mod visual yang paling dicintai komunitas Stardew Valley. Palet warnanya yang hangat dan earthy mengubah UI game yang tadinya cerah mencolok menjadi lebih kalem dan nyaman dipandang. Masalahnya, versi PC dari mod ini **tidak sepenuhnya kompatibel** dengan Stardew Valley versi Android 1.6.
+
+Itulah alasan saya membuat [**DaisyNiko's Earthy Interface Mobile**](https://www.nexusmods.com/stardewvalley/mods/32253) — patch khusus yang menjembatani antara mod asli DaisyNiko dengan arsitektur UI versi mobile. Tujuannya sederhana: pengguna Android bisa menikmati tampilan Earthy Interface tanpa harus berurusan dengan border oranye yang tidak berubah atau config yang tidak bisa di-scroll.
+
+## Apa yang Di-fix?
+
+Stardew Valley versi mobile memiliki kode UI yang di-fork dari versi PC. Beberapa elemen antarmuka ditulis ulang khusus untuk Android, dan kode ini sering kali tidak kompatibel dengan mod UI menyeluruh seperti Earthy Interface.
+
+Masalah paling umum yang dilaporkan pengguna mobile adalah:
+
+- **Border oranye yang tetap muncul** meskipun Earthy Interface sudah terpasang
+- **Menu konfigurasi (GMCM) tidak bisa di-scroll** karena terlalu banyak pilihan warna dalam satu layar
+- **Beberapa tekstur UI hilang atau tidak tergantikan** karena file XNB yang dimodifikasi tidak sesuai dengan versi mobile
+
+Saya membuat mod ini untuk menyelesaikan ketiga masalah tersebut dengan patch yang dirancang khusus untuk arsitektur UI Android 1.6.
+
+## Yang Perlu Disiapkan
+
+Sebelum memasang mod ini, pastikan kamu sudah memiliki dua hal berikut:
+
+### 1. Content Patcher
+
+Framework wajib buatan [![Pathoschild](https://avatars.nexusmods.com/1552317/100) Pathoschild](https://www.nexusmods.com/profile/Pathoschild) yang memungkinkan mod mengubah konten game tanpa mengedit file asli. Tanpa ini, mod tidak akan berjalan. Pastikan kamu menggunakan versi yang kompatibel dengan SMAPI Android.
+
+### 2. DaisyNiko's Earthy Interface (PC Version)
+
+Mod aslinya buatan [![DaisyNiko](https://avatars.nexusmods.com/61079406/100) DaisyNiko](https://www.nexusmods.com/profile/DaisyNiko) tetap harus dipasang. **DaisyNiko's Earthy Interface Mobile bukan mod standalone** — ini patch yang melengkapi mod asli, bukan menggantikannya.
+
+<Aside type='note'>
+  Pastikan SMAPI Android dan SMAPI Launcher sudah terpasang. Kalau belum, ikuti panduan instalasi SMAPI untuk Android terlebih dahulu.
+</Aside>
+
+## Cara Memasang
+
+Prosesnya singkat dan tidak memerlukan pengeditan file manual.
+
+<Steps>
+1. Buka SMAPI Launcher  
+   Jalankan aplikasi SMAPI Launcher di perangkat Android kamu.
+
+2. Masuk ke Mod Manager  
+   Pilih menu **Mod Manager** dari antarmuka utama.
+
+3. Pilih "Install MOD"  
+   Klik opsi **Install MOD** untuk memulai proses pemasangan.
+
+4. Pilih File Mod  
+   Arahkan ke file mod yang sudah kamu unduh dari Nexus Mods. Format file biasanya `.zip`.
+
+5. Tunggu Hingga Selesai  
+   SMAPI Launcher akan mengekstrak dan memasang mod secara otomatis. Setelah muncul konfirmasi selesai, mod siap digunakan.
+
+6. Jalankan Game  
+   Buka Stardew Valley melalui ikon **SMAPI Stardew Valley**, bukan ikon game biasa.
+</Steps>
+
+<Aside type='tip'>
+  Kalau kamu masih bingung dengan langkah-langkah di atas, saya sudah menyiapkan video tutorial di YouTube. Tautannya tersedia di halaman mod.
+</Aside>
+
+## Kenapa Harus Pakai Mod Manager?
+
+Di Android 11 ke atas, folder `Android/data` dilindungi oleh **scoped storage**. Kamu tidak bisa lagi membuka atau membuat folder di dalamnya lewat aplikasi file manager biasa — termasuk folder `Mods` milik Stardew Valley.
+
+Artinya, **instalasi manual dengan cara drag-and-drop file mod sudah tidak mungkin dilakukan**. Satu-satunya cara untuk memasukkan mod ke folder game adalah melalui **Mod Manager** bawaan SMAPI Launcher, yang memanfaatkan **Storage Access Framework (SAF)** Android untuk menulis langsung ke folder yang dilindungi.
+
+Kalau kamu mencoba menginstal mod secara manual dan gagal, bukan berarti mod-nya rusak atau tidak kompatibel — kemungkinan besar Android-nya yang memblokir akses ke folder tersebut.
+
+## Catatan Kompatibilitas
+
+Mod ini saya rancang khusus untuk **Stardew Valley versi 1.6 di Android**. Versi PC dari mod asli mungkin sudah berjalan dengan baik di desktop, tapi di mobile, patch ini diperlukan.
+
+Kalau kamu menemukan bug atau perilaku aneh setelah memasang mod, **laporkan di kolom komentar halaman Nexus Mods atau di bawah artikel ini**. Saya pantau langsung setiap laporan dan rilis perbaikan kalau memang diperlukan.
+
+## Penutup
+
+Saya membuat DaisyNiko's Earthy Interface Mobile karena melihat sendiri betapa frustrasinya pengguna Android yang ingin memakai mod UI ini tapi selalu gagal. Mod ini bukan sekadar port dari versi PC — saya rancang khusus untuk mengatasi keterbatasan arsitektur UI Android.
+
+Kalau kamu pengguna Android yang selama ini menghindari mod UI karena takut bermasalah, sekarang saatnya mencoba. Dengan Content Patcher, mod asli DaisyNiko, dan patch mobile ini, kamu bisa menikmati tampilan Earthy Interface tanpa kompromi.
+
+**Mod UI apa yang paling ingin kamu pasang di Stardew Valley Android? Ceritakan di kolom komentar.**
+
+## Credits
+
+[![DaisyNiko](https://avatars.nexusmods.com/61079406/100) DaisyNiko](https://www.nexusmods.com/profile/DaisyNiko), [![Pathoschild](https://avatars.nexusmods.com/1552317/100) Pathoschild](https://www.nexusmods.com/profile/Pathoschild), [![NRTnarathip](https://avatars.githubusercontent.com/u/61742272?v=4) NRTnarathip](https://github.com/NRTnarathip).
