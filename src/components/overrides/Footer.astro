@@ -20,15 +20,17 @@ const currentYear = new Date().getFullYear();
 ---
 <footer class="sl-flex">
   <div class="site-footer sl-flex">
-    <div class="site-footer__social">
-      <SocialIcons />
+    <div class="site-footer__top">
+      <div class="socials">
+        <SocialIcons />
+      </div>
       <p class="sl-flex">
         <a href={localize('/privacy/')}>{t('footer.privacy')}</a>
         <span>|</span>
         <a href={localize('/terms/')}>{t('footer.terms')}</a>
       </p>
     </div>
-    <div class="site-footer__credits">
+    <div class="site-footer__bottom">
       <p>
         <a class="kudos" href={siteTitleHref}>
           {siteTitle}
@@ -61,14 +63,19 @@ const currentYear = new Date().getFullYear();
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.5rem;
+    gap: 1rem;
     width: 100%;
   }
 
-  .site-footer__social {
+  .site-footer__top {
     display: flex;
     align-items: center;
-    gap: var(--sl-nav-gap);
+    gap: 1rem;
+    & .socials {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
     & p {
       align-items: center;
       gap: 0.5em;
@@ -85,7 +92,7 @@ const currentYear = new Date().getFullYear();
     }
   }
 
-  .site-footer__credits {
+  .site-footer__bottom {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -122,11 +129,11 @@ const currentYear = new Date().getFullYear();
       align-items: center;
     }
 
-    .site-footer__social {
+    .site-footer__top {
       flex-direction: column;
     }
 
-    .site-footer__credits {
+    .site-footer__bottom {
       justify-content: center;
     }
   }

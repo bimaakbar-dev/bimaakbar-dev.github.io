@@ -46,7 +46,6 @@ const customIndex = isBlogIndex || isDocIndex;
 			<div class="meta sl-flex">
 				<LastUpdated />
 			</div>
-			<hr />
 	) : (
 		<article class="sl-markdown-content">
 			<slot />
@@ -59,7 +58,6 @@ const customIndex = isBlogIndex || isDocIndex;
 			<Comments />
 		</div>
 		<Pagination />
-		<hr />
 		<MobileScrollToTop />
 	)
 }
@@ -86,9 +84,6 @@ const customIndex = isBlogIndex || isDocIndex;
 	}
 	:where(.meta, .custom-meta) > :global(p:only-child) {
 		margin-inline-start: auto;
-	}
-	:global([data-has-hero] hr) {
-		display: none;
 	}
 	:global([data-has-hero] .comments) {
     	display: none;

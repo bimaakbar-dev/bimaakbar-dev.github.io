@@ -35,7 +35,6 @@ const absolutOg = (() => {
 })();
 
 const ogImageAlt = data.title || siteDescription;
-const renderReaderRevenue = isBlogPost;
 ---
 
 <Font cssVariable="--font-montserrat" preload />
@@ -46,20 +45,19 @@ const renderReaderRevenue = isBlogPost;
 	<slot />
 </Default>
 
-<link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96" />
-<link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content={siteTitle} />
-<link rel="manifest" href="/images/favicons/site.webmanifest" />
-
 {!hasManualOg && entry && (
 	<>
       <meta property="og:image" content={absolutOg} />
       <meta property="og:image:alt" content={ogImageAlt} />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:image" content={absolutOg} />
-      <meta name="twitter:image:alt" content={ogImageAlt} />
     </>
 )}
+
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<meta name="apple-mobile-web-app-title" content={siteTitle} />
+
+<link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png" />
+<link rel="manifest" href="/images/favicons/site.webmanifest" />
 
 <meta name="google-site-verification" content={SEO.verification.google} />
 <meta name="msvalidate.01" content={SEO.verification.bing} />
@@ -68,10 +66,13 @@ const renderReaderRevenue = isBlogPost;
 
 <script async src={`https://www.googletagmanager.com/gtag/js?id=${SEO.analytics.google}`}></script>
 <script is:inline define:vars={{ gaId: SEO.analytics.google }}>
+  // @ts-ignore
   window.dataLayer = window.dataLayer || [];
+  // @ts-ignore
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
+  // @ts-ignore
   gtag('config', gaId);
 </script>
 
