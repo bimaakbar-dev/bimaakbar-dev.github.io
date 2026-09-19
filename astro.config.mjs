@@ -103,7 +103,7 @@ export default defineConfig({
         dark: "./src/assets/images/author/bimaakbar.svg",
         replacesTitle: false,
       },
-      favicon: "/images/favicon.svg",
+      favicon: "/images/favicons/favicon.svg",
       defaultLocale: "root",
       locales: siteLocale,
       customCss: ["./src/styles/global.css"],
