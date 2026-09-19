@@ -1,0 +1,45 @@
+/* Link.css */
+.sl-markdown-content {
+  & a:not(:where(.not-content *)) {
+    font-weight: 500;
+    color: var(--sl-color-white);
+    text-decoration-color: var(--sl-color-accent-high);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 2px;
+  }
+
+  & a.is-external:not(:where(.not-content *)) {
+    color: var(--sl-color-accent-high);
+  }
+
+  /* Link didalam inline-code */
+  & a:has(code) code:not(:where(.not-content *)) {
+    color: var(--sl-color-white);
+  }
+
+  & a.is-external:not(:where(.not-content *))::after {
+    --ic-external: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M18 6L6 18M8 6h10v10'/%3E%3C/svg%3E");
+    --icon-size: 1em;
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    margin-inline-start: 0.125em;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    font-size: inherit;
+    background-color: var(--sl-color-accent-high);
+    mask: var(--ic-external) center / contain no-repeat;
+    -webkit-mask: var(--ic-external) center / contain no-repeat;
+    transition: transform 0.15s ease;
+  }
+
+  /* Hover */
+  & a:not(:where(.not-content *)):hover {
+    color: var(--sl-color-accent-high);
+    text-decoration: none;
+  }
+  & a.is-external:not(:where(.not-content *)):hover {
+    text-decoration: none;
+    
+  }
+}

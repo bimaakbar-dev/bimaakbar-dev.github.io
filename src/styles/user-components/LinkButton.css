@@ -1,0 +1,126 @@
+/* LinkButton.css */
+
+:root {
+  --ds-radius-btn: 999rem;
+
+  --ds-btn-pad-y:    0.4375rem;
+  --ds-btn-pad-x:    1.125rem;
+  --ds-btn-pad-y-lg: 0.9375rem;
+  --ds-btn-pad-x-lg: 1.25rem;
+
+  --ds-duration-base: 120ms;
+  --ds-ease:          ease;
+
+  --ds-btn-primary-bg:            var(--sl-color-white);
+  --ds-btn-primary-bg-hover:      var(--sl-color-white);
+  --ds-btn-primary-text:          var(--sl-color-black);
+  --ds-btn-primary-opacity-hover: 0.82;
+
+  --ds-btn-secondary-bg-hover:     var(--sl-color-gray-5);
+  --ds-btn-secondary-text:         var(--sl-color-white);
+  --ds-btn-secondary-border:       var(--sl-color-hairline);
+  --ds-btn-secondary-border-hover: var(--sl-color-gray-4);
+
+  --ds-btn-minimal-text:       var(--sl-color-gray-3);
+  --ds-btn-minimal-text-hover: var(--sl-color-gray-1);
+
+  --ds-focus-ring: var(--sl-color-accent);
+}
+
+:root[data-theme="light"],
+[data-theme="light"] ::backdrop {
+  --ds-btn-primary-bg:            hsl(0, 0%, 4%);
+  --ds-btn-primary-bg-hover:      hsl(0, 0%, 18%);
+  --ds-btn-primary-text:          hsl(0, 0%, 98%);
+  --ds-btn-primary-opacity-hover: 1;
+
+  --ds-btn-secondary-bg-hover:     hsla(0, 0%, 0%, 0.04);
+  --ds-btn-secondary-text:         var(--sl-color-white);
+  --ds-btn-secondary-border:       hsla(0, 0%, 0%, 0.18);
+  --ds-btn-secondary-border-hover: hsla(0, 0%, 0%, 0.32);
+
+  --ds-btn-minimal-text:       var(--sl-color-gray-3);
+  --ds-btn-minimal-text-hover: var(--sl-color-gray-2);
+}
+
+/* ── Komponen ─────────────────────────────────────────── */
+
+.sl-link-button {
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: var(--ds-radius-btn);
+  display: inline-flex;
+  font-size: var(--sl-text-sm);
+  font-weight: 600;
+  gap: 0.5em;
+  line-height: var(--sl-line-height-headings, 1.1875);
+  outline-offset: 0.25rem;
+  padding: var(--ds-btn-pad-y) var(--ds-btn-pad-x);
+  text-decoration: none;
+  transition:
+    color var(--ds-duration-base) var(--ds-ease),
+    opacity var(--ds-duration-base) var(--ds-ease);
+}
+
+.sl-link-button svg {
+  flex-shrink: 0;
+  width: 0.75em;
+  height: 0.75em;
+}
+
+.sl-link-button.primary {
+  background: var(--ds-btn-primary-bg);
+  border-color: var(--ds-btn-primary-border, transparent);
+  color: var(--ds-btn-primary-text);
+}
+
+.sl-link-button.secondary {
+  background: transparent;
+  border-color: var(--ds-btn-secondary-border);
+  color: var(--ds-btn-secondary-text);
+}
+
+.sl-link-button.minimal {
+  background: transparent;
+  border-color: transparent;
+  color: var(--ds-btn-minimal-text);
+  padding-inline: 0;
+}
+
+@media (hover: hover) {
+  .sl-link-button.primary:hover {
+    background: var(--ds-btn-primary-bg-hover);
+    color: var(--ds-btn-primary-text);
+    opacity: var(--ds-btn-primary-opacity-hover);
+  }
+
+  .sl-link-button.secondary:hover {
+    background: var(--ds-btn-secondary-bg-hover);
+    border-color: var(--ds-btn-secondary-border-hover);
+    color: var(--ds-btn-secondary-text);
+  }
+
+  .sl-link-button.minimal:hover {
+    color: var(--ds-btn-minimal-text-hover);
+  }
+}
+
+.sl-link-button:focus-visible {
+  outline: 2px solid var(--ds-focus-ring);
+  outline-offset: 2px;
+}
+
+.sl-markdown-content .sl-link-button {
+  margin-inline-end: 1rem;
+}
+
+.sl-markdown-content .sl-link-button:not(:where(p *)) {
+  margin-block: 1rem;
+}
+
+@media (min-width: 50rem) {
+  .sl-link-button {
+    font-size: var(--sl-text-lg);
+    padding: var(--ds-btn-pad-y-lg) var(--ds-btn-pad-x-lg);
+  }
+}

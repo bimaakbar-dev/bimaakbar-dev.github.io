@@ -1,0 +1,203 @@
+---
+// src/components/MemberList.astro
+import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { existsSync } from "node:fs";
+import path from "node:path";
+
+interface Props {
+  title?: string;
+  serverURL?: string;
+  limit?: number;
+  cacheTTL?: number;
+}
+
+const {
+  title = "Member",
+  serverURL = "https://bimaakbar-dev-comments.bimasaktiakbarr.workers.dev/api",
+  limit = 10,
+  cacheTTL = 86_400_000,
+} = Astro.props;
+
+const cacheDir = path.join(process.cwd(), ".cache");
+const cacheFile = path.join(cacheDir, "waline-members.json");
+
+interface Member {
+  objectId: number;
+  display_name: string;
+  avatar: string;
+  url?: string;
+  type?: "administrator" | "guest";
+}
+
+let members: Member[] = [];
+
+try {
+  // 1. Coba dari cache
+  if (existsSync(cacheFile)) {
+    const { promises: fs } = await import("node:fs");
+    const { mtimeMs } = await fs.stat(cacheFile);
+    if (Date.now() - mtimeMs < cacheTTL) {
+      members = JSON.parse(await readFile(cacheFile, "utf-8"));
+    }
+  }
+
+  // 2. Fetch kalau cache kosong / expired
+  if (members.length === 0) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 5000);
+
+    const res = await fetch(`${serverURL}/user`, {
+      headers: { Accept: "application/json" },
+      signal: controller.signal,
+    });
+    clearTimeout(timeout);
+
+    if (res.ok) {
+      const data = await res.json();
+      const raw: any[] = Array.isArray(data?.data) ? data.data : [];
+
+      // Map ke bentuk yang kita butuh, exclude email (sensitive)
+      members = raw
+        .map((u) => ({
+          objectId: u.objectId,
+          display_name: u.display_name || u.nick || "Anonymous",
+          avatar: u.avatar,
+          url: u.url || undefined,
+          type: u.type,
+        }))
+        // Admin di depan, lalu terbaru
+        .sort((a, b) => {
+          if (a.type === "administrator" && b.type !== "administrator") return -1;
+          if (b.type === "administrator" && a.type !== "administrator") return 1;
+          return b.objectId - a.objectId;
+        });
+
+      try {
+        if (!existsSync(cacheDir)) await mkdir(cacheDir, { recursive: true });
+        await writeFile(cacheFile, JSON.stringify(members, null, 2));
+      } catch {}
+    }
+  }
+} catch {
+  // Silent fail → members tetap kosong, komponen tidak render
+}
+
+const visible = members.slice(0, limit);
+const remaining = Math.max(0, members.length - limit);
+---
+
+{visible.length > 0 && (
+  <>
+    <h2 set:html={title} />
+    <ul class="member-stack not-content" role="list" aria-label="Member">
+      {visible.map((m) => (
+        <li role="listitem">
+          {m.url ? (
+            <a
+              href={m.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="avatar-wrap"
+              title={m.display_name}
+            >
+              <img
+                src={m.avatar}
+                alt={m.display_name}
+                width="34"
+                height="34"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+          ) : (
+            <span class="avatar-wrap" title={m.display_name}>
+              <img
+                src={m.avatar}
+                alt={m.display_name}
+                width="34"
+                height="34"
+                loading="lazy"
+                decoding="async"
+              />
+            </span>
+          )}
+        </li>
+      ))}
+      {remaining > 0 && (
+        <li role="listitem">
+          <span
+            class="chip-count"
+            aria-label={`${remaining} member lainnya`}
+            title={`+${remaining} member`}
+          >
+            +{remaining}
+          </span>
+        </li>
+      )}
+    </ul>
+  </>
+)}
+
+<style>
+  .member-stack {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+    isolation: isolate;
+  }
+
+  .member-stack li {
+    margin-left: -8px;
+  }
+
+  .member-stack li:first-child {
+    margin-left: 0;
+  }
+
+  .avatar-wrap {
+    display: block;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2.5px var(--sl-color-black);
+    transition: transform 0.15s ease;
+  }
+
+  .avatar-wrap img {
+    display: block;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--sl-color-gray-6);
+  }
+
+  .chip-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2.5px var(--sl-color-black);
+    background: color-mix(in srgb, var(--sl-color-accent) 12%, var(--sl-color-black));
+    color: var(--sl-color-accent-high);
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+
+  @media (hover: hover) {
+    .avatar-wrap:hover,
+    .chip-count:hover {
+      transform: translateY(-3px);
+      z-index: 2;
+      position: relative;
+    }
+
+    .chip-count:hover {
+      background: color-mix(in srgb, var(--sl-color-accent) 20%, var(--sl-color-black));
+    }
+  }
+</style>

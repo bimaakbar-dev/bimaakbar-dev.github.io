@@ -1,0 +1,92 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+const { lang } = Astro.locals.starlightRoute;
+
+const repo = 'bimaakbar-dev/bimaakbar-dev.github.io';
+const repoId = 'R_kgDOUKMOFQ';
+const category = 'General';
+const categoryId = 'DIC_kwDOUKMOFc4DEm1Q';
+---
+
+<section class:list={['comments', className]}>
+  <h2 class="comments__title">Komentar</h2>
+
+  <div class="comments__embed">
+    <script
+	  is:inline
+      src="https://giscus.app/client.js"
+      data-repo={repo}
+      data-repo-id={repoId}
+      data-category={category}
+      data-category-id={categoryId}
+      data-mapping="pathname"
+      data-strict="1"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-lang={lang}
+      data-loading="lazy"
+      crossorigin="anonymous"
+      data-theme="preferred_color_scheme"
+      async
+    ></script>
+  </div>
+</section>
+
+<script is:inline>
+// @ts-nocheck
+
+  (function() {
+    const DARK_THEME = 'dark_dimmed';
+    const LIGHT_THEME = 'light';
+
+    function sendThemeToGiscus() {
+      const frame = document.querySelector('iframe.giscus-frame');
+      if (!frame) return;
+
+      const theme = document.documentElement.dataset.theme || 'dark';
+      const giscusTheme = theme === 'dark' ? DARK_THEME : LIGHT_THEME;
+
+      frame.contentWindow?.postMessage(
+        { giscus: { setConfig: { theme: giscusTheme } } },
+        'https://giscus.app'
+      );
+    }
+
+    window.addEventListener('message', (e) => {
+      if (e.origin !== 'https://giscus.app') return;
+      if (typeof e.data !== 'object' || !e.data.giscus) return;
+      sendThemeToGiscus();
+    });
+
+    new MutationObserver(sendThemeToGiscus).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+  })();
+</script>
+
+<style>
+  .comments {
+    max-width: 50rem;
+    margin-inline: auto;
+    width: 100%;
+    border-top: 1px solid var(--sl-color-gray-5);
+    padding-top: var(--sl-content-gap-y);
+    padding-inline: 0;
+  }
+
+  .comments__title {
+    font-size: var(--sl-text-h3);
+    font-weight: 600;
+    color: var(--sl-color-white);
+    margin-bottom: 1.5rem;
+  }
+
+  .comments__embed {
+    min-height: 15rem;
+  }
+</style>

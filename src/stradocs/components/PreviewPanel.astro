@@ -1,0 +1,69 @@
+---
+import { 
+  Tabs, 
+  TabItem 
+} from "@astrojs/starlight/components";
+
+const showContentTypeTabs = Astro.slots.has("markdoc");
+---
+
+<figure class="preview-panel sl-block">
+  {
+    showContentTypeTabs ? (
+      <Tabs syncKey="content-type">
+        <TabItem label="MDX">
+          <slot />
+        </TabItem>
+        <TabItem label="Markdoc">
+          <slot name="markdoc" />
+        </TabItem>
+      </Tabs>
+    ) : (
+      <slot />
+    )
+  }
+  <div class="preview">
+    <p>{Astro.locals.t("component.preview")}</p>
+    <div class="preview-content">
+      <slot name="preview" />
+    </div>
+  </div>
+</figure>
+
+<style is:global>
+  .sl-markdown-content {
+
+    & .preview-panel {
+      border-radius: 0.75rem;
+      & .preview {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75em;
+        border: 1px solid var(--sl-color-hairline);
+        border-radius: 0.75rem;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-top: 0;
+        padding: 1rem;
+        margin-top: 0;
+        & p {
+          font-size: var(--sl-text-body);
+          margin: 0;
+          padding: 0
+        }
+        & .preview-content {
+          display: block;
+          margin-top: 0;
+        }
+      }
+      & .preview:only-child {
+        border-top: 1px solid var(--sl-color-hairline);
+        border-radius: 0.75rem;
+      }
+      & .expressive-code pre:not(.preview-content *) {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+  }
+</style>

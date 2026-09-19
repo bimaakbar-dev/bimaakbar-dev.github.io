@@ -1,0 +1,118 @@
+/* Table.css */
+
+:root {
+  --ds-table-margin:      2.5rem 0;
+  --ds-table-radius:      0.5rem;
+
+  --ds-table-head-bg:         rgb(from var(--sl-color-gray-6) r g b / 80%);
+  --ds-table-head-border:     var(--sl-color-gray-5);
+  --ds-table-head-color:      var(--sl-color-white);
+  --ds-table-head-size:       var(--sl-text-sm);
+  --ds-table-head-weight:     500;
+  --ds-table-head-pad:        0.75em 1em;
+
+  --ds-table-body-size:       var(--sl-text-sm);
+  --ds-table-body-pad:        0.5em 1em;
+  --ds-table-body-pad-first:  1rem;
+  --ds-table-row-border:      var(--sl-color-gray-5);
+  --ds-table-row-bg-hover:    rgb(from var(--sl-color-gray-6) r g b / 30%);
+
+  --ds-table-wrapper-shadow:  none;
+}
+
+[data-theme="light"] {
+  --ds-table-head-bg:         var(--sl-color-gray-7);
+  --ds-table-head-color:      var(--sl-color-white);
+  --ds-table-row-bg-hover:    hsla(0, 0%, 0%, 0.03);
+
+  --ds-table-wrapper-shadow:  var(--shadow-float);
+}
+
+/* ── Komponen ─────────────────────────────────────────── */
+
+.sl-markdown-content .table-wrapper:not(:where(.not-content *)) {
+  display: block;
+  position: relative;
+  margin: var(--ds-table-margin);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-radius: var(--ds-table-radius);
+  box-shadow: var(--ds-table-wrapper-shadow);
+}
+
+.sl-markdown-content .table-wrapper > table:not(:where(.not-content *)) {
+  display: table;
+  width: 100%;
+  min-width: max-content;
+  border-spacing: 0;
+  border-collapse: separate;
+  table-layout: auto;
+  overflow: visible;
+}
+
+/* Head */
+.sl-markdown-content thead:not(:where(.not-content *)) {
+  border-radius: var(--ds-table-radius);
+  background-color: var(--ds-table-head-bg);
+  overflow: hidden;
+}
+
+.sl-markdown-content thead th:not(:where(.not-content *)) {
+  padding: var(--ds-table-head-pad);
+  border-block: 1px solid var(--ds-table-head-border);
+  color: var(--ds-table-head-color);
+  font-weight: var(--ds-table-head-weight);
+  font-size: var(--ds-table-head-size);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.sl-markdown-content thead th:first-child:not(:where(.not-content *)) {
+  border-inline-start: 1px solid var(--ds-table-head-border);
+  border-start-start-radius: var(--ds-table-radius);
+  border-end-start-radius: var(--ds-table-radius);
+}
+
+.sl-markdown-content thead th:last-child:not(:where(.not-content *)) {
+  border-inline-end: 1px solid var(--ds-table-head-border);
+  border-start-end-radius: var(--ds-table-radius);
+  border-end-end-radius: var(--ds-table-radius);
+}
+
+/* th reset */
+.sl-markdown-content th:not(:where(.not-content *)) {
+  margin: 0;
+  border-bottom: none;
+}
+
+/* Body */
+.sl-markdown-content td:not(:where(.not-content *)) {
+  padding: var(--ds-table-body-pad);
+  font-size: var(--ds-table-body-size);
+  border-bottom: none;
+  margin: 0;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+.sl-markdown-content tbody tr:first-child td:not(:where(.not-content *)) {
+  padding-top: var(--ds-table-body-pad-first);
+}
+
+.sl-markdown-content tbody tr:not(:first-child) td:not(:where(.not-content *)) {
+  border-top: 1px solid var(--ds-table-row-border);
+}
+
+/* Nowrap untuk link dan code di dalam td */
+.sl-markdown-content :is(td a, td code):not(:where(.not-content *)) {
+  white-space: nowrap;
+}
+
+/* Row hover */
+@media (hover: hover) {
+  .sl-markdown-content tbody tr:hover td:not(:where(.not-content *)) {
+    background: var(--ds-table-row-bg-hover);
+    transition: background 120ms ease;
+  }
+}
