@@ -7,7 +7,7 @@ const { lang } = Astro.locals.starlightRoute;
 
 const repo = 'bimaakbar-dev/bimaakbar-dev.github.io';
 const repoId = 'R_kgDOUKMOFQ';
-const category = 'Comments';
+const category = 'General';
 const categoryId = 'DIC_kwDOUKMOFc4DEm1Q';
 ---
 
@@ -15,7 +15,8 @@ const categoryId = 'DIC_kwDOUKMOFc4DEm1Q';
   <h2 class="comments__title">Komentar</h2>
 
   <div class="comments__embed">
-    <script is:inline
+    <script
+	  is:inline
       src="https://giscus.app/client.js"
       data-repo={repo}
       data-repo-id={repoId}
