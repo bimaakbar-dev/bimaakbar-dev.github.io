@@ -7,7 +7,7 @@ export { PAGE_TITLE_ID };
 
 export const SEO = {
   verification: {
-    google: "ZxoHYWipAMoGhvwVi5nxolWsZOntrYkNkVcG9HTfFZQ",
+    google: "IjIuPUCBy2m_fCIWYihtBdvwdk2hBBwt2-LyMb-RGjE",
     bing: "",
     yandex: "1878480c0d7b5510",
   },
