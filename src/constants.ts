@@ -20,7 +20,7 @@ export const SEO = {
   },
 
   analytics: {
-    google: "G-2TKFP229HJ",
+    google: "G-YH3JS69V37",
     yandex: "108731154",
     googleTag: "GTM-NJJPZV2M"
   },
