@@ -3,7 +3,7 @@
 :root {
   --ds-details-radius:          0.75rem;
   --ds-details-border:          var(--sl-color-gray-5);
-  --ds-details-border-hover:    var(--sl-color-gray-4);
+  --ds-details-border-hover:    var(--sl-color-gray-5);
   --ds-details-bg:              transparent;
   --ds-details-bg-hover:        rgb(from var(--sl-color-gray-6) r g b / 40%);
 
@@ -15,7 +15,7 @@
 
   --ds-details-marker-color:          var(--sl-color-gray-3);
   --ds-details-marker-color-hover:    var(--sl-color-white);
-  --ds-details-marker-size:           1.25em;
+  --ds-details-marker-size:           1.333em;
   --ds-details-marker-duration:       140ms;
 
   --ds-details-body-color:      var(--sl-color-gray-2);
@@ -24,10 +24,7 @@
 }
 
 [data-theme="light"] {
-  --ds-details-bg:              var(--sl-color-gray-7);
-  --ds-details-bg-hover:        var(--sl-color-gray-7);
-
-  --ds-details-border-hover:    hsla(0, 0%, 0%, 0.24);
+  --ds-details-bg-hover:        var(--sl-color-gray-6);
 
   --ds-details-summary-color:       var(--sl-color-gray-2);
   --ds-details-summary-color-hover: var(--sl-color-white);
