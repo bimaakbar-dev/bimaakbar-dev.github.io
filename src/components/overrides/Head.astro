@@ -47,7 +47,6 @@ const renderReaderRevenue = isBlogPost;
 </Default>
 
 <link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96" />
-<link rel="shortcut icon" href="/images/favicons/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png" />
 <meta name="apple-mobile-web-app-title" content={siteTitle} />
 <link rel="manifest" href="/images/favicons/site.webmanifest" />
@@ -68,12 +67,12 @@ const renderReaderRevenue = isBlogPost;
 <meta name="google-adsense-account" content={SEO.ads.google} />
 
 <script async src={`https://www.googletagmanager.com/gtag/js?id=${SEO.analytics.google}`}></script>
-<script is:inline>
+<script is:inline define:vars={{ gaId: SEO.analytics.google }}>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-YH3JS69V37');
+  gtag('config', gaId);
 </script>
 
 <script
