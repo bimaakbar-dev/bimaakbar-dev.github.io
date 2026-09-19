@@ -1,111 +1,146 @@
 ---
-title: Terms of Service
-description: Terms of service for the BimaakbarDEV website governing website usage and user responsibilities
+title: Privacy Policy
+description: Privacy policy of BimaakbarDEV regarding data collection, cookies, advertising, and user rights.
 editUrl: false
 lastUpdated: 2026-09-19
 ---
 
-Welcome to **BimaakbarDEV**. By accessing or using this website, you agree to be bound by the following terms of service.
+Your privacy is important to us. This Privacy Policy explains what information we collect, how we use it, and your rights regarding that information when you visit our website.
+
+We comply with applicable privacy laws, including the General Data Protection Regulation (GDPR) and ePrivacy Directive, and we work with advertising partners such as **Google AdSense** to display relevant ads.
 
 ---
 
-## 1. Acceptance of Terms
+## 1. Information We Collect
 
-By accessing the **BimaakbarDEV** website, you confirm that you:
+We may collect the following types of data:
 
-- Have read and understood these terms
-- Agree to be bound by these terms
-- Are at least 13 years old (or the legal age in your jurisdiction)
+| Category | Examples | Method |
+|----------|----------|--------|
+| **Technical data** | IP address, browser type, device, operating system, screen resolution | Automatically via analytics & server logs |
+| **Usage data** | Pages visited, time spent, clicks, scroll depth, referral source | Automatically via analytics (Google Analytics) |
+| **Communication data** | Name, email address, message content | Submitted via contact or comment forms |
+| **Cookies & similar technologies** | User preferences, session IDs, ad tracking identifiers | Stored on your device (see Section 4) |
 
-If you do not agree with any part of these terms, do not use our website.
+We do **not** collect sensitive personal data (e.g., health, political opinions, biometric data).
 
-## 2. Changes to Terms
+## 2. How We Use Your Information
 
-We reserve the right to modify these terms at any time. Changes will be announced on this page.
+We use the collected information for the following purposes:
 
-Continued use of the website after changes signifies your acceptance.
+- To operate, maintain, and improve the website
+- To analyze traffic, user behavior, and performance (using Google Analytics)
+- To personalize content and user experience (e.g., dark/light mode preference)
+- To serve relevant advertisements through **Google AdSense**
+- To respond to your inquiries or comments
+- To detect and prevent fraud or security issues
 
-## 3. Website Usage
+We do **not** sell your personal data to third parties.
 
-You agree to use this website in accordance with:
+## 3. Third-Party Services (Data Processors)
 
-- The terms set forth herein
-- Applicable laws and regulations
-- Reasonable standards of ethics and conduct
+We use the following third-party services that may process your data:
 
-You are **prohibited** from:
+| Service | Function | Data Location | Privacy Policy |
+|---------|----------|---------------|----------------|
+| **Google Analytics** | Traffic analysis | Google servers (US/EU) | [Google Privacy](https://policies.google.com/privacy) |
+| **Google AdSense** | Advertising | Google servers | [Google AdSense](https://policies.google.com/technologies/ads) |
+| **GitHub** | Hosting (repository) | GitHub servers | [GitHub Privacy](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement) |
 
-- Using the website for illegal activities
-- Submitting content that infringes copyright
-- Disrupting website operations (DDOS, hacking, etc.)
-- Misusing website features
+These third parties may collect and process your data according to their own privacy policies. We recommend you review them.
 
-## 4. Accounts and Comments
+## 4. Cookies & Similar Technologies
 
-Some features (such as comments) may require an account. You are responsible for:
+This website uses **cookies** and similar tracking technologies to enhance functionality, analyze traffic, and serve personalized ads.
 
-- The confidentiality of your account information
-- All activities that occur under your account
+### What are cookies?
+Cookies are small text files stored on your device when you visit a website. They help remember your preferences and track your activity.
 
-We reserve the right to remove comments that:
+### Types of cookies we use:
 
-- Are offensive, abusive, or contain hate speech
-- Contain spam or irrelevant promotions
-- Infringe third-party copyrights
+| Type | Purpose | Examples |
+|------|---------|----------|
+| **Strictly Necessary** | Required for basic site functions (navigation, security) | Session cookies, load balancing |
+| **Preference Cookies** | Remember your settings (theme, language) | Dark/light mode, font size |
+| **Analytics Cookies** | Collect anonymous usage statistics | Google Analytics |
+| **Advertising Cookies** | Deliver relevant ads, limit ad frequency | Google AdSense |
 
-## 5. Intellectual Property Rights
+### Consent Management (CMP)
+We use a **Consent Management Platform** to obtain and manage your cookie preferences. When you first visit our website, a banner will appear allowing you to accept, reject, or customize your cookie settings. You can change your preferences at any time by clicking the "Cookie Preferences" link in the footer.
 
-All original content on this website:
+**Your choices:**
+- Accept all cookies
+- Reject non-essential cookies (only necessary cookies will be used)
+- Manage specific vendor preferences
 
-- Articles, tutorials, and opinions
-- Code samples and scripts
-- The `BimaakbarDEV` logo
-- Audio/visual assets
+Without accepting advertising cookies, you will still see ads, but they may be less relevant (non-personalized).
 
-Is the property of **BimaakbarDEV** or licensed for use.
+## 5. Advertising & Mediation
 
-You are **not permitted** to sell, distribute, or use the content for commercial purposes without permission.
+This website uses **Google AdSense** and **Yandex Ads** to display relevant advertisements.
 
-## 6. User Content
+### How Google AdSense works:
+- Google uses cookies to serve ads based on your prior visits to our website or other websites.
+- Google's use of advertising cookies enables it and its partners to serve ads to you based on your visit to our site and/or other sites on the Internet.
+- You may opt out of personalized advertising by visiting [Google Ad Settings](https://adssettings.google.com/).
 
-By submitting comments, messages, or content to the website, you grant us a non-exclusive license to:
+### Opt-out options:
+- **Google Ad Settings**: [https://adssettings.google.com/](https://adssettings.google.com/)
+- **Network Advertising Initiative (NAI)** opt-out: [https://optout.networkadvertising.org/](https://optout.networkadvertising.org/)
+- **Your Online Choices (EDAA)**: [https://www.youronlinechoices.com/](https://www.youronlinechoices.com/)
 
-- Display such content on the website
-- Promote the website with such content
-- Moderate or remove content that violates the terms
+## 6. Data Retention
 
-You retain copyright over the content you submit.
+We retain your personal data only as long as necessary for the purposes outlined in this policy:
 
-## 7. Limitation of Liability
+- **Analytics data**: 14–26 months (Google Analytics)
+- **Ad tracking data**: up to 13 months (Google)
+- **Contact form messages**: 12 months (or until resolved)
 
-The website and content are provided **"as is"**.
+After the retention period, data is automatically deleted or anonymized.
 
-We **do not guarantee**:
+## 7. Data Security
 
-- The website will always be available without interruption
-- Content will always be accurate or error-free
-- Use of the website will meet your expectations
+We implement reasonable security measures to protect your data from unauthorized access, alteration, or disclosure. These include:
 
-To the extent permitted by law, we shall not be liable for direct, indirect, incidental, or consequential damages arising from the use of the website.
+- SSL/TLS encryption (HTTPS)
+- Regular software updates
+- Restricted access to personal data
 
-## 8. Third-Party Links
+However, **no method of transmission over the Internet is 100% secure**. We cannot guarantee absolute security.
 
-The website may contain links to third-party sites. We do not control and are not responsible for their content or privacy practices.
+## 8. Children's Privacy
 
-Accessing such links is at your own risk.
+Our website is **not intended for children under the age of 13** (or under 16 in certain jurisdictions). We do not knowingly collect personal data from children. If you believe we have inadvertently collected data from a child, please contact us immediately, and we will delete it.
 
-## 9. Termination of Access
+## 9. Your Rights (Based on Your Location)
 
-We reserve the right to terminate or restrict your access to the website at any time, without notice, if:
+Depending on your jurisdiction (e.g., EU/EEA, UK, Brazil, California), you may have the following rights:
 
-- You violate these terms
-- You engage in illegal activities
-- It is necessary to protect other users
+- **Right to access** – Request a copy of your personal data.
+- **Right to rectification** – Correct inaccurate or incomplete data.
+- **Right to erasure** (right to be forgotten) – Request deletion of your data.
+- **Right to restrict processing** – Limit how we use your data.
+- **Right to data portability** – Receive your data in a structured, machine-readable format.
+- **Right to object** – Object to processing for direct marketing or legitimate interests.
+- **Right to withdraw consent** – Withdraw previously given consent (e.g., cookies).
 
-## 10. Governing Law
+To exercise these rights, contact us at: [[hello@c0desk1.my.id]]. We will respond within 30 days.
 
-These terms are governed by the laws of the **Republic of Indonesia**. Any disputes arising shall be resolved in the competent courts of Indonesia.
+For EU residents, you also have the right to lodge a complaint with your local Data Protection Authority (DPA).
 
-## 11. Contact
+## 10. Do Not Track (DNT)
 
-If you have questions about these terms, please contact at [[hello@c0desk1.my.id]]
+Our website does not currently respond to "Do Not Track" signals because no standard has been adopted. However, you can still control cookies and ad personalization through the consent banner and browser settings.
+
+## 11. Changes to This Privacy Policy
+
+We may update this Privacy Policy from time to time to reflect changes in our practices, legal requirements, or third-party services. Any updates will be posted on this page with a revised "Last Updated" date.
+
+We encourage you to review this page periodically. Continued use of the website after changes constitutes acceptance of the updated policy.
+
+## 12. Contact Us
+
+If you have any questions, concerns, or requests regarding this Privacy Policy or your data, please contact us at [[hello@c0desk1.my.id]].
+
+For privacy-related issues, you may also reach our data protection officer (if applicable) at the same email.
