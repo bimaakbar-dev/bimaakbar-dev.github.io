@@ -47,12 +47,10 @@ main {
   --color-btn-primary-text: hsl(0, 0%, 96%);
   --color-btn-primary-bg: hsl(0, 0%, 9%);
   --color-btn-primary-border: hsl(0, 0%, 9%);
-  --color-btn-primary-shadow: 0 0 #0000;
-  --color-btn-primary-inset-shadow: 0 0 #0000;
   --color-btn-primary-hover-bg: hsl(0, 0%, 20%);
   --color-btn-primary-hover-border: hsl(0, 0%, 20%);
   --color-btn-primary-selected-bg: hsl(0, 0%, 0%);
-  --color-btn-primary-selected-shadow: 0 0 #0000;
+  --color-btn-primary-selected-border: hsl(0, 0%, 0%);
   --color-btn-primary-disabled-text: hsla(0, 0%, 96%, 0.6);
   --color-btn-primary-disabled-bg: hsla(0, 0%, 9%, 0.5);
   --color-btn-primary-disabled-border: hsla(0, 0%, 9%, 0.5);
@@ -73,6 +71,10 @@ main {
 
 .gsc-comment-box-tabs {
   border-radius: 0.75rem 0.75rem 0 0 !important;
+}
+
+.gsc-comment-box-tabs button {
+  border-radius: 0.5rem 0.5rem 0 0 !important;
 }
 
 .gsc-comment-box-textarea {
@@ -100,11 +102,11 @@ main {
 }
 
 .gsc-reply-box {
-  border-radius: 0.75rem !important;
+  border-radius: 0 0 0.75rem 0.75rem !important;
 }
 
 .gsc-reply-box > button {
-  border-radius: 0 0 0.5rem 0.5rem !important;
+  border-radius: 0.5rem !important;
 }
 
 .BtnGroup {
