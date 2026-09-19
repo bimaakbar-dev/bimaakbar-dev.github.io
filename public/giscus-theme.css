@@ -100,7 +100,7 @@ main {
 }
 
 .gsc-reply-box {
-  border-radius: 0.75rem !important;
+  border-radius: 0 0 0.75rem 0.75rem !important;
 }
 
 .gsc-reply-box > button {
