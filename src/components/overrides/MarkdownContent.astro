@@ -12,7 +12,7 @@ import Comments from "~/stradocs/components/Comments.astro";
 import CommentSection from "~/stradocs/components/comments/CommentSection.astro";
 
 
-const { entry, isBlogPost, isBlogIndex, isDocIndex } = Astro.locals.starlightRoute;
+const { entry, isBlogPost, isBlogIndex, isDocIndex, isLegalPage } = Astro.locals.starlightRoute;
 const customIndex = isBlogIndex || isDocIndex;
 
 ---
@@ -39,45 +39,54 @@ const customIndex = isBlogIndex || isDocIndex;
 			</div>
 			<Pagination />
 			<hr />
-	) : (
+	) : isLegalPage ? (
 			<article class="sl-markdown-content">
 				<slot />
 			</article>
-			<div class="meta sl-flex">
-				<EditLink />
-				<LastUpdated />
-			</div>
+	) : (
+		<article class="sl-markdown-content">
+			<slot />
+		</article>
+		<div class="meta sl-flex">
+			<EditLink />
+			<LastUpdated />
+		</div>
+		<div class="comments">
 			<Comments />
-			<Pagination />
-			<MobileScrollToTop />
-			<hr />
+		</div>
+		<Pagination />
+		<MobileScrollToTop />
+		<hr />
 	)
 }
 
 <style>
-  .meta {
-    width: 100%;
-    gap: 0.75em 3rem;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    font-size: var(--sl-text-sm);
-    color: var(--sl-color-gray-3);
-    margin-top: 3rem;
-  }
-  .custom-meta {
-    width: 100%;
-    gap: 0.75em 3rem;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    font-size: var(--sl-text-sm);
-    color: var(--sl-color-gray-3);
-    margin-top: 1rem;
-    padding-block: var(--sl-content-gap-y);
-  }
-  :where(.meta, .custom-meta) > :global(p:only-child) {
-    margin-inline-start: auto;
-  }
-  :global([data-has-sidebar][data-has-hero] hr) {
-    display: none;
-  }
+	:global([data-has-hero] .comments) {
+    	display: none;
+  	}
+	.meta {
+		width: 100%;
+		gap: 0.75em 3rem;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		font-size: var(--sl-text-sm);
+		color: var(--sl-color-gray-3);
+		margin-top: 3rem;
+	}
+	.custom-meta {
+		width: 100%;
+		gap: 0.75em 3rem;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		font-size: var(--sl-text-sm);
+		color: var(--sl-color-gray-3);
+		margin-top: 1rem;
+		padding-block: var(--sl-content-gap-y);
+	}
+	:where(.meta, .custom-meta) > :global(p:only-child) {
+		margin-inline-start: auto;
+	}
+	:global([data-has-hero] hr) {
+		display: none;
+	}
 </style>

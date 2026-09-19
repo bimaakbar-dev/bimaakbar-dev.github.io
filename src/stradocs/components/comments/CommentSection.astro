@@ -16,53 +16,77 @@ const path = Astro.url.pathname;
   data-path={path}
 >
   <header class="c-comments__header">
-    <h2 class="c-comments__title">Komentar</h2>
-    <span class="c-comments__count" data-count>—</span>
+    <div class="c-comments__header-left">
+      <span class="c-comments__label">Diskusi</span>
+      <span class="c-comments__count" data-count>—</span>
+    </div>
+    <div class="c-comments__auth" data-auth hidden>
+      <img class="c-comments__auth-avatar" data-user-avatar alt="" />
+      <span class="c-comments__auth-name" data-user-name></span>
+      <button type="button" class="c-comments__auth-btn" data-logout>Keluar</button>
+    </div>
+    <div class="c-comments__auth-prompt" data-auth-prompt>
+      <button type="button" class="c-btn c-btn--ghost c-btn--xs" data-open-login>Masuk</button>
+      <button type="button" class="c-btn c-btn--ghost c-btn--xs" data-open-register>Daftar</button>
+    </div>
   </header>
-
-  <div class="c-comments__auth" data-auth hidden>
-    <img class="c-comments__auth-avatar" data-user-avatar alt="" />
-    <span class="c-comments__auth-name" data-user-name></span>
-    <button type="button" class="c-comments__auth-btn" data-logout>Keluar</button>
-  </div>
 
   <form class="c-comments__form" data-form>
     <p class="c-comments__form-to" data-form-to hidden></p>
 
-    <div class="c-comments__row">
-      <input
-        type="text"
-        name="nick"
-        placeholder="Nama"
-        maxlength="50"
-        required
-        autocomplete="nickname"
-        data-field="nick"
-      />
-      <input
-        type="email"
-        name="mail"
-        placeholder="Email (opsional, untuk gravatar)"
-        autocomplete="email"
-        data-field="mail"
-      />
+    <div class="c-form__fields">
+      <div class="c-form__row">
+        <div class="c-form__field">
+          <label class="c-form__label" for="c-nick">Nama <span aria-hidden="true">*</span></label>
+          <input
+            id="c-nick"
+            type="text"
+            name="nick"
+            placeholder="Nama tampilan"
+            maxlength="50"
+            required
+            autocomplete="nickname"
+            data-field="nick"
+          />
+        </div>
+        <div class="c-form__field">
+          <label class="c-form__label" for="c-mail">Email <span class="c-form__optional">opsional</span></label>
+          <input
+            id="c-mail"
+            type="email"
+            name="mail"
+            placeholder="Untuk gravatar"
+            autocomplete="email"
+            data-field="mail"
+          />
+        </div>
+      </div>
+
+      <div class="c-form__field">
+        <label class="c-form__label" for="c-link">Website <span class="c-form__optional">opsional</span></label>
+        <input
+          id="c-link"
+          type="url"
+          name="link"
+          placeholder="https://"
+          autocomplete="url"
+          data-field="link"
+        />
+      </div>
+
+      <div class="c-form__field c-form__field--textarea">
+        <label class="c-form__label" for="c-comment">Komentar <span aria-hidden="true">*</span></label>
+        <textarea
+          id="c-comment"
+          name="comment"
+          placeholder="Tulis komentar… Markdown didukung."
+          rows="4"
+          required
+          data-field="comment"
+        ></textarea>
+        <span class="c-form__hint">Markdown: **bold**, *italic*, `code`, > kutipan</span>
+      </div>
     </div>
-
-    <input
-      type="url"
-      name="link"
-      placeholder="Website (opsional)"
-      autocomplete="url"
-      data-field="link"
-    />
-
-    <textarea
-      name="comment"
-      placeholder="Tulis komentar... (mendukung Markdown)"
-      rows="4"
-      required
-      data-field="comment"
-    ></textarea>
 
     <input
       type="text"
@@ -74,69 +98,61 @@ const path = Astro.url.pathname;
     />
 
     <div class="c-comments__actions">
-      <p class="c-comments__status" data-status></p>
-      <button type="button" class="c-comments__cancel" data-cancel hidden>Batal</button>
-      <button type="submit" class="c-comments__submit" data-submit>Kirim</button>
+      <p class="c-comments__status" data-status role="status" aria-live="polite"></p>
+      <div class="c-comments__btns">
+        <button type="button" class="c-btn c-btn--ghost c-btn--sm" data-cancel hidden>Batal balas</button>
+        <button type="submit" class="c-btn c-btn--sm c-btn--primary" data-submit>Kirim</button>
+      </div>
     </div>
   </form>
 
-  <div class="c-comments__auth-prompt" data-auth-prompt>
-    <span>Atau</span>
-    <button type="button" class="c-comments__link" data-open-login>Masuk</button>
-    <span>/</span>
-    <button type="button" class="c-comments__link" data-open-register>Daftar</button>
-    <span>untuk komentar dengan akun.</span>
-  </div>
-
   <div class="c-comments__list" data-list>
-    <p class="c-comments__loading">Memuat komentar…</p>
+    <div class="c-comments__skeleton" aria-hidden="true">
+      <div class="c-skel"><div class="c-skel__avatar"></div><div class="c-skel__lines"><div class="c-skel__line c-skel__line--short"></div><div class="c-skel__line"></div><div class="c-skel__line c-skel__line--med"></div></div></div>
+      <div class="c-skel"><div class="c-skel__avatar"></div><div class="c-skel__lines"><div class="c-skel__line c-skel__line--med"></div><div class="c-skel__line"></div></div></div>
+    </div>
   </div>
 
   <div class="c-comments__pagination" data-pagination hidden></div>
 
   <dialog class="c-auth-modal" data-auth-modal>
-    <form class="c-auth-modal__form" data-auth-form>
-      <h3 class="c-auth-modal__title" data-auth-title>Masuk</h3>
+    <div class="c-auth-modal__inner">
+      <form class="c-auth-modal__form" data-auth-form novalidate>
+        <div class="c-auth-modal__head">
+          <h3 class="c-auth-modal__title" data-auth-title>Masuk</h3>
+          <button type="button" class="c-auth-modal__close" data-auth-close aria-label="Tutup">
+            <svg viewBox="0 0 16 16" fill="none" width="14" height="14" aria-hidden="true">
+              <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
 
-      <input
-        type="text"
-        name="nick"
-        placeholder="Nama"
-        autocomplete="nickname"
-        data-auth-field="nick"
-        hidden
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        required
-        autocomplete="email"
-        data-auth-field="email"
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        required
-        minlength="6"
-        autocomplete="current-password"
-        data-auth-field="password"
-      />
+        <div class="c-auth-modal__fields">
+          <div class="c-form__field" data-nick-wrap>
+            <label class="c-form__label" for="m-nick">Nama</label>
+            <input id="m-nick" type="text" name="nick" placeholder="Nama tampilan" autocomplete="nickname" data-auth-field="nick" hidden />
+          </div>
+          <div class="c-form__field">
+            <label class="c-form__label" for="m-email">Email</label>
+            <input id="m-email" type="email" name="email" placeholder="kamu@email.com" required autocomplete="email" data-auth-field="email" />
+          </div>
+          <div class="c-form__field">
+            <label class="c-form__label" for="m-pw">Password</label>
+            <input id="m-pw" type="password" name="password" placeholder="Min. 6 karakter" required minlength="6" autocomplete="current-password" data-auth-field="password" />
+          </div>
+        </div>
 
-      <p class="c-auth-modal__msg" data-auth-msg></p>
+        <p class="c-auth-modal__msg" data-auth-msg role="status" aria-live="polite"></p>
 
-      <div class="c-auth-modal__actions">
-        <button type="button" class="c-auth-modal__btn" data-auth-close>Batal</button>
-        <button
-          type="submit"
-          class="c-auth-modal__btn c-auth-modal__btn--primary"
-          data-auth-submit
-        >
-          Masuk
-        </button>
-      </div>
-    </form>
+        <div class="c-auth-modal__foot">
+          <button type="submit" class="c-btn c-btn--primary c-btn--sm c-btn--full" data-auth-submit>Masuk</button>
+          <p class="c-auth-modal__switch">
+            <span data-switch-text>Belum punya akun?</span>
+            <button type="button" class="c-link" data-switch-mode>Daftar</button>
+          </p>
+        </div>
+      </form>
+    </div>
   </dialog>
 </section>
 
@@ -151,7 +167,8 @@ const path = Astro.url.pathname;
     const path = root.dataset.path!;
     const client = new WalineClient(serverURL);
 
-    const $ = <T extends HTMLElement = HTMLElement>(sel: string) => root.querySelector<T>(sel);
+    const $ = <T extends HTMLElement = HTMLElement>(sel: string) =>
+      root.querySelector<T>(sel);
 
     const form = $<HTMLFormElement>('[data-form]')!;
     const listEl = $<HTMLElement>('[data-list]')!;
@@ -175,108 +192,138 @@ const path = Astro.url.pathname;
     const modalMsg = $<HTMLElement>('[data-auth-msg]')!;
     const modalSubmit = $<HTMLButtonElement>('[data-auth-submit]')!;
     const modalClose = $<HTMLButtonElement>('[data-auth-close]')!;
-    const nickField = modalForm.querySelector<HTMLInputElement>('[data-auth-field="nick"]')!;
+    const nickInput = modalForm.querySelector<HTMLInputElement>('[data-auth-field="nick"]')!;
+    const nickWrap = modalForm.querySelector<HTMLElement>('[data-nick-wrap]')!;
+    const switchText = $<HTMLElement>('[data-switch-text]')!;
+    const switchMode = $<HTMLButtonElement>('[data-switch-mode]')!;
 
     let currentUser: WalineUser | null = null;
-    let replyTo: WalineComment | null = null;
+    let replyTo: { pid: number; rid: number; nick: string } | null = null;
     let currentPage = 1;
     let authMode: 'login' | 'register' = 'login';
 
     const esc = (s: string) =>
-      s.replace(
-        /[&<>"']/g,
-        (c) =>
-          ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!,
+      s.replace(/[&<>"']/g, (c) =>
+        ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!
       );
 
-    const fmtDate = (iso: string) => {
-      const d = new Date(iso);
+    const fmtDate = (ts: number) => {
+      const d = new Date(ts);
       const diff = (Date.now() - d.getTime()) / 1000;
       if (diff < 60) return 'baru saja';
-      if (diff < 3600) return `${Math.floor(diff / 60)} menit lalu`;
+      if (diff < 3600) return `${Math.floor(diff / 60)} mnt lalu`;
       if (diff < 86400) return `${Math.floor(diff / 3600)} jam lalu`;
-      if (diff < 604800) return `${Math.floor(diff / 86400)} hari lalu`;
-      return d.toLocaleDateString('id-ID', {
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric',
-      });
+      if (diff < 604800) return `${Math.floor(diff / 86400)} hr lalu`;
+      return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
     };
 
-    function commentItem(c: WalineComment, isReply = false): string {
-      const canDelete = currentUser && currentUser.email === c.mail;
+    function commentItem(c: WalineComment, isReply = false, depth = 0): string {
+      const canDelete =
+        currentUser &&
+        (currentUser.type === 'administrator' || currentUser.objectId === c.user_id);
+
+      const rid = isReply ? (c.rid ?? c.objectId) : c.objectId;
+
       return `
-        <article class="c-item${isReply ? ' c-item--reply' : ''}" data-comment-id="${c.objectId}">
-          <img class="c-item__avatar" src="${esc(c.avatar)}" alt="" loading="lazy" />
+        <article class="c-item${isReply ? ' c-item--reply' : ''}${depth > 1 ? ' c-item--deep' : ''}" data-comment-id="${c.objectId}">
+          <div class="c-item__avatar-wrap">
+            <img class="c-item__avatar" src="${esc(c.avatar)}" alt="${esc(c.nick)}" loading="lazy" width="32" height="32" />
+            ${c.children?.length ? '<div class="c-item__thread-line" aria-hidden="true"></div>' : ''}
+          </div>
           <div class="c-item__body">
             <header class="c-item__header">
-              ${
-                c.link
+              <div class="c-item__meta">
+                ${c.link
                   ? `<a class="c-item__name" href="${esc(c.link)}" target="_blank" rel="noopener nofollow">${esc(c.nick)}</a>`
                   : `<span class="c-item__name">${esc(c.nick)}</span>`
-              }
-              ${c.status === 'waiting' ? '<span class="c-item__badge">menunggu moderasi</span>' : ''}
-              <time class="c-item__date">${fmtDate(c.insertedAt)}</time>
+                }
+                ${c.type === 'administrator' ? '<span class="c-item__badge c-item__badge--admin">Admin</span>' : ''}
+                ${c.status === 'waiting' ? '<span class="c-item__badge c-item__badge--pending">Moderasi</span>' : ''}
+                ${c.reply_user ? `<span class="c-item__reply-to" aria-label="membalas ${esc(c.reply_user.nick)}">↩ ${esc(c.reply_user.nick)}</span>` : ''}
+              </div>
+              <time class="c-item__date" datetime="${new Date(c.time).toISOString()}">${fmtDate(c.time)}</time>
             </header>
             <div class="c-item__content">${c.comment}</div>
             <div class="c-item__actions">
-              <button type="button" class="c-item__action" data-reply="${c.objectId}" data-nick="${esc(c.nick)}">Balas</button>
-              ${
-                canDelete
-                  ? `<button type="button" class="c-item__action c-item__action--danger" data-delete="${c.objectId}">Hapus</button>`
-                  : ''
-              }
+              <button
+                type="button"
+                class="c-item__action"
+                data-reply="${c.objectId}"
+                data-rid="${rid}"
+                data-nick="${esc(c.nick)}"
+                aria-label="Balas komentar ${esc(c.nick)}"
+              >
+                Balas
+              </button>
+              ${canDelete ? `
+              <button type="button" class="c-item__action c-item__action--danger" data-delete="${c.objectId}" aria-label="Hapus komentar">
+                Hapus
+              </button>` : ''}
             </div>
           </div>
         </article>
-        ${c.children?.map((child) => commentItem(child, true)).join('') ?? ''}
+        ${c.children?.map((child) => commentItem(child, true, depth + 1)).join('') ?? ''}
       `;
     }
 
     function renderList(comments: WalineComment[]) {
       if (!comments.length) {
-        listEl.innerHTML =
-          '<p class="c-comments__empty">Belum ada komentar. Jadilah yang pertama.</p>';
+        listEl.innerHTML = `
+          <div class="c-comments__empty">
+            <svg viewBox="0 0 40 40" fill="none" width="36" height="36" aria-hidden="true">
+              <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3"/>
+              <path d="M14 20h12M14 15h8M14 25h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <p>Belum ada komentar.</p>
+            <p class="c-comments__empty-sub">Jadilah yang pertama berdiskusi.</p>
+          </div>`;
         return;
       }
-      listEl.innerHTML = comments.map((c) => commentItem(c)).join('');
+      listEl.innerHTML = `<div class="c-item-list">${comments.map((c) => commentItem(c)).join('')}</div>`;
+    }
+
+    function setSubmitting(loading: boolean) {
+      submitBtn.disabled = loading;
     }
 
     async function loadComments(page = 1) {
-      listEl.innerHTML = '<p class="c-comments__loading">Memuat komentar…</p>';
+      listEl.innerHTML = `
+        <div class="c-comments__skeleton" aria-hidden="true">
+          <div class="c-skel"><div class="c-skel__avatar"></div><div class="c-skel__lines"><div class="c-skel__line c-skel__line--short"></div><div class="c-skel__line"></div><div class="c-skel__line c-skel__line--med"></div></div></div>
+          <div class="c-skel"><div class="c-skel__avatar"></div><div class="c-skel__lines"><div class="c-skel__line c-skel__line--med"></div><div class="c-skel__line"></div></div></div>
+        </div>`;
       try {
         const res = await client.listComments(path, page, 20);
         if (res.errno !== 0) throw new Error(res.errmsg);
-        countEl.textContent = String(res.data.count ?? 0);
+        const count = res.data.count ?? 0;
+        countEl.textContent = String(count);
         renderList(res.data.data ?? []);
         currentPage = page;
         renderPagination(res.data.totalPages ?? 1, page);
       } catch (e) {
-        listEl.innerHTML = `<p class="c-comments__error">Gagal memuat komentar: ${esc(String(e))}</p>`;
+        listEl.innerHTML = `<p class="c-comments__error">Gagal memuat: ${esc(String(e))}</p>`;
       }
     }
 
     function renderPagination(totalPages: number, current: number) {
       const el = $<HTMLElement>('[data-pagination]')!;
-      if (totalPages <= 1) {
-        el.hidden = true;
-        return;
-      }
+      if (totalPages <= 1) { el.hidden = true; return; }
       el.hidden = false;
       el.innerHTML = `
-        ${current > 1 ? `<button type="button" data-page="${current - 1}">← Sebelumnya</button>` : ''}
-        <span>Halaman ${current} dari ${totalPages}</span>
-        ${current < totalPages ? `<button type="button" data-page="${current + 1}">Selanjutnya →</button>` : ''}
+        ${current > 1 ? `<button type="button" class="c-btn c-btn--ghost c-btn--sm" data-page="${current - 1}">← Sebelumnya</button>` : '<span></span>'}
+        <span class="c-pagination__info">${current} / ${totalPages}</span>
+        ${current < totalPages ? `<button type="button" class="c-btn c-btn--ghost c-btn--sm" data-page="${current + 1}">Berikutnya →</button>` : '<span></span>'}
       `;
     }
 
+    // ── Form submit ──────────────────────────────────
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const fd = new FormData(form);
       if (fd.get('hp')) return;
 
-      submitBtn.disabled = true;
-      statusEl.textContent = 'Mengirim…';
+      setSubmitting(true);
+      statusEl.textContent = '';
       statusEl.removeAttribute('data-state');
 
       try {
@@ -286,42 +333,40 @@ const path = Astro.url.pathname;
           mail: String(fd.get('mail') ?? '').trim() || undefined,
           link: String(fd.get('link') ?? '').trim() || undefined,
           url: path,
-          pid: replyTo?.objectId,
+          pid: replyTo?.pid,
+          rid: replyTo?.rid,
+          at: replyTo?.nick,
         });
+
 
         if (res.errno !== 0) {
           statusEl.textContent = res.errmsg || 'Gagal mengirim.';
           statusEl.setAttribute('data-state', 'error');
         } else {
-          statusEl.textContent =
-            res.data.status === 'waiting'
-              ? 'Komentar menunggu moderasi.'
-              : 'Komentar terkirim.';
+          const isWaiting = res.data?.status === 'waiting';
+          statusEl.textContent = isWaiting ? 'Komentar menunggu moderasi.' : 'Terkirim!';
+          statusEl.setAttribute('data-state', isWaiting ? 'warn' : 'success');
           form.reset();
-          if (currentUser) {
-            (form.querySelector('[data-field="nick"]') as HTMLInputElement).value =
-              currentUser.nick;
-            (form.querySelector('[data-field="mail"]') as HTMLInputElement).value =
-              currentUser.email;
-          }
+          prefillUserFields();
           cancelReply();
-          await loadComments(1);
+          if (!isWaiting) await loadComments(1);
         }
       } catch {
         statusEl.textContent = 'Terjadi kesalahan jaringan.';
         statusEl.setAttribute('data-state', 'error');
       } finally {
-        submitBtn.disabled = false;
+        setSubmitting(false);
       }
     });
 
-    function setReply(id: string, nick: string) {
-      replyTo = { objectId: id } as WalineComment;
+    // ── Reply ────────────────────────────────────────
+    function setReply(pid: number, rid: number, nick: string) {
+      replyTo = { pid, rid, nick };
       formToEl.hidden = false;
       formToEl.textContent = `Membalas @${nick}`;
       cancelBtn.hidden = false;
-      form.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      (form.querySelector('[data-field="comment"]') as HTMLTextAreaElement).focus();
+      form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      (form.querySelector<HTMLTextAreaElement>('[data-field="comment"]'))?.focus();
     }
 
     function cancelReply() {
@@ -333,20 +378,26 @@ const path = Astro.url.pathname;
 
     cancelBtn.addEventListener('click', cancelReply);
 
+    // ── Delegated list events ────────────────────────
     listEl.addEventListener('click', async (e) => {
       const target = e.target as HTMLElement;
       const replyBtn = target.closest<HTMLButtonElement>('[data-reply]');
       const deleteBtn = target.closest<HTMLButtonElement>('[data-delete]');
 
       if (replyBtn) {
-        setReply(replyBtn.dataset.reply!, replyBtn.dataset.nick!);
+        setReply(
+          Number(replyBtn.dataset.reply),
+          Number(replyBtn.dataset.rid),
+          replyBtn.dataset.nick!,
+        );
       }
 
       if (deleteBtn) {
         if (!confirm('Hapus komentar ini?')) return;
-        const res = await client.deleteComment(deleteBtn.dataset.delete!);
+        deleteBtn.disabled = true;
+        const res = await client.deleteComment(Number(deleteBtn.dataset.delete));
         if (res.errno === 0) await loadComments(currentPage);
-        else alert(res.errmsg || 'Gagal menghapus.');
+        else { alert(res.errmsg || 'Gagal menghapus.'); deleteBtn.disabled = false; }
       }
     });
 
@@ -355,21 +406,40 @@ const path = Astro.url.pathname;
       if (btn) loadComments(Number(btn.dataset.page));
     });
 
+    // ── Auth ─────────────────────────────────────────
     function openAuthModal(mode: 'login' | 'register') {
       authMode = mode;
-      modalTitle.textContent = mode === 'login' ? 'Masuk' : 'Daftar';
-      modalSubmit.textContent = mode === 'login' ? 'Masuk' : 'Daftar';
-      nickField.hidden = mode === 'login';
-      nickField.required = mode === 'register';
+      const isLogin = mode === 'login';
+      modalTitle.textContent = isLogin ? 'Masuk' : 'Buat akun';
+      modalSubmit.textContent = isLogin ? 'Masuk' : 'Daftar';
+      switchText.textContent = isLogin ? 'Belum punya akun?' : 'Sudah punya akun?';
+      switchMode.textContent = isLogin ? 'Daftar' : 'Masuk';
+      nickInput.hidden = isLogin;
+      nickInput.required = !isLogin;
+      nickWrap.hidden = isLogin;
       modalMsg.textContent = '';
       modalMsg.removeAttribute('data-state');
       modalForm.reset();
       modal.showModal();
+      // Focus first visible input
+      setTimeout(() => {
+        const first = modalForm.querySelector<HTMLInputElement>('input:not([hidden])');
+        first?.focus();
+      }, 50);
     }
+
+    switchMode.addEventListener('click', () => {
+      openAuthModal(authMode === 'login' ? 'register' : 'login');
+    });
 
     openLogin.addEventListener('click', () => openAuthModal('login'));
     openRegister.addEventListener('click', () => openAuthModal('register'));
     modalClose.addEventListener('click', () => modal.close());
+
+    // Close on backdrop click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.close();
+    });
 
     modalForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -380,6 +450,7 @@ const path = Astro.url.pathname;
 
       modalSubmit.disabled = true;
       modalMsg.textContent = 'Memproses…';
+      modalMsg.removeAttribute('data-state');
 
       try {
         const res =
@@ -394,9 +465,9 @@ const path = Astro.url.pathname;
         }
 
         if (authMode === 'register') {
-          modalMsg.textContent = 'Berhasil daftar. Silakan masuk.';
+          modalMsg.textContent = 'Berhasil! Silakan masuk.';
           modalMsg.setAttribute('data-state', 'success');
-          setTimeout(() => openAuthModal('login'), 1200);
+          setTimeout(() => openAuthModal('login'), 1000);
           return;
         }
 
@@ -413,8 +484,25 @@ const path = Astro.url.pathname;
 
     logoutBtn.addEventListener('click', async () => {
       await client.logout();
+      currentUser = null;
+      clearUserFields();
       await refreshUser();
     });
+
+    function prefillUserFields() {
+      if (!currentUser) return;
+      const nickF = form.querySelector<HTMLInputElement>('[data-field="nick"]');
+      const mailF = form.querySelector<HTMLInputElement>('[data-field="mail"]');
+      if (nickF) nickF.value = currentUser.display_name;
+      if (mailF) mailF.value = currentUser.email;
+    }
+
+    function clearUserFields() {
+      const nickF = form.querySelector<HTMLInputElement>('[data-field="nick"]');
+      const mailF = form.querySelector<HTMLInputElement>('[data-field="mail"]');
+      if (nickF) nickF.value = '';
+      if (mailF) mailF.value = '';
+    }
 
     async function refreshUser() {
       currentUser = await client.getCurrentUser();
@@ -423,19 +511,19 @@ const path = Astro.url.pathname;
         authBar.hidden = false;
         authPrompt.hidden = true;
         userAvatar.src = currentUser.avatar;
-        userName.textContent = currentUser.nick;
-
-        (form.querySelector('[data-field="nick"]') as HTMLInputElement).value =
-          currentUser.nick;
-        (form.querySelector('[data-field="mail"]') as HTMLInputElement).value =
-          currentUser.email;
+        userName.textContent = currentUser.display_name;
+        prefillUserFields();
       } else {
         authBar.hidden = true;
         authPrompt.hidden = false;
       }
     }
 
-    refreshUser().then(() => loadComments(1));
+    // FIX: await refreshUser() dulu baru loadComments, bukan .then() chain
+    (async () => {
+      await refreshUser();
+      await loadComments(1);
+    })();
   }
 
   function init() {
@@ -450,183 +538,295 @@ const path = Astro.url.pathname;
 </script>
 
 <style is:global>
-  .c-comments [hidden] {
-    display: none !important;
-  }
+  /* ── Hidden fix ─────────────────────────────────── */
+  .c-comments [hidden] { display: none !important; }
 
-  /* ── Root ──────────────────────────────────────────── */
+  /* ── Root ───────────────────────────────────────── */
   .c-comments {
+    --c-radius: 0.75rem;
+    --c-radius-sm: 0.35rem;
+    --c-transition: 0.13s ease;
+
     max-width: 50rem;
     margin-inline: auto;
+    padding-block: 3.5rem 2rem;
     padding-inline: 0;
-    padding-block: 3rem;
-    width: 100%;
-    border-top: 1px solid var(--sl-color-gray-5);
+    border-top: 1px solid var(--sl-color-hairline);
     font-family: var(--sl-font);
+    font-size: 0.875rem;
     font-feature-settings: 'cv11', 'ss01';
-    font-variant-numeric: tabular-nums;
   }
 
-  /* ── Header ────────────────────────────────────────── */
+  /* ── Button system ─────────────────────────────── */
+  .c-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: var(--c-radius-sm);
+    font: inherit;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .c-btn--sm {
+    padding: 0.4375rem 0.875rem;
+    font-size: 0.75rem;
+  }
+
+  .c-btn--xs {
+    padding: 0.3125rem 0.625rem;
+    font-size: 0.6875rem;
+  }
+
+  .c-btn--full { width: 100%; justify-content: center; }
+
+  .c-btn--primary {
+    background: var(--sl-color-accent);
+    border: 1px solid var(--sl-color-accent);
+    color: var(--sl-color-white);
+  }
+
+  .c-btn--primary:hover { opacity: 0.82; }
+  .c-btn--primary:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  .c-btn--ghost {
+    background: transparent;
+    border: 1px solid var(--sl-color-gray-5);
+    color: var(--sl-color-gray-2);
+  }
+
+  .c-btn--ghost:hover {
+    background: var(--sl-color-gray-6);
+    border-color: var(--sl-color-gray-4);
+    color: var(--sl-color-white);
+  }
+
+  .c-btn:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+  }
+
+
+
+  /* ── Link button ────────────────────────────────── */
+  .c-link {
+    padding: 0; border: 0; background: none;
+    color: var(--sl-color-accent-high);
+    font: inherit; font-size: inherit; font-weight: 500;
+    cursor: pointer;
+    text-underline-offset: 2px;
+  }
+  .c-link:hover { text-decoration: underline; }
+  .c-link:focus-visible { outline: 2px solid var(--sl-color-accent); outline-offset: 2px; border-radius: 2px; }
+
+  /* ── Header ─────────────────────────────────────── */
   .c-comments__header {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
     margin-bottom: 1.5rem;
   }
 
-  .c-comments__title {
-    margin: 0;
-    font-size: var(--sl-text-h3);
+  .c-comments__header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+  }
+
+  .c-comments__label {
+    font-size: var(--sl-text-h4);
     font-weight: 600;
     color: var(--sl-color-white);
   }
 
   .c-comments__count {
-    padding: 0.0625rem 0.375rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.375rem;
+    height: 1.375rem;
+    padding-inline: 0.3125rem;
     border-radius: 999px;
     background: var(--sl-color-gray-6);
+    border: 1px solid var(--sl-color-hairline);
     color: var(--sl-color-gray-3);
     font-family: var(--sl-font-mono);
-    font-size: 0.6875rem;
-    font-weight: 500;
-    line-height: 1.5;
+    font-size: var(--sl-text-xs);
+    font-weight: 600;
     letter-spacing: 0;
+    line-height: 1;
   }
 
-  /* ── Auth bar ──────────────────────────────────────── */
+  /* ── Auth bar (in header) ─────────────────────── */
   .c-comments__auth {
     display: flex;
     align-items: center;
-    gap: 0.625rem;
-    padding: 0.5rem 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid var(--sl-color-gray-5);
-    border-radius: 0.375rem;
-    background: var(--sl-color-bg);
-    font-size: 0.8125rem;
+    gap: 0.5rem;
+    font-size: 0.75rem;
   }
 
   .c-comments__auth-avatar {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.375rem;
+    height: 1.375rem;
     border-radius: 50%;
     flex-shrink: 0;
+    object-fit: cover;
     background: var(--sl-color-gray-6);
   }
 
   .c-comments__auth-name {
-    color: var(--sl-color-white);
+    color: var(--sl-color-gray-2);
     font-weight: 500;
+    max-width: 10rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .c-comments__auth-btn {
-    margin-inline-start: auto;
     padding: 0.1875rem 0.5rem;
-    border: 0;
-    border-radius: 0.25rem;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: var(--c-radius-sm);
     background: transparent;
     color: var(--sl-color-gray-3);
-    font: inherit;
-    font-size: 0.75rem;
+    font: inherit; font-size: 0.6875rem;
     cursor: pointer;
-    transition: color 0.12s ease;
+    transition: color var(--c-transition), background-color var(--c-transition), border-color var(--c-transition);
   }
 
   .c-comments__auth-btn:hover {
     color: var(--sl-color-white);
     background: var(--sl-color-gray-6);
+    border-color: var(--sl-color-gray-4);
   }
 
-  .c-comments__auth-btn:focus-visible {
-    outline: 2px solid var(--sl-color-accent);
-    outline-offset: 2px;
-  }
+  .c-comments__auth-btn:focus-visible { outline: 2px solid var(--sl-color-accent); outline-offset: 2px; }
 
-  /* ── Form ──────────────────────────────────────────── */
-  .c-comments__form {
+  .c-comments__auth-prompt {
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 0;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  /* ── Form ───────────────────────────────────────── */
+  .c-comments__form {
     margin-bottom: 2rem;
   }
 
   .c-comments__form-to {
-    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    margin: 0 0 0.75rem;
     padding: 0.375rem 0.625rem;
-    border-radius: 0.375rem;
+    border-radius: var(--c-radius-sm);
+    border-left: 2px solid var(--sl-color-accent);
     background: var(--sl-color-accent-low);
-    color: var(--sl-color-text-accent);
+    color: var(--sl-color-accent-high);
     font-size: 0.75rem;
     font-weight: 500;
   }
 
-  .c-comments__row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
+  .c-form__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    padding: 1rem;
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: var(--c-radius);
+    background: var(--sl-color-gray-6);
+    margin-bottom: 0.625rem;
   }
 
-  @media (max-width: 30rem) {
-    .c-comments__row {
-      grid-template-columns: 1fr;
-    }
+  .c-form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.625rem;
+  }
+
+  @media (max-width: 32rem) {
+    .c-form__row { grid-template-columns: 1fr; }
+  }
+
+  .c-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .c-form__field--textarea { gap: 0.3125rem; }
+
+  .c-form__label {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: var(--sl-color-gray-3);
+    letter-spacing: 0.01em;
+  }
+
+  .c-form__label span[aria-hidden] {
+    color: var(--sl-color-red);
+    margin-inline-start: 0.125rem;
+  }
+
+  .c-form__optional {
+    font-weight: 400;
+    color: var(--sl-color-gray-3);
+    opacity: 0.7;
+  }
+
+  .c-form__hint {
+    font-size: 0.625rem;
+    color: var(--sl-color-gray-3);
+    opacity: 0.65;
+    font-family: var(--sl-font-mono);
+    margin-top: 0.125rem;
   }
 
   .c-comments__form input,
   .c-comments__form textarea {
-    width: 100%;
-    padding: 0.5rem 0.75rem;
-    border: 1px solid var(--sl-color-hairline);
-    border-radius: 0.375rem;
-    background: var(--sl-color-bg);
+    padding: 0.4375rem 0.625rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: var(--c-radius-sm);
+    background: var(--sl-color-black);
     color: var(--sl-color-text);
     font: inherit;
     font-size: 0.8125rem;
-    line-height: 1.4;
-    transition: border-color 0.12s ease, box-shadow 0.12s ease;
+    line-height: 1.5;
+    transition: border-color var(--c-transition), box-shadow var(--c-transition);
+    width: 100%;
   }
 
   .c-comments__form input::placeholder,
   .c-comments__form textarea::placeholder {
     color: var(--sl-color-gray-3);
-    opacity: 0.8;
-  }
-
-  .c-comments__form input:hover,
-  .c-comments__form textarea:hover {
-    border-color: var(--sl-color-gray-4);
+    opacity: 0.6;
   }
 
   .c-comments__form input:focus,
   .c-comments__form textarea:focus {
     outline: none;
-    border-color: var(--sl-color-gray-3);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--sl-color-gray-4) 30%, transparent);
+    border-color: var(--sl-color-accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--sl-color-accent) 18%, transparent);
   }
 
   .c-comments__form textarea {
     resize: vertical;
-    min-height: 5.5rem;
+    min-height: 6rem;
     font-family: inherit;
-    line-height: 1.5;
+    line-height: 1.6;
   }
 
   .c-comments__hp {
-    position: absolute;
-    left: -9999px;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-    pointer-events: none;
+    position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none;
   }
 
   .c-comments__actions {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin-top: 0.25rem;
   }
 
   .c-comments__status {
@@ -634,136 +834,96 @@ const path = Astro.url.pathname;
     margin: 0;
     font-size: 0.75rem;
     color: var(--sl-color-gray-3);
+    min-height: 1em;
   }
 
-  .c-comments__status[data-state='error'] {
-    color: var(--sl-color-red-high);
-  }
+  .c-comments__status[data-state='error'] { color: var(--sl-color-red-high); }
+  .c-comments__status[data-state='success'] { color: var(--sl-color-green-high); }
+  .c-comments__status[data-state='warn'] { color: var(--sl-color-orange-high); }
 
-  .c-comments__cancel,
-  .c-comments__submit {
-    padding: 0.375rem 0.75rem;
-    border-radius: 0.375rem;
-    font: inherit;
-    font-size: 0.75rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: color 0.12s ease, opacity 0.12s ease;
-  }
-
-  .c-comments__cancel {
-    border: 1px solid var(--sl-color-gray-5);
-    background: transparent;
-    color: var(--sl-color-gray-2);
-  }
-
-  .c-comments__cancel:hover {
-    color: var(--sl-color-white);
-    border-color: var(--sl-color-gray-4);
-  }
-
-  .c-comments__submit {
-    border: 1px solid var(--sl-color-gray-5);
-    background: var(--sl-color-gray-6);
-    color: var(--sl-color-white);
-  }
-
-  .c-comments__submit:hover {
-    opacity: 0.85;
-  }
-
-  .c-comments__submit:focus-visible,
-  .c-comments__cancel:focus-visible {
-    outline: 2px solid var(--sl-color-accent);
-    outline-offset: 2px;
-  }
-
-  .c-comments__submit:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  /* ── Auth prompt ──────────────────────────────────── */
-  .c-comments__auth-prompt {
+  .c-comments__btns {
     display: flex;
-    flex-wrap: wrap;
+    gap: 0.375rem;
     align-items: center;
-    gap: 0.25rem;
-    margin: 0 0 2rem;
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--sl-color-gray-5);
-    font-size: 0.75rem;
-    color: var(--sl-color-gray-3);
   }
 
-  .c-comments__link {
-    padding: 0;
-    border: 0;
-    background: none;
-    color: var(--sl-color-white);
-    font: inherit;
-    font-size: inherit;
-    font-weight: 500;
-    cursor: pointer;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
-    transition: opacity 0.12s ease;
-  }
-
-  .c-comments__link:hover {
-    opacity: 0.7;
-  }
-
-  .c-comments__link:focus-visible {
-    outline: 2px solid var(--sl-color-accent);
-    outline-offset: 2px;
-    border-radius: 2px;
-  }
-
-  /* ── List ─────────────────────────────────────────── */
-  .c-comments__list {
+  /* ── Skeleton loader ────────────────────────────── */
+  .c-comments__skeleton {
     display: flex;
     flex-direction: column;
     gap: 0;
   }
 
-  .c-comments__loading,
-  .c-comments__empty,
-  .c-comments__error {
-    margin: 0;
-    padding: 2rem 0;
-    text-align: center;
-    font-size: 0.8125rem;
-    color: var(--sl-color-gray-3);
-  }
-
-  .c-comments__error {
-    color: var(--sl-color-red-high);
-  }
-
-  .c-item {
+  .c-skel {
     display: flex;
     gap: 0.75rem;
     padding: 1rem 0;
-    border-bottom: 1px solid var(--sl-color-gray-5);
-    background: transparent;
-    transition: background-color 0.12s ease;
+    border-bottom: 1px solid var(--sl-color-hairline);
+    animation: c-pulse 1.6s ease-in-out infinite;
   }
 
-  .c-item:first-child {
+  .c-skel:first-child { border-top: 1px solid var(--sl-color-hairline); }
+
+  .c-skel__avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--sl-color-gray-6);
+    flex-shrink: 0;
+  }
+
+  .c-skel__lines {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    padding-top: 0.25rem;
+  }
+
+  .c-skel__line {
+    height: 0.6875rem;
+    border-radius: 999px;
+    background: var(--sl-color-gray-6);
+    width: 100%;
+  }
+
+  .c-skel__line--short { width: 35%; }
+  .c-skel__line--med { width: 60%; }
+
+  @keyframes c-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.45; }
+  }
+
+  /* ── Comment list ───────────────────────────────── */
+  .c-item-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .c-item {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 0.75rem;
+    padding-block: 1rem;
     border-top: 1px solid var(--sl-color-gray-5);
   }
 
-  .c-item:hover {
-    background: color-mix(in srgb, var(--sl-color-gray-6) 40%, transparent);
+  .c-item--reply {
+    margin-inline-start: 2.75rem;
+    padding-inline-start: 0;
+    border-top: 1px solid var(--sl-color-gray-5);
   }
 
-  .c-item--reply {
-    margin-inline-start: 2rem;
-    padding-inline-start: 1rem;
-    border-inline-start: 2px solid var(--sl-color-hairline);
-    border-bottom: 1px solid var(--sl-color-hairline);
+  .c-item--deep {
+    margin-inline-start: 5.5rem;
+  }
+
+  .c-item__avatar-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
   }
 
   .c-item__avatar {
@@ -775,296 +935,365 @@ const path = Astro.url.pathname;
     background: var(--sl-color-gray-6);
   }
 
-  .c-item__body {
-    flex: 1;
-    min-width: 0;
+  .c-item--reply .c-item__avatar {
+    width: 1.5rem;
+    height: 1.5rem;
   }
+
+  .c-item__thread-line {
+    flex: 1;
+    width: 1px;
+    background: var(--sl-color-gray-5);
+    min-height: 0.5rem;
+  }
+
+  .c-item__body { min-width: 0; }
 
   .c-item__header {
     display: flex;
     align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.3125rem;
     flex-wrap: wrap;
+  }
+
+  .c-item__meta {
+    display: flex;
+    align-items: baseline;
     gap: 0.375rem;
-    margin-bottom: 0.25rem;
-    line-height: 1.4;
+    flex-wrap: wrap;
+    min-width: 0;
   }
 
   .c-item__name {
     font-size: 0.8125rem;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--sl-color-white);
     text-decoration: none;
     letter-spacing: -0.01em;
+    white-space: nowrap;
   }
 
-  .c-item__name:hover {
+  a.c-item__name:hover {
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 2px;
   }
 
   .c-item__badge {
-    padding: 0.0625rem 0.375rem;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.0625rem 0.3125rem;
     border-radius: 999px;
+    font-size: 0.625rem;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+  }
+
+  .c-item__badge--admin {
+    background: var(--sl-color-accent-low);
+    color: var(--sl-color-accent-high);
+  }
+
+  .c-item__badge--pending {
     background: var(--sl-color-orange-low);
     color: var(--sl-color-orange-high);
+  }
+
+  .c-item__reply-to {
     font-size: 0.6875rem;
-    font-weight: 500;
-    line-height: 1.5;
+    color: var(--sl-color-gray-3);
+    font-weight: 400;
   }
 
   .c-item__date {
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     color: var(--sl-color-gray-3);
-    font-family: inherit;
+    white-space: nowrap;
+    font-feature-settings: 'tnum';
   }
 
   .c-item__content {
-    color: var(--sl-color-gray-2);
+    color: var(--sl-color-gray-1);
     font-size: 0.8125rem;
-    line-height: 1.6;
+    line-height: 1.65;
     overflow-wrap: anywhere;
   }
 
-  .c-item__content p {
-    margin: 0 0 0.4em;
-  }
-  .c-item__content p:last-child {
-    margin-bottom: 0;
-  }
+  .c-item__content p { margin: 0 0 0.4em; }
+  .c-item__content p:last-child { margin-bottom: 0; }
 
   .c-item__content a {
-    color: var(--sl-color-white);
+    color: var(--sl-color-accent-high);
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 2px;
   }
 
-  .c-item__content a:hover {
-    opacity: 0.7;
-  }
+  .c-item__content a:hover { opacity: 0.75; }
 
   .c-item__content code {
-    padding: 0.1em 0.35em;
+    padding: 0.1em 0.3em;
     border-radius: 0.25rem;
-    background: var(--sl-color-gray-6);
+    background: var(--sl-color-bg-inline-code);
     color: var(--sl-color-text);
     font-family: var(--sl-font-mono);
-    font-size: 0.875em;
+    font-size: 0.8125em;
   }
 
   .c-item__content pre {
     margin: 0.5em 0;
     padding: 0.75rem;
-    border-radius: 0.375rem;
-    background: var(--sl-color-gray-6);
+    border-radius: var(--c-radius-sm);
+    background: var(--sl-color-bg-inline-code);
+    border: 1px solid var(--sl-color-hairline);
     overflow-x: auto;
     font-size: 0.75rem;
   }
 
-  .c-item__content pre code {
-    padding: 0;
-    background: transparent;
-  }
+  .c-item__content pre code { padding: 0; background: transparent; }
 
   .c-item__content blockquote {
-    margin: 0.5em 0;
-    padding: 0.25em 0.75rem;
-    border-inline-start: 2px solid var(--sl-color-gray-5);
+    margin: 0.4em 0;
+    padding: 0.125em 0.625rem;
+    border-inline-start: 2px solid var(--sl-color-accent);
     color: var(--sl-color-gray-3);
+    background: var(--sl-color-accent-low);
+    border-radius: 0 var(--c-radius-sm) var(--c-radius-sm) 0;
   }
 
   .c-item__actions {
     display: flex;
     gap: 0.75rem;
-    margin-top: 0.375rem;
+    margin-top: 0.4375rem;
   }
 
   .c-item__action {
-    padding: 0;
-    border: 0;
-    background: none;
+    display: inline-flex;
+    align-items: center;
+    padding: 0; border: 0; background: none;
     color: var(--sl-color-gray-3);
-    font: inherit;
-    font-size: 0.75rem;
-    font-weight: 500;
+    font: inherit; font-size: 0.6875rem; font-weight: 500;
     cursor: pointer;
-    transition: color 0.12s ease;
+    transition: color var(--c-transition);
   }
 
-  .c-item__action:hover {
-    color: var(--sl-color-white);
+  .c-item__action:hover { color: var(--sl-color-white); }
+  .c-item__action--danger:hover { color: var(--sl-color-red-high); }
+  .c-item__action:focus-visible { outline: 2px solid var(--sl-color-accent); outline-offset: 2px; border-radius: 2px; }
+
+  /* ── Empty / error ──────────────────────────────── */
+  .c-comments__empty {
+    padding: 2.5rem 1rem;
+    text-align: center;
+    color: var(--sl-color-gray-3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
   }
 
-  .c-item__action:focus-visible {
-    outline: 2px solid var(--sl-color-accent);
-    outline-offset: 2px;
-    border-radius: 2px;
-  }
+  .c-comments__empty svg { opacity: 0.35; margin-bottom: 0.5rem; }
+  .c-comments__empty p { margin: 0; font-size: 0.8125rem; color: var(--sl-color-gray-2); }
+  .c-comments__empty-sub { font-size: 0.75rem !important; color: var(--sl-color-gray-3) !important; }
 
-  .c-item__action--danger:hover {
+  .c-comments__error {
+    margin: 0;
+    padding: 1.5rem 0;
+    text-align: center;
+    font-size: 0.8125rem;
     color: var(--sl-color-red-high);
   }
 
-  /* ── Pagination ───────────────────────────────────── */
+  /* ── Pagination ─────────────────────────────────── */
   .c-comments__pagination {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    justify-content: space-between;
     gap: 1rem;
-    margin-top: 1.5rem;
-    font-size: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .c-comments__pagination > :last-child { text-align: right; }
+
+  .c-pagination__info {
+    font-size: 0.6875rem;
     color: var(--sl-color-gray-3);
+    text-align: center;
+    font-feature-settings: 'tnum';
   }
 
-  .c-comments__pagination button {
-    padding: 0.375rem 0.75rem;
-    border: 1px solid var(--sl-color-hairline);
-    border-radius: 0.375rem;
-    background: transparent;
-    color: var(--sl-color-white);
-    font: inherit;
-    font-size: 0.75rem;
-    font-weight: 500;
-    cursor: pointer;
-  }
-
-  .c-comments__pagination button:hover {
-    background: var(--sl-color-gray-6);
-    border-color: var(--sl-color-gray-4);
-  }
-
-  .c-comments__pagination button:focus-visible {
-    outline: 2px solid var(--sl-color-accent);
-    outline-offset: 2px;
-  }
-
-  /* ── Auth modal ───────────────────────────────────── */
+  /* ── Auth modal ─────────────────────────────────── */
   .c-auth-modal {
     margin: auto;
     padding: 0;
-    border: 1px solid var(--sl-color-hairline);
-    border-radius: 0.5rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: var(--c-radius);
     background: var(--sl-color-bg);
     color: var(--sl-color-text);
-    max-width: 22rem;
-    width: 90%;
-    box-shadow:
-      0 0 0 1px var(--sl-color-hairline),
-      0 20px 40px -12px rgb(0 0 0 / 0.4);
+    max-width: 20rem;
+    width: calc(100% - 2rem);
+    box-shadow: var(--sl-shadow-lg), 0 0 0 1px transparent;
   }
 
   .c-auth-modal::backdrop {
     background: var(--sl-color-backdrop-overlay);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .c-auth-modal__inner {
+    overflow: hidden;
+    border-radius: var(--c-radius);
   }
 
   .c-auth-modal__form {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    padding: 1.25rem;
+    padding: 1.125rem;
+  }
+
+  .c-auth-modal__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
   }
 
   .c-auth-modal__title {
-    margin: 0 0 0.25rem;
-    font-size: 0.9375rem;
+    margin: 0;
+    font-size: var(--sl-text-h5);
     font-weight: 600;
     color: var(--sl-color-white);
     letter-spacing: -0.02em;
   }
 
+  .c-auth-modal__close {
+    padding: 0.25rem;
+    border: 0;
+    border-radius: var(--c-radius-sm);
+    background: transparent;
+    color: var(--sl-color-gray-3);
+    cursor: pointer;
+    transition: color var(--c-transition), background-color var(--c-transition);
+    line-height: 0;
+  }
+
+  .c-auth-modal__close:hover {
+    color: var(--sl-color-white);
+    background: var(--sl-color-gray-6);
+  }
+
+  .c-auth-modal__close:focus-visible { outline: 2px solid var(--sl-color-accent); outline-offset: 2px; }
+
+  .c-auth-modal__social {
+    display: flex;
+    gap: 0.375rem;
+  }
+
+  .c-oauth-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    padding: 0.4375rem 0.625rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: var(--c-radius-sm);
+    background: transparent;
+    color: var(--sl-color-gray-2);
+    font: inherit;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .c-oauth-btn:hover {
+    background: var(--sl-color-gray-6);
+    border-color: var(--sl-color-gray-4);
+    color: var(--sl-color-white);
+  }
+
+  .c-oauth-btn:focus-visible { outline: 2px solid var(--sl-color-accent); outline-offset: 2px; }
+
+  .c-auth-modal__sep {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-block: 0.125rem;
+    font-size: 0.6875rem;
+    color: var(--sl-color-gray-3);
+  }
+
+  .c-auth-modal__sep::before,
+  .c-auth-modal__sep::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--sl-color-gray-5);
+  }
+
+  .c-auth-modal__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
   .c-auth-modal__form input {
-    padding: 0.5rem 0.75rem;
-    border: 1px solid var(--sl-color-hairline);
-    border-radius: 0.375rem;
-    background: var(--sl-color-bg);
+    padding: 0.4375rem 0.625rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: var(--c-radius-sm);
+    background: var(--sl-color-gray-6);
     color: var(--sl-color-text);
     font: inherit;
     font-size: 0.8125rem;
-    transition: border-color 0.12s ease, box-shadow 0.12s ease;
+    width: 100%;
+    transition: border-color var(--c-transition), box-shadow var(--c-transition);
   }
 
-  .c-auth-modal__form input::placeholder {
-    color: var(--sl-color-gray-3);
-    opacity: 0.8;
-  }
-
-  .c-auth-modal__form input:hover {
-    border-color: var(--sl-color-gray-4);
-  }
+  .c-auth-modal__form input::placeholder { color: var(--sl-color-gray-3); opacity: 0.6; }
 
   .c-auth-modal__form input:focus {
     outline: none;
-    border-color: var(--sl-color-gray-3);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--sl-color-gray-4) 30%, transparent);
+    border-color: var(--sl-color-accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--sl-color-accent) 18%, transparent);
   }
 
   .c-auth-modal__msg {
     margin: 0;
-    min-height: 1.2em;
-    font-size: 0.75rem;
+    min-height: 1.125em;
+    font-size: 0.6875rem;
     color: var(--sl-color-gray-3);
   }
 
-  .c-auth-modal__msg[data-state='error'] {
-    color: var(--sl-color-red-high);
-  }
-  .c-auth-modal__msg[data-state='success'] {
-    color: var(--sl-color-green-high);
-  }
+  .c-auth-modal__msg[data-state='error'] { color: var(--sl-color-red-high); }
+  .c-auth-modal__msg[data-state='success'] { color: var(--sl-color-green-high); }
 
-  .c-auth-modal__actions {
+  .c-auth-modal__foot {
     display: flex;
-    gap: 0.375rem;
-    justify-content: flex-end;
-    margin-top: 0.5rem;
+    flex-direction: column;
+    gap: 0.625rem;
+    margin-top: 0.25rem;
   }
 
-  .c-auth-modal__btn {
-    padding: 0.375rem 0.75rem;
-    border: 1px solid var(--sl-color-hairline);
-    border-radius: 0.375rem;
-    background: transparent;
-    color: var(--sl-color-white);
-    font: inherit;
-    font-size: 0.75rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.12s ease, border-color 0.12s ease,
-      opacity 0.12s ease;
+  .c-auth-modal__switch {
+    margin: 0;
+    font-size: 0.6875rem;
+    color: var(--sl-color-gray-3);
+    gap: 0.25rem;
+    display: flex;
+    align-items: center;
   }
 
-  .c-auth-modal__btn:hover {
-    background: var(--sl-color-gray-6);
-    border-color: var(--sl-color-gray-4);
-  }
-
-  .c-auth-modal__btn--primary {
-    background: var(--sl-color-black);
-    border-color: var(--sl-color-black);
-    color: var(--sl-color-white);
-  }
-
-  .c-auth-modal__btn--primary:hover {
-    opacity: 0.85;
-    background: var(--sl-color-black);
-    border-color: var(--sl-color-black);
-    color: var(--sl-color-white);
-  }
-
-  .c-auth-modal__btn:focus-visible {
-    outline: 2px solid var(--sl-color-accent);
-    outline-offset: 2px;
-  }
-
+  /* ── Reduced motion ─────────────────────────────── */
   @media (prefers-reduced-motion: reduce) {
-    .c-comments *,
-    .c-comments *::before,
-    .c-comments *::after {
+    .c-comments *, .c-comments *::before, .c-comments *::after {
       transition-duration: 0.01ms !important;
       animation-duration: 0.01ms !important;
     }
+    .c-btn__spinner { animation: none; }
   }
 </style>
