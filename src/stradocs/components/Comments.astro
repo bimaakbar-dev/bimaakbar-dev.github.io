@@ -3,6 +3,7 @@ interface Props {
   class?: string;
 }
 const { class: className } = Astro.props;
+const { lang } = Astro.locals.starlightRoute;
 
 const repo = 'bimaakbar-dev/bimaakbar-dev.github.io';
 const repoId = 'R_kgDOUKMOFQ';
@@ -14,7 +15,7 @@ const categoryId = 'DIC_kwDOUKMOFc4DEm1Q';
   <h2 class="comments__title">Komentar</h2>
 
   <div class="comments__embed">
-    <script
+    <script is:inline
       src="https://giscus.app/client.js"
       data-repo={repo}
       data-repo-id={repoId}
@@ -24,8 +25,8 @@ const categoryId = 'DIC_kwDOUKMOFc4DEm1Q';
       data-strict="0"
       data-reactions-enabled="1"
       data-emit-metadata="0"
-      data-input-position="bottom"
-      data-lang="id"
+      data-input-position="top"
+      data-lang={lang}
       data-loading="lazy"
       crossorigin="anonymous"
       data-theme="preferred_color_scheme"
