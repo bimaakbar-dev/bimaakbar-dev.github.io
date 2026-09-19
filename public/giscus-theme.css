@@ -43,9 +43,19 @@ main {
   --color-btn-hover-bg: hsl(0, 0%, 12%);
   --color-btn-hover-border: hsla(224, 100%, 60%, 0.5);
   --color-btn-selected-bg: hsl(224, 54%, 20%);
-  --color-btn-primary-text: hsl(0, 0%, 7.04%);
+
+  --color-btn-primary-text: hsl(0, 0%, 98%);
   --color-btn-primary-bg: hsl(224, 100%, 60%);
+  --color-btn-primary-border: hsl(224, 100%, 60%);
+  --color-btn-primary-shadow: 0 0 #0000;
+  --color-btn-primary-inset-shadow: 0 0 #0000;
   --color-btn-primary-hover-bg: hsl(224, 100%, 68%);
+  --color-btn-primary-hover-border: hsl(224, 100%, 68%);
+  --color-btn-primary-selected-bg: hsl(224, 100%, 55%);
+  --color-btn-primary-selected-shadow: 0 0 #0000;
+  --color-btn-primary-disabled-text: hsla(0, 0%, 98%, 0.6);
+  --color-btn-primary-disabled-bg: hsla(224, 100%, 60%, 0.5);
+  --color-btn-primary-disabled-border: hsla(224, 100%, 60%, 0.5);
 
   --color-action-list-item-default-hover-bg: hsl(0, 0%, 12%);
   --color-segmented-control-bg: hsl(0, 0%, 9.8%);
@@ -94,7 +104,7 @@ main {
 }
 
 .gsc-reply-box > button {
-  border-radius: 0.5rem !important;
+  border-radius: 0 0 0.5rem 0.5rem !important;
 }
 
 .BtnGroup {
