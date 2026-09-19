@@ -67,22 +67,15 @@ const renderReaderRevenue = isBlogPost;
 <meta name="yandex-verification" content={SEO.verification.yandex} />
 <meta name="google-adsense-account" content={SEO.ads.google} />
 
+<script async src={`https://www.googletagmanager.com/gtag/js?id=${SEO.analytics.google}`}></script>
 <script is:inline>
-  (function (w, d, s, l, i) {
-    // @ts-ignore
-    w[l] = w[l] || [];
-    // @ts-ignore
-    w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-    var f = d.getElementsByTagName(s)[0], j = d.createElement(s), 
-    dl = l != "dataLayer" ? "&l=" + l : ""; 
-    // @ts-ignore
-    j.async = true; 
-    // @ts-ignore
-    j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-    // @ts-ignore
-    f.parentNode.insertBefore(j, f);
-  })(window, document, "script", "dataLayer", "GTM-NJJPZV2M");
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YH3JS69V37');
 </script>
+
 <script
   async
   src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${SEO.ads.google}`}
