@@ -1,17 +1,17 @@
 ---
 title: Terms of Service
-description: Terms of service for the c0desk1 website governing website usage and user responsibilities
+description: Terms of service for the BimaakbarDEV website governing website usage and user responsibilities
 editUrl: false
-lastUpdated: 2026-09-17
+lastUpdated: 2026-09-19
 ---
 
-Welcome to **c0desk1**. By accessing or using this website, you agree to be bound by the following terms of service.
+Welcome to **BimaakbarDEV**. By accessing or using this website, you agree to be bound by the following terms of service.
 
 ---
 
 ## 1. Acceptance of Terms
 
-By accessing the **c0desk1** website, you confirm that you:
+By accessing the **BimaakbarDEV** website, you confirm that you:
 
 - Have read and understood these terms
 - Agree to be bound by these terms
@@ -59,10 +59,10 @@ All original content on this website:
 
 - Articles, tutorials, and opinions
 - Code samples and scripts
-- The `c0desk1` logo
+- The `BimaakbarDEV` logo
 - Audio/visual assets
 
-Is the property of **c0desk1** or licensed for use.
+Is the property of **BimaakbarDEV** or licensed for use.
 
 You are **not permitted** to sell, distribute, or use the content for commercial purposes without permission.
 
@@ -108,4 +108,4 @@ These terms are governed by the laws of the **Republic of Indonesia**. Any dispu
 
 ## 11. Contact
 
-If you have questions about these terms, please contact at [Contact](/contact)
+If you have questions about these terms, please contact at [[hello@c0desk1.my.id]]
