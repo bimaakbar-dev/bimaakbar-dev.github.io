@@ -1,5 +1,10 @@
 // src/utils/waline.ts
 
+export interface WalineReplyUser {
+  nick: string;
+  link?: string;
+}
+
 export interface WalineComment {
   objectId: string;
   nick: string;
@@ -11,6 +16,8 @@ export interface WalineComment {
   insertedAt: string;
   createdAt: string;
   updatedAt: string;
+  /** Unix timestamp (ms) used for display/sorting — separate from the ISO audit fields above. */
+  time: number;
   browser?: string;
   os?: string;
   sticky?: boolean;
@@ -18,12 +25,22 @@ export interface WalineComment {
   avatar: string;
   children: WalineComment[];
   status?: 'approved' | 'waiting' | 'spam';
+  /** Author role, mirrors WalineUser.type for the comment's author. */
+  type?: 'administrator';
+  /** objectId of the comment's author, used to check delete permission. */
+  user_id?: string;
+  /** Root comment id for threaded replies. */
+  rid?: string;
+  /** Who this comment is replying to, when it's a nested reply. */
+  reply_user?: WalineReplyUser;
 }
 
 export interface WalineUser {
   objectId: string;
   email: string;
   nick: string;
+  /** Display name shown in the UI (falls back to nick server-side). */
+  display_name: string;
   link?: string;
   avatar: string;
   type?: 'administrator';
@@ -65,7 +82,6 @@ export class WalineClient {
     return res.json();
   }
 
-  // ── Comments ──────────────────────────────────────
   async listComments(path: string, page = 1, pageSize = 20) {
     return this.request<{
       page: number;
@@ -82,7 +98,12 @@ export class WalineClient {
     mail?: string;
     link?: string;
     url: string;
+    /** Parent comment id, when replying. */
     pid?: string;
+    /** Root comment id of the thread, when replying. */
+    rid?: string;
+    /** Nickname of the person being replied to. */
+    at?: string;
   }) {
     return this.request<WalineComment>('/comment', {
       method: 'POST',
@@ -94,8 +115,25 @@ export class WalineClient {
     return this.request<null>(`/comment/${objectId}`, { method: 'DELETE' });
   }
 
-  // ── Auth ──────────────────────────────────────────
-  // ✅ Register: POST /api/user
+  /** Partial update of a comment — used for like, sticky, and status changes. */
+  async updateComment(
+    objectId: string,
+    data: { like?: boolean; sticky?: 0 | 1; status?: 'approved' | 'waiting' | 'spam' },
+  ) {
+    return this.request<WalineComment>(`/comment/${objectId}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async likeComment(objectId: string, like: boolean) {
+    return this.updateComment(objectId, { like });
+  }
+
+  async setSticky(objectId: string, sticky: boolean) {
+    return this.updateComment(objectId, { sticky: sticky ? 1 : 0 });
+  }
+
   async register(input: { email: string; password: string; nick: string; url: string }) {
     return this.request<WalineUser>('/user', {
       method: 'POST',
@@ -103,7 +141,6 @@ export class WalineClient {
     });
   }
 
-  // ✅ Login: POST /api/token
   async login(email: string, password: string) {
     const res = await this.request<{ token: string; user: WalineUser }>('/token', {
       method: 'POST',
@@ -113,7 +150,6 @@ export class WalineClient {
     return res;
   }
 
-  // ✅ Current user: GET /api/token (bukan /user)
   async getCurrentUser(): Promise<WalineUser | null> {
     if (!this.token) return null;
     try {
@@ -124,7 +160,6 @@ export class WalineClient {
     }
   }
 
-  // ✅ Logout: DELETE /api/token
   async logout() {
     if (this.token) {
       try {
