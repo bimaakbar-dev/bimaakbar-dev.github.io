@@ -59,7 +59,10 @@ main {
 
 .gsc-comment-box {
   border-radius: 0.75rem !important;
-  overflow: hidden;
+}
+
+.gsc-comment-box-tabs {
+  border-radius: 0.75rem 0.75rem 0 0 !important;
 }
 
 .gsc-comment-box-textarea {
@@ -70,14 +73,24 @@ main {
   border-radius: 0 0 0.5rem 0.5rem !important;
 }
 
+.gsc-comment-box-bottom {
+  border-radius: 0 0 0.75rem 0.75rem !important;
+}
+
 .gsc-comment > div {
   border-radius: 0.75rem !important;
-  overflow: hidden;
+}
+
+.gsc-comment-header {
+  border-radius: 0.75rem 0.75rem 0 0 !important;
+}
+
+.gsc-comment-footer {
+  border-radius: 0 0 0.75rem 0.75rem !important;
 }
 
 .gsc-reply-box {
   border-radius: 0.75rem !important;
-  overflow: hidden;
 }
 
 .gsc-reply-box > button {
@@ -86,11 +99,16 @@ main {
 
 .BtnGroup {
   border-radius: 0.5rem !important;
-  overflow: hidden;
 }
 
-.btn-primary {
-  border-radius: 0.5rem !important;
+.BtnGroup-item:first-child,
+.BtnGroup-item:first-child .btn {
+  border-radius: 0.5rem 0 0 0.5rem !important;
+}
+
+.BtnGroup-item:last-child,
+.BtnGroup-item:last-child .btn {
+  border-radius: 0 0.5rem 0.5rem 0 !important;
 }
 
 .gsc-reactions-popover {
