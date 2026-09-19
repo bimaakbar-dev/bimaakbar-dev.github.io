@@ -19,13 +19,13 @@ export const sidebarConfig = [
     },
     items: [{ autogenerate: { directory: "docs/writing" } }],
   },
-  {
-    label: "Komponen",
-    translations: {
-      en: "Components",
-    },
-    items: [{ autogenerate: { directory: "docs/components" } }],
-  },
+//  {
+//    label: "Komponen",
+//    translations: {
+//      en: "Components",
+//    },
+//    items: [{ autogenerate: { directory: "docs/components" } }],
+//  },
   {
     label: "Referensi",
     translations: {
