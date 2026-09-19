@@ -1,115 +1,102 @@
 ---
-title: Privacy Policy
-description: Privacy policy of BimaakbarDEV regarding data collection, cookies, advertising, and user rights.
+title: Terms of Service
+description: Terms of service for using BimaakbarDEV — acceptable use, intellectual property, and limitations.
 editUrl: false
 lastUpdated: 2026-09-19
 ---
 
-Your privacy matters. This Privacy Policy explains what data **BimaakbarDEV** ("we", "our") collects, how we use it, and your rights when you visit this website. We comply with the **GDPR**, **ePrivacy Directive**, and other applicable privacy laws.
+By accessing or using **BimaakbarDEV** (the "Site"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree, please do not use the Site.
 
-## 1. Information We Collect
+---
 
-| Category | Examples | Method |
-|----------|----------|--------|
-| **Technical data** | IP address, browser, device, OS | Server logs (GitHub Pages, Cloudflare) |
-| **Usage data** | Pages visited, time spent, referral source | Google Analytics |
-| **Comment data** | Name, email, website URL, message, IP, User-Agent | Waline & Giscus |
-| **Reader data** | Email, survey responses, contribution data | Reader Revenue Manager |
-| **Cookies** | Session IDs, ad identifiers, preferences | See Section 4 |
+## 1. About the Site
 
-We do **not** collect sensitive personal data (health, political views, biometrics).
+BimaakbarDEV is a personal blog and documentation site covering gaming, anime, coding, and modding. Content is provided for informational and educational purposes only.
 
-## 2. How We Use Your Information
+## 2. Acceptable Use
 
-- Operate, maintain, and improve the website
-- Analyze traffic and performance (Google Analytics)
-- Display relevant ads (Google AdSense)
-- Process contributions and reader surveys (Reader Revenue Manager)
-- Enable comments (Waline, Giscus)
-- Detect spam, fraud, and security threats
+You agree **not** to:
 
-We **do not sell** your personal data.
+- Use the Site for any unlawful purpose
+- Attempt to gain unauthorized access to the Site, its servers, or connected systems
+- Post spam, hate speech, harassment, or illegal content in comments
+- Impersonate other users or misrepresent your identity
+- Scrape, copy, or redistribute content at scale without permission
+- Upload malware or malicious code through comment forms
 
-## 3. Third-Party Services
+We reserve the right to remove any content or block any user that violates these Terms, at our sole discretion, without prior notice.
 
-| Service | Purpose | Privacy Policy |
-|---------|---------|----------------|
-| **Google Analytics** | Traffic analysis | [policies.google.com/privacy](https://policies.google.com/privacy) |
-| **Google AdSense** | Advertising | [policies.google.com/technologies/ads](https://policies.google.com/technologies/ads) |
-| **Reader Revenue Manager** | Contributions, surveys, newsletter | [policies.google.com/privacy](https://policies.google.com/privacy) |
-| **Giscus** | Comments (via GitHub Discussions) | [giscus PRIVACY-POLICY](https://github.com/giscus/giscus/blob/main/PRIVACY-POLICY.md) |
-| **Waline** | Comments (backend on Cloudflare Workers) | [waline.js.org/privacy](https://waline.js.org/en/advanced/privacy.html) |
-| **Cloudflare** | Hosting, CDN, DDoS protection, D1 database | [cloudflare.com/privacypolicy](https://www.cloudflare.com/privacypolicy/) |
-| **GitHub** | Hosting (GitHub Pages) | [GitHub Privacy Statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement) |
+## 3. User-Generated Content
 
-**Hosting & data transfer:** BimaakbarDEV is hosted on GitHub Pages (US-based infrastructure). GitHub processes server-side access logs, including IP addresses, which may involve transfer of data outside the EU/EEA under GitHub's Standard Contractual Clauses (SCC).
+Comments on this Site are powered by **Waline** (self-hosted on Cloudflare Workers) and **Giscus** (via GitHub Discussions). By posting a comment, you:
 
-## 4. Cookies & Consent
+- Grant us a non-exclusive, worldwide, royalty-free license to display, store, and moderate your comment
+- Confirm that you own or have the right to post the content
+- Agree that your comment may be publicly visible, indexed by search engines, and archived
 
-We use cookies for functionality, analytics, and advertising.
+We are **not responsible** for user-generated content. Opinions expressed in comments belong to their respective authors.
 
-| Type | Purpose | Example |
-|------|---------|---------|
-| **Strictly necessary** | Site security, load balancing | Cloudflare `__cf_bm`, `cf_clearance` |
-| **Preference** | Remember your settings (theme, language) | Dark/light mode, font size |
-| **Analytics** | Anonymous traffic statistics | Google Analytics |
-| **Advertising** | Relevant ads, frequency capping | Google AdSense |
+## 4. Intellectual Property
 
-**Consent Management (CMP):** We use a Google-certified Consent Management Platform integrated with the **IAB Transparency and Consent Framework (TCF) v2.3**. On your first visit, a banner lets you accept, reject, or customize cookies. You can change your choice anytime via the "Cookie Preferences" link in the footer.
+**Site content** (articles, images, code examples, design) is owned by BimaakbarDEV unless otherwise stated. You may:
 
-Without advertising cookies, you will still see ads — but they will be **non-personalized**.
+- Share links to the Site freely
+- Quote short excerpts with proper attribution and a link back
 
-## 5. Advertising & Reader Revenue
+You may **not**:
 
-**Google AdSense** uses cookies to serve ads based on your prior visits to this and other websites. You can opt out of personalized advertising at [Google Ad Settings](https://adssettings.google.com/) or via [NAI opt-out](https://optout.networkadvertising.org/).
+- Republish full articles without written permission
+- Use Site content for commercial purposes without a license
 
-**Reader Revenue Manager (RRM)** lets readers support BimaakbarDEV through contributions, surveys, or newsletter sign-up. Payment data (including card details) is processed **directly by Google** — we do **not** store your payment information on our servers. Survey responses and email addresses collected via RRM are processed by Google on our behalf.
+**Third-party content** — Mods, screenshots, logos, and trademarks referenced on the Site belong to their respective owners. See the Credits section of individual articles for attribution.
 
-## 6. Comments (Waline & Giscus)
+## 5. Mods and External Downloads
 
-**Waline** (self-hosted on Cloudflare Workers with D1 database) stores your name, email, website URL, comment content, IP address, and User-Agent. Data is used solely for comment functionality, spam prevention, and rate limiting. It is stored in an encrypted Cloudflare D1 database and never shared with third parties.
+Some articles discuss or link to third-party mods hosted on platforms like **Nexus Mods**. We:
 
-**Giscus** stores comments in **GitHub Discussions** of this site's repository. To comment, you must authorize Giscus via **GitHub OAuth**. Comment data is governed by GitHub's Privacy Statement.
+- Do **not** host mod files on our servers
+- Are **not** responsible for the content, safety, or functionality of third-party mods
+- Recommend you always scan downloaded files and read mod descriptions carefully
 
-## 7. Data Retention
+**Modding your game is at your own risk.** We are not liable for corrupted save files, game instability, or data loss resulting from installing third-party mods.
 
-| Data | Retention |
-|------|-----------|
-| Analytics | 14 months (Google Analytics) |
-| Ad tracking | Up to 13 months (Google) |
-| Comments (Waline, Giscus) | Until deleted by user or site owner |
-| RRM surveys & emails | As long as needed for the stated purpose |
-| Contact messages | 12 months |
+## 6. Advertising & Monetization
 
-After the retention period, data is deleted or anonymized.
+The Site displays ads via **Google AdSense** and accepts reader contributions via **Google Reader Revenue Manager**. Ad content is controlled by Google and its partners; we do not endorse every ad shown.
 
-## 8. Data Security
+For details on how data is processed, see our [Privacy Policy](/legal/privacy).
 
-We implement HTTPS/TLS encryption, restrict access to personal data, and keep software updated. However, no method of transmission over the Internet is 100% secure.
+## 7. Disclaimer of Warranties
 
-## 9. Children's Privacy
+The Site is provided **"as is"** and **"as available"** without warranties of any kind, express or implied. We do not guarantee that:
 
-BimaakbarDEV is not intended for children under 13 (or 16 in certain jurisdictions). We do not knowingly collect data from children. If you believe we have inadvertently collected data from a child, contact us and we will delete it.
+- The Site will be uninterrupted, error-free, or secure
+- Information on the Site is accurate, complete, or current
+- Any errors will be corrected
 
-## 10. Your Rights
+Technical tutorials, modding guides, and configuration tips are provided in good faith but may become outdated as software updates.
 
-Depending on your location (EU/EEA, UK, Brazil, California), you may have the right to:
+## 8. Limitation of Liability
 
-- **Access**, **correct**, or **delete** your personal data
-- **Restrict** or **object** to processing
-- **Port** your data to another service
-- **Withdraw consent** at any time
+To the maximum extent permitted by law, BimaakbarDEV and its author shall **not be liable** for any direct, indirect, incidental, or consequential damages arising from:
 
-To exercise these rights, contact us at [hello@c0desk1.my.id](mailto:hello@c0desk1.my.id). We respond within 30 days. EU residents may also lodge a complaint with their local Data Protection Authority (DPA).
+- Your use of, or inability to use, the Site
+- Reliance on information provided on the Site
+- Third-party content, ads, or linked resources
+- Modding activities discussed on the Site
 
-## 11. Do Not Track (DNT)
+## 9. External Links
 
-We do not currently respond to "Do Not Track" signals, as no standard has been adopted. You can still control cookies via the consent banner and browser settings.
+The Site contains links to external websites (Nexus Mods, GitHub, YouTube, etc.). We do not control and are not responsible for the content, privacy practices, or availability of those sites.
 
-## 12. Changes to This Privacy Policy
+## 10. Changes to These Terms
 
-We may update this Privacy Policy periodically. Changes will be posted on this page with a revised "Last Updated" date. Continued use of BimaakbarDEV constitutes acceptance of the updated policy.
+We may update these Terms at any time. Changes will be posted on this page with a revised "Last Updated" date. Continued use of the Site after changes constitutes acceptance.
 
-## 13. Contact
+## 11. Governing Law
 
-For privacy questions or data requests, reach us at [hello@c0desk1.my.id](mailto:hello@c0desk1.my.id).
+These Terms are governed by the laws of the **Republic of Indonesia**, without regard to conflict-of-law principles. Any disputes shall be resolved in the courts of Indonesia.
+
+## 12. Contact
+
+For questions about these Terms, contact us at [hello@c0desk1.my.id](mailto:hello@c0desk1.my.id).
