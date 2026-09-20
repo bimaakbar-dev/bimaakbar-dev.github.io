@@ -97,31 +97,20 @@ const getHref = (post: { id: string }) => {
     height: 100%;
     border: 1px solid var(--sl-color-gray-5);
     border-radius: 0.75rem;
-    background: transparent;
+    background: var(--sl-color-gray-6);
     color: var(--sl-color-gray-2);
     overflow: hidden;
     outline: 1px solid transparent;
-    transition:
-      background 140ms ease,
   }
 
   @media (hover: hover) {
     .related-card:hover {
-      background: rgb(from var(--sl-color-gray-6) r g b / 40%);
+      background: transparent;
     }
   }
 
   [data-theme="light"] .related-card {
-    background: var(--sl-color-gray-7);
-    border-color: var(--sl-color-gray-6);
     box-shadow: var(--shadow-float);
-  }
-
-  @media (hover: hover) {
-    [data-theme="light"] .related-card:hover {
-      background: var(--sl-color-gray-7);
-      box-shadow: var(--sl-shadow-md);
-    }
   }
 
   .related-card:focus-within {
@@ -142,7 +131,7 @@ const getHref = (post: { id: string }) => {
   }
 
   .related-card-content a {
-    font-size: var(--sl-text-h4);
+    font-size: var(--sl-text-h5);
     line-height: var(--sl-line-height-headings);
     color: var(--sl-color-white);
     text-decoration: none;
@@ -151,7 +140,6 @@ const getHref = (post: { id: string }) => {
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* Full card clickable */
   .related-card-content a::after {
     content: '';
     position: absolute;
@@ -160,14 +148,14 @@ const getHref = (post: { id: string }) => {
 
   .related-card-content p {
     color: var(--sl-color-gray-2);
-    font-size: var(--sl-text-body);
+    font-size: var(--sl-text-sm);
     line-height: var(--sl-line-height);
     margin: 0;
   }
 
   @media (min-width: 50rem) {
     .related-card-content a {
-      font-size: var(--sl-text-h3);
+      font-size: var(--sl-text-h4);
     }
   }
 

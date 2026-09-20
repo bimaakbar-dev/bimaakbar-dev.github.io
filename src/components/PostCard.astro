@@ -71,11 +71,8 @@ const blogPosts = allPosts
     padding: 1.25em;
     border-radius: 0.75rem;
     border: 1px solid var(--sl-color-gray-5);
-    
-    background: rgb(from var(--sl-color-gray-6) r g b / 40%);
+    background: var(--sl-color-gray-6);
     outline: 1px solid transparent;
-    transition:
-      background 140ms ease,
   }
 
   @media (hover: hover) {
@@ -85,16 +82,7 @@ const blogPosts = allPosts
   }
 
   [data-theme='light'] .post-card {
-    background: var(--sl-color-gray-7);
-    border-color: var(--sl-color-gray-6);
     box-shadow: var(--shadow-float);
-  }
-
-  @media (hover: hover) {
-    [data-theme='light'] .post-card:hover {
-      background: var(--sl-color-black);
-      box-shadow: var(--sl-shadow-md);
-    }
   }
 
   li:focus-within .post-card {
