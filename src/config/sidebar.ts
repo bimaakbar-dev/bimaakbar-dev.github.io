@@ -1,8 +1,8 @@
 // src/config/sidebar.ts
 export const sidebarConfig = [
-  { label: 'Apa itu c0desk1?', 
+  { label: 'Apa itu Stradocs?', 
     translations: {
-      en: "Whats a c0desk1?",
+      en: "Whats a Stradocs?",
     }, 
     slug: "docs"},
 //  {
@@ -19,13 +19,19 @@ export const sidebarConfig = [
     },
     items: [{ autogenerate: { directory: "docs/writing" } }],
   },
-//  {
-//    label: "Komponen",
-//    translations: {
-//      en: "Components",
-//    },
-//    items: [{ autogenerate: { directory: "docs/components" } }],
-//  },
+  {
+    label: "Komponen",
+    translations: {
+      en: "Components",
+    },
+    badge: { 
+      text: {
+        id: 'Segera', 
+        en: 'Soon'
+      }, variant: 'note' 
+    },
+    items: [{ autogenerate: { directory: "docs/components" } }]
+  },
   {
     label: "Referensi",
     translations: {

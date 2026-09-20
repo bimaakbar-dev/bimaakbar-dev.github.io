@@ -1,5 +1,5 @@
 // src/stradocs/components/index.ts
-
+export { default as AboutCard } from './AboutCard.astro';
 export { default as CardGrid } from './CardGrid.astro';
 export { default as ContributorList } from './ContributorList.astro';
 export { default as GithubCard } from './GithubCard.astro';

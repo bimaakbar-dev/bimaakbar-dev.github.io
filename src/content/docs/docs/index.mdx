@@ -2,10 +2,11 @@
 title: Docs
 description: Custom Starlight theme featuring a modern design aesthetic and full layout flexibility.
 hero:
-  title: BimaakbarDEV Docs
-  tagline: Trik, tips, dan catatan dari dunia Game, Anime, dan Coding.
+  title: Stradocs
+  tagline: Custom Starlight theme featuring a modern design, aesthetic and full layout flexibility.
   image:
-    file: ~/assets/images/author/bimaakbar.svg
+    dark: ~/assets/images/logo/dark-logo.svg
+    light: ~/assets/images/logo/light-logo.svg
     alt: BimaakbarDEV
 editUrl: false
 lastUpdated: false
@@ -13,3 +14,28 @@ prev: false
 next: false
 tableOfContents: false
 ---
+
+import { LinkCard } from '@astrojs/starlight/components';
+import { AboutCard, CardGrid, ContributorList } from '~/stradocs/components';
+
+## Menulis  
+
+<CardGrid>
+  <LinkCard title='Markdown' description='Pelajari cara menulis menggunakan markdown di Stradocs' href="/docs/writing/markdown" />
+  <LinkCard title='MDX' description='Pelajari cara menulis MDX di Stradocs' href='/docs/writing/using-mdx' />
+</CardGrid>  
+
+## Referensi  
+
+<CardGrid>
+  <LinkCard title='Inline Syntax' description='Pelajari Syntak Inline di Markdown' href='/docs/reference/inline-syntax' />
+  <LinkCard title='Block Syntax' description='Pelajari Syntak Block di Markdown' href='/docs/reference/block-syntax' />
+</CardGrid>
+
+<ContributorList title='Kontributor' repo='bimaakbar-dev/bimaakbar-dev.github.io' limit='20' />
+
+<AboutCard title='Powered by'>
+  Situs ini dikembangkan oleh <a href='https://github.com/bimaakbar-dev'>Bima Akbar</a>.
+  <br />
+  <a href='https://starlight.astro.build'>Pelajari tentang Starlight</a>
+</AboutCard>
