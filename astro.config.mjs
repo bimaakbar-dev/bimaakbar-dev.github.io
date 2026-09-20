@@ -9,7 +9,6 @@ import { satteri } from "@astrojs/markdown-satteri";
 import { hastExternalLink } from "./src/lib/plugins/satteri/hast/hast-external-link";
 import { hastTable } from "./src/lib/plugins/satteri/hast/hast-table";
 import { mdastStradocsAside } from './src/lib/plugins/satteri/mdast/mdast-stradocs-aside'
-import { mermaidPlugin } from "./src/lib/plugins/satteri/mdast/satteri-plugin-mermaid";
 
 const site = "https://bimaakbar-dev.github.io/";
 const siteName = "BimaakbarDEV";
@@ -76,8 +75,7 @@ export default defineConfig({
         hastTable
       ],
       mdastPlugins: [
-        mdastStradocsAside,
-        mermaidPlugin,
+        mdastStradocsAside
       ],
       features: {
         frontmatter: true,
