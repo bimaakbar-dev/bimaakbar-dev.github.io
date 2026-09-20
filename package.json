@@ -13,7 +13,6 @@
     "@astrojs/markdown-satteri": "^0.4.1",
     "@astrojs/rss": "^4.0.19",
     "@astrojs/starlight": "^0.42.1",
-    "@orama/orama": "^3.1.18",
     "astro": "^7.3.3",
     "satteri": "^0.10.5",
     "sharp": "^0.35.3"
