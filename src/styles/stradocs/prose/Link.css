@@ -3,17 +3,18 @@
   & a:not(:where(.not-content *)) {
     font-weight: 500;
     color: var(--sl-color-white);
-    text-decoration-color: var(--sl-color-accent-high);
+    text-decoration: dotted;
+    text-decoration-color: var(--sl-color-white);
     text-decoration-thickness: 1.5px;
     text-underline-offset: 2px;
   }
 
   & a.is-external:not(:where(.not-content *)) {
     color: var(--sl-color-accent-high);
-    text-decoration: none;
+    text-decoration-color: var(--sl-color-accent-high);
   }
 
-  /* Link didalam inline-code */
+
   & a:has(code) code:not(:where(.not-content *)) {
     color: inherit;
   }
@@ -35,7 +36,8 @@
   }
 
   /* Hover */
-  & a:not(:where(.not-content *)):hover {
+  & a:not(:where(.not-content *)):hover,
+	a.is-external:not(:where(.not-content *)):hover {
     color: var(--sl-color-accent-high);
     text-decoration: none;
   }
