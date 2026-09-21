@@ -100,10 +100,10 @@
   background-color: var(--ds-details-marker-color-hover);
 }
 
-.sl-markdown-content details[open]:not(:where(.not-content *)) > summary:not(:where(.not-content *)) {
+/* .sl-markdown-content details[open]:not(:where(.not-content *)) > summary:not(:where(.not-content *)) {
   border-block-end: 1px solid var(--ds-details-border);
-
 }
+*/
 
 .sl-markdown-content details[open]:not(:where(.not-content *)) > summary:not(:where(.not-content *))::before {
   transform: rotate(90deg);
