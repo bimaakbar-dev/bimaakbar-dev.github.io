@@ -37,11 +37,15 @@
   --sl-color-red: hsl(var(--sl-hue-red), 85%, 65%);
   --sl-color-red-high: hsl(var(--sl-hue-red), 70%, 88%);
 
+  --sl-color-accent-low: var(--darksolar);
+  --sl-color-accent: var(--solar);
+  --sl-color-accent-high: var(--solar);
+
+  /* disable for maintance
   --sl-color-accent-low: hsl(224, 54%, 20%);
   --sl-color-accent: hsl(224, 100%, 60%);
   --sl-color-accent-high: hsl(224, 100%, 85%);
-
-  /* disable for maintance
+  
   --sl-color-accent-high: hsl(22, 100%, 60%);
   --sl-color-accent: hsl(32, 100%, 55%);
   --sl-color-accent-low: hsla(22, 100%, 60%, 0.603);
