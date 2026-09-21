@@ -7,7 +7,7 @@
     text-decoration-style: dotted;
     text-decoration-color: var(--sl-color-white);
     text-decoration-thickness: 1.5px;
-    text-underline-offset: 3px;
+    text-underline-offset: 4px;
   }
 
   & a.is-external:not(:where(.not-content *)) {
@@ -15,7 +15,7 @@
     text-decoration: none;
     text-decoration-color: var(--sl-color-accent-high);
     text-decoration-thickness: 1.5px;
-    text-underline-offset: 3px;
+    text-underline-offset: 4px;
   }
 
 
