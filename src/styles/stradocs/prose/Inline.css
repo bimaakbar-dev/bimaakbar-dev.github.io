@@ -139,7 +139,7 @@
    ============================================================ */
 .sl-markdown-content {
   & del:not(:where(.not-content *)) {
-    color: var(--sl-color-gray-3);
+    color: var(--sl-color-red);
     background: color-mix(in srgb, var(--sl-color-red-low) 40%, transparent);
     border: 1px solid color-mix(in srgb, var(--sl-color-red) 20%, transparent);
     text-decoration: none;
