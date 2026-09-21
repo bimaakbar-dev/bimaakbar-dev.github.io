@@ -8,13 +8,14 @@
 }
 .sl-markdown-content :is(strong em, b i):not(:where(.not-content *)) {
   font-weight: 600;
+  color: var(--sl-color-white);
 }
 
 /* Kbd */
 .sl-markdown-content {
   & kbd:not(:where(.not-content *)) {
     display: inline-block;
-    border-radius: 6px;
+    border-radius: 0.333rem;
     padding: 0.25em 0.5em;
     font-family: var(--sl-font-mono);
     font-size: 0.78em;
