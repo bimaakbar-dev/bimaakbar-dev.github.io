@@ -16,7 +16,7 @@
 
 [data-theme='light'] .sl-markdown-content {
   & ul:not(:where(.not-content *)) > li::marker {
-    color: var(--sl-color-gray-6);
+    color: var(--sl-color-gray-5);
   }
 }
 
