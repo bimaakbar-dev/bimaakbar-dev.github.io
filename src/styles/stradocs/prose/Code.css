@@ -4,6 +4,7 @@
     border: 1px solid transparent;
     border-radius: 0.5rem;
     font-size: var(--sl-text-code-sm);
+    color: var(--solar);
   }
   & pre:not(:where(.not-content *)) {
     border: 1px solid var(--sl-color-gray-5);

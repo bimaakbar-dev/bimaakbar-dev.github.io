@@ -9,6 +9,9 @@
   --sl-color-gray-6: hsl(0, 0%, 9.8%);
   --sl-color-black: hsl(0, 0%, 7.04%);
 
+  --darksolar: hsl(26 61% 50%);
+  --solar: hsl(22 100% 52%);
+
   --sl-hue-orange: 35;
   --sl-color-orange-low: hsl(var(--sl-hue-orange), 30%, 15%);
   --sl-color-orange: hsl(var(--sl-hue-orange), 90%, 60%);
@@ -91,9 +94,9 @@
   --sl-color-accent-high:      hsl(145, 55%, 32%);
   */
   
-  --sl-color-accent-low: hsla(0, 0%, 82%, 50%);
-  --sl-color-accent-high: hsl(0, 0%, 9%);
-  --sl-color-accent: hsla(0, 0%, 82%, 50%);
+  --sl-color-accent-low: var(--darksolar);
+  --sl-color-accent: var(--solar);
+  --sl-color-accent-high: var(--solar);
   
   --sl-color-bg:               var(--sl-color-black);
   --sl-color-bg-nav:           var(--sl-color-black);
@@ -156,6 +159,7 @@
   --hue-green: 145;
   --green: hsl(var(--hue-green) 42% 48%);
   --overlay-greenblur: hsl(var(--hue-green) 42% 48% / 0.2);
+  
 }
 
 [data-has-hero] :is(header):not([data-has-sidebar][data-has-hero] header) {
