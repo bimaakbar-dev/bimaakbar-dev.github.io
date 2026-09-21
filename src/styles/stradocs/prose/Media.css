@@ -18,7 +18,7 @@
     display: grid;
     & :is(img, picture, video, iframe) { margin: 0; }
     & > figcaption:not(:where(.not-content *)) {
-      margin-top: 0.5rem;
+      margin-top: 0.75rem;
       margin-inline: auto;
       max-width: 45ch;
       font-size: var(--sl-text-xs);
