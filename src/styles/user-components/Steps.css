@@ -9,8 +9,8 @@
 }
 
 [data-theme="light"] {
-  --ds-steps-bullet-bg:         var(--sl-color-gray-7);
-  --ds-steps-bullet-border:     var(--sl-color-gray-5);
+  --ds-steps-bullet-bg:         var(--sl-color-gray-6);
+  --ds-steps-bullet-border:     transparent;
 }
 
 /* ── Komponen ─────────────────────────────────────────── */
