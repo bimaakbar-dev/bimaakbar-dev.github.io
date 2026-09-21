@@ -6,7 +6,7 @@
     text-decoration: underline;
     text-decoration-style: dotted;
     text-decoration-color: var(--sl-color-white);
-    text-decoration-thickness: 1.5px;
+    text-decoration-thickness: 1px;
     text-underline-offset: 4px;
   }
 
@@ -14,7 +14,7 @@
     color: var(--sl-color-accent-high);
     text-decoration: none;
     text-decoration-color: var(--sl-color-accent-high);
-    text-decoration-thickness: 1.5px;
+    text-decoration-thickness: 1px;
     text-underline-offset: 4px;
   }
 
