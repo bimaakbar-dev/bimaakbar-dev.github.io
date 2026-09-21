@@ -68,11 +68,6 @@
   background: var(--sl-color-accent);
   color: var(--sl-color-white);
 }
-[data-theme="light"]::-moz-selection,
-[data-theme="light"]::selection {
-  background: var(--sl-color-accent-high);
-  color: var(--sl-color-white);
-}
 
 html {
   color-scheme: dark;
@@ -152,11 +147,6 @@ select:hover,
 select:focus {
   background-color: rgb(from var(--sl-color-gray-6) r g b / 80%);
   outline: none;
-}
-
-:global([data-theme='light'] select:hover,
-[data-theme='light'] select:focus) {
-  background-color: rgb(from var(--sl-color-gray-7) r g b / 80%);
 }
 
 option {
