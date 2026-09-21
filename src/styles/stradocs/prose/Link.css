@@ -3,7 +3,8 @@
   & a:not(:where(.not-content *)) {
     font-weight: 500;
     color: var(--sl-color-white);
-    text-decoration: dotted;
+    text-decoration: underline;
+    text-decoration-style: dotted;
     text-decoration-color: var(--sl-color-white);
     text-decoration-thickness: 1.5px;
     text-underline-offset: 2px;
