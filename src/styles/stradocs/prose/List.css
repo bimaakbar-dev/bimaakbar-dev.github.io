@@ -14,12 +14,6 @@
   }
 }
 
-[data-theme='light'] .sl-markdown-content {
-  & ul:not(:where(.not-content *)) > li::marker {
-    color: var(--sl-color-gray-5);
-  }
-}
-
 /* Task List */
 .sl-markdown-content {
   & ul.contains-task-list {
