@@ -16,10 +16,9 @@
   --ds-btn-primary-text:          var(--sl-color-black);
   --ds-btn-primary-opacity-hover: 0.82;
 
-  --ds-btn-secondary-bg-hover:     var(--sl-color-gray-5);
-  --ds-btn-secondary-text:         var(--sl-color-white);
-  --ds-btn-secondary-border:       var(--sl-color-hairline);
-  --ds-btn-secondary-border-hover: var(--sl-color-gray-4);
+  --ds-btn-secondary-bg-hover:     var(--sl-color-gray-6);
+  --ds-btn-secondary-text:         var(--solar);
+  --ds-btn-secondary-border:       var(--darksolar);
 
   --ds-btn-minimal-text:       var(--sl-color-gray-3);
   --ds-btn-minimal-text-hover: var(--sl-color-gray-1);
@@ -33,11 +32,6 @@
   --ds-btn-primary-bg-hover:      hsl(0, 0%, 18%);
   --ds-btn-primary-text:          hsl(0, 0%, 98%);
   --ds-btn-primary-opacity-hover: 1;
-
-  --ds-btn-secondary-bg-hover:     hsla(0, 0%, 0%, 0.04);
-  --ds-btn-secondary-text:         var(--sl-color-white);
-  --ds-btn-secondary-border:       hsla(0, 0%, 0%, 0.18);
-  --ds-btn-secondary-border-hover: hsla(0, 0%, 0%, 0.32);
 
   --ds-btn-minimal-text:       var(--sl-color-gray-3);
   --ds-btn-minimal-text-hover: var(--sl-color-gray-2);
@@ -96,7 +90,6 @@
 
   .sl-link-button.secondary:hover {
     background: var(--ds-btn-secondary-bg-hover);
-    border-color: var(--ds-btn-secondary-border-hover);
     color: var(--ds-btn-secondary-text);
   }
 
@@ -112,6 +105,7 @@
 
 .sl-markdown-content .sl-link-button {
   margin-inline-end: 1rem;
+  font-size: var(--sl-text-body);
 }
 
 .sl-markdown-content .sl-link-button:not(:where(p *)) {
