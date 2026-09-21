@@ -637,9 +637,9 @@ const path = Astro.url.pathname;
     margin-inline: auto;
     padding-block: 3.5rem 2rem;
     padding-inline: 0;
-    border-top: 1px solid var(--sl-color-hairline);
+    border-top: 1px solid var(--sl-color-gray-5);
     font-family: var(--sl-font);
-    font-size: 0.875rem;
+    font-size: var(--sl-text-body);
     font-feature-settings: 'cv11', 'ss01';
   }
 
@@ -671,7 +671,7 @@ const path = Astro.url.pathname;
 
   .c-btn--primary {
     background: var(--sl-color-accent);
-    border: 1px solid var(--sl-color-accent);
+    border: 1px solid transparent;
     color: var(--sl-color-white);
   }
 
@@ -686,7 +686,6 @@ const path = Astro.url.pathname;
 
   .c-btn--ghost:hover {
     background: var(--sl-color-gray-6);
-    border-color: var(--sl-color-gray-4);
     color: var(--sl-color-white);
   }
 
@@ -713,9 +712,7 @@ const path = Astro.url.pathname;
     flex-wrap: wrap;
     row-gap: 0.625rem;
     gap: 0.75rem;
-    margin-bottom: 1.75rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--sl-color-hairline);
+    margin-bottom: 1.5rem;
   }
 
   .c-comments__header-left {
@@ -728,10 +725,9 @@ const path = Astro.url.pathname;
 
   .c-comments__label {
     font-size: var(--sl-text-h4);
-    font-weight: 600;
+    font-weight: 500;
     color: var(--sl-color-white);
     font-family: var(--font-montserrat);
-    letter-spacing: -0.01em;
   }
 
   .c-comments__count {
@@ -743,11 +739,11 @@ const path = Astro.url.pathname;
     padding-inline: 0.3125rem;
     border-radius: 999px;
     background: var(--sl-color-gray-6);
-    border: 1px solid var(--sl-color-hairline);
+    border: 1px solid var(--sl-color-gray-5);
     color: var(--sl-color-gray-3);
     font-family: var(--sl-font-mono);
     font-size: var(--sl-text-xs);
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 0;
     line-height: 1;
   }
@@ -767,7 +763,7 @@ const path = Astro.url.pathname;
     flex-shrink: 0;
     object-fit: cover;
     background: var(--sl-color-gray-6);
-    box-shadow: 0 0 0 1px var(--sl-color-hairline);
+    box-shadow: 0 0 0 1px var(--sl-color-gray-5);
   }
 
   .c-comments__auth-name {
@@ -781,19 +777,18 @@ const path = Astro.url.pathname;
 
   .c-comments__auth-btn {
     padding: 0.1875rem 0.5rem;
-    border: 1px solid var(--sl-color-hairline);
+    border: 1px solid var(--sl-color-gray-5);
     border-radius: var(--c-radius-sm);
     background: transparent;
     color: var(--sl-color-gray-3);
     font: inherit; font-size: 0.6875rem;
     cursor: pointer;
-    transition: color var(--c-transition), background-color var(--c-transition), border-color var(--c-transition);
+    transition: color var(--c-transition);
   }
 
   .c-comments__auth-btn:hover {
     color: var(--sl-color-white);
     background: var(--sl-color-gray-6);
-    border-color: var(--sl-color-gray-4);
   }
 
   .c-comments__auth-btn:focus-visible { outline: 2px solid var(--sl-color-accent); outline-offset: 2px; }
@@ -828,7 +823,7 @@ const path = Astro.url.pathname;
     flex-direction: column;
     gap: 0.75rem;
     padding: 1.125rem;
-    border: 1px solid var(--sl-color-hairline);
+    border: 1px solid var(--sl-color-gray-5);
     border-radius: var(--c-radius);
     background: var(--sl-color-gray-6);
     margin-bottom: 0.75rem;
@@ -1001,8 +996,6 @@ const path = Astro.url.pathname;
     padding: 1rem 0.625rem;
     margin-inline: -0.625rem;
     border-top: 1px solid var(--sl-color-gray-5);
-    border-radius: var(--c-radius-sm);
-    transition: background-color var(--c-transition);
   }
 
   .c-item:hover {
@@ -1012,7 +1005,6 @@ const path = Astro.url.pathname;
   .c-item--reply {
     margin-inline-start: 2.5rem;
     padding-inline-start: 0.875rem;
-    border-inline-start: 2px solid var(--sl-color-gray-5);
     border-top: 1px solid var(--sl-color-gray-5);
   }
 
@@ -1043,7 +1035,7 @@ const path = Astro.url.pathname;
     flex-shrink: 0;
     object-fit: cover;
     background: var(--sl-color-gray-6);
-    box-shadow: 0 0 0 1px var(--sl-color-hairline);
+    box-shadow: 0 0 0 1px var(--sl-color-gray-5);
   }
 
   .c-item--reply .c-item__avatar {
@@ -1152,7 +1144,7 @@ const path = Astro.url.pathname;
 
   .c-item__content code {
     padding: 0.1em 0.3em;
-    border-radius: 0.25rem;
+    border-radius: 0.333rem;
     background: var(--sl-color-bg-inline-code);
     color: var(--sl-color-text);
     font-family: var(--sl-font-mono);
@@ -1164,7 +1156,7 @@ const path = Astro.url.pathname;
     padding: 0.75rem;
     border-radius: var(--c-radius-sm);
     background: var(--sl-color-bg-inline-code);
-    border: 1px solid var(--sl-color-hairline);
+    border: 1px solid var(--sl-color-gray-5);
     overflow-x: auto;
     font-size: 0.75rem;
   }
@@ -1176,8 +1168,6 @@ const path = Astro.url.pathname;
     padding: 0.125em 0.625rem;
     border-inline-start: 2px solid var(--sl-color-accent);
     color: var(--sl-color-gray-3);
-    background: var(--sl-color-accent-low);
-    border-radius: 0 var(--c-radius-sm) var(--c-radius-sm) 0;
   }
 
   .c-item__actions {
@@ -1296,7 +1286,6 @@ const path = Astro.url.pathname;
     font-size: var(--sl-text-h5);
     font-weight: 600;
     color: var(--sl-color-white);
-    letter-spacing: -0.02em;
   }
 
   .c-auth-modal__close {
@@ -1376,4 +1365,4 @@ const path = Astro.url.pathname;
       animation-duration: 0.01ms !important;
     }
   }
-</style>
+</style>
