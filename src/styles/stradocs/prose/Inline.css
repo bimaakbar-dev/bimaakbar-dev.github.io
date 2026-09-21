@@ -1,6 +1,4 @@
-/* ============================================================
-   Bold / Italic
-   ============================================================ */
+/* Bold / Italic */
 .sl-markdown-content :is(strong, b):not(:where(.not-content *)) {
   font-weight: 600;
   color: var(--sl-color-white);
@@ -12,9 +10,7 @@
   font-weight: 600;
 }
 
-/* ============================================================
-   Kbd
-   ============================================================ */
+/* Kbd */
 .sl-markdown-content {
   & kbd:not(:where(.not-content *)) {
     display: inline-block;
@@ -34,15 +30,13 @@
   }
 }
 
-/* ============================================================
-   Abbr
-   ============================================================ */
+/* Abbr */
 .sl-markdown-content {
   & abbr:not(:where(.not-content *)) {
     text-decoration: underline;
     text-decoration-style: dotted;
     text-decoration-thickness: 1.5px;
-    text-underline-offset: 4px;
+    text-underline-offset: 3px;
     text-decoration-color: var(--sl-color-gray-3);
     cursor: help;
     display: inline-flex;
@@ -76,9 +70,7 @@
   }
 }
 
-/* ============================================================
-   Sup / Sub
-   ============================================================ */
+/* Sup / Sub */
 .sl-markdown-content {
   & :is(sub, sup):not(:where(.not-content *)) {
     position: relative;
@@ -94,18 +86,14 @@
   }
 }
 
-/* ============================================================
-   Small
-   ============================================================ */
+/* Small */
 .sl-markdown-content small:not(:where(.not-content *)) {
   display: inline-block;
   color: var(--sl-color-gray-3);
   margin: 0;
 }
 
-/* ============================================================
-   Mark
-   ============================================================ */
+/* Mark */
 .sl-markdown-content {
   & mark:not(:where(.not-content *)) {
     --mark-accent: #facc15;
@@ -120,23 +108,22 @@
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
   }
+}
 
-  & mark:hover:not(:where(.not-content *)) {
-    background: var(--sl-color-orange-low);
-
-    @supports (background: color-mix(in srgb, red 30%, transparent)) {
-      background: color-mix(in srgb, var(--mark-accent) 30%, transparent);
+@media (hover: hover) {
+    .sl-markdown-content mark:hover:not(:where(.not-content *)) {
+    	background: var(--sl-color-orange-low);
+    	@supports (background: color-mix(in srgb, red 30%, transparent)) {
+      	background: color-mix(in srgb, var(--mark-accent) 30%, transparent);
+    	}
     }
-  }
 }
 
 :root[data-theme="dark"] .sl-markdown-content mark:not(:where(.not-content *)) {
   --mark-accent: #fde047;
 }
 
-/* ============================================================
-   Del / Ins / S / U
-   ============================================================ */
+/* Del / Ins / S / U */
 .sl-markdown-content {
   & del:not(:where(.not-content *)) {
     color: var(--sl-color-red);
@@ -149,7 +136,7 @@
     &::before {
       content: "- ";
       color: var(--sl-color-red);
-      font-weight: 700;
+      font-weight: 600;
     }
   }
 
@@ -164,13 +151,13 @@
     &::before {
       content: "+ ";
       color: var(--sl-color-green);
-      font-weight: 700;
+      font-weight: 600;
     }
   }
 
   & s:not(:where(.not-content *)) {
     text-decoration: line-through;
-    text-decoration-thickness: 2px;
+    text-decoration-thickness: 1.5px;
     color: var(--sl-color-gray-3);
   }
 
@@ -201,12 +188,11 @@
     font-family: var(--sl-font-mono);
     font-size: var(--sl-text-code);
     padding: 0.2em 0.4em;
-    border-radius: 0.5rem;
+    border-radius: 0.333rem;
     border: 1px solid #2a2a2e;
     background: #0e0e10;
     color: #a6e22e;
     box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.5);
-
     &::before { content: "> "; opacity: 0.5; }
   }
 
