@@ -8,7 +8,6 @@
   --ds-card-bg:             transparent;
   --ds-card-bg-hover:       var(--sl-color-gray-6);
   --ds-card-border:         var(--sl-color-gray-5);
-  --ds-card-border-hover:   var(--sl-color-gray-4);
 
   --ds-card-title-color:        var(--sl-color-white);
   --ds-card-title-size:         var(--sl-text-sm);
@@ -35,9 +34,6 @@
   box-shadow: none;
   position: relative;
   background-color: var(--ds-card-bg);
-  transition:
-    background 140ms ease,
-    outline-color 140ms ease;
 }
 
 .sl-link-card a {
@@ -74,15 +70,12 @@
   transition: color 140ms ease;
 }
 
-@media (hover: hover) {
-  .sl-link-card:hover {
-    outline-color: var(--ds-card-border-hover);
-    background-color: var(--ds-card-bg-hover);
-  }
+.sl-link-card:hover {
+  background-color: var(--ds-card-bg-hover);
+}
 
-  .sl-link-card:hover .icon {
-    color: var(--ds-card-icon-color-hover);
-  }
+.sl-link-card:hover .icon {
+  color: var(--ds-card-icon-color-hover);
 }
 
 @media (min-width: 50rem) {
