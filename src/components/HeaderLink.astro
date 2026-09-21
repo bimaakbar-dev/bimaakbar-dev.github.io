@@ -55,27 +55,19 @@ const linkClass = [active && "is-active"]
     text-decoration: none;
     color: var(--sl-color-gray-2);
     font-size: var(--sl-text-sm);
-    font-weight: 600;
+    font-weight: 500;
     font-family: var(--font-montserrat);
     white-space: nowrap;
     line-height: 1;
     padding: 0.5em 0.75em;
-    border-radius: 99rem;
     &:hover {
       color: var(--sl-color-white);
-      background-color: var(--sl-color-gray-6);
     }
     &.is-active {
-      color: var(--sl-color-accent-high);
+      color: var(--sl-color-white);
       &:hover {
         filter: brightness(1.15);
       }
-    }
-  }
-  [data-theme="light"] a {
-    color: var(--sl-color-gray-2);
-    &.is-active {
-      color: var(--sl-color-accent-high);
     }
   }
   @media (max-width: 50rem) {

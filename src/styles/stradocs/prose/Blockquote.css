@@ -7,7 +7,7 @@
     padding-block: 0.5em;
     border-inline-start: none;
     color: var(--sl-color-white);
-    font-size: var(--sl-text-h5);
+    font-size: var(--sl-text-sm);
 
     &::before {
       content: "";
@@ -15,12 +15,12 @@
       inset-block: 0.75em;
       inset-inline-start: 0.25em;
       width: 3px;
-      background: var(--sl-color-gray-4);
+      background: var(--sl-color-accent-high);
       border-radius: 99rem;
     }
     & cite:not(:where(.not-content *)) {
       color: var(--sl-color-gray-3);
-      font-size: var(--sl-text-sm);
+      font-size: var(--sl-text-xs);
 
       &::before {
         content: "\2014";
@@ -34,7 +34,7 @@
 @media (min-width: 50em) {
   .sl-markdown-content {
     & blockquote:not(:where(.not-content *)) {
-      font-size: var(--sl-text-h4);
+      font-size: var(--sl-text-base);
     }
   }
 }

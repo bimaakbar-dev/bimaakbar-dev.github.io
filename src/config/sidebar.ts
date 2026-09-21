@@ -28,7 +28,7 @@ export const sidebarConfig = [
       text: {
         id: 'Segera', 
         en: 'Soon'
-      }, variant: 'note' 
+      }, variant: 'default' 
     },
     items: [{ autogenerate: { directory: "docs/components" } }]
   },

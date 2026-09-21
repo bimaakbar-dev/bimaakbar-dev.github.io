@@ -36,9 +36,10 @@
 /* ── Komponen ─────────────────────────────────────────── */
 
 .sl-markdown-content details:not(:where(.not-content *)) {
-  border: 1px solid var(--ds-details-border);
+  border-block-end: 1px solid var(--ds-details-border);
+  border-inline-start: 0;
   background: var(--ds-details-bg);
-  border-radius: 0.75rem;
+
   padding: 0;
   overflow: hidden;
 }
@@ -46,6 +47,10 @@
 .sl-markdown-content details:not(:where(.not-content *)):has(> summary:hover) {
   border-color: var(--ds-details-border-hover);
   background: var(--ds-details-bg-hover);
+}
+
+.sl-markdown-content details + details:not(:where(.not-content *)) {
+  margin: 0;
 }
 
 /* Summary */

@@ -3,7 +3,7 @@ import { Icon } from "@astrojs/starlight/components";
 ---
 
 <button popovertarget="starlight__sidebar" class="sl-menu-button sl-flex md:sl-hidden print:hidden">
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" class="open-menu">
+  <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" class="open-menu">
 	  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5"></path>
   </svg>
   <Icon name="close" class="close-menu" size="1em" />
@@ -30,8 +30,9 @@ import { Icon } from "@astrojs/starlight/components";
 			justify-content: center;
 			& svg {
 				flex-shrink: 0;
-				width: 1em;
-				height: 1em;
+				width: 1.333em;
+				height: 1.333em;
+				font-size: inherit;
 			}
 			&:has(~ :popover-open) {
 				background-color: transparent;
