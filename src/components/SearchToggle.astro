@@ -59,6 +59,11 @@ const { variant = 'icon-only', class: className } = Astro.props;
 		cursor: pointer;
 		height: 2.5rem;
 		font-size: var(--sl-text-xl);
+		& svg {
+			width: 1.333em;
+        	height: 1.333em;
+        	flex-shrink: 0;
+        }
 		&.bar {
 			border: 1px solid var(--sl-color-gray-5);
 			border-radius: 99rem;
