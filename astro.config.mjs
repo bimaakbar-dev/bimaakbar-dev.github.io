@@ -85,7 +85,7 @@ export default defineConfig({
         superscript: true,
         subscript: true,
         wikilinks: true,
-        smartPunctuation: true,
+        smartPunctuation: false,
         math: { singleDollarTextMath: false },
         rawHtml: false
       },
