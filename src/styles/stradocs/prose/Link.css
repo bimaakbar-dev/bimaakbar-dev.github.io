@@ -7,12 +7,15 @@
     text-decoration-style: dotted;
     text-decoration-color: var(--sl-color-white);
     text-decoration-thickness: 1.5px;
-    text-underline-offset: 2px;
+    text-underline-offset: 3px;
   }
 
   & a.is-external:not(:where(.not-content *)) {
     color: var(--sl-color-accent-high);
+    text-decoration: none;
     text-decoration-color: var(--sl-color-accent-high);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
   }
 
 
@@ -37,9 +40,11 @@
   }
 
   /* Hover */
-  & a:not(:where(.not-content *)):hover,
-	a.is-external:not(:where(.not-content *)):hover {
+  & a:not(:where(.not-content *)):hover {
     color: var(--sl-color-accent-high);
     text-decoration: none;
+  }
+  & a.is-external:not(:where(.not-content *)):hover {
+    text-decoration: underline;
   }
 }
