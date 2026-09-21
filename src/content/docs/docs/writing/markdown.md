@@ -176,8 +176,7 @@ Dia berkata <q>ini adalah quote pendek</q> di dalam paragraf.
 ```markdown
 > Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
-> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
->
+> Lorem ipsum dolor sit amet, consectetur adipiscing elit.  
 > <cite>John Doe, Penulis</cite>
 
 > Level 1
@@ -185,31 +184,18 @@ Dia berkata <q>ini adalah quote pendek</q> di dalam paragraf.
 > > Level 2
 > >
 > > > Level 3
-
-> **Catatan**
->
-> > **Sub-catatan**
-> >
-> > > **Sub-sub-catatan**
 ```
 
 > Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
-> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
->
+> Lorem ipsum dolor sit amet, consectetur adipiscing elit.  
 > <cite>John Doe, Penulis</cite>
 
 > Level 1
 >
 > > Level 2
 > >
-> > > Level 3
-
-> **Catatan**
->
-> > **Sub-catatan**
-> >
-> > > **Sub-sub-catatan**
+> > > Level 3  
 
 ## Subscript & Superscript
 ```markdown
@@ -590,17 +576,6 @@ Teks di bawah komentar.
 ```
 
 &copy; &reg; &trade; &amp; &lt; &gt; &nbsp; &mdash; &ndash; &hellip; &laquo; &raquo; &times; &divide;
-
-## Emoji Code
-```markdown
-:smile: :rocket: :fire: :tada: :sparkles: :heart: :+1: :-1:
-
-:warning: :bulb: :books: :memo: :bug: :zap:
-```
-
-:smile: :rocket: :fire: :tada: :sparkles: :heart: :+1: :-1:
-
-:warning: :bulb: :books: :memo: :bug: :zap:
 
 ## Mermaid
 
