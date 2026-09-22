@@ -1,4 +1,6 @@
-/* Bold / Italic */
+/* ============================================================
+   Bold / Italic
+   ============================================================ */
 .sl-markdown-content :is(strong, b):not(:where(.not-content *)) {
   font-weight: 600;
   color: var(--sl-color-white);
@@ -11,7 +13,9 @@
   color: var(--sl-color-white);
 }
 
-/* Kbd */
+/* ============================================================
+   Kbd
+   ============================================================ */
 .sl-markdown-content {
   & kbd:not(:where(.not-content *)) {
     display: inline-block;
@@ -31,7 +35,9 @@
   }
 }
 
-/* Abbr */
+/* ============================================================
+   Abbr
+   ============================================================ */
 .sl-markdown-content {
   & abbr:not(:where(.not-content *)) {
     text-decoration: underline;
@@ -71,7 +77,9 @@
   }
 }
 
-/* Sup / Sub */
+/* ============================================================
+   Sup / Sub
+   ============================================================ */
 .sl-markdown-content {
   & :is(sub, sup):not(:where(.not-content *)) {
     position: relative;
@@ -87,14 +95,18 @@
   }
 }
 
-/* Small */
+/* ============================================================
+   Small
+   ============================================================ */
 .sl-markdown-content small:not(:where(.not-content *)) {
   display: inline-block;
   color: var(--sl-color-gray-3);
   margin: 0;
 }
 
-/* Mark */
+/* ============================================================
+   Mark
+   ============================================================ */
 .sl-markdown-content {
   & mark:not(:where(.not-content *)) {
     --mark-accent: #facc15;
@@ -112,19 +124,22 @@
 }
 
 @media (hover: hover) {
-    .sl-markdown-content mark:hover:not(:where(.not-content *)) {
-    	background: var(--sl-color-orange-low);
-    	@supports (background: color-mix(in srgb, red 30%, transparent)) {
-      	background: color-mix(in srgb, var(--mark-accent) 30%, transparent);
-    	}
+  .sl-markdown-content mark:hover:not(:where(.not-content *)) {
+    background: var(--sl-color-orange-low);
+
+    @supports (background: color-mix(in srgb, red 30%, transparent)) {
+      background: color-mix(in srgb, var(--mark-accent) 30%, transparent);
     }
+  }
 }
 
 :root[data-theme="dark"] .sl-markdown-content mark:not(:where(.not-content *)) {
   --mark-accent: #fde047;
 }
 
-/* Del / Ins / S / U */
+/* ============================================================
+   Del / Ins / S / U
+   ============================================================ */
 .sl-markdown-content {
   & del:not(:where(.not-content *)) {
     color: var(--sl-color-red);
@@ -137,7 +152,7 @@
     &::before {
       content: "- ";
       color: var(--sl-color-red);
-      font-weight: 600;
+      font-weight: 700;
     }
   }
 
@@ -152,13 +167,13 @@
     &::before {
       content: "+ ";
       color: var(--sl-color-green);
-      font-weight: 600;
+      font-weight: 700;
     }
   }
 
   & s:not(:where(.not-content *)) {
     text-decoration: line-through;
-    text-decoration-thickness: 1.5px;
+    text-decoration-thickness: 2px;
     color: var(--sl-color-gray-3);
   }
 
@@ -194,6 +209,7 @@
     background: #0e0e10;
     color: #a6e22e;
     box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.5);
+
     &::before { content: "> "; opacity: 0.5; }
   }
 

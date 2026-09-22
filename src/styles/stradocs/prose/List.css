@@ -39,7 +39,7 @@
         margin: 0;
         margin-block-start: calc((var(--sl-line-height, 1.75) * 1em - 1.1em) / 2);
         border: 1.5px solid var(--sl-color-gray-5);
-        border-radius: 0.333rem;
+        border-radius: 0.25rem;
         background-color: transparent;
         cursor: pointer;
         transition: all 0.15s ease;
@@ -50,8 +50,8 @@
             content: "";
             width: 0.6em;
             height: 0.32em;
-            border-left: 2px solid var(--sl-color-text-invert);
-            border-bottom: 2px solid var(--sl-color-text-invert);
+            border-left: 2px solid var(--sl-color-black);
+            border-bottom: 2px solid var(--sl-color-black);
             transform: rotate(-45deg) translate(0.5px, -0.5px);
             transform-origin: center;
           }
@@ -115,7 +115,7 @@
   }
 }
 
-@media (min-width: 50rem) {
+@media (min-width: 50em) {
   .sl-markdown-content {
     & dl:not(:where(.not-content *)) {
       grid-template-columns: minmax(12rem, max-content) 1fr;

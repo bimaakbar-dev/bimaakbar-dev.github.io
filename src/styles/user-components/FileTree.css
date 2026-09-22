@@ -24,9 +24,7 @@
   --ds-filetree-highlight-radius: 0.25rem;
 }
 
-[data-theme="light"] {
-  --ds-filetree-bg: var(--sl-color-gray-6);
-}
+/* ── Komponen ─────────────────────────────────────────── */
 
 starlight-file-tree {
   border: 1px solid var(--ds-filetree-border);
@@ -71,6 +69,8 @@ starlight-file-tree .highlight {
 starlight-file-tree .highlight svg.tree-icon {
   fill: currentColor;
 }
+
+/* ── Hover ────────────────────────────────────────────── */
 
 @media (hover: hover) {
   starlight-file-tree .directory > details > summary:hover,

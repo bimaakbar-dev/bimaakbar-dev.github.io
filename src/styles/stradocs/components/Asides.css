@@ -74,8 +74,9 @@
   & a {
     color: var(--sl-color-white);
     font-weight: 500;
+    text-decoration: underline;
     text-decoration-color: var(--callout-color);
-    text-decoration-thickness: 1px;
+    text-decoration-thickness: 1.5px;
     text-underline-offset: 0.2em;
   }
   & :not(pre) > code {
@@ -110,5 +111,5 @@
 
 [data-theme='light'] .sl-markdown-content .callout[variant] {
   --callout-bg: var(--sl-color-gray-6);
-  border: 1px solid transparent;
+  border: none;
 }

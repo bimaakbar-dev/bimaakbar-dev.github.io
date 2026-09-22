@@ -3,9 +3,7 @@
   & a:not(:where(.not-content *)) {
     font-weight: 500;
     color: var(--sl-color-white);
-    text-decoration: underline;
     text-decoration-style: dotted;
-    text-decoration-color: var(--sl-color-white);
     text-decoration-thickness: 1px;
     text-underline-offset: 4px;
   }
@@ -13,14 +11,12 @@
   & a.is-external:not(:where(.not-content *)) {
     color: var(--sl-color-accent-high);
     text-decoration: none;
-    text-decoration-color: var(--sl-color-accent-high);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 4px;
   }
 
-
+  /* Link didalam inline-code */
   & a:has(code) code:not(:where(.not-content *)) {
-    color: inherit;
+    color: var(--sl-color-white);
+    text-underline-offset: 2px;
   }
 
   & a.is-external:not(:where(.not-content *))::after {
@@ -41,10 +37,10 @@
 
   /* Hover */
   & a:not(:where(.not-content *)):hover {
-    color: var(--sl-color-accent-high);
     text-decoration: none;
   }
   & a.is-external:not(:where(.not-content *)):hover {
     text-decoration: underline;
+    
   }
 }

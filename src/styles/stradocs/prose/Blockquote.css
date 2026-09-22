@@ -15,7 +15,7 @@
       inset-block: 0.75em;
       inset-inline-start: 0.25em;
       width: 3px;
-      background: var(--solar);
+      background: var(--sl-color-accent-high);
     }
     & cite:not(:where(.not-content *)) {
       color: var(--sl-color-gray-3);

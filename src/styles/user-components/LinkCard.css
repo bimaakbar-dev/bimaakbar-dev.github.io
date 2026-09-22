@@ -70,12 +70,14 @@
   transition: color 140ms ease;
 }
 
-.sl-link-card:hover {
-  background-color: var(--ds-card-bg-hover);
-}
+@media (hover: hover) {
+  .sl-link-card:hover {
+    background-color: var(--ds-card-bg-hover);
+  }
 
-.sl-link-card:hover .icon {
-  color: var(--ds-card-icon-color-hover);
+  .sl-link-card:hover .icon {
+    color: var(--ds-card-icon-color-hover);
+  }
 }
 
 @media (min-width: 50rem) {

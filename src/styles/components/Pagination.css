@@ -24,3 +24,12 @@
     color: var(--sl-color-gray-3);
   }
 }
+
+[data-theme='light'] .pagination-links {
+  & a {
+    background-color: rgb(from var(--sl-color-gray-7) r g b / 100%);
+  }
+  & a:hover {
+    background-color: rgb(from var(--sl-color-gray-7) r g b / 50%);
+  }
+}
