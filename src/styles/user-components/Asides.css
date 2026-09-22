@@ -31,7 +31,8 @@
   color: var(--sl-color-text);
 }
 [data-theme='light'] .starlight-aside {
-  background-color: var(--sl-color-gray-7);
+  background-color: var(--sl-color-gray-6);
+  outline: none;
 }
 .starlight-aside::before {
   content: "";

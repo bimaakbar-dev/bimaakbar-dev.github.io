@@ -20,8 +20,8 @@
 
 :root[data-theme="light"],
 [data-theme="light"] ::backdrop {
-  --ds-card-feature-bg:     var(--sl-color-gray-7);
-  --ds-card-feature-border: hsla(0, 0%, 0%, 0.08);
+  --ds-card-feature-bg:     var(--sl-color-gray-6);
+  --ds-card-feature-border: transparent;
 
   --ds-card-feature-title-color: var(--sl-color-white);
   --ds-card-feature-icon-color:  var(--sl-color-gray-3);

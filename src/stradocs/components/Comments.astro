@@ -9,10 +9,14 @@ const repo = 'bimaakbar-dev/bimaakbar-dev.github.io';
 const repoId = 'R_kgDOUKMOFQ';
 const category = 'General';
 const categoryId = 'DIC_kwDOUKMOFc4DEm1Q';
+
+const baseUrl = 'https://bimaakbar-dev.github.io';
+const darkTheme = `${baseUrl}/giscus-theme.css`;
+const lightTheme = `${baseUrl}/giscus-theme-light.css`;
 ---
 
 <section class:list={['comments', className]}>
-  <h2 class="comments__title">Komentar</h2>
+  <h2 class="comments__title">Diskusi</h2>
 
   <div class="comments__embed">
     <script
@@ -30,28 +34,34 @@ const categoryId = 'DIC_kwDOUKMOFc4DEm1Q';
       data-lang={lang}
       data-loading="lazy"
       crossorigin="anonymous"
-      data-theme="preferred_color_scheme"
+      data-theme={lightTheme}
       async
     ></script>
   </div>
 </section>
 
-<script is:inline>
-// @ts-nocheck
-
+<script is:inline define:vars={{ darkTheme, lightTheme }}>
   (function() {
-    const DARK_THEME = 'dark_dimmed';
-    const LIGHT_THEME = 'light';
+    /**
+    * @type {Element | null}
+    */
+    let giscusFrame = null;
+
+    function getGiscusTheme() {
+      const theme = document.documentElement.dataset.theme || 'dark';
+      // @ts-ignore
+      return theme === 'dark' ? darkTheme : lightTheme;
+    }
 
     function sendThemeToGiscus() {
-      const frame = document.querySelector('iframe.giscus-frame');
-      if (!frame) return;
+      if (!giscusFrame) {
+        giscusFrame = document.querySelector('iframe.giscus-frame');
+      }
+      if (!giscusFrame) return;
 
-      const theme = document.documentElement.dataset.theme || 'dark';
-      const giscusTheme = theme === 'dark' ? DARK_THEME : LIGHT_THEME;
-
-      frame.contentWindow?.postMessage(
-        { giscus: { setConfig: { theme: giscusTheme } } },
+      // @ts-ignore
+      giscusFrame.contentWindow?.postMessage(
+        { giscus: { setConfig: { theme: getGiscusTheme() } } },
         'https://giscus.app'
       );
     }
@@ -69,7 +79,7 @@ const categoryId = 'DIC_kwDOUKMOFc4DEm1Q';
   })();
 </script>
 
-<style>
+<style is:global>
   .comments {
     max-width: 50rem;
     margin-inline: auto;
@@ -88,5 +98,9 @@ const categoryId = 'DIC_kwDOUKMOFc4DEm1Q';
 
   .comments__embed {
     min-height: 15rem;
+  }
+  
+  [data-has-hero] .comments {
+    display: none;
   }
 </style>

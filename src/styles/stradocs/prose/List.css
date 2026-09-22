@@ -26,7 +26,7 @@
       gap: 0.5em;
       list-style: none;
       margin-block: 0.375em;
-      line-height: 1.6;
+      line-height: var(--sl-line-height);
 
       & input[type="checkbox"]:not(:where(.not-content *)) {
         appearance: none;
@@ -50,8 +50,8 @@
             content: "";
             width: 0.6em;
             height: 0.32em;
-            border-left: 2px solid var(--sl-color-text-invert);
-            border-bottom: 2px solid var(--sl-color-text-invert);
+            border-left: 2px solid var(--sl-color-black);
+            border-bottom: 2px solid var(--sl-color-black);
             transform: rotate(-45deg) translate(0.5px, -0.5px);
             transform-origin: center;
           }

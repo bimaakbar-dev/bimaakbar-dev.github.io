@@ -1,0 +1,103 @@
+---
+import { Icon } from "@astrojs/starlight/components";
+
+interface Props {
+	variant?: 'icon-only' | 'bar';
+	class?: string;
+}
+
+const { variant = 'icon-only', class: className } = Astro.props;
+---
+
+<button
+	type="button"
+	data-open-search-modal
+	disabled
+	aria-label={Astro.locals.t('search.label')}
+	aria-keyshortcuts="Control+K"
+	class:list={[className, variant]}
+>
+	<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="16" width="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false" style="fill:currentColor">
+		<path d="m18.031 16.617 4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617m-2.006-.742A6.98 6.98 0 0 0 18 11c0-3.867-3.133-7-7-7s-7 3.133-7 7 3.133 7 7 7a6.98 6.98 0 0 0 4.875-1.975z"></path>
+	</svg>
+	{variant === 'bar' && (
+		<>
+			<span class="sl-hidden md:sl-block" aria-hidden="true">{Astro.locals.t('search.label')}</span>
+			<kbd class="sl-hidden md:sl-flex search-kbd" style="display: none;">
+				<kbd class="platform-key">{Astro.locals.t('search.ctrlKey')}</kbd><kbd>K</kbd>
+			</kbd>
+		</>
+	)}
+</button>
+
+<script is:inline>
+	(() => {
+		const currentBtn = document.currentScript?.previousElementSibling;
+		if (!currentBtn) return;
+		
+		const shortcut = currentBtn.querySelector('kbd');
+		if (!shortcut) return;
+
+		const platformKey = shortcut.querySelector('.platform-key');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			currentBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script>
+
+<style>
+	button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		border: 0;
+		background-color: transparent;
+		color: var(--sl-color-white);
+		cursor: pointer;
+		height: 2.5rem;
+		font-size: var(--sl-text-xl);
+		& svg {
+			flex-shrink: 0;
+			width: 1em;
+			height: 1em;
+			font-size: inherit;
+        }
+		&.bar {
+			border: 1px solid var(--sl-color-gray-5);
+			border-radius: 99rem;
+			padding-inline-start: 0.75rem;
+			padding-inline-end: 0.5rem;
+			background-color: var(--sl-color-gray-6);
+			color: var(--sl-color-gray-3);
+			font-size: var(--sl-text-sm);
+			width: 100%;
+			max-width: 22rem;
+			&:hover {
+				color: var(--sl-color-white);
+			}
+			& > :last-child {
+				margin-inline-start: auto;
+			}
+			& kbd {
+				border-radius: 0.25rem;
+				font-size: var(--sl-text-2xs);
+				gap: 0.25em;
+				padding-inline: 0.25em;
+				background-color: var(--sl-color-black);
+				font-family: var(--__sl-font);
+			}
+		}
+		
+	}
+	[data-theme='light'] button {
+		&.bar {
+			background-color: var(--sl-color-gray-7);
+			& kbd {
+				background-color: var(--sl-color-accent);
+			}
+		}
+	}
+</style>

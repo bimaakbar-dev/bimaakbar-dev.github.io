@@ -41,7 +41,7 @@
 }
 
 [data-theme="light"] {
-  --sl-badge-default-bg:   rgb(from var(--sl-color-accent-low) r g b / 90%);
+  --sl-badge-default-bg:   rgb(from var(--sl-color-accent-low) r g b / 20%);
   --sl-badge-default-text: var(--sl-color-accent-high);
 
   --sl-badge-note-bg:   rgb(from var(--sl-color-blue-low) r g b / 80%);

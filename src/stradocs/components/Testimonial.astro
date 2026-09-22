@@ -47,10 +47,10 @@ const src = (await avatar()).default;
     & blockquote {
       position: relative;
       text-align: left;
-      padding: 0.75rem 1rem;
+      padding: 0.75rem;
       border-radius: 0.75rem;
       border-bottom-left-radius: 0;
-      border: 1px solid var(--sl-color-hairline);
+      border: 1px solid var(--sl-color-gray-5);
       background: var(--sl-color-gray-6);
       color: var(--sl-color-white);
       font-size: var(--sl-text-h3);
@@ -85,23 +85,23 @@ const src = (await avatar()).default;
       gap: 0.5rem;
       text-align: left;
       & img {
-        outline: 1px solid var(--sl-color-accent-low);
+        outline: 1px solid var(--sl-color-gray-5);
         outline-offset: -1px;
         border-radius: 99rem;
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 2.3rem;
+        height: 2.3rem;
         object-fit: cover;
       }
       & .cite {
         flex-direction: column;
         & p {
           font-weight: 500;
-          font-size: var(--sl-text-sm);
+          font-size: var(--sl-text-xs);
           color: var(--sl-color-gray-2);
           line-height: var(--sl-line-height-headings);
         }
         & a {
-          font-size: var(--sl-text-xs);
+          font-size: var(--sl-text-2xs);
           text-decoration: none;
           color: var(--sl-color-accent-high);
           &:hover {

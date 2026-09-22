@@ -24,10 +24,6 @@
   --ds-filetree-highlight-radius: 0.25rem;
 }
 
-[data-theme="light"] {
-  --ds-filetree-bg: var(--sl-color-gray-7);
-}
-
 /* ── Komponen ─────────────────────────────────────────── */
 
 starlight-file-tree {

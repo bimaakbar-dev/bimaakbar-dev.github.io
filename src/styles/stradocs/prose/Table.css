@@ -21,9 +21,9 @@
 }
 
 [data-theme="light"] {
-  --ds-table-head-bg:         var(--sl-color-gray-7);
+  --ds-table-head-bg:         var(--sl-color-gray-6);
   --ds-table-head-color:      var(--sl-color-white);
-  --ds-table-row-bg-hover:    hsla(0, 0%, 0%, 0.03);
+  --ds-table-row-bg-hover:    rgb(from var(--sl-color-gray-6) r g b / 30%);
 
   --ds-table-wrapper-shadow:  var(--shadow-float);
 }

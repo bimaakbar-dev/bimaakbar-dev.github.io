@@ -3,7 +3,7 @@
 :root {
   --ds-details-radius:          0.75rem;
   --ds-details-border:          var(--sl-color-gray-5);
-  --ds-details-border-hover:    var(--sl-color-gray-4);
+  --ds-details-border-hover:    var(--sl-color-gray-5);
   --ds-details-bg:              transparent;
   --ds-details-bg-hover:        rgb(from var(--sl-color-gray-6) r g b / 40%);
 
@@ -15,7 +15,7 @@
 
   --ds-details-marker-color:          var(--sl-color-gray-3);
   --ds-details-marker-color-hover:    var(--sl-color-white);
-  --ds-details-marker-size:           1.25em;
+  --ds-details-marker-size:           1.333em;
   --ds-details-marker-duration:       140ms;
 
   --ds-details-body-color:      var(--sl-color-gray-2);
@@ -24,10 +24,7 @@
 }
 
 [data-theme="light"] {
-  --ds-details-bg:              var(--sl-color-gray-7);
-  --ds-details-bg-hover:        var(--sl-color-gray-7);
-
-  --ds-details-border-hover:    hsla(0, 0%, 0%, 0.24);
+  --ds-details-bg-hover:        var(--sl-color-gray-6);
 
   --ds-details-summary-color:       var(--sl-color-gray-2);
   --ds-details-summary-color-hover: var(--sl-color-white);
@@ -39,16 +36,16 @@
 /* ── Komponen ─────────────────────────────────────────── */
 
 .sl-markdown-content details:not(:where(.not-content *)) {
-  border: 1px solid var(--ds-details-border);
+  border-block-end: 1px solid var(--ds-details-border);
+  border-inline-start: 0;
   background: var(--ds-details-bg);
-  border-radius: 0.75rem;
+
   padding: 0;
   overflow: hidden;
 }
 
-.sl-markdown-content details:not(:where(.not-content *)):has(> summary:hover) {
-  border-color: var(--ds-details-border-hover);
-  background: var(--ds-details-bg-hover);
+.sl-markdown-content details + details:not(:where(.not-content *)) {
+  margin: 0;
 }
 
 /* Summary */
@@ -90,17 +87,11 @@
   -webkit-mask-image: var(--ic-details);
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
-  transition:
-    transform var(--ds-details-marker-duration) ease,
+  transition: transform var(--ds-details-marker-duration) ease,
 }
 
 .sl-markdown-content details:not(:where(.not-content *)) > summary:not(:where(.not-content *)):hover::before {
   background-color: var(--ds-details-marker-color-hover);
-}
-
-.sl-markdown-content details[open]:not(:where(.not-content *)) > summary:not(:where(.not-content *)) {
-  border-block-end: 1px solid var(--ds-details-border);
-
 }
 
 .sl-markdown-content details[open]:not(:where(.not-content *)) > summary:not(:where(.not-content *))::before {
@@ -121,4 +112,15 @@
 
 .sl-markdown-content details:not(:where(.not-content *)) > *:not(summary):not(:where(.not-content *)):last-child {
   margin-block-end: var(--ds-details-body-spacing);
+}
+
+.sl-markdown-content details:not(:where(.not-content *)) > *:not(summary):not(:where(.not-content *)):first-child {
+  margin-block-start: 0;
+}
+
+@media (hover: hover) {
+  .sl-markdown-content details:not(:where(.not-content *)):has(> summary:hover) {
+    border-color: var(--ds-details-border-hover);
+    background: var(--ds-details-bg-hover);
+  }
 }

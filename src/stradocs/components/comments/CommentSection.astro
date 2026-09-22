@@ -198,9 +198,29 @@ const path = Astro.url.pathname;
     const switchMode = $<HTMLButtonElement>('[data-switch-mode]')!;
 
     let currentUser: WalineUser | null = null;
-    let replyTo: { pid: number; rid: number; nick: string } | null = null;
+    // pid/rid mirror WalineComment.objectId, which is a string — not a number.
+    let replyTo: { pid: string; rid: string; nick: string } | null = null;
     let currentPage = 1;
     let authMode: 'login' | 'register' = 'login';
+
+    // ── Liked-comment tracking (per-browser, so the same visitor can't spam-like) ──
+    const LIKED_KEY = 'c-comments-liked';
+    function getLikedIds(): Set<string> {
+      try {
+        const raw = localStorage.getItem(LIKED_KEY);
+        return new Set(raw ? (JSON.parse(raw) as string[]) : []);
+      } catch {
+        return new Set();
+      }
+    }
+    function setLiked(id: string, liked: boolean) {
+      const ids = getLikedIds();
+      if (liked) ids.add(id);
+      else ids.delete(id);
+      try {
+        localStorage.setItem(LIKED_KEY, JSON.stringify([...ids]));
+      } catch {}
+    }
 
     const esc = (s: string) =>
       s.replace(/[&<>"']/g, (c) =>
@@ -221,11 +241,14 @@ const path = Astro.url.pathname;
       const canDelete =
         currentUser &&
         (currentUser.type === 'administrator' || currentUser.objectId === c.user_id);
+      const canPin = currentUser?.type === 'administrator' && !isReply;
 
       const rid = isReply ? (c.rid ?? c.objectId) : c.objectId;
+      const liked = getLikedIds().has(c.objectId);
+      const likeCount = c.like ?? 0;
 
       return `
-        <article class="c-item${isReply ? ' c-item--reply' : ''}${depth > 1 ? ' c-item--deep' : ''}" data-comment-id="${c.objectId}">
+        <article class="c-item${isReply ? ' c-item--reply' : ''}${depth > 1 ? ' c-item--deep' : ''}${c.sticky ? ' c-item--sticky' : ''}" data-comment-id="${c.objectId}">
           <div class="c-item__avatar-wrap">
             <img class="c-item__avatar" src="${esc(c.avatar)}" alt="${esc(c.nick)}" loading="lazy" width="32" height="32" />
             ${c.children?.length ? '<div class="c-item__thread-line" aria-hidden="true"></div>' : ''}
@@ -233,6 +256,7 @@ const path = Astro.url.pathname;
           <div class="c-item__body">
             <header class="c-item__header">
               <div class="c-item__meta">
+                ${c.sticky ? '<span class="c-item__badge c-item__badge--sticky">📌 Disematkan</span>' : ''}
                 ${c.link
                   ? `<a class="c-item__name" href="${esc(c.link)}" target="_blank" rel="noopener nofollow">${esc(c.nick)}</a>`
                   : `<span class="c-item__name">${esc(c.nick)}</span>`
@@ -247,6 +271,18 @@ const path = Astro.url.pathname;
             <div class="c-item__actions">
               <button
                 type="button"
+                class="c-item__action c-item__action--like${liked ? ' is-liked' : ''}"
+                data-like="${c.objectId}"
+                aria-pressed="${liked}"
+                aria-label="Sukai komentar ${esc(c.nick)}"
+              >
+                <svg viewBox="0 0 16 16" width="12" height="12" fill="${liked ? 'currentColor' : 'none'}" aria-hidden="true">
+                  <path d="M8 13.5s-5.5-3.2-5.5-7A3 3 0 0 1 8 4.5 3 3 0 0 1 13.5 6.5c0 3.8-5.5 7-5.5 7Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                </svg>
+                <span data-like-count>${likeCount}</span>
+              </button>
+              <button
+                type="button"
                 class="c-item__action"
                 data-reply="${c.objectId}"
                 data-rid="${rid}"
@@ -255,6 +291,10 @@ const path = Astro.url.pathname;
               >
                 Balas
               </button>
+              ${canPin ? `
+              <button type="button" class="c-item__action" data-pin="${c.objectId}" data-pinned="${c.sticky ? '1' : '0'}" aria-label="${c.sticky ? 'Lepas sematan' : 'Sematkan komentar'}">
+                ${c.sticky ? 'Lepas sematan' : 'Sematkan'}
+              </button>` : ''}
               ${canDelete ? `
               <button type="button" class="c-item__action c-item__action--danger" data-delete="${c.objectId}" aria-label="Hapus komentar">
                 Hapus
@@ -279,7 +319,9 @@ const path = Astro.url.pathname;
           </div>`;
         return;
       }
-      listEl.innerHTML = `<div class="c-item-list">${comments.map((c) => commentItem(c)).join('')}</div>`;
+      // Sticky root comments float to the top, keeping relative order otherwise.
+      const sorted = [...comments].sort((a, b) => (b.sticky ? 1 : 0) - (a.sticky ? 1 : 0));
+      listEl.innerHTML = `<div class="c-item-list">${sorted.map((c) => commentItem(c)).join('')}</div>`;
     }
 
     function setSubmitting(loading: boolean) {
@@ -338,7 +380,6 @@ const path = Astro.url.pathname;
           at: replyTo?.nick,
         });
 
-
         if (res.errno !== 0) {
           statusEl.textContent = res.errmsg || 'Gagal mengirim.';
           statusEl.setAttribute('data-state', 'error');
@@ -360,7 +401,7 @@ const path = Astro.url.pathname;
     });
 
     // ── Reply ────────────────────────────────────────
-    function setReply(pid: number, rid: number, nick: string) {
+    function setReply(pid: string, rid: string, nick: string) {
       replyTo = { pid, rid, nick };
       formToEl.hidden = false;
       formToEl.textContent = `Membalas @${nick}`;
@@ -383,21 +424,67 @@ const path = Astro.url.pathname;
       const target = e.target as HTMLElement;
       const replyBtn = target.closest<HTMLButtonElement>('[data-reply]');
       const deleteBtn = target.closest<HTMLButtonElement>('[data-delete]');
+      const likeBtn = target.closest<HTMLButtonElement>('[data-like]');
+      const pinBtn = target.closest<HTMLButtonElement>('[data-pin]');
 
       if (replyBtn) {
-        setReply(
-          Number(replyBtn.dataset.reply),
-          Number(replyBtn.dataset.rid),
-          replyBtn.dataset.nick!,
-        );
+        const pid = replyBtn.dataset.reply;
+        const rid = replyBtn.dataset.rid;
+        const nick = replyBtn.dataset.nick;
+        if (pid && rid && nick) setReply(pid, rid, nick);
       }
 
       if (deleteBtn) {
+        const id = deleteBtn.dataset.delete;
+        if (!id) return;
         if (!confirm('Hapus komentar ini?')) return;
         deleteBtn.disabled = true;
-        const res = await client.deleteComment(Number(deleteBtn.dataset.delete));
+        const res = await client.deleteComment(id);
         if (res.errno === 0) await loadComments(currentPage);
         else { alert(res.errmsg || 'Gagal menghapus.'); deleteBtn.disabled = false; }
+      }
+
+      if (likeBtn) {
+        const id = likeBtn.dataset.like;
+        if (!id) return;
+        const alreadyLiked = getLikedIds().has(id);
+        const nextLiked = !alreadyLiked;
+        const countEl = likeBtn.querySelector<HTMLElement>('[data-like-count]')!;
+        const current = Number(countEl.textContent) || 0;
+
+        // Optimistic update
+        likeBtn.disabled = true;
+        likeBtn.classList.toggle('is-liked', nextLiked);
+        likeBtn.setAttribute('aria-pressed', String(nextLiked));
+        countEl.textContent = String(Math.max(0, current + (nextLiked ? 1 : -1)));
+
+        try {
+          const res = await client.likeComment(id, nextLiked);
+          if (res.errno === 0) {
+            setLiked(id, nextLiked);
+          } else {
+            // Revert on failure
+            likeBtn.classList.toggle('is-liked', alreadyLiked);
+            likeBtn.setAttribute('aria-pressed', String(alreadyLiked));
+            countEl.textContent = String(current);
+          }
+        } catch {
+          likeBtn.classList.toggle('is-liked', alreadyLiked);
+          likeBtn.setAttribute('aria-pressed', String(alreadyLiked));
+          countEl.textContent = String(current);
+        } finally {
+          likeBtn.disabled = false;
+        }
+      }
+
+      if (pinBtn) {
+        const id = pinBtn.dataset.pin;
+        if (!id) return;
+        const nextPinned = pinBtn.dataset.pinned !== '1';
+        pinBtn.disabled = true;
+        const res = await client.setSticky(id, nextPinned);
+        if (res.errno === 0) await loadComments(currentPage);
+        else { alert(res.errmsg || 'Gagal mengubah sematan.'); pinBtn.disabled = false; }
       }
     });
 
@@ -519,7 +606,6 @@ const path = Astro.url.pathname;
       }
     }
 
-    // FIX: await refreshUser() dulu baru loadComments, bukan .then() chain
     (async () => {
       await refreshUser();
       await loadComments(1);
@@ -568,6 +654,7 @@ const path = Astro.url.pathname;
     line-height: 1;
     white-space: nowrap;
     cursor: pointer;
+    transition: background-color var(--c-transition), border-color var(--c-transition), color var(--c-transition), opacity var(--c-transition);
   }
 
   .c-btn--sm {
@@ -608,8 +695,6 @@ const path = Astro.url.pathname;
     outline-offset: 2px;
   }
 
-
-
   /* ── Link button ────────────────────────────────── */
   .c-link {
     padding: 0; border: 0; background: none;
@@ -625,8 +710,12 @@ const path = Astro.url.pathname;
   .c-comments__header {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    row-gap: 0.625rem;
     gap: 0.75rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--sl-color-hairline);
   }
 
   .c-comments__header-left {
@@ -634,12 +723,15 @@ const path = Astro.url.pathname;
     align-items: center;
     gap: 0.5rem;
     flex: 1;
+    min-width: 0;
   }
 
   .c-comments__label {
     font-size: var(--sl-text-h4);
     font-weight: 600;
     color: var(--sl-color-white);
+    font-family: var(--font-montserrat);
+    letter-spacing: -0.01em;
   }
 
   .c-comments__count {
@@ -675,6 +767,7 @@ const path = Astro.url.pathname;
     flex-shrink: 0;
     object-fit: cover;
     background: var(--sl-color-gray-6);
+    box-shadow: 0 0 0 1px var(--sl-color-hairline);
   }
 
   .c-comments__auth-name {
@@ -688,7 +781,7 @@ const path = Astro.url.pathname;
 
   .c-comments__auth-btn {
     padding: 0.1875rem 0.5rem;
-    border: 1px solid var(--sl-color-hairline);
+    border: 1px solid var(--sl-color-gray-5);
     border-radius: var(--c-radius-sm);
     background: transparent;
     color: var(--sl-color-gray-3);
@@ -713,7 +806,7 @@ const path = Astro.url.pathname;
 
   /* ── Form ───────────────────────────────────────── */
   .c-comments__form {
-    margin-bottom: 2rem;
+    margin-bottom: 2.25rem;
   }
 
   .c-comments__form-to {
@@ -733,12 +826,12 @@ const path = Astro.url.pathname;
   .c-form__fields {
     display: flex;
     flex-direction: column;
-    gap: 0.625rem;
-    padding: 1rem;
+    gap: 0.75rem;
+    padding: 1.125rem;
     border: 1px solid var(--sl-color-hairline);
     border-radius: var(--c-radius);
     background: var(--sl-color-gray-6);
-    margin-bottom: 0.625rem;
+    margin-bottom: 0.75rem;
   }
 
   .c-form__row {
@@ -858,11 +951,11 @@ const path = Astro.url.pathname;
     display: flex;
     gap: 0.75rem;
     padding: 1rem 0;
-    border-bottom: 1px solid var(--sl-color-hairline);
+    border-bottom: 1px solid var(--sl-color-gray-5);
     animation: c-pulse 1.6s ease-in-out infinite;
   }
 
-  .c-skel:first-child { border-top: 1px solid var(--sl-color-hairline); }
+  .c-skel:first-child { border-top: 1px solid var(--sl-color-gray-5); }
 
   .c-skel__avatar {
     width: 2rem;
@@ -905,18 +998,33 @@ const path = Astro.url.pathname;
     display: grid;
     grid-template-columns: 2rem 1fr;
     gap: 0.75rem;
-    padding-block: 1rem;
+    padding: 1rem 0.625rem;
+    margin-inline: -0.625rem;
     border-top: 1px solid var(--sl-color-gray-5);
+    transition: background-color var(--c-transition);
+  }
+
+  .c-item:hover {
+    background: color-mix(in srgb, var(--sl-color-gray-5) 10%, transparent);
   }
 
   .c-item--reply {
-    margin-inline-start: 2.75rem;
-    padding-inline-start: 0;
+    margin-inline-start: 2.5rem;
+    padding-inline-start: 0.875rem;
     border-top: 1px solid var(--sl-color-gray-5);
   }
 
   .c-item--deep {
-    margin-inline-start: 5.5rem;
+    margin-inline-start: 4.75rem;
+  }
+
+  .c-item--sticky {
+    background: var(--sl-color-accent-low);
+    border-radius: var(--c-radius-sm);
+  }
+
+  .c-item--sticky:hover {
+    background: color-mix(in srgb, var(--sl-color-accent-low) 85%, var(--sl-color-gray-5) 15%);
   }
 
   .c-item__avatar-wrap {
@@ -933,6 +1041,7 @@ const path = Astro.url.pathname;
     flex-shrink: 0;
     object-fit: cover;
     background: var(--sl-color-gray-6);
+    box-shadow: 0 0 0 1px var(--sl-color-gray-5);
   }
 
   .c-item--reply .c-item__avatar {
@@ -993,13 +1102,18 @@ const path = Astro.url.pathname;
   }
 
   .c-item__badge--admin {
-    background: var(--sl-color-accent-low);
-    color: var(--sl-color-accent-high);
+    background: var(--sl-color-blue-low);
+    color: var(--sl-color-blue-high);
   }
 
   .c-item__badge--pending {
     background: var(--sl-color-orange-low);
     color: var(--sl-color-orange-high);
+  }
+
+  .c-item__badge--sticky {
+    background: var(--sl-color-accent-low);
+    color: var(--sl-color-accent-high);
   }
 
   .c-item__reply-to {
@@ -1048,7 +1162,7 @@ const path = Astro.url.pathname;
     padding: 0.75rem;
     border-radius: var(--c-radius-sm);
     background: var(--sl-color-bg-inline-code);
-    border: 1px solid var(--sl-color-hairline);
+    border: 1px solid var(--sl-color-gray-5);
     overflow-x: auto;
     font-size: 0.75rem;
   }
@@ -1083,6 +1197,18 @@ const path = Astro.url.pathname;
   .c-item__action:hover { color: var(--sl-color-white); }
   .c-item__action--danger:hover { color: var(--sl-color-red-high); }
   .c-item__action:focus-visible { outline: 2px solid var(--sl-color-accent); outline-offset: 2px; border-radius: 2px; }
+  .c-item__action:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .c-item__action--like {
+    gap: 0.25rem;
+  }
+
+  .c-item__action--like svg { transition: transform var(--c-transition); }
+  .c-item__action--like:hover svg { transform: scale(1.1); }
+
+  .c-item__action--like.is-liked {
+    color: var(--sl-color-red-high);
+  }
 
   /* ── Empty / error ──────────────────────────────── */
   .c-comments__empty {
@@ -1133,7 +1259,7 @@ const path = Astro.url.pathname;
     border-radius: var(--c-radius);
     background: var(--sl-color-bg);
     color: var(--sl-color-text);
-    max-width: 20rem;
+    max-width: 21rem;
     width: calc(100% - 2rem);
     box-shadow: var(--sl-shadow-lg), 0 0 0 1px transparent;
   }
@@ -1152,8 +1278,8 @@ const path = Astro.url.pathname;
   .c-auth-modal__form {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    padding: 1.125rem;
+    gap: 0.625rem;
+    padding: 1.25rem;
   }
 
   .c-auth-modal__head {
@@ -1189,57 +1315,10 @@ const path = Astro.url.pathname;
 
   .c-auth-modal__close:focus-visible { outline: 2px solid var(--sl-color-accent); outline-offset: 2px; }
 
-  .c-auth-modal__social {
-    display: flex;
-    gap: 0.375rem;
-  }
-
-  .c-oauth-btn {
-    flex: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.375rem;
-    padding: 0.4375rem 0.625rem;
-    border: 1px solid var(--sl-color-gray-5);
-    border-radius: var(--c-radius-sm);
-    background: transparent;
-    color: var(--sl-color-gray-2);
-    font: inherit;
-    font-size: 0.75rem;
-    font-weight: 500;
-    text-decoration: none;
-  }
-
-  .c-oauth-btn:hover {
-    background: var(--sl-color-gray-6);
-    border-color: var(--sl-color-gray-4);
-    color: var(--sl-color-white);
-  }
-
-  .c-oauth-btn:focus-visible { outline: 2px solid var(--sl-color-accent); outline-offset: 2px; }
-
-  .c-auth-modal__sep {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-block: 0.125rem;
-    font-size: 0.6875rem;
-    color: var(--sl-color-gray-3);
-  }
-
-  .c-auth-modal__sep::before,
-  .c-auth-modal__sep::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--sl-color-gray-5);
-  }
-
   .c-auth-modal__fields {
     display: flex;
     flex-direction: column;
-    gap: 0.375rem;
+    gap: 0.5rem;
   }
 
   .c-auth-modal__form input {
@@ -1275,8 +1354,8 @@ const path = Astro.url.pathname;
   .c-auth-modal__foot {
     display: flex;
     flex-direction: column;
-    gap: 0.625rem;
-    margin-top: 0.25rem;
+    gap: 0.75rem;
+    margin-top: 0.375rem;
   }
 
   .c-auth-modal__switch {
@@ -1288,12 +1367,10 @@ const path = Astro.url.pathname;
     align-items: center;
   }
 
-  /* ── Reduced motion ─────────────────────────────── */
   @media (prefers-reduced-motion: reduce) {
     .c-comments *, .c-comments *::before, .c-comments *::after {
       transition-duration: 0.01ms !important;
       animation-duration: 0.01ms !important;
     }
-    .c-btn__spinner { animation: none; }
   }
 </style>

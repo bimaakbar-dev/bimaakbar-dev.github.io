@@ -110,5 +110,6 @@
 }
 
 [data-theme='light'] .sl-markdown-content .callout[variant] {
-  --callout-bg: var(--sl-color-gray-7);
+  --callout-bg: var(--sl-color-gray-6);
+  border: none;
 }

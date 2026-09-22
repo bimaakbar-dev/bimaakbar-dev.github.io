@@ -9,6 +9,9 @@
   --sl-color-gray-6: hsl(0, 0%, 9.8%);
   --sl-color-black: hsl(0, 0%, 7.04%);
 
+  --darksolar: hsl(26 61% 50%);
+  --solar: hsl(22 100% 52%);
+
   --sl-hue-orange: 35;
   --sl-color-orange-low: hsl(var(--sl-hue-orange), 30%, 15%);
   --sl-color-orange: hsl(var(--sl-hue-orange), 90%, 60%);
@@ -34,11 +37,15 @@
   --sl-color-red: hsl(var(--sl-hue-red), 85%, 65%);
   --sl-color-red-high: hsl(var(--sl-hue-red), 70%, 88%);
 
+  --sl-color-accent-low: var(--darksolar);
+  --sl-color-accent: var(--solar);
+  --sl-color-accent-high: var(--solar);
+
+  /* disable for maintance
   --sl-color-accent-low: hsl(224, 54%, 20%);
   --sl-color-accent: hsl(224, 100%, 60%);
   --sl-color-accent-high: hsl(224, 100%, 85%);
 
-  /* disable for maintance
   --sl-color-accent-high: hsl(22, 100%, 60%);
   --sl-color-accent: hsl(32, 100%, 55%);
   --sl-color-accent-low: hsla(22, 100%, 60%, 0.603);
@@ -47,7 +54,7 @@
   --sl-color-text: var(--sl-color-gray-1);
 
   --sl-color-text-accent: var(--sl-color-accent-high);
-  --sl-color-text-invert: var(--sl-color-black);
+  --sl-color-text-invert: var(--sl-color-white);
 
   --sl-color-bg: var(--sl-color-black);
   --sl-color-bg-nav: var(--sl-color-black);
@@ -74,30 +81,40 @@
 }
 
 :root[data-theme="light"],
-[data-theme="light"] ::backdrop {
-  --sl-color-bg:               hsl(0, 0%, 96%);
-  --sl-color-bg-nav:           hsl(0, 0%, 96%);
-  --sl-color-bg-sidebar:       hsl(0, 0%, 96%);
-  --sl-color-bg-inline-code:   hsl(0, 0%, 94.7%);
+[data-theme="light"] ::backdrop {  
+  --sl-color-white: hsl(0, 0%, 3.9%);
+  --sl-color-gray-1: hsl(0, 0%, 9%);
+  --sl-color-gray-2: hsl(0, 0%, 15.1%);
+  --sl-color-gray-3: hsl(0, 0%, 45.1%);
+  --sl-color-gray-4: hsl(0, 0%, 63.9%);
+  --sl-color-gray-5: hsla(0, 0%, 80%, 50%);
+  --sl-color-gray-6: hsl(0, 0%, 93.1%);
+  --sl-color-gray-7: hsl(0, 0%, 96%);
+  --sl-color-black: hsl(0, 0%, 96%);
+  
+  /* Disabled for now
+  --sl-color-accent-low:       hsl(145, 50%, 92%);
+  --sl-color-accent:           hsl(145, 42%, 48%);
+  --sl-color-accent-high:      hsl(145, 55%, 32%);
+  */
+  
+  --sl-color-accent-low: var(--darksolar);
+  --sl-color-accent: var(--solar);
+  --sl-color-accent-high: var(--solar);
+  
+  --sl-color-bg:               var(--sl-color-black);
+  --sl-color-bg-nav:           var(--sl-color-black);
+  --sl-color-bg-sidebar:       var(--sl-color-gray-7);
+  --sl-color-bg-inline-code:   var(--sl-color-gray-6);
   --sl-color-bg-accent:        var(--sl-color-accent-high);
-  --sl-color-black:            hsl(0, 0%, 96%);
 
-  --sl-color-white:            hsl(0, 0%, 3.9%);
-  --sl-color-gray-1:           hsl(150, 10%, 15%);
-  --sl-color-gray-2:           hsl(150, 8%, 30%);
-  --sl-color-gray-3:           hsl(0, 0%, 45.1%);
-  --sl-color-gray-4:           hsl(100, 5%, 74%);
-  --sl-color-gray-5:           hsla(0, 0%, 80%, 50%);
-  --sl-color-gray-6:           hsl(0, 0%, 94.7%);
-  --sl-color-gray-7:           hsl(0, 0%, 98%);
-
-  --sl-color-text:             var(--sl-color-white);
   --sl-color-text-accent:      var(--sl-color-accent-high);
-  --sl-color-text-invert:      hsl(0, 0%, 98%);
+  --sl-color-text-invert:      var(--sl-color-black);
 
-  --sl-color-hairline-light:   var(--sl-color-gray-7);
-  --sl-color-hairline:         var(--sl-color-gray-5);
-  --sl-color-hairline-shade:   var(--sl-color-gray-5);
+  --sl-color-hairline-light:   var(--sl-color-gray-6);
+  --sl-color-hairline-shade:   var(--sl-color-gray-6);
+  
+  --sl-color-backdrop-overlay: hsla(0, 0%, 0%, 0.2);
 
   --sl-hue-orange: 30;
   --sl-color-orange-low:       hsl(var(--sl-hue-orange), 70%, 93%);
@@ -124,15 +141,6 @@
   --sl-color-red:              hsl(var(--sl-hue-red), 55%, 52%);
   --sl-color-red-high:         hsl(var(--sl-hue-red), 55%, 36%);
 
-  /* Disabled for now
-  --sl-color-accent-low:       hsl(145, 50%, 92%);
-  --sl-color-accent:           hsl(145, 42%, 48%);
-  --sl-color-accent-high:      hsl(145, 55%, 32%);
-  */
-  --sl-color-accent-low: hsla(0, 0%, 82%, 50%);
-  --sl-color-accent-high: hsl(0, 0%, 9%);
-  --sl-color-accent: hsla(0, 0%, 82%, 50%);
-
   --sl-shadow-sm:
     0 1px 2px hsl(150 25% 20% / 0.04),
     0 1px 1px hsl(150 25% 20% / 0.03);
@@ -155,6 +163,7 @@
   --hue-green: 145;
   --green: hsl(var(--hue-green) 42% 48%);
   --overlay-greenblur: hsl(var(--hue-green) 42% 48% / 0.2);
+  
 }
 
 [data-has-hero] :is(header):not([data-has-sidebar][data-has-hero] header) {

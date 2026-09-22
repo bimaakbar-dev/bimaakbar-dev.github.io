@@ -18,10 +18,10 @@
     display: grid;
     & :is(img, picture, video, iframe) { margin: 0; }
     & > figcaption:not(:where(.not-content *)) {
-      margin-top: 0;
+      margin-top: 0.5rem;
       margin-inline: auto;
       max-width: 45ch;
-      font-size: var(--sl-text-sm);
+      font-size: var(--sl-text-xs);
       color: var(--sl-color-gray-3);
       text-align: center;
       text-wrap: balance;
@@ -128,7 +128,7 @@
 
 /* Hr */
 .sl-markdown-content hr:not(:where(.not-content *)) {
-  color: var(--sl-color-gray-6);
+  color: var(--sl-color-gray-5);
 }
 
 @media (max-width: 50rem) {

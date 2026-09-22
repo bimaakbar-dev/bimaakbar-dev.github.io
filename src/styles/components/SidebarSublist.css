@@ -1,23 +1,11 @@
 ul.top-level {
-	--sl-sidebar-item-padding-inline: 0.5rem;
-}
-ul.top-level ul li {
-  position: relative;
-	margin-inline-start: 0.25rem;
-	border-inline-start: none;
-	padding-inline-start: calc(var(--sl-sidebar-item-padding-inline) + var(--sl-sidebar-item-padding-inline));
-}
-
-ul.top-level ul li::before {
-  position: absolute;
-	left: var(--sl-sidebar-item-padding-inline);
-  height: 100%;
-  width: 1px;
-  background-color: var(--sl-color-gray-5);
-  content: "";
-}
-
-.top-level {
+  --sl-sidebar-item-padding-inline: 0.5rem;
+  & ul li {
+    position: relative;
+    margin-inline-start: 0.25rem;
+    border-inline-start: none;
+    padding-inline-start: calc(var(--sl-sidebar-item-padding-inline) + var(--sl-sidebar-item-padding-inline));
+  }
   & .group-label .large {
     padding-inline-start: var(--sl-sidebar-item-padding-inline);
     margin-inline-start: -0.5rem;
@@ -28,61 +16,78 @@ ul.top-level ul li::before {
     font-weight: 500;
     color: var(--sl-color-white);
   }
-  & > li a {
+  & li a {
     position: relative;
-    border-radius: 0;
     color: var(--sl-color-gray-2);
-    /* line-height: 1.4; */
+    font-weight: 500;
+    padding-block: 0.5em;
+    border-radius: 0.5rem;
   }
-  & > li a:hover,
-  & > li a:focus {
+  & li a:hover,
+  & li a:focus {
     color: var(--sl-color-white);
+    background-color: color-mix(in oklab, var(--sl-color-gray-5) 80%, transparent);
   }
-  & > li a[aria-current="page"],
-  & > li a[aria-current="page"]:hover,
-  & > li a[aria-current="page"]:focus {
+  & li a[aria-current="page"],
+  & li a[aria-current="page"]:hover,
+  & li a[aria-current="page"]:focus {
     position: relative;
     color: var(--sl-color-text-accent);
-    background-color: transparent;
-    font-weight: 500;
+    background-color: color-mix(in oklab, var(--sl-color-gray-5) 60%, transparent);
   }
 }
 
-ul.top-level ul li:has(> a[aria-current="page"])::after {
-  content: "";
-  position: absolute;
-  left: 0.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  height: calc(var(--sl-text-base) * 1.4 - 4px);
-  width: 2px;
-  background-color: color-mix(in oklab, var(--sl-color-bg-accent) 100%, transparent);
-  border-radius: 99rem;
-}
-
-ul.top-level ul li:has(> a[aria-current="page"])::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  height: 100%;
-  width: 100%;
-  background-color: color-mix(in oklab, var(--sl-color-gray-5) 100%, transparent);
-  border-radius: 0.5rem;
-  z-index: -1;
-}
-
-[data-theme='light'] {
-  & ul.top-level > li a[aria-current="page"],
-  & ul.top-level > li a[aria-current="page"]:hover,
-  & ul.top-level > li a[aria-current="page"]:focus{
+ul.top-level details ul {
+  & li a:hover,
+  & li a:focus {
+    border-radius: 0;
     background-color: transparent;
   }
-  & ul.top-level ul li:has(> a[aria-current="page"])::before {
-    background-color: color-mix(in oklab, var(--sl-color-gray-5) 40%, transparent);
+  & li > a[aria-current="page"],
+  & li > a[aria-current="page"]:hover,
+  & li > a[aria-current="page"]:focus {
+    background-color: transparent;
+  }
+  & li::before {
+    position: absolute;
+    left: var(--sl-sidebar-item-padding-inline);
+    height: 100%;
+    width: 1px;
+    background-color: var(--sl-color-gray-5);
+    content: "";
+  }
+  & li:has(> a[aria-current="page"]) {
+    isolation: isolate;
+  }
+  & li:has(> a:hover)::before,
+  & li:has(> a[aria-current="page"])::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 95%;
+    transform: translateY(-50%);
+    width: 100%;
+    background-color: color-mix(in oklab, var(--sl-color-gray-5) 60%, transparent);
+    border-radius: 0.5rem;
+    z-index: -1;
+  }
+  & li:has(> a[aria-current="page"])::after {
+    content: "";
+    position: absolute;
+    left: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    height: calc(var(--sl-text-base) * 1.4 - 4px);
+    width: 2px;
+    background-color: color-mix(in oklab, var(--sl-color-bg-accent) 100%, transparent);
+    border-radius: 99rem;
   }
 }
+
 @media (min-width: 50rem) {
-  .top-level {
+  ul.top-level {
     & .large,
     & li a {
       font-size: var(--sl-text-sm);

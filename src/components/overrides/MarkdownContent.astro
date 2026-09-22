@@ -1,0 +1,86 @@
+---
+// src/components/overwrite/MarkdownContent.astro
+import "@astrojs/starlight/style/markdown.css";
+
+import EditLink from "@astrojs/starlight/components/EditLink.astro";
+import LastUpdated from "@astrojs/starlight/components/LastUpdated.astro";
+import Pagination from "@astrojs/starlight/components/Pagination.astro";
+
+import RelatedPosts from "~/components/RelatedPosts.astro";
+import MobileScrollToTop from "../MobileScrollToTop.astro";
+import Comments from "~/stradocs/components/Comments.astro";
+import CommentSection from "~/stradocs/components/comments/CommentSection.astro";
+
+
+const { entry, isBlogPost, isBlogIndex, isDocIndex, isLegalPage } = Astro.locals.starlightRoute;
+const customIndex = isBlogIndex || isDocIndex;
+
+---
+
+{
+	isBlogPost ? (
+		<>
+    		<article class="sl-markdown-content">
+				<slot />
+    		</article>
+    		<div class="custom-meta sl-flex">
+				<EditLink />
+				<LastUpdated />	
+			</div>
+    		<CommentSection />
+    		<Pagination />
+    		<RelatedPosts currentSlug={entry.id} />
+    		<hr />
+    		<MobileScrollToTop />
+		</>
+	) : customIndex ? (
+			<div class="not-content">
+				<slot />		
+			</div>
+			<Pagination />
+			<hr />
+	) : isLegalPage ? (
+			<article class="sl-markdown-content">
+				<slot />
+			</article>
+			<div class="meta sl-flex">
+				<LastUpdated />
+			</div>
+	) : (
+		<article class="sl-markdown-content">
+			<slot />
+		</article>
+		<div class="meta sl-flex">
+			<EditLink />
+			<LastUpdated />
+		</div>
+		<Comments />
+		<Pagination />
+		<MobileScrollToTop />
+	)
+}
+
+<style>
+	.meta {
+		width: 100%;
+		gap: 0.75em 3rem;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		font-size: var(--sl-text-sm);
+		color: var(--sl-color-gray-3);
+		margin-top: 3rem;
+	}
+	.custom-meta {
+		width: 100%;
+		gap: 0.75em 3rem;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		font-size: var(--sl-text-sm);
+		color: var(--sl-color-gray-3);
+		margin-top: 1rem;
+		padding-block: var(--sl-content-gap-y);
+	}
+	:where(.meta, .custom-meta) > :global(p:only-child) {
+		margin-inline-start: auto;
+	}
+</style>

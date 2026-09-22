@@ -6,9 +6,8 @@
   --ds-card-gap:      0.5em;
 
   --ds-card-bg:             transparent;
-  --ds-card-bg-hover:       rgb(from var(--sl-color-gray-6) r g b / 40%);
+  --ds-card-bg-hover:       var(--sl-color-gray-6);
   --ds-card-border:         var(--sl-color-gray-5);
-  --ds-card-border-hover:   var(--sl-color-gray-4);
 
   --ds-card-title-color:        var(--sl-color-white);
   --ds-card-title-size:         var(--sl-text-sm);
@@ -20,17 +19,6 @@
 
   --ds-card-icon-color:         var(--sl-color-gray-3);
   --ds-card-icon-color-hover:   var(--sl-color-white);
-}
-
-:root[data-theme="light"],
-[data-theme="light"] ::backdrop {
-  --ds-card-bg:           var(--sl-color-gray-7);
-  --ds-card-bg-hover:     var(--sl-color-gray-7);
-  --ds-card-border:       hsla(0, 0%, 0%, 0.1);
-  --ds-card-border-hover: hsla(0, 0%, 0%, 0.22);
-
-  --ds-card-title-color:      var(--sl-color-white);
-  --ds-card-icon-color-hover: var(--sl-color-gray-2);
 }
 
 /* ── Komponen ─────────────────────────────────────────── */
@@ -46,9 +34,6 @@
   box-shadow: none;
   position: relative;
   background-color: var(--ds-card-bg);
-  transition:
-    background 140ms ease,
-    outline-color 140ms ease;
 }
 
 .sl-link-card a {
@@ -87,7 +72,6 @@
 
 @media (hover: hover) {
   .sl-link-card:hover {
-    outline-color: var(--ds-card-border-hover);
     background-color: var(--ds-card-bg-hover);
   }
 
