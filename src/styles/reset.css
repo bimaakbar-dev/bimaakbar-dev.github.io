@@ -89,10 +89,11 @@ body {
   hanging-punctuation: first last;
   line-height: var(--sl-line-height);
   font-family: var(--__sl-font);
-  font-feature-settings:
+  /* font-feature-settings:
     "ss01" on,
     "ss02" on,
     "kern" on;
+  */
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
