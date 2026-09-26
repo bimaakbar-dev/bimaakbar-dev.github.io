@@ -1,0 +1,22 @@
+name: Notify Discord on New Blog Post
+
+on:
+  push:
+    branches: [dev]
+    paths:
+      - 'src/content/docs/blog/**'
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Discord Notification
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        with:
+          args: |
+            **Postingan Blog Baru!**
+            **Repo:** ${{ github.repository }}
+            **Commit:** ${{ github.event.head_commit.message }}
+            **Link:** https://bimaakbar-dev.github.io/blog
