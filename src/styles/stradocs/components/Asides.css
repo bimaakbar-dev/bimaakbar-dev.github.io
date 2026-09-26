@@ -72,21 +72,15 @@
     color: var(--callout-color);
   }
   & a {
-    color: var(--sl-color-white);
-    font-weight: 500;
-    text-decoration: underline;
+    color: var(--callout-color);
     text-decoration-color: var(--callout-color);
-    text-decoration-thickness: 1.5px;
-    text-underline-offset: 0.2em;
   }
   & :not(pre) > code {
     font-size: var(--sl-text-code-sm);
-    border: 1px solid color-mix(in srgb, var(--callout-color) 20%, transparent);
-    border-radius: 0.25rem;
-    background: color-mix(in srgb, var(--callout-color) 12%, var(--sl-color-black));
     padding: 0.1em 0.4em;
-    color: var(--fg-strong);
+    color: var(--callout-color);
     font-weight: 400;
+    background-color: var(--sl-color-black);
   }
 }
 
