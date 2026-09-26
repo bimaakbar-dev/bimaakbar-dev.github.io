@@ -10,13 +10,33 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-      - name: Send Discord Notification
-        uses: Ilshidur/action-discord@master
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      - name: Checkout repo
+        uses: actions/checkout@v5
         with:
-          args: |
-            **Postingan Blog Baru!**
-            **Repo:** ${{ github.repository }}
-            **Commit:** ${{ github.event.head_commit.message }}
-            **Link:** https://bimaakbar-dev.github.io/blog
+          fetch-depth: 2
+
+      - name: Extract post info
+        id: post
+        run: |
+          FILE=$(git diff --name-only HEAD~1 HEAD | grep 'src/content/docs/blog/.*\.\(md\|mdx\)' | head -n 1)
+          if [ -z "$FILE" ]; then
+            echo "Tidak ada file post yang berubah."
+            exit 0
+          fi
+          SLUG=$(basename "$FILE" | sed 's/\.[^.]*$//')
+          TITLE=$(grep -m1 '^title:' "$FILE" | sed 's/title: *//; s/"//g; s/'"'"'//g')
+          echo "slug=$SLUG" >> $GITHUB_OUTPUT
+          echo "title=$TITLE" >> $GITHUB_OUTPUT
+          echo "file=$FILE" >> $GITHUB_OUTPUT
+
+      - name: Send Discord Notification
+        if: steps.post.outputs.slug != ''
+        uses: tsickert/discord-webhook@v6.0.0
+        with:
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          embed-title: "${{ steps.post.outputs.title }}"
+          embed-url: "https://bimaakbar-dev.github.io/blog/${{ steps.post.outputs.slug }}/"
+          embed-description: "Postingan blog baru! Klik judul untuk membaca."
+          embed-color: 5814783
+          embed-footer: "bimaakbar-dev.github.io"
+          username: "c0desk1"
