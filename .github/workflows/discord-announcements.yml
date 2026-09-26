@@ -2,7 +2,7 @@ name: Notify Discord on New Blog Post
 
 on:
   push:
-    branches: [dev]
+    branches: ['dev']
     paths:
       - 'src/content/docs/blog/**'
 
