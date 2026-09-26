@@ -75,6 +75,9 @@
     color: var(--callout-color);
     text-decoration-color: var(--callout-color);
   }
+  & a.is-external::after {
+    background-color: var(--callout-color);
+  }
   & :not(pre) > code {
     font-size: var(--sl-text-code-sm);
     padding: 0.1em 0.4em;
