@@ -9,7 +9,7 @@ const INVITE_URL = "https://discord.gg/JctkAQs4W8";
   <div class="sl-flex cta">
     <Icon name="discord" class="discord-icon" size="2.5rem" />
     <LinkButton href={INVITE_URL} variant="secondary" target="_blank">
-      Gabung dengan Discord
+      Gabung Discord
     </LinkButton>
   </div>
 </div>
@@ -25,12 +25,24 @@ const INVITE_URL = "https://discord.gg/JctkAQs4W8";
   h2 {
     margin: 0 0 1.5rem;
     font-size: 1.25rem;
-    font-weight: 600;
+    font-weight: 500;
   }
   .cta {
     flex-direction: column;
     align-items: center;
     gap: 0.75rem;
+  }
+
+  .cta a {
+    color: #5865f2 !important;
+    border-color: #5865f2 !important;
+    font-size: var(--sl-text-base);
+    font-weight: 500;
+    &:hover {
+      color: var(--sl-color-white) !important;
+      border-color: var(--sl-color-white) !important;
+      background: none !important;
+    }
   }
 
   .discord-icon {
