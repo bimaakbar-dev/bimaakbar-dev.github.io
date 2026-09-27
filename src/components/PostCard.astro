@@ -41,6 +41,7 @@ const blogPosts = allPosts
                 alt={title}
                 loading={index > 3 ? "eager" : "lazy"}
                 decoding="async"
+                fetchpriority={index > 3 ? "high" : "low"}
               />
             )}
           </div>
@@ -62,33 +63,20 @@ const blogPosts = allPosts
     list-style: none;
     padding: 0;
   }
-
+  li:focus-within .post-card {
+    outline-color: var(--sl-color-accent-high);
+  }
   .post-card {
     position: relative;
     display: flex;
     flex-direction: column;
     height: 100%;
     padding: 1.25em;
-    border-radius: 0.75rem;
+    border-radius: 1rem;
     border: 1px solid var(--sl-color-gray-5);
     background: var(--sl-color-gray-6);
     outline: 1px solid transparent;
   }
-
-  @media (hover: hover) {
-    .post-card:hover {
-      background: transparent;
-    }
-  }
-
-  [data-theme='light'] .post-card {
-    box-shadow: var(--shadow-float);
-  }
-
-  li:focus-within .post-card {
-    outline-color: var(--sl-color-accent-high);
-  }
-
   .post-card header .date {
     font-family: var(--__sl-font-mono);
     font-size: var(--sl-text-base);
@@ -111,7 +99,7 @@ const blogPosts = allPosts
     display: flex;
     flex-direction: column;
     flex: 1;
-    margin-top: 1.25em;
+    margin-top: 1em;
     gap: 0.75em;
   }
 
@@ -145,6 +133,11 @@ const blogPosts = allPosts
     margin: 0;
   }
 
+  [data-theme='light'] .post-card {
+    box-shadow: var(--shadow-float);
+    border: none;
+  }
+
   @media (min-width: 50rem) {
     .post-card .content {
       display: grid;
@@ -156,6 +149,12 @@ const blogPosts = allPosts
 
     .post-card .content h3 {
       font-size: var(--sl-text-h3);
+    }
+  }
+
+  @media (hover: hover) {
+    .post-card:hover {
+      background: transparent;
     }
   }
 
