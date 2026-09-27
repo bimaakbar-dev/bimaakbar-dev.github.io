@@ -10,6 +10,7 @@ import RelatedPosts from "~/components/RelatedPosts.astro";
 import MobileScrollToTop from "../MobileScrollToTop.astro";
 import Comments from "~/stradocs/components/Comments.astro";
 import CommentSection from "~/stradocs/components/comments/CommentSection.astro";
+import DiscordServer from "../DiscordServer.astro";
 
 
 const { entry, isBlogPost, isBlogIndex, isDocIndex, isLegalPage } = Astro.locals.starlightRoute;
@@ -27,8 +28,8 @@ const customIndex = isBlogIndex || isDocIndex;
 				<EditLink />
 				<LastUpdated />	
 			</div>
-    		<CommentSection />
-    		<Pagination />
+			<hr />
+			<DiscordServer variant="article" />
     		<RelatedPosts currentSlug={entry.id} />
     		<hr />
     		<MobileScrollToTop />
