@@ -1,0 +1,39 @@
+---
+import { LinkButton, Icon } from "@astrojs/starlight/components";
+
+const INVITE_URL = "https://discord.gg/JctkAQs4W8";
+---
+
+<div class="sl-flex discord not-content">
+  <h2>Punya pertanyaan atau ingin diskusi?</h2>
+  <div class="sl-flex cta">
+    <Icon name="discord" class="discord-icon" size="2.5rem" />
+    <LinkButton href={INVITE_URL} variant="secondary" target="_blank">
+      Gabung dengan Discord
+    </LinkButton>
+  </div>
+</div>
+
+<style>
+  .discord {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+  }
+  h2 {
+    margin: 0 0 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  .cta {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .discord-icon {
+    color: #5865f2;
+  }
+</style>
