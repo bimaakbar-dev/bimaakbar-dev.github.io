@@ -34,8 +34,8 @@ const imageAttrs = {
 	decoding: 'async' as const,
 	width: 1500,
 	height: 643,
-	alt: cover?.alt || '',
-    fetchpriority: 'high' as const,
+	alt: cover?.alt || title || "",
+  fetchpriority: 'high' as const,
 };
 
 const breadcrumbItems = [
@@ -52,7 +52,7 @@ const readingTime = getReadingTime(entry.body ?? '');
     {cover?.image && ( typeof cover.image === 'string' ? (
     	<img
         	src={cover.image}
-        	alt={cover.alt ?? ''}
+        	alt={cover.alt ?? title}
         	loading="eager"
         	decoding="async"
         	fetchpriority="high"
