@@ -8,9 +8,19 @@ interface Props {
   limit?: number;
 }
 
-const { currentSlug, limit = 4 } = Astro.props as Props;
-const route = Astro.locals.starlightRoute as any;
-const { blogPrefix, blogBasePath, entry, id } = route;
+const { 
+  currentSlug, 
+  limit = 4 
+} = Astro.props as Props;
+
+const route = Astro.locals.starlightRoute;
+
+const { 
+  blogPrefix, 
+  blogBasePath, 
+  entry, 
+  id 
+} = route;
 
 const currentId = id || currentSlug;
 const currentTags: string[] = entry?.data?.tags || [];
@@ -96,7 +106,7 @@ const getHref = (post: { id: string }) => {
     flex-direction: column;
     height: 100%;
     border: 1px solid var(--sl-color-gray-5);
-    border-radius: 0.75rem;
+    border-radius: 1rem;
     background: var(--sl-color-gray-6);
     color: var(--sl-color-gray-2);
     overflow: hidden;
