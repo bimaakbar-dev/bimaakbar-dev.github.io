@@ -9,44 +9,47 @@ import Pagination from "@astrojs/starlight/components/Pagination.astro";
 import RelatedPosts from "~/components/RelatedPosts.astro";
 import MobileScrollToTop from "../MobileScrollToTop.astro";
 import Comments from "~/stradocs/components/Comments.astro";
-import CommentSection from "~/stradocs/components/comments/CommentSection.astro";
 import DiscordServer from "../DiscordServer.astro";
 
+const { 
+	entry, 
+	isBlogPost, 
+	isBlogIndex, 
+	isDocIndex, 
+	isLegalPage 
+} = Astro.locals.starlightRoute;
 
-const { entry, isBlogPost, isBlogIndex, isDocIndex, isLegalPage } = Astro.locals.starlightRoute;
 const customIndex = isBlogIndex || isDocIndex;
 
 ---
 
 {
 	isBlogPost ? (
-		<>
-    		<article class="sl-markdown-content">
-				<slot />
-    		</article>
-    		<div class="custom-meta sl-flex">
-				<EditLink />
-				<LastUpdated />	
-			</div>
-			<hr />
-			<DiscordServer variant="article" />
-    		<RelatedPosts currentSlug={entry.id} />
-    		<hr />
-    		<MobileScrollToTop />
-		</>
+    	<article class="sl-markdown-content">
+			<slot />
+    	</article>
+    	<div class="custom-meta sl-flex">
+			<EditLink />
+			<LastUpdated />	
+		</div>
+    	<RelatedPosts currentSlug={entry.id} />
+    	<hr />
+		<DiscordServer variant="article" />
+		<hr />
+    	<MobileScrollToTop />
 	) : customIndex ? (
-			<div class="not-content">
-				<slot />		
-			</div>
-			<Pagination />
-			<hr />
+		<div class="not-content">
+			<slot />		
+		</div>
+		<Pagination />
+		<hr />
 	) : isLegalPage ? (
-			<article class="sl-markdown-content">
-				<slot />
-			</article>
-			<div class="meta sl-flex">
-				<LastUpdated />
-			</div>
+		<article class="sl-markdown-content">
+			<slot />
+		</article>
+		<div class="meta sl-flex">
+			<LastUpdated />
+		</div>
 	) : (
 		<article class="sl-markdown-content">
 			<slot />
