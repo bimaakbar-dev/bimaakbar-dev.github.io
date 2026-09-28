@@ -23,9 +23,21 @@ const blogPosts = allPosts
 {
   blogPosts.map((post, index) => {
     const { data } = post;
-    const { title, description, pubDate, heroImage } = data;
+    const { title, description, pubDate, cover } = data;
+
+    const isAboveFold = index < 5;
+    const imageAttrs = {
+      loading: (isAboveFold ? 'eager' : 'lazy') as 'eager' | 'lazy',
+      decoding: 'async' as const,
+      fetchpriority: (isAboveFold ? 'high' : 'low') as 'high' | 'low',
+      width: 766,
+      height: 328,
+    };
+
+    const alt = cover?.alt || title || "";
     const slug = post.id.slice(blogPrefix.length);
     const href = `${blogBasePath}/${slug}`;
+
     return (
       <li class="not-content">
         <article class="post-card">
@@ -33,20 +45,25 @@ const blogPosts = allPosts
             <FormattedDate class="date" date={pubDate} />
           </header>
           <div class="cover">
-            {heroImage && (
-              <Image
-                width={766}
-                height={328}
-                src={heroImage}
-                alt={title}
-                loading={index > 4 ? "eager" : "lazy"}
-                decoding="async"
-                fetchpriority={index > 4 ? "high" : "low"}
-                quality='high' 
-                fit='cover' 
-                position='center'
-              />
-            )}
+            {cover?.image &&
+              (typeof cover.image === 'string' ? (
+                <img
+                  src={cover.image}
+                  {...imageAttrs}
+                  alt={alt}
+                  class="sl-block"
+                />
+              ) : (
+                <Image
+                  src={cover.image}
+                  {...imageAttrs}
+                  alt={alt}
+                  quality="high"
+                  fit="cover"
+                  position="center"
+                  class="sl-block"
+                />
+              ))}
           </div>
           <div class="content">
             <h3>
