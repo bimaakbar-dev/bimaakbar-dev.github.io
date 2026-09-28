@@ -6,7 +6,8 @@ description: Game survival crafting Solarpunk resmi rilis 8 Juni 2026. Padukan
 author: 
   - name: Bima Akbar
   - avatar: ~/assets/images/testimonials/bimaakbarmusic.jpg
-heroImage: ~/assets/images/blog/solarpunk-cover.jpg
+cover: 
+  image: ~/assets/images/blog/solarpunk-cover.jpg
 tags:
   - news
   - update
