@@ -31,21 +31,22 @@ const INVITE_URL = "https://discord.gg/JctkAQs4W8";
     flex-direction: column;
     align-items: center;
     gap: 0.75rem;
-  }
-
-  .cta a {
-    color: #5865f2 !important;
-    border-color: #5865f2 !important;
+    & a {
+    color: var(--purple) !important;
+    border-color: var(--purple) !important;
     font-size: var(--sl-text-base);
     font-weight: 500;
-    &:hover {
-      color: var(--sl-color-white) !important;
-      border-color: var(--sl-color-white) !important;
-      background: none !important;
+      &:hover {
+        color: var(--sl-color-white) !important;
+        border-color: var(--sl-color-white) !important;
+        background: none !important;
+      }
     }
-  }
-
-  .discord-icon {
-    color: #5865f2;
+    & svg {
+      color: var(--purple);
+      flex-shrink: 0;
+      width: 1em;
+      height: 1em
+    }
   }
 </style>
