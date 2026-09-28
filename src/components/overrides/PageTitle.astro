@@ -25,9 +25,18 @@ const {
   title,
   description,
   pubDate,
-  heroImage,
+  cover,
   author = [],
 } = entry.data;
+
+const imageAttrs = {
+	loading: 'eager' as const,
+	decoding: 'async' as const,
+	width: 1500,
+	height: 643,
+	alt: cover?.alt || '',
+    fetchpriority: 'high' as const,
+};
 
 const breadcrumbItems = [
   { label: Astro.locals.t("nav.docs"), href: `${docsBasePath}` },
@@ -40,21 +49,28 @@ const readingTime = getReadingTime(entry.body ?? '');
 {
   isBlogPost ? (
   <div class="hero not-content">
-    {heroImage && ( 
-      <Image
-        width={1500}
-        height={643}
-        src={heroImage}
-        class="sl-block"
-        alt={title || ""}
-        loading="eager"
-        decoding="async"
-        fetchpriority='high'
-        quality='high' 
-        fit='cover' 
-        position='center'
-      />
-    )}
+    {cover?.image && ( typeof cover.image === 'string' ? (
+    	<img
+        	src={cover.image}
+        	alt={cover.alt ?? ''}
+        	loading="eager"
+        	decoding="async"
+        	fetchpriority="high"
+        	width="1500"
+        	height="643"
+        	class="sl-block"
+        />
+  	) : (
+        <Image
+      	  src={cover.image}
+      	  {...imageAttrs}
+      	  quality='high'
+        	fit='cover'
+        	position='center'
+        	class="sl-block"
+        />
+  	)
+	)}
   </div>
   <header class="blog-post-header sl-flex">
     <div class="post-meta sl-flex">
