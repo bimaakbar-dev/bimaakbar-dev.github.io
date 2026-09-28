@@ -26,5 +26,8 @@
   "rss.title": "BimaakbarDev",
   "rss.RssFeedLabel": "Subscribe",
   "rss.RssFeedTitle": "RSS",
-  "rss.RssFeedDesc": "Stay up-to-date with news from the"
+  "rss.RssFeedDesc": "Stay up-to-date with news from the",
+
+  "discord.title" : "Have questions or want to discuss?",
+  "discord.action" : "Join our Discord"
 }
