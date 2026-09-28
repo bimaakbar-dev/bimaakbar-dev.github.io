@@ -39,7 +39,7 @@ const readingTime = getReadingTime(entry.body ?? '');
 
 {
   isBlogPost ? (
-  <div class="hero-image not-content">
+  <div class="hero not-content">
     {heroImage && ( 
       <Image
         width={1500}
@@ -74,7 +74,7 @@ const readingTime = getReadingTime(entry.body ?? '');
                     src={a.avatar}
                     width={48}
                     height={48}
-                    alt={a.name || ''}
+                    alt={a.name}
                     loading="eager"
                     decoding="async"
                     fetchpriority="low"
@@ -113,13 +113,16 @@ const readingTime = getReadingTime(entry.body ?? '');
 }
 
 <style>
-  .hero-image {
+  .hero {
     margin-inline: auto;
     width: 100%;
     max-width: 72rem;
+    height: 100%;
     position: relative;
     z-index: 0;
     margin-bottom: -1rem;
+    overflow: hidden;
+    border-radius: 1rem;
     & img {
       width: 100%;
       height: auto;
@@ -139,13 +142,12 @@ const readingTime = getReadingTime(entry.body ?? '');
     padding-block: var(--sl-content-gap-y);
     background: var(--sl-color-black);
     z-index: 10;
-    border-top-left-radius: 0.75rem;
-    border-top-right-radius: 0.75rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
     & :where(.post-meta .post-date, .post-meta .post-reading-time, .post-author) {
       font-size: var(--sl-text-body);
-      font-weight: 500;
       color: var(--sl-color-gray-2);
-      font-family: var(--font-firaCode);
+      line-height: var(--sl-line-height);
     }
     & .post-meta {
       margin-inline: auto;
@@ -194,7 +196,7 @@ const readingTime = getReadingTime(entry.body ?? '');
           & > img {
             margin: 0;
             display: block;
-            border-radius: 99rem;
+            border-radius: 999px;
             width: 1.5em;
             height: 1.5em;
             object-fit: cover;
@@ -267,7 +269,7 @@ const readingTime = getReadingTime(entry.body ?? '');
   }
 
   @media (min-width: 50rem) {
-    .hero-image {
+    .hero {
       margin-bottom: -3rem;
     }
     .blog-post-header {
@@ -279,7 +281,7 @@ const readingTime = getReadingTime(entry.body ?? '');
     }
   }
   @media (min-width: 72rem) {
-    .hero-image {
+    .hero {
       margin-bottom: -6rem;
     }
   }
