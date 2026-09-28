@@ -1,0 +1,7 @@
+# LLMS Index - c0desk1
+
+> Indeks dokumentasi untuk LLM
+
+llms.txt yang tersedia untuk setiap bahasa:
+
+- [root](https://bimaakbar-dev.github.io/docs/llms.txt)

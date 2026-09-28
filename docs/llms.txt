@@ -1,0 +1,9 @@
+# c0desk1
+# Total: 4 halaman
+
+> Dokumentasi untuk LLM, gunakan ini untuk memahami struktur situs.
+
+- [Paragraf Sintak](https://bimaakbar-dev.github.io/docs/reference/block-syntax/): Pelajari bagaimana cara penulisan sintak tipe paragraf dalam markdown di Stradocs
+- [Sintak Markdown](https://bimaakbar-dev.github.io/docs/reference/inline-syntax/): Pelajari kode sintak markdown untuk tipe teks di Stradocs
+- [Markdown](https://bimaakbar-dev.github.io/docs/writing/markdown/): Preview semua elemen typography di markdown
+- [Menggunakan MDX](https://bimaakbar-dev.github.io/docs/writing/using-mdx/): Learn how to write mdx

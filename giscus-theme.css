@@ -1,0 +1,140 @@
+main {
+  --color-fg-default: hsl(0, 0%, 92%);
+  --color-text-primary: hsl(0, 0%, 92%);
+  --color-fg-muted: hsla(0, 0%, 70%, 0.8);
+  --color-text-secondary: hsla(0, 0%, 70%, 0.8);
+  --color-fg-subtle: hsla(0, 0%, 60%, 0.6);
+  --color-text-tertiary: hsla(0, 0%, 60%, 0.6);
+
+  --color-canvas-default: hsl(0, 0%, 7.04%);
+  --color-bg-primary: hsl(0, 0%, 7.04%);
+  --color-canvas-overlay: hsl(0, 0%, 9.8%);
+  --color-bg-secondary: hsl(0, 0%, 9.8%);
+  --color-canvas-inset: hsl(0, 0%, 9.8%);
+  --color-canvas-subtle: hsl(0, 0%, 9.8%);
+  --color-bg-tertiary: hsl(0, 0%, 9.8%);
+  --color-bg-canvas: hsl(0, 0%, 7.04%);
+  --color-bg-overlay: hsl(0, 0%, 9.8%);
+  --color-bg-inset: hsl(0, 0%, 9.8%);
+  --color-bg-subtle: hsl(0, 0%, 9.8%);
+
+  --color-border-default: hsla(0, 0%, 40.9%, 30%);
+  --color-border-primary: hsla(0, 0%, 40.9%, 30%);
+  --color-border-muted: hsla(0, 0%, 40.9%, 15%);
+  --color-border-secondary: hsla(0, 0%, 40.9%, 15%);
+  --color-neutral-muted: hsla(0, 0%, 40.9%, 20%);
+
+  --color-accent-fg: hsl(224, 100%, 85%);
+  --color-accent-emphasis: hsl(224, 100%, 60%);
+  --color-accent-muted: hsla(224, 100%, 60%, 0.4);
+  --color-accent-subtle: hsl(224, 54%, 20%);
+
+  --color-success-fg: hsl(150, 80%, 55%);
+  --color-attention-fg: hsl(35, 90%, 60%);
+  --color-attention-muted: hsla(35, 90%, 60%, 0.4);
+  --color-attention-subtle: hsla(35, 90%, 60%, 0.15);
+  --color-danger-fg: hsl(350, 85%, 65%);
+  --color-danger-muted: hsla(350, 85%, 65%, 0.4);
+  --color-danger-subtle: hsla(350, 85%, 65%, 0.15);
+
+  --color-btn-text: hsl(0, 0%, 92%);
+  --color-btn-bg: hsl(0, 0%, 9.8%);
+  --color-btn-border: hsla(0, 0%, 40.9%, 30%);
+  --color-btn-hover-bg: hsl(0, 0%, 12%);
+  --color-btn-hover-border: hsla(224, 100%, 60%, 0.5);
+  --color-btn-selected-bg: hsl(224, 54%, 20%);
+
+  --color-btn-primary-text: hsl(0, 0%, 98%);
+  --color-btn-primary-bg: hsl(224, 100%, 60%);
+  --color-btn-primary-border: hsl(224, 100%, 60%);
+  --color-btn-primary-hover-bg: hsl(224, 100%, 68%);
+  --color-btn-primary-hover-border: hsl(224, 100%, 68%);
+  --color-btn-primary-selected-bg: hsl(224, 100%, 55%);
+  --color-btn-primary-selected-border: hsl(224, 100%, 55%);
+  --color-btn-primary-disabled-text: hsla(0, 0%, 98%, 0.6);
+  --color-btn-primary-disabled-bg: hsla(224, 100%, 60%, 0.5);
+  --color-btn-primary-disabled-border: hsla(224, 100%, 60%, 0.5);
+
+  --color-action-list-item-default-hover-bg: hsl(0, 0%, 12%);
+  --color-segmented-control-bg: hsl(0, 0%, 9.8%);
+  --color-segmented-control-button-bg: hsl(0, 0%, 7.04%);
+  --color-segmented-control-button-selected-border: hsla(224, 100%, 60%, 0.5);
+  --color-scale-gray-7: hsl(0, 0%, 12%);
+  --color-scale-blue-8: hsl(224, 54%, 20%);
+  --color-social-reaction-bg-hover: hsl(0, 0%, 12%);
+  --color-social-reaction-bg-reacted-hover: hsl(224, 54%, 25%);
+}
+
+.gsc-comment-box {
+  border-radius: 0.75rem !important;
+}
+
+.gsc-comment-box-tabs {
+  border-radius: 0.75rem 0.75rem 0 0 !important;
+}
+
+.gsc-comment-box-tabs button {
+  border-radius: 0.5rem 0.5rem 0 0 !important;
+}
+
+.gsc-comment-box-textarea {
+  border-radius: 0.5rem 0.5rem 0 0 !important;
+}
+
+.gsc-comment-box-textarea-extras {
+  border-radius: 0 0 0.5rem 0.5rem !important;
+}
+
+.gsc-comment-box-bottom {
+  border-radius: 0 0 0.75rem 0.75rem !important;
+}
+
+.gsc-comment > div {
+  border-radius: 0.75rem !important;
+}
+
+.gsc-comment-header {
+  border-radius: 0.75rem 0.75rem 0 0 !important;
+}
+
+.gsc-comment-footer {
+  border-radius: 0 0 0.75rem 0.75rem !important;
+}
+
+.gsc-reply-box {
+  border-radius: 0 0 0.75rem 0.75rem !important;
+}
+
+.gsc-reply-box > button {
+  border-radius: 0.5rem !important;
+}
+
+.BtnGroup {
+  border-radius: 0.5rem !important;
+}
+
+.BtnGroup-item:first-child,
+.BtnGroup-item:first-child .btn {
+  border-radius: 0.5rem 0 0 0.5rem !important;
+}
+
+.BtnGroup-item:last-child,
+.BtnGroup-item:last-child .btn {
+  border-radius: 0 0.5rem 0.5rem 0 !important;
+}
+
+.gsc-reactions-popover {
+  border-radius: 0.75rem !important;
+}
+
+.gsc-social-reaction-summary-item,
+.gsc-direct-reaction-button,
+.gsc-upvote-button,
+.gsc-reactions-menu summary,
+.color-box-border-info {
+  border-radius: 999rem !important;
+}
+
+.gsc-comment-author-avatar img {
+  border-radius: 50% !important;
+}
