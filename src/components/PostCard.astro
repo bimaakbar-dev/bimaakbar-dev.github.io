@@ -38,10 +38,13 @@ const blogPosts = allPosts
                 width={766}
                 height={328}
                 src={heroImage}
-                alt={title}
-                loading={index > 3 ? "eager" : "lazy"}
+                alt={title || ""}
+                loading={index > 4 ? "eager" : "lazy"}
                 decoding="async"
-                fetchpriority={index > 3 ? "high" : "low"}
+                fetchpriority={index > 4 ? "high" : "low"}
+                quality='high' 
+                fit='cover' 
+                position='center'
               />
             )}
           </div>
