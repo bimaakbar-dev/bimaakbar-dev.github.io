@@ -27,5 +27,7 @@
   "rss.title": "BimaakbarDEV",
   "rss.RssFeedLabel": "Berlangganan",
   "rss.RssFeedTitle": "RSS",
-  "rss.RssFeedDesc": "Dapatkan informasi terkini dari"
+  "rss.RssFeedDesc": "Dapatkan informasi terkini dari",
+  "discord.title" : "Punya pertanyaan atau ingin diskusi?",
+  "discord.action" : "Gabung Discord"
 }
