@@ -11,6 +11,7 @@
 
   --darksolar: hsl(26 61% 50%);
   --solar: hsl(22 100% 52%);
+  --purple: hsl(224, 100%, 85%);
 
   --sl-hue-orange: 35;
   --sl-color-orange-low: hsl(var(--sl-hue-orange), 30%, 15%);
