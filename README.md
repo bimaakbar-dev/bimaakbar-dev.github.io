@@ -38,9 +38,7 @@
    ```bash
    npm run dev
    ```
-
-> [!TIP]
-> The server will run automatically on `localhost:4321`.
+   The server will run automatically on `localhost:4321`.
 
 ## License
 
