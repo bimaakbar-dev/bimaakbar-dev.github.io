@@ -4,7 +4,7 @@ on:
   workflow_run:
     workflows: ["Deploy Astro site to Pages"]
     types: [completed]
-    branches: [Dev]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
