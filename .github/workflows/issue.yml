@@ -1,4 +1,4 @@
-name: Assistant Issue Handler
+name: Assistant Issue
 
 on:
   issues:
@@ -43,7 +43,7 @@ jobs:
             -f "labels[]=$LABEL" 2>/dev/null || true
           
           gh api "/repos/$REPO/issues/$ISSUE_NUM/comments" \
-            -f "body=Terima kasih sudah buka issue! 🌸
+            -f "body=Terima kasih sudah buka issue!
 
           Issue ini sudah otomatis dilabeli **\`$LABEL\`**. Saya akan cek segera.
 
@@ -54,8 +54,8 @@ jobs:
       - name: Send to Telegram
         if: always()
         env:
-          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          BOT_TOKEN: ${{ secrets.UNLYOD_TG_BOT }}
+          CHAT_ID: ${{ secrets.ADMIN_CHAT_ID }}
         run: |
           MESSAGE="🐛 <b>Issue Baru</b>
           
