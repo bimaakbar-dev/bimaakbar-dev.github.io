@@ -1,128 +1,43 @@
-name: Cleanup Cloudflare
+name: Cleanup Pages Deployments
 
 on:
   workflow_dispatch:
     inputs:
-      action:
-        description: 'Yang mau dihapus'
-        type: choice
+      project_name:
+        description: 'Nama project Cloudflare Pages'
         required: true
-        options:
-          - 'pages-only'
-          - 'workers-only'
-          - 'both'
-        default: 'both'
-      keep_pages:
-        description: 'Pages yang dipertahankan (pisah koma, kosongkan kalau hapus semua)'
-        required: false
-        default: ''
-      keep_workers:
-        description: 'Workers yang dipertahankan (WAJIB)'
-        required: true
-        default: 'c0desk1-bot,c0desk1-emak-bot,bimaakbar-dev-comments'
-      dry_run:
-        description: 'Dry run (tidak hapus)'
-        type: boolean
-        required: true
-        default: true
+        default: 'bimaakbar'
 
 jobs:
   cleanup:
     runs-on: ubuntu-latest
     steps:
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
       - name: Install jq
         run: sudo apt-get install -y jq
 
-      - name: List Pages
-        if: ${{ inputs.action == 'pages-only' || inputs.action == 'both' }}
+      - name: Install Wrangler
+        run: npm install -g wrangler
+
+      - name: Cleanup deployments
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          PROJECT_NAME: ${{ inputs.project_name }}
         run: |
-          echo "=== Cloudflare Pages ==="
-          curl -s -X GET "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects" \
-            -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" | jq -r '.result[] | "\(.name) | \(.created_on)"'
-
-      - name: List Workers
-        if: ${{ inputs.action == 'workers-only' || inputs.action == 'both' }}
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          echo "=== Cloudflare Workers ==="
-          curl -s -X GET "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/workers/scripts" \
-            -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" | jq -r '.result[].id'
-
-      - name: Delete Pages
-        if: ${{ inputs.action == 'pages-only' || inputs.action == 'both' }}
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          KEEP: ${{ inputs.keep_pages }}
-          DRY_RUN: ${{ inputs.dry_run }}
-        run: |
-          IFS=',' read -ra KEEP_ARRAY <<< "$KEEP"
-          echo "Keep Pages: ${KEEP_ARRAY[@]}"
-          echo "---"
-
-          curl -s -X GET "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects" \
-            -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" | jq -r '.result[].name' | while read project; do
-            [ -z "$project" ] && continue
-            skip=false
-            for keep in "${KEEP_ARRAY[@]}"; do
-              keep_trimmed=$(echo "$keep" | xargs)
-              if [ -n "$keep_trimmed" ] && [ "$project" = "$keep_trimmed" ]; then
-                skip=true
-                break
+          prod_id=""
+          while :; do
+            ids=$(npx wrangler pages deployment list --project-name "$PROJECT_NAME" --json | jq -r '.[].Id')
+            to_delete=$(echo "$ids" | grep -v -F -x "$prod_id" | grep .)
+            [ -z "$to_delete" ] && { echo "Done. Production: $prod_id"; break; }
+            echo "Deleting $(echo "$to_delete" | wc -l | tr -d ' ') deployments..."
+            while IFS= read -r id; do
+              if ! npx wrangler pages deployment delete "$id" --project-name "$PROJECT_NAME" --force 2>&1 | tee /tmp/wrangler-del.log | grep -q "Successfully deleted"; then
+                grep -q "active production deployment" /tmp/wrangler-del.log && prod_id="$id"
               fi
-            done
-
-            if [ "$skip" = "true" ]; then
-              echo "SKIP: $project"
-            else
-              if [ "$DRY_RUN" = "true" ]; then
-                echo "WOULD DELETE: $project"
-              else
-                echo "DELETING: $project"
-                curl -s -X DELETE "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/${project}" \
-                  -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" | jq -r '.success'
-              fi
-            fi
-          done
-
-      - name: Delete Workers
-        if: ${{ inputs.action == 'workers-only' || inputs.action == 'both' }}
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          KEEP: ${{ inputs.keep_workers }}
-          DRY_RUN: ${{ inputs.dry_run }}
-        run: |
-          IFS=',' read -ra KEEP_ARRAY <<< "$KEEP"
-          echo "Keep Workers: ${KEEP_ARRAY[@]}"
-          echo "---"
-
-          curl -s -X GET "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/workers/scripts" \
-            -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" | jq -r '.result[].id' | while read worker; do
-            [ -z "$worker" ] && continue
-            skip=false
-            for keep in "${KEEP_ARRAY[@]}"; do
-              keep_trimmed=$(echo "$keep" | xargs)
-              if [ -n "$keep_trimmed" ] && [ "$worker" = "$keep_trimmed" ]; then
-                skip=true
-                break
-              fi
-            done
-
-            if [ "$skip" = "true" ]; then
-              echo "SKIP: $worker"
-            else
-              if [ "$DRY_RUN" = "true" ]; then
-                echo "WOULD DELETE: $worker"
-              else
-                echo "DELETING: $worker"
-                curl -s -X DELETE "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/workers/scripts/${worker}" \
-                  -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" | jq -r '.success'
-              fi
-            fi
+            done <<< "$to_delete"
           done
