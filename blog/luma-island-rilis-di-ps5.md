@@ -54,7 +54,7 @@ Tapi setidaknya kalian udah bisa **wishlist di PlayStation Store** sekarang. Lum
 
 ## Yang bikin Luma Island beda dari life sim lain
 
-### 1. Crossplay beneran, bukan cuma gimmick
+### Crossplay beneran, bukan cuma gimmick
 
 Ini yang paling gue highlight. Luma Island bakal support **cross-platform multiplayer** antara **PS5, Xbox Series X|S, dan PC sejak hari pertama rilis**. Bukan patch setahun kemudian. Bukan cuma "partial". Full dari awal.
 
@@ -65,13 +65,13 @@ Detail yang sering dilewatin orang: **pemain PC bisa ngundang temen yang main di
   <figcaption>Source: <a href="https://dotesports.com/indies/news/how-to-host-join-multiplayer-luma-island">Dot Esports</a></figcaption>
 </figure>
 
-### 2. Nggak ada tekanan. Serius.
+### Nggak ada tekanan. Serius.
 
 Ini poin yang mungkin bikin kalian mikir "lah, game kalau nggak ada tekanan kan jadi bosen?" Ternyata nggak. Luma Island sengaja **ngilangin stamina bar** dan **batas inventory**. Kalian bebas nge-farm, mancing, nambang, atau bangun rumah sebanyak yang kalian mau, selama yang kalian mau.
 
 Buat kalian yang cuma pengen *chill* sepulang kerja atau sepulang kuliah, ini fitur yang **underrated banget**. Nggak perlu mikir "duh, staminaku abis, harus balik ke rumah dulu".
 
-### 3. Tiga mode kesulitan, tinggal pilih
+### Tiga mode kesulitan, tinggal pilih
 
 Karena nggak semua orang suka combat, Luma Island nyediain **tiga mode**:
 
@@ -79,7 +79,7 @@ Karena nggak semua orang suka combat, Luma Island nyediain **tiga mode**:
 - **Adventure Mode:** Kombinasi seimbang antara eksplorasi dan aksi. Ini yang kayaknya bakal jadi mode paling umum.
 - **Hero Mode:** Buat kalian yang mau tantangan lebih. Boss-nya lebih galak, resource lebih susah didapat.
 
-### 4. Delapan profesi yang beneran ngubah gameplay
+### Delapan profesi yang beneran ngubah gameplay
 
 Di Luma Island, kalian bisa milih dari **8 profesi**, dan tiap profesi punya **jalur progresi, resep, resource, dan alat sendiri**. Nggak cuma skin, tapi beneran ngubah cara kalian main:
 
@@ -94,13 +94,13 @@ Di Luma Island, kalian bisa milih dari **8 profesi**, dan tiap profesi punya **j
 
 Jadi kalau kalian pengen main ulang dengan karakter baru dan profesi berbeda, gameplay-nya bakal kerasa beda. Ini yang bikin game-nya punya replayability tinggi — bukan cuma "endgame grind".
 
-### 5. Lumas: hewan peliharaan magis yang ngasih kejutan
+### Lumas: hewan peliharaan magis yang ngasih kejutan
 
 Salah satu fitur paling *gemes* menurut gue pribadi: **Lumas**. Ini makhluk magis yang bisa kalian tetasin dari **telur misterius** yang tersebar di seluruh map. Kalau udah menetas, mereka bakal nemenin kalian jalan-jalan, dan—ini bagian kerennya—**membantu nemuin harta karun tersembunyi**.
 
 Buat yang suka mekanik pet-companion kayak di Stardew atau Palia, ini bakal jadi daya tarik tersendiri.
 
-### 6. Dunianya luas, dan beneran open-world
+### Dunianya luas, dan beneran open-world
 
 Jangan salah, Luma Island bukan cuma sawah dan rumah. Dunianya ngecakup:
 
@@ -131,6 +131,8 @@ Menurut gue, **worth banget**, dengan beberapa catatan:
 - Tanggal rilis PS5 belum jelas (masih "2026")
 - Visual-nya stylized, bukan realistis — kalau kalian suka grafis detail, mungkin kurang sreg
 - Combat-nya cukup ringan, jadi bukan buat kalian yang nyari action RPG
+
+<small>Pendapat dari beberapa user diberbagai forum</small>
 
 Kalau kalian suka **Stardew Valley**, **Coral Island**, atau **Palia**, kemungkinan besar kalian bakal betah main Luma Island. Tapi kalau kalian nyari game yang lebih "keras" kayak **Rune Factory** atau **My Time at Sandrock** yang combat-nya lebih berat... mungkin bakal kerasa agak terlalu santai.
 
