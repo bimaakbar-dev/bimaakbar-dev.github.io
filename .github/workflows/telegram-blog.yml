@@ -72,7 +72,7 @@ jobs:
                   f"<b>c0desk1 Blog</b>\n\n"
                   f"<b>{entry.title}</b>\n\n"
                   f"{entry.get('description', '')[:250]}\n\n"
-                  f'<a href="{link}">Baca disini</a>'
+                  f'<a href="{link}">Baca selengkapnya →</a>'
               )
 
               resp = requests.post(
