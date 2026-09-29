@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: '3.12'
 
@@ -21,7 +21,7 @@ jobs:
         run: pip install feedparser requests
 
       - name: Restore cache
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: .rss-cache
           key: rss-cache-${{ github.run_number }}
@@ -56,24 +56,33 @@ jobs:
               print("No new post")
               exit(0)
 
+          # Ambil image dari enclosure
+          image_url = None
+          if hasattr(latest, "enclosures") and latest.enclosures:
+              image_url = latest.enclosures[0].get("href")
+
+          embed = {
+              "title": latest.title,
+              "url": link,
+              "description": latest.get("description", "")[:300],
+              "color": 16738314,
+              "footer": {"text": "c0desk1 blog"}
+          }
+
+          if image_url:
+              embed["image"] = {"url": image_url}
+
           webhook = os.environ["WEBHOOK"]
-          resp = requests.post(webhook, json={
-              "embeds": [{
-                  "title": latest.title,
-                  "url": link,
-                  "description": latest.get("description", "")[:300],
-                  "color": 16738314,
-                  "footer": {"text": "c0desk1 blog"}
-              }]
-          })
+          resp = requests.post(webhook, json={"embeds": [embed]})
           print(f"Status: {resp.status_code}")
           print(f"Posted: {latest.title}")
+          print(f"Image: {image_url}")
 
           CACHE.write_text(link)
           EOF
 
       - name: Save cache
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v6
         if: always()
         with:
           path: .rss-cache
