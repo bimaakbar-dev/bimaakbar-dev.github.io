@@ -108,8 +108,8 @@ jobs:
       - name: Send to Telegram
         if: env.action == 'new_discussion' || env.replied == 'true'
         env:
-          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          BOT_TOKEN: ${{ secrets.UNLYOD_TG_BOT }}
+          CHAT_ID: ${{ secrets.ADMIN_CHAT_ID }}
         run: |
           if [ "${{ env.action }}" = "new_discussion" ]; then
             MSG="💬 <b>Diskusi Baru</b>
