@@ -1,0 +1,108 @@
+name: RSS to Discord
+
+on:
+  workflow_run:
+    workflows: ["Deploy Astro site to Pages"]
+    types: [completed]
+    branches: [Dev]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rss-discord-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  discord:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          ref: Dev
+
+      - name: Setup Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Install feedparser
+        run: pip install feedparser requests
+
+      - name: Fetch RSS & Post to Discord
+        env:
+          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          python3 << 'EOF'
+          import feedparser, requests, os, json, pathlib
+
+          RSS_URL = "https://bimaakbar-dev.github.io/rss.xml"
+          SITE = "https://bimaakbar-dev.github.io"
+          STATE = pathlib.Path(".rss-state.json")
+
+          posted = []
+          if STATE.exists():
+              try:
+                  posted = json.loads(STATE.read_text()).get("posted", [])
+              except Exception:
+                  posted = []
+
+          feed = feedparser.parse(RSS_URL)
+          if not feed.entries:
+              print("No entries found")
+              exit(0)
+
+          webhook = os.environ["WEBHOOK"]
+          new_count = 0
+
+          for entry in feed.entries:
+              link = entry.link
+              if link.startswith("/"):
+                  link = SITE + link
+
+              if link in posted:
+                  continue
+
+              image_url = None
+              if hasattr(entry, "enclosures") and entry.enclosures:
+                  image_url = entry.enclosures[0].get("href")
+
+              embed = {
+                  "title": entry.title,
+                  "url": link,
+                  "description": entry.get("description", "")[:300],
+                  "color": 16738314,
+                  "footer": {"text": "c0desk1 blog"}
+              }
+
+              if image_url:
+                  embed["image"] = {"url": image_url}
+
+              resp = requests.post(webhook, json={"embeds": [embed]})
+              print(f"Posted: {entry.title} → Status: {resp.status_code}")
+
+              if resp.status_code in (200, 204):
+                  posted.append(link)
+                  new_count += 1
+
+          if new_count == 0:
+              print("No new post")
+              exit(0)
+
+          posted = posted[-100:]
+          STATE.write_text(json.dumps({"posted": posted}, indent=2))
+          print(f"Total new posts: {new_count}")
+          EOF
+
+      - name: Commit state file
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -f .rss-state.json ]; then
+            git add .rss-state.json
+            git diff --staged --quiet || git commit -m "Update RSS state [skip ci]"
+            git push origin Dev
+          fi
