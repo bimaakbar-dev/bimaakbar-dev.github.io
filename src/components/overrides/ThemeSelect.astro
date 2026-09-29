@@ -1,0 +1,126 @@
+---
+// src/components/ThemeSelect.astro
+import { Icon } from '@astrojs/starlight/components';
+const label = Astro.locals.t('themeSelect.accessibleLabel');
+---
+
+<theme-toggle>
+  <button
+    type="button"
+    class="theme-cycle"
+    aria-label={label}
+    title={label}
+    data-theme-toggle
+    data-mode="auto"
+  >
+    <Icon name="laptop" class="auto" />
+    <Icon name="sun" class="light" />
+    <Icon name="moon" class="dark" />
+  </button>
+</theme-toggle>
+
+<script is:inline>
+  StarlightThemeProvider.updatePickers();
+</script>
+
+<script>
+  type Theme = 'auto' | 'dark' | 'light';
+
+  const storageKey = 'starlight-theme';
+
+  const parseTheme = (theme: unknown): Theme =>
+    theme === 'auto' || theme === 'dark' || theme === 'light' ? theme : 'auto';
+
+  const loadTheme = (): Theme =>
+    parseTheme(typeof localStorage !== 'undefined' ? localStorage.getItem(storageKey) : null);
+
+  function storeTheme(theme: Theme): void {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(storageKey, theme === 'light' || theme === 'dark' ? theme : '');
+    }
+  }
+
+  const getPreferredColorScheme = (): 'light' | 'dark' =>
+    matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+
+  function syncAllButtons(theme: Theme): void {
+    document.querySelectorAll<HTMLElement>('[data-theme-toggle]').forEach((btn) => {
+      btn.dataset.mode = theme;
+    });
+  }
+
+  function onThemeChange(theme: Theme): void {
+    StarlightThemeProvider.updatePickers(theme);
+    document.documentElement.dataset.theme = theme === 'auto' ? getPreferredColorScheme() : theme;
+    storeTheme(theme);
+    syncAllButtons(theme);
+  }
+
+  matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
+    if (loadTheme() === 'auto') onThemeChange('auto');
+  });
+
+  class ThemeToggle extends HTMLElement {
+    constructor() {
+      super();
+      onThemeChange(loadTheme());
+
+      this.querySelector<HTMLButtonElement>('[data-theme-toggle]')?.addEventListener('click', () => {
+        const current = loadTheme();
+        const next: Theme =
+          current === 'auto' ? 'light' :
+          current === 'light' ? 'dark' :
+          'auto';
+        onThemeChange(next);
+      });
+    }
+  }
+
+  if (!customElements.get('theme-toggle')) {
+    customElements.define('theme-toggle', ThemeToggle);
+  }
+</script>
+
+<style>
+  :global(theme-toggle) {
+    display: contents;
+  }
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 99rem;
+    background: transparent;
+    color: var(--sl-color-gray-2);
+    cursor: pointer;
+    transition: color 0.15s ease;
+    &:hover {
+      color: var(--sl-color-white);
+      background: var(--sl-color-gray-6);
+      border-color: var(--sl-color-gray-5);
+    }
+    &:focus-visible {
+      outline: 2px solid var(--sl-color-accent);
+      outline-offset: 2px;
+    }
+    & svg {
+      flex-shrink: 0;
+      width: 1rem;
+      height: 1rem;
+      display: none;
+    }
+    &[data-mode='auto'] .auto,
+    &[data-mode='light'] .light,
+    &[data-mode='dark'] .dark {
+      display: block;
+    }
+  }
+  [data-theme='light'] button:hover {
+    background: var(--sl-color-gray-7);
+  }
+</style>
