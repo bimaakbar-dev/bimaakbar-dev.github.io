@@ -1,0 +1,91 @@
+name: Assistant Issue Handler
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  handle:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate App Token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: bimaakbar-dev
+
+      - name: Auto-label & comment
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          ISSUE_NUM=${{ github.event.issue.number }}
+          TITLE="${{ github.event.issue.title }}"
+          BODY="${{ github.event.issue.body }}"
+          REPO="${{ github.repository }}"
+          
+          TITLE_LOWER=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]')
+          BODY_LOWER=$(echo "$BODY" | tr '[:upper:]' '[:lower:]')
+          FULL="$TITLE_LOWER $BODY_LOWER"
+          
+          LABEL="question"
+          
+          if echo "$FULL" | grep -qiE "bug|error|broken|rusak|gagal|tidak bisa|ga bisa"; then
+            LABEL="bug"
+          elif echo "$FULL" | grep -qiE "fitur|feature|saran|request|tambah"; then
+            LABEL="enhancement"
+          elif echo "$FULL" | grep -qiE "typo|ejaan|salah tulis"; then
+            LABEL="typo"
+          fi
+          
+          gh api "/repos/$REPO/issues/$ISSUE_NUM/labels" \
+            -f "labels[]=$LABEL" 2>/dev/null || true
+          
+          gh api "/repos/$REPO/issues/$ISSUE_NUM/comments" \
+            -f "body=Terima kasih sudah buka issue! 🌸
+
+          Issue ini sudah otomatis dilabeli **\`$LABEL\`**. Saya akan cek segera.
+
+          Kalau ada info tambahan, tulis saja di sini.
+
+          — bimaakbar[bot]"
+
+      - name: Send to Telegram
+        if: always()
+        env:
+          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          MESSAGE="🐛 <b>Issue Baru</b>
+          
+          <b>${{ github.event.issue.title }}</b>
+          
+          Dari: @${{ github.event.issue.user.login }}
+          🔗 ${{ github.event.issue.html_url }}"
+          
+          curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+            -d "chat_id=${CHAT_ID}" \
+            -d "text=${MESSAGE}" \
+            -d "parse_mode=HTML" \
+            -d "disable_web_page_preview=true"
+
+      - name: Send to Discord
+        if: always()
+        env:
+          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: |
+          curl -s -X POST "$WEBHOOK" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"embeds\": [{
+                \"title\": \"🐛 Issue Baru\",
+                \"description\": \"${{ github.event.issue.title }}\",
+                \"url\": \"${{ github.event.issue.html_url }}\",
+                \"color\": 15548997,
+                \"fields\": [
+                  {\"name\": \"Dari\", \"value\": \"@${{ github.event.issue.user.login }}\", \"inline\": true}
+                ],
+                \"footer\": {\"text\": \"bimaakbar[bot] · issue\"}
+              }]
+            }"
