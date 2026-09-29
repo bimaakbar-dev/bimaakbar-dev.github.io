@@ -1,17 +1,22 @@
 name: RSS to Discord
 
 on:
-  push:
+  workflow_run:
+    workflows: ["Deploy Astro site to Pages"]
+    types: [completed]
     branches: [Dev]
-    paths:
-      - 'src/content/**'
   workflow_dispatch:
 
 permissions:
   contents: write
 
+concurrency:
+  group: rss-discord-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  rss:
+  discord:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -26,9 +31,6 @@ jobs:
 
       - name: Install feedparser
         run: pip install feedparser requests
-
-      - name: Wait for deploy
-        run: sleep 120
 
       - name: Fetch RSS & Post to Discord
         env:
