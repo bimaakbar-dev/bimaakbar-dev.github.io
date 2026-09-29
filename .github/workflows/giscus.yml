@@ -24,7 +24,7 @@ jobs:
           EVENT: ${{ github.event_name }}
         run: |
           REPO="${{ github.repository }}"
-          BOT_LOGIN="bimaakbar[bot]"
+          BOT_LOGIN="unlyod[bot]"
           
           if [ "$EVENT" = "discussion" ]; then
             # Diskusi baru dibuat
@@ -88,7 +88,7 @@ jobs:
           • Telegram: @bimaakbar
           • Discord: discord.gg/zzaUTzWbm
 
-          — bimaakbar[bot]"
+          — unlyod[bot]"
             
             gh api graphql -f query='
               mutation($discussionId: ID!, $body: String!) {
@@ -157,6 +157,6 @@ jobs:
                 \"description\": \"$DESC\",
                 \"url\": \"${{ env.url }}\",
                 \"color\": $COLOR,
-                \"footer\": {\"text\": \"bimaakbar[bot] · giscus\"}
+                \"footer\": {\"text\": \"unlyod[bot] · giscus\"}
               }]
             }"
