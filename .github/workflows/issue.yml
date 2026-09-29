@@ -49,7 +49,7 @@ jobs:
 
           Kalau ada info tambahan, tulis saja di sini.
 
-          — bimaakbar[bot]"
+          — unlyod[bot]"
 
       - name: Send to Telegram
         if: always()
@@ -86,6 +86,6 @@ jobs:
                 \"fields\": [
                   {\"name\": \"Dari\", \"value\": \"@${{ github.event.issue.user.login }}\", \"inline\": true}
                 ],
-                \"footer\": {\"text\": \"bimaakbar[bot] · issue\"}
+                \"footer\": {\"text\": \"unlyod[bot] · issue\"}
               }]
             }"
