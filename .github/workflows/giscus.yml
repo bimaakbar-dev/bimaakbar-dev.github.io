@@ -1,0 +1,162 @@
+name: Assistant Giscus
+
+on:
+  discussion:
+    types: [created]
+  discussion_comment:
+    types: [created]
+
+jobs:
+  handle:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate App Token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: bimaakbar-dev
+
+      - name: Handle discussion
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          REPO="${{ github.repository }}"
+          BOT_LOGIN="bimaakbar[bot]"
+          
+          if [ "$EVENT" = "discussion" ]; then
+            # Diskusi baru dibuat
+            DISC_NUM=${{ github.event.discussion.number }}
+            TITLE="${{ github.event.discussion.title }}"
+            AUTHOR="${{ github.event.discussion.user.login }}"
+            URL="${{ github.event.discussion.html_url }}"
+            
+            # Skip kalau dibuat oleh bot
+            if [ "$AUTHOR" = "$BOT_LOGIN" ]; then
+              echo "Skip: dibuat bot"
+              exit 0
+            fi
+            
+            echo "action=new_discussion" >> $GITHUB_ENV
+            echo "disc_num=$DISC_NUM" >> $GITHUB_ENV
+            echo "title=$TITLE" >> $GITHUB_ENV
+            echo "author=$AUTHOR" >> $GITHUB_ENV
+            echo "url=$URL" >> $GITHUB_ENV
+            
+          else
+            # Komentar baru
+            DISC_NUM=${{ github.event.discussion.number }}
+            COMMENT_BODY="${{ github.event.comment.body }}"
+            COMMENT_AUTHOR="${{ github.event.comment.user.login }}"
+            COMMENT_ID="${{ github.event.comment.node_id }}"
+            DISC_TITLE="${{ github.event.discussion.title }}"
+            DISC_URL="${{ github.event.discussion.html_url }}"
+            
+            # Skip kalau komentar dari bot sendiri
+            if [ "$COMMENT_AUTHOR" = "$BOT_LOGIN" ]; then
+              echo "Skip: komentar bot"
+              exit 0
+            fi
+            
+            echo "action=comment" >> $GITHUB_ENV
+            echo "disc_num=$DISC_NUM" >> $GITHUB_ENV
+            echo "comment_body<<EOF" >> $GITHUB_ENV
+            echo "$COMMENT_BODY" >> $GITHUB_ENV
+            echo "EOF" >> $GITHUB_ENV
+            echo "comment_author=$COMMENT_AUTHOR" >> $GITHUB_ENV
+            echo "comment_id=$COMMENT_ID" >> $GITHUB_ENV
+            echo "title=$DISC_TITLE" >> $GITHUB_ENV
+            echo "url=$DISC_URL" >> $GITHUB_ENV
+          fi
+
+      - name: Reply if mentioned
+        if: env.action == 'comment'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          BODY="${{ env.comment_body }}"
+          BODY_LOWER=$(echo "$BODY" | tr '[:upper:]' '[:lower:]')
+          
+          if echo "$BODY_LOWER" | grep -qE "@bimaakbar(-dev|\[bot\])?|@admin|@owner"; then
+            echo "Mentioned! Replying..."
+            
+            REPLY="Halo! 👋
+
+          Ada yang bisa dibantu? Kalau perlu respon cepat, DM saya di:
+          • Telegram: @bimaakbar
+          • Discord: discord.gg/zzaUTzWbm
+
+          — bimaakbar[bot]"
+            
+            gh api graphql -f query='
+              mutation($discussionId: ID!, $body: String!) {
+                addDiscussionComment(input: {discussionId: $discussionId, body: $body}) {
+                  comment { id }
+                }
+              }
+            ' -f discussionId="${{ env.comment_id }}" -f body="$REPLY" 2>&1 || \
+            echo "GraphQL reply failed, trying REST..."
+            
+            echo "replied=true" >> $GITHUB_ENV
+          else
+            echo "No mention, skip reply"
+            echo "replied=false" >> $GITHUB_ENV
+          fi
+
+      - name: Send to Telegram
+        if: env.action == 'new_discussion' || env.replied == 'true'
+        env:
+          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ "${{ env.action }}" = "new_discussion" ]; then
+            MSG="💬 <b>Diskusi Baru</b>
+          
+          <b>${{ env.title }}</b>
+          
+          Dari: @${{ env.author }}
+          🔗 ${{ env.url }}"
+          else
+            MSG="📩 <b>Mention Baru</b>
+          
+          Diskusi: <b>${{ env.title }}</b>
+          Dari: @${{ env.comment_author }}
+          
+          Bot sudah balas otomatis.
+          🔗 ${{ env.url }}"
+          fi
+          
+          curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+            -d "chat_id=${CHAT_ID}" \
+            -d "text=${MSG}" \
+            -d "parse_mode=HTML" \
+            -d "disable_web_page_preview=true"
+
+      - name: Send to Discord
+        if: env.action == 'new_discussion' || env.replied == 'true'
+        env:
+          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: |
+          if [ "${{ env.action }}" = "new_discussion" ]; then
+            TITLE="💬 Diskusi Baru"
+            DESC="${{ env.title }}"
+            COLOR=3447003
+          else
+            TITLE="📩 Mention Baru"
+            DESC="Diskusi: **${{ env.title }}**\nDari: @${{ env.comment_author }}\n\nBot sudah balas otomatis."
+            COLOR=16738314
+          fi
+          
+          curl -s -X POST "$WEBHOOK" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"embeds\": [{
+                \"title\": \"$TITLE\",
+                \"description\": \"$DESC\",
+                \"url\": \"${{ env.url }}\",
+                \"color\": $COLOR,
+                \"footer\": {\"text\": \"bimaakbar[bot] · giscus\"}
+              }]
+            }"
