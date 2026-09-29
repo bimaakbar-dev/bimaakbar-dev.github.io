@@ -11,7 +11,7 @@
 
 [![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
 
-[![Deploy site to Pages](https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/actions/workflows/astro.yml/badge.svg?branch=Dev)](https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/actions/workflows/astro.yml)  
+[![Deploy site to Pages](https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/actions/workflows/deploy.yml/badge.svg?branch=Dev)](https://github.com/bimaakbar-dev/bimaakbar-dev.github.io/actions/workflows/deploy.yml)  
 
 </p>
 
