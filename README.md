@@ -44,10 +44,4 @@
 
 ## License
 
-MIT
-
-<p align="center">
-  <a target="_blank" href="https://bimaakbar-dev.github.io/docs/">
-    Learn more
-  </a>
-</p>
+[MIT](LICENSE)

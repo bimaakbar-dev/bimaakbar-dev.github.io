@@ -9,20 +9,16 @@ import { satteri } from "@astrojs/markdown-satteri";
 import { hastExternalLink } from "./src/lib/plugins/satteri/hast/hast-external-link";
 import { hastTable } from "./src/lib/plugins/satteri/hast/hast-table";
 import { mdastStradocsAside } from './src/lib/plugins/satteri/mdast/mdast-stradocs-aside'
-import { mermaidPlugin } from "./src/lib/plugins/satteri/mdast/satteri-plugin-mermaid";
 
 const site = "https://bimaakbar-dev.github.io/";
-const siteName = "Stradocs";
-const siteDesc = "Custom Starlight theme featuring a modern design";
+const siteName = "BimaakbarDEV";
+const siteDesc = "Kumpulan trik dan tips dari dunia Game, Anime, dan Coding yang kamu cari.";
 const siteLocale = {
   root: {
-    label: "English",
-    lang: "en",
-  },
-  id: {
     label: "Indonesia",
     lang: "id",
   },
+//  en: { label: "English", lang: "en" }
 };
 
 // https://astro.build/config
@@ -79,8 +75,7 @@ export default defineConfig({
         hastTable
       ],
       mdastPlugins: [
-        mdastStradocsAside,
-        mermaidPlugin,
+        mdastStradocsAside
       ],
       features: {
         frontmatter: true,
@@ -103,10 +98,10 @@ export default defineConfig({
       description: siteDesc,
       logo: {
         light: "./src/assets/images/author/bimaakbar.svg",
-        dark: "./src/assets/images/logo/logo.svg",
+        dark: "./src/assets/images/author/bimaakbar.svg",
         replacesTitle: false,
       },
-      favicon: "/images/favicon.svg",
+      favicon: "/images/favicons/favicon.svg",
       defaultLocale: "root",
       locales: siteLocale,
       customCss: ["./src/styles/global.css"],
@@ -121,13 +116,13 @@ export default defineConfig({
         {
           icon: "github",
           label: "Github",
-          href: "https://github.com/bimaakbar-dev",
+          href: "https://github.com/c0desk1",
         },
         {
-          icon: "discord",
-          label: "Discord",
-          href: "https://discord.com/users/bimaakbardev",
-        },
+          icon: 'discord',
+          label: 'Discord',
+          href: 'https://discord.com/users/bimaakbardev'
+        }
       ],
       lastUpdated: true,
       editLink: {

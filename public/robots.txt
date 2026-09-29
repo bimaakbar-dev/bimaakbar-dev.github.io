@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+Disallow: /docs/*
+Disallow: /en/docs/*
+
 Sitemap: https://bimaakbar-dev.github.io/sitemap-index.xml
