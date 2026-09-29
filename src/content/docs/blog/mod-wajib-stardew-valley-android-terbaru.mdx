@@ -1,0 +1,117 @@
+---
+title: 'Mod Wajib Setelah Install SMAPI di Stardew Valley Android'
+description: '7 Mod stardew valley yang wajib kamu pasang di android setelah install SMAPI'
+pubDate: 2026-09-26
+author:
+    - name: 'Bima Akbar'
+      avatar: '~/assets/images/author/bimaakbar.svg'
+tags:
+    - 'stardew-valley'
+    - 'mods'
+    - 'stardew-valley-android'
+    - 'smapi-stardew-valley'
+    - 'smapi-launcher-apk'
+editUrl: false
+draft: false
+lastUpdated: false
+cover: 
+    image: ~/assets/images/blog/mod-stardew-valley-cover.jpg
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Setelah SMAPI Launcher berhasil terpasang di perangkat Android, langkah selanjutnya adalah mengisi folder mod dengan mod-mod penting. Berbeda dengan PC, diversi Android terbaru saat ini, kamu **tidak bisa** menyalin file mod langsung ke folder `Android/data` secara manual. Untuk itu SMAPI Launcher di Android menggunakan **Mod Manager** bawaan untuk menginstal mod, sehingga semua mod harus di-install melalui launcher tersebut.
+
+Berikut adalah mod-mod wajib yang harus kamu pasang setelah SMAPI berhasil terinstall.
+
+![Mod Stardew Valley Wajib diinstal](https://imagehost.bond/image/host-2771)
+
+## Cara Install Mod di SMAPI Launcher Android
+
+Sebelum masuk ke daftar mod, pahami dulu alur instalasinya:
+
+<Steps>
+1. Unduh file mod dalam format `.zip` (jangan di-unzip).
+2. Buka aplikasi **SMAPI Launcher**.
+3. Ketuk tombol **"Mod Manager"**.
+4. Pilih file zip mod yang ingin di-install, lalu ketuk **"Install Mods"**.
+5. Kembali ke layar utama launcher dan ketuk **"Start Game"** untuk menjalankan game dengan mod aktif.
+</Steps>
+
+> [!NOTE]
+> Beberapa launcher SMAPI yang lebih baru seperti versi [NRTnarathip](https://github.com/NRTnarathip) juga menyediakan opsi "Install Mods" langsung dari menu utama. Pastikan kamu menggunakan SMAPI Launcher versi terbaru agar Mod Manager berfungsi dengan baik.
+
+## Content Patcher
+
+[Content Patcher](https://www.nexusmods.com/stardewvalley/mods/1915) adalah framework yang memungkinkan mod lain mengubah data, peta, dan gambar dalam game tanpa perlu mengganti file XNB secara langsung. Hampir semua mod konten modern—mulai dari retexture, NPC tambahan, hingga ekspansi besar—bergantung pada Content Patcher agar bisa berfungsi. SMAPI Android mendukung framework ini dengan baik.
+
+> [!NOTE]
+> Versi terbaru Content Patcher `2.9.1` memerlukan SMAPI `4.4.0`. Jika SMAPI Android kamu masih versi `4.1.10`, gunakan **Content Patcher `2.8.1`** yang khusus disediakan untuk pengguna Android.
+
+## Space Core
+
+[Space Core](https://www.nexusmods.com/stardewvalley/mods/1348) menyediakan fitur-fitur framework lanjutan seperti skill kustom, serialisasi data, resep forge, dan berbagai kemampuan teknis lain yang dibutuhkan oleh mod-mod kompleks. Mod seperti **Json Assets** sangat bergantung pada Space Core agar dapat berjalan dengan benar.
+
+Versi resmi Space Core di Nexus Mods **tidak mendukung Android**. Gunakan port Android dari repositori GitHub [NRTnarathip/StardewValleyMods-Android](https://github.com/NRTnarathip/StardewValleyMods-Android/releases). Versi terbaru yang tersedia adalah **SpaceCore `1.28.4-nrt.3`** yang sudah dipatch untuk game `v1.6.15.1+`. Alternatif lain adalah **SpaceCore Android for JunimoGate** di Nexus Mods yang juga kompatibel dengan SMAPI API 4.3 atau lebih baru.
+
+## Json Assets
+
+[Json Assets](https://www.nexusmods.com/stardewvalley/mods/1720) memungkinkan penambahan item, tanaman, senjata, dan berbagai objek kustom ke dalam game melalui file JSON. Mod ini menjadi tulang punggung bagi banyak mod konten yang menambahkan item baru. Json Assets **wajib** dijalankan bersama Space Core—tanpa Space Core, Json Assets tidak akan berfungsi. SMAPI Android mendukung framework ini.
+
+> [!NOTE]
+> Pastikan kamu menggunakan versi Json Assets yang kompatibel dengan versi SMAPI dan Space Core yang terpasang. Install melalui Mod Manager di SMAPI Launcher.
+
+## Generic Mod Config Menu
+
+[Generic Mod Config Menu](https://www.nexusmods.com/stardewvalley/mods/5098) menambahkan antarmuka dalam game untuk mengedit konfigurasi mod lain tanpa harus mengedit file secara manual. Kamu bisa mengaksesnya dari layar judul (melalui tombol gerigi) atau dari menu opsi di dalam game.
+
+> [!NOTE]
+> Mod ini sangat berguna di Android karena mengedit file konfigurasi di perangkat mobile jauh lebih merepotkan dibanding di PC.
+
+## Virtual Keyboard
+
+![Virtual Keyboard Mod di Stardew Valley Android](https://imagehost.bond/image/host-9638)
+
+[Virtual Keyboard](https://github.com/NRTnarathip/VirtualKeyboard) menambahkan tombol-tombol virtual di layar yang bisa kamu ketuk untuk mengirim input keyboard ke mod yang membutuhkannya. Ini sangat penting karena banyak mod PC mengandalkan tombol keyboard yang tidak tersedia di perangkat Android.
+
+> [!TIP]
+> Setelah mod terpasang, ikon keyboard akan muncul di pojok kiri atas layar. Ketuk ikon tersebut untuk menampilkan atau menyembunyikan keyboard virtual. Kamu juga bisa menambah, memindahkan, menghapus, dan mengubah ukuran tombol sesuai kebutuhan.
+
+## Visible Fish
+
+![Visible Fish di Android untuk Stardew Valley](https://imagehost.bond/image/host-3531)
+
+[Visible Fish](https://www.nexusmods.com/stardewvalley/mods/8897) menampilkan ikan-ikan yang sedang bisa ditangkap langsung di dalam air, sehingga kamu tidak perlu menebak-nebak jenis ikan apa yang ada di suatu perairan. Mod ini bekerja dengan lokasi dan ikan modded, tetapi hanya menampilkan ikan yang memiliki sprite fish tank.
+
+## UI Info Suite 2
+
+<figure>
+    <img src="https://staticdelivery.nexusmods.com/mods/1303/images/30551/30551-1735900629-1292079360.png" alt="UI Info Suite 2 di Android untuk Stardew Valley Android" />
+    <figcaption>
+        UI Info Suite 2 di Android.
+    </figcaption>
+</figure>
+
+<figure>
+    <img src="https://imagehost.bond/image/host-7586" alt="UI Info Suite 2 di Android untuk Stardew Valley Android" />
+    <figcaption>
+        UI Info Suite 2 di Desktop.
+    </figcaption>
+</figure>
+
+[UI Info Suite 2](https://www.nexusmods.com/stardewvalley/mods/30551?tab=files&file_id=165093) adalah kelanjutan dari UI Info Suite yang menambahkan berbagai informasi berguna ke antarmuka game, seperti radius jangkauan alat, ramalan cuaca, jadwal NPC, dan masih banyak lagi. **Penting:** Versi asli **UI Info Suite** sudah **rusak di Android**—kamu harus menggunakan **UI Info Suite 2**.
+
+> [!NOTE]
+> UI Info Suite 2 kini telah di-port secara khusus untuk Android. Versi port ini kompatibel dengan Mobile UI dan dapat diunduh dari Nexus Mods. Install melalui Mod Manager di SMAPI Launcher—**jangan** ekstrak secara manual. Jika kamu ingin alternatif, tersedia juga **UI Info Suite 2 Redux** yang mendukung Desktop, Android, dan Cinderbox.
+
+## Tips Instalasi
+
+- **Selalu gunakan Mod Manager di SMAPI Launcher.** Jangan menyalin file mod secara manual ke folder `Android/data`, karena file bisa tidak terdeteksi atau menyebabkan crash.
+- **Perhatikan kompatibilitas versi.** Beberapa mod memerlukan versi SMAPI tertentu. Selalu baca deskripsi mod di Nexus Mods atau GitHub sebelum mengunduh.
+- **Jangan sentuh layar saat loading.** Layar mungkin memutih saat startup—ini normal. Mengetuk layar saat loading bisa membuat aplikasi berhenti merespons.
+- **Cadangkan save file secara rutin.** Modding di Android memiliki risiko tersendiri, terutama saat memperbarui SMAPI atau mod. Save file terletak di `Main storage > android > data > abc.smapi.gameloader > files > saves`.
+- **Periksa daftar kompatibilitas mod Android.** Tidak semua mod PC bisa berjalan di Android. Gunakan sumber seperti **Android Compatible Mod List** untuk memverifikasi sebelum menginstal.
+
+## Penutup
+
+Dengan tujuh mod di atas terpasang melalui Mod Manager SMAPI Launcher, fondasi modding Stardew Valley di Android kamu sudah kokoh. Kamu bisa mulai menambahkan mod konten lain—seperti ekspansi peta, retexture, atau NPC baru—di atas fondasi ini tanpa khawatir kehilangan fungsionalitas dasar.

@@ -1,0 +1,114 @@
+/* LinkAlt.css */
+.sl-markdown-content {
+  & a:has(> img):not(:where(.not-content *)) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0;
+    margin: 0;
+    font-weight: 400;
+    vertical-align: middle;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    border-bottom: none;
+    
+    & > img {
+      display: inline-block;
+      width: auto;
+      height: 1.5em;
+      margin: 0;
+      border: none;
+      border-radius: 999px;
+      outline: 1px solid var(--sl-color-gray-5);
+      outline-offset: -1px;
+      object-fit: cover;
+    }
+
+    &:hover {
+      border-bottom: none;
+      opacity: 0.85;
+    }
+  }
+
+  /* Avatar saja */
+  & a:has(> img[alt*="avatar" i]):not(:where(.not-content *)) > img {
+    height: 1.5em;
+    width: 1.5em;
+    border-radius: 50%;
+    outline: 1px solid var(--sl-color-gray-5);
+    outline-offset: -1px;
+    object-fit: cover;
+    vertical-align: baseline;
+  }
+  & a:has(> img[alt*="avatar" i]):not(:where(.not-content *)):hover > img {
+    outline-color: var(--sl-color-accent);
+  }
+
+  /* Avatar Stack */
+  & .avatar-stack {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 0.5em;
+    vertical-align: middle;
+
+    & a:has(> img[alt*="avatar" i]):not(:where(.not-content *)) {
+      margin-inline-start: -0.5em;
+      &:first-child { margin-inline-start: 0; }
+      & > img {
+        height: 2em;
+        width: 2em;
+        box-shadow: var(--sl-shadow-sm);
+        outline: none;
+      }
+      &:hover > img {
+        outline: 1px solid var(--sl-color-accent);
+      }
+    }
+  }
+
+  & li:has(.avatar-stack):not(:where(.not-content *)) {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Badge */
+  & a:has(> img[alt*="badge" i]):not(:where(.not-content *)) > img,
+  & a:has(> img[alt*="build" i]):not(:where(.not-content *)) > img,
+  & a:has(> img[alt*="main" i]):not(:where(.not-content *)) > img {
+    border-radius: 0;
+    outline: none;
+    vertical-align: baseline;
+  }
+
+  /* Tech Stack */
+  & a:has(> img[alt*="icon" i]):not(:where(.not-content *)) {
+    padding: 0.15em 0.55em 0.15em 0.35em;
+    border-radius: 8px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border: 1px solid var(--sl-color-gray-5);
+    background: var(--sl-color-gray-6);
+    font-size: var(--sl-text-xs, 0.75rem);
+    font-weight: 500;
+    gap: 0.35em;
+    text-decoration: none;
+    vertical-align: baseline;
+    box-shadow: var(--sl-shadow-sm);
+    & > img {
+      height: 1.25em;
+      width: 1.25em;
+      border-radius: 3px;
+      outline: none;
+      object-fit: contain;
+    }
+    &:hover {
+      border-color: var(--sl-color-accent);
+      opacity: 1;
+    }
+  }
+
+  /* Sembunyikan ikon eksternal pada link bergambar */
+  & a.is-external:has(> img):not(:where(.not-content *))::after {
+    display: none;
+  }
+}
