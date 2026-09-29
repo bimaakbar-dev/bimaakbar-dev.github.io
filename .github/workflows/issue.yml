@@ -73,7 +73,7 @@ jobs:
       - name: Send to Discord
         if: always()
         env:
-          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         run: |
           curl -s -X POST "$WEBHOOK" \
             -H "Content-Type: application/json" \
