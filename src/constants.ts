@@ -7,19 +7,21 @@ export { PAGE_TITLE_ID };
 
 export const SEO = {
   verification: {
-    google: "ZxoHYWipAMoGhvwVi5nxolWsZOntrYkNkVcG9HTfFZQ",
-    bing: "",
-    yandex: "1878480c0d7b5510",
+    google: "IjIuPUCBy2m_fCIWYihtBdvwdk2hBBwt2-LyMb-RGjE",
+    bing: "7CFD9CF1E14CB523FAC8FA8F0E5D2939",
+    yandex: "5ba65a96bd30184f",
   },
 
   ads: {
     google: "ca-pub-4943136052113535",
     yandex: "R-A-19179231",
     monetag: "98464dea950ab2405c90bcb6fc2f1226",
+    readerRevenue: "CAowk9PMDA",
   },
 
   analytics: {
-    google: "G-2TKFP229HJ",
+    google: "G-YH3JS69V37",
     yandex: "108731154",
+    googleTag: "GTM-NJJPZV2M"
   },
 } as const;

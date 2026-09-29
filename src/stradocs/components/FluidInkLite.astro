@@ -1,0 +1,347 @@
+---
+interface Props {
+  class?: string;
+  /** Kekuatan partikel. Default 1. */
+  strength?: number;
+  /** Partikel otomatis (tanpa mouse). Default true. */
+  auto?: boolean;
+  /** Tinggi area. Default 400px. */
+  height?: string;
+}
+const {
+  class: className,
+  strength = 1,
+  auto = true,
+  height = '400px',
+} = Astro.props;
+---
+
+<fluid-ink-lite
+  class:list={['fluid-ink-lite', className]}
+  data-strength={strength}
+  data-auto={auto ? '1' : '0'}
+  style={`--ink-height: ${height}`}
+></fluid-ink-lite>
+
+<script>
+  interface Particle {
+    x: number; y: number;
+    vx: number; vy: number;
+    r: number;        // radius
+    vr: number;       // growth per frame
+    life: number;     // 1 → 0
+    decay: number;
+    rgb: [number, number, number];
+    blend: 'source-over' | 'lighter';
+  }
+
+  /** Rec. 709 luminance — untuk cek background terang/gelap. */
+  const lum = ([r, g, b]: [number, number, number]) =>
+    0.2126 * r + 0.7152 * g + 0.0722 * b;
+
+  function parseColor(value: string, fallback: [number, number, number]) {
+    const m = value.match(/-?[\d.]+(e-?\d+)?/g);
+    if (!m || m.length < 3) return fallback;
+    return [Number(m[0]) / 255, Number(m[1]) / 255, Number(m[2]) / 255] as [
+      number, number, number,
+    ];
+  }
+
+  const rand = (min: number, max: number) => min + Math.random() * (max - min);
+
+  class FluidInkLite extends HTMLElement {
+    private canvas!: HTMLCanvasElement;
+    private ctx!: CanvasRenderingContext2D;
+    private particles: Particle[] = [];
+    private frameHandle = 0;
+    private startHandle = 0;
+    private idle = false;
+    private observers: { disconnect(): void }[] = [];
+    private cleanups: (() => void)[] = [];
+    private booted = false;
+    private lastPointer: { x: number; y: number } | null = null;
+
+    private bg: [number, number, number] = [0.04, 0.05, 0.06];
+    private pigment: [number, number, number] = [0.91, 0.9, 0.88];
+    private accent: [number, number, number] = [0.78, 0.24, 0.23];
+    private blend: 'source-over' | 'lighter' = 'lighter';
+    private bgRgb = '10,13,15';
+
+    connectedCallback() {
+      if (this.booted) return;
+      this.booted = true;
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const idle: typeof window.requestIdleCallback | undefined =
+        window.requestIdleCallback;
+      if (idle) {
+        this.idle = true;
+        this.startHandle = idle(() => this.boot(), { timeout: 1500 });
+      } else {
+        this.startHandle = window.setTimeout(() => this.boot(), 250);
+      }
+    }
+
+    private boot() {
+      if (!this.isConnected) return;
+
+      this.canvas = document.createElement('canvas');
+      this.canvas.style.cssText = 'width:100%;height:100%;display:block';
+      this.appendChild(this.canvas);
+
+      const ctx = this.canvas.getContext('2d', { alpha: false });
+      if (!ctx) return;
+      this.ctx = ctx;
+
+      this.setAttribute('data-ink-active', '');
+      this.readPalette();
+
+      // Re-read warna saat tema berubah
+      const themeObs = new MutationObserver(() => this.readPalette());
+      themeObs.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme'],
+      });
+      this.observers.push(themeObs);
+
+      const scheme = window.matchMedia('(prefers-color-scheme: dark)');
+      const onScheme = () => this.readPalette();
+      scheme.addEventListener('change', onScheme);
+      this.cleanups.push(() => scheme.removeEventListener('change', onScheme));
+
+      // Pointer (desktop only)
+      if (window.matchMedia('(pointer: fine)').matches) {
+        const onMove = (e: PointerEvent) => this.handlePointer(e);
+        const onLeave = () => { this.lastPointer = null; };
+        this.addEventListener('pointermove', onMove);
+        this.addEventListener('pointerleave', onLeave);
+        this.cleanups.push(() => {
+          this.removeEventListener('pointermove', onMove);
+          this.removeEventListener('pointerleave', onLeave);
+        });
+      }
+
+      // Pause saat off-screen
+      let visible = true;
+      const io = new IntersectionObserver((entries) => {
+        visible = entries[0]?.isIntersecting ?? false;
+      });
+      io.observe(this);
+      this.observers.push(io);
+
+      // Opening splats
+      const opening = [100, 300, 500, 800, 1100];
+      let started = performance.now();
+      let nextAmbient = 0;
+      let lastFrame = started;
+      const strength = Number(this.dataset.strength ?? '1') || 1;
+      const auto = this.dataset.auto !== '0';
+
+      const frame = (now: number) => {
+        this.frameHandle = requestAnimationFrame(frame);
+
+        if (!visible || !this.resize()) {
+          lastFrame = now;
+          return;
+        }
+
+        const elapsed = now - started;
+        const dt = Math.min(33, now - lastFrame);
+        lastFrame = now;
+
+        while (opening.length && elapsed > opening[0]) {
+          opening.shift();
+          this.spawn(
+            rand(0.3, 0.7), rand(0.35, 0.65),
+            rand(-0.3, 0.3), rand(-0.3, 0.3),
+            rand(0.7, 1) * strength,
+          );
+        }
+
+        if (auto && elapsed > nextAmbient) {
+          nextAmbient = elapsed + rand(1800, 3600);
+          this.spawn(
+            rand(0.1, 0.9), rand(0.15, 0.85),
+            rand(-0.2, 0.2), rand(-0.2, 0.2),
+            rand(0.3, 0.6) * strength,
+          );
+        }
+
+        this.step(dt);
+        this.render();
+      };
+
+      this.frameHandle = requestAnimationFrame(frame);
+    }
+
+    private readPalette() {
+      const probe = document.createElement('span');
+      probe.style.cssText =
+        'position:absolute;width:0;height:0;visibility:hidden;pointer-events:none';
+      this.appendChild(probe);
+
+      const read = (prop: string, fallback: [number, number, number]) => {
+        probe.style.color = '';
+        probe.style.color = `var(${prop})`;
+        return parseColor(getComputedStyle(probe).color, fallback);
+      };
+
+      this.bg = read('--ink-canvas-bg', this.bg);
+      this.pigment = read('--ink-pigment', this.pigment);
+      this.accent = read('--ink-accent', this.accent);
+
+      // Terang → subtract (source-over dengan pigment gelap). Gelap → add (lighter).
+      this.blend = lum(this.bg) > 0.5 ? 'source-over' : 'lighter';
+
+      const [r, g, b] = this.bg.map((c) => Math.round(c * 255));
+      this.bgRgb = `${r},${g},${b}`;
+
+      probe.remove();
+    }
+
+    private resize(): boolean {
+      const rect = this.getBoundingClientRect();
+      if (!rect.width || !rect.height) return false;
+      const dpr = Math.min(1.5, window.devicePixelRatio || 1);
+      const w = Math.round(rect.width * dpr);
+      const h = Math.round(rect.height * dpr);
+      if (this.canvas.width !== w || this.canvas.height !== h) {
+        this.canvas.width = w;
+        this.canvas.height = h;
+        this.ctx.fillStyle = `rgb(${this.bgRgb})`;
+        this.ctx.fillRect(0, 0, w, h);
+      }
+      return true;
+    }
+
+    private handlePointer(e: PointerEvent) {
+      const rect = this.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = 1 - (e.clientY - rect.top) / rect.height;
+      if (this.lastPointer) {
+        const dx = (x - this.lastPointer.x) * 0.4;
+        const dy = (y - this.lastPointer.y) * 0.4;
+        const speed = Math.min(1, Math.hypot(dx, dy) * 8);
+        if (speed > 0.02) this.spawn(x, y, dx, dy, speed);
+      }
+      this.lastPointer = { x, y };
+    }
+
+    private spawn(x: number, y: number, vx: number, vy: number, amount: number) {
+      const strength = Number(this.dataset.strength ?? '1') || 1;
+      // Campur pigment + accent (22%)
+      const mix = 0.22;
+      const rgb: [number, number, number] = [
+        this.pigment[0] * (1 - mix) + this.accent[0] * mix,
+        this.pigment[1] * (1 - mix) + this.accent[1] * mix,
+        this.pigment[2] * (1 - mix) + this.accent[2] * mix,
+      ];
+
+      this.particles.push({
+        x, y, vx, vy,
+        r: rand(0.04, 0.09),
+        vr: rand(0.00015, 0.0004),
+        life: 1,
+        decay: rand(0.0004, 0.0009) / (0.6 + amount * strength),
+        rgb,
+        blend: this.blend,
+      });
+    }
+
+    private step(dt: number) {
+      // Trail fade — kunci efek "tinta menyebar"
+      const [br, bg, bb] = this.bgRgb.split(',').map(Number);
+      this.ctx.fillStyle = `rgba(${br},${bg},${bb},0.06)`;
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+      // Update + cull
+      for (let i = this.particles.length - 1; i >= 0; i--) {
+        const p = this.particles[i];
+        p.x += p.vx * (dt / 16);
+        p.y += p.vy * (dt / 16);
+        p.r += p.vr * (dt / 16);
+        p.life -= p.decay * (dt / 16);
+        if (p.life <= 0) this.particles.splice(i, 1);
+      }
+    }
+
+    private render() {
+      const { ctx, canvas } = this;
+      const w = canvas.width;
+      const h = canvas.height;
+
+      for (const p of this.particles) {
+        const cx = p.x * w;
+        const cy = (1 - p.y) * h;
+        const r = p.r * Math.max(w, h);
+        const [pr, pg, pb] = p.rgb;
+        const a = p.life * 0.35;
+
+        const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+        grad.addColorStop(0, `rgba(${pr * 255},${pg * 255},${pb * 255},${a})`);
+        grad.addColorStop(1, `rgba(${pr * 255},${pg * 255},${pb * 255},0)`);
+
+        ctx.globalCompositeOperation = p.blend;
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.globalCompositeOperation = 'source-over';
+    }
+
+    disconnectedCallback() {
+      cancelAnimationFrame(this.frameHandle);
+      if (this.startHandle) {
+        if (this.idle) cancelIdleCallback(this.startHandle);
+        else clearTimeout(this.startHandle);
+      }
+      for (const o of this.observers) o.disconnect();
+      for (const fn of this.cleanups) fn();
+      this.observers = [];
+      this.cleanups = [];
+      this.particles = [];
+      this.booted = false;
+    }
+  }
+
+  if (!customElements.get('fluid-ink-lite')) {
+    customElements.define('fluid-ink-lite', FluidInkLite);
+  }
+</script>
+
+<style>
+  .fluid-ink-lite {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: var(--ink-height, 400px);
+    overflow: hidden;
+    /* Fallback kalau WebGL/Canvas gagal atau reduced-motion */
+    background:
+      radial-gradient(circle at 30% 40%,
+        color-mix(in srgb, var(--sl-color-accent) 30%, transparent),
+        transparent 60%),
+      radial-gradient(circle at 70% 60%,
+        color-mix(in srgb, var(--sl-color-accent-high) 25%, transparent),
+        transparent 60%),
+      var(--sl-color-bg);
+  }
+
+  .fluid-ink-lite:not([data-ink-active]) {
+    /* Fallback: gradient statis yang enak dilihat */
+    background:
+      radial-gradient(circle at 30% 40%,
+        color-mix(in srgb, var(--sl-color-accent) 40%, transparent),
+        transparent 55%),
+      radial-gradient(circle at 70% 60%,
+        color-mix(in srgb, var(--sl-color-accent-high) 35%, transparent),
+        transparent 55%),
+      radial-gradient(circle at 50% 50%,
+        color-mix(in srgb, var(--sl-color-accent-low) 50%, transparent),
+        transparent 70%),
+      var(--sl-color-bg);
+  }
+</style>
