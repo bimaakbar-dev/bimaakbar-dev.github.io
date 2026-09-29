@@ -1,0 +1,80 @@
+name: RSS to Discord
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  rss:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install feedparser
+        run: pip install feedparser requests
+
+      - name: Restore cache
+        uses: actions/cache/restore@v5
+        with:
+          path: .rss-cache
+          key: rss-cache-${{ github.run_number }}
+          restore-keys: |
+            rss-cache-
+
+      - name: Fetch RSS & Post to Discord
+        env:
+          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          python3 << 'EOF'
+          import feedparser, requests, os, pathlib
+
+          RSS_URL = "https://bimaakbar-dev.github.io/rss.xml"
+          SITE = "https://bimaakbar-dev.github.io"
+          CACHE = pathlib.Path(".rss-cache/last.txt")
+          CACHE.parent.mkdir(exist_ok=True)
+
+          feed = feedparser.parse(RSS_URL)
+          if not feed.entries:
+              print("No entries found")
+              exit(0)
+
+          latest = feed.entries[0]
+          link = latest.link
+          if link.startswith("/"):
+              link = SITE + link
+
+          last = CACHE.read_text().strip() if CACHE.exists() else ""
+
+          if link == last:
+              print("No new post")
+              exit(0)
+
+          webhook = os.environ["WEBHOOK"]
+          resp = requests.post(webhook, json={
+              "embeds": [{
+                  "title": latest.title,
+                  "url": link,
+                  "description": latest.get("description", "")[:300],
+                  "color": 16738314,
+                  "footer": {"text": "c0desk1 blog"}
+              }]
+          })
+          print(f"Status: {resp.status_code}")
+          print(f"Posted: {latest.title}")
+
+          CACHE.write_text(link)
+          EOF
+
+      - name: Save cache
+        uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: .rss-cache
+          key: rss-cache-${{ github.run_number }}
